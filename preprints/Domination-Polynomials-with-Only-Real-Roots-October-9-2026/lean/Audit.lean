@@ -1,0 +1,12 @@
+import DominationRoots
+
+#print axioms ResearchMain.DominationRoots.realRooted_domination_iff
+#print axioms ResearchMain.DominationRoots.realRooted_domination_iff_leaf_presentation
+#print axioms ResearchMain.DominationRoots.realRooted_domination_factors
+#print axioms ResearchMain.DominationRoots.dominationPolynomial_extension
+#print axioms ResearchMain.DominationRoots.leafExtension_realRooted
+#print axioms ResearchMain.DominationRoots.supportVertex_adj_iff
+#print axioms ResearchMain.DominationRoots.rootTrace_classification
+#print axioms ResearchMain.DominationRoots.auxiliary_inequality
+#print axioms ResearchMain.DominationRoots.dominationPolynomial_not_root_minus_one
+#print axioms ResearchMain.DominationRoots.leaf_trace_equality

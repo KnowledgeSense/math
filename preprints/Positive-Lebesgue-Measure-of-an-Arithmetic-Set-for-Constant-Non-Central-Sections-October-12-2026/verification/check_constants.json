@@ -1,0 +1,103 @@
+{
+  "method": "rational cosine-sign certificate",
+  "endpoint_scale": "10000000000000000000000000000",
+  "cosine_terms": 32,
+  "atan_terms": 42,
+  "pi_interval": [
+    "3926990816987241548078304227/1250000000000000000000000000",
+    "7853981633974483096156608459/2500000000000000000000000000"
+  ],
+  "gamma_interval": [
+    "386729540169506789200120623/1000000000000000000000000000",
+    "966823850423766973000301559/2500000000000000000000000000"
+  ],
+  "seed_checks": [
+    {
+      "k": 2,
+      "s_index": 2,
+      "t_index": 1,
+      "Fminus_test": {
+        "automatic": false,
+        "cosine_margin_lower": "1201317325374862734134930261/10000000000000000000000000000",
+        "simple_lower": "30032933/250000000"
+      },
+      "Fplus_test": {
+        "automatic": false,
+        "cosine_margin_lower": "898753279264406601490075539/10000000000000000000000000000",
+        "simple_lower": "89875327/1000000000"
+      }
+    },
+    {
+      "k": 3,
+      "s_index": 3,
+      "t_index": 2,
+      "Fminus_test": {
+        "automatic": false,
+        "cosine_margin_lower": "5877609743933008121748522379/10000000000000000000000000000",
+        "simple_lower": "293880487/500000000"
+      },
+      "Fplus_test": {
+        "automatic": true,
+        "reason": "angle+delta_next > pi/2"
+      }
+    },
+    {
+      "k": 4,
+      "s_index": 3,
+      "t_index": 2,
+      "Fminus_test": {
+        "automatic": true,
+        "reason": "angle-delta_next <= 0"
+      },
+      "Fplus_test": {
+        "automatic": true,
+        "reason": "angle+delta_next > pi/2"
+      }
+    },
+    {
+      "k": 5,
+      "s_index": 3,
+      "t_index": 2,
+      "Fminus_test": {
+        "automatic": false,
+        "cosine_margin_lower": "1092333605528343889254844151/2000000000000000000000000000",
+        "simple_lower": "273083401/500000000"
+      },
+      "Fplus_test": {
+        "automatic": true,
+        "reason": "angle+delta_next > pi/2"
+      }
+    },
+    {
+      "k": 6,
+      "s_index": 3,
+      "t_index": 2,
+      "Fminus_test": {
+        "automatic": false,
+        "cosine_margin_lower": "28108960551261372573054817/400000000000000000000000000",
+        "simple_lower": "70272401/1000000000"
+      },
+      "Fplus_test": {
+        "automatic": false,
+        "cosine_margin_lower": "631925223687613105549104097/10000000000000000000000000000",
+        "simple_lower": "31596261/500000000"
+      }
+    }
+  ],
+  "source21_squared_margin_lower": "297966281348758813731358409163/2500000000000000000000000000",
+  "source21_simple_lower": "119186512539/1000000000",
+  "tail_integer_bases": [
+    {
+      "j": 256,
+      "M": "20885177893484403216",
+      "integer_gap": "340282366920938461959641799100891179904"
+    },
+    {
+      "j": 257,
+      "M": "21536496789360710641",
+      "integer_gap": "340282366920938461912746838597797045304"
+    }
+  ],
+  "ratio_integer_gap": "76415940730993759",
+  "theta_q256": "63256929652928664143855072290698527599594504445348731642908297030847880127411544767909471232462082"
+}

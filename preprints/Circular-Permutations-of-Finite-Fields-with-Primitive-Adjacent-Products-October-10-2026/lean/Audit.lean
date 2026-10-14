@@ -1,0 +1,3 @@
+import R32SunCounterexample
+
+#print axioms SunCounterexample.no_circular_permutation

@@ -1,0 +1,101 @@
+{
+  "bridge_degrees": 74,
+  "bridge_intervals": 188,
+  "bridge_all_hypotheses_checked": true,
+  "polynomial_F": "-d**3/2 + d**2*s/2 - 3*d**2/2 + 3*d*s/2 - d - s**2 - 2*s + 4",
+  "F_at_d_plus_2": "-4*(d + 1)",
+  "F_at_d_plus_3": "(d - 11)*(d + 2)/2",
+  "cartesian_minor": "-d**3*(d - 1)/2",
+  "tail_symbolic_inequalities": {
+    "sparse_gap": "(3*x**2 + 448*x + 13048)/8",
+    "tail_overlap": "(2*x**2 + 261*x + 144)/18",
+    "new_old_band_overlap": "x + 37",
+    "c3_upper_gate": "(2*x**2 + 88*x + 1391)/9"
+  },
+  "small_band_integer_consistency_degrees": [
+    29,
+    200
+  ],
+  "omitted_per_complete_layer": "8*d + 429",
+  "examples": [
+    {
+      "d": 27,
+      "q3_s": 30,
+      "q3_r": 3684,
+      "q3_rank": 11048
+    },
+    {
+      "d": 29,
+      "q3_s": 32,
+      "q3_r": 4527,
+      "q3_rank": 13577
+    },
+    {
+      "d": 30,
+      "q3_s": 33,
+      "q3_r": 4993,
+      "q3_rank": 14975
+    },
+    {
+      "d": 84,
+      "q3_s": 87,
+      "q3_r": 102427,
+      "q3_rank": 307277,
+      "s_interval": [
+        87,
+        2640
+      ],
+      "r_interval": [
+        102427,
+        104980
+      ],
+      "positions": 2554
+    },
+    {
+      "d": 87,
+      "q3_s": 90,
+      "q3_r": 113654,
+      "q3_rank": 340958,
+      "s_interval": [
+        90,
+        2880
+      ],
+      "r_interval": [
+        113654,
+        116444
+      ],
+      "positions": 2791
+    },
+    {
+      "d": 100,
+      "q3_s": 103,
+      "q3_r": 171803,
+      "q3_rank": 515405,
+      "s_interval": [
+        103,
+        4024
+      ],
+      "r_interval": [
+        171803,
+        175724
+      ],
+      "positions": 3922
+    },
+    {
+      "d": 200,
+      "q3_s": 203,
+      "q3_r": 1353603,
+      "q3_rank": 4060805,
+      "s_interval": [
+        203,
+        18474
+      ],
+      "r_interval": [
+        1353603,
+        1371874
+      ],
+      "positions": 18272
+    }
+  ],
+  "bridge_source_sha256": "5c6cd8e8ac39bc837c398ea77224c52aa391c1ce53dff29abbce8352d22605c6"
+}

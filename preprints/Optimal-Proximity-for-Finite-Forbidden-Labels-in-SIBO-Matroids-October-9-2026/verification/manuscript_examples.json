@@ -1,0 +1,9184 @@
+{
+  "status": "PASS",
+  "tuples_checked": 781,
+  "scope": "0 <= k <= 4 and 0 <= q_t <= 4",
+  "cases": [
+    {
+      "sizes": [],
+      "D": 1,
+      "unique_allowed_A_count": 0,
+      "distance": 0,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0
+      ],
+      "D": 1,
+      "unique_allowed_A_count": 0,
+      "distance": 0,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1
+      ],
+      "D": 2,
+      "unique_allowed_A_count": 0,
+      "distance": 1,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2
+      ],
+      "D": 3,
+      "unique_allowed_A_count": 0,
+      "distance": 2,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3
+      ],
+      "D": 4,
+      "unique_allowed_A_count": 0,
+      "distance": 3,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4
+      ],
+      "D": 5,
+      "unique_allowed_A_count": 0,
+      "distance": 4,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        0
+      ],
+      "D": 1,
+      "unique_allowed_A_count": 0,
+      "distance": 0,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        1
+      ],
+      "D": 2,
+      "unique_allowed_A_count": 0,
+      "distance": 1,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        2
+      ],
+      "D": 3,
+      "unique_allowed_A_count": 0,
+      "distance": 2,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        3
+      ],
+      "D": 4,
+      "unique_allowed_A_count": 0,
+      "distance": 3,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        4
+      ],
+      "D": 5,
+      "unique_allowed_A_count": 0,
+      "distance": 4,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        0
+      ],
+      "D": 2,
+      "unique_allowed_A_count": 0,
+      "distance": 1,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        1
+      ],
+      "D": 4,
+      "unique_allowed_A_count": 0,
+      "distance": 3,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        2
+      ],
+      "D": 6,
+      "unique_allowed_A_count": 0,
+      "distance": 5,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        3
+      ],
+      "D": 8,
+      "unique_allowed_A_count": 0,
+      "distance": 7,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        4
+      ],
+      "D": 10,
+      "unique_allowed_A_count": 0,
+      "distance": 9,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        0
+      ],
+      "D": 3,
+      "unique_allowed_A_count": 0,
+      "distance": 2,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        1
+      ],
+      "D": 6,
+      "unique_allowed_A_count": 0,
+      "distance": 5,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        2
+      ],
+      "D": 9,
+      "unique_allowed_A_count": 0,
+      "distance": 8,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        3
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        4
+      ],
+      "D": 15,
+      "unique_allowed_A_count": 0,
+      "distance": 14,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        0
+      ],
+      "D": 4,
+      "unique_allowed_A_count": 0,
+      "distance": 3,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        1
+      ],
+      "D": 8,
+      "unique_allowed_A_count": 0,
+      "distance": 7,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        2
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        3
+      ],
+      "D": 16,
+      "unique_allowed_A_count": 0,
+      "distance": 15,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        4
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        0
+      ],
+      "D": 5,
+      "unique_allowed_A_count": 0,
+      "distance": 4,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        1
+      ],
+      "D": 10,
+      "unique_allowed_A_count": 0,
+      "distance": 9,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        2
+      ],
+      "D": 15,
+      "unique_allowed_A_count": 0,
+      "distance": 14,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        3
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        4
+      ],
+      "D": 25,
+      "unique_allowed_A_count": 0,
+      "distance": 24,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        0,
+        0
+      ],
+      "D": 1,
+      "unique_allowed_A_count": 0,
+      "distance": 0,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        0,
+        1
+      ],
+      "D": 2,
+      "unique_allowed_A_count": 0,
+      "distance": 1,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        0,
+        2
+      ],
+      "D": 3,
+      "unique_allowed_A_count": 0,
+      "distance": 2,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        0,
+        3
+      ],
+      "D": 4,
+      "unique_allowed_A_count": 0,
+      "distance": 3,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        0,
+        4
+      ],
+      "D": 5,
+      "unique_allowed_A_count": 0,
+      "distance": 4,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        1,
+        0
+      ],
+      "D": 2,
+      "unique_allowed_A_count": 0,
+      "distance": 1,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        1,
+        1
+      ],
+      "D": 4,
+      "unique_allowed_A_count": 0,
+      "distance": 3,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        1,
+        2
+      ],
+      "D": 6,
+      "unique_allowed_A_count": 0,
+      "distance": 5,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        1,
+        3
+      ],
+      "D": 8,
+      "unique_allowed_A_count": 0,
+      "distance": 7,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        1,
+        4
+      ],
+      "D": 10,
+      "unique_allowed_A_count": 0,
+      "distance": 9,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        2,
+        0
+      ],
+      "D": 3,
+      "unique_allowed_A_count": 0,
+      "distance": 2,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        2,
+        1
+      ],
+      "D": 6,
+      "unique_allowed_A_count": 0,
+      "distance": 5,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        2,
+        2
+      ],
+      "D": 9,
+      "unique_allowed_A_count": 0,
+      "distance": 8,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        2,
+        3
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        2,
+        4
+      ],
+      "D": 15,
+      "unique_allowed_A_count": 0,
+      "distance": 14,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        3,
+        0
+      ],
+      "D": 4,
+      "unique_allowed_A_count": 0,
+      "distance": 3,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        3,
+        1
+      ],
+      "D": 8,
+      "unique_allowed_A_count": 0,
+      "distance": 7,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        3,
+        2
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        3,
+        3
+      ],
+      "D": 16,
+      "unique_allowed_A_count": 0,
+      "distance": 15,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        3,
+        4
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        4,
+        0
+      ],
+      "D": 5,
+      "unique_allowed_A_count": 0,
+      "distance": 4,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        4,
+        1
+      ],
+      "D": 10,
+      "unique_allowed_A_count": 0,
+      "distance": 9,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        4,
+        2
+      ],
+      "D": 15,
+      "unique_allowed_A_count": 0,
+      "distance": 14,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        4,
+        3
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        4,
+        4
+      ],
+      "D": 25,
+      "unique_allowed_A_count": 0,
+      "distance": 24,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        0,
+        0
+      ],
+      "D": 2,
+      "unique_allowed_A_count": 0,
+      "distance": 1,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        0,
+        1
+      ],
+      "D": 4,
+      "unique_allowed_A_count": 0,
+      "distance": 3,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        0,
+        2
+      ],
+      "D": 6,
+      "unique_allowed_A_count": 0,
+      "distance": 5,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        0,
+        3
+      ],
+      "D": 8,
+      "unique_allowed_A_count": 0,
+      "distance": 7,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        0,
+        4
+      ],
+      "D": 10,
+      "unique_allowed_A_count": 0,
+      "distance": 9,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        1,
+        0
+      ],
+      "D": 4,
+      "unique_allowed_A_count": 0,
+      "distance": 3,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        1,
+        1
+      ],
+      "D": 8,
+      "unique_allowed_A_count": 0,
+      "distance": 7,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        1,
+        2
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        1,
+        3
+      ],
+      "D": 16,
+      "unique_allowed_A_count": 0,
+      "distance": 15,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        1,
+        4
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        2,
+        0
+      ],
+      "D": 6,
+      "unique_allowed_A_count": 0,
+      "distance": 5,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        2,
+        1
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        2,
+        2
+      ],
+      "D": 18,
+      "unique_allowed_A_count": 0,
+      "distance": 17,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        2,
+        3
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        2,
+        4
+      ],
+      "D": 30,
+      "unique_allowed_A_count": 0,
+      "distance": 29,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        3,
+        0
+      ],
+      "D": 8,
+      "unique_allowed_A_count": 0,
+      "distance": 7,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        3,
+        1
+      ],
+      "D": 16,
+      "unique_allowed_A_count": 0,
+      "distance": 15,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        3,
+        2
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        3,
+        3
+      ],
+      "D": 32,
+      "unique_allowed_A_count": 0,
+      "distance": 31,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        3,
+        4
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        4,
+        0
+      ],
+      "D": 10,
+      "unique_allowed_A_count": 0,
+      "distance": 9,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        4,
+        1
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        4,
+        2
+      ],
+      "D": 30,
+      "unique_allowed_A_count": 0,
+      "distance": 29,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        4,
+        3
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        4,
+        4
+      ],
+      "D": 50,
+      "unique_allowed_A_count": 0,
+      "distance": 49,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        0,
+        0
+      ],
+      "D": 3,
+      "unique_allowed_A_count": 0,
+      "distance": 2,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        0,
+        1
+      ],
+      "D": 6,
+      "unique_allowed_A_count": 0,
+      "distance": 5,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        0,
+        2
+      ],
+      "D": 9,
+      "unique_allowed_A_count": 0,
+      "distance": 8,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        0,
+        3
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        0,
+        4
+      ],
+      "D": 15,
+      "unique_allowed_A_count": 0,
+      "distance": 14,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        1,
+        0
+      ],
+      "D": 6,
+      "unique_allowed_A_count": 0,
+      "distance": 5,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        1,
+        1
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        1,
+        2
+      ],
+      "D": 18,
+      "unique_allowed_A_count": 0,
+      "distance": 17,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        1,
+        3
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        1,
+        4
+      ],
+      "D": 30,
+      "unique_allowed_A_count": 0,
+      "distance": 29,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        2,
+        0
+      ],
+      "D": 9,
+      "unique_allowed_A_count": 0,
+      "distance": 8,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        2,
+        1
+      ],
+      "D": 18,
+      "unique_allowed_A_count": 0,
+      "distance": 17,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        2,
+        2
+      ],
+      "D": 27,
+      "unique_allowed_A_count": 0,
+      "distance": 26,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        2,
+        3
+      ],
+      "D": 36,
+      "unique_allowed_A_count": 0,
+      "distance": 35,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        2,
+        4
+      ],
+      "D": 45,
+      "unique_allowed_A_count": 0,
+      "distance": 44,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        3,
+        0
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        3,
+        1
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        3,
+        2
+      ],
+      "D": 36,
+      "unique_allowed_A_count": 0,
+      "distance": 35,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        3,
+        3
+      ],
+      "D": 48,
+      "unique_allowed_A_count": 0,
+      "distance": 47,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        3,
+        4
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        4,
+        0
+      ],
+      "D": 15,
+      "unique_allowed_A_count": 0,
+      "distance": 14,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        4,
+        1
+      ],
+      "D": 30,
+      "unique_allowed_A_count": 0,
+      "distance": 29,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        4,
+        2
+      ],
+      "D": 45,
+      "unique_allowed_A_count": 0,
+      "distance": 44,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        4,
+        3
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        4,
+        4
+      ],
+      "D": 75,
+      "unique_allowed_A_count": 0,
+      "distance": 74,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        0,
+        0
+      ],
+      "D": 4,
+      "unique_allowed_A_count": 0,
+      "distance": 3,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        0,
+        1
+      ],
+      "D": 8,
+      "unique_allowed_A_count": 0,
+      "distance": 7,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        0,
+        2
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        0,
+        3
+      ],
+      "D": 16,
+      "unique_allowed_A_count": 0,
+      "distance": 15,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        0,
+        4
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        1,
+        0
+      ],
+      "D": 8,
+      "unique_allowed_A_count": 0,
+      "distance": 7,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        1,
+        1
+      ],
+      "D": 16,
+      "unique_allowed_A_count": 0,
+      "distance": 15,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        1,
+        2
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        1,
+        3
+      ],
+      "D": 32,
+      "unique_allowed_A_count": 0,
+      "distance": 31,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        1,
+        4
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        2,
+        0
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        2,
+        1
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        2,
+        2
+      ],
+      "D": 36,
+      "unique_allowed_A_count": 0,
+      "distance": 35,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        2,
+        3
+      ],
+      "D": 48,
+      "unique_allowed_A_count": 0,
+      "distance": 47,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        2,
+        4
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        3,
+        0
+      ],
+      "D": 16,
+      "unique_allowed_A_count": 0,
+      "distance": 15,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        3,
+        1
+      ],
+      "D": 32,
+      "unique_allowed_A_count": 0,
+      "distance": 31,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        3,
+        2
+      ],
+      "D": 48,
+      "unique_allowed_A_count": 0,
+      "distance": 47,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        3,
+        3
+      ],
+      "D": 64,
+      "unique_allowed_A_count": 0,
+      "distance": 63,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        3,
+        4
+      ],
+      "D": 80,
+      "unique_allowed_A_count": 0,
+      "distance": 79,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        4,
+        0
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        4,
+        1
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        4,
+        2
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        4,
+        3
+      ],
+      "D": 80,
+      "unique_allowed_A_count": 0,
+      "distance": 79,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        4,
+        4
+      ],
+      "D": 100,
+      "unique_allowed_A_count": 0,
+      "distance": 99,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        0,
+        0
+      ],
+      "D": 5,
+      "unique_allowed_A_count": 0,
+      "distance": 4,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        0,
+        1
+      ],
+      "D": 10,
+      "unique_allowed_A_count": 0,
+      "distance": 9,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        0,
+        2
+      ],
+      "D": 15,
+      "unique_allowed_A_count": 0,
+      "distance": 14,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        0,
+        3
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        0,
+        4
+      ],
+      "D": 25,
+      "unique_allowed_A_count": 0,
+      "distance": 24,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        1,
+        0
+      ],
+      "D": 10,
+      "unique_allowed_A_count": 0,
+      "distance": 9,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        1,
+        1
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        1,
+        2
+      ],
+      "D": 30,
+      "unique_allowed_A_count": 0,
+      "distance": 29,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        1,
+        3
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        1,
+        4
+      ],
+      "D": 50,
+      "unique_allowed_A_count": 0,
+      "distance": 49,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        2,
+        0
+      ],
+      "D": 15,
+      "unique_allowed_A_count": 0,
+      "distance": 14,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        2,
+        1
+      ],
+      "D": 30,
+      "unique_allowed_A_count": 0,
+      "distance": 29,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        2,
+        2
+      ],
+      "D": 45,
+      "unique_allowed_A_count": 0,
+      "distance": 44,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        2,
+        3
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        2,
+        4
+      ],
+      "D": 75,
+      "unique_allowed_A_count": 0,
+      "distance": 74,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        3,
+        0
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        3,
+        1
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        3,
+        2
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        3,
+        3
+      ],
+      "D": 80,
+      "unique_allowed_A_count": 0,
+      "distance": 79,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        3,
+        4
+      ],
+      "D": 100,
+      "unique_allowed_A_count": 0,
+      "distance": 99,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        4,
+        0
+      ],
+      "D": 25,
+      "unique_allowed_A_count": 0,
+      "distance": 24,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        4,
+        1
+      ],
+      "D": 50,
+      "unique_allowed_A_count": 0,
+      "distance": 49,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        4,
+        2
+      ],
+      "D": 75,
+      "unique_allowed_A_count": 0,
+      "distance": 74,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        4,
+        3
+      ],
+      "D": 100,
+      "unique_allowed_A_count": 0,
+      "distance": 99,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        4,
+        4
+      ],
+      "D": 125,
+      "unique_allowed_A_count": 0,
+      "distance": 124,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "D": 1,
+      "unique_allowed_A_count": 0,
+      "distance": 0,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "D": 2,
+      "unique_allowed_A_count": 0,
+      "distance": 1,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        0,
+        0,
+        2
+      ],
+      "D": 3,
+      "unique_allowed_A_count": 0,
+      "distance": 2,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "D": 4,
+      "unique_allowed_A_count": 0,
+      "distance": 3,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        0,
+        0,
+        4
+      ],
+      "D": 5,
+      "unique_allowed_A_count": 0,
+      "distance": 4,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "D": 2,
+      "unique_allowed_A_count": 0,
+      "distance": 1,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "D": 4,
+      "unique_allowed_A_count": 0,
+      "distance": 3,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        0,
+        1,
+        2
+      ],
+      "D": 6,
+      "unique_allowed_A_count": 0,
+      "distance": 5,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        0,
+        1,
+        3
+      ],
+      "D": 8,
+      "unique_allowed_A_count": 0,
+      "distance": 7,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        0,
+        1,
+        4
+      ],
+      "D": 10,
+      "unique_allowed_A_count": 0,
+      "distance": 9,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        0,
+        2,
+        0
+      ],
+      "D": 3,
+      "unique_allowed_A_count": 0,
+      "distance": 2,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        0,
+        2,
+        1
+      ],
+      "D": 6,
+      "unique_allowed_A_count": 0,
+      "distance": 5,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        0,
+        2,
+        2
+      ],
+      "D": 9,
+      "unique_allowed_A_count": 0,
+      "distance": 8,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        0,
+        2,
+        3
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        0,
+        2,
+        4
+      ],
+      "D": 15,
+      "unique_allowed_A_count": 0,
+      "distance": 14,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        0,
+        3,
+        0
+      ],
+      "D": 4,
+      "unique_allowed_A_count": 0,
+      "distance": 3,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        0,
+        3,
+        1
+      ],
+      "D": 8,
+      "unique_allowed_A_count": 0,
+      "distance": 7,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        0,
+        3,
+        2
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        0,
+        3,
+        3
+      ],
+      "D": 16,
+      "unique_allowed_A_count": 0,
+      "distance": 15,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        0,
+        3,
+        4
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        0,
+        4,
+        0
+      ],
+      "D": 5,
+      "unique_allowed_A_count": 0,
+      "distance": 4,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        0,
+        4,
+        1
+      ],
+      "D": 10,
+      "unique_allowed_A_count": 0,
+      "distance": 9,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        0,
+        4,
+        2
+      ],
+      "D": 15,
+      "unique_allowed_A_count": 0,
+      "distance": 14,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        0,
+        4,
+        3
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        0,
+        4,
+        4
+      ],
+      "D": 25,
+      "unique_allowed_A_count": 0,
+      "distance": 24,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "D": 2,
+      "unique_allowed_A_count": 0,
+      "distance": 1,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "D": 4,
+      "unique_allowed_A_count": 0,
+      "distance": 3,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        1,
+        0,
+        2
+      ],
+      "D": 6,
+      "unique_allowed_A_count": 0,
+      "distance": 5,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        1,
+        0,
+        3
+      ],
+      "D": 8,
+      "unique_allowed_A_count": 0,
+      "distance": 7,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        1,
+        0,
+        4
+      ],
+      "D": 10,
+      "unique_allowed_A_count": 0,
+      "distance": 9,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "D": 4,
+      "unique_allowed_A_count": 0,
+      "distance": 3,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        1,
+        1,
+        1
+      ],
+      "D": 8,
+      "unique_allowed_A_count": 0,
+      "distance": 7,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        1,
+        1,
+        2
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        1,
+        1,
+        3
+      ],
+      "D": 16,
+      "unique_allowed_A_count": 0,
+      "distance": 15,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        1,
+        1,
+        4
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        1,
+        2,
+        0
+      ],
+      "D": 6,
+      "unique_allowed_A_count": 0,
+      "distance": 5,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        1,
+        2,
+        2
+      ],
+      "D": 18,
+      "unique_allowed_A_count": 0,
+      "distance": 17,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "D": 30,
+      "unique_allowed_A_count": 0,
+      "distance": 29,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        1,
+        3,
+        0
+      ],
+      "D": 8,
+      "unique_allowed_A_count": 0,
+      "distance": 7,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        1,
+        3,
+        1
+      ],
+      "D": 16,
+      "unique_allowed_A_count": 0,
+      "distance": 15,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        1,
+        3,
+        2
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        1,
+        3,
+        3
+      ],
+      "D": 32,
+      "unique_allowed_A_count": 0,
+      "distance": 31,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        1,
+        3,
+        4
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        1,
+        4,
+        0
+      ],
+      "D": 10,
+      "unique_allowed_A_count": 0,
+      "distance": 9,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        1,
+        4,
+        1
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        1,
+        4,
+        2
+      ],
+      "D": 30,
+      "unique_allowed_A_count": 0,
+      "distance": 29,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        1,
+        4,
+        3
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        1,
+        4,
+        4
+      ],
+      "D": 50,
+      "unique_allowed_A_count": 0,
+      "distance": 49,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        2,
+        0,
+        0
+      ],
+      "D": 3,
+      "unique_allowed_A_count": 0,
+      "distance": 2,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        2,
+        0,
+        1
+      ],
+      "D": 6,
+      "unique_allowed_A_count": 0,
+      "distance": 5,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        2,
+        0,
+        2
+      ],
+      "D": 9,
+      "unique_allowed_A_count": 0,
+      "distance": 8,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        2,
+        0,
+        3
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        2,
+        0,
+        4
+      ],
+      "D": 15,
+      "unique_allowed_A_count": 0,
+      "distance": 14,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        2,
+        1,
+        0
+      ],
+      "D": 6,
+      "unique_allowed_A_count": 0,
+      "distance": 5,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        2,
+        1,
+        1
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        2,
+        1,
+        2
+      ],
+      "D": 18,
+      "unique_allowed_A_count": 0,
+      "distance": 17,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        2,
+        1,
+        3
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        2,
+        1,
+        4
+      ],
+      "D": 30,
+      "unique_allowed_A_count": 0,
+      "distance": 29,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        2,
+        2,
+        0
+      ],
+      "D": 9,
+      "unique_allowed_A_count": 0,
+      "distance": 8,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        2,
+        2,
+        1
+      ],
+      "D": 18,
+      "unique_allowed_A_count": 0,
+      "distance": 17,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        2,
+        2,
+        2
+      ],
+      "D": 27,
+      "unique_allowed_A_count": 0,
+      "distance": 26,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        2,
+        2,
+        3
+      ],
+      "D": 36,
+      "unique_allowed_A_count": 0,
+      "distance": 35,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        2,
+        2,
+        4
+      ],
+      "D": 45,
+      "unique_allowed_A_count": 0,
+      "distance": 44,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        2,
+        3,
+        0
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        2,
+        3,
+        1
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        2,
+        3,
+        2
+      ],
+      "D": 36,
+      "unique_allowed_A_count": 0,
+      "distance": 35,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        2,
+        3,
+        3
+      ],
+      "D": 48,
+      "unique_allowed_A_count": 0,
+      "distance": 47,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        2,
+        3,
+        4
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        2,
+        4,
+        0
+      ],
+      "D": 15,
+      "unique_allowed_A_count": 0,
+      "distance": 14,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        2,
+        4,
+        1
+      ],
+      "D": 30,
+      "unique_allowed_A_count": 0,
+      "distance": 29,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        2,
+        4,
+        2
+      ],
+      "D": 45,
+      "unique_allowed_A_count": 0,
+      "distance": 44,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        2,
+        4,
+        3
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        2,
+        4,
+        4
+      ],
+      "D": 75,
+      "unique_allowed_A_count": 0,
+      "distance": 74,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        3,
+        0,
+        0
+      ],
+      "D": 4,
+      "unique_allowed_A_count": 0,
+      "distance": 3,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        3,
+        0,
+        1
+      ],
+      "D": 8,
+      "unique_allowed_A_count": 0,
+      "distance": 7,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        3,
+        0,
+        2
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        3,
+        0,
+        3
+      ],
+      "D": 16,
+      "unique_allowed_A_count": 0,
+      "distance": 15,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        3,
+        0,
+        4
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        3,
+        1,
+        0
+      ],
+      "D": 8,
+      "unique_allowed_A_count": 0,
+      "distance": 7,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        3,
+        1,
+        1
+      ],
+      "D": 16,
+      "unique_allowed_A_count": 0,
+      "distance": 15,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        3,
+        1,
+        2
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        3,
+        1,
+        3
+      ],
+      "D": 32,
+      "unique_allowed_A_count": 0,
+      "distance": 31,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        3,
+        1,
+        4
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        3,
+        2,
+        0
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        3,
+        2,
+        1
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        3,
+        2,
+        2
+      ],
+      "D": 36,
+      "unique_allowed_A_count": 0,
+      "distance": 35,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        3,
+        2,
+        3
+      ],
+      "D": 48,
+      "unique_allowed_A_count": 0,
+      "distance": 47,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        3,
+        2,
+        4
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        3,
+        3,
+        0
+      ],
+      "D": 16,
+      "unique_allowed_A_count": 0,
+      "distance": 15,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        3,
+        3,
+        1
+      ],
+      "D": 32,
+      "unique_allowed_A_count": 0,
+      "distance": 31,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        3,
+        3,
+        2
+      ],
+      "D": 48,
+      "unique_allowed_A_count": 0,
+      "distance": 47,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        3,
+        3,
+        3
+      ],
+      "D": 64,
+      "unique_allowed_A_count": 0,
+      "distance": 63,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        3,
+        3,
+        4
+      ],
+      "D": 80,
+      "unique_allowed_A_count": 0,
+      "distance": 79,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        3,
+        4,
+        0
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        3,
+        4,
+        1
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        3,
+        4,
+        2
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        3,
+        4,
+        3
+      ],
+      "D": 80,
+      "unique_allowed_A_count": 0,
+      "distance": 79,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        3,
+        4,
+        4
+      ],
+      "D": 100,
+      "unique_allowed_A_count": 0,
+      "distance": 99,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        4,
+        0,
+        0
+      ],
+      "D": 5,
+      "unique_allowed_A_count": 0,
+      "distance": 4,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        4,
+        0,
+        1
+      ],
+      "D": 10,
+      "unique_allowed_A_count": 0,
+      "distance": 9,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        4,
+        0,
+        2
+      ],
+      "D": 15,
+      "unique_allowed_A_count": 0,
+      "distance": 14,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        4,
+        0,
+        3
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        4,
+        0,
+        4
+      ],
+      "D": 25,
+      "unique_allowed_A_count": 0,
+      "distance": 24,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        4,
+        1,
+        0
+      ],
+      "D": 10,
+      "unique_allowed_A_count": 0,
+      "distance": 9,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        4,
+        1,
+        1
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        4,
+        1,
+        2
+      ],
+      "D": 30,
+      "unique_allowed_A_count": 0,
+      "distance": 29,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        4,
+        1,
+        3
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        4,
+        1,
+        4
+      ],
+      "D": 50,
+      "unique_allowed_A_count": 0,
+      "distance": 49,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        4,
+        2,
+        0
+      ],
+      "D": 15,
+      "unique_allowed_A_count": 0,
+      "distance": 14,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        4,
+        2,
+        1
+      ],
+      "D": 30,
+      "unique_allowed_A_count": 0,
+      "distance": 29,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        4,
+        2,
+        2
+      ],
+      "D": 45,
+      "unique_allowed_A_count": 0,
+      "distance": 44,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        4,
+        2,
+        3
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        4,
+        2,
+        4
+      ],
+      "D": 75,
+      "unique_allowed_A_count": 0,
+      "distance": 74,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        4,
+        3,
+        0
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        4,
+        3,
+        1
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        4,
+        3,
+        2
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        4,
+        3,
+        3
+      ],
+      "D": 80,
+      "unique_allowed_A_count": 0,
+      "distance": 79,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        4,
+        3,
+        4
+      ],
+      "D": 100,
+      "unique_allowed_A_count": 0,
+      "distance": 99,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        4,
+        4,
+        0
+      ],
+      "D": 25,
+      "unique_allowed_A_count": 0,
+      "distance": 24,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        4,
+        4,
+        1
+      ],
+      "D": 50,
+      "unique_allowed_A_count": 0,
+      "distance": 49,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        4,
+        4,
+        2
+      ],
+      "D": 75,
+      "unique_allowed_A_count": 0,
+      "distance": 74,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        4,
+        4,
+        3
+      ],
+      "D": 100,
+      "unique_allowed_A_count": 0,
+      "distance": 99,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        0,
+        4,
+        4,
+        4
+      ],
+      "D": 125,
+      "unique_allowed_A_count": 0,
+      "distance": 124,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "D": 2,
+      "unique_allowed_A_count": 0,
+      "distance": 1,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "D": 4,
+      "unique_allowed_A_count": 0,
+      "distance": 3,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        0,
+        0,
+        2
+      ],
+      "D": 6,
+      "unique_allowed_A_count": 0,
+      "distance": 5,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        0,
+        0,
+        3
+      ],
+      "D": 8,
+      "unique_allowed_A_count": 0,
+      "distance": 7,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        0,
+        0,
+        4
+      ],
+      "D": 10,
+      "unique_allowed_A_count": 0,
+      "distance": 9,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "D": 4,
+      "unique_allowed_A_count": 0,
+      "distance": 3,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "D": 8,
+      "unique_allowed_A_count": 0,
+      "distance": 7,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        0,
+        1,
+        2
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        0,
+        1,
+        3
+      ],
+      "D": 16,
+      "unique_allowed_A_count": 0,
+      "distance": 15,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        0,
+        1,
+        4
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        0,
+        2,
+        0
+      ],
+      "D": 6,
+      "unique_allowed_A_count": 0,
+      "distance": 5,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        0,
+        2,
+        1
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        0,
+        2,
+        2
+      ],
+      "D": 18,
+      "unique_allowed_A_count": 0,
+      "distance": 17,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        0,
+        2,
+        3
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        0,
+        2,
+        4
+      ],
+      "D": 30,
+      "unique_allowed_A_count": 0,
+      "distance": 29,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        0,
+        3,
+        0
+      ],
+      "D": 8,
+      "unique_allowed_A_count": 0,
+      "distance": 7,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        0,
+        3,
+        1
+      ],
+      "D": 16,
+      "unique_allowed_A_count": 0,
+      "distance": 15,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        0,
+        3,
+        2
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        0,
+        3,
+        3
+      ],
+      "D": 32,
+      "unique_allowed_A_count": 0,
+      "distance": 31,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        0,
+        3,
+        4
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        0,
+        4,
+        0
+      ],
+      "D": 10,
+      "unique_allowed_A_count": 0,
+      "distance": 9,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        0,
+        4,
+        1
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        0,
+        4,
+        2
+      ],
+      "D": 30,
+      "unique_allowed_A_count": 0,
+      "distance": 29,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        0,
+        4,
+        3
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        0,
+        4,
+        4
+      ],
+      "D": 50,
+      "unique_allowed_A_count": 0,
+      "distance": 49,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "D": 4,
+      "unique_allowed_A_count": 0,
+      "distance": 3,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "D": 8,
+      "unique_allowed_A_count": 0,
+      "distance": 7,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        1,
+        0,
+        2
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        1,
+        0,
+        3
+      ],
+      "D": 16,
+      "unique_allowed_A_count": 0,
+      "distance": 15,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        1,
+        0,
+        4
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "D": 8,
+      "unique_allowed_A_count": 0,
+      "distance": 7,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "D": 16,
+      "unique_allowed_A_count": 0,
+      "distance": 15,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        1,
+        1,
+        2
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        1,
+        1,
+        3
+      ],
+      "D": 32,
+      "unique_allowed_A_count": 0,
+      "distance": 31,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        1,
+        1,
+        4
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        1,
+        2,
+        0
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        1,
+        2,
+        1
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        1,
+        2,
+        2
+      ],
+      "D": 36,
+      "unique_allowed_A_count": 0,
+      "distance": 35,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        1,
+        2,
+        3
+      ],
+      "D": 48,
+      "unique_allowed_A_count": 0,
+      "distance": 47,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        1,
+        2,
+        4
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        1,
+        3,
+        0
+      ],
+      "D": 16,
+      "unique_allowed_A_count": 0,
+      "distance": 15,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        1,
+        3,
+        1
+      ],
+      "D": 32,
+      "unique_allowed_A_count": 0,
+      "distance": 31,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        1,
+        3,
+        2
+      ],
+      "D": 48,
+      "unique_allowed_A_count": 0,
+      "distance": 47,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        1,
+        3,
+        3
+      ],
+      "D": 64,
+      "unique_allowed_A_count": 0,
+      "distance": 63,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        1,
+        3,
+        4
+      ],
+      "D": 80,
+      "unique_allowed_A_count": 0,
+      "distance": 79,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        1,
+        4,
+        0
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        1,
+        4,
+        1
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        1,
+        4,
+        2
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        1,
+        4,
+        3
+      ],
+      "D": 80,
+      "unique_allowed_A_count": 0,
+      "distance": 79,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        1,
+        4,
+        4
+      ],
+      "D": 100,
+      "unique_allowed_A_count": 0,
+      "distance": 99,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        2,
+        0,
+        0
+      ],
+      "D": 6,
+      "unique_allowed_A_count": 0,
+      "distance": 5,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        2,
+        0,
+        1
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        2,
+        0,
+        2
+      ],
+      "D": 18,
+      "unique_allowed_A_count": 0,
+      "distance": 17,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        2,
+        0,
+        3
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        2,
+        0,
+        4
+      ],
+      "D": 30,
+      "unique_allowed_A_count": 0,
+      "distance": 29,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        2,
+        1,
+        0
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        2,
+        1,
+        1
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        2,
+        1,
+        2
+      ],
+      "D": 36,
+      "unique_allowed_A_count": 0,
+      "distance": 35,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        2,
+        1,
+        3
+      ],
+      "D": 48,
+      "unique_allowed_A_count": 0,
+      "distance": 47,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        2,
+        1,
+        4
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        2,
+        2,
+        0
+      ],
+      "D": 18,
+      "unique_allowed_A_count": 0,
+      "distance": 17,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        2,
+        2,
+        1
+      ],
+      "D": 36,
+      "unique_allowed_A_count": 0,
+      "distance": 35,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "D": 54,
+      "unique_allowed_A_count": 0,
+      "distance": 53,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        2,
+        2,
+        3
+      ],
+      "D": 72,
+      "unique_allowed_A_count": 0,
+      "distance": 71,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        2,
+        2,
+        4
+      ],
+      "D": 90,
+      "unique_allowed_A_count": 0,
+      "distance": 89,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        2,
+        3,
+        1
+      ],
+      "D": 48,
+      "unique_allowed_A_count": 0,
+      "distance": 47,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        2,
+        3,
+        2
+      ],
+      "D": 72,
+      "unique_allowed_A_count": 0,
+      "distance": 71,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        2,
+        3,
+        3
+      ],
+      "D": 96,
+      "unique_allowed_A_count": 0,
+      "distance": 95,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "D": 120,
+      "unique_allowed_A_count": 0,
+      "distance": 119,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        2,
+        4,
+        0
+      ],
+      "D": 30,
+      "unique_allowed_A_count": 0,
+      "distance": 29,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        2,
+        4,
+        1
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        2,
+        4,
+        2
+      ],
+      "D": 90,
+      "unique_allowed_A_count": 0,
+      "distance": 89,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        2,
+        4,
+        3
+      ],
+      "D": 120,
+      "unique_allowed_A_count": 0,
+      "distance": 119,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        2,
+        4,
+        4
+      ],
+      "D": 150,
+      "unique_allowed_A_count": 0,
+      "distance": 149,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        3,
+        0,
+        0
+      ],
+      "D": 8,
+      "unique_allowed_A_count": 0,
+      "distance": 7,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        3,
+        0,
+        1
+      ],
+      "D": 16,
+      "unique_allowed_A_count": 0,
+      "distance": 15,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        3,
+        0,
+        2
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        3,
+        0,
+        3
+      ],
+      "D": 32,
+      "unique_allowed_A_count": 0,
+      "distance": 31,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        3,
+        0,
+        4
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        3,
+        1,
+        0
+      ],
+      "D": 16,
+      "unique_allowed_A_count": 0,
+      "distance": 15,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        3,
+        1,
+        1
+      ],
+      "D": 32,
+      "unique_allowed_A_count": 0,
+      "distance": 31,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        3,
+        1,
+        2
+      ],
+      "D": 48,
+      "unique_allowed_A_count": 0,
+      "distance": 47,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        3,
+        1,
+        3
+      ],
+      "D": 64,
+      "unique_allowed_A_count": 0,
+      "distance": 63,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        3,
+        1,
+        4
+      ],
+      "D": 80,
+      "unique_allowed_A_count": 0,
+      "distance": 79,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        3,
+        2,
+        0
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        3,
+        2,
+        1
+      ],
+      "D": 48,
+      "unique_allowed_A_count": 0,
+      "distance": 47,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        3,
+        2,
+        2
+      ],
+      "D": 72,
+      "unique_allowed_A_count": 0,
+      "distance": 71,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        3,
+        2,
+        3
+      ],
+      "D": 96,
+      "unique_allowed_A_count": 0,
+      "distance": 95,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        3,
+        2,
+        4
+      ],
+      "D": 120,
+      "unique_allowed_A_count": 0,
+      "distance": 119,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        3,
+        3,
+        0
+      ],
+      "D": 32,
+      "unique_allowed_A_count": 0,
+      "distance": 31,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        3,
+        3,
+        1
+      ],
+      "D": 64,
+      "unique_allowed_A_count": 0,
+      "distance": 63,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        3,
+        3,
+        2
+      ],
+      "D": 96,
+      "unique_allowed_A_count": 0,
+      "distance": 95,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        3,
+        3,
+        3
+      ],
+      "D": 128,
+      "unique_allowed_A_count": 0,
+      "distance": 127,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        3,
+        3,
+        4
+      ],
+      "D": 160,
+      "unique_allowed_A_count": 0,
+      "distance": 159,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        3,
+        4,
+        0
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        3,
+        4,
+        1
+      ],
+      "D": 80,
+      "unique_allowed_A_count": 0,
+      "distance": 79,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        3,
+        4,
+        2
+      ],
+      "D": 120,
+      "unique_allowed_A_count": 0,
+      "distance": 119,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        3,
+        4,
+        3
+      ],
+      "D": 160,
+      "unique_allowed_A_count": 0,
+      "distance": 159,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        3,
+        4,
+        4
+      ],
+      "D": 200,
+      "unique_allowed_A_count": 0,
+      "distance": 199,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        4,
+        0,
+        0
+      ],
+      "D": 10,
+      "unique_allowed_A_count": 0,
+      "distance": 9,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        4,
+        0,
+        1
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        4,
+        0,
+        2
+      ],
+      "D": 30,
+      "unique_allowed_A_count": 0,
+      "distance": 29,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        4,
+        0,
+        3
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        4,
+        0,
+        4
+      ],
+      "D": 50,
+      "unique_allowed_A_count": 0,
+      "distance": 49,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        4,
+        1,
+        0
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        4,
+        1,
+        1
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        4,
+        1,
+        2
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        4,
+        1,
+        3
+      ],
+      "D": 80,
+      "unique_allowed_A_count": 0,
+      "distance": 79,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        4,
+        1,
+        4
+      ],
+      "D": 100,
+      "unique_allowed_A_count": 0,
+      "distance": 99,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        4,
+        2,
+        0
+      ],
+      "D": 30,
+      "unique_allowed_A_count": 0,
+      "distance": 29,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        4,
+        2,
+        1
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        4,
+        2,
+        2
+      ],
+      "D": 90,
+      "unique_allowed_A_count": 0,
+      "distance": 89,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        4,
+        2,
+        3
+      ],
+      "D": 120,
+      "unique_allowed_A_count": 0,
+      "distance": 119,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        4,
+        2,
+        4
+      ],
+      "D": 150,
+      "unique_allowed_A_count": 0,
+      "distance": 149,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        4,
+        3,
+        0
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        4,
+        3,
+        1
+      ],
+      "D": 80,
+      "unique_allowed_A_count": 0,
+      "distance": 79,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        4,
+        3,
+        2
+      ],
+      "D": 120,
+      "unique_allowed_A_count": 0,
+      "distance": 119,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        4,
+        3,
+        3
+      ],
+      "D": 160,
+      "unique_allowed_A_count": 0,
+      "distance": 159,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        4,
+        3,
+        4
+      ],
+      "D": 200,
+      "unique_allowed_A_count": 0,
+      "distance": 199,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        4,
+        4,
+        0
+      ],
+      "D": 50,
+      "unique_allowed_A_count": 0,
+      "distance": 49,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        4,
+        4,
+        1
+      ],
+      "D": 100,
+      "unique_allowed_A_count": 0,
+      "distance": 99,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        4,
+        4,
+        2
+      ],
+      "D": 150,
+      "unique_allowed_A_count": 0,
+      "distance": 149,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        4,
+        4,
+        3
+      ],
+      "D": 200,
+      "unique_allowed_A_count": 0,
+      "distance": 199,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        1,
+        4,
+        4,
+        4
+      ],
+      "D": 250,
+      "unique_allowed_A_count": 0,
+      "distance": 249,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        0,
+        0,
+        0
+      ],
+      "D": 3,
+      "unique_allowed_A_count": 0,
+      "distance": 2,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        0,
+        0,
+        1
+      ],
+      "D": 6,
+      "unique_allowed_A_count": 0,
+      "distance": 5,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        0,
+        0,
+        2
+      ],
+      "D": 9,
+      "unique_allowed_A_count": 0,
+      "distance": 8,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        0,
+        0,
+        3
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        0,
+        0,
+        4
+      ],
+      "D": 15,
+      "unique_allowed_A_count": 0,
+      "distance": 14,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        0,
+        1,
+        0
+      ],
+      "D": 6,
+      "unique_allowed_A_count": 0,
+      "distance": 5,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        0,
+        1,
+        1
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        0,
+        1,
+        2
+      ],
+      "D": 18,
+      "unique_allowed_A_count": 0,
+      "distance": 17,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        0,
+        1,
+        3
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        0,
+        1,
+        4
+      ],
+      "D": 30,
+      "unique_allowed_A_count": 0,
+      "distance": 29,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        0,
+        2,
+        0
+      ],
+      "D": 9,
+      "unique_allowed_A_count": 0,
+      "distance": 8,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        0,
+        2,
+        1
+      ],
+      "D": 18,
+      "unique_allowed_A_count": 0,
+      "distance": 17,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        0,
+        2,
+        2
+      ],
+      "D": 27,
+      "unique_allowed_A_count": 0,
+      "distance": 26,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        0,
+        2,
+        3
+      ],
+      "D": 36,
+      "unique_allowed_A_count": 0,
+      "distance": 35,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        0,
+        2,
+        4
+      ],
+      "D": 45,
+      "unique_allowed_A_count": 0,
+      "distance": 44,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        0,
+        3,
+        0
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        0,
+        3,
+        1
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        0,
+        3,
+        2
+      ],
+      "D": 36,
+      "unique_allowed_A_count": 0,
+      "distance": 35,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        0,
+        3,
+        3
+      ],
+      "D": 48,
+      "unique_allowed_A_count": 0,
+      "distance": 47,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        0,
+        3,
+        4
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        0,
+        4,
+        0
+      ],
+      "D": 15,
+      "unique_allowed_A_count": 0,
+      "distance": 14,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        0,
+        4,
+        1
+      ],
+      "D": 30,
+      "unique_allowed_A_count": 0,
+      "distance": 29,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        0,
+        4,
+        2
+      ],
+      "D": 45,
+      "unique_allowed_A_count": 0,
+      "distance": 44,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        0,
+        4,
+        3
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        0,
+        4,
+        4
+      ],
+      "D": 75,
+      "unique_allowed_A_count": 0,
+      "distance": 74,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        1,
+        0,
+        0
+      ],
+      "D": 6,
+      "unique_allowed_A_count": 0,
+      "distance": 5,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        1,
+        0,
+        1
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        1,
+        0,
+        2
+      ],
+      "D": 18,
+      "unique_allowed_A_count": 0,
+      "distance": 17,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        1,
+        0,
+        3
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        1,
+        0,
+        4
+      ],
+      "D": 30,
+      "unique_allowed_A_count": 0,
+      "distance": 29,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        1,
+        1,
+        0
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        1,
+        1,
+        1
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        1,
+        1,
+        2
+      ],
+      "D": 36,
+      "unique_allowed_A_count": 0,
+      "distance": 35,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        1,
+        1,
+        3
+      ],
+      "D": 48,
+      "unique_allowed_A_count": 0,
+      "distance": 47,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        1,
+        1,
+        4
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        1,
+        2,
+        0
+      ],
+      "D": 18,
+      "unique_allowed_A_count": 0,
+      "distance": 17,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        1,
+        2,
+        1
+      ],
+      "D": 36,
+      "unique_allowed_A_count": 0,
+      "distance": 35,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        1,
+        2,
+        2
+      ],
+      "D": 54,
+      "unique_allowed_A_count": 0,
+      "distance": 53,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        1,
+        2,
+        3
+      ],
+      "D": 72,
+      "unique_allowed_A_count": 0,
+      "distance": 71,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        1,
+        2,
+        4
+      ],
+      "D": 90,
+      "unique_allowed_A_count": 0,
+      "distance": 89,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        1,
+        3,
+        0
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        1,
+        3,
+        1
+      ],
+      "D": 48,
+      "unique_allowed_A_count": 0,
+      "distance": 47,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        1,
+        3,
+        2
+      ],
+      "D": 72,
+      "unique_allowed_A_count": 0,
+      "distance": 71,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        1,
+        3,
+        3
+      ],
+      "D": 96,
+      "unique_allowed_A_count": 0,
+      "distance": 95,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        1,
+        3,
+        4
+      ],
+      "D": 120,
+      "unique_allowed_A_count": 0,
+      "distance": 119,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        1,
+        4,
+        0
+      ],
+      "D": 30,
+      "unique_allowed_A_count": 0,
+      "distance": 29,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        1,
+        4,
+        1
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        1,
+        4,
+        2
+      ],
+      "D": 90,
+      "unique_allowed_A_count": 0,
+      "distance": 89,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        1,
+        4,
+        3
+      ],
+      "D": 120,
+      "unique_allowed_A_count": 0,
+      "distance": 119,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        1,
+        4,
+        4
+      ],
+      "D": 150,
+      "unique_allowed_A_count": 0,
+      "distance": 149,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        2,
+        0,
+        0
+      ],
+      "D": 9,
+      "unique_allowed_A_count": 0,
+      "distance": 8,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        2,
+        0,
+        1
+      ],
+      "D": 18,
+      "unique_allowed_A_count": 0,
+      "distance": 17,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        2,
+        0,
+        2
+      ],
+      "D": 27,
+      "unique_allowed_A_count": 0,
+      "distance": 26,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        2,
+        0,
+        3
+      ],
+      "D": 36,
+      "unique_allowed_A_count": 0,
+      "distance": 35,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        2,
+        0,
+        4
+      ],
+      "D": 45,
+      "unique_allowed_A_count": 0,
+      "distance": 44,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        2,
+        1,
+        0
+      ],
+      "D": 18,
+      "unique_allowed_A_count": 0,
+      "distance": 17,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        2,
+        1,
+        1
+      ],
+      "D": 36,
+      "unique_allowed_A_count": 0,
+      "distance": 35,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        2,
+        1,
+        2
+      ],
+      "D": 54,
+      "unique_allowed_A_count": 0,
+      "distance": 53,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        2,
+        1,
+        3
+      ],
+      "D": 72,
+      "unique_allowed_A_count": 0,
+      "distance": 71,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        2,
+        1,
+        4
+      ],
+      "D": 90,
+      "unique_allowed_A_count": 0,
+      "distance": 89,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        2,
+        2,
+        0
+      ],
+      "D": 27,
+      "unique_allowed_A_count": 0,
+      "distance": 26,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        2,
+        2,
+        1
+      ],
+      "D": 54,
+      "unique_allowed_A_count": 0,
+      "distance": 53,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "D": 81,
+      "unique_allowed_A_count": 0,
+      "distance": 80,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        2,
+        2,
+        3
+      ],
+      "D": 108,
+      "unique_allowed_A_count": 0,
+      "distance": 107,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        2,
+        2,
+        4
+      ],
+      "D": 135,
+      "unique_allowed_A_count": 0,
+      "distance": 134,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        2,
+        3,
+        0
+      ],
+      "D": 36,
+      "unique_allowed_A_count": 0,
+      "distance": 35,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        2,
+        3,
+        1
+      ],
+      "D": 72,
+      "unique_allowed_A_count": 0,
+      "distance": 71,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        2,
+        3,
+        2
+      ],
+      "D": 108,
+      "unique_allowed_A_count": 0,
+      "distance": 107,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        2,
+        3,
+        3
+      ],
+      "D": 144,
+      "unique_allowed_A_count": 0,
+      "distance": 143,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        2,
+        3,
+        4
+      ],
+      "D": 180,
+      "unique_allowed_A_count": 0,
+      "distance": 179,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        2,
+        4,
+        0
+      ],
+      "D": 45,
+      "unique_allowed_A_count": 0,
+      "distance": 44,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        2,
+        4,
+        1
+      ],
+      "D": 90,
+      "unique_allowed_A_count": 0,
+      "distance": 89,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        2,
+        4,
+        2
+      ],
+      "D": 135,
+      "unique_allowed_A_count": 0,
+      "distance": 134,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        2,
+        4,
+        3
+      ],
+      "D": 180,
+      "unique_allowed_A_count": 0,
+      "distance": 179,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        2,
+        4,
+        4
+      ],
+      "D": 225,
+      "unique_allowed_A_count": 0,
+      "distance": 224,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        3,
+        0,
+        0
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        3,
+        0,
+        1
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        3,
+        0,
+        2
+      ],
+      "D": 36,
+      "unique_allowed_A_count": 0,
+      "distance": 35,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        3,
+        0,
+        3
+      ],
+      "D": 48,
+      "unique_allowed_A_count": 0,
+      "distance": 47,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        3,
+        0,
+        4
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        3,
+        1,
+        0
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        3,
+        1,
+        1
+      ],
+      "D": 48,
+      "unique_allowed_A_count": 0,
+      "distance": 47,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        3,
+        1,
+        2
+      ],
+      "D": 72,
+      "unique_allowed_A_count": 0,
+      "distance": 71,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        3,
+        1,
+        3
+      ],
+      "D": 96,
+      "unique_allowed_A_count": 0,
+      "distance": 95,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        3,
+        1,
+        4
+      ],
+      "D": 120,
+      "unique_allowed_A_count": 0,
+      "distance": 119,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        3,
+        2,
+        0
+      ],
+      "D": 36,
+      "unique_allowed_A_count": 0,
+      "distance": 35,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        3,
+        2,
+        1
+      ],
+      "D": 72,
+      "unique_allowed_A_count": 0,
+      "distance": 71,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        3,
+        2,
+        2
+      ],
+      "D": 108,
+      "unique_allowed_A_count": 0,
+      "distance": 107,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        3,
+        2,
+        3
+      ],
+      "D": 144,
+      "unique_allowed_A_count": 0,
+      "distance": 143,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        3,
+        2,
+        4
+      ],
+      "D": 180,
+      "unique_allowed_A_count": 0,
+      "distance": 179,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        3,
+        3,
+        0
+      ],
+      "D": 48,
+      "unique_allowed_A_count": 0,
+      "distance": 47,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        3,
+        3,
+        1
+      ],
+      "D": 96,
+      "unique_allowed_A_count": 0,
+      "distance": 95,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        3,
+        3,
+        2
+      ],
+      "D": 144,
+      "unique_allowed_A_count": 0,
+      "distance": 143,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        3,
+        3,
+        3
+      ],
+      "D": 192,
+      "unique_allowed_A_count": 0,
+      "distance": 191,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        3,
+        3,
+        4
+      ],
+      "D": 240,
+      "unique_allowed_A_count": 0,
+      "distance": 239,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        3,
+        4,
+        0
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        3,
+        4,
+        1
+      ],
+      "D": 120,
+      "unique_allowed_A_count": 0,
+      "distance": 119,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        3,
+        4,
+        2
+      ],
+      "D": 180,
+      "unique_allowed_A_count": 0,
+      "distance": 179,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        3,
+        4,
+        3
+      ],
+      "D": 240,
+      "unique_allowed_A_count": 0,
+      "distance": 239,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        3,
+        4,
+        4
+      ],
+      "D": 300,
+      "unique_allowed_A_count": 0,
+      "distance": 299,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        4,
+        0,
+        0
+      ],
+      "D": 15,
+      "unique_allowed_A_count": 0,
+      "distance": 14,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        4,
+        0,
+        1
+      ],
+      "D": 30,
+      "unique_allowed_A_count": 0,
+      "distance": 29,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        4,
+        0,
+        2
+      ],
+      "D": 45,
+      "unique_allowed_A_count": 0,
+      "distance": 44,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        4,
+        0,
+        3
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        4,
+        0,
+        4
+      ],
+      "D": 75,
+      "unique_allowed_A_count": 0,
+      "distance": 74,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        4,
+        1,
+        0
+      ],
+      "D": 30,
+      "unique_allowed_A_count": 0,
+      "distance": 29,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        4,
+        1,
+        1
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        4,
+        1,
+        2
+      ],
+      "D": 90,
+      "unique_allowed_A_count": 0,
+      "distance": 89,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        4,
+        1,
+        3
+      ],
+      "D": 120,
+      "unique_allowed_A_count": 0,
+      "distance": 119,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        4,
+        1,
+        4
+      ],
+      "D": 150,
+      "unique_allowed_A_count": 0,
+      "distance": 149,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        4,
+        2,
+        0
+      ],
+      "D": 45,
+      "unique_allowed_A_count": 0,
+      "distance": 44,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        4,
+        2,
+        1
+      ],
+      "D": 90,
+      "unique_allowed_A_count": 0,
+      "distance": 89,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        4,
+        2,
+        2
+      ],
+      "D": 135,
+      "unique_allowed_A_count": 0,
+      "distance": 134,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        4,
+        2,
+        3
+      ],
+      "D": 180,
+      "unique_allowed_A_count": 0,
+      "distance": 179,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        4,
+        2,
+        4
+      ],
+      "D": 225,
+      "unique_allowed_A_count": 0,
+      "distance": 224,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        4,
+        3,
+        0
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        4,
+        3,
+        1
+      ],
+      "D": 120,
+      "unique_allowed_A_count": 0,
+      "distance": 119,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        4,
+        3,
+        2
+      ],
+      "D": 180,
+      "unique_allowed_A_count": 0,
+      "distance": 179,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        4,
+        3,
+        3
+      ],
+      "D": 240,
+      "unique_allowed_A_count": 0,
+      "distance": 239,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        4,
+        3,
+        4
+      ],
+      "D": 300,
+      "unique_allowed_A_count": 0,
+      "distance": 299,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        4,
+        4,
+        0
+      ],
+      "D": 75,
+      "unique_allowed_A_count": 0,
+      "distance": 74,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        4,
+        4,
+        1
+      ],
+      "D": 150,
+      "unique_allowed_A_count": 0,
+      "distance": 149,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        4,
+        4,
+        2
+      ],
+      "D": 225,
+      "unique_allowed_A_count": 0,
+      "distance": 224,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        4,
+        4,
+        3
+      ],
+      "D": 300,
+      "unique_allowed_A_count": 0,
+      "distance": 299,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        2,
+        4,
+        4,
+        4
+      ],
+      "D": 375,
+      "unique_allowed_A_count": 0,
+      "distance": 374,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        0,
+        0,
+        0
+      ],
+      "D": 4,
+      "unique_allowed_A_count": 0,
+      "distance": 3,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        0,
+        0,
+        1
+      ],
+      "D": 8,
+      "unique_allowed_A_count": 0,
+      "distance": 7,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        0,
+        0,
+        2
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        0,
+        0,
+        3
+      ],
+      "D": 16,
+      "unique_allowed_A_count": 0,
+      "distance": 15,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        0,
+        0,
+        4
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        0,
+        1,
+        0
+      ],
+      "D": 8,
+      "unique_allowed_A_count": 0,
+      "distance": 7,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        0,
+        1,
+        1
+      ],
+      "D": 16,
+      "unique_allowed_A_count": 0,
+      "distance": 15,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        0,
+        1,
+        2
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        0,
+        1,
+        3
+      ],
+      "D": 32,
+      "unique_allowed_A_count": 0,
+      "distance": 31,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        0,
+        1,
+        4
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        0,
+        2,
+        0
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        0,
+        2,
+        1
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        0,
+        2,
+        2
+      ],
+      "D": 36,
+      "unique_allowed_A_count": 0,
+      "distance": 35,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        0,
+        2,
+        3
+      ],
+      "D": 48,
+      "unique_allowed_A_count": 0,
+      "distance": 47,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        0,
+        2,
+        4
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        0,
+        3,
+        0
+      ],
+      "D": 16,
+      "unique_allowed_A_count": 0,
+      "distance": 15,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        0,
+        3,
+        1
+      ],
+      "D": 32,
+      "unique_allowed_A_count": 0,
+      "distance": 31,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        0,
+        3,
+        2
+      ],
+      "D": 48,
+      "unique_allowed_A_count": 0,
+      "distance": 47,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        0,
+        3,
+        3
+      ],
+      "D": 64,
+      "unique_allowed_A_count": 0,
+      "distance": 63,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        0,
+        3,
+        4
+      ],
+      "D": 80,
+      "unique_allowed_A_count": 0,
+      "distance": 79,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        0,
+        4,
+        0
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        0,
+        4,
+        1
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        0,
+        4,
+        2
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        0,
+        4,
+        3
+      ],
+      "D": 80,
+      "unique_allowed_A_count": 0,
+      "distance": 79,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        0,
+        4,
+        4
+      ],
+      "D": 100,
+      "unique_allowed_A_count": 0,
+      "distance": 99,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        1,
+        0,
+        0
+      ],
+      "D": 8,
+      "unique_allowed_A_count": 0,
+      "distance": 7,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        1,
+        0,
+        1
+      ],
+      "D": 16,
+      "unique_allowed_A_count": 0,
+      "distance": 15,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        1,
+        0,
+        2
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        1,
+        0,
+        3
+      ],
+      "D": 32,
+      "unique_allowed_A_count": 0,
+      "distance": 31,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        1,
+        0,
+        4
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        1,
+        1,
+        0
+      ],
+      "D": 16,
+      "unique_allowed_A_count": 0,
+      "distance": 15,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        1,
+        1,
+        1
+      ],
+      "D": 32,
+      "unique_allowed_A_count": 0,
+      "distance": 31,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        1,
+        1,
+        2
+      ],
+      "D": 48,
+      "unique_allowed_A_count": 0,
+      "distance": 47,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        1,
+        1,
+        3
+      ],
+      "D": 64,
+      "unique_allowed_A_count": 0,
+      "distance": 63,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        1,
+        1,
+        4
+      ],
+      "D": 80,
+      "unique_allowed_A_count": 0,
+      "distance": 79,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        1,
+        2,
+        0
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        1,
+        2,
+        1
+      ],
+      "D": 48,
+      "unique_allowed_A_count": 0,
+      "distance": 47,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        1,
+        2,
+        2
+      ],
+      "D": 72,
+      "unique_allowed_A_count": 0,
+      "distance": 71,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        1,
+        2,
+        3
+      ],
+      "D": 96,
+      "unique_allowed_A_count": 0,
+      "distance": 95,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        1,
+        2,
+        4
+      ],
+      "D": 120,
+      "unique_allowed_A_count": 0,
+      "distance": 119,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        1,
+        3,
+        0
+      ],
+      "D": 32,
+      "unique_allowed_A_count": 0,
+      "distance": 31,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        1,
+        3,
+        1
+      ],
+      "D": 64,
+      "unique_allowed_A_count": 0,
+      "distance": 63,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        1,
+        3,
+        2
+      ],
+      "D": 96,
+      "unique_allowed_A_count": 0,
+      "distance": 95,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        1,
+        3,
+        3
+      ],
+      "D": 128,
+      "unique_allowed_A_count": 0,
+      "distance": 127,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        1,
+        3,
+        4
+      ],
+      "D": 160,
+      "unique_allowed_A_count": 0,
+      "distance": 159,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        1,
+        4,
+        0
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        1,
+        4,
+        1
+      ],
+      "D": 80,
+      "unique_allowed_A_count": 0,
+      "distance": 79,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        1,
+        4,
+        2
+      ],
+      "D": 120,
+      "unique_allowed_A_count": 0,
+      "distance": 119,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        1,
+        4,
+        3
+      ],
+      "D": 160,
+      "unique_allowed_A_count": 0,
+      "distance": 159,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        1,
+        4,
+        4
+      ],
+      "D": 200,
+      "unique_allowed_A_count": 0,
+      "distance": 199,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        2,
+        0,
+        0
+      ],
+      "D": 12,
+      "unique_allowed_A_count": 0,
+      "distance": 11,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        2,
+        0,
+        1
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        2,
+        0,
+        2
+      ],
+      "D": 36,
+      "unique_allowed_A_count": 0,
+      "distance": 35,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        2,
+        0,
+        3
+      ],
+      "D": 48,
+      "unique_allowed_A_count": 0,
+      "distance": 47,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        2,
+        0,
+        4
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        2,
+        1,
+        0
+      ],
+      "D": 24,
+      "unique_allowed_A_count": 0,
+      "distance": 23,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        2,
+        1,
+        1
+      ],
+      "D": 48,
+      "unique_allowed_A_count": 0,
+      "distance": 47,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        2,
+        1,
+        2
+      ],
+      "D": 72,
+      "unique_allowed_A_count": 0,
+      "distance": 71,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        2,
+        1,
+        3
+      ],
+      "D": 96,
+      "unique_allowed_A_count": 0,
+      "distance": 95,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        2,
+        1,
+        4
+      ],
+      "D": 120,
+      "unique_allowed_A_count": 0,
+      "distance": 119,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        2,
+        2,
+        0
+      ],
+      "D": 36,
+      "unique_allowed_A_count": 0,
+      "distance": 35,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        2,
+        2,
+        1
+      ],
+      "D": 72,
+      "unique_allowed_A_count": 0,
+      "distance": 71,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        2,
+        2,
+        2
+      ],
+      "D": 108,
+      "unique_allowed_A_count": 0,
+      "distance": 107,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        2,
+        2,
+        3
+      ],
+      "D": 144,
+      "unique_allowed_A_count": 0,
+      "distance": 143,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        2,
+        2,
+        4
+      ],
+      "D": 180,
+      "unique_allowed_A_count": 0,
+      "distance": 179,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        2,
+        3,
+        0
+      ],
+      "D": 48,
+      "unique_allowed_A_count": 0,
+      "distance": 47,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        2,
+        3,
+        1
+      ],
+      "D": 96,
+      "unique_allowed_A_count": 0,
+      "distance": 95,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        2,
+        3,
+        2
+      ],
+      "D": 144,
+      "unique_allowed_A_count": 0,
+      "distance": 143,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        2,
+        3,
+        3
+      ],
+      "D": 192,
+      "unique_allowed_A_count": 0,
+      "distance": 191,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        2,
+        3,
+        4
+      ],
+      "D": 240,
+      "unique_allowed_A_count": 0,
+      "distance": 239,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        2,
+        4,
+        0
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        2,
+        4,
+        1
+      ],
+      "D": 120,
+      "unique_allowed_A_count": 0,
+      "distance": 119,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        2,
+        4,
+        2
+      ],
+      "D": 180,
+      "unique_allowed_A_count": 0,
+      "distance": 179,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        2,
+        4,
+        3
+      ],
+      "D": 240,
+      "unique_allowed_A_count": 0,
+      "distance": 239,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        2,
+        4,
+        4
+      ],
+      "D": 300,
+      "unique_allowed_A_count": 0,
+      "distance": 299,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        3,
+        0,
+        0
+      ],
+      "D": 16,
+      "unique_allowed_A_count": 0,
+      "distance": 15,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        3,
+        0,
+        1
+      ],
+      "D": 32,
+      "unique_allowed_A_count": 0,
+      "distance": 31,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        3,
+        0,
+        2
+      ],
+      "D": 48,
+      "unique_allowed_A_count": 0,
+      "distance": 47,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        3,
+        0,
+        3
+      ],
+      "D": 64,
+      "unique_allowed_A_count": 0,
+      "distance": 63,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        3,
+        0,
+        4
+      ],
+      "D": 80,
+      "unique_allowed_A_count": 0,
+      "distance": 79,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        3,
+        1,
+        0
+      ],
+      "D": 32,
+      "unique_allowed_A_count": 0,
+      "distance": 31,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        3,
+        1,
+        1
+      ],
+      "D": 64,
+      "unique_allowed_A_count": 0,
+      "distance": 63,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        3,
+        1,
+        2
+      ],
+      "D": 96,
+      "unique_allowed_A_count": 0,
+      "distance": 95,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        3,
+        1,
+        3
+      ],
+      "D": 128,
+      "unique_allowed_A_count": 0,
+      "distance": 127,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        3,
+        1,
+        4
+      ],
+      "D": 160,
+      "unique_allowed_A_count": 0,
+      "distance": 159,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        3,
+        2,
+        0
+      ],
+      "D": 48,
+      "unique_allowed_A_count": 0,
+      "distance": 47,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        3,
+        2,
+        1
+      ],
+      "D": 96,
+      "unique_allowed_A_count": 0,
+      "distance": 95,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        3,
+        2,
+        2
+      ],
+      "D": 144,
+      "unique_allowed_A_count": 0,
+      "distance": 143,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        3,
+        2,
+        3
+      ],
+      "D": 192,
+      "unique_allowed_A_count": 0,
+      "distance": 191,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        3,
+        2,
+        4
+      ],
+      "D": 240,
+      "unique_allowed_A_count": 0,
+      "distance": 239,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        3,
+        3,
+        0
+      ],
+      "D": 64,
+      "unique_allowed_A_count": 0,
+      "distance": 63,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        3,
+        3,
+        1
+      ],
+      "D": 128,
+      "unique_allowed_A_count": 0,
+      "distance": 127,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        3,
+        3,
+        2
+      ],
+      "D": 192,
+      "unique_allowed_A_count": 0,
+      "distance": 191,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "D": 256,
+      "unique_allowed_A_count": 0,
+      "distance": 255,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        3,
+        3,
+        4
+      ],
+      "D": 320,
+      "unique_allowed_A_count": 0,
+      "distance": 319,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        3,
+        4,
+        0
+      ],
+      "D": 80,
+      "unique_allowed_A_count": 0,
+      "distance": 79,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        3,
+        4,
+        1
+      ],
+      "D": 160,
+      "unique_allowed_A_count": 0,
+      "distance": 159,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        3,
+        4,
+        2
+      ],
+      "D": 240,
+      "unique_allowed_A_count": 0,
+      "distance": 239,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        3,
+        4,
+        3
+      ],
+      "D": 320,
+      "unique_allowed_A_count": 0,
+      "distance": 319,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        3,
+        4,
+        4
+      ],
+      "D": 400,
+      "unique_allowed_A_count": 0,
+      "distance": 399,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        4,
+        0,
+        0
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        4,
+        0,
+        1
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        4,
+        0,
+        2
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        4,
+        0,
+        3
+      ],
+      "D": 80,
+      "unique_allowed_A_count": 0,
+      "distance": 79,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        4,
+        0,
+        4
+      ],
+      "D": 100,
+      "unique_allowed_A_count": 0,
+      "distance": 99,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        4,
+        1,
+        0
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        4,
+        1,
+        1
+      ],
+      "D": 80,
+      "unique_allowed_A_count": 0,
+      "distance": 79,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        4,
+        1,
+        2
+      ],
+      "D": 120,
+      "unique_allowed_A_count": 0,
+      "distance": 119,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        4,
+        1,
+        3
+      ],
+      "D": 160,
+      "unique_allowed_A_count": 0,
+      "distance": 159,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        4,
+        1,
+        4
+      ],
+      "D": 200,
+      "unique_allowed_A_count": 0,
+      "distance": 199,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        4,
+        2,
+        0
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        4,
+        2,
+        1
+      ],
+      "D": 120,
+      "unique_allowed_A_count": 0,
+      "distance": 119,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        4,
+        2,
+        2
+      ],
+      "D": 180,
+      "unique_allowed_A_count": 0,
+      "distance": 179,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        4,
+        2,
+        3
+      ],
+      "D": 240,
+      "unique_allowed_A_count": 0,
+      "distance": 239,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        4,
+        2,
+        4
+      ],
+      "D": 300,
+      "unique_allowed_A_count": 0,
+      "distance": 299,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        4,
+        3,
+        0
+      ],
+      "D": 80,
+      "unique_allowed_A_count": 0,
+      "distance": 79,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        4,
+        3,
+        1
+      ],
+      "D": 160,
+      "unique_allowed_A_count": 0,
+      "distance": 159,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        4,
+        3,
+        2
+      ],
+      "D": 240,
+      "unique_allowed_A_count": 0,
+      "distance": 239,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        4,
+        3,
+        3
+      ],
+      "D": 320,
+      "unique_allowed_A_count": 0,
+      "distance": 319,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        4,
+        3,
+        4
+      ],
+      "D": 400,
+      "unique_allowed_A_count": 0,
+      "distance": 399,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        4,
+        4,
+        0
+      ],
+      "D": 100,
+      "unique_allowed_A_count": 0,
+      "distance": 99,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        4,
+        4,
+        1
+      ],
+      "D": 200,
+      "unique_allowed_A_count": 0,
+      "distance": 199,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        4,
+        4,
+        2
+      ],
+      "D": 300,
+      "unique_allowed_A_count": 0,
+      "distance": 299,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        4,
+        4,
+        3
+      ],
+      "D": 400,
+      "unique_allowed_A_count": 0,
+      "distance": 399,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        3,
+        4,
+        4,
+        4
+      ],
+      "D": 500,
+      "unique_allowed_A_count": 0,
+      "distance": 499,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        0,
+        0,
+        0
+      ],
+      "D": 5,
+      "unique_allowed_A_count": 0,
+      "distance": 4,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        0,
+        0,
+        1
+      ],
+      "D": 10,
+      "unique_allowed_A_count": 0,
+      "distance": 9,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        0,
+        0,
+        2
+      ],
+      "D": 15,
+      "unique_allowed_A_count": 0,
+      "distance": 14,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        0,
+        0,
+        3
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        0,
+        0,
+        4
+      ],
+      "D": 25,
+      "unique_allowed_A_count": 0,
+      "distance": 24,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        0,
+        1,
+        0
+      ],
+      "D": 10,
+      "unique_allowed_A_count": 0,
+      "distance": 9,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        0,
+        1,
+        1
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        0,
+        1,
+        2
+      ],
+      "D": 30,
+      "unique_allowed_A_count": 0,
+      "distance": 29,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        0,
+        1,
+        3
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        0,
+        1,
+        4
+      ],
+      "D": 50,
+      "unique_allowed_A_count": 0,
+      "distance": 49,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        0,
+        2,
+        0
+      ],
+      "D": 15,
+      "unique_allowed_A_count": 0,
+      "distance": 14,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        0,
+        2,
+        1
+      ],
+      "D": 30,
+      "unique_allowed_A_count": 0,
+      "distance": 29,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        0,
+        2,
+        2
+      ],
+      "D": 45,
+      "unique_allowed_A_count": 0,
+      "distance": 44,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        0,
+        2,
+        3
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        0,
+        2,
+        4
+      ],
+      "D": 75,
+      "unique_allowed_A_count": 0,
+      "distance": 74,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        0,
+        3,
+        0
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        0,
+        3,
+        1
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        0,
+        3,
+        2
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        0,
+        3,
+        3
+      ],
+      "D": 80,
+      "unique_allowed_A_count": 0,
+      "distance": 79,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        0,
+        3,
+        4
+      ],
+      "D": 100,
+      "unique_allowed_A_count": 0,
+      "distance": 99,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        0,
+        4,
+        0
+      ],
+      "D": 25,
+      "unique_allowed_A_count": 0,
+      "distance": 24,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        0,
+        4,
+        1
+      ],
+      "D": 50,
+      "unique_allowed_A_count": 0,
+      "distance": 49,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        0,
+        4,
+        2
+      ],
+      "D": 75,
+      "unique_allowed_A_count": 0,
+      "distance": 74,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        0,
+        4,
+        3
+      ],
+      "D": 100,
+      "unique_allowed_A_count": 0,
+      "distance": 99,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        0,
+        4,
+        4
+      ],
+      "D": 125,
+      "unique_allowed_A_count": 0,
+      "distance": 124,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        1,
+        0,
+        0
+      ],
+      "D": 10,
+      "unique_allowed_A_count": 0,
+      "distance": 9,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        1,
+        0,
+        1
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        1,
+        0,
+        2
+      ],
+      "D": 30,
+      "unique_allowed_A_count": 0,
+      "distance": 29,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        1,
+        0,
+        3
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        1,
+        0,
+        4
+      ],
+      "D": 50,
+      "unique_allowed_A_count": 0,
+      "distance": 49,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        1,
+        1,
+        0
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        1,
+        1,
+        1
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        1,
+        1,
+        2
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        1,
+        1,
+        3
+      ],
+      "D": 80,
+      "unique_allowed_A_count": 0,
+      "distance": 79,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        1,
+        1,
+        4
+      ],
+      "D": 100,
+      "unique_allowed_A_count": 0,
+      "distance": 99,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        1,
+        2,
+        0
+      ],
+      "D": 30,
+      "unique_allowed_A_count": 0,
+      "distance": 29,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        1,
+        2,
+        1
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        1,
+        2,
+        2
+      ],
+      "D": 90,
+      "unique_allowed_A_count": 0,
+      "distance": 89,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        1,
+        2,
+        3
+      ],
+      "D": 120,
+      "unique_allowed_A_count": 0,
+      "distance": 119,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        1,
+        2,
+        4
+      ],
+      "D": 150,
+      "unique_allowed_A_count": 0,
+      "distance": 149,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        1,
+        3,
+        0
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        1,
+        3,
+        1
+      ],
+      "D": 80,
+      "unique_allowed_A_count": 0,
+      "distance": 79,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        1,
+        3,
+        2
+      ],
+      "D": 120,
+      "unique_allowed_A_count": 0,
+      "distance": 119,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        1,
+        3,
+        3
+      ],
+      "D": 160,
+      "unique_allowed_A_count": 0,
+      "distance": 159,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        1,
+        3,
+        4
+      ],
+      "D": 200,
+      "unique_allowed_A_count": 0,
+      "distance": 199,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        1,
+        4,
+        0
+      ],
+      "D": 50,
+      "unique_allowed_A_count": 0,
+      "distance": 49,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        1,
+        4,
+        1
+      ],
+      "D": 100,
+      "unique_allowed_A_count": 0,
+      "distance": 99,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        1,
+        4,
+        2
+      ],
+      "D": 150,
+      "unique_allowed_A_count": 0,
+      "distance": 149,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        1,
+        4,
+        3
+      ],
+      "D": 200,
+      "unique_allowed_A_count": 0,
+      "distance": 199,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        1,
+        4,
+        4
+      ],
+      "D": 250,
+      "unique_allowed_A_count": 0,
+      "distance": 249,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        2,
+        0,
+        0
+      ],
+      "D": 15,
+      "unique_allowed_A_count": 0,
+      "distance": 14,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        2,
+        0,
+        1
+      ],
+      "D": 30,
+      "unique_allowed_A_count": 0,
+      "distance": 29,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        2,
+        0,
+        2
+      ],
+      "D": 45,
+      "unique_allowed_A_count": 0,
+      "distance": 44,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        2,
+        0,
+        3
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        2,
+        0,
+        4
+      ],
+      "D": 75,
+      "unique_allowed_A_count": 0,
+      "distance": 74,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        2,
+        1,
+        0
+      ],
+      "D": 30,
+      "unique_allowed_A_count": 0,
+      "distance": 29,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        2,
+        1,
+        1
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        2,
+        1,
+        2
+      ],
+      "D": 90,
+      "unique_allowed_A_count": 0,
+      "distance": 89,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        2,
+        1,
+        3
+      ],
+      "D": 120,
+      "unique_allowed_A_count": 0,
+      "distance": 119,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        2,
+        1,
+        4
+      ],
+      "D": 150,
+      "unique_allowed_A_count": 0,
+      "distance": 149,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        2,
+        2,
+        0
+      ],
+      "D": 45,
+      "unique_allowed_A_count": 0,
+      "distance": 44,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        2,
+        2,
+        1
+      ],
+      "D": 90,
+      "unique_allowed_A_count": 0,
+      "distance": 89,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        2,
+        2,
+        2
+      ],
+      "D": 135,
+      "unique_allowed_A_count": 0,
+      "distance": 134,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        2,
+        2,
+        3
+      ],
+      "D": 180,
+      "unique_allowed_A_count": 0,
+      "distance": 179,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        2,
+        2,
+        4
+      ],
+      "D": 225,
+      "unique_allowed_A_count": 0,
+      "distance": 224,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        2,
+        3,
+        0
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        2,
+        3,
+        1
+      ],
+      "D": 120,
+      "unique_allowed_A_count": 0,
+      "distance": 119,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        2,
+        3,
+        2
+      ],
+      "D": 180,
+      "unique_allowed_A_count": 0,
+      "distance": 179,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        2,
+        3,
+        3
+      ],
+      "D": 240,
+      "unique_allowed_A_count": 0,
+      "distance": 239,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        2,
+        3,
+        4
+      ],
+      "D": 300,
+      "unique_allowed_A_count": 0,
+      "distance": 299,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        2,
+        4,
+        0
+      ],
+      "D": 75,
+      "unique_allowed_A_count": 0,
+      "distance": 74,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        2,
+        4,
+        1
+      ],
+      "D": 150,
+      "unique_allowed_A_count": 0,
+      "distance": 149,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        2,
+        4,
+        2
+      ],
+      "D": 225,
+      "unique_allowed_A_count": 0,
+      "distance": 224,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        2,
+        4,
+        3
+      ],
+      "D": 300,
+      "unique_allowed_A_count": 0,
+      "distance": 299,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        2,
+        4,
+        4
+      ],
+      "D": 375,
+      "unique_allowed_A_count": 0,
+      "distance": 374,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        3,
+        0,
+        0
+      ],
+      "D": 20,
+      "unique_allowed_A_count": 0,
+      "distance": 19,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        3,
+        0,
+        1
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        3,
+        0,
+        2
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        3,
+        0,
+        3
+      ],
+      "D": 80,
+      "unique_allowed_A_count": 0,
+      "distance": 79,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        3,
+        0,
+        4
+      ],
+      "D": 100,
+      "unique_allowed_A_count": 0,
+      "distance": 99,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        3,
+        1,
+        0
+      ],
+      "D": 40,
+      "unique_allowed_A_count": 0,
+      "distance": 39,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        3,
+        1,
+        1
+      ],
+      "D": 80,
+      "unique_allowed_A_count": 0,
+      "distance": 79,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        3,
+        1,
+        2
+      ],
+      "D": 120,
+      "unique_allowed_A_count": 0,
+      "distance": 119,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        3,
+        1,
+        3
+      ],
+      "D": 160,
+      "unique_allowed_A_count": 0,
+      "distance": 159,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        3,
+        1,
+        4
+      ],
+      "D": 200,
+      "unique_allowed_A_count": 0,
+      "distance": 199,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        3,
+        2,
+        0
+      ],
+      "D": 60,
+      "unique_allowed_A_count": 0,
+      "distance": 59,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        3,
+        2,
+        1
+      ],
+      "D": 120,
+      "unique_allowed_A_count": 0,
+      "distance": 119,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        3,
+        2,
+        2
+      ],
+      "D": 180,
+      "unique_allowed_A_count": 0,
+      "distance": 179,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        3,
+        2,
+        3
+      ],
+      "D": 240,
+      "unique_allowed_A_count": 0,
+      "distance": 239,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        3,
+        2,
+        4
+      ],
+      "D": 300,
+      "unique_allowed_A_count": 0,
+      "distance": 299,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        3,
+        3,
+        0
+      ],
+      "D": 80,
+      "unique_allowed_A_count": 0,
+      "distance": 79,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        3,
+        3,
+        1
+      ],
+      "D": 160,
+      "unique_allowed_A_count": 0,
+      "distance": 159,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        3,
+        3,
+        2
+      ],
+      "D": 240,
+      "unique_allowed_A_count": 0,
+      "distance": 239,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        3,
+        3,
+        3
+      ],
+      "D": 320,
+      "unique_allowed_A_count": 0,
+      "distance": 319,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        3,
+        3,
+        4
+      ],
+      "D": 400,
+      "unique_allowed_A_count": 0,
+      "distance": 399,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        3,
+        4,
+        0
+      ],
+      "D": 100,
+      "unique_allowed_A_count": 0,
+      "distance": 99,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        3,
+        4,
+        1
+      ],
+      "D": 200,
+      "unique_allowed_A_count": 0,
+      "distance": 199,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        3,
+        4,
+        2
+      ],
+      "D": 300,
+      "unique_allowed_A_count": 0,
+      "distance": 299,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        3,
+        4,
+        3
+      ],
+      "D": 400,
+      "unique_allowed_A_count": 0,
+      "distance": 399,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        3,
+        4,
+        4
+      ],
+      "D": 500,
+      "unique_allowed_A_count": 0,
+      "distance": 499,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        4,
+        0,
+        0
+      ],
+      "D": 25,
+      "unique_allowed_A_count": 0,
+      "distance": 24,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        4,
+        0,
+        1
+      ],
+      "D": 50,
+      "unique_allowed_A_count": 0,
+      "distance": 49,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        4,
+        0,
+        2
+      ],
+      "D": 75,
+      "unique_allowed_A_count": 0,
+      "distance": 74,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        4,
+        0,
+        3
+      ],
+      "D": 100,
+      "unique_allowed_A_count": 0,
+      "distance": 99,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        4,
+        0,
+        4
+      ],
+      "D": 125,
+      "unique_allowed_A_count": 0,
+      "distance": 124,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        4,
+        1,
+        0
+      ],
+      "D": 50,
+      "unique_allowed_A_count": 0,
+      "distance": 49,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        4,
+        1,
+        1
+      ],
+      "D": 100,
+      "unique_allowed_A_count": 0,
+      "distance": 99,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        4,
+        1,
+        2
+      ],
+      "D": 150,
+      "unique_allowed_A_count": 0,
+      "distance": 149,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        4,
+        1,
+        3
+      ],
+      "D": 200,
+      "unique_allowed_A_count": 0,
+      "distance": 199,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        4,
+        1,
+        4
+      ],
+      "D": 250,
+      "unique_allowed_A_count": 0,
+      "distance": 249,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        4,
+        2,
+        0
+      ],
+      "D": 75,
+      "unique_allowed_A_count": 0,
+      "distance": 74,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        4,
+        2,
+        1
+      ],
+      "D": 150,
+      "unique_allowed_A_count": 0,
+      "distance": 149,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        4,
+        2,
+        2
+      ],
+      "D": 225,
+      "unique_allowed_A_count": 0,
+      "distance": 224,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        4,
+        2,
+        3
+      ],
+      "D": 300,
+      "unique_allowed_A_count": 0,
+      "distance": 299,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        4,
+        2,
+        4
+      ],
+      "D": 375,
+      "unique_allowed_A_count": 0,
+      "distance": 374,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        4,
+        3,
+        0
+      ],
+      "D": 100,
+      "unique_allowed_A_count": 0,
+      "distance": 99,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        4,
+        3,
+        1
+      ],
+      "D": 200,
+      "unique_allowed_A_count": 0,
+      "distance": 199,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        4,
+        3,
+        2
+      ],
+      "D": 300,
+      "unique_allowed_A_count": 0,
+      "distance": 299,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        4,
+        3,
+        3
+      ],
+      "D": 400,
+      "unique_allowed_A_count": 0,
+      "distance": 399,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        4,
+        3,
+        4
+      ],
+      "D": 500,
+      "unique_allowed_A_count": 0,
+      "distance": 499,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        4,
+        4,
+        0
+      ],
+      "D": 125,
+      "unique_allowed_A_count": 0,
+      "distance": 124,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        4,
+        4,
+        1
+      ],
+      "D": 250,
+      "unique_allowed_A_count": 0,
+      "distance": 249,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        4,
+        4,
+        2
+      ],
+      "D": 375,
+      "unique_allowed_A_count": 0,
+      "distance": 374,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        4,
+        4,
+        3
+      ],
+      "D": 500,
+      "unique_allowed_A_count": 0,
+      "distance": 499,
+      "status": "PASS"
+    },
+    {
+      "sizes": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "D": 625,
+      "unique_allowed_A_count": 0,
+      "distance": 624,
+      "status": "PASS"
+    }
+  ]
+}

@@ -1,0 +1,716 @@
+\documentclass{amsart}
+
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+
+\hypersetup{
+  pdftitle={The exact activity threshold for spectral independence of the hard-core model on trees},
+  pdfauthor={Knowledge Sense},
+  pdfsubject={Mathematics},
+  pdfkeywords={hard-core model, spectral independence, Glauber dynamics, spectral gap, trees, computer-assisted proof}
+}
+
+\hyphenation{manuscript}
+
+\numberwithin{equation}{section}
+\numberwithin{table}{section}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\gap}{\operatorname{gap}}
+\newcommand{\dist}{\operatorname{dist}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\lmax}{\lambda_{\max}}
+\newcommand{\lmin}{\lambda_{\min}}
+\newcommand{\Lam}{\Lambda}
+\newcommand{\qs}{q_{\ast}}
+\newcommand{\xs}{x_{\ast}}
+\newcommand{\ys}{y_{\ast}}
+\newcommand{\ds}{d_{\ast}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\Ch}{\mathcal{C}}
+
+\begin{document}
+
+\title[Exact threshold for the hard-core model on trees]{The exact activity threshold for spectral independence of the hard-core model on trees}
+
+\author{Knowledge Sense}
+\address{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{12 October 2026}
+
+\subjclass[2020]{Primary 60J10; Secondary 05C05, 05C69, 68W20, 82B20}
+
+\keywords{Hard-core model, spectral independence, Glauber dynamics, spectral gap, trees, computer-assisted proof}
+
+\begin{abstract}
+For the hard-core model on finite forests with vertex-dependent activities we determine the exact activity threshold for uniform spectral independence and for an optimal spectral gap of the Glauber dynamics. Let $L=5^{-1/2}(1-5^{-1/2})^{-6}\approx 15.6737$. If all activities are at most a constant $\Lambda<L$, then the correlation matrix of the occupation indicators has operator norm bounded in terms of $\Lambda$ alone. The bound persists under every pinning and every decrease of the activities, so the model is completely spectrally independent in the sense of Chen, Feng, Yin and Zhang, and the single-site heat-bath dynamics has spectral gap at least $c_\Lambda/n$. No assumption on the degrees is made. Conversely, for every constant activity $\lambda\ge L$ there are finite trees with free boundary conditions on which the correlation matrix has arbitrarily large norm and $n$ times the spectral gap is arbitrarily small. This closes the gap between the thresholds $e^2$ and $28.15$ obtained by Chen, Yang, Yin and Zhang. The main new ingredient is an inequality for a cubic potential that holds for an arbitrary number of children. A convexity argument reduces it to finitely many one-variable estimates, which we verify by interval arithmetic with rational endpoints.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $F=(V,E)$ be a finite forest and let $\lambda=(\lambda_v)_{v\in V}$ be positive numbers, the \emph{activities}. The hard-core model on $F$ is the probability measure
+\begin{equation}\label{eq:hardcore}
+\mu_{F,\lambda}(I)=\frac{1}{Z_{F,\lambda}}\prod_{v\in I}\lambda_v,\qquad I\subseteq V \text{ independent},
+\end{equation}
+where $Z_{F,\lambda}$ is the normalizing constant. The \emph{Glauber dynamics} (heat-bath dynamics) chooses a vertex uniformly at random and resamples its occupation from the conditional law given all other vertices. We write $\gap(\mu)$ for the spectral gap of this chain and $n=|V|$.
+
+For graphs of maximum degree $\Delta\ge3$, spectral independence, introduced by Anari, Liu and Oveis Gharan~\cite{ALO}, gives rapid mixing of the Glauber dynamics for the hard-core model with activities below the uniqueness threshold $\lambda_c(\Delta)=(\Delta-1)^{\Delta-1}/(\Delta-2)^{\Delta}$; see \cite{ALO,CFYZ,CLV} and the references there. On trees the situation is different, since sampling is tractable for every activity, and the relevant question is for which activities the Glauber dynamics has the optimal spectral gap $\Omega(1/n)$ on all trees, without any restriction on the degree. For the relaxation time of the Glauber dynamics on trees of bounded degree see Berger, Kenyon, Mossel and Peres~\cite{BKMP}. Restrepo, \v{S}tefankovi\v{c}, Vera, Vigoda and Yang~\cite{RSV} constructed trees on which the dynamics slows down polynomially when the activity is large; the constant implicit in their construction is about $28$ (see \cite[Section~1]{EHSV}). Efthymiou, Hayes, \v{S}tefankovi\v{c} and Vigoda~\cite{EHSV} proved approximate tensorization of variance on all trees for $\lambda\le 1.1$, and, combining spectral independence with the boosting theorem of Chen, Feng, Yin and Zhang~\cite[Theorem~1.9]{CFYZ}, an optimal relaxation time for $\lambda\le 1.3$. Chen, Yang, Yin and Zhang~\cite{CYYZ} introduced an approximate inverse of the influence matrix and proved spectral independence and an optimal spectral gap on all trees for $\lambda<e^2\approx 7.389$ \cite[Theorem~7]{CYYZ}. In the other direction they showed that spectral independence is unbounded on trees for $\lambda>28.15$ \cite[Theorem~8]{CYYZ}.
+
+In this paper we close the gap between these two thresholds. Put
+\begin{equation}\label{eq:L}
+\qs=\frac{1}{\sqrt5},\qquad L=\frac{\qs}{(1-\qs)^6}=15.6736764833\ldots .
+\end{equation}
+We use the notion of complete spectral independence of \cite{CFYZ}, which is based on the absolute influence matrix and requires a bound after every pinning and every decrease of the activities; it is recalled in Definition~\ref{def:SI}.
+
+\begin{theorem}\label{thm:main}
+\begin{enumerate}
+\item[(a)] Let $0<\Lambda<L$. There are constants $\eta_\Lambda<\infty$ and $c_\Lambda>0$, depending only on $\Lambda$, such that the following holds for every finite forest $F$ on $n\ge1$ vertices and all activities $0<\lambda_v\le\Lambda$. The hard-core measure $\mu_{F,\lambda}$ is completely $\eta_\Lambda$-spectrally independent, and
+\[
+\gap(\mu_{F,\lambda})\ \ge\ \frac{c_\Lambda}{n}.
+\]
+\item[(b)] Let $\lambda\ge L$ be constant. For every $M>0$ there is a finite tree $T$ on $n$ vertices such that the hard-core measure $\mu$ on $T$ with activity $\lambda$ at every vertex satisfies $\rho(\Psi_\mu)\ge M$ and $n\cdot\gap(\mu)\le 1/M$.
+\end{enumerate}
+\end{theorem}
+
+Here $\Psi_\mu$ is the influence matrix of the unpinned measure $\mu$, and $\rho$ denotes the spectral radius. In part (b) no pinning and no external field are used: the constructed trees carry free boundary conditions. The activities in part (a) are arbitrary in $(0,\Lambda]$; in particular, there is no lower bound on them and no bound on the degrees.
+
+Part (a) is a consequence of a bound on the correlation matrix. For a measure on $\{0,1\}^V$ without almost surely constant coordinates let $X_v$ be the occupation indicator of $v$, $a_v=\E X_v$, $s_v=\Var X_v$, and
+\[
+R_{uv}=\frac{\Cov(X_u,X_v)}{\sqrt{s_us_v}}\qquad(u,v\in V).
+\]
+
+\begin{theorem}\label{thm:corr}
+Let $0<\Lambda<L$. There is $\eta_\Lambda<\infty$ such that for every finite forest and all activities $0<\lambda_v\le\Lambda$ the correlation matrix of the hard-core measure satisfies $\|R\|_2\le\eta_\Lambda$.
+\end{theorem}
+
+Since pinnings and decreases of activities of a hard-core measure on a forest produce hard-core measures on smaller forests with activities at most $\Lambda$, Theorem~\ref{thm:corr} is automatically uniform over them. On a forest the absolute influence matrix is similar to $|R|-I$, and $|R|$ has the same spectrum as $R$ (Lemma~\ref{lem:sign}). Theorem~\ref{thm:corr} therefore gives complete spectral independence, and the spectral gap follows from \cite[Theorem~1.9]{CFYZ} together with the variance tensorization of \cite[Section~3]{EHSV} at small activities.
+
+\emph{The cubic partition inequality.} The proof of Theorem~\ref{thm:corr} rests on a scalar inequality. Fix the constants $c=2/125$ and $z\approx2.8310825$ defined in~\eqref{eq:constants} below, and set
+\begin{equation}\label{eq:Phi-intro}
+\Phi(y)=y\bigl(1+c(y-z)^2\bigr),\qquad X=\log(1+L).
+\end{equation}
+For $0<x\le X$ put $r=e^x-1$, $q=r/(1+r)$, and
+\begin{equation}\label{eq:f-intro}
+f(x)=q^2\,\Phi\bigl(\log(L/r)\bigr),\qquad f(0)=0.
+\end{equation}
+In the hard-core recursion on a rooted tree, $r$ is the occupation odds of a child in its own subtree, $x=\log(1+r)$ is its contribution to the potential of its parent, and $\log(L/r)$ dominates the potential of the child itself.
+
+\begin{theorem}\label{thm:partition}
+For every $m\ge1$ and all $x_1,\dots,x_m\in[0,X]$,
+\[
+\sum_{i=1}^m f(x_i)\ \le\ \Phi\Bigl(\sum_{i=1}^m x_i\Bigr).
+\]
+\end{theorem}
+
+The inequality is sharp: for five equal entries $x_i=\xs=-\log(1-\qs)$ both sides coincide. Since $m$ is arbitrary, the resulting bounds do not depend on the degrees. The proof in Section~\ref{sec:partition} shows by a convexity argument that a hypothetical violating list may be assumed to consist of equal positive entries, and that the number of entries must then be five. What remains are finitely many inequalities in one real variable (Proposition~\ref{prop:scalar}); these are verified in Section~\ref{sec:verification} by interval arithmetic with rational endpoints, with analytic arguments near the singular endpoint.
+
+From Theorem~\ref{thm:partition} we derive in Section~\ref{sec:partition} a strict contraction with factor $\gamma(\Lambda)<1$ for every activity cap $\Lambda<L$ (Lemma~\ref{lem:contraction}). In Section~\ref{sec:forests} it is applied, generation by generation, to the sums $\sum Q^2\Phi(y)$, where $Q$ is a product of conditional occupation probabilities along a path and $y$ is the potential at the end of the path. This yields geometric decay of the squared correlations between a vertex and its descendants at a given distance. A triangular factorization of the correlation matrix (Lemma~\ref{lem:factor}) turns this decay into a bound on $\|R\|_2$.
+
+The potential approach follows Fang, Lu, Nevo, Yao and Zheng~\cite{FLNYZ}, who used the potential $y=\sum\log(1+r)$ together with the scalar inequality \cite[Lemma~4.2]{FLNYZ} to control sums of powers of path products, in their study of the size of a random independent set at activities up to $12$. The linear potential $\Phi(y)=y$ corresponds to the exponent two in \cite[(4.5)]{FLNYZ}; for it the analogue of Theorem~\ref{thm:partition} reduces to a single-variable inequality, which numerically holds only for caps slightly below $L$ (Remark~\ref{rem:linear}). The cubic correction in~\eqref{eq:Phi-intro} closes this gap.
+
+\emph{The upper threshold.} Part (b) of Theorem~\ref{thm:main} is obtained by the mechanism of \cite[Section~5.2]{CYYZ}: a regular core tree is attached at its leaves to finite trees whose root marginals approximate a fixed point of the hard-core recursion. These trees exist by \cite[Section~5]{RSV} in the form of \cite[Lemma~57]{CYYZ}. We use a core in which the root has six children and every other internal vertex has five. The core law then converges to a stationary broadcast process in which a vertex is occupied with probability $p$ when its parent is unoccupied, where $p=\lambda(1-p)^6$, and the Rayleigh quotient of the inverse correlation matrix at the test vector of \cite[(21)]{CYYZ} tends to zero as the height of the core grows, as soon as $5p^2\ge1$, that is, as soon as $\lambda\ge L$. With branching number $b$ in place of five the same construction requires $bp^2\ge1$ with $p=\lambda(1-p)^{b+1}$, that is, $\lambda\ge\lambda_b:=b^{-1/2}(1-b^{-1/2})^{-(b+1)}$. One has $\lambda_2\approx28.14$, which underlies the bound $28.15$ in \cite[Theorem~8]{CYYZ}, $\lambda_3\approx18.09$, $\lambda_4=16$, $\lambda_5=L$ and $\lambda_6\approx16.07$. Since the construction applies for every integer $b\ge2$ (Remark~\ref{rem:upper}), Theorem~\ref{thm:main}(a) gives $\lambda_b\ge L$ for all such $b$. Thus, among the integers $b\ge2$, $\lambda_b$ is minimal at $b=5$, where $\lambda_5=L$.
+
+\emph{Dependencies.} Besides standard facts about the hard-core model and finite Markov chains, the proof uses three published results that we do not reprove: the existence of finite trees with prescribed approximate root marginal \cite[Lemma~57]{CYYZ} (from \cite[Section~5]{RSV}), the boosting theorem \cite[Theorem~1.9]{CFYZ}, and the variance tensorization for trees with activities at most $1.1$ from \cite[Section~3]{EHSV}. The first enters only part (b) of Theorem~\ref{thm:main}, and the last two only its spectral gap assertion; Theorems~\ref{thm:corr} and~\ref{thm:partition} and the spectral independence assertion use none of them. Theorem~\ref{thm:partition} depends on finitely many interval computations, described in Section~\ref{sec:verification} and Appendix~\ref{app:data}. Theorem, equation and section numbers of \cite{CFYZ,CYYZ,CLV,EHSV,FLNYZ} refer to the arXiv versions listed in the references.
+
+\emph{Organization.} Section~\ref{sec:prelim} collects notation and standard facts about the hard-core model on forests. Section~\ref{sec:partition} proves Theorem~\ref{thm:partition}, assuming the scalar estimates of Proposition~\ref{prop:scalar}, and deduces the strict contraction. Section~\ref{sec:forests} proves Theorem~\ref{thm:corr} and the spectral independence part of Theorem~\ref{thm:main}. Section~\ref{sec:gap} proves the spectral gap bound, and Section~\ref{sec:upper} proves Theorem~\ref{thm:main}(b). Section~\ref{sec:verification} proves Proposition~\ref{prop:scalar}.
+
+\section{Preliminaries}\label{sec:prelim}
+
+\subsection{Notation}
+Throughout, $F=(V,E)$ is a finite forest with $n=|V|\ge1$ and $\lambda=(\lambda_v)_{v\in V}$ are positive activities. We write $\mu=\mu_{F,\lambda}$ for the measure~\eqref{eq:hardcore} and identify an independent set $I$ with its indicator vector $(X_v)_{v\in V}\in\{0,1\}^V$. Since every activity is positive, both the empty set and every singleton have positive probability, so $0<a_v<1$ for every $v$, where $a_v=\mu(X_v=1)$. We put $s_v=a_v(1-a_v)$, and let $R$ be the correlation matrix defined in the introduction. Operator norms are Euclidean.
+
+We choose a root in every component of $F$. For a vertex $v$ we write $T_v$ for the subtree of descendants of $v$ (including $v$), $\Ch(v)$ for the set of children of $v$, and, if $v$ is not a root, $v^-$ for its parent. For a descendant $u$ of $v$ let $\dist(v,u)$ be the graph distance. All statements below hold for an arbitrary choice of roots.
+
+For $v\in V$ let $Z^1_v$ and $Z^0_v$ be the total weights of the independent sets of $T_v$ that contain $v$, respectively do not contain $v$, computed with the activities $\lambda$. Define
+\begin{equation}\label{eq:messages}
+r_v=\frac{Z_v^1}{Z_v^0},\qquad q_v=\frac{r_v}{1+r_v},\qquad x_v=\log(1+r_v),\qquad y_v=\sum_{u\in\Ch(v)}x_u .
+\end{equation}
+Thus $r_v$ is the occupation odds and $q_v$ the occupation probability of $v$ under the hard-core measure on $T_v$ alone. For a descendant $u$ of $v$ let
+\[
+Q(v,u)=\prod_{w}q_w,
+\]
+the product over the vertices $w$ of the path from $v$ to $u$ other than $v$; in particular $Q(v,v)=1$.
+
+\subsection{Recursion, Markov property and marginals}
+
+\begin{lemma}\label{lem:markov}
+Let $w\in V$. Conditionally on $X_w=0$, the restrictions of $X$ to the components of $F-w$ are independent, and each is distributed as the hard-core measure on that component with the activities $\lambda$. Conditionally on $X_w=1$, every neighbour of $w$ is unoccupied. In both cases, the restriction of $X$ to a component $C$ of $F-w$ is conditionally independent of the restriction of $X$ to $V\setminus(C\cup\{w\})$.
+\end{lemma}
+
+\begin{proof}
+An independent set $I$ with $w\notin I$ is the disjoint union of independent sets of the components of $F-w$, and its weight is the product of their weights. An independent set containing $w$ is $\{w\}$ together with an independent set of $F-w$ avoiding the neighbours of $w$, which is again a disjoint union over the components of $F-w$, each component $C$ contributing an independent set of $C$ avoiding the unique neighbour of $w$ in $C$, if any. The weights factor in the same way. Both assertions follow.
+\end{proof}
+
+\begin{lemma}\label{lem:marginals}
+\begin{enumerate}
+\item[(i)] For every $v$, $r_v=\lambda_v\prod_{u\in\Ch(v)}(1+r_u)^{-1}=\lambda_ve^{-y_v}$. In particular $0<r_v\le\lambda_v$ and $y_v=\log(\lambda_v/r_v)\ge0$.
+\item[(ii)] For a child $u$ of $w$ one has $\mu(X_u=1\mid X_w=0)=q_u$ and $\mu(X_u=1\mid X_w=1)=0$.
+\item[(iii)] If every activity is at most $\Lambda$, then for every $v$
+\[
+\frac{q_v}{1+\Lambda}\le a_v\le q_v,\qquad s_v\ge\frac{q_v}{(1+\Lambda)^2},\qquad s_v\le\Lambda e^{-y_v}.
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) An independent set of $T_v$ not containing $v$ is a disjoint union of independent sets of the trees $T_u$, $u\in\Ch(v)$, so $Z^0_v=\prod_u(Z^0_u+Z^1_u)$. An independent set containing $v$ consists of $v$ and independent sets of the $T_u$ avoiding their roots, so $Z^1_v=\lambda_v\prod_uZ^0_u$. Dividing gives the recursion, and $\prod_u(1+r_u)^{-1}=e^{-y_v}$ by~\eqref{eq:messages}.
+
+(ii) The tree $T_u$ is a component of $F-w$, so the first identity follows from Lemma~\ref{lem:markov}. The second is the hard-core constraint.
+
+(iii) If $v$ is a root, put $t=0$. Otherwise delete the edge $vv^-$, let $F'$ be the component of the resulting forest that contains $v^-$, and let $t$ be the occupation odds of $v^-$ under the hard-core measure on $F'$; by (i), applied to $F'$ rooted at $v^-$, we have $0<t\le\lambda_{v^-}\le\Lambda$. Summing the weights of independent sets of $F$ according to the occupation of $v$ and $v^-$, and dividing by the product of the weights of the empty configurations at $v$ in $T_v$ and at $v^-$ in $F'$, we obtain
+\[
+a_v=\frac{r_v}{1+r_v+t}.
+\]
+Since $1+r_v+t\le(1+r_v)(1+\Lambda)$, this gives $q_v/(1+\Lambda)\le a_v\le q_v$. Moreover $q_v\le r_v\le\Lambda$ implies $1-a_v\ge1-q_v\ge(1+\Lambda)^{-1}$, so $s_v=a_v(1-a_v)\ge q_v(1+\Lambda)^{-2}$. Finally $s_v\le a_v\le q_v\le r_v=\lambda_ve^{-y_v}\le\Lambda e^{-y_v}$.
+\end{proof}
+
+\begin{lemma}\label{lem:paths}
+Let $u$ be a descendant of $v$ with $\dist(v,u)=d$. Then
+\[
+\E[X_u\mid X_v=1]-\E[X_u\mid X_v=0]=(-1)^dQ(v,u),
+\]
+and consequently
+\begin{equation}\label{eq:Rpath}
+\Cov(X_v,X_u)=(-1)^d s_vQ(v,u),\qquad R_{vu}=(-1)^d\sqrt{s_v/s_u}\;Q(v,u).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Let $v=w_0,w_1,\dots,w_d=u$ be the path from $v$ to $u$, and put $g_k(\xi)=\E[X_{w_k}\mid X_v=\xi]$ for $\xi\in\{0,1\}$. For $k\ge1$ the tree $T_{w_k}$ is a component of $F-w_{k-1}$ and $v\notin T_{w_k}$. By Lemma~\ref{lem:markov} and Lemma~\ref{lem:marginals}(ii),
+\[
+\E[X_{w_k}\mid X_{w_{k-1}},X_v]=q_{w_k}\,(1-X_{w_{k-1}}),
+\]
+hence $g_k(\xi)=q_{w_k}(1-g_{k-1}(\xi))$ and $g_k(1)-g_k(0)=-q_{w_k}(g_{k-1}(1)-g_{k-1}(0))$. Since $g_0(1)-g_0(0)=1$, the first identity follows. For a $\{0,1\}$-valued $X_v$ and any bounded $Y$ one has $\Cov(X_v,Y)=s_v(\E[Y\mid X_v=1]-\E[Y\mid X_v=0])$, which gives~\eqref{eq:Rpath}.
+\end{proof}
+
+\begin{lemma}\label{lem:sign}
+Let $u\ne v$. If $u$ and $v$ lie in different components of $F$, then $R_{uv}=0$. Otherwise $R_{uv}\ne0$ and its sign is $(-1)^{\dist(u,v)}$. Consequently, if $J=\diag((-1)^{\mathrm{depth}(v)})$, where the depth is measured from the root of the component of $v$, then the entrywise absolute value of $R$ is $|R|=JRJ$, and $|R|$ has the same eigenvalues as $R$.
+\end{lemma}
+
+\begin{proof}
+Different components are independent. If $u$ and $v$ lie in the same component, root that component at $v$; this does not change $R$, and Lemma~\ref{lem:paths} gives the sign, since $Q(v,u)>0$. Finally $\mathrm{depth}(u)+\mathrm{depth}(v)\equiv\dist(u,v)\pmod 2$ for vertices of one component, so $(JRJ)_{uv}=|R_{uv}|$, and $J^{-1}=J$.
+\end{proof}
+
+\subsection{Spectral independence and the Glauber dynamics}
+We recall the definitions of \cite[Section~1.2]{CFYZ}, translated from $\{-1,+1\}$ to $\{0,1\}$ with $+1$ corresponding to an occupied vertex. Let $\nu$ be a probability measure on $\{0,1\}^V$ with support $\Omega(\nu)$. For $\Lambda'\subseteq V$ and a feasible partial configuration $\sigma\in\{0,1\}^{\Lambda'}$ let $\nu^\sigma$ be $\nu$ conditioned on $X_{\Lambda'}=\sigma$. For local fields $\phi\in(0,1]^V$ let $\nu^{(\phi)}$ be the measure with $\nu^{(\phi)}(\omega)\propto\nu(\omega)\prod_{v:\,\omega_v=1}\phi_v$.
+
+\begin{definition}[{\cite[Definitions~1.5 and 1.8]{CFYZ}}]\label{def:SI}
+The (absolute) influence matrix $\Psi_{\nu^\sigma}$ is indexed by $V\setminus\Lambda'$ and has zero diagonal. For distinct $u,v\in V\setminus\Lambda'$, $\Psi_{\nu^\sigma}(u,v)=0$ if $X_u$ is $\nu^\sigma$-almost surely constant, and otherwise
+\[
+\Psi_{\nu^\sigma}(u,v)=\bigl|\nu^\sigma(X_v=1\mid X_u=1)-\nu^\sigma(X_v=1\mid X_u=0)\bigr|.
+\]
+The measure $\nu$ is \emph{$\eta$-spectrally independent} if $\rho(\Psi_{\nu^\sigma})\le\eta$ for all $\Lambda'$ and all feasible $\sigma$, and \emph{completely $\eta$-spectrally independent} if $\nu^{(\phi)}$ is $\eta$-spectrally independent for every $\phi\in(0,1]^V$.
+\end{definition}
+
+For two-point laws the total variation distance in \cite[Definition~1.5]{CFYZ} is the difference of the probabilities of one point, so this is the definition of \cite{CFYZ}. When $X_u$ and $X_v$ are both nonconstant, $\Psi_{\nu^\sigma}(u,v)=|\Cov(X_u,X_v)|/\Var(X_u)$, the moments being taken under $\nu^\sigma$.
+
+The Glauber dynamics for $\nu$ picks $v\in V$ uniformly at random and replaces $X_v$ by a sample from $\nu$ conditioned on $X_{V\setminus\{v\}}$ \cite[Section~1]{CFYZ}. It is reversible with respect to $\nu$, and its transition matrix is positive semidefinite. Its spectral gap $\gap(\nu)$ is one minus the second largest eigenvalue, with $\gap(\nu)=1$ if $|\Omega(\nu)|=1$. By the variational characterization (see \cite[Chapter~13]{LP}),
+\begin{equation}\label{eq:variational}
+\gap(\nu)=\inf_{g}\frac{\mathcal E_\nu(g,g)}{\Var_\nu(g)},\qquad \mathcal E_\nu(g,g)=\frac1n\sum_{v\in V}\E_\nu\bigl[\Var_\nu(g\mid X_{V\setminus\{v\}})\bigr],
+\end{equation}
+the infimum being over functions $g$ on $\Omega(\nu)$ that are not constant. Pinned measures $\nu^\sigma$ are regarded as measures on $\{0,1\}^V$, so that the Glauber dynamics for $\nu^\sigma$ still selects among all $n$ vertices; this is the convention of \cite[(4)]{CFYZ}.
+
+\begin{lemma}\label{lem:pinning}
+Let $\phi\in(0,1]^V$, $\Lambda'\subseteq V$, and let $\sigma\in\{0,1\}^{\Lambda'}$ be feasible for $\nu=\mu_{F,\lambda}^{(\phi)}$. Let $U$ be the set of vertices of $V\setminus\Lambda'$ that have no neighbour $w\in\Lambda'$ with $\sigma_w=1$. Under $\nu^\sigma$ the coordinates in $V\setminus(\Lambda'\cup U)$ are almost surely $0$, and the restriction of $X$ to $U$ is distributed as the hard-core measure on the induced forest $F[U]$ with activities $(\phi_v\lambda_v)_{v\in U}$.
+\end{lemma}
+
+\begin{proof}
+The measure $\nu$ is the hard-core measure on $F$ with activities $\phi_v\lambda_v$. Its configurations agreeing with $\sigma$ are exactly the sets $\{w\in\Lambda':\sigma_w=1\}\cup J$ with $J$ an independent set of $F[U]$, and the weight of such a set is a constant times $\prod_{v\in J}\phi_v\lambda_v$.
+\end{proof}
+
+\section{The cubic partition inequality}\label{sec:partition}
+
+\subsection{Constants and the potential}
+Let $\qs$ and $L$ be as in~\eqref{eq:L}, and define
+\begin{equation}\label{eq:constants}
+\begin{gathered}
+c=\frac{2}{125},\qquad \xs=-\log(1-\qs),\qquad \ys=5\xs,\\
+\ds=\frac{2\qs(1-\qs)}{1+\qs},\qquad D=\ds-\frac1{\ys},\qquad t=\frac{D}{c\bigl(1+\sqrt{1-D^2/c}\bigr)},\\
+z=\ys-t,\qquad X=\log(1+L),\qquad A=\log\tfrac52 .
+\end{gathered}
+\end{equation}
+Proposition~\ref{prop:scalar}(P1) below shows that $D>0$ and $D^2<c$, so that $t>0$ is well defined. Numerically,
+\begin{gather*}
+\xs=0.5927836\ldots,\qquad \ys=2.9639180\ldots,\qquad \ds=0.3416407\ldots,\\
+D=0.0042495\ldots,\qquad t=0.1328355\ldots,\qquad z=2.8310824\ldots .
+\end{gather*}
+Let $\Phi$ be the cubic~\eqref{eq:Phi-intro}. Since $5\qs^2=1$, we also have $\ds=2(1-\qs)/(5\qs+1)$.
+
+\begin{lemma}\label{lem:t}
+$2ct/(1+ct^2)=D$.
+\end{lemma}
+
+\begin{proof}
+Put $s=\sqrt{1-D^2/c}\in(0,1)$, so that $t=D/(c(1+s))$. Then $ct^2=D^2/(c(1+s)^2)=(1-s^2)/(1+s)^2=(1-s)/(1+s)$, hence $1+ct^2=2/(1+s)$, while $2ct=2D/(1+s)$.
+\end{proof}
+
+For $0<x\le X$ we use the variables
+\begin{equation}\label{eq:qy}
+\begin{gathered}
+r=e^x-1\in(0,L],\qquad q=\frac{r}{1+r}=1-e^{-x},\\
+y=\log\frac Lr=\log L+\log(1-q)-\log q\ \ge 0,
+\end{gathered}
+\end{equation}
+and define $f(x)=q^2\Phi(y)$ as in~\eqref{eq:f-intro}, with $f(0)=0$. The point $x=A$ corresponds to $q=3/5$, and $x=\xs$ to $q=\qs$. Note that $y(\xs)=\log\bigl(L(1-\qs)/\qs\bigr)=-5\log(1-\qs)=\ys$.
+
+\subsection{The scalar estimates}
+The following finitely many one-variable statements are proved in Section~\ref{sec:verification}. Primes denote derivatives with respect to $x$.
+
+\begin{proposition}\label{prop:scalar}
+\begin{enumerate}
+\item[(P1)] $2.8310<z<2.8311$, $D>0$, $D^2<c$, $1/2<\xs<31/50$, $L/(1+L)<941/1000$, and $9/10<A<X$.
+\item[(P2)] $f(x)<\frac{1001}{1000}\,x$ for $0<x\le X$.
+\item[(P3)] $f(x)<\frac{99}{100}\,x$ for $A\le x\le X$.
+\item[(P4)] $f(x)<x$ for $0<x\le 13/25$ and for $5/8\le x\le X$.
+\item[(P5)] $f''''(x)>0$ for $0<x\le A$, and $f''(A)<0$.
+\item[(P6)] The function $G(x)=\Phi(5x)-5f(x)$ satisfies $G''(x)>0$ for $1/2\le x\le 31/50$.
+\end{enumerate}
+\end{proposition}
+
+\begin{lemma}\label{lem:Phi}
+\begin{enumerate}
+\item[(i)] $\Phi(0)=0$ and $\Phi(y)\ge y$ for $y\ge0$.
+\item[(ii)] $\Phi'(y)=1+c(3y^2-4zy+z^2)\ge1-cz^2/3>0$ for all real $y$; in particular $\Phi$ is strictly increasing.
+\item[(iii)] $\Phi(Y)\ge\frac{1001}{1000}\,Y$ for every $Y\ge0$ with $Y\notin(5/2,31/10)$.
+\item[(iv)] $\Phi'(\ys)/\Phi(\ys)=\ds$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) is clear. (ii) The quadratic $3y^2-4zy+z^2$ has minimum $-z^2/3$, and $cz^2/3<3c<1$ by (P1). (iii) For $Y\ge0$ we have $\Phi(Y)/Y=1+c(Y-z)^2$ if $Y>0$. By (P1), if $Y\le5/2$ or $Y\ge31/10$ then $|Y-z|>1/4$, and $c/16=1/1000$. The case $Y=0$ is trivial. (iv) We have $\Phi'(y)/\Phi(y)=1/y+2c(y-z)/(1+c(y-z)^2)$ for $y>0$. At $y=\ys$ we have $y-z=t$, and Lemma~\ref{lem:t} gives $\Phi'(\ys)/\Phi(\ys)=1/\ys+D=\ds$.
+\end{proof}
+
+\begin{lemma}\label{lem:small}
+If $0<q\le1/100$, then with $u=\log(L/q)$,
+\[
+\frac{f(x)}{x}\le q\,(u+cu^3)\le\frac{138}{1000}.
+\]
+Moreover $f(x)/x\to0$ as $x\to0$. In particular $f$ is continuous on $[0,X]$, and it is infinitely differentiable on $(0,X]$.
+\end{lemma}
+
+\begin{proof}
+We have $x=-\log(1-q)\ge q$ and $y=\log(L(1-q)/q)\le u$. Since $L>15$, $u\ge\log(1500)>7>z$, so $0<u-z<u$ and $\Phi(u)\le u+cu^3$. As $\Phi$ is increasing, $f(x)/x\le q^2\Phi(u)/q\le q(u+cu^3)$. As a function of $q$, with $du/dq=-1/q$,
+\[
+\frac{d}{dq}\,q(u+cu^3)=(u-1)+cu^2(u-3)>0\qquad(u\ge3),
+\]
+so the bound is increasing on $(0,1/100]$. Since $q\log^3(1/q)\to0$ as $q\to0$, the bound tends to $0$. At $q=1/100$ we have $u=\log(100L)<\log1568<7.36$, since $e^{7.36}>1571$, so $q(u+cu^3)<0.01\,(7.36+0.016\cdot 398.7)<0.138$. Smoothness on $(0,X]$ is clear from~\eqref{eq:qy}, since $q$ and $y$ are smooth functions of $x$ there.
+\end{proof}
+
+\begin{lemma}\label{lem:G}
+$G(\xs)=0$ and $G'(\xs)=0$.
+\end{lemma}
+
+\begin{proof}
+At $x=\xs$ we have $q=\qs$, $q^2=1/5$ and $y=\ys=5\xs$, so $5f(\xs)=\Phi(5\xs)$. Since $dq/dx=1-q$ and $dy/dx=-1/q$,
+\begin{equation}\label{eq:fprime}
+f'(x)=2q(1-q)\Phi(y)-q\Phi'(y).
+\end{equation}
+Hence
+\[
+G'(\xs)=5\Phi'(\ys)-5f'(\xs)=5\bigl[(1+\qs)\Phi'(\ys)-2\qs(1-\qs)\Phi(\ys)\bigr],
+\]
+which vanishes by Lemma~\ref{lem:Phi}(iv) and the definition of $\ds$.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:partition}}
+Assume Proposition~\ref{prop:scalar}. Fix $m\ge1$ and $Y\in[0,mX]$, and consider the compact set
+\[
+K_Y=\Bigl\{(x_1,\dots,x_m)\in[0,X]^m:\ \sum_ix_i=Y\Bigr\}.
+\]
+By Lemma~\ref{lem:small} the function $S(x_1,\dots,x_m)=\sum_if(x_i)$ is continuous on $K_Y$, so it attains its maximum at some point $\xi=(\xi_1,\dots,\xi_m)$. It suffices to show $S(\xi)\le\Phi(Y)$. Suppose, to the contrary, that $S(\xi)>\Phi(Y)$. Then $Y>0$, since $Y=0$ forces $\xi=0$ and $S(\xi)=0=\Phi(0)$.
+
+\emph{Step 1: $5/2<Y<31/10$.} By (P2) and $f(0)=0$, $S(\xi)<\frac{1001}{1000}Y$, because some $\xi_i$ is positive. If $Y\notin(5/2,31/10)$, Lemma~\ref{lem:Phi}(iii) gives $\Phi(Y)\ge\frac{1001}{1000}Y>S(\xi)$, a contradiction.
+
+\emph{Step 2: every positive coordinate of $\xi$ lies in $(0,A)$.} Suppose $\xi_j\ge A$. By (P3) and (P2),
+\[
+S(\xi)<\frac{99}{100}\xi_j+\frac{1001}{1000}(Y-\xi_j)=Y\Bigl(\frac{1001}{1000}-\frac{11}{1000}\cdot\frac{\xi_j}{Y}\Bigr).
+\]
+By (P1) and Step~1, $\xi_j/Y>(9/10)/(31/10)=9/31$, and ${\frac{1001}{1000}-\frac{11}{1000}\cdot\frac{9}{31}}={1-\frac{68}{31000}}<1$. Hence $S(\xi)<Y\le\Phi(Y)$ by Lemma~\ref{lem:Phi}(i), a contradiction.
+
+\emph{Step 3: the shape of $f'$ on $(0,A]$.} By (P5), $f''$ is strictly convex on $(0,A]$ and $f''(A)<0$. Let $N=\{s\in(0,A]:f''(s)<0\}$, which contains $A$, and let $a=\inf N\in[0,A)$. If $s\in N$ and $s<s'\le A$, then by convexity $f''(s')\le\max\{f''(s),f''(A)\}<0$, so $N\supseteq(a,A]$. If $a>0$ and $0<s<a$, then $f''(s)>0$: otherwise, for every $s'\in(s,a)$, strict convexity would give $f''(s')<\max\{f''(s),f''(A)\}\le0$, contradicting $s'\notin N$. Consequently $f'$ is strictly increasing on $(0,a]$ and strictly decreasing on $[a,A]$ (the first interval being empty if $a=0$). It follows that if $0<u<v<A$ and $f'(u)=f'(v)$, then $u<a<v$, and hence $f''(u)>0>f''(v)$; indeed $u=a$ is impossible because $f'(v)<f'(a)$ for $v>a$.
+
+\emph{Step 4: all positive coordinates of $\xi$ are equal.} Let $P=\{i:\xi_i>0\}\ne\emptyset$. By Step~2 the point $(\xi_i)_{i\in P}$ lies in the open set $(0,A)^P$, and it maximizes the smooth function $\sum_{i\in P}f(x_i)$ on this open set under the constraint $\sum_{i\in P}x_i=Y$, with the remaining coordinates held at $0$. By the Lagrange condition, $f'(\xi_i)$ takes the same value for all $i\in P$. By Step~3 the coordinates $\xi_i$, $i\in P$, take at most two distinct values. Suppose they take two values $u<v$; then $f''(u)>0>f''(v)$ by Step~3. If two coordinates $i\ne i'$ in $P$ equal $u$, the curve $h\mapsto\xi+h(e_i-e_{i'})$ stays in $K_Y$ for small $|h|$, and along it the second derivative of $S$ at $h=0$ is $2f''(u)>0$ while the first derivative vanishes; this contradicts the maximality of $\xi$. So exactly one coordinate $i_0$ equals $u$ and $k\ge1$ coordinates equal $v$. Along the curve that adds $h$ to $\xi_{i_0}$ and subtracts $h/k$ from each coordinate equal to $v$, the first derivative of $S$ at $h=0$ is $f'(u)-f'(v)=0$ and the second derivative is
+\[
+f''(u)+\frac{f''(v)}{k}\ \ge\ f''(u)+f''(v),
+\]
+since $f''(v)<0$. As $f''$ is strictly convex on $[u,v]$,
+\[
+\frac{f''(u)+f''(v)}{2}>\frac{1}{v-u}\int_u^vf''(s)\,ds=\frac{f'(v)-f'(u)}{v-u}=0 .
+\]
+Hence the second derivative is positive, again contradicting maximality. Therefore all positive coordinates of $\xi$ are equal.
+
+\emph{Step 5: the number of positive coordinates is five.} Let $b=|P|$, so that $\xi_i=Y/b$ for $i\in P$ and $S(\xi)=bf(Y/b)$. If $b\le4$, Step~1 gives $Y/b>5/8$, and (P4) gives $S(\xi)<Y\le\Phi(Y)$. If $b\ge6$, then $Y/b<31/60<13/25$, and the same contradiction follows from (P4). Hence $b=5$, and $x=Y/5\in(1/2,31/50)$.
+
+\emph{Step 6: the case $b=5$.} By (P1), $\xs\in(1/2,31/50)$. By (P6), $G$ is strictly convex on $[1/2,31/50]$, and by Lemma~\ref{lem:G} it has a stationary point at $\xs$ with $G(\xs)=0$. Hence $G\ge0$ on this interval, that is, $5f(x)\le\Phi(5x)=\Phi(Y)$, so $S(\xi)\le\Phi(Y)$. This final contradiction proves Theorem~\ref{thm:partition}.\qed
+
+\begin{remark}\label{rem:linear}
+By Lemma~\ref{lem:G}, equality holds in Theorem~\ref{thm:partition} for five entries equal to $\xs$, and zero entries may be added. For the linear potential $y\mapsto y$ the corresponding inequality $\sum q_i^2\log(\Lambda/r_i)\le\sum\log(1+r_i)$ for all lists in $(0,\Lambda]$ is equivalent, by taking one entry, to $q^2\log(\Lambda/r)\le\log(1+r)$ for $0<r\le\Lambda$. A numerical computation indicates that this holds precisely for $\Lambda\le15.6641\ldots$; this is not used in the proofs.
+\end{remark}
+
+\subsection{\texorpdfstring{Strict contraction below $L$}{Strict contraction below L}}
+For $0<\Lambda\le L$ and $0<r\le\Lambda$ put $x=\log(1+r)$, $q=r/(1+r)$ and
+\[
+f_\Lambda(x)=q^2\,\Phi\bigl(\log(\Lambda/r)\bigr).
+\]
+Thus $f_L=f$ on $(0,X]$.
+
+\begin{lemma}\label{lem:contraction}
+Let $0<\Lambda<L$. There is $\gamma=\gamma(\Lambda)\in(0,1)$ such that the following holds. For every $m\ge0$, all $r_1,\dots,r_m\in(0,\Lambda]$ and all $y_1,\dots,y_m$ with $0\le y_i\le\log(\Lambda/r_i)$,
+\[
+\sum_{i=1}^m\Bigl(\frac{r_i}{1+r_i}\Bigr)^2\Phi(y_i)\ \le\ \gamma\,\Phi\Bigl(\sum_{i=1}^m\log(1+r_i)\Bigr).
+\]
+\end{lemma}
+
+\begin{proof}
+For $0<r\le\Lambda$ let $g(r)=f_L(x)/x$ and $h(r)=(f_L(x)-f_\Lambda(x))/x$, where $x=\log(1+r)$. Both are continuous, and $h>0$ because $\Phi$ is strictly increasing and $\log(L/r)>\log(\Lambda/r)$. By Lemma~\ref{lem:small}, $g(r)\to0$ as $r\to0$, so there is $r_0\in(0,\Lambda]$ with $g\le1/2$ on $(0,r_0)$. On the compact interval $[r_0,\Lambda]$ let $m_h>0$ be the minimum of $h$ and $M_g$ the maximum of $g$; by (P2), $0<M_g<2$. Put
+\[
+\theta=1-\min\Bigl\{\frac12,\frac{m_h}{M_g}\Bigr\}\in\Bigl[\frac12,1\Bigr).
+\]
+We claim that
+\begin{equation}\label{eq:theta}
+f_\Lambda(x)\le\theta f_L(x)+(1-\theta)\frac x2\qquad(0<r\le\Lambda).
+\end{equation}
+This is equivalent to $h\ge(1-\theta)(g-1/2)$. On $(0,r_0)$ the right side is at most $0<h$. On $[r_0,\Lambda]$ the right side is at most $(1-\theta)M_g\le m_h\le h$.
+
+Now let $x_i=\log(1+r_i)\in(0,\log(1+\Lambda)]\subset[0,X]$ and $Y=\sum_ix_i$. Since $\Phi$ is increasing, $(r_i/(1+r_i))^2\Phi(y_i)\le f_\Lambda(x_i)$. Summing~\eqref{eq:theta} and using Theorem~\ref{thm:partition} and Lemma~\ref{lem:Phi}(i),
+\[
+\sum_if_\Lambda(x_i)\le\theta\,\Phi(Y)+(1-\theta)\frac Y2\le\frac{1+\theta}{2}\,\Phi(Y).
+\]
+The lemma holds with $\gamma=(1+\theta)/2$; for $m=0$ both sides vanish.
+\end{proof}
+
+The pointwise inequality $f_\Lambda<f_L$ alone would not give a factor $\gamma<1$, since $f_\Lambda(x)/f_L(x)\to1$ as $x\to0$. The term $x/2$ in~\eqref{eq:theta} compensates for this, because $f_L(x)/x\to0$.
+
+\section{The correlation matrix on forests}\label{sec:forests}
+
+Throughout this section $0<\Lambda<L$, $\gamma=\gamma(\Lambda)$ is as in Lemma~\ref{lem:contraction}, and $F$ is a finite forest with activities $0<\lambda_v\le\Lambda$, with a root chosen in each component. Put
+\begin{equation}\label{eq:CLambda}
+C_\Lambda=\Lambda(1+\Lambda)^2\sup_{y\ge0}e^{-y}\Phi(y)<\infty,\qquad \eta_\Lambda=\Bigl(1+\frac{\sqrt{C_\Lambda}}{1-\sqrt\gamma}\Bigr)^2 .
+\end{equation}
+
+\subsection{Decay of squared correlations}
+For $v\in V$ and $h\ge0$ let $D_h(v)$ be the set of descendants of $v$ at distance $h$ from $v$, and put
+\[
+A_h(v)=\sum_{w\in D_h(v)}Q(v,w)^2\,\Phi(y_w),\qquad S_h(v)=\sum_{u\in D_h(v)}R_{vu}^2 .
+\]
+
+\begin{lemma}\label{lem:Adecay}
+For every $v\in V$ and every $h\ge0$, $A_h(v)\le\gamma^h\,\Phi(y_v)$.
+\end{lemma}
+
+\begin{proof}
+For every vertex $w$, apply Lemma~\ref{lem:contraction} to the list $(r_u)_{u\in\Ch(w)}$ with $y_u$ in place of $y_i$. This is permitted, since $r_u\le\lambda_u\le\Lambda$ and $0\le y_u=\log(\lambda_u/r_u)\le\log(\Lambda/r_u)$ by Lemma~\ref{lem:marginals}(i), and since $\sum_{u\in\Ch(w)}\log(1+r_u)=y_w$. It gives
+\begin{equation}\label{eq:onestep}
+\sum_{u\in\Ch(w)}q_u^2\,\Phi(y_u)\le\gamma\,\Phi(y_w).
+\end{equation}
+The case $h=0$ is trivial. For $h\ge1$, every $u\in D_h(v)$ is a child of a unique $w\in D_{h-1}(v)$, and $Q(v,u)=Q(v,w)q_u$. By~\eqref{eq:onestep}, $A_h(v)\le\gamma A_{h-1}(v)$, and the claim follows by induction.
+\end{proof}
+
+\begin{proposition}\label{prop:Sdecay}
+For every $v\in V$ and every $h\ge1$, $S_h(v)\le C_\Lambda\,\gamma^{h-1}$.
+\end{proposition}
+
+\begin{proof}
+By~\eqref{eq:Rpath}, $S_h(v)=s_v\sum_{u\in D_h(v)}Q(v,u)^2/s_u$. Write each $u\in D_h(v)$ as a child of $w\in D_{h-1}(v)$. By Lemma~\ref{lem:marginals}(iii), $Q(v,u)^2/s_u\le(1+\Lambda)^2Q(v,w)^2q_u$. The elementary inequality $r/(1+r)\le\log(1+r)$ gives $\sum_{u\in\Ch(w)}q_u\le y_w\le\Phi(y_w)$. Therefore, by Lemma~\ref{lem:Adecay},
+\[
+S_h(v)\le(1+\Lambda)^2s_v\,A_{h-1}(v)\le(1+\Lambda)^2\gamma^{h-1}s_v\Phi(y_v).
+\]
+Finally $s_v\Phi(y_v)\le\Lambda e^{-y_v}\Phi(y_v)$ by Lemma~\ref{lem:marginals}(iii), and the supremum in~\eqref{eq:CLambda} is finite because $\Phi$ is a polynomial.
+\end{proof}
+
+The last generation is treated separately in the proof because the variance $s_u$ in the denominator absorbs one of the two factors $q_u$.
+
+\subsection{A triangular factorization}
+The following factorization holds for every forest with positive activities; it does not use $\Lambda<L$. The inverse correlation matrix of a tree model has the corresponding sum-of-squares form, which is the starting point of the approximate inverse method of \cite[Proposition~29, Lemma~41]{CYYZ}.
+
+Order $V$ so that every non-root vertex comes after its parent. Let $B$ be the $V\times V$ matrix with $B_{u,u^-}=R_{u,u^-}$ for every non-root $u$ and all other entries $0$. It is strictly lower triangular, hence nilpotent. Let $\mathcal D$ be the diagonal matrix with $\mathcal D_{vv}=1$ for roots and $\mathcal D_{uu}=1-R_{u,u^-}^2$ otherwise.
+
+\begin{lemma}\label{lem:factor}
+\begin{enumerate}
+\item[(i)] For $h\ge1$, $(B^h)_{uw}=R_{uw}$ if $w$ is the ancestor of $u$ at distance $h$, and $(B^h)_{uw}=0$ otherwise.
+\item[(ii)] With $K=(I-B)^{-1}=\sum_{h\ge0}B^h$ one has $R=K\mathcal DK^{\mathsf T}$, and $0<\mathcal D_{uu}\le1$ for every $u$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) For $h=1$ this is the definition. If it holds for $h-1$, then\[(B^h)_{uw}=\sum_kB_{uk}(B^{h-1})_{kw}=R_{u,u^-}(B^{h-1})_{u^-,w},\]which vanishes unless $w$ is the ancestor of $u^-$ at distance $h-1$. In that case~\eqref{eq:Rpath} (and the symmetry of $R$) gives
+\begin{align*}
+R_{u,u^-}R_{u^-,w}&=\Bigl(-\sqrt{\tfrac{s_{u^-}}{s_u}}\,q_u\Bigr)\Bigl((-1)^{h-1}\sqrt{\tfrac{s_w}{s_{u^-}}}\,Q(w,u^-)\Bigr)\\
+&=(-1)^h\sqrt{\tfrac{s_w}{s_u}}\,Q(w,u)=R_{uw}.
+\end{align*}
+
+(ii) Let $Y_v=(X_v-a_v)/\sqrt{s_v}$, and define $\eps_v=Y_v$ for roots and $\eps_u=Y_u-R_{u,u^-}Y_{u^-}$ otherwise, so that $\eps=(I-B)Y$. Since $X_{u^-}$ takes two values, $\E[Y_u\mid X_{u^-}]$ is an affine function of $Y_{u^-}$, and comparing means and covariances gives $\E[Y_u\mid X_{u^-}]=R_{u,u^-}Y_{u^-}$. Let $W_u$ be the set of vertices preceding $u$ in the chosen order. No vertex of $T_u$ precedes $u$, so $W_u\cap T_u=\emptyset$, and $u^-\in W_u$. For a non-root $u$, Lemma~\ref{lem:markov}, applied at $w=u^-$ to the component $T_u$ of $F-u^-$, gives $\E[Y_u\mid X_{W_u}]=\E[Y_u\mid X_{u^-}]$, hence $\E[\eps_u\mid X_{W_u}]=0$. For a root $v$, all vertices of its component come after $v$, so $X_{W_v}$ is independent of $Y_v$ and $\E[\eps_v\mid X_{W_v}]=\E[Y_v]=0$. Every $\eps_{u'}$ with $u'$ preceding $u$ is a function of $X_{W_u}$, so the $\eps_u$ are pairwise uncorrelated. Moreover $\E\eps_u^2=1-2R_{u,u^-}^2+R_{u,u^-}^2=1-R_{u,u^-}^2$ for non-roots. Thus $\Cov(\eps)=\mathcal D$ and $R=\Cov(Y)=K\mathcal DK^{\mathsf T}$. Finally $|R_{u,u^-}|<1$, since $X_u$ is not almost surely an affine function of $X_{u^-}$: conditionally on $X_{u^-}=0$, both values of $X_u$ have positive probability.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:corr}}
+By Lemma~\ref{lem:factor}(i), every row of $B^h$ has at most one nonzero entry. Hence $(B^h)^{\mathsf T}B^h$ is diagonal, with entry $S_h(w)$ at $w$, and Proposition~\ref{prop:Sdecay} gives $\|B^h\|_2^2=\max_wS_h(w)\le C_\Lambda\gamma^{h-1}$ for $h\ge1$. Therefore
+\[
+\|K\|_2\le\sum_{h\ge0}\|B^h\|_2\le1+\sqrt{C_\Lambda}\sum_{h\ge1}\gamma^{(h-1)/2}=1+\frac{\sqrt{C_\Lambda}}{1-\sqrt\gamma},
+\]
+and by Lemma~\ref{lem:factor}(ii), $\|R\|_2\le\|K\|_2^2\|\mathcal D\|_2\le\eta_\Lambda$.\qed
+
+\subsection{Complete spectral independence}
+
+\begin{lemma}\label{lem:influence}
+Let $F$ be a finite forest with positive activities and let $\Psi$ be the influence matrix of the unpinned measure $\mu_{F,\lambda}$. Then $\Psi=S^{-1/2}(|R|-I)S^{1/2}$ with $S=\diag(s_v)$, and $\rho(\Psi)=\lmax(R)-1$.
+\end{lemma}
+
+\begin{proof}
+All coordinates are nonconstant, so for $u\ne v$
+\[
+\Psi(u,v)=\frac{|\Cov(X_u,X_v)|}{s_u}=s_u^{-1/2}\,|R_{uv}|\,s_v^{1/2},
+\]
+which is the asserted similarity. The matrix $|R|-I$ is symmetric with nonnegative entries, so its spectral radius is its largest eigenvalue, which equals $\lmax(R)-1$ by Lemma~\ref{lem:sign}.
+\end{proof}
+
+\begin{proof}[Proof of the spectral independence in Theorem~\ref{thm:main}(a)]
+Let $\phi\in(0,1]^V$ and let $\sigma$ be a feasible pinning on $\Lambda'\subseteq V$ for $\nu=\mu_{F,\lambda}^{(\phi)}$. Let $U$ be as in Lemma~\ref{lem:pinning}. By Definition~\ref{def:SI}, the rows and columns of $\Psi_{\nu^\sigma}$ indexed by the almost surely constant coordinates $V\setminus(\Lambda'\cup U)$ vanish, and by Lemma~\ref{lem:pinning} the remaining principal submatrix is the influence matrix of the hard-core measure on $F[U]$ with activities $\phi_v\lambda_v\le\Lambda$. If $U=\emptyset$, then $\Psi_{\nu^\sigma}=0$. Otherwise Lemma~\ref{lem:influence} and Theorem~\ref{thm:corr}, applied to $F[U]$, give $\rho(\Psi_{\nu^\sigma})\le\eta_\Lambda-1<\eta_\Lambda$.
+\end{proof}
+
+\section{The spectral gap}\label{sec:gap}
+
+We use two published results. The first is the boosting theorem of Chen, Feng, Yin and Zhang. For $\theta\in(0,1)$ write $\nu^{(\theta)}$ for $\nu^{(\phi)}$ with $\phi\equiv\theta$, and let $\gap_{\min}(\nu)$ be the minimum of $\gap(\nu^\sigma)$ over all $\Lambda'\subseteq V$ and all feasible $\sigma\in\{0,1\}^{\Lambda'}$, with the conventions of Section~\ref{sec:prelim}.
+
+\begin{theorem}[{\cite[Theorem~1.9]{CFYZ}}]\label{thm:CFYZ}
+If $\nu$ is completely $\eta$-spectrally independent, then for every $\theta\in(0,1)$,
+\[
+\gap(\nu)\ \ge\ \Bigl(\frac\theta2\Bigr)^{2\eta+7}\gap_{\min}\bigl(\nu^{(\theta)}\bigr).
+\]
+\end{theorem}
+
+The second is the variance tensorization of Efthymiou, Hayes, \v{S}tefankovi\v{c} and Vigoda for small activities. In \cite[Section~3]{EHSV} it is proved, for every finite tree with arbitrary vertex activities in $(0,1.1]$ \cite[(11)]{EHSV}, that
+\begin{equation}\label{eq:EHSV}
+\Var_\mu(g)\le\sum_{v\in V}\kappa(\lambda_v)\,\E_\mu\bigl[\Var_\mu(g\mid X_{V\setminus\{v\}})\bigr],\qquad \kappa(s)=1000(1+s)^2e^{1.3s},
+\end{equation}
+for every real function $g$ on the independent sets; see \cite[(12) and Lemma~3.1]{EHSV}. (In \cite[Definition~2.1]{EHSV} functions are nonnegative; since both sides of~\eqref{eq:EHSV} are invariant under adding constants, this is no restriction.)
+
+\begin{lemma}\label{lem:EHSVforest}
+Inequality~\eqref{eq:EHSV} holds for every finite forest with activities in $(0,1.1]$.
+\end{lemma}
+
+\begin{proof}
+The hard-core measure on a forest with components $T_1,\dots,T_k$ is the product of the hard-core measures on the $T_j$. For a product measure one has $\Var(g)\le\sum_j\E[\Var_j(g)]$, where $\Var_j$ denotes the variance in the coordinates of $T_j$ given the others (the Efron--Stein inequality). For fixed values outside $T_j$, apply~\eqref{eq:EHSV} on $T_j$ to the resulting function of $X_{T_j}$; by independence, its single-site conditional variances are those of $g$ under $\mu$. Taking expectations and summing over $j$ gives the claim.
+\end{proof}
+
+\begin{proof}[Proof of the spectral gap bound in Theorem~\ref{thm:main}(a)]
+Let $\theta=1/(2\max\{1,\Lambda\})$ and $\nu=\mu_{F,\lambda}$. By Section~\ref{sec:forests}, $\nu$ is completely $\eta_\Lambda$-spectrally independent. Let $\sigma$ be a feasible pinning for $\nu^{(\theta)}$ on $\Lambda'\subseteq V$, and let $U$ be as in Lemma~\ref{lem:pinning}. If $U=\emptyset$, then $|\Omega(\nu^{(\theta)\sigma})|=1$ and the gap is $1$ by convention. Otherwise, by Lemma~\ref{lem:pinning}, $\nu^{(\theta)\sigma}$ is the hard-core measure on $F[U]$ with activities $\theta\lambda_v\le1/2$, extended by constants. For a function $g$ on its support, Lemma~\ref{lem:EHSVforest} gives
+\[
+\Var(g)\le\kappa(\tfrac12)\sum_{v\in U}\E\bigl[\Var(g\mid X_{V\setminus\{v\}})\bigr]=n\,\kappa(\tfrac12)\,\mathcal E(g,g),
+\]
+because $\kappa$ is increasing and the conditional variances at the coordinates outside $U$ vanish. By~\eqref{eq:variational}, $\gap(\nu^{(\theta)\sigma})\ge1/(n\kappa(1/2))$. Theorem~\ref{thm:CFYZ} now gives
+\[
+\gap(\nu)\ge\frac{c_\Lambda}{n},\qquad c_\Lambda=\frac{(\theta/2)^{2\eta_\Lambda+7}}{\kappa(1/2)} .\qedhere
+\]
+\end{proof}
+
+\begin{remark}
+Fix $\lambda\in(0,L)$ and $\Delta\ge3$, and consider forests of maximum degree at most $\Delta$ with activity $\lambda$ at every vertex. Under every feasible pinning, each value of an unpinned coordinate that has positive conditional probability has conditional probability at least $\lambda(1+\lambda)^{-\Delta-1}$, so these measures are marginally bounded in the sense of \cite{CLV}, uniformly in the forest. In this setting Theorem~\ref{thm:main}(a) can be combined with \cite[Theorem~1.12]{CLV} to obtain mixing time bounds of order $n\log n$. When the activities are not bounded away from zero, as is allowed in Theorem~\ref{thm:main}(a), no such lower bound on the marginals holds. We do not pursue this here.
+\end{remark}
+
+\section{The upper threshold}\label{sec:upper}
+
+In this section $\lambda\ge L$ is a constant activity used at every vertex. Since $s\mapsto s(1-s)^{-6}$ increases from $0$ to $\infty$ on $(0,1)$, there is a unique $p\in(0,1)$ with
+\begin{equation}\label{eq:p}
+p=\lambda(1-p)^6,
+\end{equation}
+and $p\ge\qs$, that is, $5p^2\ge1$, because $\lambda\ge L=\qs(1-\qs)^{-6}$. Put $\omega=p/(1-p)$. Then $1+\omega=(1-p)^{-1}$ and
+\begin{equation}\label{eq:omega}
+\lambda(1+\omega)^{-5}=\omega,\qquad \lambda(1+\omega)^{-6}=p .
+\end{equation}
+
+\begin{lemma}[{\cite[Lemma~57]{CYYZ}; see \cite[Section~5]{RSV}}]\label{lem:gadget}
+Let $\lambda>0$ and $d\ge3$. For every $\delta\in(0,1)$ there is a finite rooted tree $T_\delta$ such that, for the hard-core measure on $T_\delta$ with activity $\lambda$ at every vertex, the occupation probability of the root differs by less than $\delta$ from the unique solution in $(0,1)$ of $s=\lambda(1-s)^d$.
+\end{lemma}
+
+We apply Lemma~\ref{lem:gadget} with $d=6$, so that the target value is $p$. Let $\omega_\delta$ be the occupation odds of the root of $T_\delta$; then $\omega_\delta\to\omega$ as $\delta\to0$.
+
+\subsection{The construction}
+For $H\ge1$ let $\mathcal C_H$ be the rooted tree of height $H$ in which the root has six children and every other vertex at depth less than $H$ has five children. Its leaves are the vertices at depth $H$. Let $T_{H,\delta}$ be the tree obtained from $\mathcal C_H$ by identifying every leaf of $\mathcal C_H$ with the root of a separate copy of $T_\delta$. This is a finite tree, and we consider the hard-core measure on it with activity $\lambda$ at every vertex.
+
+\begin{lemma}\label{lem:corelaw}
+The law of the restriction of $X$ to the vertices of $\mathcal C_H$ is the hard-core measure on $\mathcal C_H$ with activity $\lambda$ at the internal vertices and activity $\omega_\delta$ at the leaves.
+\end{lemma}
+
+\begin{proof}
+For a leaf $\ell$ of $\mathcal C_H$ let $T^{(\ell)}$ be the attached copy of $T_\delta$, rooted at $\ell$, and let $Z^1$ and $Z^0$ be the total weights of the independent sets of $T_\delta$ that contain, respectively do not contain, its root; thus $Z^1/Z^0=\omega_\delta$. An independent set of $T_{H,\delta}$ is the same as an independent set $J$ of $\mathcal C_H$ together with, for every leaf $\ell$, an independent set of $T^{(\ell)}$ whose intersection with $\{\ell\}$ agrees with $J$. Its weight is $\lambda^{|J'|}$ times the product of the weights of the sets in the copies, where $J'$ is the set of internal vertices of $\mathcal C_H$ in $J$. Summing over the sets in the copies, the total weight of the configurations that restrict to $J$ on $\mathcal C_H$ is $\lambda^{|J'|}(Z^1)^{|J\setminus J'|}(Z^0)^{k-|J\setminus J'|}$, where $k$ is the number of leaves of $\mathcal C_H$. Dividing by $(Z^0)^k$ gives the weight $\lambda^{|J'|}\omega_\delta^{|J\setminus J'|}$.
+\end{proof}
+
+Let $\nu_{H,\omega'}$ denote the hard-core measure on $\mathcal C_H$ with activity $\lambda$ at internal vertices and $\omega'>0$ at the leaves, and $R^{(H,\omega')}$ its correlation matrix. The means, variances and covariances of the occupation indicators under $\nu_{H,\omega'}$ are rational functions of $\omega'$ with denominators that are positive for $\omega'>0$, and all variances are positive. Hence the entries of $R^{(H,\omega')}$ are continuous in $\omega'>0$.
+
+\begin{lemma}\label{lem:ideal}
+In $\nu_{H,\omega}$ every vertex has occupation probability $p/(1+p)$, and $R^{(H,\omega)}_{u,u^-}=-p$ for every non-root vertex $u$.
+\end{lemma}
+
+\begin{proof}
+Root $\mathcal C_H$ at its root. The leaves have odds $\omega$, and by~\eqref{eq:omega} and Lemma~\ref{lem:marginals}(i) every non-root vertex has odds $\lambda(1+\omega)^{-5}=\omega$, by induction on the height. Hence $q_u=\omega/(1+\omega)=p$ for every non-root $u$, and the root has odds $\lambda(1+\omega)^{-6}=p$, so its occupation probability is $p/(1+p)$. By Lemma~\ref{lem:marginals}(ii), $a_u=(1-a_{u^-})p$ for every non-root $u$, and by induction on the depth $a_u=(1-p/(1+p))p=p/(1+p)$. All variances are therefore equal, and~\eqref{eq:Rpath} gives $R_{u,u^-}=-q_u=-p$.
+\end{proof}
+
+\begin{lemma}\label{lem:blowup}
+$\lmax\bigl(R^{(H,\omega)}\bigr)\ge1+6p^2\sum_{j=0}^{H-1}(5p^2)^j\ge1+\frac{6H}{5}$.
+\end{lemma}
+
+\begin{proof}
+Write $R=R^{(H,\omega)}$. By Lemma~\ref{lem:factor} and Lemma~\ref{lem:ideal}, $R=K\mathcal DK^{\mathsf T}$, where $K=(I-B)^{-1}$ is unit lower triangular, $B_{u,u^-}=-p$, and $\mathcal D$ is diagonal with entry $1$ at the root and $1-p^2>0$ elsewhere. Hence $R$ is invertible and
+\[
+\xi^{\mathsf T}R^{-1}\xi=\bigl\|\mathcal D^{-1/2}(I-B)\xi\bigr\|^2=\xi_{\mathrm{root}}^2+\sum_{u\ne\mathrm{root}}\frac{(\xi_u+p\,\xi_{u^-})^2}{1-p^2}\qquad(\xi\in\R^{\mathcal C_H}).
+\]
+Take $\xi_u=(-p)^{\mathrm{depth}(u)}$, the vector of \cite[(21)]{CYYZ} in the present setting. Then $\xi_u+p\,\xi_{u^-}=0$ for every non-root $u$, so $\xi^{\mathsf T}R^{-1}\xi=1$. By the Rayleigh principle, $\lmax(R)=\lmin(R^{-1})^{-1}\ge\|\xi\|^2$. There are $6\cdot5^{j-1}$ vertices at depth $j\ge1$, so
+\[
+\|\xi\|^2=1+\sum_{j=1}^H6\cdot5^{j-1}p^{2j}=1+6p^2\sum_{j=0}^{H-1}(5p^2)^j\ge1+6p^2H\ge1+\frac{6H}5,
+\]
+using $5p^2\ge1$.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:main}(b)}
+We first record a general upper bound for the spectral gap.
+
+\begin{lemma}\label{lem:gapupper}
+Let $\nu$ be a probability measure on $\{0,1\}^V$, $|V|=n$, without almost surely constant coordinates, and let $R$ be its correlation matrix. Then $\gap(\nu)\le1/(n\,\lmax(R))$.
+\end{lemma}
+
+\begin{proof}
+Let $\xi$ be a unit eigenvector of $R$ for $\lmax(R)$ and put $g=\sum_v\xi_v(X_v-a_v)/\sqrt{s_v}$. Then $\Var(g)=\xi^{\mathsf T}R\xi=\lmax(R)$. Given $X_{V\setminus\{v\}}$, the function $g$ differs from $\xi_vX_v/\sqrt{s_v}$ by a constant, so by the law of total variance
+\[
+\mathcal E(g,g)=\frac1n\sum_v\frac{\xi_v^2}{s_v}\,\E\bigl[\Var(X_v\mid X_{V\setminus\{v\}})\bigr]\le\frac1n\sum_v\xi_v^2=\frac1n .
+\]
+The claim follows from~\eqref{eq:variational}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(b)]
+Let $M>0$. Choose $H\ge1$ with $6H/5>M$, so that $\lmax(R^{(H,\omega)})>M+1$ by Lemma~\ref{lem:blowup}. Since $R^{(H,\omega')}$ depends continuously on $\omega'$, the largest eigenvalue of a symmetric matrix depends continuously on its entries, and $\omega_\delta\to\omega$ as $\delta\to0$, there is $\delta\in(0,1)$ with $\lmax(R^{(H,\omega_\delta)})>M+1$. Let $T=T_{H,\delta}$, let $\mu$ be its hard-core measure with activity $\lambda$, and let $R_T$ be its correlation matrix. By Lemma~\ref{lem:corelaw}, the principal submatrix of $R_T$ indexed by the vertices of $\mathcal C_H$ is $R^{(H,\omega_\delta)}$, so $\lmax(R_T)\ge\lmax(R^{(H,\omega_\delta)})>M+1$. By Lemma~\ref{lem:influence}, $\rho(\Psi_\mu)=\lmax(R_T)-1>M$, and by Lemma~\ref{lem:gapupper}, $n\cdot\gap(\mu)\le1/\lmax(R_T)<1/M$.
+\end{proof}
+
+\begin{remark}\label{rem:upper}
+For $\lambda=L$ the bound of Lemma~\ref{lem:blowup} grows linearly in $H$, while for $\lambda>L$ it grows exponentially. In both cases the correlation matrices of unbounded norm are those of the free-boundary measures on the constructed trees, so Lemma~\ref{lem:gapupper} applies directly and no comparison between spectral independence and the spectral gap is needed. With $\mathcal C_H$ replaced by a core of branching number $b\ge2$ (root with $b+1$ children) and $d=b+1$ in Lemma~\ref{lem:gadget}, the same argument applies whenever $bp^2\ge1$ with $p=\lambda(1-p)^{b+1}$; for $b=2$ this is the setting of \cite[Section~5.2]{CYYZ}.
+\end{remark}
+
+\section{Verification of the scalar estimates}\label{sec:verification}
+
+In this section we prove Proposition~\ref{prop:scalar}. The constants in (P1) and all statements on intervals bounded away from $x=0$ are verified by interval arithmetic with rational endpoints; the behaviour near $x=0$ is handled analytically.
+
+\subsection{\texorpdfstring{Formulas in the variable $q$}{Formulas in the variable q}}
+By~\eqref{eq:qy}, the map $x\mapsto q=1-e^{-x}$ is an increasing bijection from $(0,X]$ onto $(0,L/(1+L)]$, with $x=-\log(1-q)$. For a function of $(q,y)$ the derivative with respect to $x$ is obtained by applying the operator $(1-q)\partial_q-q^{-1}\partial_y$. Thus
+\begin{align}
+\frac{f(x)}{x}&=\frac{q^2\,\Phi(y)}{-\log(1-q)},\label{eq:ratio}\\
+f''(x)&=2(1-q)(1-2q)\,\Phi(y)-3(1-q)\,\Phi'(y)+\Phi''(y),\label{eq:f2}\\
+q^2f''''(x)&=a_0+a_1y+a_2y^2+a_3y^3,\label{eq:f4}\\
+G''(x)&=50c\,(15x-2z)-5f''(x),\label{eq:G2}
+\end{align}
+where $\Phi''(y)=2c(3y-2z)$ and
+\begin{align*}
+a_0&=(q-1)\bigl(15cq^2z^2-6cqz^2-28cqz-2cz^2-4cz+12c+15q^2-6q-2\bigr),\\
+a_1&=2(q-1)\bigl(8cq^3z^2-7cq^2z^2-30cq^2z+12cqz+21cq+4cz+3c+8q^3-7q^2\bigr),\\
+a_2&=-c\,(q-1)\bigl(32q^3z-28q^2z-45q^2+18q+6\bigr),\\
+a_3&=2c\,q^2(q-1)(8q-7).
+\end{align*}
+Formula~\eqref{eq:f2} follows from~\eqref{eq:fprime} by one more application of the operator, and~\eqref{eq:f4} by three more; the right side of~\eqref{eq:f4} is a polynomial in $q$ and $y$ because the negative powers of $q$ cancel. Formula~\eqref{eq:f4} has also been confirmed by exact symbolic computation, as part of the second program described below. In~\eqref{eq:G2} we used $\Phi''(5x)=2c(15x-2z)$. The points $x=13/25,5/8,1/2,31/50$ are bracketed in the variable $q$ by
+\begin{equation}\label{eq:brackets}
+\begin{gathered}
+-\log\tfrac{594}{1000}>\tfrac{13}{25},\qquad -\log\tfrac{5353}{10000}<\tfrac58,\\
+-\log\tfrac{607}{1000}<\tfrac12,\qquad -\log\tfrac{537}{1000}>\tfrac{31}{50},
+\end{gathered}
+\end{equation}
+that is, $x(406/1000)>13/25$, $x(4647/10000)<5/8$, $x(393/1000)<1/2$ and $x(463/1000)>31/50$.
+
+\subsection{Interval arithmetic}
+Two independently implemented programs, written in Python with the standard library only, carry out the verification. Every interval endpoint is an integer multiple of a fixed unit, $10^{-40}$ in the first program and $2^{-170}$ in the second. Sums are exact; products, quotients, integer powers and square roots (via integer square roots) are rounded outward. No floating-point number enters any decision. Logarithms of positive intervals are enclosed as follows. In the first program the argument is scaled by a power of two into $[1,2)$, and $\log u=2\sum_{j\ge0}w^{2j+1}/(2j+1)$ with $w=(u-1)/(u+1)\in[0,1/3)$ is truncated after $55$ terms; the remainder lies in $[0,\,2w^{111}/(111(1-w^2))]$ and is added to the upper endpoint. In the second program the argument is scaled into $(1/2,1]$, and $-\log(1-w)=\sum_{k\ge1}w^k/k$ with $w\in[0,1/2)$ is truncated after $180$ terms, with remainder in $[0,\,w^{181}/(181(1-w))]$. In both programs $\log2$ is enclosed by the same series, and the scaling contributes an integer multiple of it. The constants $\qs$, $L$, $\xs$, $\ys$, $\ds$, $D$, $t$, $z$ are computed from~\eqref{eq:constants} in this arithmetic, so the intervals used below contain the exact constants.
+
+An inequality $P(q)>0$ on a closed interval $[q_0,q_1]$ is verified by evaluating an enclosure of $P$ over the whole interval, with $y$ and $x$ enclosed through~\eqref{eq:qy}. If the lower endpoint of the enclosure is positive, the interval is accepted; otherwise it is split at an interior point into two closed subintervals sharing that point, and the procedure is repeated. Failure to accept before a fixed maximum depth stops the program with an error. The accepted intervals cover $[q_0,q_1]$; the second program checks this explicitly by sorting the accepted intervals and comparing consecutive endpoints exactly.
+
+\subsection{Proof of Proposition~\ref{prop:scalar}}
+\emph{(P1).} Both programs compute enclosures of the constants and check, by comparing endpoints, that $D>0$, $D^2<c$, $1/2<\xs<31/50$, $L/(1+L)<941/1000$ and $\log(5/2)>9/10$. The enclosure of $z$ obtained by each program has rational endpoints in the interval $(2.8310,2.8311)$; these endpoints are part of the output (Appendix~\ref{app:data}). Finally $A<X$ because $L>3/2$.
+
+\emph{(P2)--(P6) away from $x=0$.} Table~\ref{tab:cover} lists the verified inequalities, written in terms of $q$ by~\eqref{eq:ratio}--\eqref{eq:G2}, the $q$-intervals, and the number of interval evaluations performed by each program. The upper endpoint $941/1000$ covers $x=X$ by (P1), the endpoint $3/5$ corresponds to $x=A$, and~\eqref{eq:brackets} shows that the $q$-intervals for (P4) and (P6) cover the required $x$-intervals. In addition, an enclosure of~\eqref{eq:f2} at the single point $q=3/5$ shows $f''(A)<0$.
+
+\begin{table}[ht]
+\caption{Interval verifications. The last two columns give the number of interval evaluations, including those of intervals that were split. The largest bisection depth reached is $15$.}
+\label{tab:cover}
+\centering
+\begin{tabular}{@{}lllrr@{}}
+\toprule
+Claim & Inequality & $q$-interval & Program 1 & Program 2\\
+\midrule
+(P2) & $\frac{1001}{1000}-f(x)/x>0$ & $[\frac1{100},\frac{941}{1000}]$ & 851 & 851\\[2pt]
+(P3) & $\frac{99}{100}-f(x)/x>0$ & $[\frac35,\frac{941}{1000}]$ & 17 & 17\\[2pt]
+(P4) & $1-f(x)/x>0$ & $[\frac1{100},\frac{406}{1000}]$ & 91 & 91\\[2pt]
+(P4) & $1-f(x)/x>0$ & $[\frac{4647}{10000},\frac{941}{1000}]$ & 465 & 465\\[2pt]
+(P5) & $q^2f''''(x)>0$ & $[\frac1{20},\frac35]$ & 19 & 73\\[2pt]
+(P6) & $G''(x)>0$ & $[\frac{393}{1000},\frac{463}{1000}]$ & 1 & 7\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\emph{(P2) and (P4) near $x=0$.} For $0<q\le1/100$, Lemma~\ref{lem:small} gives $f(x)/x<0.138$, which proves both on the corresponding range $0<x\le-\log(99/100)$.
+
+\emph{(P5) near $x=0$.} Let $0<q\le1/20$. Then $y\ge\log(19L)>0$. The coefficient $a_3=2cq^2(1-q)(7-8q)$ is nonnegative. Enclosing $a_0,a_1,a_2$ over the whole interval $q\in[0,1/20]$ gives
+\[
+a_0>2.0931,\qquad a_2>0.0864,\qquad |a_1|<0.5486 .
+\]
+Hence for every $y\ge0$,
+\[
+q^2f''''(x)\ge2.0931-0.5486\,y+0.0864\,y^2>0,
+\]
+since the discriminant $0.5486^2-4\cdot2.0931\cdot0.0864<0.31-0.72<0$. Thus $f''''(x)>0$ for $0<q\le1/20$, which together with Table~\ref{tab:cover} proves (P5).
+
+This completes the proof of Proposition~\ref{prop:scalar}, and hence of Theorem~\ref{thm:partition}.\qed
+
+\begin{remark}
+In the first program the smallest certified lower bounds of the left sides in Table~\ref{tab:cover} are about $1.07\cdot10^{-5}$ for (P2), $0.023$ for (P3), $1.2\cdot10^{-4}$ and $1.3\cdot10^{-6}$ for the two ranges of (P4), $0.032$ for (P5) and $0.55$ for (P6). Both programs accept every inequality of Table~\ref{tab:cover}.
+\end{remark}
+
+\appendix
+
+\section{Data availability}\label{app:data}
+The two programs of Section~\ref{sec:verification} and their output certificates are provided as ancillary files accompanying this paper, together with a README file that describes how to run them. The first program is \texttt{check\_cubic\_intervals.py}, and the second is \texttt{check\_independent.py}. The first program prints a certificate listing the enclosures of $\qs$, $L$ and $z$, the bound of Lemma~\ref{lem:small} at $q=1/100$, the coefficient bounds used for (P5), and, for each line of Table~\ref{tab:cover}, the number of evaluations, the maximal depth and the smallest certified margin, all as exact rational numbers. The second program, which does not import the first, records the enclosures of the same constants and the same kind of data for each line of Table~\ref{tab:cover}; in addition, it generates the polynomial in~\eqref{eq:f4} by symbolic differentiation, compares it coefficient by coefficient with the displayed formulas, and records every accepted subinterval with its certified margin.
+
+\section*{Use of AI-assisted tools}
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{99}
+
+\bibitem{ALO}
+N.~Anari, K.~Liu, and S.~Oveis Gharan, \emph{Spectral independence in high-dimensional expanders and applications to the hardcore model}, 2020 IEEE 61st Annual Symposium on Foundations of Computer Science (FOCS), IEEE, 2020, 1319--1330; arXiv:2001.00303.
+
+\bibitem{BKMP}
+N.~Berger, C.~Kenyon, E.~Mossel, and Y.~Peres, \emph{Glauber dynamics on trees and hyperbolic graphs}, Probab. Theory Related Fields \textbf{131} (2005), no.~3, 311--340.
+
+\bibitem{CFYZ}
+X.~Chen, W.~Feng, Y.~Yin, and X.~Zhang, \emph{Rapid mixing of Glauber dynamics via spectral independence for all degrees}, SIAM J. Comput., published online 13 June 2024, \href{https://doi.org/10.1137/22M1474734}{doi:10.1137/22M1474734}; arXiv:2105.15005v3.
+
+\bibitem{CYYZ}
+X.~Chen, X.~Yang, Y.~Yin, and X.~Zhang, \emph{Spectral independence beyond total influence on trees and related graphs}, Proceedings of the 2025 Annual ACM-SIAM Symposium on Discrete Algorithms (SODA), SIAM, 2025, 5388--5417, \href{https://doi.org/10.1137/1.9781611978322.183}{doi:10.1137/1.9781611978322.183}; arXiv:2404.04668v1.
+
+\bibitem{CLV}
+Z.~Chen, K.~Liu, and E.~Vigoda, \emph{Optimal mixing of Glauber dynamics: entropy factorization via high-dimensional expansion}, SIAM J. Comput. \textbf{55} (2026), STOC21-104--STOC21-153, \href{https://doi.org/10.1137/21M1443340}{doi:10.1137/21M1443340}; arXiv:2011.02075v4.
+
+\bibitem{EHSV}
+C.~Efthymiou, T.~P.~Hayes, D.~\v{S}tefankovi\v{c}, and E.~Vigoda, \emph{Optimal mixing via tensorization for random independent sets on arbitrary trees}, Combin. Probab. Comput. \textbf{34} (2025), 259--275, \href{https://doi.org/10.1017/S0963548324000348}{doi:10.1017/S0963548324000348}; arXiv:2307.07727v4.
+
+\bibitem{FLNYZ}
+E.~X.~Fang, J.~Lu, E.~Nevo, Y.~Yao, and H.~Zheng, \emph{Unimodality of independence polynomials for sufficiently large forests}, preprint (2026), arXiv:2609.20961v1.
+
+\bibitem{LP}
+D.~A.~Levin and Y.~Peres, \emph{Markov chains and mixing times}, 2nd ed., American Mathematical Society, Providence, RI, 2017, \href{https://doi.org/10.1090/mbk/107}{doi:10.1090/mbk/107}.
+
+\bibitem{RSV}
+R.~Restrepo, D.~\v{S}tefankovi\v{c}, J.~C.~Vera, E.~Vigoda, and L.~Yang, \emph{Phase transition for Glauber dynamics for independent sets on regular trees}, SIAM J. Discrete Math. \textbf{28} (2014), 835--861.
+
+\end{thebibliography}
+
+\end{document}

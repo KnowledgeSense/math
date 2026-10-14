@@ -1,0 +1,32 @@
+[
+  {
+    "index": 0,
+    "url": "https://neilsloane.com/hadamard/had.16.0.txt",
+    "matrix_matches_packet": true,
+    "primary_sha256": "4d25b2a79110844ee48120816d0f494d509c7b4651522cb41f9420ccb0abb7aa"
+  },
+  {
+    "index": 1,
+    "url": "https://neilsloane.com/hadamard/had.16.1.txt",
+    "matrix_matches_packet": true,
+    "primary_sha256": "55268639ee75a8bd34637951a5f69055d3ef97c0d5836a694cb6eb484ee43d74"
+  },
+  {
+    "index": 2,
+    "url": "https://neilsloane.com/hadamard/had.16.2.txt",
+    "matrix_matches_packet": true,
+    "primary_sha256": "7d81b63852119ef6c74e9ebb07bd073382e8734aae15df87a3474b2f7517116e"
+  },
+  {
+    "index": 3,
+    "url": "https://neilsloane.com/hadamard/had.16.3.txt",
+    "matrix_matches_packet": true,
+    "primary_sha256": "db1e5d18c6fe9703134330a06a50ff7ebd4f9565115205e35d30dd91fc73abe1"
+  },
+  {
+    "index": 4,
+    "url": "https://neilsloane.com/hadamard/had.16.4.txt",
+    "matrix_matches_packet": true,
+    "primary_sha256": "2bd5669ae5b33c12d10cf0073e08a9af839ad6ac4b2ea6fa1c9f2ca97e978424"
+  }
+]

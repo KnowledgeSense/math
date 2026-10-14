@@ -1,0 +1,31 @@
+{
+  "author": "Knowledge Sense",
+  "scope": "Exact checks of the supplied saved certificates.",
+  "checks": {
+    "near2_local": {
+      "status": "EXACT PASS"
+    },
+    "near2_complement": {
+      "status": "INDEPENDENT EXACT COMPLEMENT PASS"
+    },
+    "c4": {
+      "status": "PASS exact cover and margin checks"
+    },
+    "transition": {
+      "status": "EXACT COVER/DEFINITENESS/INTERPOLATION PASS"
+    },
+    "branch": {
+      "status": "PASS, exact branch comparison"
+    },
+    "bridge_local": {
+      "status": "EXACT PASS"
+    },
+    "bridge_complement": {
+      "status": "INDEPENDENT EXACT BRIDGE COMPLEMENT PASS"
+    },
+    "tail": {
+      "status": "PASS exact certificate checks"
+    }
+  },
+  "fresh_transcendental_regeneration": false
+}

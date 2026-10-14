@@ -1,0 +1,207 @@
+{
+  "arithmetic": "exact Python integers; no floating point",
+  "normalized_model": {
+    "words": 55987,
+    "range": "length 0..6, each j in 0..5; all coefficients and all Schur coefficients",
+    "max_degree": 24,
+    "failures": 0
+  },
+  "contracted_kernels": {
+    "count": 19525,
+    "range": "1 <= number of B <= 5; every intervening C exponent in 1..5",
+    "observed_min_d_x_y_w_Q": [
+      4,
+      5,
+      5,
+      11,
+      3
+    ],
+    "failures": 0
+  },
+  "partial_sign_contraction": {
+    "cases": 102,
+    "evaluations": {
+      "s": 2,
+      "t": 3
+    },
+    "range": "all subsets of j=3 sites in 15 selected words; all original and all surviving charge colorings summed exactly",
+    "failures": 0,
+    "words": [
+      {
+        "word": [
+          3
+        ],
+        "Z_at_s2_t3": 88,
+        "all_subset_contractions_match": true
+      },
+      {
+        "word": [
+          3,
+          3
+        ],
+        "Z_at_s2_t3": 7647,
+        "all_subset_contractions_match": true
+      },
+      {
+        "word": [
+          3,
+          1,
+          3
+        ],
+        "Z_at_s2_t3": 21041,
+        "all_subset_contractions_match": true
+      },
+      {
+        "word": [
+          0,
+          3,
+          0
+        ],
+        "Z_at_s2_t3": 1972,
+        "all_subset_contractions_match": true
+      },
+      {
+        "word": [
+          0,
+          3,
+          3,
+          0
+        ],
+        "Z_at_s2_t3": 167307,
+        "all_subset_contractions_match": true
+      },
+      {
+        "word": [
+          3,
+          0,
+          3
+        ],
+        "Z_at_s2_t3": 33650,
+        "all_subset_contractions_match": true
+      },
+      {
+        "word": [
+          2,
+          3,
+          4
+        ],
+        "Z_at_s2_t3": 684143,
+        "all_subset_contractions_match": true
+      },
+      {
+        "word": [
+          1,
+          3,
+          1,
+          3,
+          1
+        ],
+        "Z_at_s2_t3": 176339,
+        "all_subset_contractions_match": true
+      },
+      {
+        "word": [
+          0,
+          3,
+          3,
+          3,
+          3,
+          3,
+          0
+        ],
+        "Z_at_s2_t3": 110250952587,
+        "all_subset_contractions_match": true
+      },
+      {
+        "word": [
+          0,
+          3,
+          1,
+          3,
+          3,
+          1,
+          0
+        ],
+        "Z_at_s2_t3": 84026817,
+        "all_subset_contractions_match": true
+      },
+      {
+        "word": [
+          4,
+          3,
+          3,
+          2
+        ],
+        "Z_at_s2_t3": 59541033,
+        "all_subset_contractions_match": true
+      },
+      {
+        "word": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "Z_at_s2_t3": 57858192,
+        "all_subset_contractions_match": true
+      },
+      {
+        "word": [
+          3,
+          0,
+          3,
+          0,
+          3
+        ],
+        "Z_at_s2_t3": 13278892,
+        "all_subset_contractions_match": true
+      },
+      {
+        "word": [
+          2,
+          3,
+          1,
+          0,
+          3,
+          4
+        ],
+        "Z_at_s2_t3": 542817430,
+        "all_subset_contractions_match": true
+      },
+      {
+        "word": [
+          0,
+          3,
+          2,
+          3,
+          0
+        ],
+        "Z_at_s2_t3": 2444275,
+        "all_subset_contractions_match": true
+      }
+    ]
+  },
+  "uncontracted_sign_example": {
+    "word": [
+      0,
+      3,
+      3,
+      3,
+      3,
+      3,
+      0
+    ],
+    "internal_signs": -1,
+    "junction_signs": 1,
+    "fixed_sign_evaluation": -9,
+    "recurrence_values": [
+      1,
+      2,
+      3,
+      3,
+      0,
+      -9
+    ]
+  },
+  "role": "bounded diagnostics accompanying the analytic proof; finite ranges do not certify arbitrary lengths"
+}

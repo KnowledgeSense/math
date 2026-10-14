@@ -1,0 +1,491 @@
+{
+  "author": "Knowledge Sense",
+  "status": "PASS",
+  "scope": "Finite exact checks supplementary to the analytic proof in the paper.",
+  "exact_arithmetic": "fractions.Fraction and integer gain products",
+  "parameters": {
+    "n": [
+      2,
+      24
+    ],
+    "m": [
+      1,
+      2,
+      3,
+      4,
+      6,
+      10,
+      100,
+      1000
+    ],
+    "k": "0 through n; m=1,k=0 checked separately with rank n-1"
+  },
+  "sigma_domain": "sigma_0=1; 1<=h<=floor(n/2), n>=2, 1<=k<=n",
+  "counts": {
+    "kernel_rows": 2553,
+    "weight_comparisons": 17479,
+    "coefficient_comparisons": 38732,
+    "closed_coloop_values": 2677,
+    "attenuation_sequences": 299,
+    "normalized_curvature_comparisons": 2079,
+    "jointless_trivial_rows": 23
+  },
+  "direct_lattice": [
+    {
+      "n": 4,
+      "m": 1,
+      "k": 0,
+      "rank": 3,
+      "flats": 15,
+      "coefficients": [
+        6,
+        12,
+        12,
+        6
+      ],
+      "rank_subsets_evaluated": 64,
+      "intervals_P": 59,
+      "group": "C1"
+    },
+    {
+      "n": 4,
+      "m": 1,
+      "k": 1,
+      "rank": 4,
+      "flats": 30,
+      "coefficients": [
+        6,
+        18,
+        24,
+        18,
+        6
+      ],
+      "rank_subsets_evaluated": 128,
+      "intervals_P": 179,
+      "group": "C1"
+    },
+    {
+      "n": 4,
+      "m": 1,
+      "k": 2,
+      "rank": 4,
+      "flats": 40,
+      "coefficients": [
+        12,
+        34,
+        44,
+        34,
+        12
+      ],
+      "rank_subsets_evaluated": 250,
+      "intervals_P": 256,
+      "group": "C1"
+    },
+    {
+      "n": 4,
+      "m": 1,
+      "k": 3,
+      "rank": 4,
+      "flats": 47,
+      "coefficients": [
+        18,
+        48,
+        61,
+        48,
+        18
+      ],
+      "rank_subsets_evaluated": 463,
+      "intervals_P": 313,
+      "group": "C1"
+    },
+    {
+      "n": 4,
+      "m": 1,
+      "k": 4,
+      "rank": 4,
+      "flats": 52,
+      "coefficients": [
+        24,
+        60,
+        75,
+        60,
+        24
+      ],
+      "rank_subsets_evaluated": 752,
+      "intervals_P": 357,
+      "group": "C1"
+    },
+    {
+      "n": 4,
+      "m": 2,
+      "k": 0,
+      "rank": 4,
+      "flats": 72,
+      "coefficients": [
+        45,
+        108,
+        130,
+        108,
+        45
+      ],
+      "rank_subsets_evaluated": 1779,
+      "intervals_P": 524,
+      "group": "C2"
+    },
+    {
+      "n": 4,
+      "m": 2,
+      "k": 1,
+      "rank": 4,
+      "flats": 83,
+      "coefficients": [
+        60,
+        141,
+        168,
+        141,
+        60
+      ],
+      "rank_subsets_evaluated": 2628,
+      "intervals_P": 625,
+      "group": "C2"
+    },
+    {
+      "n": 4,
+      "m": 2,
+      "k": 2,
+      "rank": 4,
+      "flats": 94,
+      "coefficients": [
+        75,
+        174,
+        206,
+        174,
+        75
+      ],
+      "rank_subsets_evaluated": 3641,
+      "intervals_P": 726,
+      "group": "C2"
+    },
+    {
+      "n": 4,
+      "m": 2,
+      "k": 3,
+      "rank": 4,
+      "flats": 105,
+      "coefficients": [
+        90,
+        207,
+        244,
+        207,
+        90
+      ],
+      "rank_subsets_evaluated": 4840,
+      "intervals_P": 827,
+      "group": "C2"
+    },
+    {
+      "n": 4,
+      "m": 2,
+      "k": 4,
+      "rank": 4,
+      "flats": 116,
+      "coefficients": [
+        105,
+        240,
+        282,
+        240,
+        105
+      ],
+      "rank_subsets_evaluated": 6217,
+      "intervals_P": 928,
+      "group": "C2"
+    },
+    {
+      "n": 3,
+      "m": 3,
+      "k": 0,
+      "rank": 3,
+      "flats": 23,
+      "coefficients": [
+        16,
+        27,
+        27,
+        16
+      ],
+      "rank_subsets_evaluated": 329,
+      "intervals_P": 101,
+      "group": "C3"
+    },
+    {
+      "n": 3,
+      "m": 3,
+      "k": 1,
+      "rank": 3,
+      "flats": 27,
+      "coefficients": [
+        20,
+        34,
+        34,
+        20
+      ],
+      "rank_subsets_evaluated": 519,
+      "intervals_P": 121,
+      "group": "C3"
+    },
+    {
+      "n": 3,
+      "m": 3,
+      "k": 2,
+      "rank": 3,
+      "flats": 31,
+      "coefficients": [
+        24,
+        41,
+        41,
+        24
+      ],
+      "rank_subsets_evaluated": 753,
+      "intervals_P": 141,
+      "group": "C3"
+    },
+    {
+      "n": 3,
+      "m": 3,
+      "k": 3,
+      "rank": 3,
+      "flats": 35,
+      "coefficients": [
+        28,
+        48,
+        48,
+        28
+      ],
+      "rank_subsets_evaluated": 1038,
+      "intervals_P": 161,
+      "group": "C3"
+    },
+    {
+      "n": 3,
+      "m": 6,
+      "k": 0,
+      "rank": 3,
+      "flats": 59,
+      "coefficients": [
+        70,
+        108,
+        108,
+        70
+      ],
+      "rank_subsets_evaluated": 5276,
+      "intervals_P": 299,
+      "group": "C6"
+    },
+    {
+      "n": 3,
+      "m": 6,
+      "k": 1,
+      "rank": 3,
+      "flats": 66,
+      "coefficients": [
+        77,
+        121,
+        121,
+        77
+      ],
+      "rank_subsets_evaluated": 6597,
+      "intervals_P": 334,
+      "group": "C6"
+    },
+    {
+      "n": 3,
+      "m": 6,
+      "k": 2,
+      "rank": 3,
+      "flats": 73,
+      "coefficients": [
+        84,
+        134,
+        134,
+        84
+      ],
+      "rank_subsets_evaluated": 8111,
+      "intervals_P": 369,
+      "group": "C6"
+    },
+    {
+      "n": 3,
+      "m": 6,
+      "k": 3,
+      "rank": 3,
+      "flats": 80,
+      "coefficients": [
+        91,
+        147,
+        147,
+        91
+      ],
+      "rank_subsets_evaluated": 9837,
+      "intervals_P": 404,
+      "group": "C6"
+    },
+    {
+      "n": 3,
+      "m": 6,
+      "k": 0,
+      "rank": 3,
+      "flats": 59,
+      "coefficients": [
+        70,
+        108,
+        108,
+        70
+      ],
+      "rank_subsets_evaluated": 5276,
+      "intervals_P": 299,
+      "group": "S3"
+    },
+    {
+      "n": 3,
+      "m": 6,
+      "k": 1,
+      "rank": 3,
+      "flats": 66,
+      "coefficients": [
+        77,
+        121,
+        121,
+        77
+      ],
+      "rank_subsets_evaluated": 6597,
+      "intervals_P": 334,
+      "group": "S3"
+    },
+    {
+      "n": 3,
+      "m": 6,
+      "k": 2,
+      "rank": 3,
+      "flats": 73,
+      "coefficients": [
+        84,
+        134,
+        134,
+        84
+      ],
+      "rank_subsets_evaluated": 8111,
+      "intervals_P": 369,
+      "group": "S3"
+    },
+    {
+      "n": 3,
+      "m": 6,
+      "k": 3,
+      "rank": 3,
+      "flats": 80,
+      "coefficients": [
+        91,
+        147,
+        147,
+        91
+      ],
+      "rank_subsets_evaluated": 9837,
+      "intervals_P": 404,
+      "group": "S3"
+    }
+  ],
+  "rank_zero_and_one": [
+    {
+      "n": 1,
+      "m": 1,
+      "k": 0,
+      "rank": 0,
+      "flats": 1,
+      "coefficients": [
+        1
+      ],
+      "rank_subsets_evaluated": 1,
+      "intervals_P": 0,
+      "group": "C1"
+    },
+    {
+      "n": 1,
+      "m": 1,
+      "k": 1,
+      "rank": 1,
+      "flats": 2,
+      "coefficients": [
+        1,
+        1
+      ],
+      "rank_subsets_evaluated": 2,
+      "intervals_P": 2,
+      "group": "C1"
+    },
+    {
+      "n": 1,
+      "m": 2,
+      "k": 0,
+      "rank": 0,
+      "flats": 1,
+      "coefficients": [
+        1
+      ],
+      "rank_subsets_evaluated": 1,
+      "intervals_P": 0,
+      "group": "C2"
+    },
+    {
+      "n": 1,
+      "m": 2,
+      "k": 1,
+      "rank": 1,
+      "flats": 2,
+      "coefficients": [
+        1,
+        1
+      ],
+      "rank_subsets_evaluated": 2,
+      "intervals_P": 2,
+      "group": "C2"
+    },
+    {
+      "n": 1,
+      "m": 6,
+      "k": 0,
+      "rank": 0,
+      "flats": 1,
+      "coefficients": [
+        1
+      ],
+      "rank_subsets_evaluated": 1,
+      "intervals_P": 0,
+      "group": "C6"
+    },
+    {
+      "n": 1,
+      "m": 6,
+      "k": 1,
+      "rank": 1,
+      "flats": 2,
+      "coefficients": [
+        1,
+        1
+      ],
+      "rank_subsets_evaluated": 2,
+      "intervals_P": 2,
+      "group": "C6"
+    }
+  ],
+  "equal_order_group_comparison": {
+    "groups": [
+      "C6",
+      "S3"
+    ],
+    "n": 3,
+    "k": [
+      0,
+      3
+    ],
+    "status": "PASS"
+  }
+}

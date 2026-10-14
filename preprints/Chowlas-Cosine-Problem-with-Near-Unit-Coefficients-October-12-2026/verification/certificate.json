@@ -1,0 +1,787 @@
+{
+  "method": "Independent symbolic Fourier reconstruction; exact sign comparison in Q(sqrt(2)); all quadratic Taylor boxes; rational constants. Finite support enumeration is supplementary only.",
+  "R": "sqrt(2)*a**2/4 - sqrt(2)*a*b - sqrt(2)*a*c/2 - sqrt(2)*b**2 - b**2 + sqrt(2)*b*c + 2*b*d + sqrt(2)*c**2/2 + 4*c**2 + sqrt(2)*c*d - sqrt(2)*c*e/2 - sqrt(2)*d**2 - d**2 - sqrt(2)*d*e + sqrt(2)*e**2/4",
+  "J": "-sqrt(2)*a**2/4 - sqrt(2)*a*b + sqrt(2)*a*c/2 + sqrt(2)*b**2 + sqrt(2)*b*c + 4*b*c - 4*c*d - sqrt(2)*c*d - sqrt(2)*c*e/2 - sqrt(2)*d**2 + sqrt(2)*d*e + sqrt(2)*e**2/4",
+  "all_boxes": [
+    {
+      "occupancy": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "R": {
+        "center": "0",
+        "gradient_l1": "0",
+        "quadratic_coefficient_l1": "0",
+        "lower": "0",
+        "upper": "0"
+      },
+      "J": {
+        "center": "0",
+        "gradient_l1": "0",
+        "quadratic_coefficient_l1": "0",
+        "lower": "0",
+        "upper": "0"
+      }
+    },
+    {
+      "occupancy": [
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "R": {
+        "center": "sqrt(2)/4",
+        "gradient_l1": "sqrt(2)/2",
+        "quadratic_coefficient_l1": "sqrt(2)/4",
+        "lower": "9799*sqrt(2)/40000",
+        "upper": "10201*sqrt(2)/40000"
+      },
+      "J": {
+        "center": "sqrt(2)/4",
+        "gradient_l1": "sqrt(2)/2",
+        "quadratic_coefficient_l1": "sqrt(2)/4",
+        "lower": "9799*sqrt(2)/40000",
+        "upper": "10201*sqrt(2)/40000"
+      }
+    },
+    {
+      "occupancy": [
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "R": {
+        "center": "-sqrt(2) - 1",
+        "gradient_l1": "2 + 2*sqrt(2)",
+        "quadratic_coefficient_l1": "1 + sqrt(2)",
+        "lower": "-10201*sqrt(2)/10000 - 10201/10000",
+        "upper": "-9799*sqrt(2)/10000 - 9799/10000"
+      },
+      "J": {
+        "center": "-sqrt(2)",
+        "gradient_l1": "2*sqrt(2)",
+        "quadratic_coefficient_l1": "sqrt(2)",
+        "lower": "-10201*sqrt(2)/10000",
+        "upper": "-9799*sqrt(2)/10000"
+      }
+    },
+    {
+      "occupancy": [
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "R": {
+        "center": "-7*sqrt(2)/4 - 1",
+        "gradient_l1": "2 + 7*sqrt(2)/2",
+        "quadratic_coefficient_l1": "1 + 9*sqrt(2)/4",
+        "lower": "-71409*sqrt(2)/40000 - 10201/10000",
+        "upper": "-68591*sqrt(2)/40000 - 9799/10000"
+      },
+      "J": {
+        "center": "sqrt(2)/4",
+        "gradient_l1": "5*sqrt(2)/2",
+        "quadratic_coefficient_l1": "9*sqrt(2)/4",
+        "lower": "8991*sqrt(2)/40000",
+        "upper": "11009*sqrt(2)/40000"
+      }
+    },
+    {
+      "occupancy": [
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "R": {
+        "center": "sqrt(2)/2 + 4",
+        "gradient_l1": "sqrt(2) + 8",
+        "quadratic_coefficient_l1": "sqrt(2)/2 + 4",
+        "lower": "9799*sqrt(2)/20000 + 9799/2500",
+        "upper": "10201*sqrt(2)/20000 + 10201/2500"
+      },
+      "J": {
+        "center": "0",
+        "gradient_l1": "0",
+        "quadratic_coefficient_l1": "0",
+        "lower": "0",
+        "upper": "0"
+      }
+    },
+    {
+      "occupancy": [
+        0,
+        0,
+        1,
+        0,
+        1
+      ],
+      "R": {
+        "center": "sqrt(2)/4 + 4",
+        "gradient_l1": "sqrt(2)/2 + 8",
+        "quadratic_coefficient_l1": "5*sqrt(2)/4 + 4",
+        "lower": "1959*sqrt(2)/8000 + 9799/2500",
+        "upper": "2041*sqrt(2)/8000 + 10201/2500"
+      },
+      "J": {
+        "center": "-sqrt(2)/4",
+        "gradient_l1": "sqrt(2)/2",
+        "quadratic_coefficient_l1": "3*sqrt(2)/4",
+        "lower": "-10203*sqrt(2)/40000",
+        "upper": "-9797*sqrt(2)/40000"
+      }
+    },
+    {
+      "occupancy": [
+        0,
+        0,
+        1,
+        1,
+        0
+      ],
+      "R": {
+        "center": "sqrt(2)/2 + 3",
+        "gradient_l1": "3*sqrt(2) + 10",
+        "quadratic_coefficient_l1": "5*sqrt(2)/2 + 5",
+        "lower": "1879*sqrt(2)/4000 + 5799/2000",
+        "upper": "2121*sqrt(2)/4000 + 6201/2000"
+      },
+      "J": {
+        "center": "-4 - 2*sqrt(2)",
+        "gradient_l1": "4*sqrt(2) + 8",
+        "quadratic_coefficient_l1": "2*sqrt(2) + 4",
+        "lower": "-10201/2500 - 10201*sqrt(2)/5000",
+        "upper": "-9799/2500 - 9799*sqrt(2)/5000"
+      }
+    },
+    {
+      "occupancy": [
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "R": {
+        "center": "3 - 3*sqrt(2)/4",
+        "gradient_l1": "9*sqrt(2)/2 + 10",
+        "quadratic_coefficient_l1": "5 + 17*sqrt(2)/4",
+        "lower": "5799/2000 - 31817*sqrt(2)/40000",
+        "upper": "6201/2000 - 28183*sqrt(2)/40000"
+      },
+      "J": {
+        "center": "-4 - 5*sqrt(2)/4",
+        "gradient_l1": "9*sqrt(2)/2 + 8",
+        "quadratic_coefficient_l1": "4 + 15*sqrt(2)/4",
+        "lower": "-10201/2500 - 10363*sqrt(2)/8000",
+        "upper": "-9799/2500 - 9637*sqrt(2)/8000"
+      }
+    },
+    {
+      "occupancy": [
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "R": {
+        "center": "-sqrt(2) - 1",
+        "gradient_l1": "2 + 2*sqrt(2)",
+        "quadratic_coefficient_l1": "1 + sqrt(2)",
+        "lower": "-10201*sqrt(2)/10000 - 10201/10000",
+        "upper": "-9799*sqrt(2)/10000 - 9799/10000"
+      },
+      "J": {
+        "center": "sqrt(2)",
+        "gradient_l1": "2*sqrt(2)",
+        "quadratic_coefficient_l1": "sqrt(2)",
+        "lower": "9799*sqrt(2)/10000",
+        "upper": "10201*sqrt(2)/10000"
+      }
+    },
+    {
+      "occupancy": [
+        0,
+        1,
+        0,
+        0,
+        1
+      ],
+      "R": {
+        "center": "-3*sqrt(2)/4 - 1",
+        "gradient_l1": "2 + 5*sqrt(2)/2",
+        "quadratic_coefficient_l1": "1 + 5*sqrt(2)/4",
+        "lower": "-6201*sqrt(2)/8000 - 10201/10000",
+        "upper": "-5799*sqrt(2)/8000 - 9799/10000"
+      },
+      "J": {
+        "center": "5*sqrt(2)/4",
+        "gradient_l1": "5*sqrt(2)/2",
+        "quadratic_coefficient_l1": "5*sqrt(2)/4",
+        "lower": "9799*sqrt(2)/8000",
+        "upper": "10201*sqrt(2)/8000"
+      }
+    },
+    {
+      "occupancy": [
+        0,
+        1,
+        0,
+        1,
+        0
+      ],
+      "R": {
+        "center": "-2*sqrt(2)",
+        "gradient_l1": "4*sqrt(2)",
+        "quadratic_coefficient_l1": "2*sqrt(2) + 4",
+        "lower": "-10201*sqrt(2)/5000 - 1/2500",
+        "upper": "1/2500 - 9799*sqrt(2)/5000"
+      },
+      "J": {
+        "center": "0",
+        "gradient_l1": "4*sqrt(2)",
+        "quadratic_coefficient_l1": "2*sqrt(2)",
+        "lower": "-201*sqrt(2)/5000",
+        "upper": "201*sqrt(2)/5000"
+      }
+    },
+    {
+      "occupancy": [
+        0,
+        1,
+        0,
+        1,
+        1
+      ],
+      "R": {
+        "center": "-11*sqrt(2)/4",
+        "gradient_l1": "11*sqrt(2)/2",
+        "quadratic_coefficient_l1": "4 + 13*sqrt(2)/4",
+        "lower": "-112213*sqrt(2)/40000 - 1/2500",
+        "upper": "1/2500 - 107787*sqrt(2)/40000"
+      },
+      "J": {
+        "center": "5*sqrt(2)/4",
+        "gradient_l1": "9*sqrt(2)/2",
+        "quadratic_coefficient_l1": "13*sqrt(2)/4",
+        "lower": "48187*sqrt(2)/40000",
+        "upper": "51813*sqrt(2)/40000"
+      }
+    },
+    {
+      "occupancy": [
+        0,
+        1,
+        1,
+        0,
+        0
+      ],
+      "R": {
+        "center": "sqrt(2)/2 + 3",
+        "gradient_l1": "3*sqrt(2) + 10",
+        "quadratic_coefficient_l1": "5*sqrt(2)/2 + 5",
+        "lower": "1879*sqrt(2)/4000 + 5799/2000",
+        "upper": "2121*sqrt(2)/4000 + 6201/2000"
+      },
+      "J": {
+        "center": "2*sqrt(2) + 4",
+        "gradient_l1": "4*sqrt(2) + 8",
+        "quadratic_coefficient_l1": "2*sqrt(2) + 4",
+        "lower": "9799*sqrt(2)/5000 + 9799/2500",
+        "upper": "10201*sqrt(2)/5000 + 10201/2500"
+      }
+    },
+    {
+      "occupancy": [
+        0,
+        1,
+        1,
+        0,
+        1
+      ],
+      "R": {
+        "center": "sqrt(2)/4 + 3",
+        "gradient_l1": "5*sqrt(2)/2 + 10",
+        "quadratic_coefficient_l1": "13*sqrt(2)/4 + 5",
+        "lower": "8987*sqrt(2)/40000 + 5799/2000",
+        "upper": "11013*sqrt(2)/40000 + 6201/2000"
+      },
+      "J": {
+        "center": "7*sqrt(2)/4 + 4",
+        "gradient_l1": "7*sqrt(2)/2 + 8",
+        "quadratic_coefficient_l1": "11*sqrt(2)/4 + 4",
+        "lower": "68589*sqrt(2)/40000 + 9799/2500",
+        "upper": "71411*sqrt(2)/40000 + 10201/2500"
+      }
+    },
+    {
+      "occupancy": [
+        0,
+        1,
+        1,
+        1,
+        0
+      ],
+      "R": {
+        "center": "sqrt(2)/2 + 4",
+        "gradient_l1": "5*sqrt(2) + 8",
+        "quadratic_coefficient_l1": "9*sqrt(2)/2 + 8",
+        "lower": "8991*sqrt(2)/20000 + 4899/1250",
+        "upper": "11009*sqrt(2)/20000 + 5101/1250"
+      },
+      "J": {
+        "center": "0",
+        "gradient_l1": "8 + 6*sqrt(2)",
+        "quadratic_coefficient_l1": "4*sqrt(2) + 8",
+        "lower": "-151*sqrt(2)/2500 - 101/1250",
+        "upper": "101/1250 + 151*sqrt(2)/2500"
+      }
+    },
+    {
+      "occupancy": [
+        0,
+        1,
+        1,
+        1,
+        1
+      ],
+      "R": {
+        "center": "4 - 3*sqrt(2)/4",
+        "gradient_l1": "8 + 13*sqrt(2)/2",
+        "quadratic_coefficient_l1": "8 + 25*sqrt(2)/4",
+        "lower": "4899/1250 - 261*sqrt(2)/320",
+        "upper": "5101/1250 - 219*sqrt(2)/320"
+      },
+      "J": {
+        "center": "3*sqrt(2)/4",
+        "gradient_l1": "8 + 13*sqrt(2)/2",
+        "quadratic_coefficient_l1": "8 + 23*sqrt(2)/4",
+        "lower": "-101/1250 + 27377*sqrt(2)/40000",
+        "upper": "101/1250 + 32623*sqrt(2)/40000"
+      }
+    },
+    {
+      "occupancy": [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "R": {
+        "center": "sqrt(2)/4",
+        "gradient_l1": "sqrt(2)/2",
+        "quadratic_coefficient_l1": "sqrt(2)/4",
+        "lower": "9799*sqrt(2)/40000",
+        "upper": "10201*sqrt(2)/40000"
+      },
+      "J": {
+        "center": "-sqrt(2)/4",
+        "gradient_l1": "sqrt(2)/2",
+        "quadratic_coefficient_l1": "sqrt(2)/4",
+        "lower": "-10201*sqrt(2)/40000",
+        "upper": "-9799*sqrt(2)/40000"
+      }
+    },
+    {
+      "occupancy": [
+        1,
+        0,
+        0,
+        0,
+        1
+      ],
+      "R": {
+        "center": "sqrt(2)/2",
+        "gradient_l1": "sqrt(2)",
+        "quadratic_coefficient_l1": "sqrt(2)/2",
+        "lower": "9799*sqrt(2)/20000",
+        "upper": "10201*sqrt(2)/20000"
+      },
+      "J": {
+        "center": "0",
+        "gradient_l1": "sqrt(2)",
+        "quadratic_coefficient_l1": "sqrt(2)/2",
+        "lower": "-201*sqrt(2)/20000",
+        "upper": "201*sqrt(2)/20000"
+      }
+    },
+    {
+      "occupancy": [
+        1,
+        0,
+        0,
+        1,
+        0
+      ],
+      "R": {
+        "center": "-3*sqrt(2)/4 - 1",
+        "gradient_l1": "2 + 5*sqrt(2)/2",
+        "quadratic_coefficient_l1": "1 + 5*sqrt(2)/4",
+        "lower": "-6201*sqrt(2)/8000 - 10201/10000",
+        "upper": "-5799*sqrt(2)/8000 - 9799/10000"
+      },
+      "J": {
+        "center": "-5*sqrt(2)/4",
+        "gradient_l1": "5*sqrt(2)/2",
+        "quadratic_coefficient_l1": "5*sqrt(2)/4",
+        "lower": "-10201*sqrt(2)/8000",
+        "upper": "-9799*sqrt(2)/8000"
+      }
+    },
+    {
+      "occupancy": [
+        1,
+        0,
+        0,
+        1,
+        1
+      ],
+      "R": {
+        "center": "-3*sqrt(2)/2 - 1",
+        "gradient_l1": "2 + 4*sqrt(2)",
+        "quadratic_coefficient_l1": "1 + 5*sqrt(2)/2",
+        "lower": "-6161*sqrt(2)/4000 - 10201/10000",
+        "upper": "-5839*sqrt(2)/4000 - 9799/10000"
+      },
+      "J": {
+        "center": "0",
+        "gradient_l1": "3*sqrt(2)",
+        "quadratic_coefficient_l1": "5*sqrt(2)/2",
+        "lower": "-121*sqrt(2)/4000",
+        "upper": "121*sqrt(2)/4000"
+      }
+    },
+    {
+      "occupancy": [
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "R": {
+        "center": "sqrt(2)/4 + 4",
+        "gradient_l1": "sqrt(2)/2 + 8",
+        "quadratic_coefficient_l1": "5*sqrt(2)/4 + 4",
+        "lower": "1959*sqrt(2)/8000 + 9799/2500",
+        "upper": "2041*sqrt(2)/8000 + 10201/2500"
+      },
+      "J": {
+        "center": "sqrt(2)/4",
+        "gradient_l1": "sqrt(2)/2",
+        "quadratic_coefficient_l1": "3*sqrt(2)/4",
+        "lower": "9797*sqrt(2)/40000",
+        "upper": "10203*sqrt(2)/40000"
+      }
+    },
+    {
+      "occupancy": [
+        1,
+        0,
+        1,
+        0,
+        1
+      ],
+      "R": {
+        "center": "4",
+        "gradient_l1": "8",
+        "quadratic_coefficient_l1": "2*sqrt(2) + 4",
+        "lower": "9799/2500 - sqrt(2)/5000",
+        "upper": "sqrt(2)/5000 + 10201/2500"
+      },
+      "J": {
+        "center": "0",
+        "gradient_l1": "0",
+        "quadratic_coefficient_l1": "3*sqrt(2)/2",
+        "lower": "-3*sqrt(2)/20000",
+        "upper": "3*sqrt(2)/20000"
+      }
+    },
+    {
+      "occupancy": [
+        1,
+        0,
+        1,
+        1,
+        0
+      ],
+      "R": {
+        "center": "sqrt(2)/4 + 3",
+        "gradient_l1": "5*sqrt(2)/2 + 10",
+        "quadratic_coefficient_l1": "13*sqrt(2)/4 + 5",
+        "lower": "8987*sqrt(2)/40000 + 5799/2000",
+        "upper": "11013*sqrt(2)/40000 + 6201/2000"
+      },
+      "J": {
+        "center": "-4 - 7*sqrt(2)/4",
+        "gradient_l1": "7*sqrt(2)/2 + 8",
+        "quadratic_coefficient_l1": "11*sqrt(2)/4 + 4",
+        "lower": "-10201/2500 - 71411*sqrt(2)/40000",
+        "upper": "-9799/2500 - 68589*sqrt(2)/40000"
+      }
+    },
+    {
+      "occupancy": [
+        1,
+        0,
+        1,
+        1,
+        1
+      ],
+      "R": {
+        "center": "3 - sqrt(2)",
+        "gradient_l1": "4*sqrt(2) + 10",
+        "quadratic_coefficient_l1": "5 + 5*sqrt(2)",
+        "lower": "5799/2000 - 2081*sqrt(2)/2000",
+        "upper": "6201/2000 - 1919*sqrt(2)/2000"
+      },
+      "J": {
+        "center": "-4 - sqrt(2)",
+        "gradient_l1": "4*sqrt(2) + 8",
+        "quadratic_coefficient_l1": "4 + 9*sqrt(2)/2",
+        "lower": "-10201/2500 - 20809*sqrt(2)/20000",
+        "upper": "-9799/2500 - 19191*sqrt(2)/20000"
+      }
+    },
+    {
+      "occupancy": [
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "R": {
+        "center": "-7*sqrt(2)/4 - 1",
+        "gradient_l1": "2 + 7*sqrt(2)/2",
+        "quadratic_coefficient_l1": "1 + 9*sqrt(2)/4",
+        "lower": "-71409*sqrt(2)/40000 - 10201/10000",
+        "upper": "-68591*sqrt(2)/40000 - 9799/10000"
+      },
+      "J": {
+        "center": "-sqrt(2)/4",
+        "gradient_l1": "5*sqrt(2)/2",
+        "quadratic_coefficient_l1": "9*sqrt(2)/4",
+        "lower": "-11009*sqrt(2)/40000",
+        "upper": "-8991*sqrt(2)/40000"
+      }
+    },
+    {
+      "occupancy": [
+        1,
+        1,
+        0,
+        0,
+        1
+      ],
+      "R": {
+        "center": "-3*sqrt(2)/2 - 1",
+        "gradient_l1": "2 + 4*sqrt(2)",
+        "quadratic_coefficient_l1": "1 + 5*sqrt(2)/2",
+        "lower": "-6161*sqrt(2)/4000 - 10201/10000",
+        "upper": "-5839*sqrt(2)/4000 - 9799/10000"
+      },
+      "J": {
+        "center": "0",
+        "gradient_l1": "3*sqrt(2)",
+        "quadratic_coefficient_l1": "5*sqrt(2)/2",
+        "lower": "-121*sqrt(2)/4000",
+        "upper": "121*sqrt(2)/4000"
+      }
+    },
+    {
+      "occupancy": [
+        1,
+        1,
+        0,
+        1,
+        0
+      ],
+      "R": {
+        "center": "-11*sqrt(2)/4",
+        "gradient_l1": "11*sqrt(2)/2",
+        "quadratic_coefficient_l1": "4 + 13*sqrt(2)/4",
+        "lower": "-112213*sqrt(2)/40000 - 1/2500",
+        "upper": "1/2500 - 107787*sqrt(2)/40000"
+      },
+      "J": {
+        "center": "-5*sqrt(2)/4",
+        "gradient_l1": "9*sqrt(2)/2",
+        "quadratic_coefficient_l1": "13*sqrt(2)/4",
+        "lower": "-51813*sqrt(2)/40000",
+        "upper": "-48187*sqrt(2)/40000"
+      }
+    },
+    {
+      "occupancy": [
+        1,
+        1,
+        0,
+        1,
+        1
+      ],
+      "R": {
+        "center": "-7*sqrt(2)/2",
+        "gradient_l1": "7*sqrt(2)",
+        "quadratic_coefficient_l1": "4 + 9*sqrt(2)/2",
+        "lower": "-71409*sqrt(2)/20000 - 1/2500",
+        "upper": "1/2500 - 68591*sqrt(2)/20000"
+      },
+      "J": {
+        "center": "0",
+        "gradient_l1": "5*sqrt(2)",
+        "quadratic_coefficient_l1": "9*sqrt(2)/2",
+        "lower": "-1009*sqrt(2)/20000",
+        "upper": "1009*sqrt(2)/20000"
+      }
+    },
+    {
+      "occupancy": [
+        1,
+        1,
+        1,
+        0,
+        0
+      ],
+      "R": {
+        "center": "3 - 3*sqrt(2)/4",
+        "gradient_l1": "9*sqrt(2)/2 + 10",
+        "quadratic_coefficient_l1": "5 + 17*sqrt(2)/4",
+        "lower": "5799/2000 - 31817*sqrt(2)/40000",
+        "upper": "6201/2000 - 28183*sqrt(2)/40000"
+      },
+      "J": {
+        "center": "5*sqrt(2)/4 + 4",
+        "gradient_l1": "9*sqrt(2)/2 + 8",
+        "quadratic_coefficient_l1": "4 + 15*sqrt(2)/4",
+        "lower": "9637*sqrt(2)/8000 + 9799/2500",
+        "upper": "10363*sqrt(2)/8000 + 10201/2500"
+      }
+    },
+    {
+      "occupancy": [
+        1,
+        1,
+        1,
+        0,
+        1
+      ],
+      "R": {
+        "center": "3 - sqrt(2)",
+        "gradient_l1": "4*sqrt(2) + 10",
+        "quadratic_coefficient_l1": "5 + 5*sqrt(2)",
+        "lower": "5799/2000 - 2081*sqrt(2)/2000",
+        "upper": "6201/2000 - 1919*sqrt(2)/2000"
+      },
+      "J": {
+        "center": "sqrt(2) + 4",
+        "gradient_l1": "4*sqrt(2) + 8",
+        "quadratic_coefficient_l1": "4 + 9*sqrt(2)/2",
+        "lower": "19191*sqrt(2)/20000 + 9799/2500",
+        "upper": "20809*sqrt(2)/20000 + 10201/2500"
+      }
+    },
+    {
+      "occupancy": [
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      "R": {
+        "center": "4 - 3*sqrt(2)/4",
+        "gradient_l1": "8 + 13*sqrt(2)/2",
+        "quadratic_coefficient_l1": "8 + 25*sqrt(2)/4",
+        "lower": "4899/1250 - 261*sqrt(2)/320",
+        "upper": "5101/1250 - 219*sqrt(2)/320"
+      },
+      "J": {
+        "center": "-3*sqrt(2)/4",
+        "gradient_l1": "8 + 13*sqrt(2)/2",
+        "quadratic_coefficient_l1": "8 + 23*sqrt(2)/4",
+        "lower": "-32623*sqrt(2)/40000 - 101/1250",
+        "upper": "101/1250 - 27377*sqrt(2)/40000"
+      }
+    },
+    {
+      "occupancy": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "R": {
+        "center": "4 - 2*sqrt(2)",
+        "gradient_l1": "8 + 8*sqrt(2)",
+        "quadratic_coefficient_l1": "8 + 8*sqrt(2)",
+        "lower": "4899/1250 - 2601*sqrt(2)/1250",
+        "upper": "5101/1250 - 2399*sqrt(2)/1250"
+      },
+      "J": {
+        "center": "0",
+        "gradient_l1": "8 + 6*sqrt(2)",
+        "quadratic_coefficient_l1": "8 + 15*sqrt(2)/2",
+        "lower": "-243*sqrt(2)/4000 - 101/1250",
+        "upper": "101/1250 + 243*sqrt(2)/4000"
+      }
+    }
+  ],
+  "grouped_R_upper": {
+    "000": "10201*sqrt(2)/20000",
+    "001": "-5799*sqrt(2)/8000 - 9799/10000",
+    "010": "10201*sqrt(2)/20000 + 10201/2500",
+    "011": "2121*sqrt(2)/4000 + 6201/2000",
+    "100": "-5799*sqrt(2)/8000 - 9799/10000",
+    "101": "1/2500 - 9799*sqrt(2)/5000",
+    "110": "2121*sqrt(2)/4000 + 6201/2000",
+    "111": "11009*sqrt(2)/20000 + 5101/1250"
+  },
+  "boundary_J_lower": [
+    {
+      "outer": [
+        0,
+        0
+      ],
+      "lower": "9799*sqrt(2)/5000 + 9799/2500"
+    },
+    {
+      "outer": [
+        0,
+        1
+      ],
+      "lower": "68589*sqrt(2)/40000 + 9799/2500"
+    },
+    {
+      "outer": [
+        1,
+        0
+      ],
+      "lower": "9637*sqrt(2)/8000 + 9799/2500"
+    },
+    {
+      "outer": [
+        1,
+        1
+      ],
+      "lower": "19191*sqrt(2)/20000 + 9799/2500"
+    }
+  ],
+  "margin_exact": "58226264657/25000000000000",
+  "margin_decimal_for_display": "0.00232905058628000000",
+  "combinatorial_sanity_sets": 4095,
+  "checks_passed": true
+}

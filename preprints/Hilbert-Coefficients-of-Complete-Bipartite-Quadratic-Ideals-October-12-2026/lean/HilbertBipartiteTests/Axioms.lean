@@ -1,0 +1,16 @@
+import HilbertBipartite
+
+#print axioms HilbertBipartite.release_main_theorem
+#print axioms HilbertBipartite.actual_length_explicit_expansion
+#print axioms HilbertBipartite.compositionLength_formula
+#print axioms HilbertBipartite.length_bipartiteIdeal_pow
+#print axioms HilbertBipartite.monomial_mem_bipartiteIdeal_pow_iff
+#print axioms HilbertBipartite.finrank_bipartiteIdeal_pow
+#print axioms HilbertBipartite.compositionLength_hilbertExpansion
+#print axioms HilbertBipartite.hilbertCoefficient_is_family
+#print axioms HilbertBipartite.hilbertCoefficient_unique
+#print axioms HilbertBipartite.existsUnique_hilbertSamuelPolynomial
+#print axioms HilbertBipartite.hilbertCoefficient_eq_formula
+#print axioms HilbertBipartite.correctionNumerator_coefficient
+#print axioms HilbertBipartite.coefficientFormula_high_signed_pos
+#print axioms HilbertBipartite.coefficientFormula_nonneg_iff

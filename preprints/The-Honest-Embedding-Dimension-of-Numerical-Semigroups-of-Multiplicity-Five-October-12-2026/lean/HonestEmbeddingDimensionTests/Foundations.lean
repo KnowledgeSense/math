@@ -1,0 +1,9 @@
+import HonestEmbeddingDimension.ThreeCoordinateNormalForm
+import HonestEmbeddingDimension.FirstCollision
+import HonestEmbeddingDimension.RationalGerms
+
+#print axioms HonestEmbeddingDimension.formal_three_coordinate_normal_form
+#print axioms HonestEmbeddingDimension.analytic_plane_values
+#print axioms HonestEmbeddingDimension.distinct_residues_le_parameter_generators
+#print axioms HonestEmbeddingDimension.new_triple_value_gt_collision
+#print axioms HonestEmbeddingDimension.analyticTaylor_geometric_quotient

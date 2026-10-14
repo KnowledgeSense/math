@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "number_of_exact_identities": 13,
+  "checks": [
+    "resolvent_00",
+    "resolvent_01",
+    "resolvent_10",
+    "resolvent_11",
+    "TB_symmetric",
+    "rank_one_ODE",
+    "rank_drop_determinant",
+    "real_q_operator_direction_0",
+    "real_q_operator_direction_1",
+    "real_q_operator_direction_2",
+    "real_q_operator_direction_3",
+    "real_q_operator_direction_4",
+    "real_q_operator_direction_5"
+  ],
+  "scope": "symbolic resolvent/ODE/rank-drop identities and real-q operator coefficient checks; no analytic boundary claims automated"
+}

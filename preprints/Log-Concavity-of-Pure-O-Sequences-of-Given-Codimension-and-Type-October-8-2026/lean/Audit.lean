@@ -1,0 +1,11 @@
+import PureOSequences
+
+#print axioms ResearchMain.PureOSequences.classification
+#print axioms ResearchMain.PureOSequences.counterexample_classification
+#print axioms ResearchMain.PureOSequences.three_variable_minimum_failure_type
+#print axioms ResearchMain.PureOSequences.higher_minimum_failure_type
+#print axioms ResearchMain.PureOSequences.type_one_logConcave
+#print axioms ResearchMain.PureOSequences.two_variable_logConcave
+#print axioms ResearchMain.PureOSequences.TypeTwo.type_two_three_variables_logConcave
+#print axioms ResearchMain.PureOSequences.exists_three_variable_counterexample
+#print axioms ResearchMain.PureOSequences.exists_counterexample_above_dimension_three

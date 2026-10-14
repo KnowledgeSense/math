@@ -1,0 +1,461 @@
+{
+  "status": "AUTHOR COMPONENT EXACT PASS",
+  "p_domain": "all real p>=100",
+  "z_integral_domain": "[-19/20,19/20]",
+  "bin_count": 64,
+  "kappa_integral_lower": "1218353129184303/104857600000000000",
+  "chord_loss_coefficient_lower": "844318718524721979/524288000000000000",
+  "jacobian_increase_coefficient_upper": "75/49",
+  "strict_margin": "2050017207711376971/25690112000000000000",
+  "rows": [
+    {
+      "z_lower": "0",
+      "z_upper": "19/1280",
+      "K_upper": "16493653/9940000",
+      "kappa_lower_numerator": 13027580,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "19/1280",
+      "z_upper": "19/640",
+      "K_upper": "8485989/4970000",
+      "kappa_lower_numerator": 12594677,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "19/640",
+      "z_upper": "57/1280",
+      "K_upper": "17450303/9940000",
+      "kappa_lower_numerator": 12168452,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "57/1280",
+      "z_upper": "19/320",
+      "K_upper": "4482157/2485000",
+      "kappa_lower_numerator": 11749442,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "19/320",
+      "z_upper": "19/256",
+      "K_upper": "18406953/9940000",
+      "kappa_lower_numerator": 11338129,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "19/256",
+      "z_upper": "57/640",
+      "K_upper": "9442639/4970000",
+      "kappa_lower_numerator": 10934933,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "57/640",
+      "z_upper": "133/1280",
+      "K_upper": "2766229/1420000",
+      "kappa_lower_numerator": 10540221,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "133/1280",
+      "z_upper": "19/160",
+      "K_upper": "2480241/1242500",
+      "kappa_lower_numerator": 10154305,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "19/160",
+      "z_upper": "171/1280",
+      "K_upper": "20320253/9940000",
+      "kappa_lower_numerator": 9777448,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "171/1280",
+      "z_upper": "19/128",
+      "K_upper": "10399289/4970000",
+      "kappa_lower_numerator": 9409866,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "19/128",
+      "z_upper": "209/1280",
+      "K_upper": "21276903/9940000",
+      "kappa_lower_numerator": 9051727,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "209/1280",
+      "z_upper": "57/320",
+      "K_upper": "5438807/2485000",
+      "kappa_lower_numerator": 8703161,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "57/320",
+      "z_upper": "247/1280",
+      "K_upper": "22233553/9940000",
+      "kappa_lower_numerator": 8364255,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "247/1280",
+      "z_upper": "133/640",
+      "K_upper": "1622277/710000",
+      "kappa_lower_numerator": 8035062,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "133/640",
+      "z_upper": "57/256",
+      "K_upper": "23190203/9940000",
+      "kappa_lower_numerator": 7715600,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "57/256",
+      "z_upper": "19/80",
+      "K_upper": "1479283/621250",
+      "kappa_lower_numerator": 7405856,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "19/80",
+      "z_upper": "323/1280",
+      "K_upper": "24146853/9940000",
+      "kappa_lower_numerator": 7105791,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "323/1280",
+      "z_upper": "171/640",
+      "K_upper": "12312589/4970000",
+      "kappa_lower_numerator": 6815338,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "171/640",
+      "z_upper": "361/1280",
+      "K_upper": "25103503/9940000",
+      "kappa_lower_numerator": 6534406,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "361/1280",
+      "z_upper": "19/64",
+      "K_upper": "6395457/2485000",
+      "kappa_lower_numerator": 6262886,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "19/64",
+      "z_upper": "399/1280",
+      "K_upper": "3722879/1420000",
+      "kappa_lower_numerator": 6000650,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "399/1280",
+      "z_upper": "209/640",
+      "K_upper": "13269239/4970000",
+      "kappa_lower_numerator": 5747551,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "209/640",
+      "z_upper": "437/1280",
+      "K_upper": "27016803/9940000",
+      "kappa_lower_numerator": 5503430,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "437/1280",
+      "z_upper": "57/160",
+      "K_upper": "3436891/1242500",
+      "kappa_lower_numerator": 5268115,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "57/160",
+      "z_upper": "95/256",
+      "K_upper": "27973453/9940000",
+      "kappa_lower_numerator": 5041424,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "95/256",
+      "z_upper": "247/640",
+      "K_upper": "14225889/4970000",
+      "kappa_lower_numerator": 4823164,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "247/640",
+      "z_upper": "513/1280",
+      "K_upper": "28930103/9940000",
+      "kappa_lower_numerator": 4613136,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "513/1280",
+      "z_upper": "133/320",
+      "K_upper": "1050301/355000",
+      "kappa_lower_numerator": 4411135,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "133/320",
+      "z_upper": "551/1280",
+      "K_upper": "29886753/9940000",
+      "kappa_lower_numerator": 4216951,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "551/1280",
+      "z_upper": "57/128",
+      "K_upper": "15182539/4970000",
+      "kappa_lower_numerator": 4030371,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "57/128",
+      "z_upper": "589/1280",
+      "K_upper": "30843403/9940000",
+      "kappa_lower_numerator": 3851178,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "589/1280",
+      "z_upper": "19/40",
+      "K_upper": "978804/310625",
+      "kappa_lower_numerator": 3679154,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "19/40",
+      "z_upper": "627/1280",
+      "K_upper": "31800053/9940000",
+      "kappa_lower_numerator": 3514083,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "627/1280",
+      "z_upper": "323/640",
+      "K_upper": "16139189/4970000",
+      "kappa_lower_numerator": 3355746,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "323/640",
+      "z_upper": "133/256",
+      "K_upper": "4679529/1420000",
+      "kappa_lower_numerator": 3203926,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "133/256",
+      "z_upper": "171/320",
+      "K_upper": "8308757/2485000",
+      "kappa_lower_numerator": 3058408,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "171/320",
+      "z_upper": "703/1280",
+      "K_upper": "33713353/9940000",
+      "kappa_lower_numerator": 2918980,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "703/1280",
+      "z_upper": "361/640",
+      "K_upper": "17095839/4970000",
+      "kappa_lower_numerator": 2785431,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "361/640",
+      "z_upper": "741/1280",
+      "K_upper": "34670003/9940000",
+      "kappa_lower_numerator": 2657555,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "741/1280",
+      "z_upper": "19/32",
+      "K_upper": "4393541/1242500",
+      "kappa_lower_numerator": 2535148,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "19/32",
+      "z_upper": "779/1280",
+      "K_upper": "35626653/9940000",
+      "kappa_lower_numerator": 2418010,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "779/1280",
+      "z_upper": "399/640",
+      "K_upper": "2578927/710000",
+      "kappa_lower_numerator": 2305946,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "399/640",
+      "z_upper": "817/1280",
+      "K_upper": "36583303/9940000",
+      "kappa_lower_numerator": 2198766,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "817/1280",
+      "z_upper": "209/320",
+      "K_upper": "9265407/2485000",
+      "kappa_lower_numerator": 2096282,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "209/320",
+      "z_upper": "171/256",
+      "K_upper": "37539953/9940000",
+      "kappa_lower_numerator": 1998314,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "171/256",
+      "z_upper": "437/640",
+      "K_upper": "19009139/4970000",
+      "kappa_lower_numerator": 1904684,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "437/640",
+      "z_upper": "893/1280",
+      "K_upper": "38496603/9940000",
+      "kappa_lower_numerator": 1815220,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "893/1280",
+      "z_upper": "57/80",
+      "K_upper": "2435933/621250",
+      "kappa_lower_numerator": 1729756,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "57/80",
+      "z_upper": "931/1280",
+      "K_upper": "5636179/1420000",
+      "kappa_lower_numerator": 1648130,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "931/1280",
+      "z_upper": "95/128",
+      "K_upper": "19965789/4970000",
+      "kappa_lower_numerator": 1570185,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "95/128",
+      "z_upper": "969/1280",
+      "K_upper": "40409903/9940000",
+      "kappa_lower_numerator": 1495770,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "969/1280",
+      "z_upper": "247/320",
+      "K_upper": "10222057/2485000",
+      "kappa_lower_numerator": 1424736,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "247/320",
+      "z_upper": "1007/1280",
+      "K_upper": "41366553/9940000",
+      "kappa_lower_numerator": 1356944,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "1007/1280",
+      "z_upper": "513/640",
+      "K_upper": "20922439/4970000",
+      "kappa_lower_numerator": 1292255,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "513/640",
+      "z_upper": "209/256",
+      "K_upper": "42323203/9940000",
+      "kappa_lower_numerator": 1230538,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "209/256",
+      "z_upper": "133/160",
+      "K_upper": "764313/177500",
+      "kappa_lower_numerator": 1171665,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "133/160",
+      "z_upper": "1083/1280",
+      "K_upper": "43279853/9940000",
+      "kappa_lower_numerator": 1115514,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "1083/1280",
+      "z_upper": "551/640",
+      "K_upper": "21879089/4970000",
+      "kappa_lower_numerator": 1061966,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "551/640",
+      "z_upper": "1121/1280",
+      "K_upper": "44236503/9940000",
+      "kappa_lower_numerator": 1010909,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "1121/1280",
+      "z_upper": "57/64",
+      "K_upper": "11178707/2485000",
+      "kappa_lower_numerator": 962231,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "57/64",
+      "z_upper": "1159/1280",
+      "K_upper": "45193153/9940000",
+      "kappa_lower_numerator": 915829,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "1159/1280",
+      "z_upper": "589/640",
+      "K_upper": "22835739/4970000",
+      "kappa_lower_numerator": 871602,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "589/640",
+      "z_upper": "1197/1280",
+      "K_upper": "6592829/1420000",
+      "kappa_lower_numerator": 829452,
+      "kappa_lower_denominator": 100000000
+    },
+    {
+      "z_lower": "1197/1280",
+      "z_upper": "19/20",
+      "K_upper": "1457129/310625",
+      "kappa_lower_numerator": 789286,
+      "kappa_lower_denominator": 100000000
+    }
+  ],
+  "seconds": 0.0027663707733154297
+}

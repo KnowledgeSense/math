@@ -1,0 +1,746 @@
+\documentclass{amsart}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage[hidelinks,
+  pdftitle={Nearly linear consecutive log-concavity failures in spherically symmetric subcubic trees},
+  pdfauthor={Knowledge Sense},
+  pdfsubject={Independence polynomials of trees},
+  pdfkeywords={independence polynomial, log-concavity, spherically symmetric tree, hard-core model, local limit theorem, bifurcating Markov chain}]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{question}[theorem]{Question}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Tb}{\mathbb{T}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\nuo}{\nu_{\mathrm{o}}}
+\newcommand{\nue}{\nu_{\mathrm{e}}}
+\newcommand{\abs}[1]{\lvert #1\rvert}
+\newcommand{\norm}[1]{\lVert #1\rVert}
+
+\begin{document}
+
+\title[Consecutive log-concavity failures in subcubic trees]{Nearly linear consecutive log-concavity failures in spherically symmetric subcubic trees}
+
+\author{Knowledge Sense}
+\address{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{12 October 2026}
+
+\subjclass[2020]{Primary 05C31, 05C69; Secondary 05A20, 05C05, 60F05, 60J80}
+
+\keywords{Independence polynomial, log-concavity, spherically symmetric tree, hard-core model, local limit theorem, bifurcating Markov chain}
+
+\begin{abstract}
+For a tree $T$ let $s_j(T)$ be the number of independent sets of size $j$ in $T$. For every $\eta>0$ we exhibit spherically symmetric trees of maximum degree three, namely complete binary trees of depth $m$ with a path of a fixed odd length $n$ attached to every leaf, whose sequence $(s_j)$ fails to be log-concave at $C\abs{V}^{1-\eta}$ or more consecutive indices for all large $m$. These failures lie in $[c\alpha,(1-c)\alpha]$, where $\alpha$ is the independence number and $c>0$ depends only on $n$; in fact they concentrate at a fixed fraction $q_n\in(0.99,1)$ of $\alpha$. This answers a question of Galvin on log-concavity failures at a fixed fractional distance below $\alpha$, shows that the longest run of consecutive failures among trees with at most $N$ vertices is $N^{1-o(1)}$, and shows that the universal upper endpoint of the log-concave range considered by Fang, Lu, Nevo, Yao and Zheng is strictly smaller than one. The pendant path is tuned so that the hard-core measure at a large activity is an exact two-state broadcast on the binary core. The size of a random independent set then has a non-Gaussian scaling limit whose density is not log-concave, and local limit theorems for second differences transfer this to the coefficient sequence.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+For a finite graph $G$ let $s_j(G)$ be the number of independent sets of size $j$ in $G$, let $\alpha(G)$ be the independence number, and let
+\[
+I(G;x)=\sum_{j=0}^{\alpha(G)} s_j(G)\,x^j
+\]
+be the independence polynomial. A positive sequence $(a_0,\dots,a_d)$ is \emph{log-concave} if $a_j^2\ge a_{j-1}a_{j+1}$ for $1\le j\le d-1$. Following Galvin~\cite{Gal26}, we say that log-concavity is \emph{broken at $j$} if $a_j^2<a_{j-1}a_{j+1}$; we also call $j$ a \emph{failure}. A \emph{run} of failures is a set of consecutive indices each of which is a failure.
+
+Alavi, Malde, Schwenk and Erd\H{o}s~\cite{AMSE87} showed that the independent set sequence of a general graph can exhibit any pattern of rises and falls, and asked whether the sequence of every tree, or of every forest, is unimodal. Levit and Mandrescu conjectured the stronger statement that it is log-concave~\cite{LM04}. Both properties have been verified for many families, including claw-free graphs~\cite{Ham90,CS07} and various decorated paths and caterpillars; see~\cite{GH18} and the references there. Recently Fang, Lu, Nevo, Yao and Zheng proved that the independence sequence of every sufficiently large forest is unimodal, and that it is strictly log-concave at all indices $j$ with $\abs{V}/5\le j\le 17\alpha/25$ \cite[Theorems~1.1 and~1.2]{FLNYZ26}.
+
+Log-concavity itself fails for trees. Kadrawi, Levit, Yosef and Mizrachi found two trees on $26$ vertices whose sequences are not log-concave~\cite{KLYM23}, Kadrawi and Levit constructed infinite families~\cite{KL25}, and Ramos and Sun found many further examples by a machine-assisted search~\cite{RS25}. In these examples the failures occur at or near the top coefficient. Galvin~\cite[Theorem~1.3]{Gal26} constructed trees in which log-concavity is broken at about $\alpha(1-1/(16\log\alpha))$, and asked the following question \cite[Question~3.1]{Gal26}.
+
+\begin{question}[Galvin]\label{q:galvin}
+Is there a $c>0$ such that there are trees $T$ with arbitrarily large independence number $\alpha(T)$, for which the log-concavity of the independent set sequence of $T$ is broken at no later than around $(1-c)\alpha(T)$?
+\end{question}
+
+Galvin also observed that, since the independent set sequence of a tree is nonincreasing from $\lceil(2\alpha-1)/3\rceil$ onwards~\cite{LM06}, using failures of log-concavity as an avenue towards a tree with non-unimodal independent set sequence would require examples answering Question~\ref{q:galvin} in the affirmative with $c>1/3$ \cite[Section~3]{Gal26}.
+
+A second line of work concerns the number and the arrangement of failures. Bencs observed, as reported in \cite[Section~3]{Gal26}, that spherically symmetric trees, consisting of a complete binary tree with a pendant path at every leaf, can have several failures, and Galvin asked whether their number can be arbitrarily large \cite[Question~3.2]{Gal26}. Bautista-Ramos showed that the number of failures is unbounded in another family~\cite{BR25}, and then answered Question~3.2 of \cite{Gal26} in the affirmative: for every depth $m\ge3$ and every sufficiently large odd path length $n$, the binary tree of depth $m$ with pendant paths of length $n$ has at least $J_{m-3}$ failures, where $J_\ell$ is the $\ell$-th Jacobsthal number \cite[Theorem~3 and Corollary~3]{BR26}. There the depth is fixed first and the path length grows. For consecutive failures, Bautista-Ramos, Guill\'en-Galv\'an and G\'omez-Salgado constructed infinite families with runs of length two and three adjacent to the top coefficient, and finite families with runs of length four and five \cite[Corollaries~5 and~6 and Section~4.4]{BGG26}. For every even $k\ge8$, Yu~\cite[Theorem~1.2]{Yu26} constructed a tree $U_k$ with $12k^3+30k^2+14k+22$ vertices and a run of at least $3k/5-1$ failures, so that the longest run among trees with at most $N$ vertices is $\Omega(N^{1/3})$. In that construction the maximum degree grows with $k$ and the run lies at distance $\Theta(\abs{V}^{2/3})$ from $\alpha$ \cite[Section~8]{Yu26}. Yu also reported long finite runs in the spherically symmetric family, and noted that the asymptotic growth of these runs, including whether they are unbounded, was open \cite[Section~1]{Yu26}.
+
+\subsection{Main result}
+
+For integers $m\ge0$ and $n\ge1$ let $T_{m,n}$ be the complete rooted binary tree of depth $m$ (with $2^m$ leaves) together with a path on $n$ new vertices attached to every leaf by an edge to one of its endpoints. In the notation of~\cite{Gal26,BR26} this is $T(2^m1^n)$. It has
+\[
+\abs{V(T_{m,n})}=(n+2)2^m-1
+\]
+vertices and maximum degree at most three, and it is spherically symmetric. Write $s_{m,n,j}=s_j(T_{m,n})$ and $\alpha_{m,n}=\alpha(T_{m,n})$.
+
+\begin{theorem}\label{thm:main}
+Let $\eta>0$, let $k\ge 16384$ be an integer with $k/(k+2)>2^{-\eta}$, and put $n=2k+1$. There are a constant $C>0$, a number $q_n$ with
+\[
+0.99<q_n<1-\frac{1}{3n+7},
+\]
+and an integer $m_0$ with the following property. For every $m\ge m_0$ there is a set $\mathcal R_m$ of at least $C\abs{V(T_{m,n})}^{1-\eta}$ consecutive integers, contained in $[c\,\alpha_{m,n},(1-c)\,\alpha_{m,n}]$ with $c=1/(6n+14)$, such that every $j\in\mathcal R_m$ satisfies
+\[
+s_{m,n,j-1}\,s_{m,n,j+1}>s_{m,n,j}^2 .
+\]
+Moreover $\max_{j\in\mathcal R_m}\abs{j/\alpha_{m,n}-q_n}\to0$ as $m\to\infty$.
+\end{theorem}
+
+The pendant path length $n$ is fixed and only the depth $m$ grows. Thus the longest run of failures is unbounded already in the spherically symmetric family, and for any prescribed $\eta>0$ it is at least $C\abs{V}^{1-\eta}$. The number $q_n$ is given explicitly in Section~\ref{sec:proof} in terms of a solution of the tuning equation~\eqref{eq:fixedpoint}, which is fixed once and for all in Section~\ref{sec:tuning}. The theorem concerns strict failures of log-concavity; it does not bear on unimodality, see Section~\ref{sec:remarks}.
+
+We record three consequences. The first answers Question~\ref{q:galvin}.
+
+\begin{corollary}\label{cor:galvin}
+There are trees $T$ of maximum degree three with $\alpha(T)$ arbitrarily large whose independent set sequence breaks log-concavity at an index $j$ with $0.99\,\alpha(T)\le j\le(1-10^{-5})\,\alpha(T)$. In particular Question~\ref{q:galvin} has an affirmative answer with $c=10^{-5}$.
+\end{corollary}
+
+For a tree $T$ let $L(T)$ be the length of its longest run of failures, and for $N\ge1$ let $M(N)$ be the maximum of $L(T)$ over trees with at most $N$ vertices; let $M_3(N)$ be the same maximum over trees of maximum degree at most three. Trivially $M_3(N)\le M(N)\le N$.
+
+\begin{corollary}\label{cor:extremal}
+For every $\eta>0$ there are $C_\eta>0$ and $N_\eta$ such that $M_3(N)\ge C_\eta N^{1-\eta}$ for all $N\ge N_\eta$; this lower bound is witnessed by the spherically symmetric trees $T_{m,n}$. Consequently $\log M_3(N)/\log N\to1$ and $\log M(N)/\log N\to1$ as $N\to\infty$.
+\end{corollary}
+
+This improves the exponent $1/3$ of~\cite{Yu26} to $1-o(1)$. The third consequence concerns the range of log-concavity for large forests. Fang et al.\ \cite[Section~9]{FLNYZ26} define $[a_{\mathrm{lc}},b_{\mathrm{lc}}]\subseteq[0,1]$ as the largest interval such that every sufficiently large forest $F$ has a log-concave sequence of coefficients between the indices $(a_{\mathrm{lc}}+o(1))\alpha(F)$ and $(b_{\mathrm{lc}}-o(1))\alpha(F)$. They prove $a_{\mathrm{lc}}=0$ and $b_{\mathrm{lc}}\ge 17/25$, and remark that for all examples known to them the failures appear at $(1-o(1))\alpha(F)$, so that possibly $b_{\mathrm{lc}}=1$.
+
+\begin{corollary}\label{cor:blc}
+In the notation of \cite[Section~9]{FLNYZ26}, $b_{\mathrm{lc}}<1-10^{-5}$.
+\end{corollary}
+
+This is consistent with the strict log-concavity in the range $\abs{V}/5\le j\le 17\alpha/25$ proved in \cite[Theorem~1.2]{FLNYZ26}, since the failures constructed in Theorem~\ref{thm:main} lie above $0.99\,\alpha$.
+
+\subsection{Outline of the proof and relation to previous work}
+
+Let $P_\ell$ denote the path on $\ell$ vertices. For an activity $\lambda>0$ consider the hard-core measure on $T_{m,n}$, which gives an independent set $J$ probability proportional to $\lambda^{\abs{J}}$. The probability that a random independent set has size $j$ equals $s_{m,n,j}\lambda^j/I(T_{m,n};\lambda)$, and this tilting does not change the sign of $s_{j-1}s_{j+1}-s_j^2$. The proof has four steps.
+
+\begin{enumerate}[label=(\arabic*),leftmargin=*]
+\item \emph{Tuning} (Section~\ref{sec:tuning}). We take $\lambda=r(1+r)^2$, where $r\approx k$ solves an explicit equation. Then, at every depth, the hard-core measure on the binary core is an exact Markov broadcast with a fixed two-state kernel whose second eigenvalue is $-p$, where $p=r/(1+r)$ is close to one.
+\item \emph{Census limit} (Sections~\ref{sec:census} and~\ref{sec:total}). Since $2p^2>1$, the centred number of occupied core vertices at level $h$, divided by $(-2p)^h$, is an $L^2$-bounded martingale with a non-degenerate limit $M_\infty$, and the total size $N_m$ satisfies $(N_m-u_m)/(-2p)^m\to\kappa M_\infty$ for an explicit centring $u_m$ and a constant $\kappa\neq0$.
+\item \emph{Limit density} (Section~\ref{sec:density}). Distributional fixed-point equations for the conditional laws of $M_\infty$ give positive entire densities. Since the two conditional means differ by one while the conditional variances are $O(1-p)$, the logarithm of the limit density is strictly convex on a compact interval.
+\item \emph{Local limits} (Sections~\ref{sec:fourier} and~\ref{sec:local}). A bound $C\exp(-c\abs{t}^\beta)$ for the characteristic functions at finite depth, uniform in $m$ over the full frequency range, gives local limit theorems for the point probabilities and their first and second differences. These transfer the strict log-convexity of the density to a run of failures of length proportional to $(2p)^m$. A local limit for the masses alone would not suffice, since a failure has relative size of order $(2p)^{-2m}$.
+\end{enumerate}
+
+Several ingredients are classical. That the hard-core measure on a tree is a Markov chain indexed by the tree, obtained by conditioning on the state of a root, is standard; see for instance \cite[Section~3]{FLNYZ26}. On the binary core our broadcast is a bifurcating Markov chain on two states, and the convergence in step~(2) is a special case of the theory of Bitseki Penda and Delmas for the supercritical regime \cite[Lemma~3.8, Theorem~3.9 and Corollary~3.11]{BPD21}; we give a direct proof because we need it conditionally on the root state, in $L^2$, and with the contribution of the pendant paths. Detecting a breakdown of log-concavity through a non-Gaussian local limit theorem has a precedent in the work of Trinas and Valle on the superdiffusive elephant random walk \cite[Theorem~3.1, Lemma~4.1 and Propositions~4.2 and~4.3]{TV26}, where the local limit is derived from an exact recurrence for the probability mass function. The ingredients specific to this paper are the exact tuning in step~(1), the analysis of the limit density in step~(3), and the uniform full-frequency bound in step~(4), which handles the negative eigenvalue and yields local limits for second differences; together they place the run at a fixed fraction of $\alpha$. To our knowledge, Theorem~\ref{thm:main} and Corollaries~\ref{cor:galvin} to~\ref{cor:blc} have not appeared in the literature.
+
+\subsection{Organization}
+
+Section~\ref{sec:prelim} collects notation, the independence number of $T_{m,n}$ and the broadcast description of the hard-core measure. Section~\ref{sec:tuning} tunes the pendant path. Sections~\ref{sec:census} and~\ref{sec:density} study the census martingale and its limit density. Section~\ref{sec:total} proves the limit theorem for the total size, Section~\ref{sec:fourier} the uniform Fourier bound, and Section~\ref{sec:local} the local limit theorems. Section~\ref{sec:proof} proves Theorem~\ref{thm:main} and its corollaries, and Section~\ref{sec:remarks} contains concluding remarks. Appendix~\ref{app:midpoint} proves the midpoint inequality for log-concave densities used in Section~\ref{sec:density}.
+
+\section{Preliminaries}\label{sec:prelim}
+
+\subsection{Notation}
+
+Throughout, $n=2k+1$ is odd, and from Section~\ref{sec:tuning} on we assume $k\ge16384$. For $\ell\ge0$ let $F_\ell(\lambda)=I(P_\ell;\lambda)$, with $F_0=1$. Choosing $j$ pairwise nonadjacent vertices of $P_\ell$ is the same as choosing $j$ elements of $\{1,\dots,\ell\}$ no two consecutive, so
+\begin{equation}\label{eq:pathpoly}
+F_\ell(\lambda)=\sum_{j\ge0}\binom{\ell+1-j}{j}\lambda^j .
+\end{equation}
+
+For a graph $G$ and $\lambda>0$, the \emph{hard-core measure} $\Prob^G_\lambda$ gives each independent set $J$ of $G$ probability $\lambda^{\abs{J}}/I(G;\lambda)$. If $N=\abs{J}$ is the size of the random independent set, then
+\begin{equation}\label{eq:tilt}
+\Prob^G_\lambda(N=j)=\frac{s_j(G)\lambda^j}{I(G;\lambda)},
+\qquad
+\E^G_\lambda N=\frac{\lambda I'(G;\lambda)}{I(G;\lambda)} .
+\end{equation}
+Writing $w_j=\Prob^G_\lambda(N=j)$, we have
+\begin{equation}\label{eq:tiltsign}
+w_{j-1}w_{j+1}-w_j^2=\frac{\lambda^{2j}}{I(G;\lambda)^2}\bigl(s_{j-1}(G)s_{j+1}(G)-s_j(G)^2\bigr),
+\end{equation}
+so failures of log-concavity of $(w_j)$ and of $(s_j(G))$ occur at the same indices.
+
+In $T_{m,n}$ the vertices of the complete binary tree form the \emph{core}; its root is denoted $\varrho$, and a core vertex at distance $h$ from $\varrho$ is at \emph{level} $h$. The path attached to a core leaf $\ell$ is the \emph{tail} at $\ell$. For a core vertex $v$ at level $h$, let $T^{(v)}$ be the subtree consisting of $v$, its core descendants and the tails below them; it is isomorphic to $T_{m-h,n}$ with root $v$.
+
+\subsection{The independence number}
+
+The following formula is \cite[Lemma~15]{BR26}, where it is stated as the degree of the independence polynomial; we include a short proof.
+
+\begin{lemma}\label{lem:alpha}
+For $m\ge0$ and odd $n=2k+1\ge3$,
+\[
+\alpha_{m,n}=\frac{(3k+5)2^m-c_m}{3},\qquad c_m=\begin{cases}2,& m \text{ even},\\ 1,& m\text{ odd}.\end{cases}
+\]
+In particular $\alpha_{m,n}=A_*2^m-c_m/3$ with $A_*=k+5/3$.
+\end{lemma}
+
+\begin{proof}
+Let $\alpha^0_m$ and $\alpha^1_m$ be the largest sizes of independent sets of $T_{m,n}$ avoiding and containing the root, respectively. For $m=0$ the tree is $P_{n+1}$ rooted at an endpoint, so $\alpha^0_0=\alpha(P_{2k+1})=k+1$ and $\alpha^1_0=1+\alpha(P_{2k})=k+1$. For $m\ge1$, deleting the root leaves two copies of $T_{m-1,n}$, while deleting its closed neighbourhood leaves two copies of $T_{m-1,n}$ minus their roots; hence
+\[
+\alpha^0_m=2\max(\alpha^0_{m-1},\alpha^1_{m-1}),\qquad \alpha^1_m=1+2\alpha^0_{m-1}.
+\]
+Put $d_m=\alpha^1_m-\alpha^0_m$. Then $d_0=0$ and $d_m=1-2\max(0,d_{m-1})$, so $d_m=1$ for odd $m$ and $d_m=-1$ for even $m\ge2$. Consequently $\alpha_{m,n}=\max(\alpha^0_m,\alpha^1_m)$ equals $2\alpha_{m-1,n}$ for even $m\ge2$ and $1+2\alpha^0_{m-1}=1+2\alpha_{m-1,n}$ for odd $m$, because $d_{m-1}\le0$ in the latter case. The formula holds for $m=0$ and is preserved by these two recursions.
+\end{proof}
+
+\subsection{The hard-core measure as a broadcast}
+
+Let $\Tb$ be the infinite rooted binary tree. For $p\in(0,1)$ put $\eps=1-p$ and consider the transition kernel on the states $\{0,1\}$
+\begin{equation}\label{eq:kernel}
+\mathsf P=\begin{pmatrix}\eps & p\\ 1 & 0\end{pmatrix},
+\end{equation}
+where the rows are indexed by the state of a parent and the columns by the state of a child. The \emph{broadcast} with kernel $\mathsf P$ and root state $i$ is the random configuration $(X_v)_{v\in\Tb}$ with $X_{\mathrm{root}}=i$ in which, conditionally on the states up to level $h$, the states at level $h+1$ are independent and each is distributed according to the row of $\mathsf P$ indexed by the state of its parent. Its law is denoted $\Prob_i$. We write $\Prob$ for the mixture $\eps\Prob_0+p\Prob_1$.
+
+\begin{lemma}\label{lem:broadcast}
+Let $n\ge3$, and let $\lambda,r>0$ satisfy
+\begin{equation}\label{eq:fixedpoint}
+\lambda=r(1+r)^2\qquad\text{and}\qquad \lambda F_{n-1}(\lambda)=r\,F_n(\lambda).
+\end{equation}
+Put $p=r/(1+r)$. Let $J$ be distributed according to $\Prob^{T_{m,n}}_\lambda$, and let $X_v=\mathbf 1\{v\in J\}$ for core vertices $v$.
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=*]
+\item $\Prob^{T_{m,n}}_\lambda(\varrho\in J)=p$, and the core configuration $(X_v)$ has the law of the restriction to levels $0,\dots,m$ of the broadcast with kernel~\eqref{eq:kernel} and root law $(\eps,p)$.
+\item Conditionally on the core configuration, the restrictions of $J$ to the $2^m$ tails are independent. The restriction to the tail at a leaf $\ell$ is distributed as $\Prob^{P_n}_\lambda$ if $X_\ell=0$; if $X_\ell=1$, the first tail vertex is absent and the restriction to the remaining $P_{n-1}$ is distributed as $\Prob^{P_{n-1}}_\lambda$.
+\item Let $m\ge1$, and let $v_1,v_2$ be the children of $\varrho$. Conditionally on $X_\varrho=0$, the restrictions of $J$ to $T^{(v_1)}$ and $T^{(v_2)}$ are independent and each is distributed as $\Prob^{T_{m-1,n}}_\lambda$. Conditionally on $X_\varrho=1$, they are independent and each is distributed as $\Prob^{T_{m-1,n}}_\lambda$ conditioned on the root being absent.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For a core vertex $v$ and $i\in\{0,1\}$ let $Z^i_v$ be the sum of $\lambda^{\abs{J'}}$ over the independent sets $J'$ of $T^{(v)}$ with $\mathbf 1\{v\in J'\}=i$. We claim that $Z^1_v=rZ^0_v$ for every core vertex $v$. If $v$ is a core leaf, then $Z^0_v=F_n(\lambda)$ and $Z^1_v=\lambda F_{n-1}(\lambda)$, since the presence of $v$ forbids exactly the first tail vertex; the claim is the second half of~\eqref{eq:fixedpoint}. If $v$ has children $c,c'$ for which the claim holds, then
+\[
+Z^0_v=(Z^0_c+Z^1_c)(Z^0_{c'}+Z^1_{c'})=(1+r)^2Z^0_cZ^0_{c'},\qquad Z^1_v=\lambda Z^0_cZ^0_{c'},
+\]
+so $Z^1_v/Z^0_v=\lambda/(1+r)^2=r$.
+
+Every independent set of $T^{(v)}$ is the union of its intersection with $\{v\}$ and its intersections with $T^{(c)}$ and $T^{(c')}$, and the weight $\lambda^{\abs{J'}}$ factorizes accordingly. The only constraint between the parts is that $c,c'\notin J'$ when $v\in J'$. Hence, under the hard-core measure on $T^{(v)}$ conditioned on $v\notin J'$, the intersections with $T^{(c)}$ and $T^{(c')}$ are independent hard-core configurations, and under the conditioning $v\in J'$ they are independent hard-core configurations conditioned on $c\notin J'$ and $c'\notin J'$. This is~(c) for $v=\varrho$. In the first case the conditional probability that $c\in J'$ is $Z^1_c/(Z^0_c+Z^1_c)=r/(1+r)=p$, and in the second case this probability is $0$. Applying the same argument inside the subtrees level by level shows that, conditionally on the core states up to level $h$, the configurations in the subtrees rooted at level $h+1$ are independent, and the state of each vertex at level $h+1$ is distributed according to the row of $\mathsf P$ indexed by the state of its parent. Together with $\Prob^{T_{m,n}}_\lambda(\varrho\in J)=Z^1_\varrho/(Z^0_\varrho+Z^1_\varrho)=p$ this proves~(a). At a core leaf $\ell$ the same factorization applies to $\{\ell\}$ and its tail, which gives~(b).
+\end{proof}
+
+\section{Tuning the pendant path}\label{sec:tuning}
+
+Let $D=4(k+1)^2$. Reversing the polynomials~\eqref{eq:pathpoly} for $\ell=2k+1$ and $\ell=2k$ (substitute $j\mapsto k+1-j$ and $j\mapsto k-j$) gives
+\begin{equation}\label{eq:reverse}
+F_{2k+1}(\lambda)=\lambda^{k+1}S_{\mathrm o}(1/\lambda),\qquad F_{2k}(\lambda)=(k+1)\lambda^kS_{\mathrm e}(1/\lambda),
+\end{equation}
+where
+\begin{align*}
+S_{\mathrm o}(y)&=\sum_{j=0}^{k+1}\sigma_jy^j, & \sigma_j&=\binom{k+1+j}{2j},\\
+S_{\mathrm e}(y)&=\sum_{j=0}^{k}\tau_jy^j, & \tau_j&=\frac{1}{k+1}\binom{k+1+j}{2j+1}.
+\end{align*}
+
+\begin{lemma}\label{lem:reverse}
+We have $\sigma_0=\tau_0=1$ and $0\le\sigma_j,\tau_j\le D^j/(2j)!$ for all $j$. Consequently, for $y>0$ and $z=Dy$, each $S\in\{S_{\mathrm o},S_{\mathrm e}\}$ satisfies
+\[
+1\le S(y)\le e^z\qquad\text{and}\qquad 0\le \frac{yS'(y)}{S(y)}\le ze^z .
+\]
+\end{lemma}
+
+\begin{proof}
+The numerator of $\sigma_j=\binom{k+1+j}{2j}$ is a product of $2j$ factors, each at most $k+1+j\le2(k+1)$, so $\sigma_j\le D^j/(2j)!$. The numerator of $\binom{k+1+j}{2j+1}$ is the product of the $2j+1$ integers from $k+1-j$ to $k+1+j$, which contains the factor $k+1$; after cancelling it, the remaining $2j$ factors are at most $2(k+1)$, so $\tau_j\le D^j/(2j+1)!$. Since $(2j)!\ge j!$, we get $S(y)\le\sum_jz^j/j!=e^z$ and $yS'(y)\le\sum_j jz^j/j!=ze^z$, while $S(y)\ge1$ because the constant term is $1$ and all coefficients are nonnegative.
+\end{proof}
+
+\begin{proposition}\label{prop:tuning}
+Let $k\ge16384$ and $n=2k+1$. There is $r\in(k/2,2k)$ such that $\lambda=r(1+r)^2$ satisfies~\eqref{eq:fixedpoint}. Fix such an $r$ and put
+\[
+p=\frac{r}{1+r},\quad \eps=1-p,\quad \gamma=2p,\quad \theta=\frac{p}{1+p},
+\]
+\[
+a_0=\frac{\lambda F_n'(\lambda)}{F_n(\lambda)},\quad a_1=\frac{\lambda F_{n-1}'(\lambda)}{F_{n-1}(\lambda)},\quad b=a_1-a_0,\quad \kappa=b+\frac{\gamma}{1+\gamma}.
+\]
+Then the following hold.
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=*]
+\item $\eps\le2/(k+2)<1/8192$; in particular $p>0.99$ and $\theta<1/2$.
+\item $2k/(k+2)\le\gamma<2$; in particular $2p^2>1$ and $\gamma^2>2$.
+\item $a_0=k+1-\nuo$ and $a_1=k-\nue$ with $0\le\nuo,\nue\le256/k\le1/64$.
+\item $\kappa=\nuo-\nue-1/(1+\gamma)<-1/4$.
+\end{enumerate}
+\end{proposition}
+
+By~\eqref{eq:tilt}, $a_0$ and $a_1$ are the expected sizes of hard-core independent sets of $P_n$ and $P_{n-1}$ at activity $\lambda$.
+
+\begin{proof}
+For $\lambda>0$ put $R(\lambda)=\lambda F_{2k}(\lambda)/F_{2k+1}(\lambda)$. By~\eqref{eq:reverse},
+\[
+R(\lambda)=(k+1)\frac{S_{\mathrm e}(1/\lambda)}{S_{\mathrm o}(1/\lambda)} .
+\]
+For $r\in[k/2,2k]$ we have $\lambda(r):=r(1+r)^2\ge k^3/8$, so $z=D/\lambda(r)\le32(k+1)^2/k^3\le128/k\le1/128$. Lemma~\ref{lem:reverse} gives
+\[
+(k+1)e^{-128/k}\le R(\lambda(r))\le(k+1)e^{128/k}.
+\]
+As $e^{128/k}\le e^{1/128}<3/2$, the continuous function $g(r)=R(\lambda(r))-r$ satisfies $g(k/2)\ge 2(k+1)/3-k/2>0$ and $g(2k)\le3(k+1)/2-2k<0$. A zero $r\in(k/2,2k)$ of $g$ satisfies~\eqref{eq:fixedpoint}, because $n-1=2k$.
+
+(i) Since $t\mapsto t/(1+t)$ is increasing and $r>k/2$, we get $p>k/(k+2)$ and $\eps<2/(k+2)<1/8192$. Also $\theta=p/(1+p)<1/2$.
+
+(ii) This follows from (i) and $p<1$; note $2p^2>2\cdot0.99^2>1$.
+
+(iii) Differentiating the logarithms of~\eqref{eq:reverse} gives $a_0=k+1-\nuo$ and $a_1=k-\nue$, where $\nuo=yS_{\mathrm o}'(y)/S_{\mathrm o}(y)$ and $\nue=yS_{\mathrm e}'(y)/S_{\mathrm e}(y)$ at $y=1/\lambda$. By Lemma~\ref{lem:reverse} with $z\le128/k\le1/128$, both lie in $[0,ze^z]\subseteq[0,256/k]$, and $256/k\le1/64$.
+
+(iv) We have $b=a_1-a_0=\nuo-\nue-1$, so $\kappa=\nuo-\nue-1+\gamma/(1+\gamma)=\nuo-\nue-1/(1+\gamma)$. Since $\gamma<2$, $1/(1+\gamma)>1/3$, and $\kappa<1/64-1/3<-1/4$.
+\end{proof}
+
+Proposition~\ref{prop:tuning} asserts only the existence of a solution $r$, and we do not need uniqueness. From now on $k\ge16384$ and $n=2k+1$, we fix one solution $r$ as in Proposition~\ref{prop:tuning}, and $\lambda,p,\eps,\gamma,\theta,a_0,a_1,b,\kappa$ denote the corresponding quantities. The limit laws, the number $q_n$, the interval $J$ of Corollary~\ref{cor:J} and all constants below refer to this choice. By Lemma~\ref{lem:broadcast}, the hard-core measure $\Prob^{T_{m,n}}_\lambda$ is described, for every $m$, by the broadcast with the kernel~\eqref{eq:kernel} for this value of $p$.
+
+\section{The census martingale}\label{sec:census}
+
+Let $(X_v)_{v\in\Tb}$ be the broadcast of Section~\ref{sec:prelim}, write $\abs v$ for the level of $v$, and let $\mathcal G_h$ be the $\sigma$-field generated by the states at levels at most $h$. Put
+\[
+Y_v=X_v-\theta,\qquad L_h=\sum_{\abs v=h}Y_v,\qquad M_h=(-\gamma)^{-h}L_h .
+\]
+The number $\theta=p/(1+p)$ is the stationary probability of state $1$ for $\mathsf P$. The kernel $\mathsf P$ has eigenvalues $1$ and $-p$, and the function $x\mapsto x-\theta$ is an eigenfunction for $-p$: if $c$ is a child of $v$, then
+\begin{equation}\label{eq:eigen}
+\E[X_c\mid X_v]=p(1-X_v),\qquad \E[Y_c\mid X_v]=-pY_v,\qquad \Var(X_c\mid X_v)=p\eps(1-X_v).
+\end{equation}
+The middle identity is checked separately for $X_v=0$, where both sides equal $p-\theta=p\theta$, and for $X_v=1$, where both sides equal $-\theta=-p(1-\theta)$.
+
+\begin{proposition}\label{prop:martingale}
+Let $i\in\{0,1\}$. Under $\Prob_i$ the following hold.
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=*]
+\item $(M_h)_{h\ge0}$ is a martingale with respect to $(\mathcal G_h)$, and for $h\ge1$
+\[
+\E_i\bigl[(M_h-M_{h-1})^2\mid\mathcal G_{h-1}\bigr]=\gamma^{-2h}p\eps\sum_{\abs v=h}(1-X_{\mathrm{par}(v)})\le p\eps\,(2p^2)^{-h},
+\]
+where $\mathrm{par}(v)$ is the parent of $v$.
+\item $M_h$ converges in $L^2(\Prob_i)$ to a limit $M_\infty$, and
+\[
+\E_iM_\infty=i-\theta,\qquad 0<\Var_i(M_\infty)\le\frac{p\eps}{2p^2-1}\le2\eps,\qquad \sup_{h}\E_iM_h^2\le2 .
+\]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(a) By~\eqref{eq:eigen}, $\E_i[L_h\mid\mathcal G_{h-1}]=\sum_{\abs u=h-1}2(-p)Y_u=-\gamma L_{h-1}$, so $\E_i[M_h\mid\mathcal G_{h-1}]=M_{h-1}$. Moreover
+\[
+M_h-M_{h-1}=(-\gamma)^{-h}\sum_{\abs v=h}\bigl(X_v-\E[X_v\mid X_{\mathrm{par}(v)}]\bigr),
+\]
+and conditionally on $\mathcal G_{h-1}$ the summands are independent and centred with variances $p\eps(1-X_{\mathrm{par}(v)})$. This gives the identity, and the bound follows from $2^h\gamma^{-2h}=(2p^2)^{-h}$.
+
+(b) Martingale increments are orthogonal, and $\sum_{h\ge1}p\eps(2p^2)^{-h}=p\eps/(2p^2-1)$ is finite because $2p^2>1$. Hence $M_h$ converges in $L^2(\Prob_i)$, and $\E_i[(M_\infty-M_0)^2]=\sum_{h\ge1}\E_i[(M_h-M_{h-1})^2]\le p\eps/(2p^2-1)$. Since $M_0=i-\theta$ is deterministic under $\Prob_i$, this gives the mean and the upper bound on the variance; as $p>0.99$ we have $2p^2-1>0.96>p/2$, whence $p\eps/(2p^2-1)\le2\eps$. Also $\E_iM_h^2\le(i-\theta)^2+2\eps\le2$. For positivity, if $i=0$ then the term $h=1$ in (a) equals $2\gamma^{-2}p\eps>0$. If $i=1$, both children of the root are in state $0$, so all four vertices at level $2$ have parents in state $0$ and the term $h=2$ equals $4\gamma^{-4}p\eps>0$. In both cases $\Var_i(M_\infty)=\sum_{h\ge1}\E_i[(M_h-M_{h-1})^2]>0$.
+\end{proof}
+
+Let $W_i$ denote the law of $M_\infty$ under $\Prob_i$, and $\varphi_i(t)=\E_ie^{itM_\infty}$ its characteristic function. Under $\Prob=\eps\Prob_0+p\Prob_1$ the law of $M_\infty$ is $\eps W_0+pW_1$.
+
+\begin{proposition}\label{prop:fixedpointlaw}
+Let $M',M''$ be independent with law $W_0$, and let $Z',Z''$ be independent with law $\eps W_0+pW_1$. Then $W_1$ is the law of $-(M'+M'')/\gamma$ and $W_0$ is the law of $-(Z'+Z'')/\gamma$. Consequently, for $t\in\R$,
+\begin{equation}\label{eq:charfixed}
+\begin{aligned}
+\varphi_1(t)&=\varphi_0(-t/\gamma)^2,\\
+\varphi_0(t)&=\bigl(\eps\varphi_0(-t/\gamma)+p\varphi_1(-t/\gamma)\bigr)^2 .
+\end{aligned}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Let $v_1,v_2$ be the children of the root and let $M^{(l)}_h$ be the analogue of $M_h$ for the broadcast restricted to the subtree rooted at $v_l$, with levels counted from $v_l$. Since the vertices at level $h\ge1$ are the vertices at level $h-1$ of these two subtrees, $M_h=-(M^{(1)}_{h-1}+M^{(2)}_{h-1})/\gamma$. Letting $h\to\infty$ in $L^2$ gives $M_\infty=-(M^{(1)}_\infty+M^{(2)}_\infty)/\gamma$ almost surely. By the definition of the broadcast, conditionally on $(X_{v_1},X_{v_2})$ the two subtree broadcasts are independent with root states $X_{v_1}$ and $X_{v_2}$, and under $\Prob_i$ the pair $(X_{v_1},X_{v_2})$ consists of two independent states distributed according to the row $i$ of $\mathsf P$. Under $\Prob_1$ both states are $0$, so $M^{(1)}_\infty$ and $M^{(2)}_\infty$ are independent with law $W_0$. Under $\Prob_0$ each state is $1$ with probability $p$, so $M^{(1)}_\infty$ and $M^{(2)}_\infty$ are independent with law $\eps W_0+pW_1$. Taking characteristic functions gives~\eqref{eq:charfixed}.
+\end{proof}
+
+\begin{remark}\label{rem:bpd}
+In the terminology of~\cite{BPD21}, $(X_v)$ is a bifurcating Markov chain on two states whose kernel has the eigenvalue $-p$ with $2p^2>1$; this is their super-critical case. The martingale $M_h$ is the martingale of \cite[Lemma~3.8]{BPD21} attached to the eigenvalue $-p$, and the convergence in probability of the normalized total census $(2p)^{-m}\sum_{\abs v\le m}Y_v$, with the alternating factor $(-1)^m$ and the coefficient $(1+1/\gamma)^{-1}=\gamma/(1+\gamma)$, is contained in \cite[Theorem~3.9 and Corollary~3.11]{BPD21}. We need the conditional versions given the root state, convergence in $L^2$, and the additional contribution of the tails, so we give the short direct argument in Section~\ref{sec:total}.
+\end{remark}
+
+\section{The limit density}\label{sec:density}
+
+Let $\Psi(t)=\max(\abs{\varphi_0(t)},\abs{\varphi_1(t)})$ and $\beta=\log2/\log\gamma$; by Proposition~\ref{prop:tuning}(ii), $\beta>1$. Since $\varphi_i(-t)=\overline{\varphi_i(t)}$, the identities~\eqref{eq:charfixed} give
+\begin{equation}\label{eq:psisquare}
+\Psi(t)\le\Psi(t/\gamma)^2\qquad(t\in\R).
+\end{equation}
+
+\begin{proposition}\label{prop:decay}
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=*]
+\item $\Psi(t)<1$ for every $t\neq0$.
+\item There are constants $c_1,C_1>0$ such that $\Psi(t)\le C_1\exp(-c_1\abs t^\beta)$ for all $t\in\R$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(i) Suppose $\Psi(t_0)=1$ for some $t_0\ne0$. If $\abs{\varphi_1(t_0)}=1$, then $\abs{\varphi_0(t_0/\gamma)}=1$ by~\eqref{eq:charfixed}. If $\abs{\varphi_0(t_0)}=1$, then $\abs{\eps\varphi_0(-t_0/\gamma)+p\varphi_1(-t_0/\gamma)}=1$; as $\eps,p>0$, $\eps+p=1$ and both values have modulus at most one, both have modulus one, and again $\abs{\varphi_0(t_0/\gamma)}=1$. Iterating, $\abs{\varphi_0(t_0\gamma^{-j})}=1$ for all $j\ge1$. On the other hand, if $M,M'$ are independent with law $W_0$, then $\abs{\varphi_0(u)}^2=\E e^{iu(M-M')}$, and since $M-M'$ is centred with variance $2\Var_0(M_\infty)$,
+\[
+\abs{\varphi_0(u)}^2=1-\Var_0(M_\infty)\,u^2+o(u^2)\qquad(u\to0).
+\]
+As $\Var_0(M_\infty)>0$ by Proposition~\ref{prop:martingale}, $\abs{\varphi_0(u)}<1$ for all small $u\ne0$, a contradiction since $t_0\gamma^{-j}\to0$.
+
+(ii) By (i) and continuity, $\rho=\max\{\Psi(t):1\le\abs t\le\gamma\}<1$; we may assume $\rho>0$. Let $\abs t\ge1$ and $j=\lfloor\log_\gamma\abs t\rfloor\ge0$, so that $1\le\abs t\gamma^{-j}<\gamma$. Applying~\eqref{eq:psisquare} $j$ times gives $\Psi(t)\le\Psi(t\gamma^{-j})^{2^j}\le\rho^{2^j}$. Since $\gamma^\beta=2$, we have $2^j=(\gamma^j)^\beta>(\abs t/\gamma)^\beta=\abs t^\beta/2$, so $\Psi(t)\le\exp(-c_1\abs t^\beta)$ with $c_1=\tfrac12\log(1/\rho)$. For $\abs t<1$ we use $\Psi\le1\le e^{c_1}e^{-c_1\abs t^\beta}$, so $C_1=e^{c_1}$ works.
+\end{proof}
+
+\begin{proposition}\label{prop:analytic}
+The laws $W_0$ and $W_1$ have densities $f_0,f_1$ that extend to entire functions and are strictly positive on $\R$. Consequently the law of $M_\infty$ under $\Prob$ has the density $f_W=\eps f_0+pf_1$, which is real analytic and strictly positive on $\R$.
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{prop:decay}(ii) and $\beta>1$,
+\[
+\int_\R\abs{\varphi_i(t)}\,e^{A\abs t}\,dt<\infty\qquad\text{for every }A>0 .
+\]
+In particular $\varphi_i$ is integrable, so $W_i$ has the continuous density
+\[
+f_i(x)=\frac1{2\pi}\int_\R e^{-itx}\varphi_i(t)\,dt .
+\]
+The same integral with $x$ replaced by $w\in\C$ converges absolutely and locally uniformly, since
+\[
+\abs{e^{-itw}}\le e^{\abs t\abs{\operatorname{Im}w}}\qquad(t\in\R,\ w\in\C);
+\]
+by dominated convergence it defines an entire function extending $f_i$. As $f_i$ is a probability density it is not identically zero, so its real zeros are isolated and form a countable set.
+
+By Proposition~\ref{prop:fixedpointlaw}, $f_1(x)=\gamma\,(f_0*f_0)(-\gamma x)$. For each real $x$ the set of $y$ with $f_0(y)f_0(-\gamma x-y)=0$ is countable, so the integrand defining $(f_0*f_0)(-\gamma x)$ is positive almost everywhere and $f_1(x)>0$. Similarly $f_0(x)=\gamma\,(g*g)(-\gamma x)$ with $g=\eps f_0+pf_1$, which is positive outside a countable set, so $f_0(x)>0$. The assertions on $f_W$ follow.
+\end{proof}
+
+A density $f$ on $\R$ is \emph{log-concave} if $f((x+y)/2)\ge\sqrt{f(x)f(y)}$ for all $x,y$; for a positive continuous $f$ this is equivalent to the concavity of $\log f$. Appendix~\ref{app:midpoint} proves the following integral inequality: if $f$ is a positive continuous log-concave density and $A,B$ are compact intervals, then
+\begin{equation}\label{eq:midpoint}
+\int_{(A+B)/2}f\ \ge\ \Bigl(\int_Af\Bigr)^{1/2}\Bigl(\int_Bf\Bigr)^{1/2},
+\end{equation}
+where $(A+B)/2=\{(a+b)/2:a\in A,\ b\in B\}$.
+
+\begin{proposition}\label{prop:notlc}
+The density $f_W$ is not log-concave.
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{prop:martingale} the laws $W_0,W_1$ have means $\mu_0=-\theta$ and $\mu_1=1-\theta$ and variances at most $2\eps$. Let $A$ and $B$ be the closed intervals of radius $1/8$ centred at $\mu_0$ and $\mu_1$, and $C=(A+B)/2$, the interval of radius $1/8$ centred at $(\mu_0+\mu_1)/2$. Let $\mu=\eps W_0+pW_1$, the law with density $f_W$. Chebyshev's inequality gives
+\[
+\mu(A)\ge\eps\,(1-64\cdot2\eps)\ge\frac\eps2,\qquad \mu(B)\ge p\,(1-64\cdot2\eps)\ge\frac14,
+\]
+because $128\eps\le1/64$. Every point of $C$ has distance at least $1/2-1/8=3/8$ from both $\mu_0$ and $\mu_1$, so
+\[
+\mu(C)\le\eps\cdot\frac{2\eps}{(3/8)^2}+p\cdot\frac{2\eps}{(3/8)^2}=\frac{128\eps}{9}<15\eps .
+\]
+Since $\eps<1/8192<1/1800$, we have $(15\eps)^2<\eps/8\le\mu(A)\mu(B)$, that is, $\mu(C)<\sqrt{\mu(A)\mu(B)}$. By Proposition~\ref{prop:analytic}, $f_W$ is positive and continuous, so~\eqref{eq:midpoint} shows that $f_W$ is not log-concave.
+\end{proof}
+
+Let $f$ denote the density of $\kappa M_\infty$ under $\Prob$, that is, $f(x)=\abs\kappa^{-1}f_W(x/\kappa)$, and let
+\begin{equation}\label{eq:phi}
+\varphi(t)=\E\,e^{it\kappa M_\infty}=\eps\varphi_0(\kappa t)+p\varphi_1(\kappa t)
+\end{equation}
+be its characteristic function. By Proposition~\ref{prop:decay}(ii),
+\begin{equation}\label{eq:phidecay}
+\abs{\varphi(t)}\le C_1\exp(-c_1\abs\kappa^\beta\abs t^\beta)\qquad(t\in\R),
+\end{equation}
+so $f$ and its derivatives are given by
+\begin{equation}\label{eq:fderiv}
+f^{(\ell)}(x)=\frac1{2\pi}\int_\R(-it)^\ell e^{-itx}\varphi(t)\,dt\qquad(\ell=0,1,2),
+\end{equation}
+and $f,f',f''$ are bounded on $\R$.
+
+\begin{corollary}\label{cor:J}
+The density $f$ is real analytic and strictly positive on $\R$, and there are a compact interval $J=[x_1,x_2]$ with $x_1<x_2$ and a constant $\delta>0$ such that
+\[
+f(x)f''(x)-f'(x)^2\ge\delta\qquad(x\in J).
+\]
+\end{corollary}
+
+\begin{proof}
+Positivity and analyticity are inherited from $f_W$ since $\kappa\ne0$. If $(\log f_W)''\le0$ held everywhere, then $\log f_W$ would be concave on $\R$ and $f_W$ would be log-concave, contradicting Proposition~\ref{prop:notlc}. Hence there is $y_0$ with $f_Wf_W''-(f_W')^2>0$ at $y_0$. A direct computation gives
+\[
+f(x)f''(x)-f'(x)^2=\kappa^{-4}\bigl(f_Wf_W''-(f_W')^2\bigr)(x/\kappa),
+\]
+which is positive at $x_0=\kappa y_0$. By continuity it is bounded below by some $\delta>0$ on a compact interval of positive length containing $x_0$.
+\end{proof}
+
+\section{The total size of the independent set}\label{sec:total}
+
+Let $N_m$ be the size of a random independent set of $T_{m,n}$ under $\Prob^{T_{m,n}}_\lambda$. Put $H_m=\gamma^m$ and
+\begin{equation}\label{eq:center}
+u_m=\theta(2^{m+1}-1)+2^m(a_0+b\theta),
+\end{equation}
+so that $u_m-2u_{m-1}=\theta$ for $m\ge1$. For $i\in\{0,1\}$ define
+\[
+\Phi_{m,i}(t)=\E^{T_{m,n}}_\lambda\bigl[e^{it(N_m-u_m)/H_m}\,\big|\,X_\varrho=i\bigr],\qquad \Phi_m=\eps\Phi_{m,0}+p\Phi_{m,1}.
+\]
+By Lemma~\ref{lem:broadcast}(a), $\Phi_m(t)=\E^{T_{m,n}}_\lambda e^{it(N_m-u_m)/H_m}$.
+
+\begin{proposition}\label{prop:clt}
+For $i\in\{0,1\}$, $\Phi_{m,i}(t)-\varphi_i((-1)^m\kappa t)\to0$ as $m\to\infty$, uniformly for $t$ in compact subsets of $\R$. Consequently $\Phi_m(t)-\varphi((-1)^mt)\to0$ uniformly on compact sets.
+\end{proposition}
+
+\begin{proof}
+Fix $i$ and $m$. Let $(X_v)$ be the broadcast under $\Prob_i$, and, on an extension of the probability space, let $(Q_\ell)_{\abs\ell=m}$ be conditionally independent given $(X_v)$, where $Q_\ell$ has the law of $N$ under $\Prob^{P_n}_\lambda$ if $X_\ell=0$ and under $\Prob^{P_{n-1}}_\lambda$ if $X_\ell=1$. By Lemma~\ref{lem:broadcast}(a),(b), the random variable
+\[
+N=\sum_{\abs v\le m}X_v+\sum_{\abs\ell=m}Q_\ell
+\]
+has the law of $N_m$ under $\Prob^{T_{m,n}}_\lambda(\cdot\mid X_\varrho=i)$. By the definition of $a_0,a_1$ we have $\E[Q_\ell\mid(X_v)]=a_0+bX_\ell$, and $0\le Q_\ell\le n$. Put $Z_m=\sum_{\abs\ell=m}(Q_\ell-a_0-bX_\ell)$; then $\E Z_m^2=\E\sum_\ell\Var(Q_\ell\mid(X_v))\le n^22^m$. Using $\sum_{\abs v\le m}\theta=\theta(2^{m+1}-1)$ and $\sum_{\abs\ell=m}X_\ell=L_m+2^m\theta$, we obtain the exact decomposition
+\[
+N-u_m=\sum_{h=0}^mL_h+bL_m+Z_m,
+\]
+and after division by $(-\gamma)^m$,
+\begin{equation}\label{eq:decomp}
+\frac{N-u_m}{(-\gamma)^m}=\sum_{l=0}^m(-\gamma)^{-l}M_{m-l}+bM_m+\frac{Z_m}{(-\gamma)^m}.
+\end{equation}
+All these random variables, including $M_\infty$, are defined on the same probability space, and we compare each term with its limit in $L^2(\Prob_i)$. First, $\norm{Z_m}_2/\gamma^m\le n(2/\gamma^2)^{m/2}\to0$ by Proposition~\ref{prop:tuning}(ii). Second, $\norm{bM_m-bM_\infty}_2\to0$. Third, since $\sum_{l\ge0}(-\gamma)^{-l}=\gamma/(1+\gamma)$, for every fixed $L\le m$
+\[
+\Bigl\lVert\sum_{l=0}^m(-\gamma)^{-l}M_{m-l}-\frac{\gamma}{1+\gamma}M_\infty\Bigr\rVert_2
+\le\sum_{l=0}^{L}\gamma^{-l}\norm{M_{m-l}-M_\infty}_2+3\sqrt2\sum_{l>L}\gamma^{-l},
+\]
+where we used $\norm{M_h}_2\le\sqrt2$ and $\norm{M_\infty}_2\le\sqrt2$ from Proposition~\ref{prop:martingale}. Letting first $m\to\infty$ and then $L\to\infty$ shows that this tends to zero. As $\kappa=b+\gamma/(1+\gamma)$, we conclude that
+\[
+\Bigl\lVert\frac{N-u_m}{(-\gamma)^m}-\kappa M_\infty\Bigr\rVert_{L^2(\Prob_i)}\longrightarrow0\qquad(m\to\infty).
+\]
+Since $(N-u_m)/H_m=(-1)^m(N-u_m)/(-\gamma)^m$ and $\abs{e^{ix}-e^{iy}}\le\abs{x-y}$,
+\[
+\bigl\lvert\Phi_{m,i}(t)-\E_ie^{i(-1)^mt\kappa M_\infty}\bigr\rvert\le\abs t\,\Bigl\lVert\frac{N-u_m}{(-\gamma)^m}-\kappa M_\infty\Bigr\rVert_{L^2(\Prob_i)},
+\]
+which tends to zero uniformly for $t$ in compact sets. Finally $\E_ie^{is\kappa M_\infty}=\varphi_i(\kappa s)$, and the statement for $\Phi_m$ follows from~\eqref{eq:phi}.
+\end{proof}
+
+Thus $(N_m-u_m)/H_m$ converges in distribution to the law with density $f$ along even $m$, and to the law with density $f(-x)$ along odd $m$.
+
+\section{A uniform Fourier bound at finite depth}\label{sec:fourier}
+
+Let $\Psi_m(t)=\max(\abs{\Phi_{m,0}(t)},\abs{\Phi_{m,1}(t)})$.
+
+\begin{lemma}\label{lem:recursion}
+For $m\ge1$ and $t\in\R$,
+\begin{align*}
+\Phi_{m,0}(t)&=e^{-it\theta/H_m}\bigl(\eps\Phi_{m-1,0}(t/\gamma)+p\Phi_{m-1,1}(t/\gamma)\bigr)^2,\\
+\Phi_{m,1}(t)&=e^{it(1-\theta)/H_m}\,\Phi_{m-1,0}(t/\gamma)^2 .
+\end{align*}
+In particular $\Psi_m(t)\le\Psi_{m-1}(t/\gamma)^2$.
+\end{lemma}
+
+\begin{proof}
+Let $v_1,v_2$ be the children of $\varrho$ and let $N',N''$ be the numbers of vertices of the random independent set in $T^{(v_1)}$ and $T^{(v_2)}$, so that $N_m=X_\varrho+N'+N''$. Since $u_m=2u_{m-1}+\theta$ and $H_m=\gamma H_{m-1}$,
+\[
+\frac{N_m-u_m}{H_m}=\frac{X_\varrho-\theta}{H_m}+\frac1\gamma\Bigl(\frac{N'-u_{m-1}}{H_{m-1}}+\frac{N''-u_{m-1}}{H_{m-1}}\Bigr).
+\]
+By Lemma~\ref{lem:broadcast}(c), given $X_\varrho=0$ the variables $N',N''$ are independent with the law of $N_{m-1}$ under $\Prob^{T_{m-1,n}}_\lambda$, whose characteristic function after centring and scaling is $\Phi_{m-1}=\eps\Phi_{m-1,0}+p\Phi_{m-1,1}$; given $X_\varrho=1$ they are independent with the law of $N_{m-1}$ conditioned on the root being absent. This gives the two identities. The inequality follows because $\abs{\eps\Phi_{m-1,0}+p\Phi_{m-1,1}}\le\Psi_{m-1}$ and the prefactors have modulus one.
+\end{proof}
+
+\begin{lemma}\label{lem:lattice}
+For every $h\ge0$, $i\in\{0,1\}$ and $0<\abs t\le\pi H_h$, we have $\abs{\Phi_{h,i}(t)}<1$.
+\end{lemma}
+
+\begin{proof}
+Conditionally on $X_\varrho=i$, the size $N_h$ takes both values $i$ and $i+1$ with positive probability. For $i=0$ consider the empty set and a singleton $\{v^*\}$ with $v^*\ne\varrho$. For $i=1$ consider $\{\varrho\}$ and $\{\varrho,v^*\}$, where $v^*$ is a vertex at distance at least two from $\varrho$; such a vertex exists since $n\ge3$. All independent sets have positive probability because $\lambda>0$. If $\abs{\Phi_{h,i}(t)}=1$, then $e^{itN_h/H_h}$ is almost surely constant under the conditioning, so $e^{it/H_h}=1$, which is impossible for $0<\abs{t/H_h}\le\pi$. The deterministic phase $e^{-itu_h/H_h}$ does not affect the modulus.
+\end{proof}
+
+\begin{proposition}\label{prop:uniformdecay}
+There are constants $c_2,C_2>0$ and an integer $h_0$ such that
+\[
+\Psi_m(t)\le C_2\exp(-c_2\abs t^\beta)\qquad\text{for all } m\ge h_0 \text{ and } \abs t\le\pi H_m .
+\]
+\end{proposition}
+
+\begin{proof}
+Let $K=\{t:1\le\abs t\le\gamma\}$. For $t\in K$ we have $\kappa t\ne0$, so by Proposition~\ref{prop:decay}(i) and continuity $\rho_1=\max_{t\in K}\Psi(\kappa t)<1$. By Proposition~\ref{prop:clt} and $\abs{\varphi_i(-s)}=\abs{\varphi_i(s)}$, $\abs{\Phi_{h,i}(t)}\to\abs{\varphi_i(\kappa t)}$ uniformly on $K$. Hence there is $h_0$ such that, with $\rho=(1+\rho_1)/2<1$,
+\begin{equation}\label{eq:annulus}
+\Psi_h(t)\le\rho\qquad(h\ge h_0,\ t\in K),
+\end{equation}
+and we may also assume $\pi\gamma^{h_0}>\gamma$. By Lemma~\ref{lem:lattice} and continuity,
+\[
+\rho_0=\max\bigl\{\Psi_{h_0}(s):1\le\abs s\le\pi\gamma^{h_0}\bigr\}<1 .
+\]
+
+Let $m\ge h_0$ and $1\le\abs t\le\pi\gamma^m$, and put $j=\lfloor\log_\gamma\abs t\rfloor$, so that $\gamma^j\le\abs t<\gamma^{j+1}$. If $j\le m-h_0$, apply Lemma~\ref{lem:recursion} $j$ times; the remaining frequency $t\gamma^{-j}$ lies in $K$ and the remaining depth $m-j$ is at least $h_0$, so~\eqref{eq:annulus} gives $\Psi_m(t)\le\rho^{2^j}$, and as in the proof of Proposition~\ref{prop:decay}, $2^j>\abs t^\beta/2$. If $j>m-h_0$, apply Lemma~\ref{lem:recursion} $m-h_0$ times; the remaining frequency $s=t\gamma^{-(m-h_0)}$ satisfies $\gamma\le\abs s\le\pi\gamma^{h_0}$, so $\Psi_m(t)\le\rho_0^{2^{m-h_0}}$. Since $\abs t\le\pi\gamma^m$ we have $\abs t^\beta\le\pi^\beta2^m$, hence $2^{m-h_0}\ge\abs t^\beta/(\pi^\beta2^{h_0})$. In both cases $\Psi_m(t)\le\exp(-c_2\abs t^\beta)$ with
+\[
+c_2=\min\Bigl(\tfrac12\log\tfrac1\rho,\ \frac{\log(1/\rho_0)}{\pi^\beta2^{h_0}}\Bigr)>0,
+\]
+where we may assume $\rho,\rho_0>0$. For $\abs t<1$ the bound holds with $C_2=e^{c_2}$.
+\end{proof}
+
+Note that the negative eigenvalue only affects the phases in Lemma~\ref{lem:recursion} and the parity of the limit in Proposition~\ref{prop:clt}; neither matters for moduli.
+
+\section{Local limit theorems for second differences}\label{sec:local}
+
+Let $w_{m,j}=\Prob^{T_{m,n}}_\lambda(N_m=j)$ for $j\in\Z$ (so $w_{m,j}=0$ outside $\{0,\dots,\alpha_{m,n}\}$), and $x_{m,j}=(j-u_m)/H_m$. Let $g_m=f$ for even $m$ and $g_m(x)=f(-x)$ for odd $m$; thus $g_m$ is the density whose characteristic function is $\varphi((-1)^mt)$.
+
+\begin{proposition}\label{prop:llt}
+As $m\to\infty$, uniformly in $j\in\Z$,
+\begin{align*}
+H_mw_{m,j}-g_m(x_{m,j})&\to0,\\
+H_m^2(w_{m,j+1}-w_{m,j})-g_m'(x_{m,j})&\to0,\\
+H_m^2(w_{m,j}-w_{m,j-1})-g_m'(x_{m,j})&\to0,\\
+H_m^3(w_{m,j+1}-2w_{m,j}+w_{m,j-1})-g_m''(x_{m,j})&\to0 .
+\end{align*}
+\end{proposition}
+
+\begin{proof}
+Since $N_m$ is integer valued, $w_{m,j}=(2\pi)^{-1}\int_{-\pi}^{\pi}e^{-isj}\E e^{isN_m}\,ds$. Substituting $s=t/H_m$ and using $\E e^{isN_m}=e^{isu_m}\Phi_m(t)$ gives, for all $j\in\Z$,
+\[
+H_mw_{m,j}=\frac1{2\pi}\int_{-\pi H_m}^{\pi H_m}e^{-itx_{m,j}}\Phi_m(t)\,dt .
+\]
+As $x_{m,j\pm1}=x_{m,j}\pm1/H_m$, the four scaled quantities in the statement equal
+\[
+\frac1{2\pi}\int_\R e^{-itx_{m,j}}\,e_m(t)\,\mathbf 1_{\{\abs t\le\pi H_m\}}\Phi_m(t)\,dt
+\]
+with the multipliers $e_m(t)=1$, $H_m(e^{-it/H_m}-1)$, $H_m(1-e^{it/H_m})$ and $H_m^2(e^{-it/H_m}-2+e^{it/H_m})$, respectively. These satisfy $\abs{e_m(t)}\le1,\abs t,\abs t,t^2$, because $\abs{e^{iy}-1}=2\abs{\sin(y/2)}\le\abs y$ and $\abs{e^{-iy}-2+e^{iy}}=4\sin^2(y/2)\le y^2$, and they converge pointwise to $1,-it,-it,-t^2$. By~\eqref{eq:fderiv}, the corresponding expressions for $g_m,g_m',g_m',g_m''$ at $x$ are the same integrals with $e_m\mathbf 1_{\{\abs t\le\pi H_m\}}\Phi_m(t)$ replaced by the limit multiplier times $\varphi((-1)^mt)$. Hence each difference in the statement is bounded, uniformly in $j$, by
+\[
+\frac1{2\pi}\int_\R\bigl\lvert e_m(t)\mathbf 1_{\{\abs t\le\pi H_m\}}\Phi_m(t)-e_\infty(t)\varphi((-1)^mt)\bigr\rvert\,dt,
+\]
+where $e_\infty$ is the limit multiplier. Along even $m$ and along odd $m$ separately, the integrand tends to zero pointwise by Proposition~\ref{prop:clt}, and for $m\ge h_0$ it is dominated by $(1+t^2)\bigl(C_2e^{-c_2\abs t^\beta}+\abs{\varphi(t)}\bigr)$, which is integrable by Proposition~\ref{prop:uniformdecay} and~\eqref{eq:phidecay}; here we used $\abs{\Phi_m}\le\Psi_m$ and $\abs{\varphi(-t)}=\abs{\varphi(t)}$. Dominated convergence completes the proof.
+\end{proof}
+
+\begin{corollary}\label{cor:curvature}
+Uniformly in $j\in\Z$,
+\[
+H_m^4\bigl(w_{m,j-1}w_{m,j+1}-w_{m,j}^2\bigr)-\bigl(g_mg_m''-(g_m')^2\bigr)(x_{m,j})\to0\qquad(m\to\infty).
+\]
+\end{corollary}
+
+\begin{proof}
+With $d_+=w_{m,j+1}-w_{m,j}$ and $d_-=w_{m,j}-w_{m,j-1}$ we have the exact identity
+\[
+\begin{split}
+w_{m,j-1}w_{m,j+1}-w_{m,j}^2&=(w_{m,j}-d_-)(w_{m,j}+d_+)-w_{m,j}^2\\
+&=w_{m,j}(d_+-d_-)-d_+d_-,
+\end{split}
+\]
+and $d_+-d_-=w_{m,j+1}-2w_{m,j}+w_{m,j-1}$. Thus
+\[
+H_m^4\bigl(w_{m,j-1}w_{m,j+1}-w_{m,j}^2\bigr)=(H_mw_{m,j})\bigl(H_m^3(d_+-d_-)\bigr)-(H_m^2d_+)(H_m^2d_-).
+\]
+By Proposition~\ref{prop:llt} each factor converges uniformly in $j$ to $g_m$, $g_m''$, $g_m'$ and $g_m'$ at $x_{m,j}$, and these functions are bounded uniformly in $m$, since $g_m$ is $f$ or its reflection. The claim follows.
+\end{proof}
+
+\section{Proofs of the main results}\label{sec:proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+The assumption $k/(k+2)>2^{-\eta}$ means $\eta>\log_2((k+2)/k)$, so we may choose $\eta'$ with $\log_2((k+2)/k)<\eta'<\min(\eta,1)$. Then $k/(k+2)>2^{-\eta'}$ and $\abs V^{1-\eta}\le\abs V^{1-\eta'}$, so it suffices to prove the theorem for $\eta'$. We may therefore assume $0<\eta<1$. Let $k$ and $n$ be as in the statement, fix the quantities of Proposition~\ref{prop:tuning}, and let $J=[x_1,x_2]$ and $\delta$ be as in Corollary~\ref{cor:J}.
+
+\emph{Failures.} For odd $m$, $g_m(x)=f(-x)$, so $g_m'(x)=-f'(-x)$, $g_m''(x)=f''(-x)$, and $(g_mg_m''-(g_m')^2)(x)=(ff''-(f')^2)(-x)$. Let $J_m=J$ for even $m$ and $J_m=-J$ for odd $m$. Then $g_mg_m''-(g_m')^2\ge\delta$ on $J_m$. By Corollary~\ref{cor:curvature} there is $m_1$ such that for $m\ge m_1$ and all $j$ with $x_{m,j}\in J_m$,
+\[
+H_m^4\bigl(w_{m,j-1}w_{m,j+1}-w_{m,j}^2\bigr)>\delta/2>0 .
+\]
+Let $\mathcal R_m$ be the set of integers $j$ with $x_{m,j}\in J_m$, that is, the integers in the interval $u_m+H_mJ_m$ of length $(x_2-x_1)H_m$. They are consecutive, and there are at least $(x_2-x_1)H_m-1$ of them. Since $w_{m,j-1}w_{m,j+1}>w_{m,j}^2\ge0$ forces $w_{m,j\pm1}>0$, these indices lie in $\{1,\dots,\alpha_{m,n}-1\}$, and by~\eqref{eq:tiltsign} each of them is a failure of log-concavity of $(s_{m,n,j})_j$.
+
+\emph{Location.} Put $X=\max(\abs{x_1},\abs{x_2})$, $A_*=k+5/3$ and
+\[
+\rho_*=2\theta+a_0+b\theta=2\theta+(1-\theta)a_0+\theta a_1,\qquad q_n=\rho_*/A_* .
+\]
+By~\eqref{eq:center}, $u_m=\rho_*2^m-\theta$, and by Lemma~\ref{lem:alpha}, $\alpha_{m,n}=A_*2^m-c_m/3$. Every $j\in\mathcal R_m$ satisfies $\abs{j-u_m}\le XH_m$, so
+\[
+\max_{j\in\mathcal R_m}\Bigl\lvert\frac{j}{\alpha_{m,n}}-q_n\Bigr\rvert
+=\max_{j\in\mathcal R_m}\frac{\abs{j-u_m-\theta+q_nc_m/3}}{\alpha_{m,n}}
+\le\frac{X\gamma^m+2}{A_*2^m-1},
+\]
+which tends to zero as $m\to\infty$ because $\gamma<2$. By Proposition~\ref{prop:tuning}(iii),
+\[
+\rho_*=k+1+\theta-(1-\theta)\nuo-\theta\nue,\qquad A_*-\rho_*=\tfrac23-\theta+(1-\theta)\nuo+\theta\nue .
+\]
+Since $\theta<1/2$ and $\nuo,\nue\ge0$, we get $A_*-\rho_*>1/6$, so $1-q_n>1/(6A_*)=1/(6k+10)=1/(3n+7)$. Since $\nuo,\nue\le1/64$, we get $\rho_*>k$, so $q_n>k/(k+5/3)>0.99$. With $c=1/(6n+14)$ we have $c<q_n$ and $q_n<1-2c$, so there is $m_2$ such that $\mathcal R_m\subseteq[c\,\alpha_{m,n},(1-c)\,\alpha_{m,n}]$ for all $m\ge m_2$.
+
+\emph{Length.} There is $m_3$ such that $(x_2-x_1)H_m-1\ge\tfrac12(x_2-x_1)\gamma^m$ for $m\ge m_3$. By Proposition~\ref{prop:tuning}(ii) and the choice of $k$, $\gamma\ge2k/(k+2)>2^{1-\eta}$. As $\abs{V(T_{m,n})}<(n+2)2^m$,
+\[
+\gamma^m>2^{(1-\eta)m}>\Bigl(\frac{\abs{V(T_{m,n})}}{n+2}\Bigr)^{1-\eta}.
+\]
+Hence, with $C=(x_2-x_1)/(2(n+2))$ and $m_0=\max(m_1,m_2,m_3)$, the set $\mathcal R_m$ has at least $C\abs{V(T_{m,n})}^{1-\eta}$ elements for every $m\ge m_0$, and all the assertions of the theorem hold.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:galvin}]
+Apply Theorem~\ref{thm:main} with $k=16384$ and $\eta=1/2$, which is admissible since $16384/16386>2^{-1/2}$. Here $n=32769$ and $3n+7=98314$, so Theorem~\ref{thm:main} gives
+\[
+0.99<q_n<1-\frac{1}{98314}<1-10^{-5}.
+\]
+Since $\max_{j\in\mathcal R_m}\abs{j/\alpha_{m,n}-q_n}\to0$, for all large $m$ every $j\in\mathcal R_m$ satisfies $0.99\,\alpha_{m,n}\le j\le(1-10^{-5})\,\alpha_{m,n}$. Finally $\alpha_{m,n}\to\infty$ by Lemma~\ref{lem:alpha}.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:extremal}]
+Fix $\eta>0$ and let $n$, $C$ and $m_0$ be given by Theorem~\ref{thm:main}. Write $V_m=\abs{V(T_{m,n})}=(n+2)2^m-1$, and let $N\ge\max(V_{m_0},3)$. Let $m\ge m_0$ be the largest integer with $V_m\le N$. Since $V_{m+1}=2V_m+1>N$, we have $V_m\ge(N-1)/2\ge N/3$. The tree $T_{m,n}$ is spherically symmetric, has maximum degree three and at most $N$ vertices, and by Theorem~\ref{thm:main}
+\[
+M_3(N)\ge L(T_{m,n})\ge C\,V_m^{1-\eta}\ge C\,3^{-1}N^{1-\eta}.
+\]
+Together with $M_3(N)\le M(N)\le N$ this gives $1-\eta\le\liminf\log M_3(N)/\log N\le\limsup\log M(N)/\log N\le1$ for every $\eta>0$.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:blc}]
+Let $n=32769$ and $q=q_n$, as in the proof of Corollary~\ref{cor:galvin}, so that $0.99<q<1-10^{-5}$. Theorem~\ref{thm:main} provides trees $T_{m,n}$, forests with arbitrarily many vertices, that break log-concavity at indices $j_m\in\mathcal R_m$ with $j_m/\alpha_{m,n}\to q$. Suppose that $b_{\mathrm{lc}}>q$. Since $a_{\mathrm{lc}}=0$ by \cite[Section~9]{FLNYZ26}, there would be $\zeta>0$ such that every sufficiently large forest $F$ has a log-concave coefficient sequence at all indices between $(q-\zeta)\alpha(F)$ and $(q+\zeta)\alpha(F)$, contradicting the failures at $j_m$ for large $m$. Hence $b_{\mathrm{lc}}\le q<1-10^{-5}$.
+\end{proof}
+
+\section{Concluding remarks}\label{sec:remarks}
+
+\subsection{Scope}
+
+Theorem~\ref{thm:main} is asymptotic in the depth $m$ for a fixed, possibly very large, odd path length $n$. The proof yields neither a useful explicit value of $m_0$ nor the interval $J$ explicitly. We have not attempted to optimize the threshold $k\ge16384$, which serves only to simplify the elementary estimates of Section~\ref{sec:tuning} and the Chebyshev bounds in Proposition~\ref{prop:notlc}.
+
+The failures produced by Corollary~\ref{cor:curvature} are weak in a relative sense: $(s_{j-1}s_{j+1}-s_j^2)/s_j^2$ is of order $H_m^{-2}=\gamma^{-2m}$. The run $\mathcal R_m$ constructed in the proof has length of order $\gamma^m$, that is, of order $\abs V^{\log_2\gamma}$. Since $\gamma<2$ for every fixed $n$, the construction does not produce runs of linear length. We make no claim about the longest run of $T_{m,n}$, or about failures elsewhere in its independent set sequence.
+
+The failures constructed in Theorem~\ref{thm:main} lie above $0.99\,\alpha$, hence in the range where the independent set sequence of a tree is nonincreasing~\cite{LM06}. They therefore say nothing about the unimodality question of~\cite{AMSE87}, which for sufficiently large forests is settled by \cite[Theorem~1.1]{FLNYZ26}, and, in connection with the remark following Question~\ref{q:galvin}, our constant $c$ is far below $1/3$. Failures at a fixed fraction of $\alpha$ below $17/25$, in particular below $2/3$, cannot occur in large trees at all: since $\alpha(F)\ge\abs{V(F)}/2$ for a forest $F$, the log-concavity range $\eps\abs{V}\le j\le17\alpha/25$ of \cite[Theorem~1.2 and Section~9]{FLNYZ26}, valid for every fixed $\eps>0$, contains all indices $j$ with $j/\alpha(F)$ in a fixed compact subinterval of $(0,17/25)$ once $F$ is large enough. The large activity $\lambda\approx k^3$ used here lies far outside the bounded range of activities in which the Gaussian local limit theorem of \cite[Section~6]{FLNYZ26} operates, and the fluctuations of $N_m$ are of order $\gamma^m$, much larger than $\abs V^{1/2}$.
+
+\subsection{A numerical illustration}
+
+The following values were computed numerically for $k=16384$, $n=32769$, using the solution $r$ of~\eqref{eq:fixedpoint} nearest to $k+1$. They are not used in the proofs and are not certified:
+\[
+r\approx16384.6666646,\quad \lambda\approx4.3991203\times10^{12},\quad p\approx0.99993897,
+\]
+\[
+\gamma\approx1.99987794,\quad \kappa\approx-0.33332655,\quad q_n\approx0.99998983,\quad \log_2\gamma\approx0.99991195 .
+\]
+In this example the run constructed in the proof thus has length of order $\abs V^{\log_2\gamma}$ with $\log_2\gamma\approx0.99991$.
+
+\subsection{Questions}
+
+Corollary~\ref{cor:extremal} shows $M(N)=N^{1-o(1)}$. It would be interesting to decide whether $M(N)$, or $M_3(N)$, is of order $N$. In our construction a linear run would require letting $n$ grow with $m$, where the uniformity of the estimates of Sections~\ref{sec:fourier} and~\ref{sec:local} is no longer available. It would also be natural to determine $b_{\mathrm{lc}}$ in the notation of~\cite{FLNYZ26}; Corollary~\ref{cor:blc} and \cite[Theorem~1.2]{FLNYZ26} give $17/25\le b_{\mathrm{lc}}<1-10^{-5}$. Our family does not lower the upper bound substantially, since $q_n>0.99$ for every admissible $n$ and $q_n\to1$ as $n\to\infty$.
+
+\appendix
+
+\section{The midpoint inequality}\label{app:midpoint}
+
+The following is a one-dimensional case of the Pr\'ekopa--Leindler inequality; we give a short transport proof under the assumptions we need.
+
+\begin{lemma}\label{lem:midpoint}
+Let $f$ be a positive continuous log-concave probability density on $\R$, and let $A=[a_1,a_2]$ and $B=[b_1,b_2]$ be compact intervals of positive length. Then~\eqref{eq:midpoint} holds with $(A+B)/2=[(a_1+b_1)/2,(a_2+b_2)/2]$.
+\end{lemma}
+
+\begin{proof}
+Put $a=\int_Af>0$ and $b=\int_Bf>0$, and let $G_A(x)=a^{-1}\int_{a_1}^xf$ for $x\in A$ and $G_B(y)=b^{-1}\int_{b_1}^yf$ for $y\in B$. Both are continuously differentiable, strictly increasing bijections onto $[0,1]$ with positive derivatives $u=f/a$ and $v=f/b$. The map $T=G_B^{-1}\circ G_A$ is a continuously differentiable increasing bijection from $A$ onto $B$ with
+\[
+v(T(x))\,T'(x)=u(x)\qquad(x\in A).
+\]
+Let $z(x)=(x+T(x))/2$. It is a continuously differentiable increasing bijection from $A$ onto $(A+B)/2$ with $z'=(1+T')/2$. By log-concavity, $f(z(x))\ge\sqrt{f(x)f(T(x))}=\sqrt{ab}\,\sqrt{u(x)v(T(x))}$. Changing variables and using $(1+T')/2\ge\sqrt{T'}$,
+\[
+\begin{split}
+\int_{(A+B)/2}f&=\int_Af(z(x))\,z'(x)\,dx\ge\sqrt{ab}\int_A\sqrt{u(x)\,v(T(x))\,T'(x)}\,dx\\
+&=\sqrt{ab}\int_Au(x)\,dx=\sqrt{ab}.
+\end{split}
+\qedhere
+\]
+\end{proof}
+
+\section*{Use of AI-assisted tools}
+
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{99}
+
+\bibitem{AMSE87}
+Y.~Alavi, P.~J. Malde, A.~J. Schwenk, and P.~Erd\H{o}s, \emph{The vertex independence sequence of a graph is not constrained}, Congr. Numer. \textbf{58} (1987), 15--23.
+
+\bibitem{BR25}
+C.~Bautista-Ramos, \emph{Multiple breaks of log-concavity in the independence polynomials of trees}, preprint (2025), arXiv:2511.00334.
+
+\bibitem{BR26}
+C.~Bautista-Ramos, \emph{Unbounded log-concavity breaks in independence polynomials of spherically symmetric trees}, preprint (2026), arXiv:2610.04172v1.
+
+\bibitem{BGG26}
+C.~Bautista-Ramos, C.~Guill\'en-Galv\'an, and P.~G\'omez-Salgado, \emph{Linear recurrences for non-log-concave independence polynomials of trees}, Graphs Combin. \textbf{42} (2026), Paper No.~59.
+
+\bibitem{BPD21}
+S.~V. Bitseki Penda and J.-F. Delmas, \emph{Central limit theorem for bifurcating Markov chains under pointwise ergodic conditions}, Ann. Appl. Probab. \textbf{32} (2022), no.~5, 3817--3849, doi:10.1214/21-AAP1774.
+
+\bibitem{CS07}
+M.~Chudnovsky and P.~Seymour, \emph{The roots of the independence polynomial of a clawfree graph}, J. Combin. Theory Ser. B \textbf{97} (2007), no.~3, 350--357.
+
+\bibitem{FLNYZ26}
+E.~X. Fang, J.~Lu, E.~Nevo, Y.~Yao, and H.~Zheng, \emph{Unimodality of independence polynomials for sufficiently large forests}, preprint (2026), arXiv:2609.20961v1.
+
+\bibitem{Gal26}
+D.~Galvin, \emph{Trees with non log-concave independent set sequences}, preprint (2026), arXiv:2502.10654v2.
+
+\bibitem{GH18}
+D.~Galvin and J.~Hilyard, \emph{The independent set sequence of some families of trees}, Australas. J. Combin. \textbf{70} (2018), no.~2, 236--252.
+
+\bibitem{Ham90}
+Y.~O. Hamidoune, \emph{On the numbers of independent $k$-sets in a claw free graph}, J. Combin. Theory Ser. B \textbf{50} (1990), no.~2, 241--244.
+
+\bibitem{KL25}
+O.~Kadrawi and V.~E. Levit, \emph{The independence polynomial of trees is not always log-concave starting from order 26}, Ars Math. Contemp. \textbf{25} (2025), no.~4, Paper No.~P4.03.
+
+\bibitem{KLYM23}
+O.~Kadrawi, V.~E. Levit, R.~Yosef, and M.~Mizrachi, \emph{On computing of independence polynomials of trees}, in: Recent Research in Polynomials (F.~\"Ozger, ed.), IntechOpen, 2023.
+
+\bibitem{LM04}
+V.~E. Levit and E.~Mandrescu, \emph{Very well-covered graphs with log-concave independence polynomials}, Carpathian J. Math. \textbf{20} (2004), no.~1, 73--80.
+
+\bibitem{LM06}
+V.~E. Levit and E.~Mandrescu, \emph{Partial unimodality for independence polynomials of K\"onig--Egerv\'ary graphs}, Congr. Numer. \textbf{179} (2006), 109--119.
+
+\bibitem{RS25}
+E.~Ramos and S.~Sun, \emph{An AI enhanced approach to the tree unimodality conjecture}, preprint (2025), arXiv:2510.18826.
+
+\bibitem{TV26}
+H.~Trinas and G.~Valle, \emph{A superdiffusive local limit theorem for the elephant random walk and the breakdown of log-concavity}, preprint (2026), arXiv:2609.14753v1.
+
+\bibitem{Yu26}
+X.~Yu, \emph{Unbounded runs of non-log-concavity in independence polynomials of trees}, manuscript (3 September 2026), in: reproducibility archive, version~1.1, Zenodo, doi:10.5281/zenodo.22263331.
+
+\end{thebibliography}
+
+\end{document}

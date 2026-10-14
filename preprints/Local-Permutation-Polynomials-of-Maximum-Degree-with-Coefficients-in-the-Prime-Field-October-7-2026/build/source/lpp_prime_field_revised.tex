@@ -1,0 +1,385 @@
+\documentclass[11pt]{amsart}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage[margin=1.15in]{geometry}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Red}{\operatorname{Red}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\one}{\mathbf{1}}
+\newcommand{\cT}{\mathcal{T}}
+
+\begin{document}
+
+\title[Maximum-degree local permutation polynomials]{Local permutation polynomials of maximum degree with coefficients in the prime field}
+
+\author{Knowledge Sense}
+\address{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\subjclass[2020]{Primary 11T06; Secondary 05B15}
+\keywords{Local permutation polynomial, finite field, maximum degree, Latin hypercube}
+
+\begin{abstract}
+A polynomial in $n$ variables over $\F_q$ is a local permutation polynomial if it permutes $\F_q$ in each variable when the other variables are fixed. Such a polynomial, reduced so that its degree in each variable is less than $q$, has total degree at most $n(q-2)$. We show that for every prime power $q=p^r>3$ and every $n\ge 1$ this bound is attained by a local permutation polynomial whose coefficients lie in the prime field $\F_p$. The new ingredients are an exchange of two Frobenius orbits, which handles the case $p\ge 5$, $r\ge 2$, $p\nmid r$, and an exact computation of the top coefficient of a recursively defined family in characteristic $3$. The same reduction shows that this recursive family, conjectured to have maximum degree in every odd characteristic, fails to do so for $(q,n)=(7,10)$ and $(19,8)$.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $q=p^r$ be a power of a prime $p$. Every function $\F_q^n\to\F_q$ is represented by a unique polynomial $f\in\F_q[X_1,\dots,X_n]$ with $\deg_{X_i}f<q$ for all $i$; we call such polynomials \emph{reduced} and identify them with the functions they define. A reduced polynomial $f$ is a \emph{local permutation polynomial} (LPP) over $\F_q$ if, for each $i$ and each choice of $c_j\in\F_q$ $(j\ne i)$, the polynomial
+\[
+f(c_1,\dots,c_{i-1},X_i,c_{i+1},\dots,c_n)\in\F_q[X_i]
+\]
+permutes $\F_q$. In two variables these are exactly the polynomials describing Latin squares, and in general they describe Latin hypercubes. Local permutation polynomials over prime fields were studied by Mullen~\cite{Mullen}.
+
+The total degree of a reduced LPP in $n$ variables is at most $n(q-2)$ when $q>2$; see \cite[Proposition~1]{GU23} and Lemma~\ref{lem:prelim}(d) below. For $n=2$, Diestelkamp, Hartke and Kenney~\cite{DHK} showed that this bound is sharp. Gutierrez and Jim\'enez Urroz~\cite{GU25a} constructed LPPs of degree $n(q-2)$ for every $q>3$ and every $n\ge1$. In characteristic $2$, and whenever there is an integer $1<b<p-1$ with $\gcd(b,q-1)=1$, their polynomials have coefficients in $\F_p$ \cite[Theorems~4 and~5]{GU25a}; in the remaining cases the construction uses coefficients outside $\F_p$ \cite[Theorem~6]{GU25a}. They asked for LPPs of maximum degree defined over $\F_p$ for every $q$ \cite[Section~6]{GU25a}. This question was also considered in \cite{GU25b}. By \cite[Theorem~1]{GU25b}, for $p\ge5$ such polynomials exist for every $q=p^r$ when $n<p-1$, and also for $n=p-1$ when $r\ge2$; Theorem~2 there settles the case of odd $p$ with $p\mid r$ for every $n$. In addition, for odd $p$ the polynomials $f_2$ and $f_3$ of \eqref{eq:recursion} below have maximum degree \cite[Theorems~7 and~8]{GU25a}.
+
+Our main result answers this question affirmatively for every $q>3$ and every $n$.
+
+\begin{theorem}\label{thm:main}
+Let $q=p^r>3$ and $n\ge1$. There is a reduced local permutation polynomial $f\in\F_p[X_1,\dots,X_n]$ over $\F_q$ with $\deg f=n(q-2)$.
+\end{theorem}
+
+For $n=1$ one may take $X^{q-2}$, which permutes $\F_q$ since $\gcd(q-2,q-1)=1$. For arbitrary $n$, the results of \cite{GU25a,GU25b} leave open two cases:
+\begin{enumerate}
+\item[(A)] $p\ge5$, $r\ge2$ and $p\nmid r$, when no integer $1<b<p-1$ is coprime to $q-1$ (for example $q=25$);
+\item[(B)] $p=3$ and $3\nmid r$.
+\end{enumerate}
+We handle case (A) with a switching lemma; the resulting construction covers every $n$ and all of $p\ge5$, $r\ge2$, $p\nmid r$, including parameters already covered in \cite{GU25a,GU25b}. We handle case (B) by analyzing a recursive family introduced in \cite{GU25a}.
+
+The switching lemma (Lemma~\ref{lem:switch}) states that if $h$ is a permutation of $\F_q$ and $T\subseteq\F_q$ is a set with $h(T)$ invariant under $x\mapsto x+1$, then
+\[
+\sum_{i=1}^n h(X_i)+\prod_{i=1}^n \one_T(X_i)
+\]
+is an LPP, and it has maximum degree as soon as the elements of $T$ have nonzero sum. Its coefficients lie in $\F_p$ when $h$ and $T$ are compatible with the Frobenius map. The cases $p=2$ and $p\mid r$ are covered by this lemma with suitable choices of $h$ and $T$ (Remark~\ref{rem:char2} and Section~\ref{sec:proof}). For $p\ge5$, $r\ge2$ and $p\nmid r$ we obtain suitable data by exchanging two Frobenius orbits of elements of degree $r$ (Theorem~\ref{thm:exchange}).
+
+For case (B) we study the recursively defined LPPs
+\begin{equation}\label{eq:recursion}
+f_1=X_1,\qquad f_n=t\bigl(f_{n-1}^{\,q-2}+X_n^{q-2}\bigr)\quad(n\ge2),
+\end{equation}
+reduced in each variable, where $t(X)=X+\sum_{j=0}^{q-2}X^j$ is the transposition of $0$ and $1$. These polynomials lie in $\F_p[X_1,\dots,X_n]$. Gutierrez and Jim\'enez Urroz proved that $\deg f_3=3(q-2)$ for odd $p$ and conjectured that $\deg f_n=n(q-2)$ whenever $q=p^r>3$ and $p$ is odd \cite[Theorem~8 and Conjecture~1]{GU25a}; since $f_1=X_1$, the conjecture concerns $n\ge2$. We express the coefficient of $X_1^{q-2}\cdots X_n^{q-2}$ in $f_n$ in terms of the iterates of an explicit linear operator on univariate polynomials (Proposition~\ref{prop:coefficient}). In characteristic $3$ the orbit of $U$ under this operator is periodic of period $2$ from the first step on, which gives the following.
+
+\begin{theorem}\label{thm:char3}
+Let $q=3^r$ with $r\ge2$. For every $n\ge2$ the coefficient of $X_1^{q-2}\cdots X_n^{q-2}$ in $f_n$ equals $2$. In particular $\deg f_n=n(q-2)$.
+\end{theorem}
+
+Outside characteristic $3$ the conjecture can fail.
+
+\begin{theorem}\label{thm:counter}
+For $q=7$ one has $\deg f_{10}<10(q-2)$, and for $q=19$ one has $\deg f_8<8(q-2)$.
+\end{theorem}
+
+The proof of Theorem~\ref{thm:main} uses \eqref{eq:recursion} only for $p=3$, so Theorem~\ref{thm:counter} has no bearing on it.
+
+The paper is organized as follows. Section~\ref{sec:prelim} collects standard facts. Section~\ref{sec:switch} proves the switching lemma, and Section~\ref{sec:exchange} constructs the orbit exchange. Section~\ref{sec:recursion} analyzes the family \eqref{eq:recursion} and proves Theorem~\ref{thm:char3}. Theorem~\ref{thm:main} is proved in Section~\ref{sec:proof}, and Theorem~\ref{thm:counter} in Section~\ref{sec:counter}.
+
+\section{Preliminaries}\label{sec:prelim}
+
+Throughout, $q=p^r$ and $\sigma$ denotes the Frobenius map $x\mapsto x^p$ of $\F_q$. For a polynomial $P$ we write $\Red(P)$ for the reduced polynomial defining the same function on $\F_q^n$; in one variable $U$, $\Red$ replaces $U^e$ $(e\ge1)$ by $U^{e'}$, where $1\le e'\le q-1$ and $e'\equiv e\pmod{q-1}$. We use the convention $0^0=1$. For a subset $T\subseteq\F_q$, $\one_T$ denotes its indicator function, with values in $\{0,1\}\subseteq\F_p$.
+
+The following facts are standard (see \cite{LN} for (a)--(c) and \cite[Proposition~1]{GU23} for (d)); we include short proofs for completeness.
+
+\newpage
+
+\begin{lemma}\label{lem:prelim}
+Let $q>2$.
+\begin{enumerate}
+\item[(a)] Let $\varphi\colon\F_q^n\to\F_q$ and let $P$ be its reduced polynomial. For $1\le e_1,\dots,e_n\le q-1$, the coefficient of $X_1^{e_1}\cdots X_n^{e_n}$ in $P$ is
+\[
+(-1)^n\sum_{x\in\F_q^n}\varphi(x)\,x_1^{q-1-e_1}\cdots x_n^{q-1-e_n}.
+\]
+\item[(b)] If $\varphi\colon\F_q\to\F_q$ satisfies $\varphi\circ\sigma=\sigma\circ\varphi$, then its reduced polynomial lies in $\F_p[X]$.
+\item[(c)] The reduced polynomial of a permutation of $\F_q$ has degree at most $q-2$.
+\item[(d)] If $f$ is a reduced LPP in $n$ variables, then $\deg_{X_i}f\le q-2$ for every $i$. Hence $\deg f\le n(q-2)$, with equality if and only if the coefficient of $X_1^{q-2}\cdots X_n^{q-2}$ in $f$ is nonzero.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) In $\F_p[X]$ we have $(1+X)^{q-1}=\sum_{j=0}^{q-1}(-X)^j$, since $(1+X)\sum_{j=0}^{q-1}(-X)^j=1+X^q=(1+X)^q$. Hence $(X-a)^{q-1}=\sum_{j=0}^{q-1}(-1)^j(-a)^{q-1-j}X^j=\sum_{j=0}^{q-1}a^{q-1-j}X^j$, because $q-1$ is even when $p$ is odd (and signs are irrelevant when $p=2$). Since $1-(X-a)^{q-1}$ is the indicator function of $\{a\}$, the reduced polynomial of $\varphi$ is
+\[
+P=\sum_{x\in\F_q^n}\varphi(x)\prod_{i=1}^n\bigl(1-(X_i-x_i)^{q-1}\bigr),
+\]
+and the coefficient of $X_i^{e_i}$ with $e_i\ge1$ in the $i$-th factor is $-x_i^{q-1-e_i}$.
+
+(b) Write $P=\sum_j c_jX^j$ and $P^\sigma=\sum_j c_j^pX^j$. For $a\in\F_q$ we have $P^\sigma(a^p)=P(a)^p=\varphi(a)^p=\varphi(a^p)$. As $\sigma$ is bijective, $P^\sigma$ and $P$ define the same function, and both are reduced, so $c_j^p=c_j$ for all $j$.
+
+(c) By (a), the coefficient of $X^{q-1}$ is $-\sum_{a\in\F_q}\varphi(a)=-\sum_{b\in\F_q}b=0$.
+
+(d) Write $f=\sum_{j=0}^{q-1}A_jX_i^j$ with $A_j$ reduced in the remaining variables. For every specialization $c$ of these variables, $\sum_jA_j(c)X_i^j$ is the reduced polynomial of a permutation, so $A_{q-1}(c)=0$ by (c). Thus $A_{q-1}=0$. The monomial $X_1^{q-2}\cdots X_n^{q-2}$ is the only monomial of degree $n(q-2)$ allowed by these bounds.
+\end{proof}
+
+We also use the following elementary closure properties \cite[Theorem~1]{GU25a}. If $f$ and $g$ are LPPs in disjoint sets of variables, then $f+g$ is an LPP. If $f$ is an LPP and $\pi\in\F_q[X]$ permutes $\F_q$, then $\pi(f)$ is an LPP.
+
+\section{A switching lemma}\label{sec:switch}
+
+\begin{lemma}\label{lem:switch}
+Let $q>2$, let $h$ be a permutation of $\F_q$, and let $S,T\subseteq\F_q$. Suppose that $h\circ\sigma=\sigma\circ h$, that $\sigma(T)=T$, and that
+\begin{enumerate}
+\item[(i)] $S+1=S$;
+\item[(ii)] $h(T)=S$;
+\item[(iii)] $s_T:=\sum_{a\in T}a\ne0$.
+\end{enumerate}
+Let $g$ be the reduced polynomial of $\one_T$, and identify $h$ with its reduced polynomial. Then $g,h\in\F_p[X]$, $\deg g=q-2$ and $\deg h\le q-2$. Moreover, for every $n\ge2$ the polynomial
+\[
+F_n=\sum_{i=1}^n h(X_i)+\prod_{i=1}^n g(X_i)\in\F_p[X_1,\dots,X_n]
+\]
+is a reduced LPP over $\F_q$ of degree $n(q-2)$.
+\end{lemma}
+
+\begin{proof}
+Since $T$ is $\sigma$-stable, $\one_T$ commutes with $\sigma$, so $g\in\F_p[X]$ by Lemma~\ref{lem:prelim}(b); similarly $h\in\F_p[X]$, and $\deg h\le q-2$ by Lemma~\ref{lem:prelim}(c). By Lemma~\ref{lem:prelim}(a),
+\[
+g(X)=\sum_{a\in T}\bigl(1-(X-a)^{q-1}\bigr)=-|T|\,X^{q-1}-s_T\,X^{q-2}+(\text{lower terms}).
+\]
+By (i), $S$ is a union of cosets of $\F_p$, so $|T|=|S|\equiv0\pmod p$ by (ii). Together with (iii), this gives $\deg g=q-2$ with leading coefficient $-s_T$.
+
+Each variable occurs in $F_n$ with degree at most $q-2$, so $F_n$ is reduced. The terms $h(X_i)$ have degree at most $q-2<n(q-2)$, so the coefficient of $X_1^{q-2}\cdots X_n^{q-2}$ in $F_n$ is $(-s_T)^n\ne0$ and $\deg F_n=n(q-2)$.
+
+It remains to show that $F_n$ is an LPP. By symmetry it suffices to consider the variable $X_1$. Fix $c_2,\dots,c_n\in\F_q$ and put $C=\sum_{i\ge2}h(c_i)$. If some $c_i\notin T$, the specialization is $h(X_1)+C$, a permutation. Otherwise it is $\varphi(x)=h(x)+\one_T(x)+C$. By (ii) and (i), $\varphi$ maps $T$ bijectively onto $S+1+C=S+C$, and it maps $\F_q\setminus T$ bijectively onto $(\F_q\setminus S)+C$. Hence $\varphi$ is a permutation.
+\end{proof}
+
+\begin{remark}\label{rem:char2}
+Let $p=2$ and $q>2$, and take $h(X)=X$ and $S=T=\F_q\setminus\{0,1\}$. All hypotheses of Lemma~\ref{lem:switch} hold; in particular $s_T=\sum_{a\in\F_q}a-0-1=1$. As a function, $\sum_{i=1}^{q-2}X^i$ equals $\one_T$, so $F_n$ is the polynomial of \cite[Theorem~4]{GU25a}.
+\end{remark}
+
+\section{Exchanging Frobenius orbits}\label{sec:exchange}
+
+In this section $p$ is odd, $r\ge2$ and $p\nmid r$. Let $D\subseteq\F_q$ be the set of elements $x$ with $\F_p(x)=\F_q$, and let $\Tr$ be the trace from $\F_q$ to $\F_p$. Translations by elements of $\F_p$ commute with $\sigma$, so the group $G=\langle\sigma\rangle\times\F_p$, of order $pr$, acts on $D$ by $(\sigma^i,c)\cdot x=x^{p^i}+c$.
+
+\begin{lemma}\label{lem:free}
+The action of $G$ on $D$ is free.
+\end{lemma}
+
+\begin{proof}
+Suppose $x^{p^i}+c=x$ with $x\in D$, $0\le i<r$ and $c\in\F_p$. Applying $\sigma^i$ repeatedly gives $x^{p^{ki}}=x-kc$ for all $k\ge1$. Take $k=r/\gcd(i,r)$; then $r\mid ki$, so $x^{p^{ki}}=x$ and $kc=0$ in $\F_p$. Since $k\mid r$ and $p\nmid r$, $k$ is invertible in $\F_p$, so $c=0$. Then $x^{p^i}=x$, and since $x$ has degree $r$ over $\F_p$, $i=0$.
+\end{proof}
+
+\begin{lemma}\label{lem:count}
+If $p\ge5$ and $r\ge2$, then $|D|>pr$.
+\end{lemma}
+
+\begin{proof}
+Every element of $\F_q\setminus D$ lies in a subfield $\F_{p^d}$ with $d\mid r$, $d<r$. Therefore
+\[
+|\F_q\setminus D|\le\sum_{d=1}^{r-1}p^d<\frac{p^r}{p-1}\le\frac{p^r}{4},
+\]
+so $|D|>\tfrac34p^r$. Moreover $p^{r-1}\ge5^{r-1}\ge2r$ for $r\ge2$, by induction on $r$. Hence $|D|>\tfrac34p\cdot2r>pr$.
+\end{proof}
+
+\begin{theorem}\label{thm:exchange}
+Let $p\ge5$, $r\ge2$ and $p\nmid r$. There exist a permutation $h$ of $\F_q$ and subsets $S,T\subseteq\F_q$ satisfying all hypotheses of Lemma~\ref{lem:switch}. Consequently, for every $n\ge2$ there is a reduced LPP over $\F_q$ in $\F_p[X_1,\dots,X_n]$ of degree $n(q-2)$.
+\end{theorem}
+
+\begin{proof}
+By Lemmas~\ref{lem:free} and \ref{lem:count}, $D$ is a union of free $G$-orbits of size $pr$, and there are at least two of them. Choose $\alpha\in D$ and $\beta_0\in D\setminus G\alpha$. Since $\Tr(\beta_0+c)=\Tr(\beta_0)+rc$ and $r$ is invertible in $\F_p$, there is $c\in\F_p$ with $\Tr(\beta_0+c)\ne\Tr(\alpha)$. Put $\beta=\beta_0+c$; then $\beta\in G\beta_0$, so $\beta\in D\setminus G\alpha$.
+
+Let $O_\alpha=\{\alpha^{p^i}:0\le i<r\}$ and $O_\beta=\{\beta^{p^i}:0\le i<r\}$. These are $\sigma$-orbits of size $r$, and they are disjoint, because $O_\alpha\subseteq G\alpha$ and $O_\beta\subseteq G\beta$. Define $h$ by $h(\alpha^{p^i})=\beta^{p^i}$ and $h(\beta^{p^i})=\alpha^{p^i}$ for $0\le i<r$, and $h(x)=x$ for all other $x$. Then $h$ is a permutation commuting with $\sigma$. Set
+\[
+S=G\alpha=\{\alpha^{p^i}+c:0\le i<r,\ c\in\F_p\},\qquad T=(S\setminus O_\alpha)\cup O_\beta.
+\]
+
+Both sets are $\sigma$-stable, and $S+1=S$. Since $S\setminus O_\alpha$ is disjoint from $O_\alpha\cup O_\beta$, $h$ fixes it pointwise, so $h(T)=(S\setminus O_\alpha)\cup O_\alpha=S$. Finally,
+\[
+\sum_{a\in S}a=\sum_{i=0}^{r-1}\sum_{c\in\F_p}\bigl(\alpha^{p^i}+c\bigr)=p\Tr(\alpha)+r\sum_{c\in\F_p}c=0,
+\]
+because $p$ is odd. Hence $s_T=\sum_{a\in S}a-\Tr(\alpha)+\Tr(\beta)=\Tr(\beta)-\Tr(\alpha)\ne0$. The last assertion follows from Lemma~\ref{lem:switch}.
+\end{proof}
+
+\begin{remark}
+The hypotheses of Theorem~\ref{thm:exchange} cannot simply be dropped. If $p\mid r$, the action need not be free: for $r=p$, a root $\zeta$ of $Z^p-Z-1$ lies in $D$ and is fixed by $(\sigma,-1)$, since $\zeta^p=\zeta+1$. If $p=3$ and $r=2$, then $|D|=6=pr$, and there is only one orbit. Both situations are covered by other means in Section~\ref{sec:proof}.
+\end{remark}
+
+\section{The recursive family}\label{sec:recursion}
+
+In this section $q=p^r>3$ is arbitrary. The polynomial $t(X)=X+\sum_{j=0}^{q-2}X^j$ satisfies $t(0)=1$, $t(1)=0$ and $t(a)=a$ for $a\ne0,1$, because $\sum_{j=0}^{q-2}a^j=0$ for $a\ne0,1$. Since $X^{q-2}$ permutes $\F_q$, the closure properties of Section~\ref{sec:prelim} show by induction that each $f_n$ in \eqref{eq:recursion} is an LPP in $\F_p[X_1,\dots,X_n]$.
+
+For a reduced univariate polynomial $H$ we put
+\[
+\Delta(H)=H(1)-H(0),\qquad E(U)=\sum_{j=0}^{q-2}U^j,\qquad K_H=\Red(H\circ t),
+\]
+and we define the $\F_p$-linear operator
+\[
+\cT(H)=\Red\bigl(K_H'(U^{q-2})\bigr).
+\]
+Note that $H\circ t$ is reduced before it is differentiated; differentiation does not commute with $\Red$.
+
+\begin{lemma}\label{lem:operator}
+Let $H$ be reduced. Then $K_H=H+\Delta(H)\,E$. If $K_H=\sum_{j=0}^{q-1}k_jU^j$, then
+\[
+\cT(H)=k_1-\sum_{m=1}^{q-2}m\,k_{q-m}\,U^m.
+\]
+\end{lemma}
+
+\begin{proof}
+As functions, $H\circ t-H$ takes the value $\Delta(H)$ at $0$, the value $-\Delta(H)$ at $1$, and $0$ elsewhere. The function $E$ takes the values $1$ at $0$, $q-1=-1$ at $1$, and $0$ elsewhere. Since $H+\Delta(H)E$ is reduced, it equals $K_H$.
+
+Next, $K_H'(U^{q-2})=\sum_{j=1}^{q-1}jk_jU^{(j-1)(q-2)}$. The term $j=1$ is the constant $k_1$. For $2\le j\le q-1$ we have $(j-1)(q-2)\ge1$ and $(j-1)(q-2)\equiv-(j-1)\equiv q-j\pmod{q-1}$ with $1\le q-j\le q-2$, so $\Red(U^{(j-1)(q-2)})=U^{q-j}$. Writing $m=q-j$, the coefficient of $U^m$ is $(q-m)k_{q-m}=-mk_{q-m}$.
+\end{proof}
+
+\begin{lemma}\label{lem:extract}
+Let $n\ge2$ and let $H$ be a reduced univariate polynomial. The coefficient of $X_n^{q-2}$ in $\Red(H(f_n))$, viewed as a reduced polynomial in $X_1,\dots,X_{n-1}$, equals $\Red\bigl(\cT(H)(f_{n-1})\bigr)$.
+\end{lemma}
+
+\begin{proof}
+Write $K=K_H=\sum_jk_jU^j$, and set $V=f_{n-1}^{q-2}$ and $Y=X_n^{q-2}$. As functions, $H(f_n)=H(t(V+Y))=K(V+Y)$. In $\F_p[V,Y]$ we have the Taylor expansion
+\[
+K(V+Y)=\sum_{m=0}^{q-1}K^{[m]}(V)\,Y^m,\qquad K^{[m]}(V)=\sum_{j}\binom{j}{m}k_jV^{j-m},
+\]
+with $K^{[1]}=K'$. Now $\Red(Y^m)=X_n^{e(m)}$, where $e(0)=0$ and, for $1\le m\le q-1$, $e(m)\in[1,q-1]$ with $e(m)\equiv m(q-2)\equiv-m\pmod{q-1}$. Thus $e(m)=q-2$ if and only if $m=1$. Collecting terms gives
+\[
+\Red(H(f_n))=\sum_{m=0}^{q-1}\Red\bigl(K^{[m]}(V)\bigr)X_n^{e(m)},
+\]
+and the coefficient of $X_n^{q-2}$ is $\Red(K'(f_{n-1}^{q-2}))=\Red(\cT(H)(f_{n-1}))$, since $\cT(H)$ and $K'(U^{q-2})$ define the same function.
+\end{proof}
+
+\begin{proposition}\label{prop:coefficient}
+For $n\ge1$, the coefficient $c_n$ of $X_1^{q-2}\cdots X_n^{q-2}$ in $f_n$ equals the coefficient of $U^{q-2}$ in $\cT^{\,n-1}(U)$.
+\end{proposition}
+
+\begin{proof}
+We show by descending induction on $k$, $1\le k\le n$, that the coefficient of $X_{k+1}^{q-2}\cdots X_n^{q-2}$ in $f_n$, as a reduced polynomial in $X_1,\dots,X_k$, equals $\Red(\cT^{\,n-k}(U)(f_k))$. For $k=n$ this is trivial. If it holds for some $k\ge2$, then taking the coefficient of $X_k^{q-2}$ and applying Lemma~\ref{lem:extract} with $n$ replaced by $k$ and $H=\cT^{\,n-k}(U)$ gives the statement for $k-1$. For $k=1$ we obtain $\cT^{\,n-1}(U)(X_1)$, and the claim follows.
+\end{proof}
+
+\begin{remark}
+For odd $p$, Lemma~\ref{lem:operator} gives $\cT(U)=2-\sum_{m=2}^{q-2}mU^m$, whose coefficient of $U^{q-2}$ is $-(q-2)=2\ne0$. Hence $\deg f_2=2(q-2)$, in agreement with \cite[Theorem~7]{GU25a}.
+\end{remark}
+
+\begin{proof}[Proof of Theorem~\ref{thm:char3}]
+Let $q=3^r$ with $r\ge2$. Throughout the proof we regard integers as elements of $\F_3$. Each residue class modulo $3$ occurs $q/3$ times among $0,1,\dots,q-1$, and $3\mid q/3$; hence $\sum_{m=0}^{q-1}m=0$ and $\sum_{m=0}^{q-1}m^2=0$ in $\F_3$. Since $q-1=-1$ in $\F_3$, it follows that
+\begin{equation}\label{eq:sums}
+\sum_{m=2}^{q-2}m=0-1-(q-1)=0,\qquad\sum_{m=2}^{q-2}m^2=0-1-(q-1)^2=1.
+\end{equation}
+Define
+\[
+A=2-\sum_{m=2}^{q-2}mU^m,\qquad B=-\sum_{m=2}^{q-2}m^2U^m.
+\]
+We claim that $\cT(U)=A$, $\cT(A)=B$ and $\cT(B)=A$. Each claim follows from Lemma~\ref{lem:operator}.
+
+\emph{$H=U$.} Here $\Delta(U)=1$, so $k_0=1$, $k_1=2$, $k_j=1$ for $2\le j\le q-2$, and $k_{q-1}=0$. Hence $\cT(U)=2-\sum_{m=2}^{q-2}mU^m=A$.
+
+\emph{$H=A$.} By \eqref{eq:sums}, $\Delta(A)=-\sum_{m=2}^{q-2}m=0$, so $k_j$ is the coefficient of $U^j$ in $A$: $k_1=k_{q-1}=0$ and $k_j=-j$ for $2\le j\le q-2$. Hence $\cT(A)=-\sum_{m=2}^{q-2}m\cdot\bigl(-(q-m)\bigr)U^m=-\sum_{m=2}^{q-2}m^2U^m=B$.
+
+\emph{$H=B$.} By \eqref{eq:sums}, $\Delta(B)=-1=2$, so $k_1=2$, $k_{q-1}=0$ and $k_j=2-j^2$ for $2\le j\le q-2$. Hence
+\[
+\cT(B)=2-\sum_{m=2}^{q-2}m\bigl(2-(q-m)^2\bigr)U^m=2-\sum_{m=2}^{q-2}(2m-m^3)U^m=A,
+\]
+since $m^3=m$ in $\F_3$.
+
+Consequently $\cT^{\,n-1}(U)\in\{A,B\}$ for every $n\ge2$. The coefficient of $U^{q-2}$ is $-(q-2)=2$ in $A$ and $-(q-2)^2=-4=2$ in $B$. By Proposition~\ref{prop:coefficient}, $c_n=2$, and $\deg f_n=n(q-2)$ by Lemma~\ref{lem:prelim}(d).
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm:main}}\label{sec:proof}
+
+For $n=1$ we take $X^{q-2}$. Let $n\ge2$. We distinguish cases.
+
+\emph{Case $p=2$.} Use Remark~\ref{rem:char2}; this is \cite[Theorem~4]{GU25a}.
+
+\emph{Case $p=3$.} Since $q>3$, we have $r\ge2$, and $f_n$ has the required properties by Theorem~\ref{thm:char3}.
+
+\emph{Case $p\ge5$, $r=1$.} Take $b=p-2$. Then $1<b<p-1$ and $\gcd(b,p-1)=1$, so \cite[Theorem~5]{GU25a} gives the required polynomial.
+
+\emph{Case $p\ge5$, $p\mid r$.} This case is \cite[Theorem~2]{GU25b}. It also follows from Lemma~\ref{lem:switch}, as we now indicate. Let $\zeta$ be a root of $P(Z)=Z^p-Z-1$. Since $P$ has no root in $\F_p$ and $\zeta^p=\zeta+1$, the roots of $P$ are $\zeta+c$ $(c\in\F_p)$, they form one $\sigma$-orbit of length $p$, and $\zeta\in\F_{p^p}\subseteq\F_q$. Let $h(X)=X^{q-2}$, which acts as inversion on $\F_q^\times$ and commutes with $\sigma$. Put $S=\zeta+\F_p$ and $T=h(S)=\{(\zeta+c)^{-1}:c\in\F_p\}$; note that $0\notin S$. Then $T$ is $\sigma$-stable, $S+1=S$ and $h(T)=S$. From $P(Z)=\prod_{c\in\F_p}(Z-\zeta-c)$ we get
+\[
+\sum_{c\in\F_p}\frac1{\zeta+c}=-\frac{P'(0)}{P(0)}=-1\ne0.
+\]
+Thus all hypotheses of Lemma~\ref{lem:switch} hold, and $F_n$ is the required polynomial.
+
+\emph{Case $p\ge5$, $r\ge2$, $p\nmid r$.} Apply Theorem~\ref{thm:exchange}.
+
+These cases exhaust all $q=p^r>3$, which proves Theorem~\ref{thm:main}. \qed
+
+\section{The recursive family in other characteristics}\label{sec:counter}
+
+By Proposition~\ref{prop:coefficient} and Lemma~\ref{lem:prelim}(d), $\deg f_n=n(q-2)$ if and only if the coefficient of $U^{q-2}$ in $\cT^{\,n-1}(U)$ is nonzero. Lemma~\ref{lem:operator} describes $\cT$ as an explicit linear map on $\F_p^q$, so these coefficients can be computed exactly for any given $q$ and $n$. All computations below were carried out in exact arithmetic modulo $p$; a verification script in Python~3, using only the standard library, is available from the author on request.
+
+\begin{proof}[Proof of Theorem~\ref{thm:counter}]
+For $q=7$, Table~\ref{tab:q7} lists $\cT^{k}(U)$ for $0\le k\le9$; each row is obtained from the previous one by Lemma~\ref{lem:operator}. The coefficient of $U^6$ is always $0$ and is omitted. In particular
+\[
+\cT^{9}(U)=6+4U^3+3U^4\in\F_7[U],
+\]
+whose coefficient of $U^5$ vanishes. Hence $c_{10}=0$ and $\deg f_{10}<50$.
+
+For $q=19$ the same iteration gives
+\begin{align*}
+\cT^{7}(U)={}&2+U^3+16U^4+10U^5+U^6+11U^7+4U^8+6U^9+13U^{10}\\
+&+15U^{11}+8U^{12}+18U^{13}+9U^{14}+3U^{15}+18U^{16}\in\F_{19}[U],
+\end{align*}
+with zero coefficient of $U^{17}$. Hence $c_8=0$ and $\deg f_8<136$.
+\end{proof}
+
+\begin{table}[ht]
+\caption{The polynomials $\cT^{k}(U)=\sum_{m}u_mU^m$ over $\F_7$, and $\Delta=\Delta(\cT^{k}(U))$. The coefficient $c_{k+1}$ of Proposition~\ref{prop:coefficient} is $u_5$.}\label{tab:q7}
+\centering
+\begin{tabular}{ccccccc c}
+\toprule
+$k$ & $u_0$ & $u_1$ & $u_2$ & $u_3$ & $u_4$ & $u_5$ & $\Delta$\\
+\midrule
+0 & 0 & 1 & 0 & 0 & 0 & 0 & 1\\
+1 & 2 & 0 & 5 & 4 & 3 & 2 & 0\\
+2 & 0 & 0 & 3 & 5 & 5 & 3 & 2\\
+3 & 2 & 0 & 4 & 0 & 0 & 3 & 0\\
+4 & 0 & 0 & 1 & 0 & 0 & 1 & 2\\
+5 & 2 & 0 & 1 & 1 & 6 & 6 & 0\\
+6 & 0 & 0 & 2 & 3 & 3 & 2 & 3\\
+7 & 3 & 0 & 4 & 3 & 4 & 3 & 0\\
+8 & 0 & 0 & 1 & 2 & 2 & 1 & 6\\
+9 & 6 & 0 & 0 & 4 & 3 & 0 & 0\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The values of $c_n$ for these two fields are
+\begin{align*}
+q=7&:\quad (c_1,\dots,c_{10})=(0,2,3,3,1,6,2,3,1,0),\\
+q=19&:\quad (c_1,\dots,c_8)=(0,2,15,15,8,1,17,0).
+\end{align*}
+Thus, among $n\ge2$, the values $n=10$ and $n=8$ are the smallest with $\deg f_n<n(q-2)$ for $q=7$ and $q=19$, respectively.
+
+\begin{remark}
+For a prime $q=p$ there is an independent way to compute $c_n$ which avoids polynomial reduction. By Lemma~\ref{lem:prelim}(a),
+\[
+c_n=(-1)^n\sum_{x\in\F_p^n}f_n(x)\,x_1\cdots x_n=(-1)^n\sum_{z\in\F_p}z\,W_n(z),\qquad W_n(z)=\sum_{f_n(x)=z}x_1\cdots x_n.
+\]
+Writing $\iota(x)=x^{p-2}$, the recursion \eqref{eq:recursion} gives $W_1(z)=z$ and
+\[
+W_n(z)=\sum_{\substack{y,x\in\F_p\\ t(\iota(y)+\iota(x))=z}}W_{n-1}(y)\,x\qquad(n\ge2).
+\]
+For $p=7$ this yields $(W_{10}(0),\dots,W_{10}(6))=(1,1,6,4,6,4,6)$, and $\sum_zzW_{10}(z)=105=0$ in $\F_7$. For both $q=7$ and $q=19$, this computation reproduces the values of $c_n$ listed above.
+\end{remark}
+
+\begin{thebibliography}{9}
+
+\bibitem{DHK}
+W.~S. Diestelkamp, S.~G. Hartke, and R.~H. Kenney, \emph{On the degree of local permutation polynomials}, J. Combin. Math. Combin. Comput. \textbf{50} (2004), 129--140.
+
+\bibitem{GU23}
+J.~Gutierrez and J.~Jim\'enez Urroz, \emph{Local permutation polynomials and the action of e-Klenian groups}, Finite Fields Appl. \textbf{91} (2023), Paper No. 102261.
+
+\bibitem{GU25a}
+J.~Gutierrez and J.~Jim\'enez Urroz, \emph{Permutation and local permutation polynomials of maximum degree}, Afr. Mat. \textbf{36} (2025), Paper No. 45. \href{https://doi.org/10.1007/s13370-025-01247-3}{doi:10.1007/s13370-025-01247-3}.
+
+\bibitem{GU25b}
+J.~Gutierrez and J.~Jim\'enez Urroz, \emph{Local permutation polynomials of maximum degree over prime finite fields}, Bull. Malays. Math. Sci. Soc. \textbf{48} (2025), Paper No. 40. \href{https://doi.org/10.1007/s40840-025-01825-5}{doi:10.1007/s40840-025-01825-5}.
+
+\bibitem{LN}
+R.~Lidl and H.~Niederreiter, \emph{Finite Fields}, 2nd ed., Encyclopedia of Mathematics and its Applications, vol.~20, Cambridge University Press, Cambridge, 1997.
+
+\bibitem{Mullen}
+G.~L. Mullen, \emph{Local permutation polynomials over $\mathbb{Z}_p$}, Fibonacci Quart. \textbf{18} (1980), 104--108.
+
+\end{thebibliography}
+
+\end{document}

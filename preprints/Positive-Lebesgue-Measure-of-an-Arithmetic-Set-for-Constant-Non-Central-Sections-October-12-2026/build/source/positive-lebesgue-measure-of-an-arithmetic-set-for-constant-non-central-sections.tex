@@ -1,0 +1,399 @@
+\documentclass{amsart}
+
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+
+\hypersetup{
+  pdftitle={Positive Lebesgue measure of an arithmetic set for constant non-central sections},
+  pdfauthor={Knowledge Sense},
+  pdfsubject={Mathematics},
+  pdfkeywords={Barker-Larman problem, non-central sections, bodies of revolution, continued fractions, Lebesgue measure}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\AAA}{\mathbb{A}}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\meas}[1]{\lvert #1 \rvert}
+
+\begin{document}
+
+\title[Positive measure for constant non-central sections]{Positive Lebesgue measure of an arithmetic set for constant non-central sections}
+
+\author{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{12 October 2026}
+
+\subjclass[2020]{Primary 52A20; Secondary 11J70, 11K50}
+
+\keywords{Barker--Larman problem, non-central sections, bodies of revolution, continued fractions, Lebesgue measure}
+
+\begin{abstract}
+Haddad and Ryabogin proved that a symmetric convex body of revolution in $\R^4$ containing the unit ball, all of whose sections by hyperplanes tangent to the ball have the same volume $A$, is a Euclidean ball, provided that $A$ belongs to an explicit set $\AAA$ defined by infinitely many Diophantine inequalities. They showed that $\AAA$ has positive Hausdorff dimension and asked whether it has positive Lebesgue measure. We answer this question affirmatively: every neighbourhood of their explicit example $A_0=\frac{4\pi}{3}\tan\bigl(\pi(4+\sqrt2)/14\bigr)^3$ contains a subset of $\AAA$ of positive Lebesgue measure. The proof replaces the parity conditions on continued fraction digits used by Haddad and Ryabogin with a direct estimate for the second smallest of the distances from the odd multiples of the rotation number to the nearest integers.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $B^n$ denote the centred unit Euclidean ball in $\R^n$. Barker and Larman \cite{BL} asked whether a convex body in $\R^n$ containing $B^n$ in its interior is determined by the $(n-1)$-dimensional volumes of its sections by hyperplanes tangent to $B^n$. A particular case asks whether such a body, all of whose sections by tangent hyperplanes have the same volume, must be a Euclidean ball. The planar case goes back to Santal\'o \cite{Sa}, and Yaskin and Yaskina \cite{YY} settled the three-dimensional case under the additional assumption that the body has the volume of the corresponding ball. We refer to \cite{Ga} for background on geometric tomography. The problem remains open in general.
+
+Haddad and Ryabogin \cite{HR} treated dimension four for symmetric bodies of revolution, under an arithmetic condition on the common volume. Write $\omega_3=4\pi/3$ for the volume of $B^3$ and, for $A>0$,
+\[
+\gamma_A=\pi^{-1}\arctan\bigl((A/\omega_3)^{1/3}\bigr).
+\]
+They introduced a set $\AAA\subseteq(8\omega_3,\infty)$, recalled in Definition~\ref{def:A}, consisting of those $A$ for which $\gamma_A$ is irrational and which satisfy an infinite family of inequalities $C(A,k)$, $k\ge2$, involving the distances from the odd multiples $(2k-1)\gamma_A$ to the nearest integers. They proved that for $A\in\AAA$ the answer to the question above is positive in the class of symmetric bodies of revolution in $\R^4$ \cite[Theorem~9]{HR}; see Theorem~\ref{thm:HR9} below. They showed that $\AAA$ contains the number
+\[
+A_0=\omega_3\tan(\pi\gamma_0)^3,\qquad \gamma_0=\frac{4+\sqrt2}{14}
+\]
+(numerically $A_0\approx 81.5849$), that $\AAA$ is infinite and that it has positive Hausdorff dimension \cite[Section~4.2]{HR}, and they asked the following question \cite[Question~15]{HR}: \emph{Is $\AAA$ a set with positive Lebesgue measure?} Theorem~\ref{thm:main} answers this question.
+
+\begin{theorem}\label{thm:main}
+Every neighbourhood of $A_0$ contains a Borel subset of $\AAA$ of positive Lebesgue measure. In particular, $\AAA$ has positive Lebesgue measure.
+\end{theorem}
+
+The set $\AAA$ is itself a Borel set (Lemma~\ref{lem:open}). Combined with \cite[Theorem~9]{HR}, Theorem~\ref{thm:main} gives the following.
+
+\begin{corollary}\label{cor:geom}
+For every neighbourhood $W$ of $A_0$ there is a Borel set $E\subseteq\AAA\cap W$ of positive Lebesgue measure with the following property. Let $A\in E$, and let $C\subseteq\R^4$ be a symmetric convex body of revolution containing $B^4$ such that $\meas{C\cap H}_3=A$ for every hyperplane $H$ tangent to $B^4$. Then $C$ is a Euclidean ball.
+\end{corollary}
+
+Corollary~\ref{cor:geom} concerns only symmetric bodies of revolution in dimension four and the values $A\in\AAA$; it does not settle the Barker--Larman problem. In the opposite direction, Haddad \cite{Ha} constructed approximate counterexamples near $\lambda_0=4\sqrt3\,\pi$, a value with $\gamma_{\lambda_0}=1/3$; note that $\lambda_0<8\omega_3$. He also describes $\AAA$ as nowhere dense \cite[Section~1]{Ha}; this is consistent with Theorem~\ref{thm:main}, since a nowhere dense set can have positive Lebesgue measure.
+
+\subsection*{Idea of the proof}
+As explained in \cite[Section~4]{HR}, the difficulty is that only odd multiples of $\gamma_A$ enter the conditions $C(A,k)$. Haddad and Ryabogin therefore imposed parity conditions on the continued fraction digits of $\gamma_A$ under which the denominators $q_j$, $j\ge2$, of its convergents are odd \cite[Proposition~13 and Theorem~14]{HR}; the resulting sets have Lebesgue measure zero \cite[p.~19]{HR}. In their concluding remarks \cite[Section~5]{HR} they observe that the parity conditions can be dropped by working with the subsequence of odd denominators, which is infinite because $q_j$ is odd whenever $q_{j-2}$ is odd and $q_{j-1}$ is even, but that the resulting conditions become considerably more complicated, with bounds that are practically intractable, and they left Question~15 open.
+
+We avoid odd denominators altogether. Passing to $\theta=2\gamma_A$, we have $(2k-1)\gamma_A=(k-\frac12)\theta$. If $p_n/q_n$ is any convergent of $\theta$ with $q_n\ge2$, the points $(r-\frac12)\theta$, $1\le r\le q_n$, lie within $1/q_{n+1}$ of a translate of the grid $q_n^{-1}\Z$ modulo $1$, so the second smallest of their distances to the nearest integers is less than $3/q_n$ (Lemma~\ref{lem:second}). This bound holds for every convergent and does not depend on the parities of the denominators. Together with quadratic bounds for the functions in $C(A,k)$ (Lemma~\ref{lem:quadratic}) and the classical lower bound for $\norm{m\theta}$, it yields an explicit criterion: if the digits of $\theta$ satisfy $b_l\le l^2$ for all $l\ge257$, then $C(A,k)$ holds for all $k\ge q_{256}$ simultaneously (Proposition~\ref{prop:tail}). Since this criterion imposes no parity condition, it is satisfied on a set of positive measure. More precisely, let $\theta_0=2\gamma_0$ and let $I$ be the cylinder of numbers whose first $L\ge256$ digits agree with those of $\theta_0$. The fixed digits $b_l$, $257\le l\le L$, are those of $\theta_0$ and satisfy the criterion, while the condition $b_l\le l^2$ for all $l>L$ fails only on a subset of $I$ of relative measure at most $2/L$ (Lemma~\ref{lem:cylinder}). The finitely many remaining conditions $C(A,k)$, $2\le k<q_{256}$, are open conditions that hold at $A_0$, so they persist in a neighbourhood of $A_0$, and $L$ is chosen so that $I$ lies in that neighbourhood.
+
+\subsection*{Dependencies}
+Besides elementary facts on continued fractions \cite{Kh}, the proof of Theorem~\ref{thm:main} uses one result of \cite{HR}: the membership $A_0\in\AAA$ established in \cite[Section~4.2]{HR}. That membership rests on \cite[Theorem~14(a)]{HR}, whose hypothesis for $A_0$ reduces to the single inequality \eqref{eq:21}, and on the five initial conditions $C(A_0,k)$, $2\le k\le6$. In Section~\ref{sec:seed} we recall these and describe an independent check in exact rational interval arithmetic, contained in the archive \texttt{supplementary-certificate.zip} that accompanies this paper. Corollary~\ref{cor:geom} additionally uses \cite[Theorem~9]{HR}.
+
+\subsection*{Organization}
+Section~\ref{sec:prelim} recalls the definition of $\AAA$ and collects facts on continued fractions. Sections~\ref{sec:estimates}, \ref{sec:tail} and~\ref{sec:cylinder} contain the basic estimates, the tail criterion and the measure estimate in cylinders. Section~\ref{sec:proof} proves Theorem~\ref{thm:main} and Corollary~\ref{cor:geom}, and Section~\ref{sec:seed} discusses the example $A_0$.
+
+\section{Preliminaries}\label{sec:prelim}
+
+\subsection{The set of Haddad and Ryabogin}
+Throughout, $\norm{x}$ denotes the distance from $x\in\R$ to the nearest integer, and $\meas{X}$ (without subscript) the Lebesgue measure of a set $X\subseteq\R$. For $A>8\omega_3$ put
+\[
+R_A=\sec(\pi\gamma_A),\qquad\text{so that}\qquad A=\omega_3(R_A^2-1)^{3/2},
+\]
+and for $x\ge1$
+\[
+G_A(x)=\arctan\sqrt{x^2-1}-\arctan\sqrt{R_A^2-1}=\arccos(1/x)-\pi\gamma_A .
+\]
+For $0<s<t<\pi/2$, and whenever $R_A\cos s\ge1$, define
+\[
+F_{A,-}(s)=-G_A(R_A\cos s),\qquad
+F_{A,+}(s,t)=G_A\Bigl(R_A\frac{\sin(t-s)}{\sin t-\sin s}\Bigr).
+\]
+For $k\ge1$ let $\delta_{A,k}=\pi\norm{(2k-1)\gamma_A}$, and for $k\ge2$ let $s_{A,k}<t_{A,k}$ be the two smallest elements of $\{\delta_{A,1},\dots,\delta_{A,k}\}$. In \cite{HR} these are denoted $\alpha_{A,k}$ and $\beta_{A,k}$, and $F_{A,+}(\alpha,\beta)$ is written with $\sin(\alpha-\beta)/(\sin\alpha-\sin\beta)$, which has the same value. The next lemma shows that all these quantities are well defined when $\gamma_A$ is irrational.
+
+\begin{lemma}\label{lem:welldef}
+Let $A>8\omega_3$ with $\gamma_A$ irrational.
+\begin{enumerate}
+\item The numbers $\delta_{A,k}$, $k\ge1$, are pairwise distinct and lie in $(0,\pi/2)$.
+\item For every $k\ge2$ we have $s_{A,k}\le\delta_{A,2}<\delta_{A,1}=\pi\gamma_A$, and hence $R_A\cos s_{A,k}>1$.
+\item For $0<s<t<\pi/2$,
+\begin{equation}\label{eq:ratio}
+\frac{\sin(t-s)}{\sin t-\sin s}=\frac{\cos\frac{t-s}{2}}{\cos\frac{t+s}{2}}
+=1+\frac{2\sin\frac s2\sin\frac t2}{\cos\frac{t+s}{2}}>1 .
+\end{equation}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) If $\norm{x}=\norm{y}$, then $x-y\in\Z$ or $x+y\in\Z$. For $x=(2k-1)\gamma_A$ and $y=(2k'-1)\gamma_A$ with $k\ne k'$, the numbers $x-y=2(k-k')\gamma_A$ and $x+y=2(k+k'-1)\gamma_A$ are nonzero integer multiples of $\gamma_A$, hence not integers. Moreover $\norm{x}\in\{0,\frac12\}$ would give $2x\in\Z$.
+
+(2) The inequality $A>8\omega_3$ means $(A/\omega_3)^{1/3}>2$, that is, $\gamma_A\in(\pi^{-1}\arctan2,\tfrac12)$. Since $\tan(\pi/3)=\sqrt3<2$, we have $\gamma_A>1/3$, so $3\gamma_A\in(1,\frac32)$. Hence $\delta_{A,1}=\pi\gamma_A$ and $\delta_{A,2}=\pi(3\gamma_A-1)$, and $\delta_{A,2}<\delta_{A,1}$ because $\gamma_A<\frac12$. As $s_{A,k}$ is nonincreasing in $k$, $s_{A,k}\le s_{A,2}=\delta_{A,2}<\pi\gamma_A$, and $R_A\cos s_{A,k}>R_A\cos(\pi\gamma_A)=1$.
+
+(3) This follows from $\sin(t-s)=2\sin\frac{t-s}2\cos\frac{t-s}2$, $\sin t-\sin s=2\cos\frac{t+s}2\sin\frac{t-s}2$ and $\cos\frac{t-s}2-\cos\frac{t+s}2=2\sin\frac s2\sin\frac t2$.
+\end{proof}
+
+By Lemma~\ref{lem:welldef}, if $\gamma_A$ is irrational and $k\ge2$, then $F_{A,-}(s_{A,k})$ and $F_{A,+}(s_{A,k},t_{A,k})$ are defined, and $G_A$ is evaluated at points of $(1,\infty)$.
+
+\begin{definition}[{\cite[Definitions~7 and 8]{HR}}]\label{def:A}
+Let $A>8\omega_3$ with $\gamma_A$ irrational, and let $k\ge2$. Condition $C(A,k)$ is
+\[
+\max\bigl\{F_{A,-}(s_{A,k}),\,F_{A,+}(s_{A,k},t_{A,k})\bigr\}<\delta_{A,k+1}.
+\]
+The set $\AAA$ consists of all $A>8\omega_3$ such that $\gamma_A$ is irrational and $C(A,k)$ holds for every $k\ge2$.
+\end{definition}
+
+\begin{theorem}[{\cite[Theorem~9]{HR}}]\label{thm:HR9}
+Let $C\subseteq\R^4$ be a symmetric convex body of revolution containing $B^4$ such that $\meas{C\cap H}_3=A$ for every hyperplane $H$ tangent to $B^4$, where $A$ does not depend on $H$. If $A\in\AAA$, then $C$ is a Euclidean ball.
+\end{theorem}
+
+\subsection{The doubled rotation number}
+Put $\theta_A=2\gamma_A$ and $\Theta=(\theta_{\min},1)$ with $\theta_{\min}=2\pi^{-1}\arctan2$. The map
+\[
+\theta\longmapsto A(\theta)=\omega_3\tan(\pi\theta/2)^3
+\]
+is a diffeomorphism of $\Theta$ onto $(8\omega_3,\infty)$ with positive derivative, and its inverse is $A\mapsto\theta_A$. Since $(2k-1)\gamma_A=(k-\frac12)\theta_A$,
+\begin{equation}\label{eq:deltatheta}
+\delta_{A,k}=\pi\norm{(k-\tfrac12)\theta_A}\qquad(k\ge1).
+\end{equation}
+We write $\Theta_{\mathrm{irr}}=\Theta\setminus\Q$.
+
+\begin{lemma}\label{lem:open}
+For every $k\ge2$, the set $O_k$ of $\theta\in\Theta_{\mathrm{irr}}$ such that $C(A(\theta),k)$ holds is relatively open in $\Theta_{\mathrm{irr}}$. In particular, $\AAA=A\bigl(\bigcap_{k\ge2}O_k\bigr)$ is a Borel set.
+\end{lemma}
+
+\begin{proof}
+The functions $\theta\mapsto\norm{(r-\frac12)\theta}$ are continuous, and so are the order statistics of finitely many continuous functions. Thus $s_{A(\theta),k}$, $t_{A(\theta),k}$, $\delta_{A(\theta),k+1}$ and $R_{A(\theta)}=\sec(\pi\theta/2)$ depend continuously on $\theta\in\Theta$. On $\Theta_{\mathrm{irr}}$, Lemma~\ref{lem:welldef} shows that $0<s_{A(\theta),k}<t_{A(\theta),k}<\pi/2$ and that the arguments of $G_{A(\theta)}$ in $C(A(\theta),k)$ lie in $(1,\infty)$, where all expressions involved are continuous. Hence $\theta\mapsto\delta_{A(\theta),k+1}-\max\{F_{A(\theta),-}(s_{A(\theta),k}),F_{A(\theta),+}(s_{A(\theta),k},t_{A(\theta),k})\}$ is continuous on $\Theta_{\mathrm{irr}}$, and $O_k$ is the set where it is positive. The set $\Theta_{\mathrm{irr}}$ is Borel and $A$ is a homeomorphism, which gives the last assertion.
+\end{proof}
+
+\subsection{Continued fractions}
+Let $\theta\in(0,1)$ be irrational with continued fraction $\theta=[0;b_1,b_2,\dots]$, and let $p_n/q_n$ be its convergents, with $p_{-1}=1$, $q_{-1}=0$, $p_0=0$, $q_0=1$ and
+\[
+p_n=b_np_{n-1}+p_{n-2},\qquad q_n=b_nq_{n-1}+q_{n-2}\qquad(n\ge1).
+\]
+When the dependence on $\theta$ matters we write $b_n(\theta)$ and $q_n(\theta)$. We use the following standard facts \cite{Kh}; see also \cite[Propositions~10 and 11]{HR}.
+\begin{equation}\label{eq:growth}
+\begin{gathered}
+q_1\ge q_0=1,\qquad q_{n+2}\ge2q_n\quad\text{and}\quad q_n\ge2^{\lfloor n/2\rfloor}\qquad(n\ge0),\\
+q_{n+1}>q_n\quad\text{and}\quad q_n\le(b_n+1)q_{n-1}\qquad(n\ge1);
+\end{gathered}
+\end{equation}
+\begin{gather}
+\frac{1}{q_n(b_{n+1}+2)}<\lvert q_n\theta-p_n\rvert<\frac1{q_{n+1}}\qquad(n\ge0);\label{eq:error}\\
+\norm{m\theta}\ge\lvert q_n\theta-p_n\rvert\qquad(n\ge1,\ 1\le m\le q_n).\label{eq:best}
+\end{gather}
+For $n\ge1$ and positive integers $c_1,\dots,c_n$, the \emph{cylinder} $I(c_1,\dots,c_n)$ is the set of irrational $\theta\in(0,1)$ with $b_i(\theta)=c_i$ for $1\le i\le n$; we call $n$ its rank and write $I_n(\theta)$ for the cylinder of rank $n$ containing $\theta$. If $p_i/q_i$ are the convergents determined by $c_1,\dots,c_n$, the map
+\begin{equation}\label{eq:mobius}
+t\longmapsto\frac{p_n+p_{n-1}t}{q_n+q_{n-1}t}
+\end{equation}
+is a bijection from the irrational points of $(0,1)$ onto $I(c_1,\dots,c_n)$; the image of $t=[0;d_1,d_2,\dots]$ has digits $c_1,\dots,c_n,d_1,d_2,\dots$, and the absolute value of the derivative of \eqref{eq:mobius} is $(q_n+q_{n-1}t)^{-2}$. In particular, $I(c_1,\dots,c_n)$ consists of the irrational points of an interval of length $1/(q_n(q_n+q_{n-1}))$ with rational endpoints.
+
+\section{Two estimates}\label{sec:estimates}
+
+\begin{lemma}\label{lem:quadratic}
+Let $A>8\omega_3$ and $0<s<t\le1/4$. Then $R_A\cos s>1$, and
+\[
+0\le F_{A,-}(s)\le s^2,\qquad 0\le F_{A,+}(s,t)\le st .
+\]
+\end{lemma}
+
+\begin{proof}
+Write $R=R_A$ and $G=G_A$. As in the proof of Lemma~\ref{lem:welldef}, $R^2-1=(A/\omega_3)^{2/3}>4$. The function $G$ is increasing on $[1,\infty)$ with $G(R)=0$, and on $(1,\infty)$ its derivative $G'(x)=1/(x\sqrt{x^2-1})$ is positive and decreasing, so $G$ is concave. Since $s,t\le1/4$, we have $\cos s,\cos\frac{s+t}2\ge1-\frac1{32}=\frac{31}{32}$, and $R^2\cos^2s-1>5\cdot(31/32)^2-1>1$; in particular $R\cos s>1$.
+
+Since $R\cos s<R$, we get $F_{A,-}(s)=G(R)-G(R\cos s)\ge0$, and by the mean value theorem
+\[
+F_{A,-}(s)\le G'(R\cos s)\,R(1-\cos s)=\frac{1-\cos s}{\cos s\,\sqrt{R^2\cos^2s-1}}\le\frac{s^2/2}{31/32}<s^2 .
+\]
+Let $\rho$ be the quotient in \eqref{eq:ratio}. Then $\rho>1$, so $F_{A,+}(s,t)=G(R\rho)\ge0$, and concavity gives
+\[
+F_{A,+}(s,t)\le G'(R)\,R(\rho-1)=\frac{\rho-1}{\sqrt{R^2-1}}
+=\frac{2\sin\frac s2\sin\frac t2}{\sqrt{R^2-1}\,\cos\frac{s+t}2}\le\frac{st/2}{2\cdot31/32}<st. \qedhere
+\]
+\end{proof}
+
+\begin{lemma}\label{lem:second}
+Let $\theta\in(0,1)$ be irrational, and let $n\ge1$ with $q_n\ge2$. Then the second smallest of the numbers $\norm{(r-\frac12)\theta}$, $1\le r\le q_n$, is less than $3/q_n$. Consequently, if $A>8\omega_3$ and $\theta=\theta_A$ is irrational, then
+\[
+0<s_{A,k}<t_{A,k}<3\pi/q_n\qquad\text{for every }k\ge q_n .
+\]
+\end{lemma}
+
+\begin{proof}
+Write $q=q_n$, $p=p_n$, and work on the circle $\T=\R/\Z$, whose distance is $\norm{x-y}$. Put $x_r=(r-\frac12)\theta$ and $y_r=rp/q-\theta/2$ for $1\le r\le q$. By \eqref{eq:error}, $\lvert\theta-p/q\rvert<1/(qq_{n+1})$, so
+\[
+\norm{x_r-y_r}\le r\,\lvert\theta-p/q\rvert<1/q_{n+1}\qquad(1\le r\le q).
+\]
+Since $p$ and $q$ are coprime, the points $y_1,\dots,y_q$ are the points of the translated grid $q^{-1}\Z-\theta/2$ in $\T$. Every point of $\T$ lies within $1/(2q)$ of this grid, hence within less than $1/(2q)+1/q_{n+1}$ of some $x_r$.
+
+The points $x_1,\dots,x_q$ are pairwise distinct and different from $0$ in $\T$, because $\theta$ is irrational. As $q\ge2$, they divide $\T$ into $q$ open arcs. Let $J$ be the arc containing $0$, and $\ell$ its length. The midpoint of $J$ has distance $\ell/2$ from the nearest $x_r$, so $\ell<1/q+2/q_{n+1}<3/q$ by \eqref{eq:growth}. The two endpoints of $J$ are distinct points $x_r$, $x_{r'}$, and each has distance less than $\ell<3/q$ from $0$. This proves the first assertion.
+
+For the second, \eqref{eq:deltatheta} gives $\delta_{A,r}=\pi\norm{x_r}$. If $k\ge q$, the two smallest elements of $\{\delta_{A,1},\dots,\delta_{A,k}\}$ are at most the two smallest elements of $\{\delta_{A,1},\dots,\delta_{A,q}\}$, and they are distinct and positive by Lemma~\ref{lem:welldef}.
+\end{proof}
+
+\section{A tail criterion}\label{sec:tail}
+
+For $j\ge1$ put $M_j=\bigl((j+4)^2+2\bigr)^4$.
+
+\begin{lemma}\label{lem:numbers}
+For every integer $j\ge256$ we have $72M_j<2^{\lfloor j/2\rfloor}$.
+\end{lemma}
+
+\begin{proof}
+For $j\in\{256,257\}$ we have $(j+4)^2+2\le261^2+2=68123<2^{17}$, so $72M_j<2^7\cdot2^{68}<2^{128}=2^{\lfloor j/2\rfloor}$. For $j\ge256$,
+\[
+\frac{M_{j+2}}{M_j}=\Bigl(\frac{(j+6)^2+2}{(j+4)^2+2}\Bigr)^4<\Bigl(\frac{j+6}{j+4}\Bigr)^8\le\Bigl(1+\frac1{130}\Bigr)^8<e^{8/130}<2,
+\]
+while $2^{\lfloor (j+2)/2\rfloor}=2\cdot2^{\lfloor j/2\rfloor}$. Induction on $j$ completes the proof.
+\end{proof}
+
+\begin{proposition}\label{prop:tail}
+Let $A>8\omega_3$ with $\gamma_A$ irrational, and let $b_l$ and $q_n$ refer to $\theta=\theta_A$. If $b_l\le l^2$ for every $l\ge257$, then $C(A,k)$ holds for every $k\ge q_{256}$.
+\end{proposition}
+
+\begin{proof}
+Fix $k\ge q_{256}$. By \eqref{eq:growth} there is a unique $j\ge256$ with $q_j\le k<q_{j+1}$. By \eqref{eq:growth} and Lemma~\ref{lem:numbers}, $q_j\ge2^{\lfloor j/2\rfloor}>72M_j\ge72$.
+
+\emph{Upper bound.} By Lemma~\ref{lem:second}, $s_{A,k}<t_{A,k}<3\pi/q_j<1/4$. Lemma~\ref{lem:quadratic} then gives
+\[
+\max\bigl\{F_{A,-}(s_{A,k}),F_{A,+}(s_{A,k},t_{A,k})\bigr\}\le t_{A,k}^2<\frac{9\pi^2}{q_j^2}.
+\]
+
+\emph{Lower bound.} Put $m=2k+1$. Then $\delta_{A,k+1}=\pi\norm{m\theta/2}\ge\frac\pi2\norm{m\theta}$, since $\norm{2y}\le2\norm{y}$ for every $y\in\R$. As $k\le q_{j+1}-1$, we have $m\le2q_{j+1}-1$, whereas $q_{j+3}\ge q_{j+2}+q_{j+1}\ge2q_{j+1}+q_j$. Hence $1\le m<q_{j+3}$, and \eqref{eq:best} and \eqref{eq:error} with $n=j+3$ give
+\[
+\norm{m\theta}\ge\lvert q_{j+3}\theta-p_{j+3}\rvert>\frac{1}{q_{j+3}(b_{j+4}+2)}.
+\]
+By \eqref{eq:growth}, $q_{j+3}\le(b_{j+3}+1)(b_{j+2}+1)(b_{j+1}+1)\,q_j$. The indices $j+1,\dots,j+4$ are at least $257$, so each of the four factors $b_{j+1}+1$, $b_{j+2}+1$, $b_{j+3}+1$, $b_{j+4}+2$ is at most $(j+4)^2+2$. Therefore $q_{j+3}(b_{j+4}+2)\le M_jq_j$ and
+\[
+\delta_{A,k+1}>\frac{\pi}{2M_jq_j}.
+\]
+
+\emph{Comparison.} The inequality $9\pi^2/q_j^2<\pi/(2M_jq_j)$ is equivalent to $q_j>18\pi M_j$, which holds because $q_j>72M_j$ and $18\pi<72$. Thus $C(A,k)$ holds.
+\end{proof}
+
+\section{Digits of quadratic growth in a cylinder}\label{sec:cylinder}
+
+\begin{lemma}\label{lem:cylinder}
+Let $L\ge3$ and let $I$ be a cylinder of rank $L$. Then the set
+\[
+E=\{\theta\in I:\ b_l(\theta)\le l^2\text{ for every }l>L\}
+\]
+is a Borel set with $\meas{E}\ge(1-2/L)\meas{I}$.
+\end{lemma}
+
+\begin{proof}
+Each set $\{\theta:b_l(\theta)\le l^2\}$ is a countable union of cylinders, so $E$ is Borel. Fix $l>L$. The cylinder $I$ is the disjoint union of the countably many cylinders $I'\subseteq I$ of rank $l-1$. Fix such an $I'$, let $p_i/q_i$ be the convergents determined by its digits, and put $r=q_{l-2}/q_{l-1}\in[0,1]$. Under the bijection \eqref{eq:mobius} with $n=l-1$, the point with parameter $t$ satisfies $b_l=\lfloor1/t\rfloor$, so $b_l>l^2$ holds exactly when $t<z:=1/(l^2+1)$. Hence
+\[
+\meas{\{\theta\in I':b_l(\theta)>l^2\}}=\int_0^z\frac{dt}{(q_{l-1}+q_{l-2}t)^2}=\frac{z}{q_{l-1}^2(1+rz)},\qquad
+\meas{I'}=\frac{1}{q_{l-1}^2(1+r)},
+\]
+and the ratio of these two quantities is $(1+r)z/(1+rz)\le2z$. Summing over $I'$ gives $\meas{\{\theta\in I:b_l(\theta)>l^2\}}\le2\meas{I}/(l^2+1)$, and summing over $l>L$,
+\[
+\meas{I\setminus E}\le\meas{I}\sum_{l>L}\frac{2}{l^2+1}<\meas{I}\sum_{l>L}\frac{2}{l(l-1)}=\frac{2}{L}\meas{I}. \qedhere
+\]
+\end{proof}
+
+\section{Proof of the main results}\label{sec:proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Let $\theta_0=2\gamma_0=(4+\sqrt2)/7$. From
+\[
+\frac1{\theta_0}=1+\frac{2-\sqrt2}{2},\qquad\frac{2}{2-\sqrt2}=3+(\sqrt2-1),\qquad\frac1{\sqrt2-1}=2+(\sqrt2-1)
+\]
+we obtain $\theta_0=[0;1,3,2,2,2,\dots]$; in particular $b_l(\theta_0)\le l^2$ for every $l\ge1$. By \cite[Section~4.2]{HR}, $A_0=A(\theta_0)$ belongs to $\AAA$ (see also Section~\ref{sec:seed}). Let $W$ be a neighbourhood of $A_0$, and put $k_*=q_{256}(\theta_0)$. The parameters are chosen in the following order.
+
+\emph{Step 1.} Since $A_0\in\AAA$, Lemma~\ref{lem:open} shows that $\theta_0\in O_k$ for each of the finitely many $k$ with $2\le k<k_*$, and that each such $O_k$ is relatively open in $\Theta_{\mathrm{irr}}$. Hence there is an open interval $V$ with $\theta_0\in V\subseteq\Theta\cap A^{-1}(W)$ such that $C(A(\theta),k)$ holds for every irrational $\theta\in V$ and every $2\le k<k_*$.
+
+\emph{Step 2.} The cylinders $I_L(\theta_0)$ are the irrational points of intervals with rational endpoints that contain the irrational number $\theta_0$, and their lengths tend to $0$. Choose $L\ge256$ with $I_L(\theta_0)\subseteq V$.
+
+\emph{Step 3.} Let $E$ be the set of $\theta\in I_L(\theta_0)$ with $b_l(\theta)\le l^2$ for every $l>L$. By Lemma~\ref{lem:cylinder}, $E$ is a Borel set with $\meas{E}\ge(1-2/L)\meas{I_L(\theta_0)}>0$.
+
+\emph{Step 4.} Let $\theta\in E$. Then $\theta\in V\subseteq\Theta$ is irrational, so $A(\theta)>8\omega_3$ and $\gamma_{A(\theta)}=\theta/2$ is irrational. The first $L\ge256$ digits of $\theta$ agree with those of $\theta_0$, so $q_{256}(\theta)=k_*$ and $b_l(\theta)=b_l(\theta_0)\le l^2$ for $257\le l\le L$; for $l>L$ we have $b_l(\theta)\le l^2$ by the definition of $E$. Proposition~\ref{prop:tail} gives $C(A(\theta),k)$ for every $k\ge k_*$, and Step~1 gives it for $2\le k<k_*$. Hence $A(E)\subseteq\AAA\cap W$.
+
+\emph{Step 5.} The map $A$ is a diffeomorphism, so $A(E)$ is a Borel set, and $A^{-1}$ is Lipschitz on compact subsets of $(8\omega_3,\infty)$, so it maps Lebesgue null sets to null sets. Since $E=A^{-1}(A(E))$ has positive measure, so does $A(E)$.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:geom}]
+Let $E\subseteq\AAA\cap W$ be the Borel set of positive Lebesgue measure given by Theorem~\ref{thm:main}. For $A\in E$ the conclusion is Theorem~\ref{thm:HR9}.
+\end{proof}
+
+\begin{remark}
+The order of the choices matters: the index $256$ and the number $k_*$ are fixed before $V$, and $L$ is chosen after $V$. The number $k_*=q_{256}(\theta_0)$ has $98$ decimal digits, but the conditions $C(A,k)$ with $2\le k<k_*$ require no numerical work near $A_0$: they hold at $A_0$ and persist on $V$ by continuity. The proof also shows that the relative measure of $A^{-1}(\AAA)$ in the cylinder $I_L(\theta_0)$ is at least $1-2/L$ for all sufficiently large $L$.
+\end{remark}
+
+\section{The example \texorpdfstring{$A_0$}{A0}}\label{sec:seed}
+
+We recall how the membership $A_0\in\AAA$ is established in \cite[Section~4.2]{HR} and describe an independent check. Let $a_0=\pi\gamma_0$, so that $R_0=R_{A_0}=1/\cos a_0\approx2.87037$. The continued fraction of $\gamma_0$ is $[0;2,1,1,2,2,2,\dots]$, and the denominators of its convergents are $3,5,13,31$ at the indices $2,3,4,5$. Its digit of index $3$ is odd and its digits of index at least $4$ are even, so the denominators of index at least $2$ are odd and \cite[Theorem~14(a)]{HR} applies. With $j_0=4$, all digits of index at least $6$ equal to $2$, and the monotonicity noted in \cite[(21)]{HR}, it reduces the conditions $C(A_0,k)$, $k\ge7$, to the single threshold inequality
+\begin{equation}\label{eq:21}
+\frac{4\pi}{\cos(\pi/13)\sqrt{R_0^2\cos^2(\pi/31)-1}}<13 .
+\end{equation}
+It remains to verify the five initial conditions $C(A_0,k)$, $2\le k\le6$.
+
+Both steps reduce to signs of trigonometric expressions. Multiplying \eqref{eq:21} by $\cos a_0$ and squaring positive quantities shows that \eqref{eq:21} is equivalent to
+\[
+D_{21}=169\cos^2(\pi/13)\bigl(\cos^2(\pi/31)-\cos^2a_0\bigr)-16\pi^2\cos^2a_0>0.
+\]
+For the initial conditions we use the identity $G_A(x)=\arccos(1/x)-\pi\gamma_A$.
+
+\begin{lemma}\label{lem:cosine}
+Let $A>8\omega_3$ with $\gamma_A$ irrational, $k\ge2$, $a=\pi\gamma_A$, $s=s_{A,k}$, $t=t_{A,k}$ and $d=\delta_{A,k+1}$.
+\begin{enumerate}
+\item If $a\le d$, then $F_{A,-}(s)<d$. If $a>d$, then $F_{A,-}(s)<d$ if and only if
+\[
+D_-=\cos s\cos(a-d)-\cos a>0 .
+\]
+\item If $a+d\ge\pi/2$, then $F_{A,+}(s,t)<d$. If $a+d<\pi/2$, then $F_{A,+}(s,t)<d$ if and only if
+\[
+D_+=\cos a\cos\tfrac{s+t}2-\cos\tfrac{t-s}2\cos(a+d)>0 .
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) Since $1/(R_A\cos s)=\cos a/\cos s\in(0,1)$ by Lemma~\ref{lem:welldef}, the inequality $F_{A,-}(s)<d$ reads $\arccos(\cos a/\cos s)>a-d$. The left side is positive, which settles the case $a\le d$. If $a>d$, then $a-d\in(0,\pi/2)$, and since $\arccos$ is decreasing, the inequality is equivalent to $\cos a/\cos s<\cos(a-d)$.
+
+(2) By \eqref{eq:ratio}, $F_{A,+}(s,t)<d$ reads $\arccos\bigl(\cos a\cos\frac{t+s}2/\cos\frac{t-s}2\bigr)<a+d$, and the argument of $\arccos$ lies in $(0,1)$, so the left side lies in $(0,\pi/2)$. This settles the case $a+d\ge\pi/2$, and otherwise the inequality is equivalent to $\cos a\cos\frac{t+s}2/\cos\frac{t-s}2>\cos(a+d)$.
+\end{proof}
+
+The archive \texttt{supplementary-certificate.zip} accompanying this paper contains three files: \texttt{README.md}, the program \texttt{check\_constants.py}, and its output \texttt{check\_constants.json}. The program runs under Python~3.12 and uses only the standard library; a successful run prints \texttt{PASS} and rewrites \texttt{check\_constants.json}. All computations use intervals with rational endpoints, rounded outwards to the grid $10^{-28}\Z$. The program encloses $\sqrt2$ between rational bounds obtained from an integer square root, $\pi$ by Machin's formula with alternating series remainders, and each cosine by its Taylor polynomial with the Lagrange remainder. For $\gamma_0$ it certifies the ordering of $\delta_{A_0,1},\dots,\delta_{A_0,7}$, the case distinctions of Lemma~\ref{lem:cosine}, and the signs of $D_-$, $D_+$ and $D_{21}$. The results for the five initial conditions are summarised in Table~\ref{tab:seed}, where $\delta_r$ abbreviates $\delta_{A_0,r}$ and each number is a certified lower bound rounded down. For the threshold inequality the program certifies $D_{21}>119.186512539$. It also rechecks the integer inequalities in the proof of Lemma~\ref{lem:numbers}.
+
+\begin{table}[ht]
+\caption{The five initial conditions $C(A_0,k)$, $2\le k\le6$, via Lemma~\ref{lem:cosine}.}\label{tab:seed}
+\begin{tabular}{cccll}
+\toprule
+$k$ & $s_{A_0,k}$ & $t_{A_0,k}$ & test for $F_{A_0,-}$ & test for $F_{A_0,+}$\\
+\midrule
+2 & $\delta_2$ & $\delta_1$ & $D_->0.120131732$ & $D_+>0.089875327$\\
+3 & $\delta_3$ & $\delta_2$ & $D_->0.587760974$ & $a_0+\delta_4>\pi/2$\\
+4 & $\delta_3$ & $\delta_2$ & $a_0\le\delta_5$ & $a_0+\delta_5>\pi/2$\\
+5 & $\delta_3$ & $\delta_2$ & $D_->0.546166802$ & $a_0+\delta_6>\pi/2$\\
+6 & $\delta_3$ & $\delta_2$ & $D_->0.070272401$ & $D_+>0.063192522$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{remark}
+Theorem~\ref{thm:main} uses the membership $A_0\in\AAA$ only through finitely many strict inequalities, namely $C(A_0,k)$ for $2\le k<k_*$; this is why a single explicit point of $\AAA$ suffices. The parity conditions of \cite[Theorem~14]{HR} enter only through this point and play no role in Sections~\ref{sec:estimates} to~\ref{sec:proof}.
+\end{remark}
+
+\section*{Use of AI-assisted tools}
+
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{9}
+
+\bibitem{BL}
+J.~A. Barker and D.~G. Larman, \emph{Determination of convex bodies by certain sets of sectional volumes}, Discrete Math. \textbf{241} (2001), no.~1--3, 79--96.
+
+\bibitem{Ga}
+R.~J. Gardner, \emph{Geometric tomography}, 2nd ed., Encyclopedia of Mathematics and its Applications, vol.~58, Cambridge University Press, Cambridge, 2006.
+
+\bibitem{Ha}
+J.~Haddad, \emph{An approximate counterexample to the Barker--Larman problem in dimension~4}, preprint (2026), arXiv:2609.10257v2.
+
+\bibitem{HR}
+J.~Haddad and D.~Ryabogin, \emph{On convex bodies with constant non-central sections}, preprint (2026), arXiv:2605.00299v1.
+
+\bibitem{Kh}
+A.~Ya. Khinchin, \emph{Continued fractions}, University of Chicago Press, Chicago, 1964.
+
+\bibitem{Sa}
+L.~A. Santal\'o, \emph{Dos propiedades caracter\'isticas de los c\'irculos sobre la superficie esf\'erica}, Math. Notae \textbf{11} (1952), 73--78.
+
+\bibitem{YY}
+V.~Yaskin and M.~Yaskina, \emph{Thick sections of convex bodies}, Adv. in Appl. Math. \textbf{71} (2015), 174--189.
+
+\end{thebibliography}
+
+\end{document}

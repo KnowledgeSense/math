@@ -1,0 +1,554 @@
+\documentclass{amsart}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={The Gaussian product inequality for disjoint principal minors of Wishart matrices},pdfauthor={Knowledge Sense}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\E}{\mathsf{E}}
+\newcommand{\Sym}{\mathcal{S}}
+\newcommand{\W}{\mathcal{W}}
+\newcommand{\NW}{\mathcal{N}\!\mathcal{W}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\Rop}{\mathcal{R}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\etr}{\operatorname{etr}}
+\newcommand{\ran}{\operatorname{ran}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\dist}{\operatorname{dist}}
+\newcommand{\ip}[2]{\langle #1,#2\rangle}
+
+\setlength{\emergencystretch}{2em}
+
+\begin{document}
+
+\title[Wishart product inequality]{The Gaussian product inequality for disjoint principal minors of Wishart matrices}
+
+\author{Knowledge Sense}
+\address{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{8 October 2026}
+
+\subjclass[2020]{Primary 60E15; Secondary 62H10, 15A15, 60E05}
+
+\keywords{Gaussian product inequality, Wishart distribution, principal minors, noncentral Wishart distribution, Loewner order, total positivity}
+
+\begin{abstract}
+Let $W$ be a real $p\times p$ Wishart matrix with real shape parameter $\alpha>p-1$ and positive definite scale matrix, and let $W_{11},\dots,W_{dd}$ be its diagonal blocks for a partition of $p$ into positive integers. We prove that $\E[\prod_i\det(W_{ii})^{\nu_i}]\ge\prod_i\E[\det(W_{ii})^{\nu_i}]$ for all real $\nu_1,\dots,\nu_d\ge0$, which settles a conjecture of Genest, Ouimet and Richards; the case $d=2$ was known. The proof separates one diagonal block at a time. Conditionally on $W_{11}$, the remaining blocks form a noncentral Wishart matrix whose noncentrality matrix is a fixed congruence transform of $W_{11}$. We show that the expected product of determinant powers is nondecreasing in the noncentrality matrix for the Loewner order, provided that its range stays in a fixed subspace. This rests on a second-order differential equation in a rank-one noncentrality parameter, valid for every real shape parameter larger than the order of the matrix, and on the pointwise positivity of an associated second-order differential operator on products of determinant powers. The separation is completed by the association of the eigenvalues of a Wishart matrix with identity scale matrix.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $W$ be a real $p\times p$ Wishart matrix with $\alpha$ degrees of freedom and positive definite scale matrix $\Sigma$, written $W\sim\W_p(\alpha,\Sigma)$; here $\alpha>p-1$ is real. Partition $W=(W_{ij})_{1\le i,j\le d}$ into blocks of sizes $p_i\times p_j$, where $p_1+\dots+p_d=p$, and write $|W_{ii}|$ for the determinant of the diagonal block $W_{ii}$. In 1934 Wilks \cite{Wil34} asked for the joint moments $\E[\prod_i|W_{ii}|^{\nu_i}]$ of these disjoint principal minors and described the general case as ``extremely complicated''. For $d=2$, Genest, Ouimet and Richards \cite{GOR25} expressed this moment through a Gaussian hypergeometric function of matrix argument. For nonnegative integer exponents and real $\alpha$, Gaunt and Ouimet \cite{GO26} gave a finite exact recursion based on a Stein identity for the Wishart distribution \cite{BGORS26}. For embedded (nested) principal minors, explicit formulas go back to Wilks; see \cite{GOR24b}.
+
+The Gaussian product inequality asserts that $\E[\prod_i|X_i|^{\gamma_i}]\ge\prod_i\E[|X_i|^{\gamma_i}]$ for every centered Gaussian vector $(X_1,\dots,X_n)$ and all $\gamma_i>0$. It grew out of the real linear polarization constant problem of Ben\'{\i}tez, Sarantopoulos and Tonge \cite{BST98}; Frenkel \cite{Fre08} formulated it for even integer exponents, Li and Wei \cite{LW12} proposed the version with real exponents, and a proof has recently been posted by Ouimet and Greaves \cite{OG26}. Genest, Ouimet and Richards \cite[Conjecture~1.1]{GOR24a} proposed the following matrix analogue, in which squared Gaussian coordinates are replaced by disjoint principal minors of a Wishart matrix.
+
+\begin{theorem}\label{thm:main}
+Let $d,p_1,\dots,p_d$ be positive integers, $p=p_1+\dots+p_d$, let $\alpha>p-1$ be real and let $\Sigma$ be a real positive definite $p\times p$ matrix. Let $W\sim\W_p(\alpha,\Sigma)$ be partitioned into blocks $W_{ij}$ of sizes $p_i\times p_j$. Then
+\begin{equation}\label{eq:main}
+\E\Bigl[\prod_{i=1}^d|W_{ii}|^{\nu_i}\Bigr]\ge\prod_{i=1}^d\E\bigl[|W_{ii}|^{\nu_i}\bigr]
+\qquad\text{for all real }\nu_1,\dots,\nu_d\ge0.
+\end{equation}
+\end{theorem}
+
+For $d=2$, Theorem~\ref{thm:main} is \cite[Corollary~3.4]{GOR25}, which is in fact a quantitative strengthening. Genest, Ouimet and Richards \cite{GOR24a} also proved product inequalities for nonpositive exponents and for some mixtures of signs, one of them conditionally on the conjecture, and a product inequality for nondecreasing functions of the eigenvalues of $W$ \cite[Theorem~3.14]{GOR24a}. When all blocks are scalar and $\alpha$ is an integer, \eqref{eq:main} can be derived from the strong Gaussian product inequality \cite[Theorem~1]{OG26}; see Remark~\ref{rem:scalar}.
+
+The conjecture concerns all real $\alpha>p-1$, the full range in which $\W_p(\alpha,\Sigma)$ has a density, and all real exponents $\nu_1,\dots,\nu_d\ge0$. Real exponents are what one needs to differentiate \eqref{eq:main} in the $\nu_i$ or to combine it with inverse powers as in \cite[Proposition~3.9]{GOR24a}. This generality is also what makes the case $d\ge3$ difficult. The hypergeometric representation of \cite{GOR25} has no known analogue for three or more blocks; the recursion of \cite{GO26} is exact for integer exponents but does not terminate for real ones \cite[Remark~3.2]{GO26}; and the iterated Schur complements that handle embedded minors \cite{GOR24b} do not apply, because removing one diagonal block by a Schur complement changes the remaining disjoint blocks instead of producing independent factors. We are not aware of a previous proof for $d\ge3$. We deduce Theorem~\ref{thm:main} from the following statement.
+
+\begin{theorem}\label{thm:sep}
+In the setting of Theorem~\ref{thm:main}, inequality \eqref{eq:main} holds in each of the following cases:
+\begin{enumerate}
+\item[(a)] $\alpha\ge p$;
+\item[(b)] $d\ge3$;
+\item[(c)] $d=2$, and either $p_1\ne p_2$ or $\rank\Sigma_{12}<p_1$.
+\end{enumerate}
+Moreover, in cases (a) and (b),
+\begin{equation}\label{eq:onevsrest}
+\E\Bigl[\prod_{i=1}^d|W_{ii}|^{\nu_i}\Bigr]\ge\E\bigl[|W_{11}|^{\nu_1}\bigr]\,\E\Bigl[\prod_{i=2}^d|W_{ii}|^{\nu_i}\Bigr].
+\end{equation}
+\end{theorem}
+
+Theorem~\ref{thm:sep} leaves out only the case $d=2$, $p_1=p_2$, $\Sigma_{12}$ invertible and $p-1<\alpha<p$, which is covered by \cite[Corollary~3.4]{GOR25}. The proof works directly with real $\alpha$ and real exponents; it uses neither an explicit formula for the joint moments nor interpolation from integer parameters.
+
+\subsection*{Outline of the proof}
+After a block diagonal congruence we may assume that $\Sigma_{11}=I$. Conditionally on $W_{11}$, the principal submatrix formed by the blocks $2,\dots,d$ has a noncentral Wishart law with shape $\alpha$, a fixed scale matrix and noncentrality matrix $K^{\mathsf T}W_{11}K$, where $K=(\Sigma_{12},\dots,\Sigma_{1d})$ (Lemma~\ref{lem:cond}). Let $G(W_{11})$ be the conditional expectation of $\prod_{i\ge2}|W_{ii}|^{\nu_i}$. If $G$ is nondecreasing in the Loewner order, then its average over orthogonal conjugations is a coordinatewise nondecreasing function of the eigenvalues of $W_{11}$. These eigenvalues have a multivariate totally positive density and are therefore associated, which gives \eqref{eq:onevsrest} (Proposition~\ref{prop:sep}). Iterating \eqref{eq:onevsrest}, and choosing the separated block suitably when $d=2$, proves Theorem~\ref{thm:sep}.
+
+The main step is the monotonicity of $G$. All the noncentrality matrices $K^{\mathsf T}W_{11}K$ have their range in the subspace $L=\ran K^{\mathsf T}$, of dimension $r=\rank K$. Let $\Omega$ have its range in $L$, and let $v\in L$. We write $\Omega=\Omega'+\theta_0vv^{\mathsf T}$ with $\rank\Omega'\le r-1$, so that $\Omega+c\,vv^{\mathsf T}=\Omega'+(\theta_0+c)vv^{\mathsf T}$. The part $\Omega'$ is carried by $r-1$ Gaussian rows, and this leaves the shape $q=\alpha-r+1$ for a noncentral Wishart matrix $W_\theta$ with noncentrality matrix $\theta vv^{\mathsf T}$. Let $f$ be a product of nonnegative powers of the determinants of the diagonal blocks of $W_\theta$, each shifted by the corresponding block of the Gaussian part. Then $g(\theta)=\E f(W_\theta)$ satisfies
+\[
+2\theta g''(\theta)+qg'(\theta)=\E\bigl[\Rop_{q,vv^{\mathsf T}}f(W_\theta)\bigr]
+\]
+(Lemma~\ref{lem:ode}), where $\Rop_{q,H}$ is a second-order differential operator that reduces for $(q,H)=(\alpha,\Sigma)$ to the Wishart Stein operator of \cite{BGORS26,GO26}. By Lemma~\ref{lem:operator}, $\Rop_{q,vv^{\mathsf T}}f\ge0$ on the positive semidefinite cone whenever $q\ge\ell+1$, where $\ell$ is the largest block size among the blocks $2,\dots,d$. Hence $g$ is nondecreasing (Proposition~\ref{prop:rankone}), and $G$ is monotone (Proposition~\ref{prop:support}). The resulting condition $q\ge\ell+1$ reads $\alpha\ge r+\ell$. It holds whenever $d\ge3$, and for $d=2$ after a suitable choice of the block to be separated, except in the case left out of Theorem~\ref{thm:sep}.
+
+Besides standard facts on Wishart laws \cite{Mui82}, the proof uses Fourier inversion on the space of symmetric matrices and the association of random vectors with a multivariate totally positive density \cite{FKG71,KR80}.
+
+\subsection*{Organization}
+Section~\ref{sec:prelim} collects facts on Laplace transforms and noncentral Wishart laws. Section~\ref{sec:operator} computes the operator $\Rop_{q,H}$ on products of determinant powers. Section~\ref{sec:rankone} proves the differential equation in a rank-one noncentrality parameter and the resulting monotonicity, and Section~\ref{sec:support} extends it to noncentrality matrices with a fixed range. Section~\ref{sec:separation} separates one block, and Section~\ref{sec:proofs} proves the theorems and adds some remarks.
+
+\section{Preliminaries}\label{sec:prelim}
+
+\subsection{Notation}
+For $m\in\N$, let $\Sym^m$ be the space of real symmetric $m\times m$ matrices, with inner product $\ip UW=\tr(UW)$ and Frobenius norm $\|\cdot\|$, and let $\Sym^m_+$ and $\Sym^m_{++}$ be the cones of positive semidefinite and positive definite matrices. We write $A\preceq B$ if $B-A\in\Sym^m_+$, $|A|$ for the determinant, and $\etr(A)=\exp(\tr A)$. On $\Sym^m_+$ we have $\|W\|\le\tr W\le\sqrt m\,\|W\|$, and for $B\in\Sym^r_+$ the arithmetic and geometric mean inequality gives $|B|\le(\tr B/r)^r$. Lebesgue measure on $\Sym^m$ refers to the coordinates $(w_{ab})_{a\le b}$.
+
+For a function $f$ of class $C^2$ on an open subset of $\Sym^m$ we use the symmetric gradient $\nabla f=(\nabla_{ab}f)$, where $\nabla_{ab}=\nabla_{ba}=\frac12(1+\delta_{ab})\,\partial/\partial w_{ab}$ for $a\le b$. Thus $\ip{\nabla f(W)}{U}$ is the derivative of $f$ at $W$ in the direction $U$. For $q\in\R$ and $H\in\Sym^m$ we define
+\begin{equation}\label{eq:Rdef}
+\Rop_{q,H}f(W)=q\tr\bigl(H\nabla f(W)\bigr)+2\tr\bigl(W\nabla H\nabla f(W)\bigr),
+\end{equation}
+where
+\[
+\tr(W\nabla H\nabla f)=\sum_{i,j,k,l=1}^m W_{ik}H_{lj}\nabla_{ij}\nabla_{kl}f.
+\]
+For $T\in\Sym^m$ one checks that $\nabla\etr(-TW)=-T\etr(-TW)$, and hence
+\begin{equation}\label{eq:Rexp}
+\Rop_{q,H}\etr(-TW)=\bigl(-q\tr(HT)+2\tr(TWTH)\bigr)\etr(-TW).
+\end{equation}
+The same formula holds for complex symmetric $T$. For $(q,H)=(\alpha,\Sigma)$, \eqref{eq:Rdef} is the operator $\mathcal R_{\alpha,\Sigma}$ of \cite[(3.2)]{GO26}, and the Stein identity of \cite{BGORS26}, in the form \cite[(3.1)]{GO26}, states that $\E[\Rop_{\alpha,\Sigma}f(W)]=\E[\tr(W\nabla f(W))]$ for $W\sim\W_m(\alpha,\Sigma)$ and polynomial $f$.
+
+Blocks of a matrix are indexed as in Theorem~\ref{thm:main}. We write $\ran$ for the range of a matrix and $\Omega^+$ for the Moore--Penrose inverse of $\Omega\in\Sym^m_+$.
+
+\subsection{Laplace transforms}
+The following lemma lets us pass from exponential test functions to compactly supported ones. With $\Rop=0$ it says that a finite signed measure on $\Sym^m_+$ is determined by its Laplace transform on $\Sym^m_{++}$.
+
+\begin{lemma}\label{lem:fourier}
+Let $\mu$ be a finite positive Borel measure on $\Sym^m_+$ with $\int(1+\tr W)\,\mu(dW)<\infty$, let $\xi$ be a finite signed Borel measure on $\Sym^m_+$, and let $\Rop$ be either $0$ or $\Rop_{q,H}$ for some $q\in\R$ and $H\in\Sym^m$. Suppose that
+\begin{equation}\label{eq:lapid}
+\int\etr(-TW)\,\xi(dW)=\int\Rop\bigl[\etr(-T\,\cdot\,)\bigr](W)\,\mu(dW)\qquad\text{for all }T\in\Sym^m_{++}.
+\end{equation}
+Then $\int\varphi\,d\xi=\int\Rop\varphi\,d\mu$ for every $\varphi\in C_c^\infty(\Sym^m)$.
+\end{lemma}
+
+\begin{proof}
+Let $\mathcal T$ be the set of complex symmetric matrices $T$ with $\operatorname{Re}T\in\Sym^m_{++}$. For $T\in\mathcal T$ and $W\in\Sym^m_+$ we have $|\etr(-TW)|=\etr(-(\operatorname{Re}T)W)\le1$, and by \eqref{eq:Rexp} the integrand on the right of \eqref{eq:lapid} is bounded by $c(1+\|T\|)^2(1+\|W\|)$. Hence both sides of \eqref{eq:lapid} are holomorphic functions on $\mathcal T$, since the integrands are entire in the entries of $T$ and locally uniformly dominated by integrable functions. Their difference vanishes on the open set $\Sym^m_{++}$ of real points of $\mathcal T$, so all its complex partial derivatives vanish at a point of $\Sym^m_{++}$; as $\mathcal T$ is convex, hence connected, the difference vanishes on $\mathcal T$.
+
+Fix $T_0\in\Sym^m_{++}$ and let $\varphi\in C_c^\infty(\Sym^m)$. Then $\psi(W)=\etr(T_0W)\varphi(W)$ belongs to $C_c^\infty(\Sym^m)$, and its Fourier transform $\hat\psi(U)=\int\psi(W)e^{-i\ip UW}dW$ is a Schwartz function. Fourier inversion gives a constant $c_m>0$ with
+\[
+\varphi(W)=c_m\int_{\Sym^m}\hat\psi(U)\etr\bigl(-(T_0-iU)W\bigr)\,dU,\qquad W\in\Sym^m.
+\]
+Differentiation under the integral sign shows that
+\[
+\Rop\varphi(W)=c_m\int_{\Sym^m}\hat\psi(U)\,\Rop\bigl[\etr(-(T_0-iU)\,\cdot\,)\bigr](W)\,dU .
+\]
+For $W\in\Sym^m_+$ the last integrand is bounded by $c|\hat\psi(U)|(1+\|U\|)^2(1+\|W\|)$, which is integrable with respect to $dU\,\mu(dW)$; likewise $|\hat\psi(U)\etr(-(T_0-iU)W)|\le|\hat\psi(U)|$. Since $T_0-iU\in\mathcal T$, Fubini's theorem and the identity on $\mathcal T$ give $\int\varphi\,d\xi=\int\Rop\varphi\,d\mu$.
+\end{proof}
+
+\subsection{Wishart and noncentral Wishart laws}
+For $\alpha>m-1$ and $\Sigma\in\Sym^m_{++}$, the Wishart law $\W_m(\alpha,\Sigma)$ has the density
+\[
+\frac{|W|^{(\alpha-m-1)/2}\etr(-\Sigma^{-1}W/2)}{2^{\alpha m/2}|\Sigma|^{\alpha/2}\Gamma_m(\alpha/2)},\qquad W\in\Sym^m_{++},
+\]
+where $\Gamma_m(a)=\pi^{m(m-1)/4}\prod_{j=1}^m\Gamma(a-(j-1)/2)$. Its Laplace transform is $\E\etr(-TW)=|I+2\Sigma T|^{-\alpha/2}$ for $T\in\Sym^m_+$, more generally $\E\etr(TW)=|I-2T\Sigma|^{-\alpha/2}$ whenever $\Sigma^{-1}-2T\in\Sym^m_{++}$ \cite[Theorem~3.2.3]{Mui82}, and its mean is $\alpha\Sigma$. In particular $\E\exp(t\tr W)<\infty$ for some $t>0$, so $\tr W$ has moments of all orders. Since $|W_{ii}|\le(\tr W)^{p_i}$ on $\Sym^p_+$, every product of nonnegative powers of the determinants of diagonal blocks of a Wishart matrix has finite expectation. By Lemma~\ref{lem:fourier} and the Laplace transform, if $W\sim\W_m(\alpha,\Sigma)$ and $M$ is an invertible $m\times m$ matrix, then $MWM^{\mathsf T}\sim\W_m(\alpha,M\Sigma M^{\mathsf T})$, and a principal submatrix $W_{II}$ satisfies $W_{II}\sim\W_{|I|}(\alpha,\Sigma_{II})$.
+
+Fix $S\in\Sym^m_{++}$ and $T\in\Sym^m_+$, and put
+\begin{equation}\label{eq:BST}
+B_T=(I+2ST)^{-1},\qquad S_T=(S^{-1}+2T)^{-1}=B_TS.
+\end{equation}
+Then $TB_T=B_T^{\mathsf T}T$ is symmetric, because $(I+2TS)T=T(I+2ST)$, and
+\begin{equation}\label{eq:resolvent}
+T-2TS_TT=T-2TB_TST=TB_T\bigl((I+2ST)-2ST\bigr)=TB_T.
+\end{equation}
+
+\begin{definition}\label{def:type}
+Let $\beta\ge0$, $S\in\Sym^m_{++}$ and $\Omega\in\Sym^m_+$. A random matrix $Y$ with values in $\Sym^m_+$ is of \emph{type} $(\beta,S,\Omega)$ if
+\begin{equation}\label{eq:type}
+\E\etr(-TY)=|I+2ST|^{-\beta/2}\etr(-\Omega TB_T)\qquad\text{for all }T\in\Sym^m_+.
+\end{equation}
+If $\beta>m-1$ and a law of type $(\beta,S,\Omega)$ exists, we denote it by $\NW_m(\beta,S,\Omega)$. We call $\Omega$ the noncentrality matrix. In the representation of Lemma~\ref{lem:gauss} below, $\Omega=M^{\mathsf T}M$ is the Gram matrix of the mean matrix $M$; it is not multiplied by $S^{-1}$.
+\end{definition}
+
+By Lemma~\ref{lem:fourier}, the type determines the law. If $Y_1$ and $Y_2$ are independent of types $(\beta_1,S,\Omega_1)$ and $(\beta_2,S,\Omega_2)$, then $Y_1+Y_2$ is of type $(\beta_1+\beta_2,S,\Omega_1+\Omega_2)$. A matrix with law $\W_m(\beta,S)$ is of type $(\beta,S,0)$.
+
+\begin{lemma}\label{lem:gauss}
+Let $S\in\Sym^m_{++}$, $T\in\Sym^m_+$ and $\mu\in\R^m$. Then, as measures in $x\in\R^m$,
+\begin{equation}\label{eq:gausstilt}
+e^{-x^{\mathsf T}Tx}\,N_m(\mu,S)(dx)=|I+2ST|^{-1/2}e^{-\mu^{\mathsf T}TB_T\mu}\,N_m(B_T\mu,S_T)(dx).
+\end{equation}
+Consequently, if $n\ge0$ is an integer, $M$ is a real $n\times m$ matrix and $Z$ is an $n\times m$ matrix with independent $N_m(0,S)$ rows, then $(Z+M)^{\mathsf T}(Z+M)$ is of type $(n,S,M^{\mathsf T}M)$; for $n=0$ this matrix is $0$. In particular $\NW_m(\beta,S,\Omega)$ exists whenever $\rank\Omega\le n$ and $\beta-n>m-1$, and it is the law of $(Z+M)^{\mathsf T}(Z+M)+V$ for any $M$ with $M^{\mathsf T}M=\Omega$ and $V\sim\W_m(\beta-n,S)$ independent of $Z$.
+\end{lemma}
+
+\begin{proof}
+Using $S_T^{-1}=S^{-1}+2T$, $S_T^{-1}B_T=S^{-1}$ and $B_T^{\mathsf T}S^{-1}+2TB_T=S^{-1}B_T+2TB_T=S^{-1}$, one obtains
+\[
+x^{\mathsf T}Tx+\tfrac12(x-\mu)^{\mathsf T}S^{-1}(x-\mu)=\tfrac12(x-B_T\mu)^{\mathsf T}S_T^{-1}(x-B_T\mu)+\mu^{\mathsf T}TB_T\mu .
+\]
+Since $|S_T|/|S|=|I+2ST|^{-1}$, this proves \eqref{eq:gausstilt}. For the Gram matrix, $\etr(-T(Z+M)^{\mathsf T}(Z+M))$ is the product over the rows $x_i^{\mathsf T}$ of $Z+M$ of $e^{-x_i^{\mathsf T}Tx_i}$, and \eqref{eq:gausstilt} applied to each row gives the type $(n,S,M^{\mathsf T}M)$. The last assertion follows by adding an independent matrix of type $(\beta-n,S,0)$.
+\end{proof}
+
+\section{A positive second-order operator}\label{sec:operator}
+
+Throughout this section, $m=m_1+\dots+m_s$ is a partition of $m$ into positive integers, $W\in\Sym^m$ is partitioned accordingly into blocks $W_{jj}$ of size $m_j$, and $\ell=\max_jm_j$. Let $K_j\in\Sym^{m_j}_{++}$ and $b_j\ge0$, and put
+\[
+\mathcal O=\{W\in\Sym^m:W_{jj}+K_j\in\Sym^{m_j}_{++}\text{ for all }j\},\qquad
+f(W)=\prod_{j=1}^s|W_{jj}+K_j|^{b_j}.
+\]
+The set $\mathcal O$ is open and contains $\Sym^m_+$, and $f$ is smooth and positive on $\mathcal O$. For $W\in\mathcal O$ let $A_j=W_{jj}+K_j$, and put
+\[
+D=\diag_j\bigl(b_jA_j^{-1}\bigr),\qquad h_j=\tr\bigl(A_j^{-1}W_{jj}\bigr),\qquad Q_j=A_j^{-1}W_{jj}A_j^{-1}.
+\]
+For $H\in\Sym^m$ and $v\in\R^m$, we write $H_{jj}$ and $v_j$ for the corresponding diagonal block and subvector.
+
+\begin{lemma}\label{lem:operator}
+For every $q\in\R$, $H\in\Sym^m$ and $W\in\mathcal O$,
+\begin{equation}\label{eq:RH}
+\frac{\Rop_{q,H}f(W)}{f(W)}=2\tr(HDWD)+\sum_{j=1}^sb_j\Bigl((q-h_j)\tr\bigl(H_{jj}A_j^{-1}\bigr)-\tr\bigl(H_{jj}Q_j\bigr)\Bigr).
+\end{equation}
+In particular, for $v\in\R^m$,
+\begin{equation}\label{eq:Rv}
+\frac{\Rop_{q,vv^{\mathsf T}}f(W)}{f(W)}=2v^{\mathsf T}DWDv+\sum_{j=1}^sb_j\,v_j^{\mathsf T}\bigl((q-h_j)A_j^{-1}-Q_j\bigr)v_j .
+\end{equation}
+If $W\in\Sym^m_+$ and $q\ge\ell+1$, then $\Rop_{q,vv^{\mathsf T}}f(W)\ge0$ for every $v\in\R^m$.
+\end{lemma}
+
+\begin{proof}
+For $a,b$ in the $j$th block, $\nabla_{ab}\log|A_j|=(A_j^{-1})_{ab}$, both for $a=b$ and for $a\neq b$; hence $\nabla f=fD$. Differentiating $A_j^{-1}$ along the symmetric coordinate directions gives, for $a,b,c,d$ in the $j$th block,
+\[
+\nabla_{ab}(A_j^{-1})_{cd}=-\tfrac12\bigl((A_j^{-1})_{ca}(A_j^{-1})_{bd}+(A_j^{-1})_{cb}(A_j^{-1})_{ad}\bigr),
+\]
+again including the case $a=b$, while $\nabla_{ab}D_{cd}=0$ unless $a,b,c,d$ lie in one block. Therefore
+\[
+\frac{\nabla_{ij}\nabla_{kl}f}{f}=D_{ij}D_{kl}-\sum_{t=1}^s\frac{b_t}{2}\mathbf 1_{\{i,j,k,l\in\mathcal I_t\}}\bigl((A_t^{-1})_{ki}(A_t^{-1})_{jl}+(A_t^{-1})_{kj}(A_t^{-1})_{il}\bigr),
+\]
+where $\mathcal I_t$ denotes the set of indices of the $t$th block. Contracting with $W_{ik}H_{lj}$, the first term gives $\tr(DWDH)$, and the two terms in parentheses give $\tr(A_t^{-1}W_{tt})\tr(H_{tt}A_t^{-1})$ and $\tr(A_t^{-1}W_{tt}A_t^{-1}H_{tt})$. Together with $q\tr(H\nabla f)/f=q\sum_jb_j\tr(H_{jj}A_j^{-1})$ this proves \eqref{eq:RH}, and \eqref{eq:Rv} is the case $H=vv^{\mathsf T}$.
+
+Let $W\in\Sym^m_+$. Then $0\preceq W_{jj}\preceq A_j$, so $X_j=A_j^{-1/2}W_{jj}A_j^{-1/2}$ satisfies $0\preceq X_j\preceq I$. Hence $0\le h_j=\tr X_j\le m_j$ and $0\preceq Q_j=A_j^{-1/2}X_jA_j^{-1/2}\preceq A_j^{-1}$. If $q\ge\ell+1$, then
+\[
+(q-h_j)A_j^{-1}-Q_j\succeq(q-m_j-1)A_j^{-1}\succeq0,
+\]
+and $DWD\succeq0$. Since $f>0$ and $b_j\ge0$, the right side of \eqref{eq:Rv} is nonnegative.
+\end{proof}
+
+\begin{lemma}\label{lem:extension}
+Let $\kappa=\min_j\lambda_{\min}(K_j)$ and $\beta=\sum_jm_jb_j$. There is $\tilde f\in C^\infty(\Sym^m)$ that coincides with $f$ on a neighborhood of $\Sym^m_+$ and satisfies $|\partial^\gamma\tilde f(W)|\le c(1+\|W\|)^\beta$ for all $W\in\Sym^m$ and all partial derivatives $\partial^\gamma$ of order at most two. Moreover, $|\Rop_{q,H}f(W)|\le c(1+\|W\|)^{\beta+1}$ for $W\in\Sym^m_+$.
+\end{lemma}
+
+\begin{proof}
+Let $\delta=\kappa/6$ and $N_t=\{W:\dist(W,\Sym^m_+)<t\}$. If $\dist(W,\Sym^m_+)\le3\delta$, there is $W'\in\Sym^m_+$ with $\|W-W'\|\le3\delta$, so $A_j\succeq W'_{jj}+K_j-3\delta I\succeq(\kappa/2)I$; thus the closure of $N_{3\delta}$ lies in $\mathcal O$, and on it $\|A_j^{-1}\|\le2/\kappa$ and $|A_j|\le(\tr A_j/m_j)^{m_j}\le c(1+\|W\|)^{m_j}$. By $\nabla f=fD$ and the formula for $\nabla\nabla f$ above, $f$ and its derivatives of order at most two are bounded by $c(1+\|W\|)^\beta$ there. Let $\zeta$ be the convolution of the indicator function of $N_{2\delta}$ with a smooth probability density supported in the ball of radius $\delta$. Then $\zeta$ is smooth with bounded derivatives, $\zeta=1$ on $N_\delta$, and $\zeta=0$ outside $N_{3\delta}$. Put $\tilde f=\zeta f$ on $\mathcal O$ and $\tilde f=0$ elsewhere. The bound on $\Rop_{q,H}f$ follows from \eqref{eq:RH}, because $0\le h_j\le m_j$, $\|Q_j\|\le\|A_j^{-1}\|\le1/\kappa$ and $\|DWD\|\le c\|W\|$ on $\Sym^m_+$.
+\end{proof}
+
+\section{A rank-one noncentrality parameter}\label{sec:rankone}
+
+Throughout this section, $S\in\Sym^m_{++}$, $v\in\R^m$ and $q>m$ is real. Let $X_0\sim N_m(0,S)$ and $V\sim\W_m(q-1,S)$ be independent; $V$ exists since $q-1>m-1$. For $s\in\R$ put
+\[
+W^{(s)}=(X_0+sv)(X_0+sv)^{\mathsf T}+V,
+\]
+and for $\theta\ge0$ let $\mu_\theta$ be the law of $W^{(\sqrt\theta)}$. By Lemma~\ref{lem:gauss}, $\mu_\theta=\NW_m(q,S,\theta vv^{\mathsf T})$ and
+\begin{equation}\label{eq:Ltheta}
+L_\theta(T):=\int\etr(-TW)\,\mu_\theta(dW)=|I+2ST|^{-q/2}e^{-\theta a_T},\qquad a_T=v^{\mathsf T}TB_Tv .
+\end{equation}
+
+For an integer $N\ge0$, let $\M_N$ be the Banach space of finite signed Borel measures $\eta$ on $\Sym^m_+$ with $\|\eta\|_N=\int(1+\tr W)^N\,|\eta|(dW)<\infty$.
+
+\begin{lemma}\label{lem:analytic}
+There are measures $\mu_\theta\in\bigcap_N\M_N$, defined for all real $\theta$ and agreeing with the laws above for $\theta\ge0$, such that $\theta\mapsto\mu_\theta$ is given on $\R$ by a power series that converges in $\M_N$ for every $N$ and every $\theta$. Consequently, if $f$ is a Borel function on $\Sym^m_+$ with $|f(W)|\le c(1+\tr W)^N$, then $g(\theta)=\int f\,d\mu_\theta$ is real analytic on $\R$ and $g^{(k)}(\theta)=\int f\,d\mu_\theta^{(k)}$ for all $k$, where $\mu_\theta^{(k)}$ is the termwise derivative.
+\end{lemma}
+
+\begin{proof}
+Let $a=v^{\mathsf T}S^{-1}v$ and $u(x)=v^{\mathsf T}S^{-1}x$, and define polynomials $P_n$ by $e^{su-as^2/2}=\sum_{n\ge0}P_n(u)s^n/n!$. Since the left side is invariant under $(s,u)\mapsto(-s,-u)$, we have $P_n(-u)=(-1)^nP_n(u)$. Cauchy's estimate on the circle $|s|=\rho$ gives $|P_n(u)|\le n!\,\rho^{-n}e^{\rho|u|+a\rho^2/2}$. Put $F(x,Y)=xx^{\mathsf T}+Y$ and define $\eta_n(\varphi)=\E[\varphi(F(X_0,V))P_n(u(X_0))]$. As $x\mapsto-x$ preserves the law of $X_0$ and fixes $F$, we get $\eta_n=0$ for odd $n$. Moreover $(1+\tr F(x,Y))^N\le(1+\|x\|^2)^N(1+\tr Y)^N$, so
+\[
+\|\eta_n\|_N\le n!\,\rho^{-n}M_{N,\rho},
+\]
+where
+\[
+M_{N,\rho}=e^{a\rho^2/2}\,\E\bigl[(1+\|X_0\|^2)^Ne^{\rho|u(X_0)|}\bigr]\,\E\bigl[(1+\tr V)^N\bigr]<\infty .
+\]
+Hence $\mu_\theta:=\sum_{k\ge0}\theta^k\eta_{2k}/(2k)!$ converges in $\M_N$ for $|\theta|<\rho^2$, and $\rho$ is arbitrary. The density of $N_m(sv,S)$ with respect to $N_m(0,S)$ is $e^{su(x)-as^2/2}$, so for $\theta=s^2\ge0$ and bounded Borel $\varphi$, dominated convergence gives
+\[
+\E\varphi(W^{(s)})=\E\bigl[\varphi(F(X_0,V))e^{su(X_0)-as^2/2}\bigr]=\sum_{n\ge0}\frac{s^n}{n!}\eta_n(\varphi)=\int\varphi\,d\mu_\theta .
+\]
+The last statement follows because $\eta\mapsto\int f\,d\eta$ is a bounded linear functional on $\M_N$.
+\end{proof}
+
+For $\theta\ge0$ put $\xi_\theta=2\theta\mu_\theta''+q\mu_\theta'$, a finite signed measure in $\bigcap_N\M_N$.
+
+\begin{lemma}\label{lem:ode}
+For every $\theta\ge0$ and $\varphi\in C_c^\infty(\Sym^m)$,
+\begin{equation}\label{eq:odetest}
+\int\varphi\,d\xi_\theta=\int\Rop_{q,vv^{\mathsf T}}\varphi\,d\mu_\theta .
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:fourier}, applied with $\xi=\xi_\theta$, $\mu=\mu_\theta$ and $\Rop=\Rop_{q,vv^{\mathsf T}}$, it suffices to verify \eqref{eq:lapid}, that is,
+\[
+\int\etr(-TW)\,\xi_\theta(dW)=\int\Rop_{q,vv^{\mathsf T}}\bigl[\etr(-T\,\cdot\,)\bigr](W)\,\mu_\theta(dW)\qquad\text{for all }T\in\Sym^m_{++}.
+\]
+Fix $T\in\Sym^m_{++}$. By Lemma~\ref{lem:analytic}, $\theta\mapsto\int\etr(-TW)\,\mu_\theta(dW)$ is real analytic on $\R$; it agrees with $|I+2ST|^{-q/2}e^{-\theta a_T}$ for $\theta\ge0$, hence for all real $\theta$. By Lemma~\ref{lem:analytic} again, the left side equals
+\[
+\bigl(2\theta\partial_\theta^2+q\partial_\theta\bigr)L_\theta(T)=\bigl(2\theta a_T^2-qa_T\bigr)L_\theta(T).
+\]
+For the right side we need $\int W\etr(-TW)\,\mu_\theta(dW)$, $\theta\ge0$. Write $W=xx^{\mathsf T}+V$ with $x=X_0+\sqrt\theta v$. By \eqref{eq:gausstilt}, $\E[xx^{\mathsf T}e^{-x^{\mathsf T}Tx}]=\E[e^{-x^{\mathsf T}Tx}]\bigl(S_T+\theta B_Tvv^{\mathsf T}B_T^{\mathsf T}\bigr)$. From the Wishart density, $\etr(-TY)\W_m(q-1,S)(dY)=|I+2ST|^{-(q-1)/2}\W_m(q-1,S_T)(dY)$, so $\E[V\etr(-TV)]=(q-1)S_T\,\E\etr(-TV)$. By independence,
+\[
+\int W\etr(-TW)\,\mu_\theta(dW)=L_\theta(T)\bigl(qS_T+\theta B_Tvv^{\mathsf T}B_T^{\mathsf T}\bigr).
+\]
+By \eqref{eq:Rexp} with $H=vv^{\mathsf T}$, and since $v^{\mathsf T}B_T^{\mathsf T}Tv=v^{\mathsf T}TB_Tv=a_T$, the right side of \eqref{eq:odetest} equals
+\[
+L_\theta(T)\bigl(-q\,v^{\mathsf T}(T-2TS_TT)v+2\theta a_T^2\bigr)=L_\theta(T)\bigl(-qa_T+2\theta a_T^2\bigr),
+\]
+where we used \eqref{eq:resolvent}. The two sides agree.
+\end{proof}
+
+\begin{remark}
+If $q$ is an integer, $\mu_\theta$ is the law of $Y^{\mathsf T}Y$ for a $q\times m$ Gaussian matrix $Y$ with independent $N_m(0,S)$ rows and mean $yv^{\mathsf T}$, where $y\in\R^q$ and $|y|^2=\theta$, and $2\theta\partial_\theta^2+q\partial_\theta$ is one half of the Laplacian in $y\in\R^q$, acting on functions of $\theta=|y|^2$.
+\end{remark}
+
+\begin{proposition}\label{prop:rankone}
+Let $m=m_1+\dots+m_s$ be a partition with $\ell=\max_jm_j$, let $K_j\in\Sym^{m_j}_+$ and $b_j\ge0$, and put $f(W)=\prod_j|W_{jj}+K_j|^{b_j}$ for $W\in\Sym^m_+$, where a factor with $b_j=0$ is read as $1$. If $q>m$ and $q\ge\ell+1$, then $\theta\mapsto\int f\,d\mu_\theta$ is nondecreasing on $[0,\infty)$.
+\end{proposition}
+
+\begin{proof}
+Assume first that every $K_j$ is positive definite, and let $\beta=\sum_jm_jb_j$. By Lemma~\ref{lem:extension} and Lemma~\ref{lem:analytic}, $g(\theta)=\int f\,d\mu_\theta$ is real analytic and $g'$, $g''$ are given by integration against $\mu'_\theta$, $\mu''_\theta$. Let $\tilde f$ be as in Lemma~\ref{lem:extension}, let $\chi\in C_c^\infty(\Sym^m)$ satisfy $0\le\chi\le1$, $\chi(W)=1$ for $\|W\|\le1$ and $\chi(W)=0$ for $\|W\|\ge2$, and put $\varphi_R(W)=\chi(W/R)\tilde f(W)$ for $R\ge1$. We apply \eqref{eq:odetest} to $\varphi_R$ and let $R\to\infty$. On the left, $|\varphi_R|\le|f|$ on $\Sym^m_+$, and dominated convergence gives $\int\varphi_R\,d\xi_\theta\to\int f\,d\xi_\theta=2\theta g''(\theta)+qg'(\theta)$. On the right, since $\tilde f=f$ near $\Sym^m_+$, the product rule gives on $\Sym^m_+$
+\[
+\Rop_{q,vv^{\mathsf T}}\varphi_R=\chi(W/R)\,\Rop_{q,vv^{\mathsf T}}f+E_R,
+\]
+where $E_R$ collects the terms containing at least one derivative of $\chi(W/R)$. These derivatives are $O(R^{-1})$ and $O(R^{-2})$ and vanish unless $R\le\|W\|\le2R$, while the coefficients of $\Rop_{q,vv^{\mathsf T}}$ are of degree at most one in $W$. By Lemma~\ref{lem:extension}, $|E_R(W)|\le c(1+\|W\|)^{\beta+1}\mathbf 1_{\{\|W\|\ge R\}}$ and $|\Rop_{q,vv^{\mathsf T}}f|\le c(1+\|W\|)^{\beta+1}$ on $\Sym^m_+$. As $\mu_\theta$ has moments of all orders, we conclude that
+\begin{equation}\label{eq:ode}
+2\theta g''(\theta)+qg'(\theta)=\varrho(\theta):=\int\Rop_{q,vv^{\mathsf T}}f\,d\mu_\theta\qquad(\theta\ge0).
+\end{equation}
+By Lemma~\ref{lem:operator}, $\varrho\ge0$, and $\varrho$ is continuous on $[0,\infty)$ by Lemma~\ref{lem:analytic}. For $\theta>0$,
+\[
+\frac{d}{d\theta}\bigl(\theta^{q/2}g'(\theta)\bigr)=\tfrac12\theta^{q/2-1}\bigl(2\theta g''(\theta)+qg'(\theta)\bigr)=\tfrac12\theta^{q/2-1}\varrho(\theta).
+\]
+Since $g'$ is continuous at $0$ and $q>0$, $\theta^{q/2}g'(\theta)\to0$ as $\theta\downarrow0$, and $t^{q/2-1}$ is integrable near $0$. Hence
+\[
+g'(\theta)=\tfrac12\theta^{-q/2}\int_0^\theta t^{q/2-1}\varrho(t)\,dt\ge0\qquad(\theta>0),
+\]
+and $g$ is nondecreasing on $[0,\infty)$.
+
+In general, apply the first part to $f_\varepsilon(W)=\prod_j|W_{jj}+K_j+\varepsilon I|^{b_j}$, $0<\varepsilon\le1$. For $W\in\Sym^m_+$ we have $f_\varepsilon(W)\to f(W)$ as $\varepsilon\downarrow0$, and $0\le f_\varepsilon(W)\le\prod_j(1+\tr W+\tr K_j)^{m_jb_j}$. Dominated convergence at fixed $\theta$ passes the inequality $\int f_\varepsilon\,d\mu_{\theta_0}\le\int f_\varepsilon\,d\mu_{\theta_1}$, $\theta_0\le\theta_1$, to the limit. Only the values of $f_\varepsilon$ are passed to the limit, so no control of the derivatives of $f$ near the boundary of the cone is needed; such derivatives may be unbounded when some $b_j$ is small.
+\end{proof}
+
+\section{Monotonicity for a fixed range}\label{sec:support}
+
+\begin{proposition}\label{prop:support}
+Let $m=m_1+\dots+m_s$ be a partition with $\ell=\max_jm_j$, let $S\in\Sym^m_{++}$, let $L\subseteq\R^m$ be a subspace of dimension $r$, and let $\alpha$ be real with
+\begin{equation}\label{eq:qcond}
+q:=\alpha-r+1>m\qquad\text{and}\qquad q\ge\ell+1 .
+\end{equation}
+Let $\mathcal P_L=\{\Omega\in\Sym^m_+:\ran\Omega\subseteq L\}$, let $b_j\ge0$, and put
+\[
+h(\Omega)=\int\prod_{j=1}^s|W_{jj}|^{b_j}\,\NW_m(\alpha,S,\Omega)(dW),\qquad\Omega\in\mathcal P_L .
+\]
+Then $h(\Omega_0)\le h(\Omega_1)$ whenever $\Omega_0,\Omega_1\in\mathcal P_L$ and $\Omega_0\preceq\Omega_1$.
+\end{proposition}
+
+The law $\NW_m(\alpha,S,\Omega)$ exists for $\Omega\in\mathcal P_L$ by Lemma~\ref{lem:gauss}, since $\rank\Omega\le r$ and $\alpha-r=q-1>m-1$.
+
+\begin{proof}
+If $r=0$, then $\mathcal P_L=\{0\}$. Let $r\ge1$. We first show that $h(\Omega)\le h(\Omega+c\,vv^{\mathsf T})$ for $\Omega\in\mathcal P_L$, $v\in L$ and $c\ge0$. We may assume $v\ne0$. We claim that
+\begin{equation}\label{eq:split}
+\Omega=\Omega'+\theta_0vv^{\mathsf T}\qquad\text{with }\Omega'\in\Sym^m_+,\ \ran\Omega'\subseteq L,\ \rank\Omega'\le r-1,\ \theta_0\ge0.
+\end{equation}
+If $v\notin\ran\Omega$, then $\ran\Omega$ is a proper subspace of $L$; take $\Omega'=\Omega$ and $\theta_0=0$. If $v\in\ran\Omega$, write $v=\Omega^{1/2}w$ with $w\in\ran\Omega$, $w\ne0$, so that $v^{\mathsf T}\Omega^+v=\|w\|^2$, and put $\theta_0=\|w\|^{-2}$. Then $\Omega'=\Omega-\theta_0vv^{\mathsf T}=\Omega^{1/2}P\Omega^{1/2}$, where $P$ is the orthogonal projection onto $w^\perp$. Thus $\Omega'\succeq0$, $\ran\Omega'\subseteq\ran\Omega$, and $\rank\Omega'=\rank(P\Omega^{1/2})=\dim(\ran\Omega\cap w^\perp)=\rank\Omega-1\le r-1$.
+
+Write $\Omega'=M'^{\mathsf T}M'$ with a real $(r-1)\times m$ matrix $M'$, let $Z'$ be an $(r-1)\times m$ matrix with independent $N_m(0,S)$ rows, and put $Y'=(Z'+M')^{\mathsf T}(Z'+M')$; for $r=1$, $Y'=0$. Let $\mu_\theta$ be the laws of Section~\ref{sec:rankone} with this $S$, $v$ and $q$, and let $W_\theta\sim\mu_\theta$ be independent of $Y'$. By Lemma~\ref{lem:gauss} and the additivity of types, $Y'+W_\theta$ is of type $(r-1+q,S,\Omega'+\theta vv^{\mathsf T})=(\alpha,S,\Omega'+\theta vv^{\mathsf T})$, so by uniqueness
+\[
+h(\Omega'+\theta vv^{\mathsf T})=\E\bigl[g_{Y'}(\theta)\bigr],\qquad g_K(\theta)=\int\prod_j|W_{jj}+K_{jj}|^{b_j}\,\mu_\theta(dW).
+\]
+For every fixed $K\in\Sym^m_+$, Proposition~\ref{prop:rankone} applies with the shifts $K_{jj}\succeq0$, because of \eqref{eq:qcond}; hence $g_K$ is nondecreasing. Taking $\theta=\theta_0$ and $\theta=\theta_0+c$ proves $h(\Omega)\le h(\Omega+c\,vv^{\mathsf T})$.
+
+In general, $\Omega_1-\Omega_0\succeq0$ has its range in $L$, so its spectral decomposition is $\sum_{i}c_iv_iv_i^{\mathsf T}$ with $c_i>0$ and $v_i\in L$. All partial sums $\Omega_0+\sum_{i\le t}c_iv_iv_i^{\mathsf T}$ belong to $\mathcal P_L$, and the rank-one case applies at each step.
+\end{proof}
+
+\begin{remark}
+The decomposition \eqref{eq:split} accounts for the value of $q$ in \eqref{eq:qcond}. The part $\Omega'$, of rank at most $r-1$, is carried by $r-1$ Gaussian rows, so the rank-one part carries the shape $\alpha-r+1$ rather than $\alpha-r$.
+\end{remark}
+
+\section{Separation of one block}\label{sec:separation}
+
+\begin{lemma}\label{lem:cond}
+Let $n=k+m$ with $k,m\ge1$, let $\alpha>n-1$, and let $\Sigma\in\Sym^n_{++}$ and $W\sim\W_n(\alpha,\Sigma)$ be partitioned as
+\[
+\Sigma=\begin{pmatrix}\Sigma_{aa}&\Sigma_{ab}\\ \Sigma_{ba}&\Sigma_{bb}\end{pmatrix},\qquad
+W=\begin{pmatrix}W_{aa}&W_{ab}\\ W_{ba}&W_{bb}\end{pmatrix},
+\]
+with diagonal blocks of sizes $k$ and $m$. Put $K=\Sigma_{aa}^{-1}\Sigma_{ab}$ and $S=\Sigma_{bb}-\Sigma_{ba}\Sigma_{aa}^{-1}\Sigma_{ab}$. Then $W_{aa}\sim\W_k(\alpha,\Sigma_{aa})$, and for every Borel function $\varphi\ge0$ on $\Sym^m_+$,
+\[
+\E\bigl[\varphi(W_{bb})\mid W_{aa}\bigr]=\int\varphi\,d\NW_m\bigl(\alpha,S,K^{\mathsf T}W_{aa}K\bigr)\qquad\text{almost surely,}
+\]
+where the right side, which is defined for every $W_{aa}\in\Sym^k_+$, is a version of the conditional expectation.
+\end{lemma}
+
+\begin{proof}
+Write $C=\Sigma_{aa}$, so that $\Sigma_{ab}=CK$ and $\Sigma_{bb}=S+K^{\mathsf T}CK$. Then
+\[
+\Sigma=\begin{pmatrix}I&0\\ K^{\mathsf T}&I\end{pmatrix}\begin{pmatrix}C&0\\0&S\end{pmatrix}\begin{pmatrix}I&K\\0&I\end{pmatrix},\qquad
+\Sigma^{-1}=\begin{pmatrix}C^{-1}+KS^{-1}K^{\mathsf T}&-KS^{-1}\\ -S^{-1}K^{\mathsf T}&S^{-1}\end{pmatrix}.
+\]
+Write $W=\bigl(\begin{smallmatrix}A&E\\E^{\mathsf T}&B\end{smallmatrix}\bigr)$ and change variables to $(A,U,V)$ with $U=A^{-1/2}E$ and $V=B-E^{\mathsf T}A^{-1}E=B-U^{\mathsf T}U$. This is a bijection from $\Sym^n_{++}$ onto $\Sym^k_{++}\times\R^{k\times m}\times\Sym^m_{++}$; it is triangular, and for fixed $A$ the map $U\mapsto A^{1/2}U$ multiplies each of the $m$ columns by $A^{1/2}$, so the Jacobian is $|A|^{m/2}$. Moreover $|W|=|A|\,|V|$, and expanding $\tr(\Sigma^{-1}W)$ gives
+\[
+\tr(\Sigma^{-1}W)=\tr(C^{-1}A)+\tr(S^{-1}V)+\tr\bigl(S^{-1}(U-A^{1/2}K)^{\mathsf T}(U-A^{1/2}K)\bigr).
+\]
+Hence the density of $(A,U,V)$ is proportional to
+\begin{multline*}
+|A|^{(\alpha-k-1)/2}\etr\bigl(-C^{-1}A/2\bigr)\cdot|V|^{((\alpha-k)-m-1)/2}\etr\bigl(-S^{-1}V/2\bigr)\\
+\cdot\etr\bigl(-S^{-1}(U-A^{1/2}K)^{\mathsf T}(U-A^{1/2}K)/2\bigr).
+\end{multline*}
+Since $\alpha-k>m-1$, the second factor is an unnormalized $\W_m(\alpha-k,S)$ density in $V$, and the third is an unnormalized Gaussian density in $U$ whose normalizing constant does not depend on $A$. Integrating out $U$ and $V$ shows that $A$ has a density proportional to the first factor, so $A\sim\W_k(\alpha,C)$; the conditional density of $(U,V)$ given $A$ is then the product of the last two factors, normalized. Hence, conditionally on $A$, the matrix $Z=U-A^{1/2}K$ has independent $N_m(0,S)$ rows and is independent of $V\sim\W_m(\alpha-k,S)$. Since
+\[
+B=V+(Z+A^{1/2}K)^{\mathsf T}(Z+A^{1/2}K),
+\]
+Lemma~\ref{lem:gauss} shows that, conditionally on $A$, $B$ is of type $(k+(\alpha-k),S,K^{\mathsf T}AK)=(\alpha,S,K^{\mathsf T}AK)$.
+\end{proof}
+
+\begin{lemma}\label{lem:assoc}
+Let $k\ge1$, $\beta>k-1$ and $A\sim\W_k(\beta,I_k)$. Let $F,G:\Sym^k_+\to[0,\infty)$ be Borel functions that are nondecreasing in the Loewner order, and assume that $F(OXO^{\mathsf T})=F(X)$ for all orthogonal $O$. If $\E[F(A)]$, $\E[G(A)]$ and $\E[F(A)G(A)]$ are finite, then $\E[F(A)G(A)]\ge\E[F(A)]\,\E[G(A)]$.
+\end{lemma}
+
+\begin{proof}
+Let $\lambda(X)=(\lambda_1\le\dots\le\lambda_k)$ denote the ordered eigenvalues of $X\in\Sym^k_+$, and let $dO$ be the Haar probability measure on the orthogonal group $\mathrm O(k)$. For $\lambda\in[0,\infty)^k$ put
+\[
+\tilde F(\lambda)=F(\diag(\lambda)),\qquad\bar G(\lambda)=\int_{\mathrm O(k)}G\bigl(O\diag(\lambda)O^{\mathsf T}\bigr)\,dO .
+\]
+If $\lambda\le\lambda'$ coordinatewise, then $O\diag(\lambda'-\lambda)O^{\mathsf T}\succeq0$, so $\tilde F$ and $\bar G$ are nondecreasing in each coordinate. Writing $X=O_X\diag(\lambda(X))O_X^{\mathsf T}$ with $O_X\in\mathrm O(k)$, the invariance of $F$ and of the Haar measure give $F(X)=\tilde F(\lambda(X))$ and $\int G(OXO^{\mathsf T})\,dO=\bar G(\lambda(X))$. The law of $A$ is invariant under orthogonal conjugation. Hence, if $O$ is Haar distributed and independent of $A$, the pair $(F(A),G(OAO^{\mathsf T}))=(F(OAO^{\mathsf T}),G(OAO^{\mathsf T}))$ has the law of $(F(A),G(A))$, and Fubini's theorem gives
+\begin{equation}\label{eq:haar}
+\E[F(A)G(A)]=\E\bigl[\tilde F(\lambda)\bar G(\lambda)\bigr],\qquad\E[G(A)]=\E\bigl[\bar G(\lambda)\bigr],\qquad\lambda=\lambda(A).
+\end{equation}
+
+The density of $A$ is proportional to $\prod_iu(\lambda_i)$ with $u(t)=t^{(\beta-k-1)/2}e^{-t/2}$. By the Jacobian of the spectral decomposition \cite[Theorem~3.2.17]{Mui82}, $\lambda$ has the density
+\[
+\pi(\lambda)=c\prod_{i=1}^ku(\lambda_i)\prod_{i<j}(\lambda_j-\lambda_i)\,\mathbf 1_{\mathcal C}(\lambda),\qquad\mathcal C=\{0<\lambda_1<\dots<\lambda_k\}.
+\]
+This density is multivariate totally positive of order two: $\pi(x\vee y)\pi(x\wedge y)\ge\pi(x)\pi(y)$ for $x,y\in\R^k$, where $\vee$ and $\wedge$ are the coordinatewise maximum and minimum. Indeed, if $x$ or $y$ lies outside $\mathcal C$ there is nothing to prove; $\mathcal C$ is closed under $\vee$ and $\wedge$; the factors $u(\lambda_i)$ cancel; and for each pair $i<j$ the gap factor satisfies the corresponding inequality. For the gap factor, the only nontrivial configuration is, up to exchanging $x$ and $y$, $x_i=a\le y_i=b<y_j=e\le x_j=f$, in which case
+\[
+(e-a)(f-b)-(f-a)(e-b)=(b-a)(f-e)\ge0 .
+\]
+For related positive dependence properties of the eigenvalues of Wishart matrices, see \cite{DH78} and the product inequality \cite[Theorem~3.14]{GOR24a}. Consequently $\lambda$ is associated \cite{FKG71,KR80}: $\E[\phi(\lambda)\psi(\lambda)]\ge\E\phi(\lambda)\,\E\psi(\lambda)$ for bounded Borel functions $\phi,\psi$ that are nondecreasing in each coordinate.
+
+Applying association to $\min(\tilde F,t)$ and $\min(\bar G,t)$, extended to $\R^k$ by $\lambda\mapsto\min(\tilde F,t)(\lambda\vee0)$ and similarly, and letting $t\to\infty$ by monotone convergence, we obtain $\E[\tilde F(\lambda)\bar G(\lambda)]\ge\E[\tilde F(\lambda)]\,\E[\bar G(\lambda)]$. By \eqref{eq:haar} this is the claim.
+\end{proof}
+
+\begin{proposition}\label{prop:sep}
+Let $d\ge2$, let $p_1,\dots,p_d$ be positive integers with $p=p_1+\dots+p_d$, and let $W\sim\W_p(\alpha,\Sigma)$ be partitioned as in Theorem~\ref{thm:main}, where $\Sigma_{11}=I_{p_1}$. Let $\ell=\max_{i\ge2}p_i$ and $r=\rank(\Sigma_{12},\dots,\Sigma_{1d})$, and assume
+\begin{equation}\label{eq:sepcond}
+\alpha>p-1\qquad\text{and}\qquad\alpha\ge r+\ell .
+\end{equation}
+Then \eqref{eq:onevsrest} holds for all real $\nu_1,\dots,\nu_d\ge0$.
+\end{proposition}
+
+\begin{proof}
+Apply Lemma~\ref{lem:cond} with $k=p_1$, $m=p-p_1$, $W_{aa}=W_{11}$ and $W_{bb}$ the principal submatrix formed by the blocks $2,\dots,d$. Let $K$ and $S$ be as there; thus $K=(\Sigma_{12},\dots,\Sigma_{1d})$, and $L=\ran K^{\mathsf T}\subseteq\R^m$ has dimension $r\le\min(k,m)$. Then $q=\alpha-r+1\ge\ell+1$ by \eqref{eq:sepcond}, and $q>(p-1)-r+1=k+m-r\ge m$. Hence \eqref{eq:qcond} holds, with the partition of $m$ into $p_2,\dots,p_d$ and $b_j=\nu_{j+1}$. By Lemma~\ref{lem:cond},
+\[
+\E\Bigl[\prod_{i=2}^d|W_{ii}|^{\nu_i}\Bigm|W_{11}\Bigr]=G(W_{11}),\qquad G(X)=h(K^{\mathsf T}XK),
+\]
+with $h$ as in Proposition~\ref{prop:support}. For $X\in\Sym^k_+$ the range of $K^{\mathsf T}XK$ lies in $L$, and $X\preceq X'$ implies $K^{\mathsf T}XK\preceq K^{\mathsf T}X'K$. By Proposition~\ref{prop:support}, $G$ is nondecreasing in the Loewner order; it is Borel by the representation in the proof of Lemma~\ref{lem:cond}. Since $W_{11}\sim\W_k(\alpha,I_k)$ with $\alpha>k-1$, and since the expectations involved are finite by Section~\ref{sec:prelim}, Lemma~\ref{lem:assoc} applied to $F(X)=|X|^{\nu_1}$ and $G$ gives
+\[
+\E\Bigl[\prod_{i=1}^d|W_{ii}|^{\nu_i}\Bigr]=\E\bigl[F(W_{11})G(W_{11})\bigr]\ge\E\bigl[|W_{11}|^{\nu_1}\bigr]\,\E\bigl[G(W_{11})\bigr],
+\]
+and $\E[G(W_{11})]=\E[\prod_{i\ge2}|W_{ii}|^{\nu_i}]$.
+\end{proof}
+
+\section{Proofs of the main results}\label{sec:proofs}
+
+\begin{proof}[Proof of Theorem~\ref{thm:sep}]
+Let $M$ be the block diagonal matrix with diagonal blocks $\Sigma_{11}^{-1/2},\dots,\Sigma_{dd}^{-1/2}$. Then $MWM\sim\W_p(\alpha,M\Sigma M)$, the diagonal blocks of $M\Sigma M$ are identity matrices, and $|(MWM)_{ii}|=|\Sigma_{ii}|^{-1}|W_{ii}|$. Both sides of \eqref{eq:main} and of \eqref{eq:onevsrest} are multiplied by $\prod_i|\Sigma_{ii}|^{-\nu_i}$, so we may assume that $\Sigma_{ii}=I_{p_i}$ for all $i$; this does not change $\rank\Sigma_{ij}$. For $d=1$ there is equality in \eqref{eq:main}. For $d\ge2$, let $\ell$ and $r$ be as in Proposition~\ref{prop:sep}, so that $r\le p_1$.
+
+(a) Let $\alpha\ge p$. We use induction on $d$; for $d=1$ there is equality. Let $d\ge2$. Since $r+\ell\le p_1+\ell\le p\le\alpha$, Proposition~\ref{prop:sep} gives \eqref{eq:onevsrest}. The principal submatrix formed by the blocks $2,\dots,d$ has the law $\W_{p-p_1}(\alpha,\Sigma')$, where $\Sigma'$ is the corresponding principal submatrix of $\Sigma$, and $\alpha\ge p>p-p_1$. By the induction hypothesis, $\E[\prod_{i\ge2}|W_{ii}|^{\nu_i}]\ge\prod_{i\ge2}\E[|W_{ii}|^{\nu_i}]$, and \eqref{eq:main} follows.
+
+(b) Let $d\ge3$. Since at least two blocks have indices $i\ge2$, we have $\ell\le p-p_1-1$, hence $r+\ell\le p_1+\ell\le p-1<\alpha$, and Proposition~\ref{prop:sep} gives \eqref{eq:onevsrest}. The principal submatrix formed by the blocks $2,\dots,d$ has order $p-p_1\le p-1<\alpha$, so part (a) applies to it, and \eqref{eq:main} follows.
+
+(c) Let $d=2$; then \eqref{eq:onevsrest} is \eqref{eq:main}. If $p_1\ne p_2$, we exchange the two blocks if necessary, so that $p_1>p_2$; then $\ell=p_2$, $r\le p_2$ and $r+\ell\le2p_2\le p-1<\alpha$. If $p_1=p_2$ and $\rank\Sigma_{12}<p_1$, then $r\le p_1-1$, $\ell=p_1$ and $r+\ell\le p-1<\alpha$. In both cases Proposition~\ref{prop:sep} gives \eqref{eq:main}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+For $d=1$ there is equality. By Theorem~\ref{thm:sep}, it remains to consider $d=2$, $p_1=p_2$, $\Sigma_{12}$ invertible and $p-1<\alpha<p$. In this case \eqref{eq:main} is \cite[Corollary~3.4]{GOR25} with $T=0$ and $\nu_0=0$; the admissibility condition $0>-\alpha/2+(p-1)/2$ there is $\alpha>p-1$.
+\end{proof}
+
+Proposition~\ref{prop:sep} applies after any simultaneous permutation of the blocks. This gives the following refinement.
+
+\begin{corollary}\label{cor:onevsrest}
+In the setting of Theorem~\ref{thm:main}, assume that $d\ge3$. Then for every $i\in\{1,\dots,d\}$,
+\[
+\E\Bigl[\prod_{j=1}^d|W_{jj}|^{\nu_j}\Bigr]\ge\E\bigl[|W_{ii}|^{\nu_i}\bigr]\,\E\Bigl[\prod_{j\ne i}|W_{jj}|^{\nu_j}\Bigr].
+\]
+\end{corollary}
+
+\begin{remark}
+For $d=2$, Theorem~\ref{thm:sep} proves \eqref{eq:main} without the hypergeometric formula of \cite{GOR25}, except when $p_1=p_2$, $\Sigma_{12}$ is invertible and $p-1<\alpha<p$. It gives the qualitative inequality \eqref{eq:main} only, not the quantitative bound of \cite[Corollary~3.4]{GOR25}. In the exceptional case $r=\ell=p_1$ whichever block is separated, and the condition $\alpha\ge r+\ell=p$ of Proposition~\ref{prop:sep} fails. For $d\ge3$, the first separation leaves at least two blocks, and every later separation takes place in a principal submatrix of order at most $p-1$.
+\end{remark}
+
+Theorem~\ref{thm:main} also removes the conditional hypothesis from a mixed-sign inequality of Genest, Ouimet and Richards; for $d=2$ this was noted in \cite[Remark~3.10]{GOR24a}.
+
+\begin{corollary}\label{cor:mixed}
+In the setting of Theorem~\ref{thm:main}, put $P_{1i}=\Sigma_{11}^{-1/2}\Sigma_{1i}\Sigma_{ii}^{-1/2}$ for $i\ge2$. If $(p_1-1)/2<\nu_1<\alpha/2-(p_1-1)/2$ and $\nu_2,\dots,\nu_d>0$, then
+\[
+\E\Bigl[|W_{11}|^{-\nu_1}\prod_{i=2}^d|W_{ii}|^{\nu_i}\Bigr]\ge\prod_{i=2}^d\bigl|I_{p_i}-P_{1i}^{\mathsf T}P_{1i}\bigr|^{\nu_i}\;\E\bigl[|W_{11}|^{-\nu_1}\bigr]\prod_{i=2}^d\E\bigl[|W_{ii}|^{\nu_i}\bigr].
+\]
+\end{corollary}
+
+\begin{proof}
+This is \cite[Proposition~3.9]{GOR24a}, which is proved there under the assumption that \cite[Conjecture~1.1]{GOR24a} holds. Its proof uses the conjecture only for a Wishart matrix of order $p$ with $\alpha$ degrees of freedom and the exponent $0$ on the first block, that is, inequality \eqref{eq:main} for the principal submatrix formed by the blocks $2,\dots,d$. This submatrix is a Wishart matrix of order $p-p_1<\alpha$, so Theorem~\ref{thm:sep}(a) applies to it; for $d=2$ there is nothing to prove.
+\end{proof}
+
+\begin{remark}\label{rem:scalar}
+If $p_1=\dots=p_d=1$ and $\alpha=n$ is an integer, \eqref{eq:main} can be derived from \cite[Theorem~1]{OG26} as follows. Write $W=Y^{\mathsf T}Y$, where $Y$ is an $n\times d$ matrix with independent $N_d(0,\Sigma)$ rows, and let $Y_i$ be its columns, so that $W_{ii}=\|Y_i\|^2$. Let $U_1,\dots,U_d$ be independent and uniformly distributed on the unit sphere of $\R^n$, independent of $Y$. Then $\E_U|U_i^{\mathsf T}Y_i|^{2\nu_i}=c_i\|Y_i\|^{2\nu_i}$ with $c_i=\E|U_{i,1}|^{2\nu_i}>0$. Conditionally on $U$, the vector $(U_i^{\mathsf T}Y_i)_i$ is centered Gaussian with variances $\Sigma_{ii}$, so \cite[Theorem~1]{OG26} gives $\E[\prod_i|U_i^{\mathsf T}Y_i|^{2\nu_i}\mid U]\ge\prod_i\E|N(0,\Sigma_{ii})|^{2\nu_i}$, a bound that does not depend on $U$. Since $U_i^{\mathsf T}Y_i\sim N(0,\Sigma_{ii})$, the same identity gives $\E|N(0,\Sigma_{ii})|^{2\nu_i}=c_i\E[|W_{ii}|^{\nu_i}]$, and dividing by $\prod_ic_i$ yields \eqref{eq:main}.
+\end{remark}
+
+\begin{remark}
+For nonnegative integer exponents, both sides of \eqref{eq:main} are explicitly computable by the recursion of \cite{GO26}, whose degree-lowering operator is $\Rop_{\alpha,\Sigma}$. Lemma~\ref{lem:ode} may be viewed as a noncentral, rank-one analogue of the Wishart Stein identity, and Lemma~\ref{lem:operator} identifies a class of functions on which $\Rop_{q,vv^{\mathsf T}}$ is positive. For negative exponents and further mixtures of signs we refer to \cite{GOR24a}.
+\end{remark}
+
+\section*{Use of AI-assisted tools}
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{99}
+
+\bibitem{BGORS26}
+G. Bailly, R. E. Gaunt, F. Ouimet, D. Richards, and R. von Sachs, \emph{Stein's method for the Wishart distribution}, preprint (2026), arXiv:2606.04859.
+
+\bibitem{BST98}
+C. Ben\'{\i}tez, Y. Sarantopoulos, and A. Tonge, \emph{Lower bounds for norms of products of polynomials}, Math. Proc. Cambridge Philos. Soc. \textbf{124} (1998), no.~3, 395--408.
+
+\bibitem{DH78}
+R. L. Dykstra and J. E. Hewett, \emph{Positive dependence of the roots of a Wishart matrix}, Ann. Statist. \textbf{6} (1978), no.~1, 235--238.
+
+\bibitem{FKG71}
+C. M. Fortuin, P. W. Kasteleyn, and J. Ginibre, \emph{Correlation inequalities on some partially ordered sets}, Comm. Math. Phys. \textbf{22} (1971), 89--103.
+
+\bibitem{Fre08}
+P. E. Frenkel, \emph{Pfaffians, hafnians and products of real linear functionals}, Math. Res. Lett. \textbf{15} (2008), no.~2, 351--358.
+
+\bibitem{GO26}
+R. E. Gaunt and F. Ouimet, \emph{On Wilks' problem: exact recursive formulas via Stein's method for the joint moments of disjoint principal minors of Wishart random matrices}, preprint (2026), arXiv:2607.03984.
+
+\bibitem{GOR24a}
+C. Genest, F. Ouimet, and D. Richards, \emph{On the Gaussian product inequality conjecture for disjoint principal minors of Wishart random matrices}, Electron. J. Probab. \textbf{29} (2024), Paper No.~166, 26~pp.
+
+\bibitem{GOR24b}
+C. Genest, F. Ouimet, and D. Richards, \emph{On Wilks' joint moment formulas for embedded principal minors of Wishart random matrices}, Stat \textbf{13} (2024), no.~2, Paper No.~e706, 6~pp.
+
+\bibitem{GOR25}
+C. Genest, F. Ouimet, and D. Richards, \emph{An explicit Wishart moment formula for the product of two disjoint principal minors}, Proc. Amer. Math. Soc. \textbf{153} (2025), no.~3, 1299--1311.
+
+\bibitem{KR80}
+S. Karlin and Y. Rinott, \emph{Classes of orderings of measures and related correlation inequalities. I. Multivariate totally positive distributions}, J. Multivariate Anal. \textbf{10} (1980), no.~4, 467--498.
+
+\bibitem{LW12}
+W. V. Li and A. Wei, \emph{A Gaussian inequality for expected absolute products}, J. Theoret. Probab. \textbf{25} (2012), no.~1, 92--99.
+
+\bibitem{Mui82}
+R. J. Muirhead, \emph{Aspects of Multivariate Statistical Theory}, John Wiley \& Sons, New York, 1982.
+
+\bibitem{OG26}
+F. Ouimet and D. Greaves, \emph{A proof of the strong Gaussian product inequality conjecture}, preprint, arXiv:2609.20234.
+
+\bibitem{Wil34}
+S. S. Wilks, \emph{Moment-generating operators for determinants of product moments in samples from a normal system}, Ann. of Math. (2) \textbf{35} (1934), no.~2, 312--340.
+
+\end{thebibliography}
+
+\end{document}

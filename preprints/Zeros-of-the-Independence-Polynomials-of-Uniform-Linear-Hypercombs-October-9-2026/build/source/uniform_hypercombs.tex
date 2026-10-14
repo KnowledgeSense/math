@@ -1,0 +1,515 @@
+\documentclass{amsart}
+\usepackage{amssymb}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+
+\begin{document}
+
+\title{Zeros of the independence polynomials of uniform linear hypercombs}
+
+\author{Knowledge Sense}
+\address{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{9 October 2026}
+
+\subjclass[2020]{Primary 05C31; Secondary 05A20, 05C65, 05C69, 30C15}
+
+\keywords{Linear hypertree, hypercomb, strong independent set, independence polynomial, zeros of polynomials, log-concavity, unimodality}
+
+\begin{abstract}
+For $n\ge 1$ and $\ell\ge 3$ let $C_{n,\ell}$ be the $\ell$-uniform linear
+hypercomb whose spine has $n$ edges. We prove that every zero $z$ of its
+strong independence polynomial satisfies $|\arg z|>2\pi/3$. By a classical
+criterion of Brenti, Royle and Wagner, the coefficients of this polynomial
+are therefore strictly log-concave, and in particular unimodal. This
+answers, for all $n$ and $\ell$, a question of Galvin and Sharpe, who proved
+unimodality outside a window of length $O(\sqrt{n})$. Up to a linear factor,
+the polynomial is the determinant of a tridiagonal matrix with two corner
+corrections. Testing a unit kernel vector against this matrix reduces the
+problem to a three-parameter family of quartic polynomials, all of whose
+zeros we locate.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $\mathcal{H}$ be a hypergraph. A set of vertices of $\mathcal{H}$ is a
+\emph{strong independent set} if it meets every edge of $\mathcal{H}$ in at
+most one vertex. If $i_k(\mathcal{H})$ denotes the number of strong
+independent sets of size $k$, we write
+\[
+I(\mathcal{H};x)=\sum_{k\ge 0} i_k(\mathcal{H})\,x^k
+\]
+for the (strong) independence polynomial. For graphs this is the usual
+independence polynomial, and whether every tree has a unimodal independence
+sequence is a well-known open question of Alavi, Malde, Schwenk and
+Erd\H{o}s~\cite{AMSE}. Galvin and Sharpe~\cite{GS} began the study of the
+corresponding question for hypertrees. They restricted attention to
+\emph{linear} hypertrees, in which two edges share at most one vertex, and
+showed that linear hyperpaths have real-rooted, and linear hyperstars
+log-concave, strong independence polynomials~\cite[Theorem~1.3]{GS}.
+
+The next family considered in~\cite{GS} consists of hypercombs. Let
+$n\ge 0$ and $\ell\ge 2$. The \emph{$\ell$-uniform linear hypercomb}
+$C_{n,\ell}$ has spine vertices $u_0,\dots,u_n$ and $2n+1$ edges of size
+$\ell$: for $1\le i\le n$ a \emph{spine edge} consisting of $u_{i-1}$, $u_i$
+and $\ell-2$ further vertices, and for $0\le i\le n$ a \emph{tooth}
+consisting of $u_i$ and $\ell-1$ further vertices. All vertices other than
+$u_0,\dots,u_n$ lie in exactly one edge. For $n\ge 1$ this is the hypercomb
+of~\cite[Section~1.1]{GS}; for $n=1$ the two teeth are attached at distinct
+vertices of the unique spine edge, as required there. The hypergraph
+$C_{0,\ell}$ is a single edge, and $I(C_{0,\ell};x)=1+\ell x$ is the initial
+condition used in~\cite[Theorem~1.7]{GS}. For $\ell=2$ the hypercomb is the
+centipede, whose independence polynomial is real-rooted~\cite{Zhu}.
+
+For $\ell\ge 3$ the situation is different. Galvin and Sharpe found a linear
+recurrence for $I(C_{n,\ell};x)$~\cite[Theorem~1.7]{GS} and observed by
+computer that its coefficient sequence is unimodal for $n\le 500$ and
+$\ell\le 12$. They proved that for every $\ell\ge 3$ there are constants
+$K_\ell,L_\ell>0$ such that the sequence is weakly increasing up to the
+index $K_\ell n-L_\ell\sqrt{n}$ and weakly decreasing from the index
+$K_\ell n+L_\ell\sqrt{n}$~\cite[Corollary~1.8]{GS}; an earlier claim of
+log-concavity for all $n$ and $\ell$ had been withdrawn~\cite[Note~1.9]{GS}.
+They asked whether the window of length $O(\sqrt{n})$ can be shortened or
+eliminated~\cite[Question~1.10(4)]{GS}. We eliminate it by locating the
+zeros. Throughout, $\arg$ denotes the principal argument, with values in
+$(-\pi,\pi]$.
+
+\begin{theorem}\label{thm:main}
+Let $n\ge 1$ and $\ell\ge 3$. Every zero $z$ of $I(C_{n,\ell};x)$ satisfies
+$|\arg z|>2\pi/3$.
+\end{theorem}
+
+Since $I(C_{n,\ell};0)=1$, the theorem places all zeros in the open sector
+of opening $2\pi/3$ around the negative real axis. A classical sufficient
+condition of Brenti, Royle and Wagner~\cite[Proposition~1.2]{BRW}, in the
+form recorded by Brown and Cameron~\cite[Corollary~2.3]{BC} and restated as
+Proposition~\ref{prop:sector} below, converts this into information on the
+coefficients.
+
+\begin{corollary}\label{cor:lc}
+Let $n\ge 1$ and $\ell\ge 3$, and write
+$I(C_{n,\ell};x)=\sum_{k=0}^{2n+1}c_kx^k$. Then $c_k>0$ for
+$0\le k\le 2n+1$, and
+\[
+c_k^2>c_{k-1}c_{k+1}\qquad(1\le k\le 2n).
+\]
+In particular the sequence $c_0,c_1,\dots,c_{2n+1}$ is log-concave and
+unimodal.
+\end{corollary}
+
+Thus the window in~\cite[Corollary~1.8]{GS} is empty for every $n\ge 1$ and
+$\ell\ge 3$, which settles~\cite[Question~1.10(4)]{GS}. The parts of
+\cite[Question~1.10]{GS} concerning all linear hypertrees, or all uniform
+linear hypertrees, remain open. We emphasize that the new statement is
+Theorem~\ref{thm:main}; the passage from the location of zeros to
+Corollary~\ref{cor:lc} uses only the classical criterion.
+
+A recent preprint~\cite{Ast} treats a weighted family of hypercombs, defined
+by the analogous recurrence with spine and tooth weights $s,t>0$; the uniform
+hypercomb $C_{n,\ell}$ corresponds to $s=\ell-2$ and $t=\ell-1$. It is shown
+there that for each fixed pair $s,t>0$ there is $N(s,t)$ such that the
+coefficients are strictly log-concave for every $n\ge N(s,t)$, and the
+question for all lengths in the unweighted case is left open. Corollary
+\ref{cor:lc} applies only to the uniform weights, but covers every length
+$n\ge 1$, and Theorem~\ref{thm:main} gives in addition the location of the
+zeros. To our knowledge, Theorem~\ref{thm:main} has not appeared in the
+literature.
+
+\begin{remark}\label{rem:notreal}
+The sector cannot be replaced by the negative real axis. For $n=5$ and
+$\ell=3$ the coefficients $c_0,\dots,c_{11}$ of $I(C_{5,3};x)$ are
+\[
+1,\ 23,\ 220,\ 1156,\ 3716,\ 7700,\ 10564,\ 9716,\ 5984,\ 2400,\ 576,\ 64,
+\]
+as one checks from the recurrence~\eqref{eq:rec} below. Here
+$c_{10}^2=331776<337920=\tfrac{11}{10}\cdot 2\cdot c_9c_{11}$, so Newton's
+inequality $c_k^2\ge(1+1/k)(1+1/(d-k))c_{k-1}c_{k+1}$, valid for every
+polynomial of degree $d$ with positive coefficients and only real zeros,
+fails for $d=11$ and $k=10$. Hence $I(C_{5,3};x)$ has non-real zeros, in contrast with the
+hyperpaths of~\cite[Theorem~1.3]{GS}.
+\end{remark}
+
+\subsection*{Method}
+Up to the factor $1+(\ell-1)x$, the polynomial $I(C_{n,\ell};x)$ is the
+determinant of an $n\times n$ tridiagonal matrix whose corner entries are
+perturbed by $x$ (Lemmas~\ref{lem:cont} and~\ref{lem:det}). At a zero, a
+unit kernel vector of this matrix produces two real numbers $\sigma$ and
+$t$, the values of the quadratic forms of the corner and path matrices, with
+$0\le\sigma\le 1$ and $|t|\le 2$, and $z$ is a zero of an explicit quartic
+depending on $\sigma$ and $|t|$ (Lemma~\ref{lem:reduction}). The heart of
+the proof is Lemma~\ref{lem:quartic}, which locates the zeros of all these
+quartics. After the substitutions $w=-1/z$ and $w=a+v^2$, with $a=\ell-1$,
+it becomes a statement about a quartic in $v$ with exactly two real zeros,
+and Vieta's formulas determine the position of the remaining pair. No
+realizability of the parameters is needed: the lemma covers the whole range
+$0\le\sigma\le 1$ and $|t|\le 2$. The argument works verbatim with a real
+parameter $a\ge 2$ in place of $\ell-1$ (Theorem~\ref{thm:general}).
+
+\subsection*{Dependencies}
+The proof of Theorem~\ref{thm:main} is self-contained. It uses the
+recurrence of~\cite[Theorem~1.7]{GS}, which we rederive in
+Lemma~\ref{lem:rec} to fix conventions. Corollary~\ref{cor:lc} uses in
+addition the criterion of~\cite{BRW}.
+
+\subsection*{Organization}
+Section~\ref{sec:det} derives the recurrence and the determinant formula and
+reduces Theorem~\ref{thm:main} to a family of quartics. Section~\ref{sec:quartic}
+locates the zeros of these quartics. Section~\ref{sec:proofs} completes the
+proofs.
+
+\section{A determinant formula}\label{sec:det}
+
+Let $a\ge 1$ be real, and put
+\begin{equation}\label{eq:fg}
+f=1+ax,\qquad g=1+(a-1)x,\qquad A=fg,\qquad B=xf.
+\end{equation}
+Define polynomials $C_n=C_n(x)$ by
+\begin{equation}\label{eq:rec}
+C_0=f+x,\qquad C_1=f(A+2x),\qquad C_n=AC_{n-1}+BC_{n-2}\quad(n\ge 2).
+\end{equation}
+Since $A(0)=1$ and $B(0)=0$, we have $C_n(0)=1$ for all $n\ge 0$.
+
+\begin{lemma}\label{lem:rec}
+Let $\ell\ge 2$ and $a=\ell-1$. Then $I(C_{n,\ell};x)=C_n(x)$ for every
+$n\ge 0$.
+\end{lemma}
+
+\begin{proof}
+Let $U_n$ and $V_n$ be the generating polynomials, by size, of the strong
+independent sets of $C_{n,\ell}$ that do not contain, respectively contain,
+the last spine vertex $u_n$. The single tooth of $C_{0,\ell}$ gives
+$U_0=1+(\ell-1)x=f$ and $V_0=x$.
+
+The hypercomb $C_{n+1,\ell}$ arises from $C_{n,\ell}$ by adding a spine edge
+$\{u_n,u_{n+1}\}\cup X$ with $|X|=\ell-2$ and a tooth $\{u_{n+1}\}\cup Y$
+with $|Y|=\ell-1$, where $X$, $Y$ and $\{u_{n+1}\}$ consist of new vertices.
+A set $S$ of vertices of $C_{n+1,\ell}$ is a strong independent set if and
+only if its restriction $S'$ to $C_{n,\ell}$ is one and the following holds.
+If $u_{n+1}\notin S$, then $S$ contains at most one vertex of $Y$, and at
+most one vertex of $X$, none if $u_n\in S'$. If $u_{n+1}\in S$, then
+$u_n\notin S'$ and $S$ contains no vertex of $X\cup Y$. Since
+$1+(\ell-2)x=g$, this gives
+\[
+U_{n+1}=f\,(gU_n+V_n),\qquad V_{n+1}=xU_n .
+\]
+Thus
+\[
+\begin{pmatrix} U_n\\ V_n\end{pmatrix}
+=M^n\begin{pmatrix} U_0\\ V_0\end{pmatrix},\qquad
+M=\begin{pmatrix} A & f\\ x & 0\end{pmatrix}.
+\]
+The matrix $M$ has trace $A$ and determinant $-B$, so $M^2=AM+BI$ by the
+Cayley--Hamilton theorem, and $U_n+V_n$ satisfies the recurrence
+in~\eqref{eq:rec} for $n\ge 2$. Finally $U_0+V_0=f+x$ and
+$U_1+V_1=f(fg+x)+xf=f(A+2x)$.
+\end{proof}
+
+Since $A=fg$ and $B=xf$, the recurrence~\eqref{eq:rec} is
+$C_n=f\,\bigl(gC_{n-1}+xC_{n-2}\bigr)$, which is the recurrence
+of~\cite[Theorem~1.7]{GS}; one also checks that
+$C_1=1+(3a+1)x+3a^2x^2+a^2(a-1)x^3$ agrees with the initial condition there.
+
+Define $F_{-1}=0$, $F_0=1$ and $F_j=AF_{j-1}+BF_{j-2}$ for $j\ge 1$, so that
+$F_1=A$.
+
+\begin{lemma}\label{lem:cont}
+For every $n\ge 1$,
+\begin{equation}\label{eq:cont}
+C_n=f\,\bigl(F_n+2xF_{n-1}+x^2F_{n-2}\bigr).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Denote the bracket by $R_n$. Then $R_1=A+2x$, so~\eqref{eq:cont} holds for
+$n=1$. For $n=2$,
+\[
+C_2=AC_1+BC_0=f(A^2+2xA)+xf(f+x)=f(A^2+B+2xA+x^2)=fR_2 .
+\]
+For $n\ge 3$ the indices $n$, $n-1$ and $n-2$ are positive, so each of
+$F_n$, $F_{n-1}$, $F_{n-2}$ satisfies the defining recurrence and
+$R_n=AR_{n-1}+BR_{n-2}$. Since $fR_n$ and $C_n$ satisfy the same recurrence
+and agree for $n=1,2$, they agree for all $n\ge 1$.
+\end{proof}
+
+For $n\ge 2$ let $J_n$ be the adjacency matrix of the path with $n$ vertices,
+that is, the $n\times n$ matrix with ones on the first super- and
+subdiagonal and zeros elsewhere, and let $E_n$ be the diagonal matrix with
+diagonal $(1,0,\dots,0,1)$.
+
+\begin{lemma}\label{lem:det}
+Let $n\ge 2$, $z\in\C$, and choose $\beta\in\C$ with $\beta^2=B(z)$. Then
+the matrix
+\[
+M_n(z)=A(z)\,I_n+z\,E_n+i\beta\,J_n
+\]
+satisfies
+$\det M_n(z)=F_n(z)+2zF_{n-1}(z)+z^2F_{n-2}(z)$.
+\end{lemma}
+
+\begin{proof}
+Let $T_m$ be the $m\times m$ tridiagonal matrix with diagonal entries $A(z)$
+and off-diagonal entries $i\beta$. Expansion along the last row gives
+$\det T_m=A(z)\det T_{m-1}-(i\beta)^2\det T_{m-2}
+=A(z)\det T_{m-1}+B(z)\det T_{m-2}$, with $\det T_0=1$ and
+$\det T_1=A(z)$; hence $\det T_m=F_m(z)$. The matrix $M_n(z)$ arises from
+$T_n$ by adding $z$ to the entries $(1,1)$ and $(n,n)$, which lie in
+distinct rows because $n\ge 2$. By multilinearity of the determinant in
+these two rows,
+\[
+\det M_n(z)=\det T_n+z\det T_{n-1}+z\det T_{n-1}+z^2\det T_{n-2},
+\]
+where the three minors are obtained by deleting row and column $1$, row and
+column $n$, and both; for $n=2$ the last one is the empty matrix, with
+determinant $1$. This is the asserted formula.
+\end{proof}
+
+\begin{lemma}\label{lem:reduction}
+Let $n\ge 2$ and let $z\in\C$ satisfy $C_n(z)=0$. Then $z\ne 0$, and either
+$z=-1/a$ or there are real numbers $\sigma\in[0,1]$ and $\tau\in[0,2]$ such
+that
+\begin{equation}\label{eq:quartic-z}
+\bigl(A(z)+\sigma z\bigr)^2+\tau^2 z f(z)=0 .
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+We have $z\ne 0$ because $C_n(0)=1$. Suppose $z\ne -1/a$, so that
+$f(z)\ne 0$. By Lemmas~\ref{lem:cont} and~\ref{lem:det}, $\det M_n(z)=0$.
+Let $v\in\C^n$ satisfy $M_n(z)v=0$ and $v^*v=1$, and put
+\[
+\sigma=v^*E_nv=|v_1|^2+|v_n|^2,\qquad
+t=v^*J_nv=2\operatorname{Re}\sum_{j=1}^{n-1}\overline{v_j}\,v_{j+1}.
+\]
+Then $\sigma\in[0,1]$, $t$ is real, and
+$|t|\le\sum_{j=1}^{n-1}\bigl(|v_j|^2+|v_{j+1}|^2\bigr)\le 2$. Moreover
+\[
+0=v^*M_n(z)v=A(z)+\sigma z+i\beta t .
+\]
+Hence $(A(z)+\sigma z)^2=-\beta^2t^2=-t^2zf(z)$, and~\eqref{eq:quartic-z}
+holds with $\tau=|t|$.
+\end{proof}
+
+\section{A family of quartics}\label{sec:quartic}
+
+\begin{lemma}\label{lem:quartic}
+Let $a\ge 2$, $\sigma\in[0,1]$ and $\tau\in[0,2]$ be real. Every zero $z$
+of
+\[
+\Phi(z)=\bigl((1+az)(1+(a-1)z)+\sigma z\bigr)^2+\tau^2z(1+az)
+\]
+satisfies $|\arg z|>2\pi/3$.
+\end{lemma}
+
+\begin{proof}
+If $\tau=0$, then $\Phi$ is the square of
+$1+(2a-1+\sigma)z+a(a-1)z^2$. This quadratic has positive coefficients and
+discriminant $(2a-1+\sigma)^2-4a(a-1)=1+2\sigma(2a-1)+\sigma^2>0$, so its
+zeros are negative real numbers. We assume from now on that $\tau>0$.
+
+\emph{Step 1: two substitutions.} Since $\Phi(0)=1$, every zero $z$ of
+$\Phi$ is nonzero, and we put $w=-1/z$. From $w(1+az)=w-a$,
+$w(1+(a-1)z)=w-a+1$ and $wz=-1$ we obtain
+\[
+w^4\,\Phi(-1/w)=D(w)^2-\tau^2w^2(w-a),\qquad
+D(w)=(w-a)(w-a+1)-\sigma w .
+\]
+If $|\arg w|<\pi/3$, then $|\arg z|=\pi-|\arg w|>2\pi/3$. It therefore
+suffices to show that every zero $w$ of $D(w)^2-\tau^2w^2(w-a)$ satisfies
+$|\arg w|<\pi/3$. Let $w$ be such a zero, and choose $v\in\C$ with
+$v^2=w-a$. Then $D(w)^2=(\tau wv)^2$, and after replacing $v$ by $-v$ if
+necessary, $D(w)=\tau wv$. Substituting $w=a+v^2$, so that
+$D(w)=v^2(v^2+1)-\sigma(a+v^2)$, we find that $v$ is a zero of
+\[
+\Psi(v)=v^4-\tau v^3+(1-\sigma)v^2-a\tau v-a\sigma .
+\]
+Consequently it suffices to prove that
+\begin{equation}\label{eq:goal}
+|\arg(a+v^2)|<\pi/3\qquad\text{for every zero $v$ of $\Psi$.}
+\end{equation}
+
+\emph{Step 2: the real zeros of $\Psi$.} For $0<v\le\tau$ we have
+$v^3(v-\tau)\le 0$ and $(1-\sigma)v^2\le(1-\sigma)\tau v$, hence
+\[
+\Psi(v)\le(1-\sigma-a)\tau v-a\sigma<0 ,
+\]
+because $a>1\ge 1-\sigma$. For $v\ge\tau$ we have
+$\Psi''(v)=6v(2v-\tau)+2(1-\sigma)>0$. As $\Psi(\tau)<0$ and
+$\Psi(v)\to\infty$, the strictly convex function $\Psi$ has exactly one zero
+$r$ in $(\tau,\infty)$, and $\Psi'(r)>0$. So $r>\tau$ is the only positive
+zero of $\Psi$, it is simple, and $\Psi<0$ on $(0,r)$. For $p\ge 0$,
+\[
+\Psi(-p)=p^4+\tau p^3+(1-\sigma)p^2+a\tau p-a\sigma
+\]
+is strictly increasing in $p$, with derivative at least $a\tau>0$, starts
+at $-a\sigma\le 0$ and tends to infinity. Hence $\Psi$ has exactly one zero
+$-p$ with $p\ge 0$, and it is simple. Since $\Psi$ has real coefficients,
+its remaining zeros form a pair $\xi,\overline{\xi}$ with
+$\operatorname{Im}\xi\ne 0$. Moreover $p<r$: this is clear if $p=0$, and if
+$p>0$ then $\Psi(p)=\Psi(-p)-2\tau p(p^2+a)<0$, so $p\in(0,r)$.
+
+For the real zeros, $a+r^2$ and $a+p^2$ are positive, so~\eqref{eq:goal}
+holds. The zero $\overline{\xi}$ yields the complex conjugate of $a+\xi^2$,
+so it remains to show that $|\arg(a+\xi^2)|<\pi/3$.
+
+\emph{Step 3: Vieta's formulas.} Put
+\[
+\delta=r-p-\tau,\qquad Q=|\xi|^2>0,\qquad H=rp\ge 0 .
+\]
+Comparing the coefficients of $v^3$ in
+$\Psi(v)=(v-r)(v+p)(v-\xi)(v-\overline{\xi})$ gives
+$r-p+2\operatorname{Re}\xi=\tau$, that is, $2\operatorname{Re}\xi=-\delta$.
+Hence $(v-\xi)(v-\overline{\xi})=v^2+\delta v+Q$, while
+$(v-r)(v+p)=v^2-(\tau+\delta)v-H$. Comparing the remaining coefficients, we
+obtain
+\begin{align}
+Q&=1-\sigma+H+\delta(\tau+\delta),\label{eq:v2}\\
+a&=Q+\delta\,\frac{Q+H}{\tau},\label{eq:v1}\\
+HQ&=a\sigma .\label{eq:v0}
+\end{align}
+
+\emph{Step 4: $\delta>0$.} Suppose that $\delta\le 0$. Since $r>p$, we have
+$\delta>-\tau$, and therefore $\delta(\tau+\delta)\le 0$. By~\eqref{eq:v1},
+$a\le Q$, so~\eqref{eq:v0} gives $H=a\sigma/Q\le\sigma$. Then~\eqref{eq:v2}
+gives $Q\le 1-\sigma+\sigma=1$, which contradicts $Q\ge a\ge 2$.
+
+\emph{Step 5: the sector.} Put $K=(Q+H)/\tau$. Then $K>0$, $K\ge Q/2$
+because $H\ge 0$ and $\tau\le 2$, and $a=Q+\delta K$ by~\eqref{eq:v1}.
+Write $\xi=-\delta/2+iy$ with $y\ne 0$, so that $Q=\delta^2/4+y^2$. Then
+\[
+a+\xi^2=Q+\delta K+\frac{\delta^2}{4}-y^2-i\delta y
+=\delta\Bigl(K+\frac{\delta}{2}\Bigr)-i\delta y .
+\]
+The real part is positive by Step~4. Hence $|\arg(a+\xi^2)|<\pi/3$ if and
+only if $\delta^2y^2<3\delta^2(K+\delta/2)^2$, that is,
+\begin{equation}\label{eq:final}
+Q<3K^2+3K\delta+\delta^2 .
+\end{equation}
+If $Q\ge 4/3$, then $3K^2\ge 3Q^2/4\ge Q$, and~\eqref{eq:final} holds
+because $3K\delta+\delta^2>0$. If $Q<4/3$, then
+$3K\delta=3(a-Q)>3(2-4/3)=2>Q$, and~\eqref{eq:final} holds again. This
+proves~\eqref{eq:goal} and the lemma.
+\end{proof}
+
+\section{Proofs of the main results}\label{sec:proofs}
+
+\begin{theorem}\label{thm:general}
+Let $a\ge 2$ be real and let $C_n$ be defined by~\eqref{eq:fg}
+and~\eqref{eq:rec}. For every $n\ge 0$, every zero $z$ of $C_n$ satisfies
+$|\arg z|>2\pi/3$.
+\end{theorem}
+
+\begin{proof}
+The only zero of $C_0=1+(a+1)x$ is $-1/(a+1)$. For $n=1$,
+$C_1=f\,(A+2x)$, where $f$ has the zero $-1/a$ and
+$A+2x=1+(2a+1)x+a(a-1)x^2$ has positive coefficients and discriminant
+$8a+1>0$; so all zeros of $C_1$ are negative real numbers. Let $n\ge 2$ and
+let $z$ be a zero of $C_n$. By Lemma~\ref{lem:reduction}, either $z=-1/a$,
+or~\eqref{eq:quartic-z} holds for some $\sigma\in[0,1]$ and
+$\tau\in[0,2]$. In the latter case $z$ is a zero of the polynomial $\Phi$
+of Lemma~\ref{lem:quartic}, because $A(z)=(1+az)(1+(a-1)z)$ and
+$zf(z)=z(1+az)$; hence $|\arg z|>2\pi/3$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Apply Lemma~\ref{lem:rec} and Theorem~\ref{thm:general} with
+$a=\ell-1\ge 2$.
+\end{proof}
+
+The passage to coefficients rests on the following classical criterion.
+Brenti, Royle and Wagner~\cite[Proposition~1.2]{BRW} state it for zeros in
+the sector $|\arg z|<\pi/3$; replacing $p(x)$ by $p(-x)$ changes the sign of
+every second coefficient and does not affect the inequalities, which gives
+the form below~\cite[Corollary~2.3]{BC}.
+
+\begin{proposition}[\cite{BRW,BC}]\label{prop:sector}
+Let $p(x)=\sum_{k=0}^d b_kx^k\in\R[x]$ have degree $d$ and $p(0)\ne 0$,
+and suppose that every zero $z$ of $p$ satisfies $|\arg z|>2\pi/3$. Then the coefficients
+$b_0,\dots,b_d$ are all positive or all negative, and
+$b_k^2>b_{k-1}b_{k+1}$ for $1\le k\le d-1$.
+\end{proposition}
+
+\begin{proof}[Proof of Corollary~\ref{cor:lc}]
+The $2n+1$ edges of $C_{n,\ell}$ cover all its vertices, so a strong
+independent set has at most $2n+1$ elements. Choosing one vertex outside the
+spine in every edge, which is possible because $\ell\ge 3$, gives one of
+size $2n+1$. Hence $I(C_{n,\ell};x)$ has degree $2n+1$. By
+Theorem~\ref{thm:main} and Proposition~\ref{prop:sector}, its coefficients
+have a common sign, which is positive because $c_0=1$, and
+$c_k^2>c_{k-1}c_{k+1}$ for $1\le k\le 2n$. Therefore the ratios
+$c_k/c_{k-1}$, $1\le k\le 2n+1$, are strictly decreasing, and the sequence
+is unimodal.
+\end{proof}
+
+\begin{remark}\label{rem:weak}
+For the non-strict inequalities $c_k^2\ge c_{k-1}c_{k+1}$ one can also argue
+directly. By Theorem~\ref{thm:main}, $I(C_{n,\ell};x)$ is a product of
+factors $1+x/\rho$ and $1-(2\cos\theta)x/\rho+x^2/\rho^2$ with $\rho>0$ and
+$2\pi/3<|\theta|<\pi$. Since $-2\cos\theta\in(1,2)$, every factor has
+positive and log-concave coefficients, and the convolution of positive
+log-concave sequences without internal zeros is again of this kind; see,
+for example,~\cite{Karlin}.
+\end{remark}
+
+\begin{remark}
+By Theorem~\ref{thm:general} and Proposition~\ref{prop:sector}, the
+conclusion of Corollary~\ref{cor:lc} holds for the polynomials $C_n$,
+$n\ge 1$, for every real $a\ge 2$. The assumption $a\ge 2$ is used in Steps
+4 and 5 of the proof of Lemma~\ref{lem:quartic}. The case $a=1$ corresponds
+to the centipede, whose independence polynomial is real-rooted~\cite{Zhu}.
+\end{remark}
+
+\section*{Use of AI-assisted tools}
+AI-assisted tools were used in the research and preparation of this
+manuscript.
+
+\begin{thebibliography}{9}
+
+\bibitem{AMSE}
+Y.~Alavi, P.~J. Malde, A.~J. Schwenk, and P.~Erd\H{o}s, \emph{The vertex
+independence sequence of a graph is not constrained}, Congr. Numer.
+\textbf{58} (1987), 15--23.
+
+\bibitem{BRW}
+F.~Brenti, G.~F. Royle, and D.~G. Wagner, \emph{Location of zeros of
+chromatic and related polynomials of graphs}, Canad. J. Math. \textbf{46}
+(1994), no.~1, 55--80.
+
+\bibitem{BC}
+J.~I. Brown and B.~Cameron, \emph{On the unimodality of independence
+polynomials of very well-covered graphs}, Discrete Math. \textbf{341}
+(2018), no.~4, 1138--1143; arXiv:1709.08236.
+
+\bibitem{GS}
+D.~Galvin and C.~Sharpe, \emph{Independent set sequence of some linear
+hypertrees}, Australas. J. Combin. \textbf{94} (2026), no.~1, 93--121;
+arXiv:2409.15555.
+
+\bibitem{Karlin}
+S.~Karlin, \emph{Total Positivity, Vol.~I}, Stanford University Press,
+Stanford, 1968.
+
+\bibitem{Ast}
+OpenAI Codex GPT-6-Astra, \emph{Eventual strict log-concavity of weighted
+linear hypercombs}, preprint (2026), aiXiv:260910.000002.
+
+\bibitem{Zhu}
+Z.-F. Zhu, \emph{The unimodality of independence polynomials of some
+graphs}, Australas. J. Combin. \textbf{38} (2007), 27--33.
+
+\end{thebibliography}
+
+\end{document}

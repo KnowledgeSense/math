@@ -1,0 +1,4835 @@
+{
+  "status": "PASS",
+  "method": "Independent exact finite enumeration; no supplied routines imported",
+  "sharpness": {
+    "tuples": 341,
+    "occupancy_values": 11111,
+    "largest_rank": 255,
+    "rows": [
+      {
+        "sizes": [],
+        "D": 1,
+        "distance": 0,
+        "feasible_occupancy": [
+          0
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0
+        ],
+        "D": 1,
+        "distance": 0,
+        "feasible_occupancy": [
+          0
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1
+        ],
+        "D": 2,
+        "distance": 1,
+        "feasible_occupancy": [
+          1
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2
+        ],
+        "D": 3,
+        "distance": 2,
+        "feasible_occupancy": [
+          2
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3
+        ],
+        "D": 4,
+        "distance": 3,
+        "feasible_occupancy": [
+          3
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          0
+        ],
+        "D": 1,
+        "distance": 0,
+        "feasible_occupancy": [
+          0
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          1
+        ],
+        "D": 2,
+        "distance": 1,
+        "feasible_occupancy": [
+          1
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          2
+        ],
+        "D": 3,
+        "distance": 2,
+        "feasible_occupancy": [
+          2
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          3
+        ],
+        "D": 4,
+        "distance": 3,
+        "feasible_occupancy": [
+          3
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          0
+        ],
+        "D": 2,
+        "distance": 1,
+        "feasible_occupancy": [
+          1
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          1
+        ],
+        "D": 4,
+        "distance": 3,
+        "feasible_occupancy": [
+          3
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          2
+        ],
+        "D": 6,
+        "distance": 5,
+        "feasible_occupancy": [
+          5
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          3
+        ],
+        "D": 8,
+        "distance": 7,
+        "feasible_occupancy": [
+          7
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          0
+        ],
+        "D": 3,
+        "distance": 2,
+        "feasible_occupancy": [
+          2
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          1
+        ],
+        "D": 6,
+        "distance": 5,
+        "feasible_occupancy": [
+          5
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          2
+        ],
+        "D": 9,
+        "distance": 8,
+        "feasible_occupancy": [
+          8
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          3
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          0
+        ],
+        "D": 4,
+        "distance": 3,
+        "feasible_occupancy": [
+          3
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          1
+        ],
+        "D": 8,
+        "distance": 7,
+        "feasible_occupancy": [
+          7
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          2
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          3
+        ],
+        "D": 16,
+        "distance": 15,
+        "feasible_occupancy": [
+          15
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          0,
+          0
+        ],
+        "D": 1,
+        "distance": 0,
+        "feasible_occupancy": [
+          0
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          0,
+          1
+        ],
+        "D": 2,
+        "distance": 1,
+        "feasible_occupancy": [
+          1
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          0,
+          2
+        ],
+        "D": 3,
+        "distance": 2,
+        "feasible_occupancy": [
+          2
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          0,
+          3
+        ],
+        "D": 4,
+        "distance": 3,
+        "feasible_occupancy": [
+          3
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          1,
+          0
+        ],
+        "D": 2,
+        "distance": 1,
+        "feasible_occupancy": [
+          1
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          1,
+          1
+        ],
+        "D": 4,
+        "distance": 3,
+        "feasible_occupancy": [
+          3
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          1,
+          2
+        ],
+        "D": 6,
+        "distance": 5,
+        "feasible_occupancy": [
+          5
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          1,
+          3
+        ],
+        "D": 8,
+        "distance": 7,
+        "feasible_occupancy": [
+          7
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          2,
+          0
+        ],
+        "D": 3,
+        "distance": 2,
+        "feasible_occupancy": [
+          2
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          2,
+          1
+        ],
+        "D": 6,
+        "distance": 5,
+        "feasible_occupancy": [
+          5
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          2,
+          2
+        ],
+        "D": 9,
+        "distance": 8,
+        "feasible_occupancy": [
+          8
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          2,
+          3
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          3,
+          0
+        ],
+        "D": 4,
+        "distance": 3,
+        "feasible_occupancy": [
+          3
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          3,
+          1
+        ],
+        "D": 8,
+        "distance": 7,
+        "feasible_occupancy": [
+          7
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          3,
+          2
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          3,
+          3
+        ],
+        "D": 16,
+        "distance": 15,
+        "feasible_occupancy": [
+          15
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          0,
+          0
+        ],
+        "D": 2,
+        "distance": 1,
+        "feasible_occupancy": [
+          1
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          0,
+          1
+        ],
+        "D": 4,
+        "distance": 3,
+        "feasible_occupancy": [
+          3
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          0,
+          2
+        ],
+        "D": 6,
+        "distance": 5,
+        "feasible_occupancy": [
+          5
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          0,
+          3
+        ],
+        "D": 8,
+        "distance": 7,
+        "feasible_occupancy": [
+          7
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          1,
+          0
+        ],
+        "D": 4,
+        "distance": 3,
+        "feasible_occupancy": [
+          3
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          1,
+          1
+        ],
+        "D": 8,
+        "distance": 7,
+        "feasible_occupancy": [
+          7
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          1,
+          2
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          1,
+          3
+        ],
+        "D": 16,
+        "distance": 15,
+        "feasible_occupancy": [
+          15
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          2,
+          0
+        ],
+        "D": 6,
+        "distance": 5,
+        "feasible_occupancy": [
+          5
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          2,
+          1
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          2,
+          2
+        ],
+        "D": 18,
+        "distance": 17,
+        "feasible_occupancy": [
+          17
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          2,
+          3
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          3,
+          0
+        ],
+        "D": 8,
+        "distance": 7,
+        "feasible_occupancy": [
+          7
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          3,
+          1
+        ],
+        "D": 16,
+        "distance": 15,
+        "feasible_occupancy": [
+          15
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          3,
+          2
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          3,
+          3
+        ],
+        "D": 32,
+        "distance": 31,
+        "feasible_occupancy": [
+          31
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          0,
+          0
+        ],
+        "D": 3,
+        "distance": 2,
+        "feasible_occupancy": [
+          2
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          0,
+          1
+        ],
+        "D": 6,
+        "distance": 5,
+        "feasible_occupancy": [
+          5
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          0,
+          2
+        ],
+        "D": 9,
+        "distance": 8,
+        "feasible_occupancy": [
+          8
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          0,
+          3
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          1,
+          0
+        ],
+        "D": 6,
+        "distance": 5,
+        "feasible_occupancy": [
+          5
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          1,
+          1
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          1,
+          2
+        ],
+        "D": 18,
+        "distance": 17,
+        "feasible_occupancy": [
+          17
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          1,
+          3
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          2,
+          0
+        ],
+        "D": 9,
+        "distance": 8,
+        "feasible_occupancy": [
+          8
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          2,
+          1
+        ],
+        "D": 18,
+        "distance": 17,
+        "feasible_occupancy": [
+          17
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          2,
+          2
+        ],
+        "D": 27,
+        "distance": 26,
+        "feasible_occupancy": [
+          26
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          2,
+          3
+        ],
+        "D": 36,
+        "distance": 35,
+        "feasible_occupancy": [
+          35
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          3,
+          0
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          3,
+          1
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          3,
+          2
+        ],
+        "D": 36,
+        "distance": 35,
+        "feasible_occupancy": [
+          35
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          3,
+          3
+        ],
+        "D": 48,
+        "distance": 47,
+        "feasible_occupancy": [
+          47
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          0,
+          0
+        ],
+        "D": 4,
+        "distance": 3,
+        "feasible_occupancy": [
+          3
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          0,
+          1
+        ],
+        "D": 8,
+        "distance": 7,
+        "feasible_occupancy": [
+          7
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          0,
+          2
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          0,
+          3
+        ],
+        "D": 16,
+        "distance": 15,
+        "feasible_occupancy": [
+          15
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          1,
+          0
+        ],
+        "D": 8,
+        "distance": 7,
+        "feasible_occupancy": [
+          7
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          1,
+          1
+        ],
+        "D": 16,
+        "distance": 15,
+        "feasible_occupancy": [
+          15
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          1,
+          2
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          1,
+          3
+        ],
+        "D": 32,
+        "distance": 31,
+        "feasible_occupancy": [
+          31
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          2,
+          0
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          2,
+          1
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          2,
+          2
+        ],
+        "D": 36,
+        "distance": 35,
+        "feasible_occupancy": [
+          35
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          2,
+          3
+        ],
+        "D": 48,
+        "distance": 47,
+        "feasible_occupancy": [
+          47
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          3,
+          0
+        ],
+        "D": 16,
+        "distance": 15,
+        "feasible_occupancy": [
+          15
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          3,
+          1
+        ],
+        "D": 32,
+        "distance": 31,
+        "feasible_occupancy": [
+          31
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          3,
+          2
+        ],
+        "D": 48,
+        "distance": 47,
+        "feasible_occupancy": [
+          47
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          3,
+          3
+        ],
+        "D": 64,
+        "distance": 63,
+        "feasible_occupancy": [
+          63
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "D": 1,
+        "distance": 0,
+        "feasible_occupancy": [
+          0
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "D": 2,
+        "distance": 1,
+        "feasible_occupancy": [
+          1
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "D": 3,
+        "distance": 2,
+        "feasible_occupancy": [
+          2
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          0,
+          0,
+          3
+        ],
+        "D": 4,
+        "distance": 3,
+        "feasible_occupancy": [
+          3
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "D": 2,
+        "distance": 1,
+        "feasible_occupancy": [
+          1
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "D": 4,
+        "distance": 3,
+        "feasible_occupancy": [
+          3
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          0,
+          1,
+          2
+        ],
+        "D": 6,
+        "distance": 5,
+        "feasible_occupancy": [
+          5
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          0,
+          1,
+          3
+        ],
+        "D": 8,
+        "distance": 7,
+        "feasible_occupancy": [
+          7
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          0,
+          2,
+          0
+        ],
+        "D": 3,
+        "distance": 2,
+        "feasible_occupancy": [
+          2
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          0,
+          2,
+          1
+        ],
+        "D": 6,
+        "distance": 5,
+        "feasible_occupancy": [
+          5
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          0,
+          2,
+          2
+        ],
+        "D": 9,
+        "distance": 8,
+        "feasible_occupancy": [
+          8
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          0,
+          2,
+          3
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          0,
+          3,
+          0
+        ],
+        "D": 4,
+        "distance": 3,
+        "feasible_occupancy": [
+          3
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          0,
+          3,
+          1
+        ],
+        "D": 8,
+        "distance": 7,
+        "feasible_occupancy": [
+          7
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          0,
+          3,
+          2
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          0,
+          3,
+          3
+        ],
+        "D": 16,
+        "distance": 15,
+        "feasible_occupancy": [
+          15
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          1,
+          0,
+          0
+        ],
+        "D": 2,
+        "distance": 1,
+        "feasible_occupancy": [
+          1
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          1,
+          0,
+          1
+        ],
+        "D": 4,
+        "distance": 3,
+        "feasible_occupancy": [
+          3
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          1,
+          0,
+          2
+        ],
+        "D": 6,
+        "distance": 5,
+        "feasible_occupancy": [
+          5
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          1,
+          0,
+          3
+        ],
+        "D": 8,
+        "distance": 7,
+        "feasible_occupancy": [
+          7
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          1,
+          1,
+          0
+        ],
+        "D": 4,
+        "distance": 3,
+        "feasible_occupancy": [
+          3
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          1,
+          1,
+          1
+        ],
+        "D": 8,
+        "distance": 7,
+        "feasible_occupancy": [
+          7
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          1,
+          1,
+          2
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          1,
+          1,
+          3
+        ],
+        "D": 16,
+        "distance": 15,
+        "feasible_occupancy": [
+          15
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          1,
+          2,
+          0
+        ],
+        "D": 6,
+        "distance": 5,
+        "feasible_occupancy": [
+          5
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          1,
+          2,
+          1
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          1,
+          2,
+          2
+        ],
+        "D": 18,
+        "distance": 17,
+        "feasible_occupancy": [
+          17
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          1,
+          3,
+          0
+        ],
+        "D": 8,
+        "distance": 7,
+        "feasible_occupancy": [
+          7
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          1,
+          3,
+          1
+        ],
+        "D": 16,
+        "distance": 15,
+        "feasible_occupancy": [
+          15
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          1,
+          3,
+          2
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          1,
+          3,
+          3
+        ],
+        "D": 32,
+        "distance": 31,
+        "feasible_occupancy": [
+          31
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          2,
+          0,
+          0
+        ],
+        "D": 3,
+        "distance": 2,
+        "feasible_occupancy": [
+          2
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          2,
+          0,
+          1
+        ],
+        "D": 6,
+        "distance": 5,
+        "feasible_occupancy": [
+          5
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          2,
+          0,
+          2
+        ],
+        "D": 9,
+        "distance": 8,
+        "feasible_occupancy": [
+          8
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          2,
+          0,
+          3
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          2,
+          1,
+          0
+        ],
+        "D": 6,
+        "distance": 5,
+        "feasible_occupancy": [
+          5
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          2,
+          1,
+          1
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          2,
+          1,
+          2
+        ],
+        "D": 18,
+        "distance": 17,
+        "feasible_occupancy": [
+          17
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          2,
+          1,
+          3
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          2,
+          2,
+          0
+        ],
+        "D": 9,
+        "distance": 8,
+        "feasible_occupancy": [
+          8
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          2,
+          2,
+          1
+        ],
+        "D": 18,
+        "distance": 17,
+        "feasible_occupancy": [
+          17
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          2,
+          2,
+          2
+        ],
+        "D": 27,
+        "distance": 26,
+        "feasible_occupancy": [
+          26
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          2,
+          2,
+          3
+        ],
+        "D": 36,
+        "distance": 35,
+        "feasible_occupancy": [
+          35
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          2,
+          3,
+          0
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          2,
+          3,
+          1
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          2,
+          3,
+          2
+        ],
+        "D": 36,
+        "distance": 35,
+        "feasible_occupancy": [
+          35
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          2,
+          3,
+          3
+        ],
+        "D": 48,
+        "distance": 47,
+        "feasible_occupancy": [
+          47
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          3,
+          0,
+          0
+        ],
+        "D": 4,
+        "distance": 3,
+        "feasible_occupancy": [
+          3
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          3,
+          0,
+          1
+        ],
+        "D": 8,
+        "distance": 7,
+        "feasible_occupancy": [
+          7
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          3,
+          0,
+          2
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          3,
+          0,
+          3
+        ],
+        "D": 16,
+        "distance": 15,
+        "feasible_occupancy": [
+          15
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          3,
+          1,
+          0
+        ],
+        "D": 8,
+        "distance": 7,
+        "feasible_occupancy": [
+          7
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          3,
+          1,
+          1
+        ],
+        "D": 16,
+        "distance": 15,
+        "feasible_occupancy": [
+          15
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          3,
+          1,
+          2
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          3,
+          1,
+          3
+        ],
+        "D": 32,
+        "distance": 31,
+        "feasible_occupancy": [
+          31
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          3,
+          2,
+          0
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          3,
+          2,
+          1
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          3,
+          2,
+          2
+        ],
+        "D": 36,
+        "distance": 35,
+        "feasible_occupancy": [
+          35
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          3,
+          2,
+          3
+        ],
+        "D": 48,
+        "distance": 47,
+        "feasible_occupancy": [
+          47
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          3,
+          3,
+          0
+        ],
+        "D": 16,
+        "distance": 15,
+        "feasible_occupancy": [
+          15
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          3,
+          3,
+          1
+        ],
+        "D": 32,
+        "distance": 31,
+        "feasible_occupancy": [
+          31
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          3,
+          3,
+          2
+        ],
+        "D": 48,
+        "distance": 47,
+        "feasible_occupancy": [
+          47
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          0,
+          3,
+          3,
+          3
+        ],
+        "D": 64,
+        "distance": 63,
+        "feasible_occupancy": [
+          63
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          0,
+          0,
+          0
+        ],
+        "D": 2,
+        "distance": 1,
+        "feasible_occupancy": [
+          1
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          0,
+          0,
+          1
+        ],
+        "D": 4,
+        "distance": 3,
+        "feasible_occupancy": [
+          3
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          0,
+          0,
+          2
+        ],
+        "D": 6,
+        "distance": 5,
+        "feasible_occupancy": [
+          5
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          0,
+          0,
+          3
+        ],
+        "D": 8,
+        "distance": 7,
+        "feasible_occupancy": [
+          7
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          0,
+          1,
+          0
+        ],
+        "D": 4,
+        "distance": 3,
+        "feasible_occupancy": [
+          3
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          0,
+          1,
+          1
+        ],
+        "D": 8,
+        "distance": 7,
+        "feasible_occupancy": [
+          7
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          0,
+          1,
+          2
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          0,
+          1,
+          3
+        ],
+        "D": 16,
+        "distance": 15,
+        "feasible_occupancy": [
+          15
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          0,
+          2,
+          0
+        ],
+        "D": 6,
+        "distance": 5,
+        "feasible_occupancy": [
+          5
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          0,
+          2,
+          1
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          0,
+          2,
+          2
+        ],
+        "D": 18,
+        "distance": 17,
+        "feasible_occupancy": [
+          17
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          0,
+          2,
+          3
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          0,
+          3,
+          0
+        ],
+        "D": 8,
+        "distance": 7,
+        "feasible_occupancy": [
+          7
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          0,
+          3,
+          1
+        ],
+        "D": 16,
+        "distance": 15,
+        "feasible_occupancy": [
+          15
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          0,
+          3,
+          2
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          0,
+          3,
+          3
+        ],
+        "D": 32,
+        "distance": 31,
+        "feasible_occupancy": [
+          31
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          1,
+          0,
+          0
+        ],
+        "D": 4,
+        "distance": 3,
+        "feasible_occupancy": [
+          3
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          1,
+          0,
+          1
+        ],
+        "D": 8,
+        "distance": 7,
+        "feasible_occupancy": [
+          7
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          1,
+          0,
+          2
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          1,
+          0,
+          3
+        ],
+        "D": 16,
+        "distance": 15,
+        "feasible_occupancy": [
+          15
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "D": 8,
+        "distance": 7,
+        "feasible_occupancy": [
+          7
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "D": 16,
+        "distance": 15,
+        "feasible_occupancy": [
+          15
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          1,
+          1,
+          2
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          1,
+          1,
+          3
+        ],
+        "D": 32,
+        "distance": 31,
+        "feasible_occupancy": [
+          31
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          1,
+          2,
+          0
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          1,
+          2,
+          1
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          1,
+          2,
+          2
+        ],
+        "D": 36,
+        "distance": 35,
+        "feasible_occupancy": [
+          35
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          1,
+          2,
+          3
+        ],
+        "D": 48,
+        "distance": 47,
+        "feasible_occupancy": [
+          47
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          1,
+          3,
+          0
+        ],
+        "D": 16,
+        "distance": 15,
+        "feasible_occupancy": [
+          15
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          1,
+          3,
+          1
+        ],
+        "D": 32,
+        "distance": 31,
+        "feasible_occupancy": [
+          31
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          1,
+          3,
+          2
+        ],
+        "D": 48,
+        "distance": 47,
+        "feasible_occupancy": [
+          47
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          1,
+          3,
+          3
+        ],
+        "D": 64,
+        "distance": 63,
+        "feasible_occupancy": [
+          63
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          2,
+          0,
+          0
+        ],
+        "D": 6,
+        "distance": 5,
+        "feasible_occupancy": [
+          5
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          2,
+          0,
+          1
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          2,
+          0,
+          2
+        ],
+        "D": 18,
+        "distance": 17,
+        "feasible_occupancy": [
+          17
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          2,
+          0,
+          3
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          2,
+          1,
+          0
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          2,
+          1,
+          1
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          2,
+          1,
+          2
+        ],
+        "D": 36,
+        "distance": 35,
+        "feasible_occupancy": [
+          35
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          2,
+          1,
+          3
+        ],
+        "D": 48,
+        "distance": 47,
+        "feasible_occupancy": [
+          47
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          2,
+          2,
+          0
+        ],
+        "D": 18,
+        "distance": 17,
+        "feasible_occupancy": [
+          17
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          2,
+          2,
+          1
+        ],
+        "D": 36,
+        "distance": 35,
+        "feasible_occupancy": [
+          35
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          2,
+          2,
+          2
+        ],
+        "D": 54,
+        "distance": 53,
+        "feasible_occupancy": [
+          53
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          2,
+          2,
+          3
+        ],
+        "D": 72,
+        "distance": 71,
+        "feasible_occupancy": [
+          71
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          2,
+          3,
+          0
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          2,
+          3,
+          1
+        ],
+        "D": 48,
+        "distance": 47,
+        "feasible_occupancy": [
+          47
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          2,
+          3,
+          2
+        ],
+        "D": 72,
+        "distance": 71,
+        "feasible_occupancy": [
+          71
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          2,
+          3,
+          3
+        ],
+        "D": 96,
+        "distance": 95,
+        "feasible_occupancy": [
+          95
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          3,
+          0,
+          0
+        ],
+        "D": 8,
+        "distance": 7,
+        "feasible_occupancy": [
+          7
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          3,
+          0,
+          1
+        ],
+        "D": 16,
+        "distance": 15,
+        "feasible_occupancy": [
+          15
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          3,
+          0,
+          2
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          3,
+          0,
+          3
+        ],
+        "D": 32,
+        "distance": 31,
+        "feasible_occupancy": [
+          31
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          3,
+          1,
+          0
+        ],
+        "D": 16,
+        "distance": 15,
+        "feasible_occupancy": [
+          15
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          3,
+          1,
+          1
+        ],
+        "D": 32,
+        "distance": 31,
+        "feasible_occupancy": [
+          31
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          3,
+          1,
+          2
+        ],
+        "D": 48,
+        "distance": 47,
+        "feasible_occupancy": [
+          47
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          3,
+          1,
+          3
+        ],
+        "D": 64,
+        "distance": 63,
+        "feasible_occupancy": [
+          63
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          3,
+          2,
+          0
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          3,
+          2,
+          1
+        ],
+        "D": 48,
+        "distance": 47,
+        "feasible_occupancy": [
+          47
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          3,
+          2,
+          2
+        ],
+        "D": 72,
+        "distance": 71,
+        "feasible_occupancy": [
+          71
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          3,
+          2,
+          3
+        ],
+        "D": 96,
+        "distance": 95,
+        "feasible_occupancy": [
+          95
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          3,
+          3,
+          0
+        ],
+        "D": 32,
+        "distance": 31,
+        "feasible_occupancy": [
+          31
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          3,
+          3,
+          1
+        ],
+        "D": 64,
+        "distance": 63,
+        "feasible_occupancy": [
+          63
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          3,
+          3,
+          2
+        ],
+        "D": 96,
+        "distance": 95,
+        "feasible_occupancy": [
+          95
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          1,
+          3,
+          3,
+          3
+        ],
+        "D": 128,
+        "distance": 127,
+        "feasible_occupancy": [
+          127
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          0,
+          0,
+          0
+        ],
+        "D": 3,
+        "distance": 2,
+        "feasible_occupancy": [
+          2
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          0,
+          0,
+          1
+        ],
+        "D": 6,
+        "distance": 5,
+        "feasible_occupancy": [
+          5
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          0,
+          0,
+          2
+        ],
+        "D": 9,
+        "distance": 8,
+        "feasible_occupancy": [
+          8
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          0,
+          0,
+          3
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          0,
+          1,
+          0
+        ],
+        "D": 6,
+        "distance": 5,
+        "feasible_occupancy": [
+          5
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          0,
+          1,
+          1
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          0,
+          1,
+          2
+        ],
+        "D": 18,
+        "distance": 17,
+        "feasible_occupancy": [
+          17
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          0,
+          1,
+          3
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          0,
+          2,
+          0
+        ],
+        "D": 9,
+        "distance": 8,
+        "feasible_occupancy": [
+          8
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          0,
+          2,
+          1
+        ],
+        "D": 18,
+        "distance": 17,
+        "feasible_occupancy": [
+          17
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          0,
+          2,
+          2
+        ],
+        "D": 27,
+        "distance": 26,
+        "feasible_occupancy": [
+          26
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          0,
+          2,
+          3
+        ],
+        "D": 36,
+        "distance": 35,
+        "feasible_occupancy": [
+          35
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          0,
+          3,
+          0
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          0,
+          3,
+          1
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          0,
+          3,
+          2
+        ],
+        "D": 36,
+        "distance": 35,
+        "feasible_occupancy": [
+          35
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          0,
+          3,
+          3
+        ],
+        "D": 48,
+        "distance": 47,
+        "feasible_occupancy": [
+          47
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          1,
+          0,
+          0
+        ],
+        "D": 6,
+        "distance": 5,
+        "feasible_occupancy": [
+          5
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          1,
+          0,
+          1
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          1,
+          0,
+          2
+        ],
+        "D": 18,
+        "distance": 17,
+        "feasible_occupancy": [
+          17
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          1,
+          0,
+          3
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          1,
+          1,
+          0
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          1,
+          1,
+          1
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          1,
+          1,
+          2
+        ],
+        "D": 36,
+        "distance": 35,
+        "feasible_occupancy": [
+          35
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          1,
+          1,
+          3
+        ],
+        "D": 48,
+        "distance": 47,
+        "feasible_occupancy": [
+          47
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          1,
+          2,
+          0
+        ],
+        "D": 18,
+        "distance": 17,
+        "feasible_occupancy": [
+          17
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          1,
+          2,
+          1
+        ],
+        "D": 36,
+        "distance": 35,
+        "feasible_occupancy": [
+          35
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          1,
+          2,
+          2
+        ],
+        "D": 54,
+        "distance": 53,
+        "feasible_occupancy": [
+          53
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          1,
+          2,
+          3
+        ],
+        "D": 72,
+        "distance": 71,
+        "feasible_occupancy": [
+          71
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          1,
+          3,
+          0
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          1,
+          3,
+          1
+        ],
+        "D": 48,
+        "distance": 47,
+        "feasible_occupancy": [
+          47
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          1,
+          3,
+          2
+        ],
+        "D": 72,
+        "distance": 71,
+        "feasible_occupancy": [
+          71
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          1,
+          3,
+          3
+        ],
+        "D": 96,
+        "distance": 95,
+        "feasible_occupancy": [
+          95
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          2,
+          0,
+          0
+        ],
+        "D": 9,
+        "distance": 8,
+        "feasible_occupancy": [
+          8
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          2,
+          0,
+          1
+        ],
+        "D": 18,
+        "distance": 17,
+        "feasible_occupancy": [
+          17
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          2,
+          0,
+          2
+        ],
+        "D": 27,
+        "distance": 26,
+        "feasible_occupancy": [
+          26
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          2,
+          0,
+          3
+        ],
+        "D": 36,
+        "distance": 35,
+        "feasible_occupancy": [
+          35
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          2,
+          1,
+          0
+        ],
+        "D": 18,
+        "distance": 17,
+        "feasible_occupancy": [
+          17
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          2,
+          1,
+          1
+        ],
+        "D": 36,
+        "distance": 35,
+        "feasible_occupancy": [
+          35
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          2,
+          1,
+          2
+        ],
+        "D": 54,
+        "distance": 53,
+        "feasible_occupancy": [
+          53
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          2,
+          1,
+          3
+        ],
+        "D": 72,
+        "distance": 71,
+        "feasible_occupancy": [
+          71
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          2,
+          2,
+          0
+        ],
+        "D": 27,
+        "distance": 26,
+        "feasible_occupancy": [
+          26
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          2,
+          2,
+          1
+        ],
+        "D": 54,
+        "distance": 53,
+        "feasible_occupancy": [
+          53
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          2,
+          2,
+          2
+        ],
+        "D": 81,
+        "distance": 80,
+        "feasible_occupancy": [
+          80
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          2,
+          2,
+          3
+        ],
+        "D": 108,
+        "distance": 107,
+        "feasible_occupancy": [
+          107
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          2,
+          3,
+          0
+        ],
+        "D": 36,
+        "distance": 35,
+        "feasible_occupancy": [
+          35
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          2,
+          3,
+          1
+        ],
+        "D": 72,
+        "distance": 71,
+        "feasible_occupancy": [
+          71
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          2,
+          3,
+          2
+        ],
+        "D": 108,
+        "distance": 107,
+        "feasible_occupancy": [
+          107
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          2,
+          3,
+          3
+        ],
+        "D": 144,
+        "distance": 143,
+        "feasible_occupancy": [
+          143
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          3,
+          0,
+          0
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          3,
+          0,
+          1
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          3,
+          0,
+          2
+        ],
+        "D": 36,
+        "distance": 35,
+        "feasible_occupancy": [
+          35
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          3,
+          0,
+          3
+        ],
+        "D": 48,
+        "distance": 47,
+        "feasible_occupancy": [
+          47
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          3,
+          1,
+          0
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          3,
+          1,
+          1
+        ],
+        "D": 48,
+        "distance": 47,
+        "feasible_occupancy": [
+          47
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          3,
+          1,
+          2
+        ],
+        "D": 72,
+        "distance": 71,
+        "feasible_occupancy": [
+          71
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          3,
+          1,
+          3
+        ],
+        "D": 96,
+        "distance": 95,
+        "feasible_occupancy": [
+          95
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          3,
+          2,
+          0
+        ],
+        "D": 36,
+        "distance": 35,
+        "feasible_occupancy": [
+          35
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          3,
+          2,
+          1
+        ],
+        "D": 72,
+        "distance": 71,
+        "feasible_occupancy": [
+          71
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          3,
+          2,
+          2
+        ],
+        "D": 108,
+        "distance": 107,
+        "feasible_occupancy": [
+          107
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          3,
+          2,
+          3
+        ],
+        "D": 144,
+        "distance": 143,
+        "feasible_occupancy": [
+          143
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          3,
+          3,
+          0
+        ],
+        "D": 48,
+        "distance": 47,
+        "feasible_occupancy": [
+          47
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          3,
+          3,
+          1
+        ],
+        "D": 96,
+        "distance": 95,
+        "feasible_occupancy": [
+          95
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          3,
+          3,
+          2
+        ],
+        "D": 144,
+        "distance": 143,
+        "feasible_occupancy": [
+          143
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          2,
+          3,
+          3,
+          3
+        ],
+        "D": 192,
+        "distance": 191,
+        "feasible_occupancy": [
+          191
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          0,
+          0,
+          0
+        ],
+        "D": 4,
+        "distance": 3,
+        "feasible_occupancy": [
+          3
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          0,
+          0,
+          1
+        ],
+        "D": 8,
+        "distance": 7,
+        "feasible_occupancy": [
+          7
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          0,
+          0,
+          2
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          0,
+          0,
+          3
+        ],
+        "D": 16,
+        "distance": 15,
+        "feasible_occupancy": [
+          15
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          0,
+          1,
+          0
+        ],
+        "D": 8,
+        "distance": 7,
+        "feasible_occupancy": [
+          7
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          0,
+          1,
+          1
+        ],
+        "D": 16,
+        "distance": 15,
+        "feasible_occupancy": [
+          15
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          0,
+          1,
+          2
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          0,
+          1,
+          3
+        ],
+        "D": 32,
+        "distance": 31,
+        "feasible_occupancy": [
+          31
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          0,
+          2,
+          0
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          0,
+          2,
+          1
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          0,
+          2,
+          2
+        ],
+        "D": 36,
+        "distance": 35,
+        "feasible_occupancy": [
+          35
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          0,
+          2,
+          3
+        ],
+        "D": 48,
+        "distance": 47,
+        "feasible_occupancy": [
+          47
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          0,
+          3,
+          0
+        ],
+        "D": 16,
+        "distance": 15,
+        "feasible_occupancy": [
+          15
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          0,
+          3,
+          1
+        ],
+        "D": 32,
+        "distance": 31,
+        "feasible_occupancy": [
+          31
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          0,
+          3,
+          2
+        ],
+        "D": 48,
+        "distance": 47,
+        "feasible_occupancy": [
+          47
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          0,
+          3,
+          3
+        ],
+        "D": 64,
+        "distance": 63,
+        "feasible_occupancy": [
+          63
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          1,
+          0,
+          0
+        ],
+        "D": 8,
+        "distance": 7,
+        "feasible_occupancy": [
+          7
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          1,
+          0,
+          1
+        ],
+        "D": 16,
+        "distance": 15,
+        "feasible_occupancy": [
+          15
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          1,
+          0,
+          2
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          1,
+          0,
+          3
+        ],
+        "D": 32,
+        "distance": 31,
+        "feasible_occupancy": [
+          31
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          1,
+          1,
+          0
+        ],
+        "D": 16,
+        "distance": 15,
+        "feasible_occupancy": [
+          15
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          1,
+          1,
+          1
+        ],
+        "D": 32,
+        "distance": 31,
+        "feasible_occupancy": [
+          31
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          1,
+          1,
+          2
+        ],
+        "D": 48,
+        "distance": 47,
+        "feasible_occupancy": [
+          47
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          1,
+          1,
+          3
+        ],
+        "D": 64,
+        "distance": 63,
+        "feasible_occupancy": [
+          63
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          1,
+          2,
+          0
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          1,
+          2,
+          1
+        ],
+        "D": 48,
+        "distance": 47,
+        "feasible_occupancy": [
+          47
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          1,
+          2,
+          2
+        ],
+        "D": 72,
+        "distance": 71,
+        "feasible_occupancy": [
+          71
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          1,
+          2,
+          3
+        ],
+        "D": 96,
+        "distance": 95,
+        "feasible_occupancy": [
+          95
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          1,
+          3,
+          0
+        ],
+        "D": 32,
+        "distance": 31,
+        "feasible_occupancy": [
+          31
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          1,
+          3,
+          1
+        ],
+        "D": 64,
+        "distance": 63,
+        "feasible_occupancy": [
+          63
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          1,
+          3,
+          2
+        ],
+        "D": 96,
+        "distance": 95,
+        "feasible_occupancy": [
+          95
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          1,
+          3,
+          3
+        ],
+        "D": 128,
+        "distance": 127,
+        "feasible_occupancy": [
+          127
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          2,
+          0,
+          0
+        ],
+        "D": 12,
+        "distance": 11,
+        "feasible_occupancy": [
+          11
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          2,
+          0,
+          1
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          2,
+          0,
+          2
+        ],
+        "D": 36,
+        "distance": 35,
+        "feasible_occupancy": [
+          35
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          2,
+          0,
+          3
+        ],
+        "D": 48,
+        "distance": 47,
+        "feasible_occupancy": [
+          47
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          2,
+          1,
+          0
+        ],
+        "D": 24,
+        "distance": 23,
+        "feasible_occupancy": [
+          23
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          2,
+          1,
+          1
+        ],
+        "D": 48,
+        "distance": 47,
+        "feasible_occupancy": [
+          47
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          2,
+          1,
+          2
+        ],
+        "D": 72,
+        "distance": 71,
+        "feasible_occupancy": [
+          71
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          2,
+          1,
+          3
+        ],
+        "D": 96,
+        "distance": 95,
+        "feasible_occupancy": [
+          95
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          2,
+          2,
+          0
+        ],
+        "D": 36,
+        "distance": 35,
+        "feasible_occupancy": [
+          35
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          2,
+          2,
+          1
+        ],
+        "D": 72,
+        "distance": 71,
+        "feasible_occupancy": [
+          71
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          2,
+          2,
+          2
+        ],
+        "D": 108,
+        "distance": 107,
+        "feasible_occupancy": [
+          107
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          2,
+          2,
+          3
+        ],
+        "D": 144,
+        "distance": 143,
+        "feasible_occupancy": [
+          143
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          2,
+          3,
+          0
+        ],
+        "D": 48,
+        "distance": 47,
+        "feasible_occupancy": [
+          47
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          2,
+          3,
+          1
+        ],
+        "D": 96,
+        "distance": 95,
+        "feasible_occupancy": [
+          95
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          2,
+          3,
+          2
+        ],
+        "D": 144,
+        "distance": 143,
+        "feasible_occupancy": [
+          143
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          2,
+          3,
+          3
+        ],
+        "D": 192,
+        "distance": 191,
+        "feasible_occupancy": [
+          191
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          3,
+          0,
+          0
+        ],
+        "D": 16,
+        "distance": 15,
+        "feasible_occupancy": [
+          15
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          3,
+          0,
+          1
+        ],
+        "D": 32,
+        "distance": 31,
+        "feasible_occupancy": [
+          31
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          3,
+          0,
+          2
+        ],
+        "D": 48,
+        "distance": 47,
+        "feasible_occupancy": [
+          47
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          3,
+          0,
+          3
+        ],
+        "D": 64,
+        "distance": 63,
+        "feasible_occupancy": [
+          63
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          3,
+          1,
+          0
+        ],
+        "D": 32,
+        "distance": 31,
+        "feasible_occupancy": [
+          31
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          3,
+          1,
+          1
+        ],
+        "D": 64,
+        "distance": 63,
+        "feasible_occupancy": [
+          63
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          3,
+          1,
+          2
+        ],
+        "D": 96,
+        "distance": 95,
+        "feasible_occupancy": [
+          95
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          3,
+          1,
+          3
+        ],
+        "D": 128,
+        "distance": 127,
+        "feasible_occupancy": [
+          127
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          3,
+          2,
+          0
+        ],
+        "D": 48,
+        "distance": 47,
+        "feasible_occupancy": [
+          47
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          3,
+          2,
+          1
+        ],
+        "D": 96,
+        "distance": 95,
+        "feasible_occupancy": [
+          95
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          3,
+          2,
+          2
+        ],
+        "D": 144,
+        "distance": 143,
+        "feasible_occupancy": [
+          143
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          3,
+          2,
+          3
+        ],
+        "D": 192,
+        "distance": 191,
+        "feasible_occupancy": [
+          191
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          3,
+          3,
+          0
+        ],
+        "D": 64,
+        "distance": 63,
+        "feasible_occupancy": [
+          63
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          3,
+          3,
+          1
+        ],
+        "D": 128,
+        "distance": 127,
+        "feasible_occupancy": [
+          127
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          3,
+          3,
+          2
+        ],
+        "D": 192,
+        "distance": 191,
+        "feasible_occupancy": [
+          191
+        ],
+        "feasible_basis_count": 1
+      },
+      {
+        "sizes": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "D": 256,
+        "distance": 255,
+        "feasible_occupancy": [
+          255
+        ],
+        "feasible_basis_count": 1
+      }
+    ]
+  },
+  "actual_partition_bases": {
+    "instances": 4096,
+    "feasible_instances": 3830,
+    "start_basis_checks": 61280,
+    "maximum_distance": 3,
+    "witness": {
+      "labels": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "start": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "feasible_bases": [
+        [
+          0,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "distance": 3
+    }
+  },
+  "interval_obstructions": [
+    {
+      "moduli": [
+        2,
+        4
+      ],
+      "forbidden_differences": [
+        [
+          1
+        ],
+        [
+          2
+        ]
+      ],
+      "maximum_obstructed_intervals": 3,
+      "product_bound": 3,
+      "search_nodes": 30,
+      "longest_prefix_chain": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          2
+        ]
+      ]
+    },
+    {
+      "moduli": [
+        3,
+        6
+      ],
+      "forbidden_differences": [
+        [
+          1,
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "maximum_obstructed_intervals": 5,
+      "product_bound": 5,
+      "search_nodes": 2750,
+      "longest_prefix_chain": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          3
+        ]
+      ]
+    },
+    {
+      "moduli": [
+        2,
+        2
+      ],
+      "forbidden_differences": [
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "maximum_obstructed_intervals": 3,
+      "product_bound": 3,
+      "search_nodes": 16,
+      "longest_prefix_chain": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ]
+    }
+  ]
+}

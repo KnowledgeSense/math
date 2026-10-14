@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "labeled_graphs_through_order_5": 1100,
+  "distinct_attachment_polynomials": 38,
+  "direct_corona_recurrence_cases": 912,
+  "positive_direction_cases": 380,
+  "exact_rational_threshold_cases": 72,
+  "exact_tilt_identity_cases": 152,
+  "rational_exact_balancing_cases": 240,
+  "smallest_tested_sufficient_M": "557256278017",
+  "largest_tested_sufficient_M": "42217575656661499423322",
+  "scope": "Independent finite diagnostics only; analytic reconstruction establishes all finite H."
+}

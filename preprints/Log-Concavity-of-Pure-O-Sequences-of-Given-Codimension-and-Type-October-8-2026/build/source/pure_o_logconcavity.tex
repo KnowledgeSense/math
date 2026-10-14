@@ -1,0 +1,383 @@
+\documentclass{amsart}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{needspace}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\B}{\mathcal{B}}
+
+\begin{document}
+
+\title[Log-concavity of pure $O$-sequences]{Log-concavity of pure $O$-sequences of given codimension and type}
+
+\author{Knowledge Sense}
+\address{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{8 October 2026}
+
+\subjclass[2020]{Primary 13D40; Secondary 05E40, 13E10, 13H10}
+
+\keywords{Pure $O$-sequence, log-concavity, monomial order ideal, level algebra, Hilbert function}
+
+\begin{abstract}
+We determine the pairs $(r,t)$ for which every pure $O$-sequence of codimension $r$ and type $t$ is log-concave: this happens exactly when $r\le 2$, when $t=1$, or when $(r,t)=(3,2)$. The positive direction follows from known results. Non-log-concave pure $O$-sequences were previously known in codimension three for every type $t\ge 4$, and in codimension $r\ge 4$ for $2\le t\le r+1$. We construct infinite families of non-log-concave pure $O$-sequences for $(r,t)=(3,3)$ and for all $r\ge 4$ and $t\ge 2$. This answers a question of Zanello: the least type for which log-concavity fails is three in codimension three and two in every codimension $r\ge 4$, and the set of such types has no gaps.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $\Gamma$ be a nonempty finite set of monomials in $x_1,\dots,x_r$ that is closed under divisibility. Following Stanley~\cite{St77}, $\Gamma$ is \emph{pure} if its maximal elements with respect to divisibility all have the same degree $e$, the \emph{socle degree}. The number $t$ of maximal elements is the \emph{type}, and the sequence
+\[
+h(\Gamma)=(h_0,h_1,\dots,h_e),\qquad h_i=\#\{M\in\Gamma:\deg M=i\},
+\]
+is a \emph{pure $O$-sequence}. We say that $h(\Gamma)$ has \emph{codimension} $r$ if every variable $x_1,\dots,x_r$ lies in $\Gamma$, that is, if $h_1=r$. Adding variables that do not occur in $\Gamma$ does not change $h(\Gamma)$, so the codimension of a pure $O$-sequence is its entry $h_1$. Equivalently, pure $O$-sequences of codimension $r$ and type $t$ are the Hilbert functions of artinian monomial level algebras of codimension $r$ and type $t$. We refer to \cite{BMMNZ12, MNZ13} for background and to \cite{HHZ25} for a recent classification result of a different kind. A sequence is \emph{log-concave} if $h_{i-1}h_{i+1}\le h_i^2$ for $0<i<e$; see Stanley's survey \cite{St89}.
+
+The log-concavity of Gorenstein and level Hilbert functions was first studied systematically by Iarrobino~\cite{Ia}, and Zanello~\cite{Za} asked for which pairs $(r,t)$ every pure $O$-sequence of codimension $r$ and type $t$ is log-concave. Log-concavity was known to hold for $r\le 2$ \cite[Proposition~4.3(i)]{Ia}, for $t=1$ \cite[Proposition~7]{Za}, and for $(r,t)=(3,2)$, the main case left open in \cite{Za}, which was settled in \cite[Appendix~B.4]{TKS}. Zanello showed that log-concavity fails for $(r,t)=(3,4)$ and for all $r\ge 4$ and $2\le t\le r+1$ \cite[Theorem~8]{Za}, and he asked whether, for each $r\ge 3$, it fails for all sufficiently large $t$; if so, he asked for the least such type $t_0(r)$ and whether the types of failure have gaps \cite[Question~9]{Za}. In three variables, examples of every type $t\ge 5$ are given in the file \texttt{hilbert\_functions\_8.lean} of the repository~\cite{AP} of Lean proofs accompanying \cite{TKS} (see Proposition~\ref{prop:known-negative}(b)). Together with Zanello's type-four example, this gives non-log-concave pure $O$-sequences of codimension three and every type $t\ge 4$.
+
+The examples cited above leave the pairs $(3,3)$ and $(r,t)$ with $r\ge 4$ and $t\ge r+2$ uncovered. We treat these pairs, which completes the classification.
+
+\begin{theorem}\label{thm:main}
+Let $r$ and $t$ be positive integers for which pure $O$-sequences of codimension $r$ and type $t$ exist, that is, $r\ge 2$ or $t=1$. Then every pure $O$-sequence of codimension $r$ and type $t$ is log-concave if and only if
+\[
+r\le 2,\qquad\text{or}\qquad t=1,\qquad\text{or}\qquad (r,t)=(3,2).
+\]
+\end{theorem}
+
+In the notation of \cite[Question~9]{Za} this gives the following.
+
+\begin{corollary}\label{cor:threshold}
+Let $r\ge 3$. There is a non-log-concave pure $O$-sequence of codimension $r$ and type $t$ if and only if $t\ge t_0(r)$, where
+\[
+t_0(3)=3\qquad\text{and}\qquad t_0(r)=2\quad\text{for } r\ge 4.
+\]
+In particular, the types for which log-concavity fails have no gaps.
+\end{corollary}
+
+Moreover, counterexamples exist in every sufficiently large socle degree.
+
+\begin{theorem}\label{thm:degrees}
+Let $r\ge 3$ and $t\ge 2$ with $(r,t)\ne (3,2)$. Put $e_0=76$ if $(r,t)=(3,3)$, $e_0=t+20$ if $r=3$ and $t\ge 4$, and $e_0=t+4r+50$ if $r\ge 4$. For every $e\ge e_0$ there is a pure $O$-sequence of codimension $r$, type $t$, and socle degree $e$ that is not log-concave.
+\end{theorem}
+
+The new constructions are Theorem~\ref{thm:type3} for $(r,t)=(3,3)$ and Theorem~\ref{thm:higher} for $r\ge 4$. Both rest on an elementary identity (Lemma~\ref{lem:identity}), a quantitative form of \cite[Lemma~3]{Za}: if three consecutive entries near the end of a sequence are triangular numbers shifted by a common constant, log-concavity fails as soon as the constant exceeds the middle triangular number. One generator is chosen so that its divisors produce the triangular numbers, and the remaining generators produce a constant that is large enough. In type three only two generators remain for the constant, and they are chosen so that, in each of the three degrees involved, their divisors correspond bijectively to the pairs $(x,y)\in[0,3k]^2$ given by the first two exponents. In codimension $r\ge 4$ we keep Zanello's generators for type two and add generators $g_1,\dots,g_{t-2}$, each obtained from the previous one by transferring one unit of exponent from $x_1$ to $x_2$; the constant then grows linearly in $t$, while every variable still occurs. Proposition~\ref{prop:three-variables} gives a further family in three variables for every $t\ge 4$. Existence in these types is known by Proposition~\ref{prop:known-negative}; we include the family so that the negative direction is self-contained and to obtain the range of socle degrees in Theorem~\ref{thm:degrees}.
+
+For comparison, by \cite[Theorem~5]{Za}, all level Hilbert functions of codimension $r$ and type $t$ are log-concave when $r\le 2$ or $(r,t)=(3,1)$, and not all of them are log-concave when $r\ge 4$ or when $r=3$ and $t\ge 3$; the pair $(3,2)$ is not decided there. For pure $O$-sequences, Theorem~\ref{thm:main} adds the pairs $(r,1)$ with $r\ge 4$ and the pair $(3,2)$ to the positive side.
+
+\subsection*{Dependencies}
+The positive direction of Theorem~\ref{thm:main} rests on three known results, which we do not reprove: \cite[Proposition~4.3(i)]{Ia}, \cite[Proposition~7]{Za}, and \cite[Appendix~B.4]{TKS} (Proposition~\ref{prop:known-positive}). The negative direction and Theorem~\ref{thm:degrees} are proved here in full by counting monomials; the earlier examples in Proposition~\ref{prop:known-negative} are recorded for comparison and are not used. Log-concavity of a pure $O$-sequence is a purely combinatorial property, so none of the statements depends on a field or its characteristic.
+
+\subsection*{Organization}
+Section~\ref{sec:prelim} collects elementary facts on boxes of divisors and the known results. Sections~\ref{sec:three} and~\ref{sec:higher} contain the constructions in codimension three and in codimension at least four, and Section~\ref{sec:proofs} completes the proofs.
+
+\section{Preliminaries}\label{sec:prelim}
+
+Throughout, $\N=\{0,1,2,\dots\}$, and a monomial $x_1^{v_1}\cdots x_r^{v_r}$ is identified with its exponent vector $v\in\N^r$. We write $|v|=v_1+\dots+v_r$ for the degree, $v\le w$ for the coordinatewise order, which is divisibility, and $v\wedge w$ for the coordinatewise minimum, which is the greatest common divisor. For $a\in\N^r$ let
+\[
+\B(a)=\{v\in\N^r: v\le a\}
+\]
+be the box of divisors of $a$. For a finite set $G\subseteq\N^r$ let $\Gamma(G)=\bigcup_{g\in G}\B(g)$ and $h_i(G)=\#\{v\in\Gamma(G):|v|=i\}$. For $j\in\N$ we put
+\[
+q_j=\binom{j+2}{2},
+\]
+the number of vectors in $\N^3$ of degree $j$.
+
+\begin{lemma}\label{lem:pure}
+Let $G\subseteq\N^r$ consist of $t\ge 1$ distinct vectors of the same degree $e$. Then $\Gamma(G)$ is a pure order ideal of socle degree $e$ and type $t$ whose maximal elements are the elements of $G$, and $h_1(G)$ is the number of indices $l$ such that $g_l>0$ for some $g\in G$. Every nonempty pure order ideal is of this form.
+\end{lemma}
+
+\begin{proof}
+Clearly $\Gamma(G)$ is finite, nonempty, and closed under divisibility, and each of its elements lies below an element of $G$. If $v\le w$ and $|v|=|w|$, then $v=w$; hence the elements of $G$ are pairwise incomparable, and they are exactly the maximal elements of $\Gamma(G)$. The elements of degree one are the unit vectors below some $g\in G$. Conversely, a nonempty finite order ideal is the union of the boxes of its maximal elements.
+\end{proof}
+
+\begin{lemma}\label{lem:boxes}
+Let $a,b\in\N^r$.
+\begin{enumerate}
+\item[(a)] $\B(a)\cap\B(b)=\B(a\wedge b)$, and $\B(a)$ contains no vector of degree larger than $|a|$.
+\item[(b)] Let $0\le j\le|a|$. If exactly three coordinates of $a$ are positive and each of them is at least $j$, then $\B(a)$ contains exactly $q_j$ vectors of degree $|a|-j$.
+\item[(c)] Let $G=G_1\sqcup\dots\sqcup G_m$ be a finite subset of $\N^r$ and let $d\in\N$. If $|g\wedge g'|<d$ whenever $g$ and $g'$ lie in different parts, then $h_i(G)=h_i(G_1)+\dots+h_i(G_m)$ for all $i\ge d$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Part (a) is immediate. For (b), the map $v\mapsto a-v$ is a bijection of $\B(a)$ onto itself with $|a-v|=|a|-|v|$, so it suffices to count the vectors of degree $j$ in $\B(a)$. These are supported on the three positive coordinates of $a$, and every vector of degree $j$ supported there satisfies the bounds given by $a$, since each of these three coordinates of $a$ is at least $j$. For (c), a vector of degree $i$ in $\Gamma(G_k)\cap\Gamma(G_l)$ with $k\ne l$ lies in $\B(g\wedge g')$ for some $g\in G_k$ and $g'\in G_l$, so $i\le|g\wedge g'|<d$ by (a).
+\end{proof}
+
+All our examples are based on the following identity, a quantitative form of \cite[Lemma~3]{Za} with the indices reversed.
+
+\begin{lemma}\label{lem:identity}
+Let $h=(h_0,\dots,h_e)$ and let $j_0$ and $\kappa$ be integers with $1\le j_0\le e-1$. If
+\[
+h_{e-j}=q_j+\kappa\qquad (j=j_0-1,\ j_0,\ j_0+1),
+\]
+then
+\[
+h_{e-j_0}^2-h_{e-j_0-1}\,h_{e-j_0+1}=q_{j_0}-\kappa.
+\]
+In particular, $h$ is not log-concave if $\kappa>q_{j_0}$.
+\end{lemma}
+
+\begin{proof}
+Write $q=q_{j_0}$. Then $q_{j_0-1}=q-(j_0+1)$ and $q_{j_0+1}=q+(j_0+2)$, so
+\[
+(q+\kappa)^2-\bigl(q+\kappa-(j_0+1)\bigr)\bigl(q+\kappa+(j_0+2)\bigr)=(j_0+1)(j_0+2)-(q+\kappa)=q-\kappa,
+\]
+because $(j_0+1)(j_0+2)=2q$.
+\end{proof}
+
+\begin{lemma}\label{lem:feasible}
+Let $r,t\ge 1$. A pure $O$-sequence of codimension $r$ and type $t$ exists if and only if $r\ge 2$ or $t=1$.
+\end{lemma}
+
+\begin{proof}
+In one variable there is only one monomial of each degree, so $r=1$ forces $t=1$, and $x_1^e$ gives an example. Let $r\ge 2$. For $t\ge 2$ take the $t$ monomials $x_1^{a}x_2^{t-1-a}$ with $0\le a\le t-1$, and for $t=1$ take $x_1x_2$; then multiply each of them by $x_3\cdots x_r$. By Lemma~\ref{lem:pure} this gives codimension $r$ and type $t$.
+\end{proof}
+
+We now state the known results in the form in which we use them.
+
+\begin{proposition}\label{prop:known-positive}
+Every pure $O$-sequence of codimension $r$ and type $t$ is log-concave in each of the following cases.
+\begin{enumerate}
+\item[(a)] $r\le 2$ \textup{(Iarrobino \cite[Proposition~4.3(i)]{Ia})}.
+\item[(b)] $t=1$ \textup{(Zanello \cite[Proposition~7]{Za})}.
+\item[(c)] $(r,t)=(3,2)$ \textup{(Tsoukalas et al.\ \cite[Appendix~B.4]{TKS})}.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(a) For $r=1$ the sequence is $(1,\dots,1)$. For $r=2$, a pure $O$-sequence is the Hilbert function of an artinian monomial level algebra of codimension two over any infinite field, and \cite[Proposition~4.3(i)]{Ia} states that every codimension two level Hilbert function is log-concave. (b) If $\Gamma=\B(a)$, the generating function of $h(\Gamma)$ is $\prod_{l=1}^r(1+z+\dots+z^{a_l})$, a product of log-concave polynomials with positive coefficients, and such products are log-concave. (c) This is the theorem of the section ``Log-Concavity of Hilbert Sequences'' in \cite[Appendix~B.4]{TKS}, which gives a natural-language proof; the corresponding Lean proof is theorem \texttt{P5} in the file \texttt{hilbert\_functions\_5.lean} of \cite{AP}.
+\end{proof}
+
+\begin{proposition}\label{prop:known-negative}
+Non-log-concave pure $O$-sequences of codimension $r$ and type $t$ were known in the following cases.
+\begin{enumerate}
+\item[(a)] $(r,t)=(3,4)$, and $r\ge 4$ with $2\le t\le r+1$ \textup{(Zanello \cite[Theorem~8]{Za})}.
+\item[(b)] $r=3$ and $t\ge 5$ \textup{(\cite{AP}, file \texttt{hilbert\_functions\_8.lean})}: for $e=t+5$, the generators
+\[
+(t+5-a,\,a,\,0)\quad(0\le a\le t-2),\qquad (2,\,2,\,t+1)
+\]
+give $(h_{e-2},h_{e-1},h_e)=(t+5,\,t+2,\,t)$, and $(t+2)^2-t(t+5)=4-t<0$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+For (b) we include the short argument. Let $0\le d\le 2$. A vector $(x,y,0)$ of degree $e-d$ lies below $(t+5-a,a,0)$ if and only if $y\le a\le y+d$, and such an $a\in[0,t-2]$ exists if and only if $y\le t-2$; so the first $t-1$ generators contribute $t-1$ vectors of degree $e-d$. The last generator contributes $q_d$ vectors by Lemma~\ref{lem:boxes}(b), and its greatest common divisor with each of the others has degree at most $4<e-2$. Thus $h_{e-d}=q_d+t-1$ by Lemma~\ref{lem:boxes}(c), and Lemma~\ref{lem:identity} with $j_0=1$ gives $h_{e-1}^2-h_{e-2}h_e=q_1-(t-1)=4-t$. All three variables occur, since every coordinate of $(2,2,t+1)$ is positive.
+\end{proof}
+
+\begin{remark}\label{rem:embedding}
+In the file \texttt{hilbert\_functions\_8.lean} of \cite{AP}, the number $r$ refers to the variables of the ambient ring, and the passage from three to $r$ variables adds variables that occur in no generator. This keeps $h_1=3$, so it does not produce pure $O$-sequences of codimension $r\ge 4$ in the sense used here.
+\end{remark}
+
+\section{Codimension three}\label{sec:three}
+
+\begin{theorem}\label{thm:type3}
+Let $k\ge 5$ and $L\ge 0$ be integers, let $e=14k+6+L$, and let $G=\{a,b,c\}$, where
+\[
+\begin{gathered}
+a=(2k,\,2k,\,10k+6+L),\qquad b=(3k,\,3k,\,8k+6+L),\\
+c=(5k+2,\,5k+2,\,4k+2+L).
+\end{gathered}
+\]
+Then $\Gamma(G)$ is a pure order ideal of codimension $3$, type $3$, and socle degree $e$, and
+\[
+h_{e-j}(G)=q_j+(3k+1)^2\qquad (j=4k,\ 4k+1,\ 4k+2).
+\]
+Consequently, for $i=e-4k-1$,
+\[
+h_i^2-h_{i-1}h_{i+1}=-k^2+4k+2=6-(k-2)^2<0.
+\]
+\end{theorem}
+
+\begin{proof}
+The three vectors are distinct, have degree $e$, and have positive coordinates, so the first statement follows from Lemma~\ref{lem:pure}. Fix $j\in\{4k,4k+1,4k+2\}$ and put $d=e-j$, so that $10k+4+L\le d\le 10k+6+L$.
+
+We claim that the vectors of degree $d$ in $\B(a)\cup\B(b)$ are exactly the vectors $(x,y,d-x-y)$ with $0\le x,y\le 3k$. Every vector in $\B(a)\cup\B(b)$ has its first two coordinates in $[0,3k]$. Conversely, let $0\le x,y\le 3k$ and $z=d-x-y$. Then $z\ge d-6k\ge 4k+4+L$. If $z\le 8k+6+L$, then $(x,y,z)\le b$. Otherwise
+\[
+x+y=d-z<d-(8k+6+L)=6k-j\le 2k,
+\]
+so $x,y\le 2k$; moreover $z\le d\le 10k+6+L$, hence $(x,y,z)\le a$. This proves the claim, and $\B(a)\cup\B(b)$ contains $(3k+1)^2$ vectors of degree $d$.
+
+All coordinates of $c$ are at least $4k+2\ge j$, so $\B(c)$ contains $q_j$ vectors of degree $d$ by Lemma~\ref{lem:boxes}(b). Finally,
+\[
+|a\wedge c|=8k+2+L,\qquad |b\wedge c|=10k+2+L,
+\]
+both smaller than $10k+4+L\le d$. Lemma~\ref{lem:boxes}(c), applied to the parts $\{a,b\}$ and $\{c\}$, gives $h_d(G)=(3k+1)^2+q_j$.
+
+Lemma~\ref{lem:identity} with $j_0=4k+1$ and $\kappa=(3k+1)^2$ now gives
+\[
+h_i^2-h_{i-1}h_{i+1}=q_{4k+1}-(3k+1)^2=(2k+1)(4k+3)-(3k+1)^2=-k^2+4k+2,
+\]
+which is negative for $k\ge 5$.
+\end{proof}
+
+\begin{example}\label{ex:76}
+For $k=5$ and $L=0$ the generators are
+\[
+x^{10}y^{10}z^{56},\qquad x^{15}y^{15}z^{46},\qquad x^{27}y^{27}z^{22},
+\]
+of degree $76$. By Theorem~\ref{thm:type3},
+\[
+(h_{54},h_{55},h_{56})=(532,\,509,\,487),\qquad 509^2=259081<259084=532\cdot 487.
+\]
+A direct enumeration of the $25{,}386$ monomials of $\Gamma(G)$ gives the whole sequence: $h_i=q_i$ for $0\le i\le 27$, and
+\begin{align*}
+(h_{28},\dots,h_{76})=(&433, 459, 484, 508, 531, 553, 574,\\
+&594, 613, 631, 648, 662, 673, 681,\\
+&686, 688, 687, 683, 676, 666, 653,\\
+&637, 618, 598, 577, 555, 532, 509,\\
+&487, 465, 441, 415, 387, 357, 325,\\
+&293, 261, 229, 197, 165, 135, 108,\\
+&84, 63, 45, 30, 18, 9, 3).
+\end{align*}
+Degree $55$ is the only degree in which log-concavity fails.
+\end{example}
+
+\begin{remark}\label{rem:type3}
+(a) Taking $k=5$ and $L=e-76$, Theorem~\ref{thm:type3} gives a non-log-concave pure $O$-sequence of codimension three and type three in every socle degree $e\ge 76$. In particular, the least socle degree of such a sequence is at most $76$.
+
+(b) The sequence in Example~\ref{ex:76} is unimodal, with peak $h_{43}=688$, as it must be: every pure $O$-sequence of codimension three and type three is unimodal by Boyle~\cite{Bo14}. Thus for $(r,t)=(3,3)$ unimodality holds while log-concavity fails.
+
+(c) As observed in \cite[Question~9(1)]{Za}, pure $O$-sequences of codimension three are log-concave in their first half. Accordingly, the degree $i=e-4k-1=10k+5+L$ of Theorem~\ref{thm:type3} lies in the second half.
+\end{remark}
+
+The following family gives examples of every type $t\ge 4$ in every socle degree $e\ge t+20$.
+
+\begin{proposition}\label{prop:three-variables}
+Let $t\ge 4$, $s=t-3$, and $e\ge t+20$. Let $G\subseteq\N^3$ consist of
+\[
+p=(4,\,4,\,e-8),\qquad u=(1,\,e-2,\,1),\qquad w=(1,\,1,\,e-2),
+\]
+and $g_m=(e-1-m,\,m,\,1)$ for $1\le m\le s$. Then $\Gamma(G)$ is a pure order ideal of codimension $3$, type $t$, and socle degree $e$, and
+\[
+h_{e-j}(G)=q_j+2t+4\qquad (j=2,3,4).
+\]
+Consequently $h_{e-3}^2-h_{e-4}h_{e-2}=6-2t<0$.
+\end{proposition}
+
+\begin{proof}
+The third coordinates of $p$, $u$, and $w$ are $e-8$, $1$, and $e-2$, which are distinct. Each $g_m$ has third coordinate $1$ and first coordinate at least $e-1-s\ge 22$, so the $t$ vectors are distinct. They have degree $e$ and use all three variables, so Lemma~\ref{lem:pure} applies. Fix $j\in\{2,3,4\}$ and let $d=e-j$.
+
+All coordinates of $p$ are at least $4\ge j$, so $\B(p)$ contributes $q_j$ by Lemma~\ref{lem:boxes}(b). The vectors of degree $j$ in $\B(u)$ are $(\alpha,\,j-\alpha-\gamma,\,\gamma)$ with $\alpha,\gamma\in\{0,1\}$; by the symmetry $v\mapsto u-v$, $\B(u)$ contributes $4$, and so does $\B(w)$.
+
+A vector $(x,y,z)$ of degree $d$ lies in $\B(g_m)$ if and only if $y\le m$, $z\le 1$, and $x=d-y-z\le e-1-m$, that is, if and only if $z\le 1$ and
+\[
+\max(1,y)\le m\le\min(s,\,j+y+z-1).
+\]
+This forces $0\le y\le s$ and $z\in\{0,1\}$. Conversely, for such $y$ and $z$ we have $\max(1,y)\le s$ and, since $j\ge 2$, $\max(1,y)\le j+y+z-1$; moreover $x=d-y-z\ge e-t-2>0$. Hence $\bigcup_m\B(g_m)$ contributes $2(s+1)$.
+
+For the four parts $\{p\}$, $\{u\}$, $\{w\}$, and $\{g_1,\dots,g_s\}$, the greatest common divisors of elements of different parts have degrees
+\[
+\begin{gathered}
+|p\wedge u|=6,\qquad |p\wedge w|=e-6,\qquad |p\wedge g_m|\le 9,\\
+|u\wedge w|=3,\qquad |u\wedge g_m|=m+2\le t-1,\qquad |w\wedge g_m|=3,
+\end{gathered}
+\]
+all smaller than $e-4\le d$. By Lemma~\ref{lem:boxes}(c), $h_d(G)=q_j+8+2(s+1)=q_j+2t+4$, and Lemma~\ref{lem:identity} with $j_0=3$ gives $h_{e-3}^2-h_{e-4}h_{e-2}=q_3-(2t+4)=6-2t$.
+\end{proof}
+
+\section{Codimension at least four}\label{sec:higher}
+
+\begin{theorem}\label{thm:higher}
+Let $r\ge 4$, $t\ge 2$, and $e\ge t+4r+50$. In $\N^r$ let
+\begin{align*}
+f&=(r+10,\,r+10,\,e-2r-20,\,0,\dots,0),\\
+g_m&=(e-r-8-m,\,4+m,\,4,\,4,\,1,\dots,1)\qquad (0\le m\le t-2),
+\end{align*}
+where the final strings consist of $r-3$ zeros and $r-4$ ones, respectively, and let $G=\{f,g_0,\dots,g_{t-2}\}$. Then $\Gamma(G)$ is a pure order ideal of codimension $r$, type $t$, and socle degree $e$, and
+\[
+h_{e-j}(G)=q_j+25(t+3)\,2^{r-4}\qquad (j=r+8,\ r+9,\ r+10).
+\]
+Consequently
+\[
+h_{e-r-9}^2-h_{e-r-10}\,h_{e-r-8}=\binom{r+11}{2}-25(t+3)\,2^{r-4}<0.
+\]
+\end{theorem}
+
+\begin{proof}
+All entries are nonnegative, since $e-2r-20\ge t+2r+30$ and $e-r-8-m\ge e-r-t-6\ge 3r+44$, and all vectors have degree $e$. The fourth coordinate distinguishes $f$ from every $g_m$, and the second coordinates distinguish the $g_m$. Every coordinate of $g_0$ is positive. By Lemma~\ref{lem:pure}, $\Gamma(G)$ is pure of codimension $r$, type $t$, and socle degree $e$. Fix $j\in\{r+8,r+9,r+10\}$ and put $d=e-j\ge e-r-10$.
+
+The three positive coordinates of $f$ are $r+10$, $r+10$, and $e-2r-20\ge r+10\ge j$, so $\B(f)$ contributes $q_j$ by Lemma~\ref{lem:boxes}(b).
+
+Let $v\in\N^r$ have degree $d$, and put $W=v_2+\dots+v_r$, so that $v_1=d-W$. Then $v\le g_m$ if and only if $v_2\le 4+m$, $v_3,v_4\le 4$, $v_l\le 1$ for $5\le l\le r$, and $d-W\le e-r-8-m$, that is, $m\le j+W-r-8$. Hence $v\in\bigcup_m\B(g_m)$ if and only if $(v_2,\dots,v_r)$ lies in
+\[
+R=[0,t+2]\times[0,4]\times[0,4]\times[0,1]^{r-4}
+\]
+and
+\[
+\max(0,\,v_2-4)\le\min(t-2,\,j+W-r-8).
+\]
+For $(v_2,\dots,v_r)\in R$ the last condition always holds, because $v_2-4\le t-2$ and $j+W-r-8\ge W\ge v_2$. Moreover $W\le t+r+6$, so $v_1=d-W\ge e-2r-t-16>0$. Hence $v\mapsto(v_2,\dots,v_r)$ is a bijection from the vectors of degree $d$ in $\bigcup_m\B(g_m)$ onto $R$, and $\bigcup_m\B(g_m)$ contributes $|R|=25(t+3)2^{r-4}$.
+
+Finally, $|f\wedge g_m|\le (r+10)+(r+10)+4=2r+24<e-r-10\le d$, so Lemma~\ref{lem:boxes}(c) gives $h_d(G)=q_j+25(t+3)2^{r-4}$. Lemma~\ref{lem:identity} with $j_0=r+9$ gives the displayed formula, since $q_{r+9}=\binom{r+11}{2}$.
+
+It remains to show that $\binom{r+11}{2}<25(t+3)2^{r-4}$. As $t\ge 2$, it suffices to show $\binom{r+11}{2}<125\cdot 2^{r-4}$. For $r=4$ this reads $105<125$. Passing from $r$ to $r+1$ multiplies the left-hand side by $(r+12)/(r+10)<2$ and the right-hand side by $2$.
+\end{proof}
+
+\begin{remark}\label{rem:zanello}
+For $t=2$ the generators $f$ and $g_0$ are those of Zanello's proof of \cite[Theorem~8(2)]{Za}, and the constant $25(t+3)2^{r-4}$ equals his $125\cdot 2^{r-4}$. Zanello obtains the types $3\le t\le r+1$ by placing the long exponent $e-r-8$ of $g_0$ on each of the $r$ variables in turn. The generators $g_1,\dots,g_{t-2}$ instead transfer exponent from $x_1$ to $x_2$ one unit at a time. In the degrees $e-r-10$, $e-r-9$, and $e-r-8$, the divisors of $g_0,\dots,g_{t-2}$ then correspond to the points of the product of intervals $R$, so the count is exact for every $t$.
+\end{remark}
+
+\section{Proofs of the main results}\label{sec:proofs}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+If $r\le 2$, $t=1$, or $(r,t)=(3,2)$, every pure $O$-sequence of codimension $r$ and type $t$ is log-concave by Proposition~\ref{prop:known-positive}. Conversely, let $(r,t)$ be a pair as in the theorem that satisfies none of these conditions. Then $r\ge 3$, $t\ge 2$, and $(r,t)\ne(3,2)$. If $r=3$ and $t=3$, Theorem~\ref{thm:type3} gives a non-log-concave pure $O$-sequence; if $r=3$ and $t\ge 4$, Proposition~\ref{prop:three-variables} does; and if $r\ge 4$, Theorem~\ref{thm:higher} does.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:threshold}]
+This is Theorem~\ref{thm:main} restricted to $r\ge 3$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:degrees}]
+For $(r,t)=(3,3)$ use Theorem~\ref{thm:type3} with $k=5$ and $L=e-76$. For $r=3$ and $t\ge 4$ use Proposition~\ref{prop:three-variables}, and for $r\ge 4$ use Theorem~\ref{thm:higher}.
+\end{proof}
+
+\section*{Use of AI-assisted tools}
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{99}
+
+\bibitem{BMMNZ12}
+M.~Boij, J.~Migliore, R.~M. Mir\'o-Roig, U.~Nagel, and F.~Zanello, \emph{On the shape of a pure $O$-sequence}, Mem. Amer. Math. Soc. \textbf{218} (2012), no.~1024, viii+78 pp.
+
+\bibitem{Bo14}
+B.~Boyle, \emph{The unimodality of pure $O$-sequences of type three in three variables}, Illinois J. Math. \textbf{58} (2014), no.~3, 757--778.
+
+\bibitem{AP}
+\begingroup\raggedright Google DeepMind, \emph{AlphaProof Nexus results}, GitHub repository, \url{https://github.com/google-deepmind/alphaproof-nexus-results}, directory \texttt{APNOutputs/AICollaborator/AlgebraicGeometry} at commit \texttt{0647711a71183c1ea492ad60860776617ce1ea88}, accessed October 2026.\par\endgroup
+
+\bibitem{HHZ25}
+T.~H. H\`a, T.~Hibi, and F.~Zanello, \emph{A special class of pure $O$-sequences}, Electron. J. Combin. \textbf{32} (2025), no.~1, Paper No.~P1.48.
+
+\bibitem{Ia}
+A.~Iarrobino, \emph{Log-concave Gorenstein sequences}, J. Commut. Algebra \textbf{16} (2024), no.~1, 25--36; arXiv:2207.10753v4.
+
+\bibitem{MNZ13}
+J.~Migliore, U.~Nagel, and F.~Zanello, \emph{Pure $O$-sequences: known results, applications, and open problems}, in Commutative Algebra (I.~Peeva, ed.), Springer, New York, 2013, 527--550.
+
+\bibitem{St77}
+R.~P. Stanley, \emph{Cohen--Macaulay complexes}, in Higher Combinatorics (M.~Aigner, ed.), NATO Adv. Study Inst. Ser., Reidel, Dordrecht, 1977, 51--62.
+
+\bibitem{St89}
+R.~P. Stanley, \emph{Log-concave and unimodal sequences in algebra, combinatorics, and geometry}, Ann. New York Acad. Sci. \textbf{576} (1989), 500--535.
+
+\bibitem{TKS}
+G.~Tsoukalas, A.~Kovsharov, S.~Shirobokov, A.~Surina, M.~Firsching, G.~B\'erczi, F.~J.~R. Ruiz, A.~Suggala, A.~Z. Wagner, E.~Wieser, L.~Yu, A.~Huang, M.~Z. Horv\'ath, A.~Ferraiuolo, H.~Michalewski, E.~Lockhart, C.~Grosu, T.~Hubert, M.~Balog, P.~Kohli, and S.~Chaudhuri, \emph{Advancing mathematics research with AI-driven formal proof search}, preprint (2026), arXiv:2605.22763v2.
+
+\bibitem{Za}
+F.~Zanello, \emph{Log-concavity of level Hilbert functions and pure $O$-sequences}, J. Commut. Algebra \textbf{16} (2024), no.~2, 245--256; arXiv:2210.09447v2.
+
+\end{thebibliography}
+
+\end{document}

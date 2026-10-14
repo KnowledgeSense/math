@@ -1,0 +1,235 @@
+{
+  "kunz_box": [
+    1,
+    24
+  ],
+  "tuples_scanned": 331776,
+  "valid_semigroups": 71970,
+  "embedding_dimension_counts": {
+    "5": 61338,
+    "4": 9773,
+    "3": 838,
+    "2": 21
+  },
+  "dimension_by_criterion_counts": {
+    "5": 47450,
+    "4": 21279,
+    "3": 3220,
+    "2": 21
+  },
+  "apery_and_first_relation_pairs": 2222,
+  "exact_rational_jet_checks": 3220,
+  "branch_counts": {
+    "e3": 838,
+    "e4_k2_j4": 826,
+    "e5": 908,
+    "e4_k2_j3": 244,
+    "e4_k3_j4": 196,
+    "e4_k4_j3": 208
+  },
+  "witnesses": {
+    "e5_h5": {
+      "generators": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "apery": [
+        0,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    "e4_h4": {
+      "generators": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "apery": [
+        0,
+        6,
+        7,
+        8,
+        14
+      ]
+    },
+    "e3_h3": {
+      "generators": [
+        5,
+        6,
+        7
+      ],
+      "apery": [
+        0,
+        6,
+        7,
+        13,
+        14
+      ]
+    },
+    "e3": {
+      "generators": [
+        5,
+        6,
+        7
+      ],
+      "apery": [
+        0,
+        6,
+        7,
+        13,
+        14
+      ],
+      "cutoff": 15
+    },
+    "e2_h2": {
+      "generators": [
+        5,
+        6
+      ],
+      "apery": [
+        0,
+        6,
+        12,
+        18,
+        24
+      ]
+    },
+    "e5_h4": {
+      "generators": [
+        5,
+        8,
+        11,
+        14,
+        17
+      ],
+      "apery": [
+        0,
+        11,
+        17,
+        8,
+        14
+      ]
+    },
+    "e4_h3": {
+      "generators": [
+        5,
+        8,
+        11,
+        17
+      ],
+      "apery": [
+        0,
+        11,
+        17,
+        8,
+        19
+      ]
+    },
+    "e4_k2_j4": {
+      "generators": [
+        5,
+        8,
+        11,
+        17
+      ],
+      "apery": [
+        0,
+        11,
+        17,
+        8,
+        19
+      ],
+      "cutoff": 20
+    },
+    "e5_h3": {
+      "generators": [
+        5,
+        11,
+        17,
+        23,
+        29
+      ],
+      "apery": [
+        0,
+        11,
+        17,
+        23,
+        29
+      ]
+    },
+    "e5": {
+      "generators": [
+        5,
+        11,
+        17,
+        23,
+        29
+      ],
+      "apery": [
+        0,
+        11,
+        17,
+        23,
+        29
+      ],
+      "cutoff": 30
+    },
+    "e4_k2_j3": {
+      "generators": [
+        5,
+        11,
+        17,
+        23
+      ],
+      "apery": [
+        0,
+        11,
+        17,
+        23,
+        34
+      ],
+      "cutoff": 35
+    },
+    "e4_k3_j4": {
+      "generators": [
+        5,
+        11,
+        28,
+        34
+      ],
+      "apery": [
+        0,
+        11,
+        22,
+        28,
+        34
+      ],
+      "cutoff": 35
+    },
+    "e4_k4_j3": {
+      "generators": [
+        5,
+        16,
+        24,
+        43
+      ],
+      "apery": [
+        0,
+        16,
+        32,
+        43,
+        24
+      ],
+      "cutoff": 44
+    }
+  },
+  "all_assertions_passed": true,
+  "scope": "Finite computation supplements the general proof; excluded arbitrary analytic parametrizations are handled by the necessity proof, not this program."
+}

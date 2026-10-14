@@ -1,0 +1,52 @@
+{
+  "status": "PASS",
+  "reference_proof_sha256": "34cf6d5d9973164ba9fbb784387f9486ccb5ffb6ea46467db9c660e606960b97",
+  "exhaustive_labeled_multigraphs": {
+    "2": {
+      "max_m": 12,
+      "instances": 13
+    },
+    "3": {
+      "max_m": 10,
+      "instances": 286
+    },
+    "4": {
+      "max_m": 10,
+      "instances": 8008
+    },
+    "5": {
+      "max_m": 5,
+      "instances": 3003
+    }
+  },
+  "random_seed": 20261007,
+  "random_instances": 4000,
+  "random_n_range": [
+    5,
+    9
+  ],
+  "random_m_upper_bound": "7*n",
+  "random_new_region_n_ge_5_m_gt_2n": 3224,
+  "whole_construction_instances": 15325,
+  "author_witnesses_independently_checked": 7,
+  "ordered_affine_inequalities": 333376,
+  "validity_of_checked_outputs": "all real r>=2",
+  "construction_branch_coverage": {
+    "divisible repair": 48,
+    "neutral followed by cross exchange": 3,
+    "boundary short donor": 1,
+    "minimum has no bad pair": 9415,
+    "boundary long donor": 2,
+    "no donor without residual pair": 4,
+    "no donor with residual pair": 18,
+    "special pairs only": 33,
+    "token chain": 1,
+    "q=0": 1097,
+    "endpoint flow": 4586,
+    "isolated pair parity flow": 47,
+    "direct buffer": 66,
+    "ordinary plus special pair": 1,
+    "multiple ordinary pairs": 3
+  },
+  "limitation": "Finite testing is supporting evidence; it does not prove arbitrary n,m."
+}

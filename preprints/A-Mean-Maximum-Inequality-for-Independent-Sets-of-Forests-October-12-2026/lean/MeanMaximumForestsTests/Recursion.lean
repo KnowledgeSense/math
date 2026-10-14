@@ -1,0 +1,6 @@
+import MeanMaximumForests.Recursion
+import MeanMaximumForests.Certificates
+
+#print axioms MeanMaximumForests.vector_mem
+#print axioms MeanMaximumForests.centered_nonnegative_iff
+#print axioms MeanMaximumForests.certificate_sound

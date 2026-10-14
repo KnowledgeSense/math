@@ -1,0 +1,589 @@
+\documentclass{amsart}
+
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Log-concavity of independence polynomials of caterpillars},pdfauthor={Knowledge Sense}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+\newcommand{\one}{\mathbf{1}}
+\newcommand{\jj}{\mathbf{j}}
+\newcommand{\Lp}{\Lambda^{+}}
+\newcommand{\wt}{\operatorname{wt}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cC}{\mathcal{R}}
+\newcommand{\bs}{\bar{\kappa}}
+\newcommand{\vac}{\circ}
+\newcommand{\occ}{\bullet}
+
+\begin{document}
+
+\title[Log-concavity for caterpillars]{Log-concavity of independence polynomials of caterpillars}
+
+\author{Knowledge Sense}
+\address{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{10 October 2026}
+
+\subjclass[2020]{Primary 05C69; Secondary 05A20, 05C05, 05E05}
+
+\keywords{Independence polynomial, log-concavity, caterpillar, Schur positivity, transfer matrix}
+
+\begin{abstract}
+A caterpillar is a tree whose non-leaf vertices induce a path, possibly with one vertex or none. We prove that the independence polynomial of every caterpillar is log-concave, for arbitrary numbers of pendant vertices along the path. Using the symmetric function criterion of Li, Li, Yang and Zhang, we show that $I(T;s)\,I(T;t)$ is Schur positive in two variables, by a transfer-matrix argument that reduces this product to free Ising chains after an explicit contraction step.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+For a graph $G$ let $i_k(G)$ be the number of independent sets of $G$ with $k$ vertices, and let
+\[
+I(G;x)=\sum_{k\ge0}i_k(G)\,x^k
+\]
+be the independence polynomial of $G$ \cite{GH83}. Alavi, Malde, Schwenk and Erd\H{o}s \cite{AMSE} showed that the numbers $i_1(G),\dots,i_{\alpha(G)}(G)$ can be ordered in any prescribed way, and asked whether the independence sequence is unimodal when $G$ is a tree or a forest \cite[Problem~3, p.~21]{AMSE}. A sequence $(a_k)$ is log-concave if $a_k^2\ge a_{k-1}a_{k+1}$ for all $k\ge1$; for nonnegative sequences without internal zeros this implies unimodality. Levit and Mandrescu conjectured that the independence polynomial of any (well-covered) forest is log-concave \cite[Section~3]{LM04}. For general trees this fails: Kadrawi, Levit, Yosef and Mizrachi \cite{KLYM} found two trees on $26$ vertices whose independence sequences are not log-concave, Kadrawi and Levit \cite{KL} constructed infinite families of such trees, and Galvin \cite{Gal26} showed that log-concavity can fail arbitrarily far from the end of the sequence. Thus log-concavity can hold only for restricted classes of trees.
+
+A \emph{caterpillar} is a tree whose non-leaf vertices induce a path, possibly with one vertex or none. For $n\ge1$ and integers $m_1,\dots,m_n\ge0$ let $T(m_1,\dots,m_n)$ be the tree obtained from a path with vertices $1,\dots,n$ (the \emph{spine}) by attaching $m_i$ pendant vertices to vertex $i$ for each $i$. Every caterpillar is of this form, and every tree of this form is a caterpillar; paths and stars are the two extreme cases. Wang and Zhu \cite[Proposition~3.1]{WZ} proved that the regular caterpillars $T(m,\dots,m)$ have log-concave independence polynomials. Galvin and Hilyard \cite[Theorem~1.9(1)]{GaH} proved log-concavity for $T(\ell_1,\ell_2,\dots,\ell_1,\ell_2)$ with an even number of spine vertices and arbitrary $\ell_1,\ell_2$. They also proved that attaching sufficiently many pendant edges at a fixed vertex of an arbitrary graph yields a log-concave independence polynomial \cite[Theorem~1.11]{GaH}, and deduced that $T(k_1,\dots,k_n)$ has a unimodal independence sequence whenever $k_n$ is sufficiently large in terms of $k_1,\dots,k_{n-1}$ \cite[Corollary~1.12]{GaH}. Bahls, Ethridge and Szabo \cite[Theorem~1.1]{BES} proved unimodality when the numbers of pendant vertices are nondecreasing along the spine and satisfy further growth conditions. In the January 2026 version of \cite{Gal26}, unimodality was recorded as open even for caterpillars.
+
+Li, Li, Yang and Zhang \cite{LLYZ} introduced a method based on chromatic symmetric functions and proved that every spider, that is, every tree with at most one vertex of degree at least three, has a log-concave independence polynomial \cite[Theorem~3.1]{LLYZ}. Caterpillars may have arbitrarily many vertices of degree at least three, while the spider with three legs of length two is not a caterpillar, so neither class contains the other.
+
+Our main result is the following.
+
+\begin{theorem}\label{thm:main}
+Let $n\ge1$ and $m_1,\dots,m_n\ge0$, and let $T=T(m_1,\dots,m_n)$. Then
+\[
+i_k(T)^2\ \ge\ i_{k-1}(T)\,i_{k+1}(T)\qquad\text{for every }k\ge1 .
+\]
+Equivalently, the independence polynomial of every caterpillar is log-concave.
+\end{theorem}
+
+Here $i_k(T)=0$ for $k<0$ and $k>\alpha(T)$, so the inequality is only of interest for $1\le k<\alpha(T)$. To our knowledge, log-concavity of the independence polynomials of all caterpillars has not appeared in the literature.
+
+Theorem~\ref{thm:main} implies that every caterpillar has a unimodal independence sequence. This consequence is also contained in the claim of Li, Vallier and Zhang \cite{LVZ}, made in a provisional manuscript that builds on earlier manuscripts of Zhang and Li, that every finite forest has a unimodal independence sequence. Fang, Lu, Nevo, Yao and Zheng \cite{FLNYZ} proved unimodality for all sufficiently large forests, together with strict log-concavity in the range $n/5\le k\le17\alpha(F)/25$ for forests $F$ on $n$ vertices with $n$ sufficiently large. Neither result gives log-concavity at every rank, and our argument is independent of both. Theorem~\ref{thm:main} does not extend to real-rootedness or to vertex-weighted counts (Remarks~\ref{rem:realroots} and~\ref{rem:weights}).
+
+\subsection*{Method}
+Stanley \cite[Theorem~2.11]{Sta98} showed that a real polynomial $P$ with $P(0)=1$ has only negative real zeros if and only if the symmetric function $\prod_iP(x_i)$ is Schur positive. Li, Li, Yang and Zhang \cite[Theorem~1.3]{LLYZ} proved the analogous criterion for log-concavity, in terms of the Schur functions with at most two parts. In two variables $s,t$ it says that $P(s)P(t)$ is a nonnegative combination of the polynomials $(st)^bh_a(s,t)$, where $h_a$ is the complete homogeneous polynomial (Lemma~\ref{lem:lc}). We prove this positivity for $P=I(T;\cdot)$ by a transfer-matrix argument along the spine.
+
+After elementary reductions (Section~\ref{sec:reduction}), the proof reduces to the Schur positivity of a family of three-state transfer-matrix sums $Z_\jj$ indexed by words $\jj$ of nonnegative integers (Theorem~\ref{thm:Z}). Each $Z_\jj$ is a weighted sum over colorings of a sequence of charges, and the multiplicity of a coloring is affine in each of the indicators that consecutive charges have equal colors. A sign identity rewrites it as a combination of free Ising chains with couplings $0$ and $2$, which are Schur positive (Lemma~\ref{lem:ising}). The coefficients of this combination can be negative. They arise only at spine vertices with exactly three pendant vertices in the union of the two independent sets, after a negative sign has been assigned to the pair of charges of such a vertex. Summing out the two opposite colorings of this pair replaces the vertex by the matrix
+\[
+B=\begin{pmatrix}6&0&0\\0&0&-1\\0&-1&0\end{pmatrix}
+\]
+in the transfer product (Proposition~\ref{prop:contraction}). The products of $B$ with powers of the compatibility matrix $C$ satisfy explicit inequalities (Lemma~\ref{lem:kernels}). With these we show that the occupied-to-vacant ratio of a partial transfer product stays in the interval $[-1/2,1]$ along the spine, which gives the nonnegativity of the remaining coefficients (Proposition~\ref{prop:Fpos}).
+
+\subsection*{Organization}
+Section~\ref{sec:prelim} collects facts on symmetric polynomials in two variables and proves the Schur positivity of free Ising chains. Section~\ref{sec:reduction} reduces Theorem~\ref{thm:main} to Theorem~\ref{thm:Z}. Section~\ref{sec:transfer} sets up the transfer matrices and the charges. Section~\ref{sec:contraction} performs the contraction of negatively signed pairs and bounds the resulting kernels. Section~\ref{sec:signs} carries out the sign expansion and the boundary-ratio argument, and completes the proofs.
+
+\section{Preliminaries}\label{sec:prelim}
+
+\subsection{Symmetric polynomials in two variables}
+Let $\Lambda$ be the real vector space of symmetric polynomials in two variables $s,t$, and put
+\[
+u=s+t,\qquad v=st,\qquad h_a=\sum_{i=0}^{a}s^it^{a-i}\quad(a\ge0).
+\]
+For a partition $(a+b,b)$ the Schur polynomial in two variables is $s_{(a+b,b)}(s,t)=v^bh_a$, and Schur polynomials of partitions with at most two parts form a basis of $\Lambda$; hence so do the polynomials $v^bh_a$ with $a,b\ge0$. Let $\Lp\subset\Lambda$ be the set of nonnegative linear combinations of these polynomials. An element of $\Lp$ is called \emph{Schur positive}.
+
+\begin{lemma}\label{lem:schur}
+The following hold.
+\begin{enumerate}
+\item[(a)] Let $f=\sum_{a,b}q_{a,b}s^at^b\in\Lambda$. For $a\ge b\ge0$ the coefficient of $v^bh_{a-b}$ in $f$ equals $q_{a,b}-q_{a+1,b-1}$, where $q_{a+1,-1}=0$.
+\item[(b)] For $a,b\ge0$ we have $h_ah_b=\sum_{r=0}^{\min(a,b)}v^rh_{a+b-2r}$.
+\item[(c)] $\Lp$ is closed under addition, multiplication and multiplication by nonnegative reals. In particular $u^k$, $v^k$ and $(u+v)^k$ belong to $\Lp$ for all $k\ge0$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) Write $f=\sum c_{a',b'}v^{b'}h_{a'-b'}$, the sum over $a'\ge b'\ge0$. Since
+\[
+v^{b'}h_{a'-b'}=\sum_{i=b'}^{a'}s^it^{a'+b'-i},
+\]
+the monomial $s^at^b$ with $a\ge b$ occurs in $v^{b'}h_{a'-b'}$ if and only if $a'+b'=a+b$ and $a'\ge a$, and then with coefficient $1$. Hence $q_{a,b}=\sum_{r\ge0}c_{a+r,b-r}$, and subtracting the same identity for $(a+1,b-1)$ gives the claim.
+
+(b) For $a,b\ge1$, multiplying by $(s-t)^2$ and using $(s-t)h_a=s^{a+1}-t^{a+1}$ shows that
+\[
+(s-t)^2\bigl(h_ah_b-v\,h_{a-1}h_{b-1}\bigr)
+=s^{a+b+2}+t^{a+b+2}-s^{a+b+1}t-st^{a+b+1}
+=(s-t)^2h_{a+b},
+\]
+so $h_ah_b=h_{a+b}+v\,h_{a-1}h_{b-1}$. Since $h_0=1$, induction on $\min(a,b)$ gives (b).
+
+(c) Closure under products follows from (b), and $u=h_1$, $v=v\,h_0$.
+\end{proof}
+
+The next lemma is the two-variable form of the criterion of Li, Li, Yang and Zhang. For completeness we include the short proof.
+
+\begin{lemma}[{cf.\ \cite[Theorem~1.3]{LLYZ}}]\label{lem:lc}
+Let $P(x)=\sum_ka_kx^k$ be a polynomial with real coefficients, and put $a_k=0$ for $k<0$. If $P(s)P(t)\in\Lp$, then $a_k^2\ge a_{k-1}a_{k+1}$ for every $k\ge1$.
+\end{lemma}
+
+\begin{proof}
+Write $P(s)P(t)=\sum_{a,b}q_{a,b}s^at^b$. Then $q_{k,k}=a_k^2$ and $q_{k+1,k-1}=a_{k+1}a_{k-1}$, so by Lemma~\ref{lem:schur}(a) the coefficient of $v^kh_0$ is $a_k^2-a_{k+1}a_{k-1}$, which is nonnegative by assumption.
+\end{proof}
+
+\begin{remark}
+For $P(0)=1$, Li, Li, Yang and Zhang \cite[Theorem~1.3]{LLYZ}, building on Stanley \cite[Theorem~2.11]{Sta98}, consider $F_P=\prod_{i\ge1}P(x_i)$ and prove that, when all coefficients of $P$ are positive, the following are equivalent: the coefficient of $s_\lambda$ in $F_P$ is nonnegative for all partitions $\lambda$ with at most two parts; $P$ is log-concave; $P$ is strongly log-concave. Setting all variables except $x_1=s$ and $x_2=t$ equal to zero maps $F_P$ to $P(s)P(t)$, annihilates the Schur functions with at least three parts and maps $s_{(a+b,b)}$ to $v^bh_a$. Hence the first condition is equivalent to $P(s)P(t)\in\Lp$. We use only the implication of Lemma~\ref{lem:lc}.
+\end{remark}
+
+\subsection{Free Ising chains}
+Throughout, we also use $s$ and $t$ as the names of two \emph{colors}. For $\lambda\ge0$ and colors $\kappa,\kappa'\in\{s,t\}$ put
+\[
+W_\lambda(\kappa,\kappa')=\begin{cases}\lambda,&\kappa=\kappa',\\ 1,&\kappa\ne\kappa'.\end{cases}
+\]
+For $N\ge1$ and $\boldsymbol\lambda=(\lambda_1,\dots,\lambda_{N-1})\in[0,2]^{N-1}$ define the Ising chain with free boundary conditions
+\[
+X_N(\boldsymbol\lambda)=\sum_{\kappa\in\{s,t\}^N}\kappa_1\kappa_2\cdots\kappa_N\prod_{e=1}^{N-1}W_{\lambda_e}(\kappa_e,\kappa_{e+1})\in\Lambda,
+\]
+where the product $\kappa_1\cdots\kappa_N$ is a monomial in $s,t$. Put $X_0=1$.
+
+\begin{lemma}\label{lem:ising}
+For every $N\ge1$ and every $\boldsymbol\lambda\in[0,2]^{N-1}$ we have $X_N(\boldsymbol\lambda)\in\Lp$. Also $X_0=1\in\Lp$.
+\end{lemma}
+
+\begin{proof}
+\emph{Step 1: all couplings equal to $2$.} Let $X_N=X_N(2,\dots,2)$ for $N\ge1$. With $\Delta=\operatorname{diag}(s,t)$ and $\one=(1,1)^{\mathsf T}$ we have $X_N=\one^{\mathsf T}\Delta(W_2\Delta)^{N-1}\one$, where $W_2$ also denotes the matrix $\left(\begin{smallmatrix}2&1\\1&2\end{smallmatrix}\right)$. The matrix $W_2\Delta=\left(\begin{smallmatrix}2s&t\\ s&2t\end{smallmatrix}\right)$ has trace $2u$ and determinant $3v$, so the Cayley--Hamilton theorem gives $X_N=2uX_{N-1}-3vX_{N-2}$ for $N\ge3$, while $X_1=u$ and $X_2=2s^2+2st+2t^2=2u^2-2v$. Comparing coefficients of powers of a formal variable $z$, it follows that
+\[
+\bigl(1-2uz+3vz^2\bigr)\Bigl(1+2\sum_{N\ge1}X_Nz^N\Bigr)=1-vz^2 .
+\]
+Let $D=(1-2sz)(1-2tz)=1-2uz+4vz^2$. Then $1-2uz+3vz^2=D-vz^2$, and in the ring of formal power series in $z$ with coefficients in $\Lambda$,
+\[
+\frac{1-vz^2}{D-vz^2}=(1-vz^2)\sum_{r\ge0}\frac{(vz^2)^r}{D^{r+1}}
+=\frac1D+\sum_{r\ge1}(vz^2)^r\,\frac{1}{D^{r}}\Bigl(\frac1D-1\Bigr).
+\]
+Since
+\[
+D^{-1}=\sum_{a\ge0}2^ah_az^a,
+\]
+every coefficient of $D^{-1}$, of $D^{-1}-1$ and, by Lemma~\ref{lem:schur}(c), of $D^{-r}$ lies in $\Lp$. Each power of $z$ receives finitely many contributions, so $X_N\in\Lp$ for all $N$.
+
+\emph{Step 2: couplings in $[1,2]$.} For $\lambda\in[1,2]$ we have $W_\lambda=(\lambda-1)W_2+(2-\lambda)W_1$. Expanding the product over the edges, $X_N(\boldsymbol\lambda)$ becomes a nonnegative combination of chains whose couplings are $1$ or $2$. Since $W_1(\kappa,\kappa')=1$, a coupling $1$ splits the chain into two independent chains, so each such chain is a product of chains with all couplings equal to $2$ and lies in $\Lp$ by Step~1 and Lemma~\ref{lem:schur}(c).
+
+\emph{Step 3: the general case.} We use induction on $N\ge1$; the case $N=1$ is trivial since $X_1=u$, and Step~2 covers the case that all couplings are at least $1$. Suppose $\lambda_e<1$ for some $e$. Since $W_{\lambda_e}=\lambda_eW_1+(1-\lambda_e)W_0$, the chain $X_N(\boldsymbol\lambda)$ is a nonnegative combination of two terms. In the first, the edge $e$ has coupling $1$ and the chain splits into a product of two shorter chains, which lie in $\Lp$ by induction (a chain with one charge is $X_1=u$). In the second, $W_0(\kappa_e,\kappa_{e+1})$ is the indicator of $\kappa_e\ne\kappa_{e+1}$, so the two charges $e,e+1$ contribute the factor $\kappa_e\kappa_{e+1}=v$. We sum over the two admissible pairs $(\kappa_e,\kappa_{e+1})$. If $1<e<N-1$, let $a=\lambda_{e-1}$ and $b=\lambda_{e+1}$; writing $W_0$ also for the matrix $\left(\begin{smallmatrix}0&1\\1&0\end{smallmatrix}\right)$,
+\[
+W_aW_0W_b=\begin{pmatrix}a+b&1+ab\\ 1+ab&a+b\end{pmatrix}=(1+ab)\,W_{(a+b)/(1+ab)},
+\]
+so the second term equals $v(1+ab)$ times a chain on $N-2$ charges in which the coupling between charges $e-1$ and $e+2$ is $(a+b)/(1+ab)$. This number lies in $[0,2]$, because the function $2ab+2-a-b$ is affine in each variable and takes the values $2,0,0,6$ at the corners of $[0,2]^2$. If $e=1<N-1$, the second term is $v\sum_{\kappa_2}W_b(\kappa_2,\kappa_3)$ times a chain on the charges $3,\dots,N$, that is, $v(1+b)X_{N-2}(\lambda_3,\dots,\lambda_{N-1})$; the case $e=N-1>1$ is symmetric. If $N=2$, the second term is $2v=2vX_0$. In all cases the second term lies in $\Lp$ by induction and Lemma~\ref{lem:schur}(c).
+\end{proof}
+
+\section{Reduction to a normalized model}\label{sec:reduction}
+
+A \emph{word} is a finite sequence $\jj=(j_1,\dots,j_n)$ of nonnegative integers, $n\ge0$. All models below are sums over the assignments of a state to each site $i=1,\dots,n$, with free ends, in which the states of consecutive sites must be compatible and the state of site $i$ receives a weight depending on $j_i$; the empty word gives the value $1$. Put $U=u+v=s+t+st$.
+
+\begin{definition}\label{def:models}
+We use the following four models.
+\begin{enumerate}
+\item The \emph{four-state model} $A_\jj$ has states $(\beta,\beta')\in\{0,1\}^2$, where $(\beta_1,\beta_1')$ and $(\beta_2,\beta_2')$ are compatible if $\beta_1\beta_2=0$ and $\beta_1'\beta_2'=0$, and weights
+\[
+\omega_j(0,0)=U^j,\quad \omega_j(1,0)=st^j,\quad \omega_j(0,1)=ts^j,\quad \omega_j(1,1)=\begin{cases}v,&j=0,\\0,&j\ge1.\end{cases}
+\]
+\item The \emph{three-state model} $G_\jj$ is the restriction of $A_\jj$ to the three states $(0,0)$, $(1,0)$ and $(0,1)$, which we denote by $0$, $s$ and $t$, respectively. Two of these states are compatible unless both equal $s$ or both equal $t$.
+\item The model $J_\jj$ has the same states and compatibility as $G_\jj$. For $j\ge1$ the states $0$, $s$, $t$ have weights $jvu^{j-1}$, $st^j$, $ts^j$; for $j=0$ they have weights $0$, $s$, $t$.
+\item The \emph{normalized model} $Z_\jj$ has the same states and compatibility as $G_\jj$. For $j\ge1$ the states $0$, $s$, $t$ have weights $ju^{j-1}$, $t^{j-1}$, $s^{j-1}$; for $j=0$ they have weights $0$, $s$, $t$.
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}\label{lem:pairs}
+For $T=T(m_1,\dots,m_n)$,
+\[
+I(T;s)\,I(T;t)=\sum_{0\le j_i\le m_i}\ \prod_{i=1}^n\binom{m_i}{j_i}\,A_{(j_1,\dots,j_n)}(s,t).
+\]
+\end{lemma}
+
+\begin{proof}
+The left side is $\sum s^{|I_1|}t^{|I_2|}$ over pairs $(I_1,I_2)$ of independent sets of $T$. Let $L_i$ be the set of pendant vertices at the spine vertex $i$. Group the pairs according to the sets $Y_i=(I_1\cup I_2)\cap L_i$; there are $\prod_i\binom{m_i}{j_i}$ choices of the sets $Y_i$ with $|Y_i|=j_i$. For fixed $Y_i$, record at each spine vertex $i$ the state $(\beta_i,\beta_i')$, where $\beta_i=1$ if $i\in I_1$ and $\beta_i'=1$ if $i\in I_2$. Independence of $I_1$ and $I_2$ on the spine is exactly the compatibility of consecutive states. A vertex of $Y_i$ lies in $I_1$ only, in $I_2$ only, or in both, subject to the condition that it is not in $I_1$ if $\beta_i=1$ and not in $I_2$ if $\beta_i'=1$. Summing over these choices and including the factor $s^{\beta_i}t^{\beta_i'}$ of the spine vertex gives the weight $\omega_{j_i}(\beta_i,\beta_i')$.
+\end{proof}
+
+\begin{lemma}\label{lem:AtoG}
+If $G_{\jj'}\in\Lp$ for every word $\jj'$, then $A_\jj\in\Lp$ for every word $\jj$.
+\end{lemma}
+
+\begin{proof}
+Fix the set $D$ of sites in state $(1,1)$. Its weight vanishes unless $j_i=0$ for all $i\in D$; the set $D$ contains no two consecutive sites, and the neighbors of $D$ are forced into the state $(0,0)$, which is compatible with every state. Hence
+\[
+A_\jj=\sum_D v^{|D|}\prod_{i\in \partial D}U^{j_i}\prod_{\Gamma}G_{\jj|_\Gamma},
+\]
+where $D$ runs over sets of pairwise nonconsecutive sites with $j_i=0$ on $D$, $\partial D$ is the set of sites outside $D$ adjacent to $D$, and $\Gamma$ runs over the maximal intervals of sites outside $D\cup \partial D$. Every factor lies in $\Lp$.
+\end{proof}
+
+\begin{lemma}\label{lem:GtoZ}
+For every word $\jj$ we have $J_\jj=v^{\nu(\jj)}Z_\jj$, where $\nu(\jj)$ is the number of indices with $j_i\ge1$. If $Z_{\jj'}\in\Lp$ for every word $\jj'$, then $G_\jj\in\Lp$ for every word $\jj$.
+\end{lemma}
+
+\begin{proof}
+For $j\ge1$ the weights of $J$ are $v$ times those of $Z$, since $st^j=v\,t^{j-1}$ and $ts^j=v\,s^{j-1}$; for $j=0$ they coincide. This proves the first statement. For the second, write the weight of the state $0$ in $G$ as $U^j=\omega_j+\varrho_j$, where $\omega_j=jvu^{j-1}$ and
+\[
+\varrho_j=U^j-jvu^{j-1}=u^j+\sum_{d=2}^{j}\binom jd v^du^{j-d}\qquad(j\ge1),
+\]
+and $\omega_0=0$, $\varrho_0=1$. Expanding the product of these sums, we choose a set $R$ of sites that are in state $0$ with weight $\varrho_{j_i}$. Since the state $0$ is compatible with every state, the remaining sites split into maximal intervals $\Gamma$, each contributing $J_{\jj|_\Gamma}$. Thus $G_\jj=\sum_R\prod_{i\in R}\varrho_{j_i}\prod_\Gamma J_{\jj|_\Gamma}$, and every factor lies in $\Lp$ by Lemma~\ref{lem:schur}(c) and the first statement.
+\end{proof}
+
+The remaining sections prove the following theorem.
+
+\begin{theorem}\label{thm:Z}
+For every word $\jj$ we have $Z_\jj\in\Lp$.
+\end{theorem}
+
+\section{Transfer matrices and charges}\label{sec:transfer}
+
+We index $3\times3$ matrices and vectors by the states $0,s,t$, in this order, write $E_{\sigma\tau}$ for the matrix units and $\one=(1,1,1)^{\mathsf T}$, and let
+\[
+C=\begin{pmatrix}1&1&1\\1&0&1\\1&1&0\end{pmatrix}
+\]
+be the compatibility matrix. With $\Omega_j=\operatorname{diag}(ju^{j-1},t^{j-1},s^{j-1})$ for $j\ge1$ and $\Omega_0=\operatorname{diag}(0,s,t)$, we have $Z_\jj=\one^{\mathsf T}\Omega_{j_1}C\,\Omega_{j_2}C\cdots C\,\Omega_{j_n}\one$ for $n\ge1$. Note that $\Omega_1$ is the identity matrix.
+
+\begin{lemma}\label{lem:Cpowers}
+For $\ell\ge1$,
+\[
+C^\ell=\begin{pmatrix}d&c&c\\c&a&b\\c&b&a\end{pmatrix}
+\]
+with integers satisfying $d=a+b$, $d\ge c\ge\max(a,b)$, $d\le2c$, $b\ge1$ and $a-b=(-1)^\ell$. If $\ell\ge2$, then $a\ge1$ and $c\ge2$. For $\ell\ge0$ we have $C^\ell\one=(f_0,f_1,f_1)^{\mathsf T}$ with $0<f_1\le f_0$.
+\end{lemma}
+
+\begin{proof}
+For $\ell=1$ we have $(d,c,a,b)=(1,1,0,1)$. Multiplication by $C$ on the right gives $(d,c,a,b)\mapsto(d+2c,\,d+c,\,c+b,\,c+a)$, where the entry $(s,0)$ equals $c+a+b=d+c$ because $d=a+b$. All assertions follow by induction; for instance $2(d+c)-(d+2c)=d>0$ and $(c+b)-(c+a)=-(a-b)$. For the last statement, $C(f_0,f_1,f_1)^{\mathsf T}=(f_0+2f_1,f_0+f_1,f_0+f_1)^{\mathsf T}$.
+\end{proof}
+
+\subsection{Charges}
+Let $\jj$ be a word of length $n\ge1$. A site $i$ is \emph{neutral} if $j_i=1$, a \emph{point} if $j_i=0$ and a \emph{group} if $j_i\ge2$. A point carries one \emph{charge} and a group $i$ carries $j_i-1$ charges. We order all charges along the spine, the charges of a group being consecutive in a fixed order. A \emph{coloring} $\chi$ assigns to each charge a color in $\{s,t\}$, and $\wt(\chi)$ is the product of all colors, a monomial in $s,t$. For a color $\kappa$ let $\bs$ be the other color. Combinatorially, the charges of a group $i$ are $j_i-1$ of the pendant vertices of $i$ that lie in the union of the two independent sets, each in exactly one of them, and the color of a charge records which one; the remaining factor $v$ was removed in Lemma~\ref{lem:GtoZ}. The charge of a point is the spine vertex itself.
+
+For a non-neutral site $i$ and a coloring $\chi$ we define the \emph{site matrix} $\Sigma_i(\chi)$ as follows. If $i$ is a point whose charge has color $\kappa$, then $\Sigma_i(\chi)=E_{\kappa\kappa}$. If $i$ is a group whose charges have colors $\kappa_1,\dots,\kappa_a$, $a=j_i-1$, then
+\begin{equation}\label{eq:sitematrix}
+\Sigma_i(\chi)=j_i\,E_{00}+\delta_i(\chi)\,E_{\bar\kappa_1\bar\kappa_a},
+\end{equation}
+where $\delta_i(\chi)=1$ if $\kappa_1=\dots=\kappa_a$ and $\delta_i(\chi)=0$ otherwise. Summing $\wt(\chi)\Sigma_i(\chi)$ over the colorings of the charges of site $i$ gives $sE_{ss}+tE_{tt}=\Omega_0$ for a point, and $j_iu^aE_{00}+t^aE_{ss}+s^aE_{tt}=\Omega_{j_i}$ for a group. For a neutral site put $\Sigma_i=\Omega_1$, the identity matrix. Consequently
+\begin{equation}\label{eq:Zcharges}
+Z_\jj=\sum_\chi\wt(\chi)\,\Phi(\chi),\qquad \Phi(\chi)=\one^{\mathsf T}\Sigma_1(\chi)\,C\,\Sigma_2(\chi)\,C\cdots C\,\Sigma_n(\chi)\,\one .
+\end{equation}
+In the language of the three-state model, an occupied group is in the state opposite to the common color of its charges, and a point is in the state given by the color of its charge. The matrix $E_{\bar\kappa_1\bar\kappa_a}$ in \eqref{eq:sitematrix} records this state through the first and the last charge of the group; when $\delta_i(\chi)=1$ the two coincide. This convention is needed for the sign expansion in Section~\ref{sec:signs}.
+
+\subsection{Color-symmetric matrices}
+Let $\mathsf P$ be the permutation matrix exchanging the states $s$ and $t$, and let $\cS$ be the set of real $3\times3$ matrices $K$ with $\mathsf PK\mathsf P=K$. These are exactly the matrices
+\begin{equation}\label{eq:Kform}
+K=\begin{pmatrix}d&p&p\\q&a&b\\q&b&a\end{pmatrix},
+\end{equation}
+and we write $g(K)=a-b$ and $w(K)=a+b$. The set $\cS$ is closed under products and transposition, and contains $C$, $E_{00}$ and the matrix
+\[
+B=6E_{00}-E_{st}-E_{ts}=\begin{pmatrix}6&0&0\\0&0&-1\\0&-1&0\end{pmatrix}.
+\]
+For $K\in\cS$ of the form \eqref{eq:Kform} the following facts are immediate.
+\begin{enumerate}
+\item[(S1)] $K(0,1,-1)^{\mathsf T}=g(K)\,(0,1,-1)^{\mathsf T}$; hence $g$ is multiplicative on $\cS$, with $g(C)=-1$ and $g(B)=1$.
+\item[(S2)] $K(A,H,H)^{\mathsf T}=(dA+2pH,\ qA+wH,\ qA+wH)^{\mathsf T}$.
+\item[(S3)] For $\sigma,\sigma'\in\{s,t\}$ we have $K_{\sigma\sigma'}=b+g(K)\,[\sigma=\sigma']$, where $[\cdot]$ is the indicator.
+\end{enumerate}
+We identify a vector $(A,H,H)^{\mathsf T}$ with the pair $(A,H)$. By (S2),
+\[
+C(A,H)=(A+2H,\,A+H),\qquad CB(A,H)=(6A-2H,\,6A-H).
+\]
+Let $\cC=\{(A,H):A>0,\ 0\le H\le 3A/2\}$.
+
+\begin{lemma}\label{lem:cone}
+The maps $C$ and $CB$ send $\cC$ into $\cC$, and they do not decrease either coordinate of a point of $\cC$. Moreover $CB$ multiplies the first coordinate by at least $3$.
+\end{lemma}
+
+\begin{proof}
+Let $(A,H)\in\cC$. For $C$, the image $(A+2H,A+H)$ has positive first coordinate, $A+H\ge H\ge0$, $A+2H\ge A$, and $A+H\le\tfrac32(A+2H)$. For $CB$, the image satisfies $6A-2H\ge3A>0$, $6A-H\ge H$ (as $H\le3A$), and $6A-H\le\tfrac32(6A-2H)$, which is equivalent to $2H\le3A$.
+\end{proof}
+
+\section{Contraction of negatively signed pairs}\label{sec:contraction}
+
+\subsection{Splitting the sites with \texorpdfstring{$j_i=3$}{j\_i=3}}
+Let $\jj$ be a word of length $n\ge1$, let $T_3=\{i:j_i=3\}$ and $m_3=|T_3|$. A site $i\in T_3$ is a group with two charges; for a coloring $\chi$ let $\kappa_1,\kappa_2$ be their colors and let $z_i(\chi)=[\kappa_1=\kappa_2]$, so that $\delta_i(\chi)=z_i(\chi)$. Put
+\[
+\Sigma_i^\pm(\chi)=3E_{00}\pm E_{\bar\kappa_1\bar\kappa_2}.
+\]
+Checking the two cases $z_i(\chi)=1$ and $z_i(\chi)=0$ separately, one finds
+\begin{equation}\label{eq:split}
+\Sigma_i(\chi)=\tfrac12\bigl(1+z_i(\chi)\bigr)\Sigma_i^+(\chi)+\tfrac12\bigl(1-z_i(\chi)\bigr)\Sigma_i^-(\chi).
+\end{equation}
+In the second term the two charges of $i$ have opposite colors, and the occupied part of $\Sigma_i^-$ carries the sign $-1$. These are the \emph{negatively signed pairs}. Summing out their colors gives the following identity.
+
+\begin{proposition}\label{prop:contraction}
+For every word $\jj$ of length $n\ge1$,
+\[
+Z_\jj=2^{-m_3}\sum_{S\subseteq T_3}v^{|S|}\,Y_S,\qquad
+Y_S=\sum_{\chi}\wt(\chi)\prod_{i\in T_3\setminus S}\bigl(1+z_i(\chi)\bigr)\,\Phi_S(\chi),
+\]
+where $\chi$ runs over the colorings of the charges of the sites not in $S$, and $\Phi_S(\chi)$ is obtained from $\Phi(\chi)$ in \eqref{eq:Zcharges} by replacing $\Sigma_i$ by $B$ for $i\in S$ and by $\Sigma_i^+$ for $i\in T_3\setminus S$.
+\end{proposition}
+
+\begin{proof}
+Write \eqref{eq:split} as $\Sigma_i=\frac12\bigl[(1+z_i)\Sigma_i^++(1-z_i)\Sigma_i^-\bigr]$, insert it for every $i\in T_3$ into \eqref{eq:Zcharges}, take out the factor $2^{-m_3}$ and expand; the set $S$ records the sites at which the second term is chosen. For $i\in S$, the colors of the two charges of $i$ occur only in $\wt(\chi)$, through the factor $\kappa_1\kappa_2$, in $1-z_i(\chi)$ and in $\Sigma_i^-(\chi)$. The factor $1-z_i$ restricts the sum to $\kappa_1\ne\kappa_2$, where it equals $1$ and $\kappa_1\kappa_2=v$. Summing over $(\kappa_1,\kappa_2)\in\{(s,t),(t,s)\}$ gives
+\[
+v\bigl(3E_{00}-E_{ts}\bigr)+v\bigl(3E_{00}-E_{st}\bigr)=v\,B,
+\]
+which proves the identity.
+\end{proof}
+
+\begin{example}
+For the word $\jj=(3)$ we have $Z_\jj=3u^2+t^2+s^2$, and $T_3$ consists of the single site. For $S=\varnothing$, $\Phi_\varnothing(\chi)=\one^{\mathsf T}\Sigma_1^+(\chi)\one=4$ for every coloring $\chi$, so $Y_\varnothing=4(2s^2+2t^2+2v)$. For $S=T_3$ we get $Y_{T_3}=\one^{\mathsf T}B\one=4$. Proposition~\ref{prop:contraction} gives $\frac12\bigl(8s^2+8t^2+8v+4v\bigr)=4s^2+4t^2+6v$, which is indeed $3u^2+s^2+t^2=4h_2+2v$.
+\end{example}
+
+Fix $S\subseteq T_3$. The \emph{surviving sites} are the non-neutral sites not in $S$; let them be $i_1<\dots<i_L$. Since $C$ and $B$ are symmetric matrices, grouping the factors of $\Phi_S(\chi)$ between consecutive surviving sites gives, for $L\ge1$,
+\begin{equation}\label{eq:NS}
+\Phi_S(\chi)=f_{\mathrm L}^{\mathsf T}\,\Xi_{i_1}(\chi)\,K_1\,\Xi_{i_2}(\chi)\,K_2\cdots K_{L-1}\,\Xi_{i_L}(\chi)\,f_{\mathrm R},
+\end{equation}
+where $\Xi_i=\Sigma_i^+$ for $i\in T_3\setminus S$ and $\Xi_i=\Sigma_i$ otherwise, each $K_k$ belongs to
+\[
+\cK=\bigl\{C^{\ell_0}BC^{\ell_1}B\cdots BC^{\ell_r}:\ r\ge0,\ \ell_0,\dots,\ell_r\ge1\bigr\},
+\]
+with $r$ the number of sites of $S$ between $i_k$ and $i_{k+1}$, and $f_{\mathrm L},f_{\mathrm R}$ are \emph{free vectors}, that is, vectors of the form
+\begin{equation}\label{eq:free}
+f=C^{\ell_0}BC^{\ell_1}B\cdots BC^{\ell_r}\one,\qquad r\ge0,\ \ell_0,\dots,\ell_{r-1}\ge1,\ \ell_r\ge0 .
+\end{equation}
+If $L=0$, then $\Phi_S$ does not depend on $\chi$ and equals
+\begin{equation}\label{eq:scalar}
+\one^{\mathsf T}C^{\ell_0}BC^{\ell_1}B\cdots BC^{\ell_r}\one,\qquad r=|S|,\ \ell_0,\ell_r\ge0,\ \ell_1,\dots,\ell_{r-1}\ge1 .
+\end{equation}
+All matrices in $\cK$ belong to $\cS$, and $\cK$ is closed under transposition.
+
+\subsection{Bounds for contracted kernels}
+
+\begin{lemma}\label{lem:kernels}
+Let $K=C^{\ell_0}BC^{\ell_1}\cdots BC^{\ell_r}\in\cK$ with $r\ge1$, written as in \eqref{eq:Kform}, and let $g=g(K)$, $w=w(K)$. Then the entries of $K$ are integers and
+\begin{enumerate}
+\item[(a)] $g\in\{-1,1\}$;
+\item[(b)] $p\le\frac32d$, $q\le\frac32d$, $w\le3p$ and $w\le3q$;
+\item[(c)] $p\ge5$, $q\ge5$ and $w\ge11$;
+\item[(d)] $\Delta(K):=8d-4p-4q+w\ge3$.
+\end{enumerate}
+Part (a) also holds for $r=0$.
+\end{lemma}
+
+\begin{proof}
+Part (a) follows from (S1), and integrality is clear. We use the factorization
+\[
+K=C^{\ell_0-1}(CB)\,C^{\ell_1-1}(CB)\cdots C^{\ell_{r-1}-1}(CB)\,C^{\ell_r}
+\]
+and Lemma~\ref{lem:cone}. Let $e_0=(1,0,0)^{\mathsf T}$, which corresponds to $(1,0)\in\cC$. By (S2), $Ke_0=(d,q,q)^{\mathsf T}$, so $(d,q)\in\cC$ and $q\le\frac32d$. Applying this to $K^{\mathsf T}\in\cK$, whose first column is $(d,p,p)^{\mathsf T}$, gives $p\le\frac32d$. Next, $C(0,1,1)^{\mathsf T}=(2,1,1)^{\mathsf T}\in\cC$, and since $\ell_r\ge1$ the vector $K(0,1,1)^{\mathsf T}=(2p,w,w)^{\mathsf T}$ lies in $\cC$; thus $w\le3p$, and by transposition $w\le3q$. This proves (b).
+
+For (c), let $(d',c',a',b')$ be the entries of $C^{\ell_r}$ as in Lemma~\ref{lem:Cpowers}. Then $C^{\ell_r}e_0=(d',c')$ with $1\le c'\le d'$, and $CB$ maps it to $(6d'-2c',6d'-c')$, whose coordinates are at least $4$ and $5$. By the monotonicity in Lemma~\ref{lem:cone}, $q\ge5$, and by transposition $p\ge5$. Similarly $C^{\ell_r}(0,1,1)^{\mathsf T}=(2c',d')$ by (S2) and $d'=a'+b'$, and $CB$ maps it to $(12c'-2d',12c'-d')$. If $\ell_r=1$ the second coordinate is $11$; if $\ell_r\ge2$ it is at least $10c'\ge20$, since $d'\le2c'$ and $c'\ge2$. Monotonicity gives $w\ge11$.
+
+For (d), let $\mathbf k=(4,-1,-1)^{\mathsf T}$. A direct computation gives $\mathbf k^{\mathsf T}K\mathbf k=16d-8p-8q+2w=2\Delta(K)$. By (S2), $C\mathbf k$ corresponds to $(2,3)\in\cC$. Applying the remaining factors of $K$, at least one of which is $CB$, we obtain $K\mathbf k=(A,H,H)^{\mathsf T}$ with $(A,H)\in\cC$ and $A\ge3\cdot2=6$. Hence $2\Delta(K)=4A-2H\ge A\ge6$.
+\end{proof}
+
+\begin{lemma}\label{lem:free}
+Every free vector \eqref{eq:free} has the form $(f_0,f_1,f_1)^{\mathsf T}$ with $f_0>0$ and $0<f_1\le\frac32f_0$. If $r=0$, then $f_1\le f_0$.
+\end{lemma}
+
+\begin{proof}
+The vector $\one$ corresponds to $(1,1)\in\cC$. Write
+\[
+f=C^{\ell_0-1}(CB)\cdots C^{\ell_{r-1}-1}(CB)\,C^{\ell_r}\one
+\]
+and apply Lemma~\ref{lem:cone}; the case $r=0$ is Lemma~\ref{lem:Cpowers}. The second coordinate stays positive, since $C$ and $CB$ map $(A,H)$ with $A>0$ and $0<H\le\frac32A$ to points with second coordinate $A+H>0$ and $6A-H>0$, respectively.
+\end{proof}
+
+\begin{lemma}\label{lem:scalar}
+The scalar \eqref{eq:scalar} is positive.
+\end{lemma}
+
+\begin{proof}
+For $r=0$ it equals $\one^{\mathsf T}C^{\ell_0}\one>0$. For $r\ge1$ write it as $(C^{\ell_0}\one)^{\mathsf T}B\,\mathbf y$ with $\mathbf y=C^{\ell_1}B\cdots BC^{\ell_r}\one$, a free vector with $r-1$ factors $B$. By Lemmas~\ref{lem:Cpowers} and~\ref{lem:free}, $C^{\ell_0}\one=(f_0,f_1,f_1)^{\mathsf T}$ with $0<f_1\le f_0$ and $\mathbf y=(A,H,H)^{\mathsf T}$ with $A>0$ and $0<H\le\frac32A$. Hence the scalar equals $6f_0A-2f_1H\ge6f_0A-3f_0A>0$.
+\end{proof}
+
+\section{Sign expansion and the boundary-ratio interval}\label{sec:signs}
+
+\subsection{Equality variables}
+Fix a word $\jj$ of length $n\ge1$ and $S\subseteq T_3$ with $L\ge1$ surviving sites. Let $\gamma_1,\dots,\gamma_N$ be the charges of the surviving sites in their order; $N\ge1$. Each consecutive pair $\{\gamma_e,\gamma_{e+1}\}$ is an \emph{edge}. It is \emph{internal} if both charges belong to the same site and a \emph{junction} otherwise; there is exactly one junction $e_k$ between the sites $i_k$ and $i_{k+1}$. The internal edges of the sites in $T_3\setminus S$ are called \emph{good}; all other edges, namely the junctions and the internal edges of groups with $j_i\ge4$, are \emph{active}. Let $m'$ be the number of active edges. For a coloring $\chi$ let $z_e(\chi)=1$ if $\gamma_e$ and $\gamma_{e+1}$ have the same color and $z_e(\chi)=0$ otherwise; for $i\in T_3\setminus S$, $z_i(\chi)$ is the value at its good edge.
+
+Each surviving site $i$ has a set of \emph{options}: a point has the single option $\occ$, and a group has the options $\vac$ (vacant) and $\occ$ (occupied). The multipliers of the options are $\mu_i(\vac)=j_i$, $\mu_i(\occ)=1$ if $i$ is a point or $j_i\in\{2,3\}$, and
+\[
+\mu_i(\occ)=\prod_{e\text{ internal to }i}z_e\qquad\text{if }j_i\ge4 .
+\]
+For $1\le k<L$ write $K_k$ as in \eqref{eq:Kform} with entries $d_k,p_k,q_k,a_k,b_k$ and $g_k=a_k-b_k$, and define the junction weights
+\[
+\tau_k(\vac,\vac)=d_k,\qquad\tau_k(\vac,\occ)=p_k,\qquad\tau_k(\occ,\vac)=q_k,
+\]
+\[
+\tau_k(\occ,\occ)=\begin{cases}b_k+g_kz_{e_k},&\text{if }i_k\text{ and }i_{k+1}\text{ are of the same kind},\\ a_k-g_kz_{e_k},&\text{otherwise},\end{cases}
+\]
+where the two kinds are points and groups. For the free vectors $f_{\mathrm L}=(f^{\mathrm L}_0,f^{\mathrm L}_1,f^{\mathrm L}_1)^{\mathsf T}$ and $f_{\mathrm R}=(f^{\mathrm R}_0,f^{\mathrm R}_1,f^{\mathrm R}_1)^{\mathsf T}$ put $\varphi_{\mathrm L}(\vac)=f^{\mathrm L}_0$, $\varphi_{\mathrm L}(\occ)=f^{\mathrm L}_1$, and similarly for $\varphi_{\mathrm R}$. Define
+\begin{equation}\label{eq:F}
+F_S(z)=\sum_{o}\varphi_{\mathrm L}(o_1)\prod_{k=1}^{L}\mu_{i_k}(o_k)\prod_{k=1}^{L-1}\tau_k(o_k,o_{k+1})\,\varphi_{\mathrm R}(o_L),
+\end{equation}
+the sum running over all choices of options $o=(o_1,\dots,o_L)$. This is a polynomial in the variables $z_e$ of the active edges, affine in each of them: a junction variable occurs only in one factor $\tau_k$, which is affine, and an internal variable occurs only in $\mu_i(\occ)$, as one factor of a product of distinct variables.
+
+\begin{lemma}\label{lem:FN}
+For every coloring $\chi$ of the surviving charges, $\Phi_S(\chi)=F_S\bigl(z(\chi)\bigr)$.
+\end{lemma}
+
+\begin{proof}
+In \eqref{eq:NS}, a point $i$ with color $\kappa$ contributes $E_{\kappa\kappa}$. A group $i$ whose first and last charges have colors $\kappa,\kappa'$ contributes $j_iE_{00}+\mu E_{\bs\bar\kappa'}$, where $\mu=\delta_i(\chi)$ if $j_i\ne3$ and $\mu=1$ if $i\in T_3\setminus S$. If $j_i=2$, then $\delta_i(\chi)=1$; if $j_i\ge4$, then $\delta_i(\chi)$ is the product of $z_e(\chi)$ over the internal edges of $i$. Thus $\mu=\mu_i(\occ)(z(\chi))$. Expanding \eqref{eq:NS} along these decompositions yields a sum over options. The vacant option uses the state $0$ on both sides of the site; the occupied option uses the state $\kappa$ (point) or $\bs$ (group) determined by the first charge on the left, and the state determined by the last charge on the right. The entries of $f_{\mathrm L}$, $f_{\mathrm R}$ and $K_k$ indexed by the state $0$ are $f_0$, $d_k$, $p_k$, $q_k$. By (S3), the entry of $K_k$ between occupied states $\sigma,\sigma'$ is $b_k+g_k[\sigma=\sigma']$. If $i_k$ and $i_{k+1}$ are of the same kind, then $[\sigma=\sigma']=z_{e_k}(\chi)$; otherwise exactly one of the two states is the color of a charge and the other is opposite to a color, so $[\sigma=\sigma']=1-z_{e_k}(\chi)$ and $b_k+g_k(1-z_{e_k})=a_k-g_kz_{e_k}$. This is \eqref{eq:F} at $z=z(\chi)$.
+\end{proof}
+
+\begin{lemma}\label{lem:signid}
+If $F$ is a polynomial in $z_1,\dots,z_m$ that is affine in each variable, then
+\[
+F(z)=2^{-m}\sum_{\varepsilon\in\{-1,1\}^m}F(\varepsilon)\prod_{e=1}^m(1+\varepsilon_ez_e).
+\]
+\end{lemma}
+
+\begin{proof}
+For $m=1$ and $F=F_0+F_1z$ the right side is $\frac12(F_0+F_1)(1+z)+\frac12(F_0-F_1)(1-z)=F(z)$. The general case follows by applying this identity to one variable at a time.
+\end{proof}
+
+\begin{proposition}\label{prop:ising}
+If $L\ge1$, then
+\[
+Y_S=2^{-m'}\sum_{\varepsilon}F_S(\varepsilon)\,X_N\bigl(\boldsymbol\lambda(\varepsilon)\bigr),
+\]
+where $\varepsilon$ runs over the sign vectors on the active edges, $\lambda_e(\varepsilon)=1+\varepsilon_e$ for an active edge $e$, and $\lambda_e(\varepsilon)=2$ for a good edge $e$.
+\end{proposition}
+
+\begin{proof}
+By Lemmas~\ref{lem:FN} and~\ref{lem:signid}, $\Phi_S(\chi)=2^{-m'}\sum_\varepsilon F_S(\varepsilon)\prod_{e\text{ active}}(1+\varepsilon_ez_e(\chi))$. For colors $\kappa,\kappa'$ of the endpoints of $e$ we have $1+\varepsilon_ez_e(\chi)=W_{1+\varepsilon_e}(\kappa,\kappa')$ and, for a good edge, $1+z_e(\chi)=W_2(\kappa,\kappa')$. Substituting into the definition of $Y_S$ and summing over $\chi$ gives $X_N(\boldsymbol\lambda(\varepsilon))$.
+\end{proof}
+
+\begin{remark}\label{rem:negative}
+The coefficients produced by a sign expansion need not be nonnegative, and this is the reason for Proposition~\ref{prop:contraction}. If the internal edges of the sites in $T_3$ are treated as active edges and no contraction is performed, the analogue of $F_S$ for the word $\jj=(0,3,3,3,3,3,0)$, with sign $-1$ on all five internal edges and sign $+1$ on all junctions, equals $-9$. Such a group has occupied multiplier $-1$ and $j_i=3$, so the implication \eqref{eq:interval} in the proof of Proposition~\ref{prop:Fpos} below fails for it: $-x/3$ can be as small as $-2/3$.
+\end{remark}
+
+\subsection{Nonnegativity of the coefficients}
+For $K\in\cK$ written as in \eqref{eq:Kform}, with $g=g(K)$ and $\varepsilon\in\{-1,1\}$, put
+\[
+\theta_\varepsilon=b+g\varepsilon,\qquad\theta'_\varepsilon=a-g\varepsilon .
+\]
+By \eqref{eq:F}, $\theta_\varepsilon$ is the occupied junction weight between sites of the same kind and $\theta'_\varepsilon$ the one between sites of different kinds.
+
+\begin{lemma}\label{lem:ineq}
+For every $K\in\cK$ and $\varepsilon\in\{-1,1\}$:
+\begin{enumerate}
+\item[(K1)] $p,q>0$ and $2d>\max(p,q)$;
+\item[(K2)] $0\le\theta_\varepsilon\le2\min(p,q)$;
+\item[(K3)] $-\min(p,q)\le\theta'_\varepsilon\le2\min(p,q)$;
+\item[(K4)] $4d-2p-2q+\theta_\varepsilon\ge0$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+If $K=C^\ell$, Lemma~\ref{lem:Cpowers} gives $p=q=c\ge1$, $d\ge c$, $b\ge1$, $0\le a\le c$, $b\le c$ and $|g|=1$. Hence $\theta_\varepsilon\in\{b-1,b+1\}\subseteq[0,c+1]\subseteq[0,2c]$ and $\theta'_\varepsilon\in\{a-1,a+1\}\subseteq[-1,c+1]\subseteq[-c,2c]$; (K1) and (K4) are clear.
+
+If $K$ contains $B$, let $w=w(K)$. Since $a=(w+g)/2$, $b=(w-g)/2$ and $g=\pm1$ by Lemma~\ref{lem:kernels}(a), both $\theta_\varepsilon$ and $\theta'_\varepsilon$ belong to $\{(w\pm g)/2,(w\pm3g)/2\}\subseteq[(w-3)/2,(w+3)/2]$. By Lemma~\ref{lem:kernels}(c), $(w-3)/2\ge4$. With $m=\min(p,q)\ge5$, Lemma~\ref{lem:kernels}(b) gives $(w+3)/2\le(3m+3)/2\le2m$. This proves (K2) and (K3). For (K4), $4d-2p-2q+\theta_\varepsilon\ge4d-2p-2q+(w-3)/2=(\Delta(K)-3)/2\ge0$ by Lemma~\ref{lem:kernels}(d). Finally (K1) follows from Lemma~\ref{lem:kernels}(b),(c), since $\max(p,q)\le\frac32d<2d$.
+\end{proof}
+
+\begin{lemma}\label{lem:step}
+Let $K\in\cK$, $\varepsilon\in\{-1,1\}$ and $\zeta\in[-\frac12,1]$. Then $d+q\zeta>0$ and
+\[
+0\le R(\zeta):=\frac{p+\theta_\varepsilon\zeta}{d+q\zeta}\le2 .
+\]
+\end{lemma}
+
+\begin{proof}
+By (K1), $d+q\zeta\ge d-q/2>0$. The numerator $p+\theta_\varepsilon\zeta$ is affine in $\zeta$; at $\zeta=-\frac12$ it is $p-\theta_\varepsilon/2\ge0$ by (K2), and at $\zeta=1$ it is $p+\theta_\varepsilon\ge0$. Similarly $2(d+q\zeta)-(p+\theta_\varepsilon\zeta)$ equals $\frac12(4d-2p-2q+\theta_\varepsilon)\ge0$ at $\zeta=-\frac12$, by (K4), and equals $(2d-p)+(2q-\theta_\varepsilon)>0$ at $\zeta=1$, by (K1) and (K2).
+\end{proof}
+
+\begin{proposition}\label{prop:Fpos}
+For every $S\subseteq T_3$ with $L\ge1$ and every sign vector $\varepsilon$ on the active edges, $F_S(\varepsilon)\ge0$.
+\end{proposition}
+
+\begin{proof}
+For a group $i$ let $\eta_i=\mu_i(\occ)(\varepsilon)$. Then $\eta_i=1$ if $j_i\in\{2,3\}$ and $\eta_i\in\{-1,1\}$ if $j_i\ge4$. In each of these cases,
+\begin{equation}\label{eq:interval}
+x\in[-1,2]\quad\Longrightarrow\quad \eta_ix/j_i\in[-\tfrac12,1],
+\end{equation}
+since $x/2\in[-\frac12,1]$, $x/3\in[-\frac13,\frac23]$ and $|x|/j_i\le\frac12$ for $j_i\ge4$.
+
+Since a point has a single option, the sum \eqref{eq:F} factorizes along the points. More precisely, $F_S(\varepsilon)$ is the product of the following factors: $f^{\mathrm L}_1$ if $i_1$ is a point and $f^{\mathrm R}_1$ if $i_L$ is a point; $\theta_{\varepsilon}$ (for the kernel $K_k$ and the sign of $e_k$) for every pair $i_k,i_{k+1}$ of consecutive points; and the value of every \emph{run}, that is, every maximal sequence of consecutive surviving sites that are groups. The first two kinds of factors are nonnegative by Lemma~\ref{lem:free} and (K2). It remains to show that every run has nonnegative value.
+
+Consider a run $i_{\underline k},\dots,i_{\overline k}$. Its left boundary is the free end if $\underline k=1$ and the point $i_{\underline k-1}$ otherwise. In the first case put $(\xi_\vac,\xi_\occ)=(f^{\mathrm L}_0,f^{\mathrm L}_1)$. In the second case put $(\xi_\vac,\xi_\occ)=(q_{\underline k-1},\theta'_{\underline k-1})$; these are the junction weights $\tau_{\underline k-1}(\occ,\vac)$ and $\tau_{\underline k-1}(\occ,\occ)$ from a point to a group, where $\theta'_{\underline k-1}$ is formed with $K_{\underline k-1}$ and the sign of $e_{\underline k-1}$. Similarly, put $(\psi_\vac,\psi_\occ)=(f^{\mathrm R}_0,f^{\mathrm R}_1)$ if $\overline k=L$, and $(\psi_\vac,\psi_\occ)=(p_{\overline k},\theta'_{\overline k})$ if $i_{\overline k+1}$ is a point. By Lemma~\ref{lem:free} and (K1), (K3), we have $\xi_\vac,\psi_\vac>0$, and the boundary ratios $\rho_{\mathrm L}=\xi_\occ/\xi_\vac$ and $\rho_{\mathrm R}=\psi_\occ/\psi_\vac$ lie in $[-1,2]$. The value of the run is
+\[
+V=\sum_{o_{\underline k},\dots,o_{\overline k}}\xi_{o_{\underline k}}\prod_{k=\underline k}^{\overline k}\mu_{i_k}(o_k)\prod_{k=\underline k}^{\overline k-1}\tau_k(o_k,o_{k+1})\,\psi_{o_{\overline k}},
+\]
+evaluated at $\varepsilon$. Define $(A_{\underline k},H_{\underline k})=(j_{i_{\underline k}}\xi_\vac,\ \eta_{i_{\underline k}}\xi_\occ)$ and, for $\underline k\le k<\overline k$,
+\[
+A_{k+1}=j_{i_{k+1}}\bigl(A_kd_k+H_kq_k\bigr),\qquad H_{k+1}=\eta_{i_{k+1}}\bigl(A_kp_k+H_k\theta_k\bigr),
+\]
+where $\theta_k$ is formed with $K_k$ and the sign of $e_k$; here two consecutive groups are of the same kind. Summing over the options one site at a time shows that $V=A_{\overline k}\psi_\vac+H_{\overline k}\psi_\occ$.
+
+We claim that $A_k>0$ and $\zeta_k:=H_k/A_k\in[-\frac12,1]$ for $\underline k\le k\le\overline k$. For $k=\underline k$ this holds because $\zeta_{\underline k}=\eta_{i_{\underline k}}\rho_{\mathrm L}/j_{i_{\underline k}}$ and $\rho_{\mathrm L}\in[-1,2]$, by \eqref{eq:interval}. If it holds for $k$, then $A_{k+1}=j_{i_{k+1}}A_k(d_k+q_k\zeta_k)>0$ by Lemma~\ref{lem:step}, and $\zeta_{k+1}=\eta_{i_{k+1}}R_k(\zeta_k)/j_{i_{k+1}}$, where $R_k(\zeta_k)\in[0,2]$ is the ratio of Lemma~\ref{lem:step} for $K_k$; thus $\zeta_{k+1}\in[-\frac12,1]$ by \eqref{eq:interval}. Consequently
+\[
+V=A_{\overline k}\,\psi_\vac\bigl(1+\rho_{\mathrm R}\zeta_{\overline k}\bigr)\ge0,
+\]
+because $\rho_{\mathrm R}\in[-1,2]$ and $\zeta_{\overline k}\in[-\frac12,1]$ give $\rho_{\mathrm R}\zeta_{\overline k}\ge-1$; the bilinear function $\rho\zeta$ attains its minimum $-1$ over this rectangle at the corners $(-1,1)$ and $(2,-\frac12)$. When the surviving sites contain no point, the whole sequence $i_1,\dots,i_L$ is a single run with two free ends, and the same argument applies.
+\end{proof}
+
+\subsection{Proofs of Theorems~\ref{thm:Z} and~\ref{thm:main}}
+
+\begin{proof}[Proof of Theorem~\ref{thm:Z}]
+For the empty word $Z_\jj=1$. Let $n\ge1$. By Proposition~\ref{prop:contraction}, $Z_\jj=2^{-m_3}\sum_Sv^{|S|}Y_S$. If $L=0$, there are no surviving charges and $Y_S=\Phi_S$ is the positive constant \eqref{eq:scalar}, by Lemma~\ref{lem:scalar}; this includes words consisting only of neutral sites. If $L\ge1$, Propositions~\ref{prop:ising} and~\ref{prop:Fpos} express $Y_S$ as a nonnegative combination of free Ising chains $X_N(\boldsymbol\lambda)$ with $\boldsymbol\lambda\in\{0,2\}^{N-1}$, which lie in $\Lp$ by Lemma~\ref{lem:ising}. Since $v^{|S|}\in\Lp$, Lemma~\ref{lem:schur}(c) gives $Z_\jj\in\Lp$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+By Theorem~\ref{thm:Z} and Lemmas~\ref{lem:GtoZ} and~\ref{lem:AtoG}, $A_\jj\in\Lp$ for every word $\jj$. By Lemma~\ref{lem:pairs}, $I(T;s)I(T;t)$ is a nonnegative combination of the polynomials $A_\jj$, so it lies in $\Lp$. Lemma~\ref{lem:lc} applied to $P=I(T;\cdot)$ gives $i_k(T)^2\ge i_{k-1}(T)i_{k+1}(T)$ for all $k\ge1$.
+\end{proof}
+
+\begin{remark}
+The proof shows that $I(T;s)I(T;t)$ is Schur positive in two variables, and Lemma~\ref{lem:schur}(a) then also gives $i_a(T)i_b(T)\ge i_{a+1}(T)i_{b-1}(T)$ for all $a\ge b\ge1$. For positive sequences this strong log-concavity is equivalent to log-concavity; cf.\ \cite[Theorem~1.3]{LLYZ}.
+\end{remark}
+
+\begin{remark}\label{rem:realroots}
+Theorem~\ref{thm:main} does not extend to real-rootedness. The star $K_{1,3}=T(3)$ has independence polynomial $1+4x+3x^2+x^3$, whose discriminant is $-31$, so two of its roots are not real.
+\end{remark}
+
+\begin{remark}\label{rem:weights}
+The theorem concerns the ordinary count of independent sets and does not extend to arbitrary positive vertex weights. If the center of $K_{1,3}$ receives weight $7$ and every leaf weight $1$, the weighted independence polynomial $\sum_I\bigl(\prod_{y\in I}w_y\bigr)x^{|I|}$ equals $1+10x+3x^2+x^3$, and $3^2<10\cdot1$.
+\end{remark}
+
+\begin{remark}
+By Theorem~\ref{thm:main}, none of the trees in \cite{Gal26,KL,KLYM} whose independence sequences are not log-concave is a caterpillar; thus the theorem does not extend to all trees.
+\end{remark}
+
+\section*{Use of AI-assisted tools}
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{99}
+
+\bibitem{AMSE}
+Y.~Alavi, P.~J. Malde, A.~J. Schwenk, and P.~Erd\H{o}s, \emph{The vertex independence sequence of a graph is not constrained}, Congr. Numer. \textbf{58} (1987), 15--23.
+
+\bibitem{BES}
+P.~Bahls, B.~Ethridge, and L.~Szabo, \emph{Unimodality of the independence polynomials of non-regular caterpillars}, Australas. J. Combin. \textbf{71} (2018), no.~1, 104--112.
+
+\bibitem{FLNYZ}
+E.~X. Fang, J.~Lu, E.~Nevo, Y.~Yao, and H.~Zheng, \emph{Unimodality of independence polynomials for sufficiently large forests}, preprint (2026), arXiv:2609.20961v1.
+
+\bibitem{Gal26}
+D.~Galvin, \emph{Trees with non log-concave independent set sequences}, preprint (2026), arXiv:2502.10654v2.
+
+\bibitem{GaH}
+D.~Galvin and J.~Hilyard, \emph{The independent set sequence of some families of trees}, Australas. J. Combin. \textbf{70} (2018), no.~2, 236--252.
+
+\bibitem{GH83}
+I.~Gutman and F.~Harary, \emph{Generalizations of the matching polynomial}, Utilitas Math. \textbf{24} (1983), 97--106.
+
+\bibitem{KL}
+O.~Kadrawi and V.~E. Levit, \emph{The independence polynomial of trees is not always log-concave starting from order $26$}, preprint (2023), arXiv:2305.01784.
+
+\bibitem{KLYM}
+O.~Kadrawi, V.~E. Levit, R.~Yosef, and M.~Mizrachi, \emph{On computing of independence polynomials of trees}, in: Recent Research in Polynomials (F.~\"Ozger, ed.), IntechOpen, 2023.
+
+\bibitem{LM04}
+V.~E. Levit and E.~Mandrescu, \emph{Very well-covered graphs with log-concave independence polynomials}, Carpathian J. Math. \textbf{20} (2004), no.~1, 73--80.
+
+\bibitem{LLYZ}
+E.~Y.~H. Li, G.~M.~X. Li, A.~L.~B. Yang, and Z.-X. Zhang, \emph{A symmetric function approach to log-concavity of independence polynomials}, Selecta Math. (N.S.) \textbf{32} (2026), Paper No.~87. Theorem numbers cited here refer to arXiv:2501.04245v1.
+
+\bibitem{LVZ}
+W.~Li, K.~Vallier, and T.~Zhang, \emph{Unimodality of forest independence polynomials}, provisional manuscript (2026), arXiv:2610.07943v1.
+
+\bibitem{Sta98}
+R.~P. Stanley, \emph{Graph colorings and related symmetric functions: ideas and applications}, Discrete Math. \textbf{193} (1998), 267--286.
+
+\bibitem{WZ}
+Y.~Wang and B.-X. Zhu, \emph{On the unimodality of independence polynomials of some graphs}, European J. Combin. \textbf{32} (2011), 10--20.
+
+\end{thebibliography}
+
+\end{document}

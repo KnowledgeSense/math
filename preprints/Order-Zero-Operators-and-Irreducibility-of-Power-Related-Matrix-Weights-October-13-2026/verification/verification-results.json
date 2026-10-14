@@ -1,0 +1,931 @@
+{
+  "author": "Knowledge Sense",
+  "contact": "math@knowledgesense.jp",
+  "method": "Exact coefficient equations for FP=PF*, F=R+iQ; modular rank certificate",
+  "prime": 1000003,
+  "size_range": [
+    1,
+    10
+  ],
+  "cases": 40,
+  "all_passed": true,
+  "scope": "Finite selected integer parameter cases; the uniform theorem is proved in the manuscript.",
+  "records": [
+    {
+      "N": 1,
+      "a": [],
+      "exponents": [
+        0
+      ],
+      "real_rank_mod_prime": 0,
+      "imaginary_rank_mod_prime": 1,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "L",
+      "parameter_case": "ones"
+    },
+    {
+      "N": 1,
+      "a": [],
+      "exponents": [
+        0
+      ],
+      "real_rank_mod_prime": 0,
+      "imaginary_rank_mod_prime": 1,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "L",
+      "parameter_case": "signed_integers"
+    },
+    {
+      "N": 1,
+      "a": [],
+      "exponents": [
+        0
+      ],
+      "real_rank_mod_prime": 0,
+      "imaginary_rank_mod_prime": 1,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "E",
+      "parameter_case": "ones"
+    },
+    {
+      "N": 1,
+      "a": [],
+      "exponents": [
+        0
+      ],
+      "real_rank_mod_prime": 0,
+      "imaginary_rank_mod_prime": 1,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "E",
+      "parameter_case": "signed_integers"
+    },
+    {
+      "N": 2,
+      "a": [
+        1
+      ],
+      "exponents": [
+        0,
+        0
+      ],
+      "real_rank_mod_prime": 3,
+      "imaginary_rank_mod_prime": 4,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "L",
+      "parameter_case": "ones"
+    },
+    {
+      "N": 2,
+      "a": [
+        2
+      ],
+      "exponents": [
+        0,
+        0
+      ],
+      "real_rank_mod_prime": 3,
+      "imaginary_rank_mod_prime": 4,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "L",
+      "parameter_case": "signed_integers"
+    },
+    {
+      "N": 2,
+      "a": [
+        1
+      ],
+      "exponents": [
+        0,
+        1
+      ],
+      "real_rank_mod_prime": 3,
+      "imaginary_rank_mod_prime": 4,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "E",
+      "parameter_case": "ones"
+    },
+    {
+      "N": 2,
+      "a": [
+        2
+      ],
+      "exponents": [
+        0,
+        1
+      ],
+      "real_rank_mod_prime": 3,
+      "imaginary_rank_mod_prime": 4,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "E",
+      "parameter_case": "signed_integers"
+    },
+    {
+      "N": 3,
+      "a": [
+        1,
+        1
+      ],
+      "exponents": [
+        0,
+        0,
+        1
+      ],
+      "real_rank_mod_prime": 8,
+      "imaginary_rank_mod_prime": 9,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "L",
+      "parameter_case": "ones"
+    },
+    {
+      "N": 3,
+      "a": [
+        2,
+        -3
+      ],
+      "exponents": [
+        0,
+        0,
+        1
+      ],
+      "real_rank_mod_prime": 8,
+      "imaginary_rank_mod_prime": 9,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "L",
+      "parameter_case": "signed_integers"
+    },
+    {
+      "N": 3,
+      "a": [
+        1,
+        1
+      ],
+      "exponents": [
+        0,
+        1,
+        2
+      ],
+      "real_rank_mod_prime": 8,
+      "imaginary_rank_mod_prime": 9,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "E",
+      "parameter_case": "ones"
+    },
+    {
+      "N": 3,
+      "a": [
+        2,
+        -3
+      ],
+      "exponents": [
+        0,
+        1,
+        2
+      ],
+      "real_rank_mod_prime": 8,
+      "imaginary_rank_mod_prime": 9,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "E",
+      "parameter_case": "signed_integers"
+    },
+    {
+      "N": 4,
+      "a": [
+        1,
+        1,
+        1
+      ],
+      "exponents": [
+        0,
+        0,
+        1,
+        2
+      ],
+      "real_rank_mod_prime": 15,
+      "imaginary_rank_mod_prime": 16,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "L",
+      "parameter_case": "ones"
+    },
+    {
+      "N": 4,
+      "a": [
+        2,
+        -3,
+        4
+      ],
+      "exponents": [
+        0,
+        0,
+        1,
+        2
+      ],
+      "real_rank_mod_prime": 15,
+      "imaginary_rank_mod_prime": 16,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "L",
+      "parameter_case": "signed_integers"
+    },
+    {
+      "N": 4,
+      "a": [
+        1,
+        1,
+        1
+      ],
+      "exponents": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "real_rank_mod_prime": 15,
+      "imaginary_rank_mod_prime": 16,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "E",
+      "parameter_case": "ones"
+    },
+    {
+      "N": 4,
+      "a": [
+        2,
+        -3,
+        4
+      ],
+      "exponents": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "real_rank_mod_prime": 15,
+      "imaginary_rank_mod_prime": 16,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "E",
+      "parameter_case": "signed_integers"
+    },
+    {
+      "N": 5,
+      "a": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "exponents": [
+        0,
+        0,
+        1,
+        2,
+        3
+      ],
+      "real_rank_mod_prime": 24,
+      "imaginary_rank_mod_prime": 25,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "L",
+      "parameter_case": "ones"
+    },
+    {
+      "N": 5,
+      "a": [
+        2,
+        -3,
+        4,
+        -5
+      ],
+      "exponents": [
+        0,
+        0,
+        1,
+        2,
+        3
+      ],
+      "real_rank_mod_prime": 24,
+      "imaginary_rank_mod_prime": 25,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "L",
+      "parameter_case": "signed_integers"
+    },
+    {
+      "N": 5,
+      "a": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "exponents": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "real_rank_mod_prime": 24,
+      "imaginary_rank_mod_prime": 25,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "E",
+      "parameter_case": "ones"
+    },
+    {
+      "N": 5,
+      "a": [
+        2,
+        -3,
+        4,
+        -5
+      ],
+      "exponents": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "real_rank_mod_prime": 24,
+      "imaginary_rank_mod_prime": 25,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "E",
+      "parameter_case": "signed_integers"
+    },
+    {
+      "N": 6,
+      "a": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "exponents": [
+        0,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "real_rank_mod_prime": 35,
+      "imaginary_rank_mod_prime": 36,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "L",
+      "parameter_case": "ones"
+    },
+    {
+      "N": 6,
+      "a": [
+        2,
+        -3,
+        4,
+        -5,
+        6
+      ],
+      "exponents": [
+        0,
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "real_rank_mod_prime": 35,
+      "imaginary_rank_mod_prime": 36,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "L",
+      "parameter_case": "signed_integers"
+    },
+    {
+      "N": 6,
+      "a": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "exponents": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "real_rank_mod_prime": 35,
+      "imaginary_rank_mod_prime": 36,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "E",
+      "parameter_case": "ones"
+    },
+    {
+      "N": 6,
+      "a": [
+        2,
+        -3,
+        4,
+        -5,
+        6
+      ],
+      "exponents": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "real_rank_mod_prime": 35,
+      "imaginary_rank_mod_prime": 36,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "E",
+      "parameter_case": "signed_integers"
+    },
+    {
+      "N": 7,
+      "a": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "exponents": [
+        0,
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "real_rank_mod_prime": 48,
+      "imaginary_rank_mod_prime": 49,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "L",
+      "parameter_case": "ones"
+    },
+    {
+      "N": 7,
+      "a": [
+        2,
+        -3,
+        4,
+        -5,
+        6,
+        -7
+      ],
+      "exponents": [
+        0,
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "real_rank_mod_prime": 48,
+      "imaginary_rank_mod_prime": 49,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "L",
+      "parameter_case": "signed_integers"
+    },
+    {
+      "N": 7,
+      "a": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "exponents": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "real_rank_mod_prime": 48,
+      "imaginary_rank_mod_prime": 49,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "E",
+      "parameter_case": "ones"
+    },
+    {
+      "N": 7,
+      "a": [
+        2,
+        -3,
+        4,
+        -5,
+        6,
+        -7
+      ],
+      "exponents": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "real_rank_mod_prime": 48,
+      "imaginary_rank_mod_prime": 49,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "E",
+      "parameter_case": "signed_integers"
+    },
+    {
+      "N": 8,
+      "a": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "exponents": [
+        0,
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "real_rank_mod_prime": 63,
+      "imaginary_rank_mod_prime": 64,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "L",
+      "parameter_case": "ones"
+    },
+    {
+      "N": 8,
+      "a": [
+        2,
+        -3,
+        4,
+        -5,
+        6,
+        -7,
+        8
+      ],
+      "exponents": [
+        0,
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "real_rank_mod_prime": 63,
+      "imaginary_rank_mod_prime": 64,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "L",
+      "parameter_case": "signed_integers"
+    },
+    {
+      "N": 8,
+      "a": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "exponents": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "real_rank_mod_prime": 63,
+      "imaginary_rank_mod_prime": 64,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "E",
+      "parameter_case": "ones"
+    },
+    {
+      "N": 8,
+      "a": [
+        2,
+        -3,
+        4,
+        -5,
+        6,
+        -7,
+        8
+      ],
+      "exponents": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "real_rank_mod_prime": 63,
+      "imaginary_rank_mod_prime": 64,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "E",
+      "parameter_case": "signed_integers"
+    },
+    {
+      "N": 9,
+      "a": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "exponents": [
+        0,
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "real_rank_mod_prime": 80,
+      "imaginary_rank_mod_prime": 81,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "L",
+      "parameter_case": "ones"
+    },
+    {
+      "N": 9,
+      "a": [
+        2,
+        -3,
+        4,
+        -5,
+        6,
+        -7,
+        8,
+        -9
+      ],
+      "exponents": [
+        0,
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "real_rank_mod_prime": 80,
+      "imaginary_rank_mod_prime": 81,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "L",
+      "parameter_case": "signed_integers"
+    },
+    {
+      "N": 9,
+      "a": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "exponents": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "real_rank_mod_prime": 80,
+      "imaginary_rank_mod_prime": 81,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "E",
+      "parameter_case": "ones"
+    },
+    {
+      "N": 9,
+      "a": [
+        2,
+        -3,
+        4,
+        -5,
+        6,
+        -7,
+        8,
+        -9
+      ],
+      "exponents": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "real_rank_mod_prime": 80,
+      "imaginary_rank_mod_prime": 81,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "E",
+      "parameter_case": "signed_integers"
+    },
+    {
+      "N": 10,
+      "a": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "exponents": [
+        0,
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "real_rank_mod_prime": 99,
+      "imaginary_rank_mod_prime": 100,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "L",
+      "parameter_case": "ones"
+    },
+    {
+      "N": 10,
+      "a": [
+        2,
+        -3,
+        4,
+        -5,
+        6,
+        -7,
+        8,
+        -9,
+        10
+      ],
+      "exponents": [
+        0,
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "real_rank_mod_prime": 99,
+      "imaginary_rank_mod_prime": 100,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "L",
+      "parameter_case": "signed_integers"
+    },
+    {
+      "N": 10,
+      "a": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "exponents": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "real_rank_mod_prime": 99,
+      "imaginary_rank_mod_prime": 100,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "E",
+      "parameter_case": "ones"
+    },
+    {
+      "N": 10,
+      "a": [
+        2,
+        -3,
+        4,
+        -5,
+        6,
+        -7,
+        8,
+        -9,
+        10
+      ],
+      "exponents": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "real_rank_mod_prime": 99,
+      "imaginary_rank_mod_prime": 100,
+      "real_solution_dimension": 1,
+      "imaginary_solution_dimension": 0,
+      "list": "E",
+      "parameter_case": "signed_integers"
+    }
+  ]
+}

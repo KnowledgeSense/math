@@ -1,0 +1,462 @@
+\documentclass{amsart}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+
+\hypersetup{
+  pdftitle={Enumeration of extendably 312-avoiding alternating sign rectangles},
+  pdfauthor={Knowledge Sense},
+  pdfsubject={Mathematics - Combinatorics},
+  pdfkeywords={alternating sign matrix, alternating sign rectangle, pattern avoidance, extendable pattern avoidance, Schroeder numbers, generating function, Lagrange inversion}
+}
+
+\hyphenation{manuscript}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Sch}{\mathrm{Sch}}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\coef}[1]{[#1]\,}
+
+\begin{document}
+
+\title[Extendably 312-avoiding alternating sign rectangles]{Enumeration of extendably 312-avoiding\\ alternating sign rectangles}
+
+\author{Knowledge Sense}
+\address{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{12 October 2026}
+
+\subjclass[2020]{Primary 05A15; Secondary 05A05, 05B20}
+
+\keywords{Alternating sign matrix, alternating sign rectangle, pattern avoidance, extendable pattern avoidance, Schr\"oder numbers, generating function, Lagrange inversion}
+
+\begin{abstract}
+H\"ongesberg, Konvalinka and Linusson introduced extendable pattern avoidance for alternating sign rectangles and obtained recurrence relations for the number $S_{r,k,d}$ of $r\times k$ alternating sign rectangles with $d$ nonempty rows that are the upper left corner of some $312$-avoiding alternating sign matrix. They conjectured an explicit formula for $S_{r,k,d}$. We prove this formula for all integers $r,k\ge d\ge 0$. We solve the recurrences along the diagonals $(r,k,d)=(d+a,d+b,d)$: the generating function of each diagonal is $P\bigl((1-t)^{-a}+R^b(1-tR)^{-a}\bigr)$, where $R$ is the generating function of the large Schr\"oder numbers and $P=R/(1+R)$. Using a diagonal form of Lagrange inversion, we show that the conjectured formula has the same diagonal generating functions.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+An alternating sign matrix (ASM) is a square matrix with entries in $\{-1,0,1\}$ in which the nonzero entries of every row and every column alternate in sign and sum to $1$. An ASM $M$ of order $N$ \emph{contains} a permutation $\pi$ of length $m$ if there are rows $i_1<\dots<i_m$ and columns $j_1<\dots<j_m$ with $M_{i_\ell,j_{\pi(\ell)}}=1$ for $\ell=1,\dots,m$, and \emph{avoids} $\pi$ otherwise. Johansson and Linusson~\cite{JL07} showed that the number of $312$-avoiding ASMs of order $n\ge1$ is the large Schr\"oder number $\Sch_{n-1}$; see~\cite{OEIS}.
+
+H\"ongesberg, Konvalinka and Linusson~\cite{HKL} recently introduced alternating sign rectangles (ASRs), a rectangular generalization of ASMs, together with \emph{extendable} pattern avoidance, in the spirit of the extended pattern avoidance of~\cite{EL95,Lin02}: an ASR extendably avoids $\pi$ if it is the upper left corner of some ASM avoiding $\pi$ (see Section~\ref{sec:prelim}). Let $S_{r,k,d}$ denote the number of $r\times k$ ASRs with exactly $d$ nonempty rows that extendably avoid $312$. This number vanishes unless $r,k\ge d\ge 0$. For each pattern in $\{312,132,213,231\}$ they established a system of recurrence relations which, together with the enumeration of~\cite{JL07}, determines the corresponding numbers, and for $\pi=312$ they conjectured a closed formula~\cite[Conjecture~4.5]{HKL}. With $C_j=\frac{1}{j+1}\binom{2j}{j}$ denoting the Catalan numbers, the conjectured formula reads
+\begin{equation}\label{eq:F}
+\begin{aligned}
+F_{r,k,d}={}&\sum_{i=1}^{d}2^{i-1}\binom{k}{i}\left(\binom{r-2}{d-i}-2\binom{r-2}{d-i-2}\right)+\binom{r}{d}\\
+&+\sum_{i\ge0}C_{2i}\binom{r-1+2i}{d-1-2i}+2\sum_{i=1}^{d}(-1)^i\binom{r}{d-i}.
+\end{aligned}
+\end{equation}
+Binomial coefficients with a negative upper index occur here when $r\le1$; the convention is fixed in Section~\ref{sec:series}. The sum over $i\ge0$ is finite, since its terms vanish for $2i>d-1$. Our main result confirms the conjecture.
+
+\begin{theorem}\label{thm:main}
+For all integers $r,k,d$ with $r,k\ge d\ge0$ we have $S_{r,k,d}=F_{r,k,d}$.
+\end{theorem}
+
+In~\cite[p.~9]{HKL} it is checked that $F$ takes the boundary values $F_{0,k,0}=F_{r,0,0}=1$, $F_{1,k,1}=k$ and $F_{r,1,1}=r$, and, using a hypergeometric identity and a result of Barry~\cite{Bar21}, that $F_{n,n,n}=\Sch_{n-1}$ for $n\ge1$. Closed formulas for $S_{r,k,d}$ on some further slices are obtained in~\cite[Section~5]{HKL}: for $d=r$, by induction from the recurrence in terms of refined Schr\"oder numbers and via Schr\"oder ballot numbers~\cite[Theorems~5.1 and~5.2, Corollary~5.3]{HKL}; for $d=k<r$~\cite[Corollary~5.4]{HKL}; and for $S_{r,r+2,r}$, through a bijection with Delannoy paths that do not cross the diagonal vertically~\cite[Theorem~5.5 and Corollary~5.6]{HKL}. Theorem~\ref{thm:main} covers the whole range of parameters.
+
+Our approach is to organize the numbers $S_{r,k,d}$ by the excesses $a=r-d$ and $b=k-d$. For integers $a,b\ge0$ put
+\[
+T_{a,b}(t)=\sum_{d\ge0}S_{d+a,d+b,d}\,t^d,
+\]
+let $R(t)=\sum_{n\ge0}\Sch_n t^n$, and let $P=R/(1+R)$.
+
+\begin{theorem}\label{thm:diag}
+For all integers $a,b\ge0$,
+\[
+T_{a,b}(t)=P\left(\frac{1}{(1-t)^{a}}+\frac{R^b}{(1-tR)^{a}}\right).
+\]
+\end{theorem}
+
+Summing over $a$ and $b$ gives the trivariate generating function.
+
+\begin{corollary}\label{cor:trivariate}
+In $\Q[[x,y,t]]$,
+\[
+\sum_{a,b,d\ge0}S_{d+a,d+b,d}\,x^ay^bt^d=\frac{P}{(1-y)\bigl(1-x/(1-t)\bigr)}+\frac{P}{(1-yR)\bigl(1-x/(1-tR)\bigr)}.
+\]
+In particular, this series is algebraic of degree at most two over $\Q(x,y,t)$.
+\end{corollary}
+
+\emph{Organization.} Section~\ref{sec:prelim} recalls the definitions, fixes conventions and states the recurrences. In Section~\ref{sec:diag} we derive Theorem~\ref{thm:diag} from these recurrences: for $d<\min(r,k)$ and for $d=r<k$ they become a first-order relation between $T_{a,b}$ and $T_{a,b-1}$, which is solved in closed form, while the recurrence for $d=k<r$ expresses $T_{a,0}$ in terms of the series $T_{0,h}$, $h\ge0$. In Section~\ref{sec:F} we compute the generating function of $F_{r,k,d}$ in $d$ for fixed $r$ and $k$, and extract the diagonal $(d+a,d+b,d)$ by a standard form of Lagrange inversion. Comparing coefficients proves Theorem~\ref{thm:main} in Section~\ref{sec:proof}, where we also record some special cases; for $a=b=0$ this gives a second proof of $F_{n,n,n}=\Sch_{n-1}$.
+
+\emph{Dependencies.} Besides elementary facts on formal power series, the proof uses the recurrences of~\cite[Propositions~4.2 and~4.3, Theorem~4.4]{HKL} and the enumeration of $312$-avoiding ASMs in~\cite{JL07}, in the form recalled in~\cite[Sections~3 and~4]{HKL}. We do not reprove these results. The formula~\eqref{eq:F} is the conjecture of~\cite{HKL}; what is new here is its proof.
+
+\section{Preliminaries}\label{sec:prelim}
+
+\subsection{Alternating sign rectangles}
+
+We follow~\cite[Section~2]{HKL}. Let $r,k\ge0$. An \emph{alternating sign rectangle} of size $r\times k$ is an $r\times k$ matrix $A$ with entries in $\{-1,0,1\}$ such that
+\begin{enumerate}
+\item the nonzero entries alternate in sign in each row and in each column;
+\item in each row containing a nonzero entry, the leftmost and the rightmost nonzero entries are $1$;
+\item in each column containing a nonzero entry, the topmost nonzero entry is $1$.
+\end{enumerate}
+A row or column without nonzero entries is \emph{empty}. Rows and columns play different roles: a nonempty row sums to $1$, while a nonempty column sums to $0$ or $1$. For $r=0$ or $k=0$ the only ASR is the empty matrix, which has no nonempty rows. An ASM is a square ASR whose rows and columns all sum to $1$.
+
+An ASR $A$ of size $r\times k$ \emph{extendably avoids} $312$ if there are an integer $N\ge\max(r,k)$ and an ASM $M$ of order $N$ that avoids $312$ and whose upper left $r\times k$ submatrix is $A$. Thus $M$ is obtained from $A$ by adding rows below and columns to the right. Here $M$ contains $312$ if there are rows $i_1<i_2<i_3$ and columns $j_1<j_2<j_3$ with
+\[
+M_{i_1,j_3}=M_{i_2,j_1}=M_{i_3,j_2}=1,
+\]
+the remaining entries of $M$ being arbitrary. Each ASR is counted once, however many extensions it has. We write $S_{r,k,d}$ for the number of extendably $312$-avoiding ASRs of size $r\times k$ with exactly $d$ nonempty rows; this is the number $S^{312}_{r,k,d}$ of~\cite{HKL}.
+
+The only ASR with no nonempty row is the zero matrix, and it is the upper left corner of the permutation matrix of order $r+k$ with ones in positions $(i,r+k+1-i)$, which avoids $312$. Hence $S_{r,k,0}=1$ for all $r,k\ge0$, in accordance with the convention of~\cite[Section~4]{HKL}. Extendable avoidance is more restrictive than avoidance of $312$ inside the rectangle.
+
+\begin{example}\label{ex:221}
+We have $S_{2,2,1}=3$. An ASR of size $2\times2$ with one nonempty row has exactly one nonzero entry, which equals $1$; there are four such matrices, and all of them avoid $312$. The matrix
+\[
+A=\begin{pmatrix}0&0\\1&0\end{pmatrix}
+\]
+is the upper left corner of the permutation matrix of $312$, but it is not the upper left corner of any $312$-avoiding ASM. Indeed, in every ASM $M$ with upper left corner $A$ the first row contains a $1$ in some column $j_3\ge3$, and the second column contains a $1$ in some row $i_3\ge3$; together with $M_{2,1}=1$ this is an occurrence of $312$. The other three matrices are the upper left corners of the permutation matrices of $132$, $231$ and $321$, which avoid $312$; this agrees with $F_{2,2,1}=3$.
+\end{example}
+
+\subsection{Formal power series and binomial coefficients}\label{sec:series}
+
+We work with formal power series over $\Q$ and write $\coef{t^n}A$ for the coefficient of $t^n$ in $A$. A series with constant term $1$ has a unique square root with constant term $1$, and $\sqrt{\cdot}$ always denotes this square root. A series $B$ is substituted into another series only when $B(0)=0$.
+
+For integers $u$ and $v$ we put
+\[
+\binom{u}{v}=\coef{z^v}(1+z)^u\quad(v\ge0),\qquad\binom{u}{v}=0\quad(v<0),
+\]
+the expansion being taken at $z=0$. For $u\ge0$ these are the usual binomial coefficients; for instance $\binom{-1}{0}=1$. Thus $\sum_{v\ge0}\binom{u}{v}z^v=(1+z)^u$ for every integer $u$, and for every integer $a\ge0$,
+\begin{equation}\label{eq:negbin}
+\sum_{h\ge0}\binom{a+h-1}{h}x^h=(1-x)^{-a}.
+\end{equation}
+Empty sums are zero. With these conventions~\eqref{eq:F} defines $F_{r,k,d}$ for all integers $r,k,d\ge0$. In the range $r,k\ge d\ge0$ of Theorem~\ref{thm:main}, a negative upper index with a nonnegative lower index occurs only in the term $\binom{-1}{0}$, for $r=d=1$; the evaluation $F_{1,k,1}=k$ recorded in~\cite[p.~9]{HKL} uses $\binom{-1}{0}=1$.
+
+\subsection{Schr\"oder numbers}
+
+The large Schr\"oder numbers $\Sch_n$ begin with $1$, $2$, $6$, $22$, $90$, $394$, and their generating function is
+\[
+R(t)=\sum_{n\ge0}\Sch_n t^n=\frac{1-t-\sqrt{1-6t+t^2}}{2t},
+\]
+see~\cite[Section~3]{HKL}. Equivalently, $R$ is the unique series with $R(0)=1$ and
+\begin{equation}\label{eq:R}
+R=1+tR+tR^2.
+\end{equation}
+Indeed, \eqref{eq:R} determines the coefficients of $R$ recursively, and the series $1-t-2tR$ has constant term $1$ and square $(1-t)^2-4t\bigl((1-t)R-tR^2\bigr)=1-6t+t^2$ by~\eqref{eq:R}, so that
+\begin{equation}\label{eq:sqrt}
+\sqrt{1-6t+t^2}=1-t-2tR.
+\end{equation}
+Since $1+R$ has constant term $2$, the series $P=R/(1+R)$ is defined.
+
+\begin{lemma}\label{lem:R}
+The following identities hold in $\Q[[t]]$:
+\begin{enumerate}
+\item $R(1-t-tR)=1$;
+\item $R-1=tR(1+R)$;
+\item $1+tR=2P$;
+\item $P-RP=-tR^2$;
+\item $(1-tR)(1+R)=2$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Items (1) and (2) are rearrangements of~\eqref{eq:R}. By (2), $(1+tR)(1+R)=1+R+tR(1+R)=2R$, which is (3). By (2), $P(1-R)=-R\,tR(1+R)/(1+R)=-tR^2$, which is (4). Finally $(1-tR)(1+R)=1+R-tR(1+R)=2$ by (2).
+\end{proof}
+
+\subsection{The recurrences}
+
+We use the following relations; (A), (B) and (C) are due to~\cite{HKL}, and (D) is the enumeration of~\cite{JL07}.
+
+\begin{proposition}\label{prop:rec}
+The numbers $S_{r,k,d}$ satisfy the following relations.
+\begin{enumerate}
+\item[(A)] For $1\le r\le k$,
+\[
+S_{r,k,r}=S_{r,k-1,r}+S_{r-1,k-1,r-1}+\sum_{i=2}^{r}\Sch_{i-2}\,S_{r+1-i,k+1-i,r+1-i}.
+\]
+\item[(B)] For $1\le k<r$,
+\[
+S_{r,k,k}=\sum_{j=0}^{k}S_{j,k,j}\binom{r-j-1}{k-j}.
+\]
+\item[(C)] For $1\le d<\min(r,k)$,
+\[
+S_{r,k,d}=S_{r,k-1,d}+S_{r-1,k-1,d-1}+\sum_{i=2}^{d}\Sch_{i-2}\left(S_{r+1-i,k+1-i,d+1-i}-\binom{r-i}{d+1-i}\right).
+\]
+\item[(D)] For $n\ge1$, $S_{n,n,n}=\Sch_{n-1}$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Relations (A), (B) and (C) are~\cite[Proposition~4.2, Proposition~4.3 and Theorem~4.4]{HKL}. An ASR of size $n\times n$ without empty rows has $n$ rows summing to $1$ and $n$ columns summing to at most $1$, so it is an ASM. An ASM extendably avoids $312$ if and only if it avoids $312$: it is an extension of itself, and an occurrence of $312$ in it is also one in every extension. Hence (D) is the enumeration of $312$-avoiding ASMs in~\cite{JL07}; it is the base case $S_{n,n,n}=\Sch_{n-1}$ used in~\cite[Section~4]{HKL}.
+\end{proof}
+
+For $r=k$ the term $S_{r,r-1,r}$ in (A) lies outside the range $r,k\ge d\ge0$ and is zero~\cite[Section~4]{HKL}; below, (A) is used only for $r<k$. For (A) with $r<k$, (B) and (C), all arguments of $S$ on the right-hand side lie in the range $r,k\ge d\ge0$ and have a smaller value of $r+k$ than the left-hand side. The admissible triples $(r,k,d)$ split into the cases $d=0$, $r=k=d\ge1$, $1\le r=d<k$, $1\le k=d<r$ and $1\le d<\min(r,k)$, covered by $S_{r,k,0}=1$, (D), (A), (B) and (C), respectively, so these relations determine $S_{r,k,d}$.
+
+\section{The diagonal generating functions}\label{sec:diag}
+
+Throughout this section $a,b\ge0$ are integers, $T_{a,b}$ is as in the introduction, and
+\[
+U_a=(1-t)^{-a}=\sum_{h\ge0}\binom{a+h-1}{h}t^h,
+\]
+by~\eqref{eq:negbin}. Each $T_{a,b}$ has constant term $S_{a,b,0}=1$.
+
+\begin{lemma}\label{lem:step}
+For $a\ge0$ and $b\ge1$,
+\[
+T_{a,b}=R\,T_{a,b-1}-tR^2U_a.
+\]
+\end{lemma}
+
+\begin{proof}
+Let $d\ge1$, $r=d+a$ and $k=d+b$. If $a\ge1$, then $1\le d<\min(r,k)$ and (C) applies. If $a=0$, then $1\le r<k$ and (A) applies; in this case $\binom{r-i}{d+1-i}=\binom{d-i}{d+1-i}=0$ for $2\le i\le d$, so (A) is (C) with the binomial terms omitted. Substituting $j=i-1$ and $h=d-j$, so that $1\le j\le d-1$ and $1\le h\le d-1$, we obtain in both cases
+\begin{equation}\label{eq:diagrec}
+\begin{aligned}
+S_{d+a,d+b,d}={}&S_{d+a,d+b-1,d}+S_{d-1+a,d-1+b,d-1}\\
+&+\sum_{\substack{j+h=d\\ j,h\ge1}}\Sch_{j-1}\left(S_{h+a,h+b,h}-\binom{a+h-1}{h}\right).
+\end{aligned}
+\end{equation}
+The three terms on the right are the coefficients of $t^d$ in $T_{a,b-1}$, in $tT_{a,b}$, and in
+\[
+tR\,(T_{a,b}-1)-tR\,(U_a-1),
+\]
+because $tR=\sum_{j\ge1}\Sch_{j-1}t^j$ and the series $T_{a,b}-1$ and $U_a-1$ have zero constant term. For $d=0$ the coefficient of $t^0$ is $1$ on both sides. Hence
+\[
+T_{a,b}=T_{a,b-1}+t(1+R)\,T_{a,b}-tR\,U_a,
+\]
+that is, $(1-t-tR)\,T_{a,b}=T_{a,b-1}-tRU_a$. Multiplying by $R$ and using Lemma~\ref{lem:R}(1) gives the claim.
+\end{proof}
+
+\begin{lemma}\label{lem:induct}
+For $a,b\ge0$,
+\[
+T_{a,b}=PU_a+R^b\,(T_{a,0}-PU_a).
+\]
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:R}(4), $PU_a=R\,PU_a-tR^2U_a$. Subtracting this from Lemma~\ref{lem:step} gives $T_{a,b}-PU_a=R\,(T_{a,b-1}-PU_a)$ for $b\ge1$, and the claim follows by induction on $b$.
+\end{proof}
+
+\begin{lemma}\label{lem:row}
+For $b\ge0$, $T_{0,b}=P\,(1+R^b)$.
+\end{lemma}
+
+\begin{proof}
+By Proposition~\ref{prop:rec}(D), $T_{0,0}=1+\sum_{d\ge1}\Sch_{d-1}t^d=1+tR=2P$, using Lemma~\ref{lem:R}(3). Since $U_0=1$, Lemma~\ref{lem:induct} gives $T_{0,b}=P+R^b(2P-P)$.
+\end{proof}
+
+\begin{lemma}\label{lem:col}
+For $a\ge0$,
+\[
+T_{a,0}=P\left((1-t)^{-a}+(1-tR)^{-a}\right).
+\]
+\end{lemma}
+
+\begin{proof}
+For $a=0$ this is $T_{0,0}=2P$. Let $a\ge1$. We claim that for every $d\ge0$
+\begin{equation}\label{eq:balanced}
+S_{d+a,d,d}=\sum_{h=0}^{d}\binom{a+h-1}{h}S_{d-h,d,d-h}.
+\end{equation}
+For $d=0$ both sides equal $1$. For $d\ge1$ this is (B) with $r=d+a$, $k=d$ and $j=d-h$, since $\binom{r-j-1}{k-j}=\binom{a+h-1}{h}$. Now $S_{d-h,d,d-h}$ is the coefficient of $t^{d-h}$ in $T_{0,h}$, because $(d-h,d,d-h)=(e,e+h,e)$ with $e=d-h$. Therefore~\eqref{eq:balanced} says that
+\[
+T_{a,0}=\sum_{h\ge0}\binom{a+h-1}{h}\,t^h\,T_{0,h},
+\]
+where the sum is defined because $t^hT_{0,h}\in t^h\Q[[t]]$. By Lemma~\ref{lem:row} and~\eqref{eq:negbin}, applied with $x=t$ and with $x=tR$,
+\[
+T_{a,0}=P\sum_{h\ge0}\binom{a+h-1}{h}\bigl(t^h+(tR)^h\bigr)=P\left((1-t)^{-a}+(1-tR)^{-a}\right).\qedhere
+\]
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:diag}]
+By Lemma~\ref{lem:col}, $T_{a,0}-PU_a=P(1-tR)^{-a}$. Inserting this into Lemma~\ref{lem:induct} gives $T_{a,b}=P(1-t)^{-a}+PR^b(1-tR)^{-a}$.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:trivariate}]
+For fixed $a$ and $b$ the coefficient of $x^ay^b$ on the left is $T_{a,b}$. On the right, expanding the geometric series in $x$ and $y$, the coefficient of $x^ay^b$ is $P(1-t)^{-a}+PR^b(1-tR)^{-a}$. The two sides agree by Theorem~\ref{thm:diag}. By~\eqref{eq:sqrt}, $R$ and $P$ lie in $\Q(t)\bigl(\sqrt{1-6t+t^2}\bigr)$, so the right-hand side lies in the field $\Q(x,y,t)\bigl(\sqrt{1-6t+t^2}\bigr)$, which has degree at most two over $\Q(x,y,t)$.
+\end{proof}
+
+\section{The generating function of the conjectured formula}\label{sec:F}
+
+For integers $r,k\ge0$ we regard~\eqref{eq:F} as defining $F_{r,k,d}$ for every $d\ge0$, and put
+\[
+G_{r,k}(z)=\sum_{d\ge0}F_{r,k,d}\,z^d.
+\]
+The values with $d>\min(r,k)$ are used only as coefficients of this auxiliary series; they carry no combinatorial meaning. Let
+\[
+C(u)=\sum_{j\ge0}C_ju^j,\qquad E(u)=\frac{C(u)+C(-u)}{2}=\sum_{i\ge0}C_{2i}u^{2i}.
+\]
+
+\begin{lemma}\label{lem:Gz}
+For integers $r,k\ge0$,
+\[
+G_{r,k}(z)=\tfrac12(1+z)^{r-2}\left((1-2z^2)(1+2z)^k+1\right)+z(1+z)^{r-1}E\bigl(z(1+z)\bigr).
+\]
+\end{lemma}
+
+\begin{proof}
+We compute the generating functions of the four summands in~\eqref{eq:F} separately. In the first summand put $m=d-i\ge0$. Since $\binom{r-2}{m-2}=0$ for $m<2$,
+\[
+\sum_{d\ge0}z^d\sum_{i=1}^{d}2^{i-1}\binom{k}{i}\left(\binom{r-2}{d-i}-2\binom{r-2}{d-i-2}\right)
+=\frac{(1+2z)^k-1}{2}\,(1-2z^2)(1+z)^{r-2}.
+\]
+The second summand gives $(1+z)^r$. In the third summand put $m=d-1-2i$; then
+\[
+\sum_{d\ge0}z^d\sum_{i\ge0}C_{2i}\binom{r-1+2i}{d-1-2i}=\sum_{i\ge0}C_{2i}\,z^{1+2i}(1+z)^{r-1+2i}=z(1+z)^{r-1}E\bigl(z(1+z)\bigr),
+\]
+where the sum over $i$ is defined because of the factor $z^{1+2i}$. In the last summand put $m=d-i$; then
+\[
+2\sum_{d\ge0}z^d\sum_{i=1}^{d}(-1)^i\binom{r}{d-i}=2(1+z)^r\sum_{i\ge1}(-z)^i=-2z(1+z)^{r-1}.
+\]
+Finally $(1+z)^r-2z(1+z)^{r-1}=(1+z)^{r-2}(1-z^2)$, and $-\tfrac12(1-2z^2)+(1-z^2)=\tfrac12$. Adding the four contributions gives the stated formula.
+\end{proof}
+
+We use the following standard diagonal form of Lagrange inversion. For a formal Laurent series $L(z)=\sum_{n\ge n_0}\ell_nz^n$ we write $\Res_z L=\ell_{-1}$.
+
+\begin{lemma}\label{lem:lagrange}
+Let $\varphi,H\in\Q[[z]]$ with $\varphi(0)=1$, and let $w\in t\Q[[t]]$ be the unique series with $w=t\,\varphi(w)$. Then $1-t\varphi'(w)$ is invertible and
+\[
+\sum_{n\ge0}\left(\coef{z^n}H(z)\varphi(z)^n\right)t^n=\frac{H(w)}{1-t\varphi'(w)}.
+\]
+\end{lemma}
+
+\begin{proof}
+The coefficients of $w$ are determined recursively by $w=t\varphi(w)$, and $1-t\varphi'(w)$ has constant term $1$. Let $g(z)=z/\varphi(z)$, so that $g(0)=0$ and $g'(0)=1$. The relation $w=t\varphi(w)$ says that $g(w(t))=t$, so $w$ is the compositional inverse of $g$ and $w(g(z))=z$.
+
+We use the change of variables formula $\Res_t L(t)=\Res_z L(g(z))\,g'(z)$, valid for every formal Laurent series $L$. Terms of $L$ with nonnegative exponent contribute power series on both sides, so by linearity it suffices to check the formula for $L(t)=t^m$ with $m<0$. For $m\le-2$ the series $g^mg'=(g^{m+1})'/(m+1)$ is a derivative and has residue $0$. For $m=-1$, writing $g=zu$ with $u(0)=1$, we have $g'/g=1/z+u'/u$, whose residue is $1$.
+
+Let $A(t)=H(w)/(1-t\varphi'(w))$ and $n\ge0$. Then $A(g(z))=H(z)/\bigl(1-g(z)\varphi'(z)\bigr)$ and
+\[
+\coef{t^n}A=\Res_t A(t)\,t^{-n-1}=\Res_z\frac{H(z)\,g'(z)}{1-g(z)\varphi'(z)}\,g(z)^{-n-1}.
+\]
+Since $g'=(\varphi-z\varphi')/\varphi^2$ and $1-g\varphi'=(\varphi-z\varphi')/\varphi$, where $\varphi-z\varphi'$ has constant term $1$, we get $g'/(1-g\varphi')=1/\varphi$. As $g^{-n-1}=\varphi^{n+1}z^{-n-1}$, the residue equals $\Res_z H(z)\varphi(z)^nz^{-n-1}=\coef{z^n}H(z)\varphi(z)^n$.
+\end{proof}
+
+We also need the even part of the Catalan series at a particular argument.
+
+\begin{lemma}\label{lem:catalan}
+With $u=t/(1-t)^2$ we have $E(u)=\tfrac12(1-t)(1+R)$.
+\end{lemma}
+
+\begin{proof}
+The Catalan series satisfies $1-2uC(u)=\sqrt{1-4u}$, hence also $1+2uC(-u)=\sqrt{1+4u}$. Therefore
+\[
+4u\,E(u)=2uC(u)+2uC(-u)=\sqrt{1+4u}-\sqrt{1-4u}.
+\]
+Substitute $u=t/(1-t)^2$, which has zero constant term. Then $1+4u=(1+t)^2/(1-t)^2$ and $1-4u=(1-6t+t^2)/(1-t)^2$. By uniqueness of square roots with constant term $1$, the substituted square roots are $(1-t)^{-1}(1+t)$ and $(1-t)^{-1}\sqrt{1-6t+t^2}$. Using~\eqref{eq:sqrt},
+\[
+\frac{4t}{(1-t)^2}\,E(u)=\frac{1+t-\sqrt{1-6t+t^2}}{1-t}=\frac{2t(1+R)}{1-t},
+\]
+and cancelling $2t$, which is possible since $\Q[[t]]$ is an integral domain, gives the claim.
+\end{proof}
+
+\begin{proposition}\label{prop:Fdiag}
+For all integers $a,b\ge0$,
+\[
+\sum_{d\ge0}F_{d+a,d+b,d}\,t^d=P\left(\frac{1}{(1-t)^{a}}+\frac{R^b}{(1-tR)^{a}}\right).
+\]
+\end{proposition}
+
+\begin{proof}
+By definition $F_{d+a,d+b,d}=\coef{z^d}G_{d+a,d+b}(z)$. By Lemma~\ref{lem:Gz}, with $r=d+a$ and $k=d+b$,
+\[
+G_{d+a,d+b}(z)=H_1(z)\varphi_1(z)^d+H_2(z)\varphi_2(z)^d,
+\]
+where
+\begin{align*}
+\varphi_1&=(1+z)(1+2z), & H_1&=\tfrac12(1+z)^{a-2}(1-2z^2)(1+2z)^b,\\
+\varphi_2&=1+z, & H_2&=\tfrac12(1+z)^{a-2}+z(1+z)^{a-1}E\bigl(z(1+z)\bigr).
+\end{align*}
+These are power series in $z$, and $\varphi_1(0)=\varphi_2(0)=1$. We apply Lemma~\ref{lem:lagrange} to both terms.
+
+For $\varphi_1$, put $w_1=(R-1)/2\in t\Q[[t]]$. By Lemma~\ref{lem:R}(2),
+\[
+t\varphi_1(w_1)=t\cdot\frac{1+R}{2}\cdot R=\frac{R-1}{2}=w_1,
+\]
+so $w_1$ is the series of Lemma~\ref{lem:lagrange}. Moreover $1+2w_1=R$ and, by Lemma~\ref{lem:R}(5), $1+w_1=(1+R)/2=(1-tR)^{-1}$. Since $\varphi_1'(z)=3+4z$ and $t=w_1/\bigl((1+w_1)(1+2w_1)\bigr)$,
+\[
+1-t\varphi_1'(w_1)=\frac{(1+w_1)(1+2w_1)-w_1(3+4w_1)}{(1+w_1)(1+2w_1)}=\frac{1-2w_1^2}{(1+w_1)(1+2w_1)}.
+\]
+The factor $1-2w_1^2$ has constant term $1$ and cancels against the factor $1-2z^2$ of $H_1$ evaluated at $w_1$. Hence
+\[
+\frac{H_1(w_1)}{1-t\varphi_1'(w_1)}=\tfrac12(1+w_1)^{a-1}(1+2w_1)^{b+1}=\tfrac12(1-tR)\,R\cdot\frac{R^b}{(1-tR)^{a}}=\frac{PR^b}{(1-tR)^{a}},
+\]
+where the last step uses $\tfrac12(1-tR)R=R/(1+R)=P$, by Lemma~\ref{lem:R}(5).
+
+For $\varphi_2$, the series $w_2=t/(1-t)$ satisfies $w_2=t(1+w_2)$, and $1+w_2=(1-t)^{-1}$, $w_2(1+w_2)=t/(1-t)^2$ and $1-t\varphi_2'(w_2)=1-t$. Hence, by Lemma~\ref{lem:catalan},
+\[
+\frac{H_2(w_2)}{1-t}=\tfrac12(1-t)^{1-a}+\frac{t}{(1-t)^{a+1}}\,E\!\left(\frac{t}{(1-t)^2}\right)
+=\tfrac12(1-t)^{1-a}+\tfrac12\,t\,(1-t)^{-a}(1+R).
+\]
+This equals $\tfrac12(1-t)^{-a}(1+tR)=P(1-t)^{-a}$ by Lemma~\ref{lem:R}(3).
+
+By Lemma~\ref{lem:lagrange} and linearity of coefficient extraction, $\sum_{d}F_{d+a,d+b,d}t^d$ is the sum of the two contributions, which is the asserted series.
+\end{proof}
+
+\section{Proof of the main theorem}\label{sec:proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Let $r,k\ge d\ge0$, and put $a=r-d$ and $b=k-d$, which are nonnegative integers. By Theorem~\ref{thm:diag} and Proposition~\ref{prop:Fdiag}, the series $\sum_{e\ge0}S_{e+a,e+b,e}t^e$ and $\sum_{e\ge0}F_{e+a,e+b,e}t^e$ coincide. Comparing the coefficients of $t^d$ gives $S_{r,k,d}=F_{r,k,d}$.
+\end{proof}
+
+\begin{remark}\label{rem:special}
+Theorem~\ref{thm:diag} makes some special cases explicit. For $a=b=0$ it gives $\sum_{d\ge0}S_{d,d,d}t^d=2P=1+tR$, so Proposition~\ref{prop:Fdiag} yields a second proof of the identity $F_{n,n,n}=\Sch_{n-1}$ of~\cite[p.~9]{HKL}. For $a=0$ and $b=1$ it gives $T_{0,1}=P(1+R)=R$, that is, $S_{d,d+1,d}=\Sch_d$ for all $d\ge0$. For small $d$, Theorem~\ref{thm:main} and a direct evaluation of~\eqref{eq:F} give
+\[
+S_{r,k,1}=r+k-1\quad(r,k\ge1),\qquad S_{r,k,2}=k(k+r-3)+\binom{r-1}{2}\quad(r,k\ge2).
+\]
+Table~\ref{tab:d3} lists the values for $d=3$.
+\end{remark}
+
+\begin{table}[ht]
+\caption{The numbers $S_{r,k,3}$ for $3\le r,k\le8$.}\label{tab:d3}
+\centering
+\begin{tabular}{c rrrrrr}
+\toprule
+$r\backslash k$ & 3 & 4 & 5 & 6 & 7 & 8\\
+\midrule
+3 & 6 & 22 & 52 & 100 & 170 & 266\\
+4 & 16 & 39 & 78 & 137 & 220 & 331\\
+5 & 31 & 62 & 111 & 182 & 279 & 406\\
+6 & 52 & 92 & 152 & 236 & 348 & 492\\
+7 & 80 & 130 & 202 & 300 & 428 & 590\\
+8 & 116 & 177 & 262 & 375 & 520 & 701\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{remark}\label{rem:checks}
+We have also checked the ingredients of the proof numerically, using exact integer and rational arithmetic. The values of $F_{r,k,d}$ agree with those computed from Proposition~\ref{prop:rec} for all $10{,}416$ triples with $0\le r,k\le30$ and $0\le d\le\min(r,k)$, and the coefficients of $t^d$ in Theorem~\ref{thm:diag} agree with $F_{d+a,d+b,d}$ for $0\le a,b\le8$ and $0\le d\le20$. Without using the recurrences, we generated all ASMs of orders $1$ to $6$ directly from monotone triangles; there are $1,2,7,42,429,7436$ of them, of which $1,2,6,22,90,394$ avoid $312$, in accordance with Proposition~\ref{prop:rec}(D). For each of the $30$ admissible triples $(r,k,d)$ with $r,k\le3$, the number of distinct upper left $r\times k$ corners of these $312$-avoiding ASMs that are ASRs with exactly $d$ nonempty rows equals $F_{r,k,d}$; the restriction to ASRs is essential, since a row of such a corner may end with $-1$. This last check exhibits extensions of order at most six for the counted rectangles; it is not an exhaustive search over extensions of arbitrary order and is not used in the proof.
+\end{remark}
+
+\section*{Use of AI-assisted tools}
+
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{9}
+
+\bibitem{Bar21}
+P.~Barry, \emph{Generalized Catalan recurrences, Riordan arrays, elliptic curves, and orthogonal polynomials}, J. Integer Seq. \textbf{24} (2021), no.~5, Article~21.5.1.
+
+\bibitem{EL95}
+K.~Eriksson and S.~Linusson, \emph{The size of Fulton's essential set}, Electron. J. Combin. \textbf{2} (1995), Research Paper R6.
+
+\bibitem{HKL}
+H.~H\"ongesberg, M.~Konvalinka, and S.~Linusson, \emph{Pattern avoidance in alternating sign rectangles I: Extended avoidance}, preprint (2026), arXiv:2610.07442.
+
+\bibitem{JL07}
+R.~Johansson and S.~Linusson, \emph{Pattern avoidance in alternating sign matrices}, Ann. Comb. \textbf{11} (2007), no.~3--4, 471--480.
+
+\bibitem{Lin02}
+S.~Linusson, \emph{Extended pattern avoidance}, Discrete Math. \textbf{246} (2002), no.~1--3, 219--230.
+
+\bibitem{OEIS}
+OEIS Foundation Inc., \emph{The On-Line Encyclopedia of Integer Sequences}, sequence A006318, \url{https://oeis.org}.
+
+\end{thebibliography}
+
+\end{document}

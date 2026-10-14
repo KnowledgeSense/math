@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "method": "Full exact polynomial products by repeated linear-factor recurrence",
+  "prior_base_order": 2037,
+  "prior_corona_order": 4074,
+  "full_degree": 2037,
+  "all_coefficients_positive": true,
+  "valley": [
+    1094,
+    1095,
+    1096
+  ],
+  "digits": [
+    716,
+    716,
+    716
+  ],
+  "coefficient_list_sha256": "8d904b43677abb33e2b8c45b0964b74051adc9bfe474ab911216fa594a65e44a",
+  "source": "https://www.linkedin.com/posts/tesuji_levit-mandrescu-counterexample-activity-7487528446403768320-b1pc",
+  "credit": "Prior public example by Lucas B.; not new here"
+}

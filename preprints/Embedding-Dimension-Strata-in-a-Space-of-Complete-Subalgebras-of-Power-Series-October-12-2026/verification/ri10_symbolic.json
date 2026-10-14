@@ -1,0 +1,159 @@
+{
+  "semigroup_generators": [
+    10,
+    11,
+    34,
+    46,
+    58
+  ],
+  "conductor": 60,
+  "gaps": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    35,
+    36,
+    37,
+    38,
+    39,
+    47,
+    48,
+    49,
+    59
+  ],
+  "tail_counts": [
+    24,
+    24,
+    9,
+    4,
+    1
+  ],
+  "monomials_under_60": 31,
+  "canonical_basis_dimension": 27,
+  "repeated_weights": {
+    "56": [
+      [
+        0,
+        2,
+        1,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0,
+        1,
+        0
+      ]
+    ],
+    "44": [
+      [
+        0,
+        4,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        1,
+        0,
+        0
+      ]
+    ],
+    "55": [
+      [
+        0,
+        5,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    ],
+    "54": [
+      [
+        1,
+        4,
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        0,
+        1,
+        0,
+        0
+      ]
+    ]
+  },
+  "elimination": [
+    {
+      "variable": "z37",
+      "coefficient": -1,
+      "later_variables_absent": true,
+      "expanded_terms": 17,
+      "sha256": "1aea14c78ee45904ef980925cd71640f7c0a8581c36de8e28f8bfadda8fd2d64"
+    },
+    {
+      "variable": "z38",
+      "coefficient": -1,
+      "later_variables_absent": true,
+      "expanded_terms": 22,
+      "sha256": "63bfe6034287046dd9549bfb2c5a2017292b25575c8f8fe7198d1dbb0b4b5a62"
+    },
+    {
+      "variable": "w49",
+      "coefficient": -1,
+      "later_variables_absent": true,
+      "expanded_terms": 24,
+      "sha256": "56302685d65d02c3c6e785ed97c3569003c6fc022ff856935ff02c11c525c9f3"
+    },
+    {
+      "variable": "z39",
+      "coefficient": -1,
+      "later_variables_absent": true,
+      "expanded_terms": 26,
+      "sha256": "b425ca84751ecabe4eb116c43b72c33175be9c78707c00315beb3bd0bdb65eab"
+    },
+    {
+      "variable": "z49",
+      "coefficient": -1,
+      "later_variables_absent": true,
+      "expanded_terms": 24529,
+      "sha256": "9053c853765b2873a2891adf1bfa57b7f592c95eee0ee0cd438fc419f5595f38"
+    }
+  ],
+  "A_B_C_triangular_coordinate_checks": true,
+  "C_expanded_terms": 8780
+}

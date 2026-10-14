@@ -1,0 +1,399 @@
+\documentclass[11pt]{amsart}
+
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage[final]{microtype}
+\usepackage[hidelinks,pdfusetitle=false]{hyperref}
+
+\hypersetup{
+  pdftitle={Polynomial counts of cokernel-closed subcategories with fixed first-column defect},
+  pdfauthor={Knowledge Sense},
+  pdfsubject={Enumeration of cokernel-closed additive subcategories for uniformly oriented type A quivers},
+  pdfkeywords={cokernel-closed subcategory, type A quiver, interval module, ordered graph, true twins, polynomial enumeration}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\rep}{\operatorname{rep}}
+\newcommand{\Coker}{\operatorname{Coker}}
+\newcommand{\bk}{\bar\kappa}
+\newcommand{\bl}{\bar\lambda}
+
+\begin{document}
+
+\title[Cokernel-closed subcategories with fixed defect]{Polynomial counts of cokernel-closed subcategories with fixed first-column defect}
+
+\author{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{13 October 2026}
+
+\subjclass[2020]{Primary 05A15; Secondary 05C30, 16G20}
+
+\keywords{Cokernel-closed subcategory, quiver of type $A$, interval module, ordered graph, true twins, polynomial enumeration}
+
+\begin{abstract}
+The full additive subcategories that are closed under direct summands and under cokernels in the category of finite-dimensional complex representations of a uniformly oriented quiver of type $A_{n+1}$ correspond to the closed subsets of a triangular array. Mazorchuk and Xu let $r(n,k)$ be the number of closed subsets with exactly $k$ points in the first column, determined $r(n,n+1-i)$ for $i\le 3$, and conjectured that for every fixed $i$ it is a polynomial in $n$ of degree $2i$ with leading coefficient $1/i!$. We prove this conjecture. More precisely, we show that
+\[
+r(n,n+1-i)=\sum_{q=0}^{2i}C_{i,q}\binom{n+1-i}{q}\qquad\text{for all } n\ge\max(0,i-1),
+\]
+where $C_{i,q}$ is the number of admissible normalized templates of rank $q$, and that $C_{i,2i}=(2i)!/i!$. A template is a finite datum recording the positions and cutoffs of the missing points together with the edges among them. The closure condition is rewritten as two rules for ordered graphs. The graph of every closed subset is recovered from its template by expanding vertices into blocks of true twins and appending universal greatest vertices, and for each choice of positions and cutoffs of maximal rank exactly one choice of the edges among the missing points is admissible.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+For $N\ge1$ let $\rep(A_N)$ be the category of finite-dimensional complex representations of the uniformly oriented quiver $1\to2\to\dots\to N$, with the contravariant convention of \cite{KS,MX}. Up to isomorphism, its indecomposable objects are the interval representations $V_{a,b}$, $1\le a\le b\le N$, every object is a finite direct sum of them, and $\operatorname{Hom}(V_{a,b},V_{c,d})$ is one-dimensional if $a\le c\le b\le d$ and zero otherwise. A full additive subcategory closed under direct summands is therefore determined by the set of intervals it contains, and it is \emph{cokernel-closed} if it contains the cokernel of every morphism between its objects. Krause and Stoye \cite{KS} studied the numbers of subcategories of $\rep(A_N)$ defined by various closure conditions. For cokernel-closed subcategories, equivalently those closed under finite colimits, no closed formula for their total number is known; see \cite[Section~3]{KS}, and \cite[Theorem~18]{MX} for an implicit recurrence.
+
+Mazorchuk and Xu \cite{MX} translated the problem into combinatorics as follows. For $n\ge0$ put
+\[
+T(n)=\{(a,b)\in\Z^2: 0\le a\le b\le n\}.
+\]
+A subset $Y\subseteq T(n)$ is \emph{closed} if, whenever $(a,b),(c,d),(e,f)\in Y$ satisfy
+\begin{equation}\label{eq:point-rule}
+a\le c\le b\le d\quad\text{and}\quad a\le e\le b\le f,
+\end{equation}
+then $(\max(c,e),\max(d,f))\in Y$; if moreover $b<\min(d,f)$, then also $(b+1,\min(d,f))\in Y$. The three points need not be distinct. Let $R(n)$ be the set of closed subsets of $T(n)$. By the cokernel criterion of Krause and Stoye \cite[Lemma~7]{KS}, in the form \cite[Lemma~1]{MX}, cokernel-closedness has to be checked only for nonzero maps $f\colon V_{a,b}\to V_{c,d}$ and for maps $(f,g)\colon V_{a,b}\to V_{c,d}\oplus V_{c',d'}$ with $f$ and $g$ nonzero, and
+\[
+\Coker f=V_{b+1,d},\qquad\Coker(f,g)=V_{b+1,\min(d,d')}\oplus V_{\max(c,c'),\max(d,d')},
+\]
+where $V_{p,q}=0$ for $p>q$. Consequently \cite[Section~3.2]{MX} the assignment
+\[
+\mathcal C\longmapsto\{(a-1,b-1): V_{a,b}\in\mathcal C\}
+\]
+is a bijection from the cokernel-closed full additive subcategories of $\rep(A_{n+1})$ that are closed under direct summands onto $R(n)$. Under this bijection the points $(0,0),(0,1),\dots,(0,n)$, which form the \emph{first column} of $T(n)$, correspond to the intervals $V_{1,1},\dots,V_{1,n+1}$.
+
+For $0\le k\le n+1$ let $r(n,k)$ be the number of $Y\in R(n)$ with exactly $k$ points in the first column \cite[Section~5.1]{MX}. We call $i=n+1-k$, the number of points of the first column missing from $Y$, the \emph{first-column defect} of $Y$. Mazorchuk and Xu proved that
+\[
+r(n,n+1)=1,\qquad r(n,n)=(n+1)^2,
+\]
+and gave polynomial formulas of degrees four and six for $r(n,n-1)$ and $r(n,n-2)$ \cite[Propositions~11--14]{MX}, by a case analysis of the configurations of the missing points. They conjectured \cite[Section~5.7]{MX} that, for every fixed $i$, the number $r(n,n+1-i)$ is a polynomial in $n$ of degree $2i$ with leading coefficient $1/i!$. Our main result proves this conjecture and gives a combinatorial interpretation of the coefficients of the polynomial in a shifted binomial basis. We write $\binom{x}{q}=x(x-1)\cdots(x-q+1)/q!$, with $\binom{x}{0}=1$.
+
+\begin{theorem}\label{thm:main}
+Let $i\ge0$. There are nonnegative integers $C_{i,0},\dots,C_{i,2i}$, defined in Definition~\ref{def:template}, such that for every integer $n\ge\max(0,i-1)$
+\begin{equation}\label{eq:main}
+r(n,n+1-i)=\sum_{q=0}^{2i}C_{i,q}\binom{n+1-i}{q},
+\end{equation}
+and $C_{i,2i}=(2i)!/i!$. In particular, $r(n,n+1-i)=P_i(n)$ for all $n\ge\max(0,i-1)$, where
+\[
+P_i(x)=\sum_{q=0}^{2i}C_{i,q}\binom{x+1-i}{q}\in\Q[x]
+\]
+has degree exactly $2i$ and leading coefficient $1/i!$.
+\end{theorem}
+
+The range $n\ge\max(0,i-1)$ consists of all $n\ge0$ for which $r(n,n+1-i)$ is defined. Table~\ref{tab:C} lists the coefficients $C_{i,q}$ for $i\le3$. Inserting them into \eqref{eq:main} gives
+\[
+P_0(n)=1,\quad P_1(n)=(n+1)^2,\quad P_2(n)=\frac{n^2(n+1)^2}{2}+\binom{n+2}{3}-n,
+\]
+\[
+P_3(n)=\frac{n^6+n^5-6n^3-n^2-7n+12}{6},
+\]
+which are the formulas of \cite[Propositions~11--14]{MX}.
+
+\begin{table}[ht]
+\caption{The coefficients $C_{i,q}$ of \eqref{eq:main} for $i\le3$.}\label{tab:C}
+\centering
+\begin{tabular}{@{}lrrrrrrr@{}}
+\toprule
+ & $q=0$ & $1$ & $2$ & $3$ & $4$ & $5$ & $6$\\
+\midrule
+$i=0$ & $1$ & & & & & & \\
+$i=1$ & $1$ & $3$ & $2$ & & & & \\
+$i=2$ & $2$ & $18$ & $41$ & $37$ & $12$ & & \\
+$i=3$ & $7$ & $125$ & $527$ & $1029$ & $1060$ & $560$ & $120$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\emph{Method.} We add a least vertex $\rho$ and encode a subset of $T(n)$ as an ordered graph on $n+2$ vertices, in which the points of the first column are the edges at $\rho$. The closure condition becomes two rules for ordered graphs (Lemma~\ref{lem:graph-rules}). In a graph satisfying them, the neighbours of $\rho$ form a clique with $\rho$, and every nonneighbour is adjacent to a final segment of them (Lemma~\ref{lem:segments}). The graph of a closed subset with $i$ missing points in the first column is thus described by $i$ positions, $i$ cutoffs, and the edges among the $i$ nonneighbours. Positions and cutoffs take at most $2i$ distinct positive values; between two consecutive values the neighbours of $\rho$ are true twins, and the neighbours of $\rho$ beyond the largest value are adjacent to all vertices. The rules are preserved under expansion of a vertex into true twins and under appending a universal greatest vertex (Lemmas~\ref{lem:twins} and~\ref{lem:universal}), so the graph of every closed subset is recovered from a normalized template together with a choice of its levels. This gives \eqref{eq:main}, with $C_{i,q}$ the number of admissible templates of rank $q$ (Proposition~\ref{prop:expansion}). The degree and the leading coefficient depend only on the templates of maximal rank $2i$, in which all $2i$ values are distinct. For each choice of positions and cutoffs of maximal rank we show that the rules force the edges among the nonneighbours (Proposition~\ref{prop:forced}) and that the forced choice is admissible (Proposition~\ref{prop:existence}).
+
+\emph{Relation to earlier work.} Compressing homogeneous blocks of vertices into a bounded template to obtain an expansion in binomial coefficients is the mechanism behind the polynomial case of the theorem of Balogh, Bollob\'as and Morris on hereditary properties of ordered graphs \cite[Theorem~1(b) and Theorem~12]{BBM}. That theorem does not apply directly here; see Remark~\ref{rem:BBM}. The graphs used in Section~\ref{sec:top} to show that the forced choice of edges is admissible for templates of maximal rank are given by the known two-endpoint model of co-TT graphs \cite{GWL}, see also \cite[Section~1]{HHMR}, and we claim no novelty for it. The contribution of this paper is the reconstruction of the graph of every closed subset from its template, which gives the exact expansion \eqref{eq:main} for all $n\ge\max(0,i-1)$, and the analysis of the templates of maximal rank, which gives the degree and the leading coefficient.
+
+\emph{Dependencies.} The proof of Theorem~\ref{thm:main} uses only the combinatorial definition of closed subsets given above. The cokernel criterion \cite[Lemma~7]{KS}, \cite[Lemma~1]{MX} enters only through the interpretation of $r(n,k)$ in terms of subcategories. Computer calculations serve only as consistency checks and are not used in the proofs (Remark~\ref{rem:computations}).
+
+\emph{Organization.} Section~\ref{sec:graphs} rewrites the closure condition for ordered graphs. Section~\ref{sec:encoding} encodes the graphs of closed subsets with $i$ missing points. Section~\ref{sec:templates} introduces true-twin expansion and templates and proves \eqref{eq:main}. Section~\ref{sec:top} treats templates of maximal rank, and Section~\ref{sec:proof} completes the proof and adds some remarks.
+
+\section{Ordered graphs}\label{sec:graphs}
+
+All graphs are finite and simple. An \emph{ordered graph} is a graph together with a total order on its vertex set. We write $st$ for the edge $\{s,t\}$ and always display it with $s<t$. Consider the following two rules for an ordered graph.
+\begin{enumerate}[label=\textup{(R\arabic*)},leftmargin=3.2em]
+\item\label{R1} If $st$ and $xy$ are edges and $s\le x<t<y$, then $ty$ is an edge.
+\item\label{R2} If $st$, $xy$ and $zw$ are edges and
+\[
+s\le x<t\le y,\qquad s\le z<t\le w,
+\]
+then $\max(x,z)\max(y,w)$ is an edge.
+\end{enumerate}
+In \ref{R2} the edges $xy$ and $zw$ may coincide, and $\max(x,z)<t\le\max(y,w)$, so the two displayed vertices are distinct. An ordered graph is \emph{admissible} if it satisfies \ref{R1} and \ref{R2}.
+
+For $Y\subseteq T(n)$ let $\Gamma(Y)$ be the ordered graph on $\{-1,0,\dots,n\}$, with the order of the integers, whose edges are the pairs $\{a-1,b\}$ with $(a,b)\in Y$. Since every pair $s<t$ in $\{-1,0,\dots,n\}$ arises from exactly one point $(s+1,t)\in T(n)$, the map $\Gamma$ is a bijection from the subsets of $T(n)$ onto the ordered graphs on $\{-1,0,\dots,n\}$.
+
+\begin{lemma}\label{lem:graph-rules}
+A subset $Y\subseteq T(n)$ is closed if and only if $\Gamma(Y)$ is admissible.
+\end{lemma}
+
+\begin{proof}
+Write the three points of \eqref{eq:point-rule} as $(s+1,t)$, $(x+1,y)$ and $(z+1,w)$, so that they correspond to the edges $st$, $xy$ and $zw$. Then \eqref{eq:point-rule} reads $s\le x<t\le y$ and $s\le z<t\le w$. The first required point corresponds to the edge $\max(x,z)\max(y,w)$, and the second, required when $t<\min(y,w)$, to the edge $t\min(y,w)$.
+
+Suppose that $\Gamma(Y)$ is admissible. The first requirement is \ref{R2}. For the second, suppose $t<\min(y,w)$ and choose the edge among $xy$ and $zw$ whose larger endpoint is $\min(y,w)$; together with $st$ it satisfies the hypothesis of \ref{R1}, which gives $t\min(y,w)$. Hence $Y$ is closed.
+
+Conversely, suppose that $Y$ is closed. Applying the definition with the second and third points equal, $xy=zw$, the second requirement gives \ref{R1}, since $s\le x<t<y$ is then exactly the hypothesis of \ref{R1}. The first requirement, with arbitrary second and third points, is \ref{R2}.
+\end{proof}
+
+\begin{lemma}\label{lem:hereditary}
+Let $G$ be an admissible ordered graph. Every induced ordered subgraph of $G$ is admissible, and so is every ordered graph isomorphic to $G$ by an order-preserving bijection.
+\end{lemma}
+
+\begin{proof}
+The hypotheses of \ref{R1} and \ref{R2} refer only to the order and the edges among the displayed vertices, and both endpoints of the required edge are among the vertices of the given edges.
+\end{proof}
+
+\section{The root and the encoding}\label{sec:encoding}
+
+Fix $i\ge0$ and $n\ge\max(0,i-1)$, and put
+\[
+m=n+1-i\ge0.
+\]
+The point $(0,b)$ of the first column corresponds to the edge $\{-1,b\}$ of $\Gamma(Y)$. By Lemma~\ref{lem:graph-rules}, $r(n,n+1-i)$ is therefore the number of admissible ordered graphs on $\{-1,0,\dots,n\}$ in which the least vertex $\rho=-1$ has exactly $m$ neighbours. In such a graph let
+\[
+A=\{a_1<\dots<a_i\}\quad\text{and}\quad B=\{b_1<\dots<b_m\}
+\]
+be the sets of nonneighbours and neighbours of $\rho$ among the other vertices; we call the elements of $B$ \emph{regular}. From now on the letters $a_j$ and $b_t$ denote vertices, not coordinates of points.
+
+\begin{lemma}\label{lem:segments}
+In an admissible ordered graph with least vertex $\rho$ and $A,B$ as above:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $\{\rho\}\cup B$ is a clique;
+\item for every $a\in A$, the neighbours of $a$ in $B$ form a final segment of $b_1<\dots<b_m$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) For $j<k$ the edges $\rho b_j$ and $\rho b_k$ satisfy $\rho\le\rho<b_j<b_k$, and \ref{R1} gives $b_jb_k$.
+
+(b) Let $ab_j$ be an edge and $j<k$; we show that $ab_k$ is an edge. If $a<b_j$, apply \ref{R2} to $\rho b_j$, $ab_j$ and $\rho b_k$; the hypotheses $\rho\le a<b_j\le b_j$ and $\rho\le\rho<b_j\le b_k$ hold, and the conclusion is $ab_k$. If $b_k<a$, apply \ref{R1} to $\rho b_k$ and $b_ja$, using $\rho\le b_j<b_k<a$; the conclusion is $b_ka$. If $b_j<a<b_k$, apply \ref{R1} to $b_ja$ and $b_jb_k$, the latter an edge by (a), using $b_j\le b_j<a<b_k$; the conclusion is $ab_k$. Since $a\notin B$, these cases are exhaustive.
+\end{proof}
+
+\begin{definition}\label{def:data}
+Let $i,m\ge0$. A \emph{datum of type $(i,m)$} is a triple $(\kappa,\lambda,\varepsilon)$ consisting of integers $0\le\kappa_1\le\dots\le\kappa_i\le m$, integers $\lambda_1,\dots,\lambda_i\in\{0,\dots,m\}$, and bits $\varepsilon_{jk}\in\{0,1\}$ for $1\le j<k\le i$. Its graph $G_m(\kappa,\lambda,\varepsilon)$ is the ordered graph on the vertices $\rho,b_1,\dots,b_m,a_1,\dots,a_i$, ordered so that $\rho$ is least, $b_1<\dots<b_m$, $a_1<\dots<a_i$, and exactly $\kappa_j$ of the vertices $b_t$ precede $a_j$. Its edges are all pairs in $\{\rho,b_1,\dots,b_m\}$, the pairs $a_jb_t$ with $t>\lambda_j$, and the pairs $a_ja_k$ with $j<k$ and $\varepsilon_{jk}=1$. The datum is \emph{admissible} if its graph is.
+\end{definition}
+
+Thus $\kappa_j$ is the position of $a_j$ among the regular vertices, and $\lambda_j$ is its cutoff: $a_j$ is adjacent to $b_t$ exactly when $t>\lambda_j$, so $\lambda_j=m$ means that $a_j$ has no regular neighbour and $\lambda_j=0$ that it is adjacent to all of them. Several vertices $a_j$ may lie between the same two regular vertices.
+
+\begin{lemma}\label{lem:encoding}
+Let $i\ge0$, $n\ge\max(0,i-1)$ and $m=n+1-i$. Then $r(n,n+1-i)$ is the number of admissible data of type $(i,m)$.
+\end{lemma}
+
+\begin{proof}
+Let $G$ be an admissible ordered graph on $\{-1,0,\dots,n\}$ in which $\rho=-1$ has exactly $m$ neighbours, and let $A$ and $B$ be as above. Put $\kappa_j=|\{t:b_t<a_j\}|$; by Lemma~\ref{lem:segments}(b) there is a unique $\lambda_j\in\{0,\dots,m\}$ such that $a_j$ is adjacent to $b_t$ exactly when $t>\lambda_j$; and let $\varepsilon_{jk}=1$ if and only if $a_ja_k$ is an edge. By Lemma~\ref{lem:segments}(a), $G$ is the graph $G_m(\kappa,\lambda,\varepsilon)$, with its vertices named as above. Conversely, $G_m(\kappa,\lambda,\varepsilon)$ has $m+i+1=n+2$ vertices, and the unique order-preserving bijection onto $\{-1,0,\dots,n\}$ carries it to a graph whose least vertex has exactly $m$ neighbours; applying the first construction to it returns $(\kappa,\lambda,\varepsilon)$. Since the relabelling preserves admissibility by Lemma~\ref{lem:hereditary}, the first construction is a bijection from the admissible graphs in question onto the admissible data of type $(i,m)$, with the second construction as its inverse.
+\end{proof}
+
+For $i=0$ the only datum is the empty one, its graph is complete, and we recover $r(n,n+1)=1$.
+
+\section{True twins and templates}\label{sec:templates}
+
+Two distinct vertices of a graph are \emph{true twins} if they are adjacent and have the same neighbours outside the pair.
+
+\begin{definition}
+Let $G$ be an ordered graph, $b$ a vertex of $G$ and $K$ a finite nonempty set disjoint from $V(G)$. The \emph{true-twin expansion} of $b$ into $K$ is the ordered graph $G'$ on $(V(G)\setminus\{b\})\cup K$ in which the elements of $K$ occupy the place of $b$ as a consecutive block, in any internal order, and whose edges are the edges of $G$ not containing $b$, all pairs in $K$, and all pairs $uk$ with $u$ a neighbour of $b$ in $G$ and $k\in K$. Let $\varphi\colon V(G')\to V(G)$ be the identity outside $K$ and map $K$ to $b$.
+\end{definition}
+
+The map $\varphi$ is weakly increasing; two distinct vertices with the same image lie in $K$ and are adjacent; and if $\varphi(u)\ne\varphi(v)$, then $uv$ is an edge of $G'$ if and only if $\varphi(u)\varphi(v)$ is an edge of $G$. Moreover, since $K$ is consecutive, $u\le v\le w$ and $\varphi(u)=\varphi(w)$ imply $\varphi(v)=\varphi(u)$.
+
+\begin{lemma}\label{lem:twins}
+Every true-twin expansion of an admissible ordered graph is admissible.
+\end{lemma}
+
+\begin{proof}
+Let $G'$ be the expansion of $b$ into $K$ and $\varphi$ as above. We call an edge $uv$ of $G'$ \emph{genuine} if $\varphi(u)\ne\varphi(v)$; then $\varphi(u)\varphi(v)$ is an edge of $G$.
+
+\emph{Rule \ref{R1}.} Let $st$ and $xy$ be edges of $G'$ with $s\le x<t<y$. If $\varphi(t)=\varphi(y)$, then $t,y\in K$ and $ty$ is an edge. Assume $\varphi(t)\ne\varphi(y)$. If $\varphi(x)=\varphi(t)$, then $xy$ is genuine, $\varphi(t)\varphi(y)=\varphi(x)\varphi(y)$ is an edge of $G$, and hence $ty$ is an edge of $G'$. If $\varphi(s)=\varphi(t)$, then $\varphi(x)=\varphi(t)$ because $s\le x\le t$, which is the previous case. If $\varphi(x)=\varphi(y)$, then $\varphi(t)=\varphi(y)$ because $x\le t\le y$, which is the first case. In all remaining cases both edges are genuine and $\varphi(s)\le\varphi(x)<\varphi(t)<\varphi(y)$. Rule \ref{R1} in $G$ gives the edge $\varphi(t)\varphi(y)$, hence $ty$ is an edge of $G'$.
+
+\emph{Rule \ref{R2}.} Let $st$, $xy$, $zw$ be edges of $G'$ with $s\le x<t\le y$ and $s\le z<t\le w$, and put $X=\max(x,z)$, $Y=\max(y,w)$. Since $\varphi$ is weakly increasing, $\varphi(X)=\max(\varphi(x),\varphi(z))$ and $\varphi(Y)=\max(\varphi(y),\varphi(w))$. If $\varphi(X)=\varphi(Y)$, then $X,Y\in K$ and $XY$ is an edge. Assume $\varphi(X)<\varphi(Y)$.
+
+Suppose first that $\varphi(x)\ne\varphi(t)$ and $\varphi(z)\ne\varphi(t)$. Then $\varphi(s)\le\varphi(x)<\varphi(t)\le\varphi(y)$ and $\varphi(s)\le\varphi(z)<\varphi(t)\le\varphi(w)$, the three edges are genuine, and \ref{R2} in $G$ gives the edge $\varphi(X)\varphi(Y)$. Hence $XY$ is an edge of $G'$.
+
+Suppose next that $\varphi(x)=\varphi(t)$, and write $\beta=\varphi(t)$. As $z<t$, we have $\varphi(z)\le\beta$, so $\varphi(X)=\beta<\varphi(Y)$, and it suffices to show that $\beta\varphi(Y)$ is an edge of $G$. If $\varphi(Y)=\varphi(y)$, this is the image of the genuine edge $xy$. Otherwise $Y=w$. If $\varphi(z)=\beta$, it is the image of the genuine edge $zw$. If $\varphi(z)<\beta$, then $\varphi(s)\le\varphi(z)<\beta<\varphi(w)$, the edges $st$ and $zw$ are genuine, and \ref{R1} in $G$ applied to $\varphi(s)\beta$ and $\varphi(z)\varphi(w)$ gives $\beta\varphi(w)$. The case $\varphi(z)=\varphi(t)$ is symmetric, with the roles of $xy$ and $zw$ interchanged.
+\end{proof}
+
+\begin{lemma}\label{lem:universal}
+Adding to an admissible ordered graph a new greatest vertex adjacent to all other vertices gives an admissible ordered graph.
+\end{lemma}
+
+\begin{proof}
+If the edge required by \ref{R1} or \ref{R2} contains the new vertex, it is present. Otherwise the new vertex does not occur among the given edges at all, because it would then be the greatest displayed vertex, namely $y$ in \ref{R1} or $\max(y,w)$ in \ref{R2}, which is an endpoint of the required edge. So the instance lies in the old graph, where the rule holds.
+\end{proof}
+
+\begin{definition}\label{def:template}
+Let $(\kappa,\lambda,\varepsilon)$ be a datum of type $(i,m)$. Its \emph{levels} are the distinct positive integers among $\kappa_1,\dots,\kappa_i,\lambda_1,\dots,\lambda_i$, written $\ell_1<\dots<\ell_q$; the number $q$ is the \emph{rank} of the datum, so $0\le q\le\min(2i,m)$. Put $\ell_0=0$. The \emph{normalization} of $(\kappa,\lambda,\varepsilon)$ is $(\bk,\bl,\varepsilon)$, where $\bk_j=s$ if $\kappa_j=\ell_s$ and $\bl_j=s$ if $\lambda_j=\ell_s$. A \emph{normalized template of rank $q$} is a datum of type $(i,q)$ in which each of $1,\dots,q$ occurs among its entries $\kappa_1,\dots,\kappa_i,\lambda_1,\dots,\lambda_i$. For $0\le q\le 2i$ let $C_{i,q}$ be the number of admissible normalized templates of rank $q$.
+\end{definition}
+
+The normalization of a datum of rank $q$ is a normalized template of rank $q$, and a normalized template is its own normalization. For fixed $i$ and $q$ there are finitely many normalized templates of rank $q$, and they do not depend on $m$; thus $C_{i,q}$ does not depend on $n$.
+
+\begin{lemma}\label{lem:reduction}
+A datum is admissible if and only if its normalization is admissible.
+\end{lemma}
+
+\begin{proof}
+Let $(\kappa,\lambda,\varepsilon)$ be a datum of type $(i,m)$ and rank $q$, with levels $\ell_1<\dots<\ell_q$, and let $G=G_m(\kappa,\lambda,\varepsilon)$. For $1\le s\le q$ let
+\[
+K_s=\{b_t:\ell_{s-1}<t\le\ell_s\},\qquad K_\infty=\{b_t:t>\ell_q\}.
+\]
+Each $K_s$ is nonempty, and $K_1,\dots,K_q,K_\infty$ partition $B$.
+
+(i) No $a_j$ lies strictly between two vertices of $K_s$. Otherwise $a_j$ lies between $b_t$ and $b_{t+1}$ for some $\ell_{s-1}<t<\ell_s$, so $\kappa_j=t$ would be a level strictly between two consecutive levels. Hence $K_s$ is consecutive in the order of $G$, and $a_j$ precedes $K_s$ if $\bk_j<s$ and follows it if $\bk_j\ge s$.
+
+(ii) Since $\lambda_j$ is $0$ or a level, it is not strictly between $\ell_{s-1}$ and $\ell_s$. Hence for $b_t\in K_s$ we have $t>\lambda_j$ if and only if $\bl_j<s$, and $a_j$ is adjacent either to all or to none of the vertices of $K_s$. Since $\{\rho\}\cup B$ is a clique by definition of $G$, it follows that the vertices of each $K_s$ are pairwise true twins.
+
+(iii) Since $\kappa_j\le\ell_q$ and $\lambda_j\le\ell_q$ for all $j$, the vertices of $K_\infty$ follow all $a_j$ and are adjacent to all of them. Thus they form a final segment of $G$ and are adjacent to all other vertices.
+
+Let $c_s$ be the least element of $K_s$. By (i) and (ii), the ordered subgraph of $G$ induced on $\{\rho,c_1,\dots,c_q,a_1,\dots,a_i\}$ is $G_q(\bk,\bl,\varepsilon)$, with $c_s$ in the role of $b_s$. If $G$ is admissible, so is $G_q(\bk,\bl,\varepsilon)$, by Lemma~\ref{lem:hereditary}. Conversely, $G$ is obtained from $G_q(\bk,\bl,\varepsilon)$ by expanding each $b_s$ into a block of $\ell_s-\ell_{s-1}\ge1$ true twins, which yields the subgraph of $G$ induced on $V(G)\setminus K_\infty$, and then adding the vertices of $K_\infty$ in increasing order, each as a new greatest vertex adjacent to all previous vertices. By Lemmas~\ref{lem:twins} and~\ref{lem:universal} these operations preserve admissibility. If $q=0$, there are no blocks $K_s$ and the same argument applies with $K_\infty=B$.
+\end{proof}
+
+\begin{proposition}\label{prop:expansion}
+For all $i,m\ge0$ the number of admissible data of type $(i,m)$ equals $\sum_{q=0}^{2i}C_{i,q}\binom{m}{q}$. Consequently, for every $n\ge\max(0,i-1)$,
+\begin{equation}\label{eq:expansion}
+r(n,n+1-i)=\sum_{q=0}^{2i}C_{i,q}\binom{n+1-i}{q}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Assign to a datum of type $(i,m)$ and rank $q$ the pair consisting of its normalization and its set of levels $\{\ell_1,\dots,\ell_q\}\subseteq\{1,\dots,m\}$. This is a bijection onto the set of pairs $(\mathcal T,L)$, where $\mathcal T$ is a normalized template of some rank $q\le2i$ and $L$ is a $q$-element subset of $\{1,\dots,m\}$. Indeed, the inverse replaces every positive entry $s$ of $\mathcal T$ by the $s$-th smallest element of $L$; the result is a datum of type $(i,m)$, since $\kappa$ remains weakly increasing, and its set of levels is exactly $L$, since every $s\in\{1,\dots,q\}$ occurs in $\mathcal T$. By Lemma~\ref{lem:reduction}, a datum is admissible exactly when its template is. For each template of rank $q$ there are $\binom{m}{q}$ choices of $L$, and $\binom{m}{q}=0$ for $q>m$. This proves the first assertion, and \eqref{eq:expansion} follows from Lemma~\ref{lem:encoding}.
+\end{proof}
+
+In particular, for $i\ge1$, \eqref{eq:expansion} holds at the boundary $m=0$, that is, $n=i-1$, where only the templates of rank $0$ contribute.
+
+\begin{example}\label{ex:one}
+Let $i=1$, so $m=n$. A datum is a pair $(\kappa_1,\lambda_1)\in\{0,\dots,m\}^2$. The normalized templates are $(0,0)$ of rank $0$; $(1,0)$, $(0,1)$, $(1,1)$ of rank $1$; and $(1,2)$, $(2,1)$ of rank $2$. All six are admissible: each of their graphs has a model as in Lemma~\ref{lem:two-endpoint} below, obtained by giving $\rho$ and the regular vertices cutoffs below every position and placing the cutoff of $a_1$ between the positions of $b_{\lambda_1}$ and $b_{\lambda_1+1}$, with $b_0=\rho$, or above all positions if $a_1$ has no regular neighbour. Hence $C_{1,0}=1$, $C_{1,1}=3$, $C_{1,2}=2$, and
+\[
+r(n,n)=1+3n+2\binom{n}{2}=(n+1)^2,
+\]
+in accordance with \cite[Proposition~12]{MX}.
+\end{example}
+
+\section{Templates of maximal rank}\label{sec:top}
+
+Let $i\ge0$ and let $(\kappa,\lambda,\varepsilon)$ be a normalized template of rank $2i$. Its $2i$ entries $\kappa_1,\dots,\kappa_i,\lambda_1,\dots,\lambda_i$ are positive and pairwise distinct, and they are $1,\dots,2i$ in some order. In particular
+\[
+1\le\kappa_1<\dots<\kappa_i,\qquad\lambda_j\ne\kappa_k\quad\text{for all } j,k.
+\]
+In $G=G_{2i}(\kappa,\lambda,\varepsilon)$ there is a regular vertex between any two nonneighbours of $\rho$. We use the convention $b_0=\rho$.
+
+\begin{proposition}\label{prop:forced}
+If a normalized template $(\kappa,\lambda,\varepsilon)$ of rank $2i$ is admissible, then for all $1\le j<k\le i$
+\begin{equation}\label{eq:forced}
+\varepsilon_{jk}=1\iff\lambda_j<\kappa_k\ \text{and}\ \lambda_k<\kappa_j.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Put $m=2i$ and $G=G_m(\kappa,\lambda,\varepsilon)$, and let $j<k$.
+
+Suppose that $a_ja_k$ is an edge. As $\kappa_j<\kappa_k$, the regular vertex $c=b_{\kappa_j+1}$ satisfies $a_j<c<a_k$. Rule \ref{R1} applied to $\rho c$ and $a_ja_k$, with $\rho\le a_j<c<a_k$, gives the edge $ca_k$; thus $\lambda_k<\kappa_j+1$, and since $\lambda_k\ne\kappa_j$, we get $\lambda_k<\kappa_j$. If $\kappa_k<m$, the regular vertex $z=b_{\kappa_k+1}$ satisfies $a_k<z$. Rule \ref{R2} applied to $\rho c$, $a_ja_k$ and $\rho z$, with $\rho\le a_j<c\le a_k$ and $\rho\le\rho<c\le z$, gives the edge $a_jz$; thus $\lambda_j\le\kappa_k$. If $\kappa_k=m$, then $\lambda_j\le\kappa_k$ trivially. In both cases $\lambda_j<\kappa_k$, because $\lambda_j\ne\kappa_k$.
+
+Conversely, suppose that $\lambda_j<\kappa_k$ and $\lambda_k<\kappa_j$. Then $\kappa_j\ge1$; put $u=b_{\kappa_j}$ and $c=b_{\kappa_k}$. Since $\kappa_j<\kappa_k$, we have $\rho<u<a_j<c<a_k$. The edges $a_jc$ and $ua_k$ exist because $\kappa_k>\lambda_j$ and $\kappa_j>\lambda_k$, and $\rho c$ is an edge. Rule \ref{R2} applied to $\rho c$, $a_jc$ and $ua_k$, with $\rho\le a_j<c\le c$ and $\rho\le u<c\le a_k$, gives the edge $\max(a_j,u)\max(c,a_k)=a_ja_k$.
+\end{proof}
+
+To show that the choice of bits in \eqref{eq:forced} is admissible, we use ordered graphs of the following kind.
+
+\begin{lemma}\label{lem:two-endpoint}
+Let $V$ be a finite totally ordered set, let $p\colon V\to\mathbb R$ be strictly increasing and let $h\colon V\to\mathbb R$ be arbitrary. The ordered graph on $V$ in which distinct vertices $u,v$ are adjacent if and only if
+\begin{equation}\label{eq:two-endpoint}
+h_u<p_v\quad\text{and}\quad h_v<p_u
+\end{equation}
+is admissible.
+\end{lemma}
+
+\begin{proof}
+For \ref{R1}, let $st$ and $xy$ be edges with $s\le x<t<y$. The edge $st$ gives $h_t<p_s\le p_x<p_y$, and the edge $xy$ gives $h_y<p_x<p_t$; these are the two inequalities for $ty$. For \ref{R2}, let $st$, $xy$, $zw$ be as in the rule and put $X=\max(x,z)$, $Y=\max(y,w)$. Choose an edge among $xy$ and $zw$ with smaller endpoint $X$; its larger endpoint is at most $Y$, so $h_X<p_Y$. Choose an edge among $xy$ and $zw$ with larger endpoint $Y$; its smaller endpoint is at most $X$, so $h_Y<p_X$. Since $X\ne Y$, the pair $XY$ is an edge.
+\end{proof}
+
+When no value of $h$ equals a value of $p$, the strict and the weak inequalities in \eqref{eq:two-endpoint} agree. Forgetting the vertex order, and with the usual convention that co-TT graphs have no loops \cite[Section~2]{HHMR}, these are the co-TT graphs in the two-endpoint form of Golumbic, Weingarten and Limouzy \cite{GWL}, as described by Hell, Huang, McConnell and Rafiey \cite[Section~1]{HHMR}; see also \cite{HHMR-SIAM}. We use them only to construct the graphs in the next proposition and make no claim about which admissible graphs have such a model.
+
+\begin{proposition}\label{prop:existence}
+Let $(\kappa,\lambda,\varepsilon)$ be a normalized template of rank $2i$ whose bits satisfy \eqref{eq:forced}. Then it is admissible.
+\end{proposition}
+
+\begin{proof}
+Put $m=2i$ and give the vertices of $G_m(\kappa,\lambda,\varepsilon)$ strictly increasing real positions $p$. Choose cutoffs $h_\rho$ and $h_{b_t}$ below $p_\rho$. For each $j$, choose $h_{a_j}$ strictly between $p_{b_{\lambda_j}}$ and $p_{b_{\lambda_j+1}}$ if $\lambda_j<m$, and greater than all positions if $\lambda_j=m$. The open interval between $p_{b_{\lambda_j}}$ and $p_{b_{\lambda_j+1}}$ may contain positions of vertices $a_k$ only if $\kappa_k=\lambda_j$, which never happens; so the choice of $h_{a_j}$ inside it is immaterial, and for every $k$
+\[
+h_{a_j}<p_{a_k}\iff\kappa_k>\lambda_j,\qquad h_{a_j}<p_{b_t}\iff t>\lambda_j.
+\]
+Consider the graph defined by \eqref{eq:two-endpoint}. Any two vertices of $\{\rho\}\cup B$ are adjacent, since both cutoffs lie below $p_\rho$. No $a_j$ is adjacent to $\rho$, since $h_{a_j}>p_\rho$. The vertex $a_j$ is adjacent to $b_t$ exactly when $t>\lambda_j$, as $h_{b_t}<p_\rho<p_{a_j}$. Finally, $a_j$ and $a_k$ are adjacent exactly when $\lambda_j<\kappa_k$ and $\lambda_k<\kappa_j$, which by \eqref{eq:forced} means $\varepsilon_{jk}=1$. Hence the graph is $G_m(\kappa,\lambda,\varepsilon)$, which is admissible by Lemma~\ref{lem:two-endpoint}.
+\end{proof}
+
+\begin{corollary}\label{cor:top}
+For every $i\ge0$ we have $C_{i,2i}=(2i)!/i!$.
+\end{corollary}
+
+\begin{proof}
+By Propositions~\ref{prop:forced} and~\ref{prop:existence}, every assignment of the values $1,\dots,2i$ to the labelled entries $\kappa_1,\dots,\kappa_i,\lambda_1,\dots,\lambda_i$ with $\kappa_1<\dots<\kappa_i$ has exactly one admissible choice of bits. Such an assignment is determined by the set of values of $\kappa$ and by the order in which the remaining $i$ values are given to $\lambda_1,\dots,\lambda_i$, so there are $\binom{2i}{i}\,i!=(2i)!/i!$ of them. For $i=0$ the only template is empty, its graph is the single vertex $\rho$, and $C_{0,0}=1$.
+\end{proof}
+
+\section{Proof of the main theorem and remarks}\label{sec:proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+The numbers $C_{i,q}$ of Definition~\ref{def:template} are nonnegative integers, \eqref{eq:main} is Proposition~\ref{prop:expansion}, and $C_{i,2i}=(2i)!/i!$ is Corollary~\ref{cor:top}. The polynomial $\binom{x+1-i}{q}$ has degree $q$ and leading coefficient $1/q!$. Hence $P_i$ has degree at most $2i$, and its coefficient of $x^{2i}$ is $C_{i,2i}/(2i)!=1/i!\neq0$.
+\end{proof}
+
+\begin{remark}\label{rem:rank-zero}
+For $i\ge2$ the coefficient $C_{i,0}$ equals $r(i-2)=|R(i-2)|$, the total number of closed subsets of $T(i-2)$. Indeed, a normalized template of rank $0$ has $\kappa=\lambda=0$, so its graph consists of $\rho$, which is isolated, and the vertices $a_1<\dots<a_i$ with the edges prescribed by $\varepsilon$. As $\rho$ lies on no edge, it occurs in no instance of the rules, and the template is admissible exactly when the ordered graph induced on $\{a_1,\dots,a_i\}$ is. For $i\ge2$, these ordered graphs on $i$ vertices correspond to the closed subsets of $T(i-2)$ by Lemma~\ref{lem:graph-rules}; also $C_{1,0}=1=r(-1)$ with the convention of \cite{MX}. This is consistent with \eqref{eq:main} at $n=i-1$ and the identity $r(n,0)=r(n-1)$ of \cite[Proposition~10]{MX}.
+\end{remark}
+
+\begin{remark}\label{rem:basis}
+The nonnegativity of the coefficients refers to the shifted basis $\binom{n+1-i}{q}$. In the basis $\binom{n}{q}$ the coefficients of $P_3$ are $2,-2,9,109,300,320,120$ for $q=0,\dots,6$.
+\end{remark}
+
+\begin{remark}\label{rem:BBM}
+By Lemma~\ref{lem:hereditary}, the admissible ordered graphs form a hereditary property of ordered graphs in the sense of \cite{BBM}, but its speed grows faster than any polynomial: for every fixed $i$, the number of admissible ordered graphs on $n+2$ vertices is $|R(n)|\ge r(n,n+1-i)$, a polynomial of degree $2i$ in $n$ by Theorem~\ref{thm:main}. For $i\ge1$, the graphs counted by $r(n,n+1-i)$ form a polynomially growing family which is not closed under taking induced ordered subgraphs: deleting a nonneighbour of the least vertex changes $i$, and deleting the least vertex changes the root. Hence \cite[Theorem~12]{BBM} does not apply directly, and in any case it would give an expansion in binomial coefficients only for sufficiently large $n$, with no information on the leading coefficient. Here the encoding of Section~\ref{sec:encoding} and the reconstruction of Lemma~\ref{lem:reduction} give the expansion for every $n\ge\max(0,i-1)$, and Section~\ref{sec:top} determines its leading coefficient.
+\end{remark}
+
+\begin{remark}\label{rem:computations}
+The values in Table~\ref{tab:C} for $i=2,3$ were obtained by enumerating all normalized templates by computer; the values $C_{2,4}=12$ and $C_{3,6}=120$ agree with Corollary~\ref{cor:top}. As consistency checks, all subsets of $T(n)$ for $n\le4$ were enumerated directly; the equivalence of Lemma~\ref{lem:graph-rules} was confirmed for each of them, and the resulting numbers $r(n,k)$ agree with \eqref{eq:main} and Table~\ref{tab:C} for all $i\le3$ in this range. Moreover, \eqref{eq:main} with Table~\ref{tab:C} reproduces the values of $r(n,k)$ with $k\ge n-2$ in the table of \cite[Section~5.1]{MX} for all $n\le6$.
+\end{remark}
+
+It would be interesting to describe the coefficients $C_{i,q}$ with $q<2i$ in closed form. Already for $q=0$, Remark~\ref{rem:rank-zero} gives $C_{i,0}=r(i-2)$ for $i\ge2$, the total number of closed subsets, for which Mazorchuk and Xu give an implicit recurrence \cite[Theorem~18]{MX} but no closed formula is known.
+
+\section*{Use of AI-assisted tools}
+
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{6}
+
+\bibitem{BBM}
+J.~Balogh, B.~Bollob\'as, and R.~Morris, \emph{Hereditary properties of ordered graphs}, in: Topics in Discrete Mathematics, Algorithms Combin., vol.~26, Springer, Berlin, 2006, 179--213; arXiv:math/0702352 (theorem numbers cited from this version).
+
+\bibitem{GWL}
+M.~C. Golumbic, N.~L. Weingarten, and V.~Limouzy, \emph{Co-TT graphs and a characterization of split co-TT graphs}, Discrete Appl. Math. \textbf{165} (2014), 168--174, doi:10.1016/j.dam.2012.11.014.
+
+\bibitem{HHMR}
+P.~Hell, J.~Huang, R.~M. McConnell, and A.~Rafiey, \emph{Interval-like graphs and digraphs}, 43rd International Symposium on Mathematical Foundations of Computer Science (MFCS 2018), Leibniz Int. Proc. Inform., vol.~117, Schloss Dagstuhl--Leibniz-Zentrum f\"ur Informatik, 2018, 68:1--68:13, doi:10.4230/LIPIcs.MFCS.2018.68; arXiv:1804.05258v2.
+
+\bibitem{HHMR-SIAM}
+P.~Hell, J.~Huang, R.~M. McConnell, and A.~Rafiey, \emph{Min-orderable digraphs}, SIAM J. Discrete Math. \textbf{34} (2020), no.~3, 1710--1724.
+
+\bibitem{KS}
+H.~Krause and B.~Stoye, \emph{Multisets of finite intervals and a universal category of poset representations}, preprint (2026), arXiv:2601.22649v2.
+
+\bibitem{MX}
+V.~Mazorchuk and S.~Xu, \emph{On the number of cokernel-closed additive subcategories for uniformly oriented $A_n$ quivers}, preprint (2026), arXiv:2610.07999v1.
+
+\end{thebibliography}
+
+\end{document}

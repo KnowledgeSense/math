@@ -1,0 +1,548 @@
+\documentclass{amsart}
+
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+
+\hypersetup{
+  pdftitle={Strict log-concavity of inverse Z-polynomials of fan matroids},
+  pdfauthor={Knowledge Sense},
+  pdfsubject={Mathematics - Combinatorics},
+  pdfkeywords={matroid, inverse Z-polynomial, fan matroid, log-concavity, real-rooted polynomial, Lagrange inversion}
+}
+
+\hyphenation{manuscript}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+\numberwithin{table}{section}
+
+\newcommand{\rk}{\operatorname{rk}}
+\newcommand{\Dz}{D_z}
+\newcommand{\Dh}{D_{1/2}}
+\newcommand{\coef}[1]{[#1]}
+
+\begin{document}
+
+\title[Inverse $Z$-polynomials of fan matroids]{Strict log-concavity of inverse $Z$-polynomials of fan matroids}
+
+\author{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{12 October 2026}
+
+\subjclass[2020]{Primary 05B35; Secondary 05A15, 05A20, 26C10}
+
+\keywords{Matroid, inverse $Z$-polynomial, fan matroid, log-concavity, real-rooted polynomial, Lagrange inversion}
+
+\begin{abstract}
+The fan graph $F_n$ is obtained by joining a new vertex to every vertex of a path on $n$ vertices; its graphic matroid has rank $n$. We prove that the coefficients $a_{n,k}$ of the inverse $Z$-polynomial of this matroid are positive and symmetric, and that $a_{n,k}^2>a_{n,k-1}a_{n,k+1}$ for all $n\ge 2$ and $1\le k\le n-1$. Starting from the generating function found by Gao, Li and Li, we write $a_{n,k}$ as a sum of nonnegative terms. The weights in this sum are the coefficients of the inverse Kazhdan--Lusztig polynomial of $F_n$, which are ballot numbers multiplied by powers of $2$. Each weight multiplies a value of the binomial kernel $D_z(i,j)=\sum_{\ell}\binom{i}{\ell}\binom{j}{\ell}z^{\ell}$ at $z=1/2$. Since the weights are log-concave, a tail-sum criterion in the spirit of Wang and Yeh reduces the problem to the kernel. The main new ingredient is an inequality in which both indices of the kernel are shifted by a common amount. Let $G_{N,k}(q;z)=\sum_{r}q^{r}D_z(k-r,N-k-r)$. For every $z>0$ and all integers $k\ge 1$ and $N\ge 2k+2$, the polynomial $G_{N,k}^2-G_{N,k-1}G_{N,k+1}$ in $q$, built from the consecutive indices $k-1,k,k+1$, has positive coefficients in degrees $0,\dots,k$, and its coefficients in all higher degrees vanish. The proof combines a ratio comparison, derived from the real-rootedness of $D_z(a,b)$, with a telescoping identity for diagonal generating functions.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $\mathsf{M}$ be a matroid. Gao and Xie~\cite{GX} introduced the inverse Kazhdan--Lusztig polynomial $Q_{\mathsf{M}}(t)$, building on the Kazhdan--Lusztig polynomial of Elias, Proudfoot and Wakefield~\cite{EPW}. After the $Z$-polynomial of Proudfoot, Xu and Young~\cite{PXY}, Ferroni, Matherne, Stevens and Vecchi~\cite{FMSV} defined the inverse $Z$-polynomial $Y_{\mathsf{M}}(t)$, and Gao, Ruan and Xie~\cite{GRX} studied its basic properties; in particular, $Y_{\mathsf{M}}(t)$ is palindromic \cite[Lemma~2.2]{GRX}. They conjectured that the coefficients of $Y_{\mathsf{M}}(t)$ form a log-concave sequence for every loopless matroid $\mathsf{M}$ \cite[Conjecture~1.5]{GRX} and proved this for loopless sparse paving matroids \cite[Theorem~1.6]{GRX}. (We follow the numbering of the arXiv version of \cite{GRX}; the conjecture and the theorem carry the same numbers in the journal version.)
+
+For $n\ge 1$ let $F_n$ be the graph obtained from a path on $n$ vertices by adding one vertex adjacent to all of them. Its graphic matroid has rank $n$ and is called the \emph{fan matroid}; it is loopless, since $F_n$ is a simple graph. Gao, Li and Li~\cite{GLL} computed both polynomials for fan matroids. They showed that $Q_{F_n}(t)=\sum_{r}c_{n,r}t^r$ with
+\begin{equation}\label{eq:c}
+c_{n,r}=\frac{(n-2r)\,2^{n-2r-1}}{n}\binom{n}{r}\qquad \Bigl(0\le r\le \Bigl\lfloor\frac{n-1}{2}\Bigr\rfloor\Bigr)
+\end{equation}
+\cite[Theorem~1.1]{GLL}, and that these coefficients form a log-concave sequence \cite[Theorem~1.2]{GLL}. Up to the factor $2^{n-2r-1}$, the numbers $c_{n,r}$ are the ballot numbers $\frac{n-2r}{n}\binom{n}{r}$. For the inverse $Z$-polynomial they found the generating function \cite[Theorem~3.1]{GLL}, recalled as Theorem~\ref{thm:GLL} below, and an expression of each coefficient as an alternating double sum \cite[Theorem~1.3]{GLL}. We write
+\[
+Y_n(t)=Y_{F_n}(t)=\sum_{k=0}^{n}a_{n,k}t^k .
+\]
+A paving matroid of rank $n$ has no circuits of size less than $n$. For $n\ge 4$ the triangles of $F_n$ are circuits of size $3<n$, so the fan matroid is not paving, and \cite[Theorem~1.6]{GRX} does not apply. Our main result establishes the conjecture of Gao, Ruan and Xie for fan matroids in a strict form.
+
+\begin{theorem}\label{thm:main}
+For every $n\ge 1$ we have $a_{n,k}>0$ for $0\le k\le n$ and $a_{n,k}=a_{n,n-k}$. For every $n\ge 2$ and every $1\le k\le n-1$,
+\[
+a_{n,k}^2>a_{n,k-1}\,a_{n,k+1}.
+\]
+\end{theorem}
+
+For $n=1$ we have $Y_1(t)=1+t$, and there is no internal index. The first rows are listed in Table~\ref{tab:rows}.
+
+\emph{The approach.} For integers $i,j$ put
+\[
+\Dz(i,j)=\sum_{\ell\ge 0}\binom{i}{\ell}\binom{j}{\ell}z^{\ell}\quad\text{if } i,j\ge 0,\qquad \Dz(i,j)=0\quad\text{otherwise}.
+\]
+In Section~\ref{sec:representation} we derive from the generating function of Gao, Li and Li the representation
+\begin{equation}\label{eq:rep-intro}
+a_{n,k}=\sum_{r\ge 0}c_{n,r}\,\Dh(k-r,\,n-k-r)\qquad(0\le k\le n),
+\end{equation}
+where $c_{n,r}=0$ for $r>\lfloor (n-1)/2\rfloor$. All terms are nonnegative, and positivity and symmetry follow at once. Log-concavity is not preserved by arbitrary nonnegative linear maps. Following the approach of Wang and Yeh~\cite{WY}, who combine nonnegativity of tail sums with Abel summation, we reduce the inequality at an index $k$ to coefficientwise statements about the polynomials
+\begin{equation}\label{eq:G-intro}
+G_{N,k}(q;z)=\sum_{r=0}^{\min(k,N-k)}q^{r}\,\Dz(k-r,\,N-k-r),
+\end{equation}
+in which both arguments of the kernel are shifted by the same amount~$r$. The reduction involves $G_{N,k'}$ with $N=n-2h$ and $k'=k-h$ for $0\le h<k$; the term $h=k$ is elementary and is treated separately. We need the following theorem, which we prove for every $z>0$.
+
+\begin{theorem}\label{thm:kernel}
+Let $z>0$, and let $N$ and $k$ be integers with $k\ge 1$ and $N\ge 2k+2$. In the polynomial
+\[
+\Delta_{N,k}(q;z)=G_{N,k}(q;z)^2-G_{N,k-1}(q;z)\,G_{N,k+1}(q;z)
+\]
+the coefficients of $q^0,q^1,\dots,q^k$ are positive, and the coefficients of all higher powers of $q$ vanish.
+\end{theorem}
+
+The constant term of $\Delta_{N,k}$ is
+\[
+\Dz(k,N-k)^2-\Dz(k-1,N-k+1)\,\Dz(k+1,N-k-1),
+\]
+so Theorem~\ref{thm:kernel} contains, for each $N$, the strict log-concavity of the antidiagonal sequence $k\mapsto\Dz(k,N-k)$ away from the centre. For $r\ge 1$ the coefficient of $q^r$ also contains the products $\Dz(k-h,N-k-h)\,\Dz(k-r+h,N-k-r+h)$, $0\le h\le r$, with shifts $h$ and $r-h$.
+
+The proof has three steps. First, contiguous relations and a second-order differential equation for $D=\Dz(a,b)$, regarded as a polynomial in $z$, give an exact identity (Lemma~\ref{lem:ratio}): for $b>a\ge 1$,
+\[
+\Dz(a,b+1)\Dz(a,b-1)-\Dz(a-1,b)\Dz(a+1,b)=C_{a,b}\,z^2\bigl(DD'+(1-z)(D'^2-DD'')\bigr)
+\]
+with an explicit constant $C_{a,b}>0$. Second, since $\Dz(a,b)$ has only negative real zeros, the last factor is positive for $z>0$, and therefore
+\[
+\Dz(a,b+1)\Dz(a,b-1)>\Dz(a-1,b)\Dz(a+1,b)\qquad(b>a\ge 1,\ z>0).
+\]
+Third, the diagonal generating functions $\sum_{m}\Dz(m,m+e)x^m$ are of the form $R(x)^e/S(x)$ (Lemma~\ref{lem:diagonal}). This turns each coefficient of $\Delta_{N,k}$ into a telescoping sum, whose value is a difference of two coefficients of an explicit bivariate series (Proposition~\ref{prop:telescoping}); the ratio comparison shows that the difference is positive.
+
+\emph{Relation to earlier work.} Besides standard facts on formal power series, the proof of Theorem~\ref{thm:main} uses a single result specific to matroids: the generating function \cite[Theorem~3.1]{GLL}, from which \eqref{eq:rep-intro} follows by Lagrange inversion. The weights in \eqref{eq:rep-intro} are the coefficients \eqref{eq:c} of $Q_{F_n}$ found in \cite[Theorem~1.1]{GLL}, and their log-concavity is \cite[Theorem~1.2]{GLL}. The reduction to tail sums in Lemma~\ref{lem:tails} is a finite form of the preservation results of Wang and Yeh \cite[Lemmas~2.1 and~2.2, Theorem~2.3]{WY}, and the real-rootedness of $\Dz(a,b)$ is classical. To keep the paper self-contained, we include short proofs of these three auxiliary facts. The main contribution of this paper is Theorem~\ref{thm:kernel}. Its application to the inverse $Z$-polynomials of all fan matroids is Theorem~\ref{thm:main}.
+
+\emph{Organization.} Section~\ref{sec:representation} proves \eqref{eq:rep-intro}. Section~\ref{sec:kernel} collects properties of the kernel $\Dz(a,b)$, including the ratio comparison. Section~\ref{sec:diagonal} treats the diagonal generating functions, and Section~\ref{sec:shift} proves Theorem~\ref{thm:kernel}. Section~\ref{sec:proof} completes the proof of Theorem~\ref{thm:main}, and Section~\ref{sec:remarks} contains remarks on the central indices, on weighted Delannoy arrays and on computations.
+
+\section{A positive representation of the coefficients}\label{sec:representation}
+
+For the definitions of $Q_{\mathsf{M}}$ and $Y_{\mathsf{M}}$ we refer to \cite{GX,FMSV,GRX}; for graphic matroids they are written out in \cite[Section~1]{GLL}. We use the convention $Y_0(t)=1$ of \cite{GLL}, $F_0$ being a single vertex. The only property of $Y_n(t)$ used in this paper is the following generating function.
+
+\begin{theorem}[{\cite[Theorem~3.1]{GLL}}]\label{thm:GLL}
+In $\mathbb{Q}[t][[u]]$,
+\begin{equation}\label{eq:GLL}
+\sum_{n\ge 0}Y_n(t)\,u^n=\frac{2\bigl(1-(1+t)u\bigr)}{3-4(1+t)u-\sqrt{1-4tu^2}},
+\end{equation}
+where the square root is the power series with constant term $1$.
+\end{theorem}
+
+In \cite{GLL} the right-hand side is written as $2(-1+u+tu)/(-3+4(1+t)u+\sqrt{1-4tu^2})$.
+
+\begin{lemma}\label{lem:bivariate}
+In $\mathbb{Q}[z][[x,y]]$,
+\[
+\sum_{i,j\ge 0}\Dz(i,j)\,x^iy^j=\frac{1}{1-x-y+(1-z)xy}.
+\]
+\end{lemma}
+
+\begin{proof}
+Since $\sum_{i\ge 0}\binom{i}{\ell}x^i=x^{\ell}/(1-x)^{\ell+1}$, the left-hand side equals
+\[
+\sum_{\ell\ge 0}\frac{z^{\ell}x^{\ell}y^{\ell}}{(1-x)^{\ell+1}(1-y)^{\ell+1}}=\frac{1}{(1-x)(1-y)-zxy}. \qedhere
+\]
+\end{proof}
+
+For $m\ge 0$ define
+\[
+E_m(t)=\sum_{k=0}^{m}\Dh(k,m-k)\,t^k .
+\]
+Substituting $x=tv$, $y=v$ and $z=1/2$ in Lemma~\ref{lem:bivariate} gives
+\begin{equation}\label{eq:E}
+\sum_{m\ge 0}E_m(t)\,v^m=\frac{1}{1-(1+t)v+\tfrac{t}{2}v^2}.
+\end{equation}
+
+\begin{proposition}\label{prop:representation}
+For every $n\ge 1$,
+\begin{equation}\label{eq:rep}
+Y_n(t)=\sum_{r=0}^{\lfloor (n-1)/2\rfloor}c_{n,r}\,t^{r}E_{n-2r}(t),
+\end{equation}
+with $c_{n,r}$ as in \eqref{eq:c}. Equivalently, \eqref{eq:rep-intro} holds for $0\le k\le n$.
+\end{proposition}
+
+\begin{proof}
+We work in $\mathbb{Q}[t][[u]]$. Let $w$ be the unique power series with $w(0)=0$ and
+\[
+w=u\,(1+tw^2).
+\]
+Then $u=w/(1+tw^2)$. Since $(1+tw^2)^2-4tw^2=(1-tw^2)^2$, we have $1-4tu^2=\bigl((1-tw^2)/(1+tw^2)\bigr)^2$, and as the square root in \eqref{eq:GLL} is the one with constant term $1$,
+\[
+\sqrt{1-4tu^2}=\frac{1-tw^2}{1+tw^2}.
+\]
+Multiplying numerator and denominator of \eqref{eq:GLL} by $1+tw^2$ and writing $B=1+t$, we obtain
+\[
+\sum_{n\ge 0}Y_n(t)\,u^n=\frac{2(1-Bw+tw^2)}{2-4Bw+4tw^2}=\frac12+\frac{1}{2\,(1-2Bw+2tw^2)}.
+\]
+By \eqref{eq:E} with $v=2w$, the last fraction equals $\frac12\sum_{j\ge 0}2^jE_j(t)\,w^j$. By the Lagrange inversion formula \cite[Theorem~5.4.2]{St}, for $n,j\ge 1$,
+\[
+\coef{u^n}\,w^j=\frac{j}{n}\,\coef{v^{n-j}}\,(1+tv^2)^n,
+\]
+which equals $\frac{j}{n}\binom{n}{r}t^r$ if $n-j=2r$ with $r\ge 0$, and vanishes otherwise. The term $j=0$ contributes only to $u^0$. Hence, for $n\ge 1$,
+\[
+Y_n(t)=\frac12\sum_{0\le r<n/2}2^{n-2r}\,\frac{n-2r}{n}\binom{n}{r}\,t^r E_{n-2r}(t),
+\]
+which is \eqref{eq:rep}. Taking the coefficient of $t^k$ and using the definition of $E_m$ gives \eqref{eq:rep-intro}; the conventions on $\Dh$ account for the terms with $r>k$ or $r>n-k$.
+\end{proof}
+
+By \cite[Theorem~1.1]{GLL}, \eqref{eq:rep} can be written as $Y_{F_n}(t)=\sum_{r}\coef{t^r}Q_{F_n}(t)\cdot t^{r}E_{n-2r}(t)$. For instance, $E_1=1+t$, $E_2=1+\frac32t+t^2$ and $E_3=1+2t+2t^2+t^3$ give
+\[
+Y_2(t)=2E_2(t)=2+3t+2t^2,\qquad Y_3(t)=4E_3(t)+tE_1(t)=4+9t+9t^2+4t^3.
+\]
+In contrast with the alternating sums of \cite[Theorem~1.3]{GLL}, all terms of \eqref{eq:rep-intro} are nonnegative.
+
+\begin{corollary}\label{cor:positive}
+For $n\ge 1$ and $0\le k\le n$ we have $a_{n,k}\ge 2^{n-1}$ and $a_{n,k}=a_{n,n-k}$.
+\end{corollary}
+
+\begin{proof}
+All terms of \eqref{eq:rep-intro} are nonnegative, and the term $r=0$ is $c_{n,0}\Dh(k,n-k)\ge c_{n,0}=2^{n-1}$. Symmetry follows from $\Dz(i,j)=\Dz(j,i)$, which exchanges the terms for $k$ and $n-k$ with the same $r$.
+\end{proof}
+
+\section{The binomial kernel}\label{sec:kernel}
+
+In this section $a,b$ are integers and $\Dz(a,b)$ is regarded as a polynomial in $z$; a prime denotes differentiation with respect to $z$.
+
+\begin{lemma}\label{lem:monotone}
+Let $0\le a\le b$. Then $\Dz(a,b)-\Dz(a-1,b+1)$ has nonnegative coefficients. If $a\ge 1$, its coefficient of $z$ equals $b-a+1$.
+\end{lemma}
+
+\begin{proof}
+For $a=0$ the difference is $1$. Let $a\ge 1$. If $\ell=a$, the coefficient of $z^\ell$ in $\Dz(a-1,b+1)$ is zero. For $0\le \ell<a$,
+\[
+\binom{a}{\ell}\binom{b}{\ell}\Big/\binom{a-1}{\ell}\binom{b+1}{\ell}=\frac{a\,(b+1-\ell)}{(a-\ell)(b+1)}\ge 1,
+\]
+because $a(b+1-\ell)-(a-\ell)(b+1)=\ell\,(b+1-a)\ge 0$. The coefficient of $z$ is $ab-(a-1)(b+1)=b-a+1$.
+\end{proof}
+
+\begin{lemma}\label{lem:zeros}
+Let $1\le a\le b$. Then $\Dz(a,b)$ has degree $a$ in $z$ and $a$ distinct real zeros, all of them negative.
+\end{lemma}
+
+This is classical. For $z\neq 1$ one has $\Dz(a,b)=(1-z)^aP_a^{(0,b-a)}\bigl(\frac{1+z}{1-z}\bigr)$, where $P^{(\alpha,\beta)}_a$ is a Jacobi polynomial, and the lemma follows from the location of the zeros of Jacobi polynomials \cite[Section~3.3]{Sz}; the relation between Jacobi polynomials and Delannoy numbers is discussed by Hetyei~\cite{He}. The following proof uses only Rolle's theorem.
+
+\begin{proof}
+The leading coefficient is $\binom{b}{a}$. Let $p(x)=x^a(1+x)^b$. We show by induction on $0\le j\le a$ that $p^{(j)}$ has a zero of multiplicity exactly $a-j$ at $0$, a zero of multiplicity exactly $b-j$ at $-1$, and $j$ simple zeros in $(-1,0)$. This is clear for $j=0$. If it holds for some $j<a$, then $0$, $-1$ and the $j$ interior zeros are $j+2$ distinct zeros of $p^{(j)}$ in $[-1,0]$, and Rolle's theorem gives $j+1$ distinct zeros of $p^{(j+1)}$ in $(-1,0)$; moreover $0$ and $-1$ are zeros of $p^{(j+1)}$ of multiplicities exactly $a-j-1$ and $b-j-1$. Since $\deg p^{(j+1)}=a+b-j-1$, these are all the zeros, and they have the stated multiplicities.
+
+By the Leibniz rule,
+\[
+\frac{1}{a!}\,p^{(a)}(x)=\sum_{\ell=0}^{a}\binom{a}{\ell}\binom{b}{\ell}x^{\ell}(1+x)^{b-\ell}=(1+x)^{b-a}\,V(x),
+\]
+where $V(x)=\sum_{\ell=0}^{a}\binom{a}{\ell}\binom{b}{\ell}x^{\ell}(1+x)^{a-\ell}$. By the case $j=a$, the polynomial $V$ has $a$ simple zeros in $(-1,0)$. For $z\neq 1$, substituting $x=z/(1-z)$, so that $1+x=1/(1-z)$, gives
+\[
+\Dz(a,b)=(1-z)^a\,V\Bigl(\frac{z}{1-z}\Bigr).
+\]
+The map $x\mapsto x/(1+x)$ is a bijection from $(-1,0)$ onto $(-\infty,0)$, and it carries the $a$ zeros of $V$ to $a$ distinct negative zeros of $\Dz(a,b)$. As $\Dz(a,b)$ has degree $a$, there are no other zeros.
+\end{proof}
+
+\begin{lemma}\label{lem:contiguous}
+Let $a,b\ge 1$, write $D=\Dz(a,b)$, and let
+\[
+I=\sum_{\ell\ge 0}\binom{a}{\ell}\binom{b}{\ell}\frac{z^{\ell}}{\ell+1},\qquad\text{so that } zI=\int_0^z D(v)\,dv.
+\]
+Then
+\begin{gather}
+\Dz(a-1,b)=D-\frac{z}{a}D',\label{eq:minus}\\
+\Dz(a+1,b)=(1-z)D+(b+1)zI,\label{eq:plus}
+\end{gather}
+together with the identities obtained from \eqref{eq:minus} and \eqref{eq:plus} by exchanging $a$ and $b$, and
+\begin{gather}
+z(1-z)D''+\bigl(1+(a+b-1)z\bigr)D'-abD=0,\label{eq:ode}\\
+(1-z)D'+(a+b+1)D=(a+1)(b+1)I.\label{eq:integrated}
+\end{gather}
+\end{lemma}
+
+\begin{proof}
+Write $f_\ell=\binom{a}{\ell}\binom{b}{\ell}$. Identity \eqref{eq:minus} follows from $\binom{a-1}{\ell}=\frac{a-\ell}{a}\binom{a}{\ell}$. By Pascal's rule, the coefficient of $z^{\ell}$ in $\Dz(a+1,b)-D$ is $\binom{a}{\ell-1}\binom{b}{\ell}=f_{\ell-1}\frac{b+1-\ell}{\ell}$, which is the coefficient of $z^\ell$ in $z\bigl((b+1)I-D\bigr)$. This proves \eqref{eq:plus}. Since $D$ and $I$ are symmetric in $a$ and $b$, the exchanged identities follow. Next, $\ell^2f_\ell=(a-\ell+1)(b-\ell+1)f_{\ell-1}$, and the coefficient of $z^{\ell}$ in the left-hand side of \eqref{eq:ode} is $(\ell+1)^2f_{\ell+1}-(a-\ell)(b-\ell)f_\ell=0$. Finally, \eqref{eq:ode} can be written as
+\[
+\bigl(z(1-z)D'\bigr)'+(a+b+1)\,zD'=abD .
+\]
+Integrating from $0$ to $z$ and using $\int_0^z vD'(v)\,dv=zD-zI$, we obtain $z(1-z)D'+(a+b+1)(zD-zI)=ab\,zI$. Dividing by $z$ gives \eqref{eq:integrated}.
+\end{proof}
+
+\begin{lemma}\label{lem:ratio}
+Let $a\ge 1$ and $b\ge a+1$, and write $D=\Dz(a,b)$. Then, as polynomials in $z$,
+\begin{equation}\label{eq:ratio-identity}
+\begin{aligned}
+&\Dz(a,b+1)\Dz(a,b-1)-\Dz(a-1,b)\Dz(a+1,b)\\
+&\qquad=\frac{(b-a)(a+b+1)}{ab(a+1)(b+1)}\,z^2\,\Bigl(DD'+(1-z)\bigl(D'^2-DD''\bigr)\Bigr).
+\end{aligned}
+\end{equation}
+Consequently, for every real $z>0$,
+\begin{equation}\label{eq:ratio}
+\Dz(a,b+1)\Dz(a,b-1)>\Dz(a-1,b)\Dz(a+1,b).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Let $\mathcal{E}$ denote the left-hand side of \eqref{eq:ratio-identity}. Substituting \eqref{eq:minus}, \eqref{eq:plus} and the exchanged identities $\Dz(a,b-1)=D-\frac{z}{b}D'$ and $\Dz(a,b+1)=(1-z)D+(a+1)zI$, and collecting terms, we obtain
+\[
+\mathcal{E}=\frac{(b-a)z}{ab}\Bigl((1-z)DD'+(a+b+1)zID'-abID\Bigr).
+\]
+By \eqref{eq:integrated}, $(a+1)(b+1)I=(1-z)D'+(a+b+1)D$; inserting this, we find that the expression in parentheses equals
+\[
+\frac{a+b+1}{(a+1)(b+1)}\Bigl(\bigl(1+(a+b)z\bigr)DD'+z(1-z)D'^2-abD^2\Bigr).
+\]
+By \eqref{eq:ode}, $abD^2=z(1-z)DD''+\bigl(1+(a+b-1)z\bigr)DD'$, so the last parenthesis equals $z\bigl(DD'+(1-z)(D'^2-DD'')\bigr)$. This proves \eqref{eq:ratio-identity}.
+
+Now let $z>0$. By Lemma~\ref{lem:zeros}, $D=\binom{b}{a}\prod_{j=1}^{a}(z+\lambda_j)$ with $\lambda_1,\dots,\lambda_a>0$, so $D>0$. With $\psi=D'/D=\sum_j(z+\lambda_j)^{-1}$ we have $\psi'=-\sum_j(z+\lambda_j)^{-2}$ and
+\[
+\begin{aligned}
+\frac{DD'+(1-z)(D'^2-DD'')}{D^2}&=\psi-(1-z)\psi'=\sum_{j=1}^{a}\Bigl(\frac{1}{z+\lambda_j}+\frac{1-z}{(z+\lambda_j)^2}\Bigr)\\
+&=\sum_{j=1}^{a}\frac{1+\lambda_j}{(z+\lambda_j)^2}>0.
+\end{aligned}
+\]
+Since the prefactor in \eqref{eq:ratio-identity} is positive, \eqref{eq:ratio} follows.
+\end{proof}
+
+\begin{corollary}\label{cor:ratio}
+Let $z>0$ and let $\delta\ge 2$ be an integer. Put $A_m=\Dz(m,m+\delta)$ and $B_m=\Dz(m,m+\delta-2)$ for $m\ge 0$. Then $A_m,B_m>0$, and the sequence $(A_m/B_{m+1})_{m\ge 0}$ is strictly increasing.
+\end{corollary}
+
+\begin{proof}
+Positivity is clear. For $m\ge 1$, apply \eqref{eq:ratio} with $a=m$ and $b=m+\delta-1\ge a+1$. Since $\Dz(m-1,m+\delta-1)=A_{m-1}$ and $\Dz(m+1,m+\delta-1)=B_{m+1}$, we get $A_mB_m>A_{m-1}B_{m+1}$, that is, $A_m/B_{m+1}>A_{m-1}/B_m$.
+\end{proof}
+
+\section{Diagonal generating functions}\label{sec:diagonal}
+
+Fix a real number $z>0$. Let $L(x)\in\mathbb{R}[[x]]$ be the unique power series with $L(0)=0$ and
+\[
+L=x\,(1+L)(z+L),
+\]
+and put
+\[
+R(x)=1+L(x),\qquad S(x)=1-x\bigl(1+z+2L(x)\bigr),\qquad \rho_j=\coef{x^j}R(x)^2\ (j\ge 0).
+\]
+For an integer $e\ge 0$ let $P_e(x)=\sum_{m\ge 0}\Dz(m,m+e)\,x^m$.
+
+\begin{lemma}\label{lem:diagonal}
+\textup{(i)} Every coefficient of $L$ in positive degree is positive; hence $\rho_j>0$ for all $j\ge 0$.
+
+\textup{(ii)} For every integer $e\ge 0$ we have $P_e=R^e/S$. In particular, $P_{e+2}=R^2P_e$.
+\end{lemma}
+
+\begin{proof}
+(i) We have $L=x\bigl(z+(1+z)L+L^2\bigr)$. Hence $\coef{x}L=z>0$, and for $m\ge 2$ the coefficient $\coef{x^m}L$ is at least $(1+z)\coef{x^{m-1}}L$, since the remaining contributions are products of coefficients of $L$. Thus all coefficients of $R=1+L$, and therefore of $R^2$, are positive.
+
+(ii) Put $\Phi(v)=(1+v)(z+v)$, so that $L=x\Phi(L)$ and $S=1-x\Phi'(L)$. We use the following form of Lagrange inversion \cite[Theorem~2.1.1, (2.1.4)]{Ge}: for every polynomial $f$,
+\begin{equation}\label{eq:lagrange}
+\sum_{m\ge 0}x^m\,\coef{v^m}f(v)\Phi(v)^m=\frac{f(L)}{1-x\Phi'(L)}.
+\end{equation}
+It can also be derived from \cite[Theorem~5.4.2]{St}, according to which $\coef{x^m}L^k=\frac{k}{m}\coef{v^{m-k}}\Phi(v)^m$ and $\coef{x^m}H(L)=\frac1m\coef{v^{m-1}}H'(v)\Phi(v)^m$ for $m\ge 1$. Differentiating $L=x\Phi(L)$ with respect to $x$ gives $x\,\frac{dL}{dx}=L/(1-x\Phi'(L))$. For $f(v)=v^k$ with $k\ge 1$ the right-hand side of \eqref{eq:lagrange} is therefore $\frac{x}{k}\frac{d}{dx}L^k$, whose coefficient of $x^m$ is $\frac{m}{k}\coef{x^m}L^k=\coef{v^{m-k}}\Phi(v)^m$. For $f=1$ the right-hand side equals $1+x\frac{d}{dx}H(L)$ with $H(v)=\log\bigl(\Phi(v)/z\bigr)$, and for $m\ge 1$ its coefficient of $x^m$ is $m\coef{x^m}H(L)=\coef{v^{m-1}}\Phi'(v)\Phi(v)^{m-1}=\coef{v^m}\Phi(v)^m$. This proves \eqref{eq:lagrange}.
+
+Taking $f(v)=(1+v)^e$ in \eqref{eq:lagrange}, we get
+\[
+\coef{x^m}\frac{R^e}{S}=\coef{v^m}(1+v)^{m+e}(z+v)^m=\sum_{\ell\ge 0}\binom{m+e}{\ell}\binom{m}{m-\ell}z^{\ell}=\Dz(m,m+e). \qedhere
+\]
+\end{proof}
+
+\section{The common-shift kernel}\label{sec:shift}
+
+For integers $N\ge 0$ and $k$ we define $G_{N,k}(q;z)$ by \eqref{eq:G-intro} if $0\le k\le N$, and $G_{N,k}=0$ otherwise. Because of the convention $\Dz(i,j)=0$ for negative arguments, the sum in \eqref{eq:G-intro} may be taken over all $r\ge 0$. Clearly $G_{N,0}=G_{N,N}=1$ and $G_{N,k}=G_{N,N-k}$. By Lemma~\ref{lem:bivariate},
+\[
+\sum_{a,b\ge 0}G_{a+b,a}(q;z)\,x^ay^b=\frac{1}{(1-qxy)\bigl(1-x-y+(1-z)xy\bigr)},
+\]
+so $G_{N,k}$ is the coefficient of $x^ky^{N-k}$ in this series. For $1\le k\le N-1$ let
+\[
+\Delta_{N,k}(q;z)=G_{N,k}(q;z)^2-G_{N,k-1}(q;z)\,G_{N,k+1}(q;z).
+\]
+
+For the rest of this section fix $z>0$ and integers $k\ge 1$ and $N\ge 2k+2$, and put $\delta=N-2k\ge 2$. Let $A_m$ and $B_m$ be as in Corollary~\ref{cor:ratio} and $\rho_j$ as in Section~\ref{sec:diagonal}. For integers $\alpha,\beta$ put
+\[
+J_{\alpha,\beta}=\sum_{i=0}^{\alpha}\sum_{j=0}^{\beta}A_iB_j\,\rho_{\alpha+\beta-i-j}\quad\text{if } \alpha,\beta\ge 0,\qquad J_{\alpha,\beta}=0\quad\text{otherwise}.
+\]
+
+\begin{proposition}\label{prop:telescoping}
+For $0\le r\le 2k$,
+\[
+\coef{q^r}\Delta_{N,k}(q;z)=J_{k,\,k-r}-J_{k-r-1,\,k+1}.
+\]
+\end{proposition}
+
+\begin{proof}
+Consider the formal power series
+\[
+J(x,y)=P_\delta(x)\,P_{\delta-2}(y)\,\frac{xR(x)^2-yR(y)^2}{x-y}.
+\]
+Since $xR(x)^2=\sum_{j\ge 0}\rho_jx^{j+1}$ and $(x^{j+1}-y^{j+1})/(x-y)=\sum_{\alpha+\beta=j}x^\alpha y^\beta$, the divided difference equals $\sum_{\alpha,\beta\ge 0}\rho_{\alpha+\beta}x^\alpha y^\beta$. Hence $J_{\alpha,\beta}$ is the coefficient of $x^\alpha y^\beta$ in $J(x,y)$, also when $\alpha<0$ or $\beta<0$. By Lemma~\ref{lem:diagonal}(ii), $P_\delta(y)=R(y)^2P_{\delta-2}(y)$ and $P_{\delta+2}(x)=R(x)^2P_\delta(x)$. Therefore, in the ring $\mathbb{R}[[x,y]][y^{-1}]$,
+\begin{equation}\label{eq:laurent}
+P_\delta(x)P_\delta(y)-\frac{x}{y}P_{\delta+2}(x)P_{\delta-2}(y)=\Bigl(1-\frac{x}{y}\Bigr)J(x,y),
+\end{equation}
+since both sides equal $y^{-1}P_\delta(x)P_{\delta-2}(y)\bigl(yR(y)^2-xR(x)^2\bigr)$.
+
+Expanding the products,
+\begin{multline*}
+\coef{q^r}\Delta_{N,k}=\sum_{h=0}^{r}\Bigl(\Dz(k-h,N-k-h)\,\Dz(k-r+h,N-k-r+h)\\
+-\Dz(k-1-h,N-k+1-h)\,\Dz(k+1-r+h,N-k-1-r+h)\Bigr).
+\end{multline*}
+Put $M=2k-r$ and $\alpha=k-h$. Then $N-k-h=\alpha+\delta$, $k-r+h=M-\alpha$ and $N-k-r+h=M-\alpha+\delta$, so the first product is the coefficient of $x^\alpha y^{M-\alpha}$ in $P_\delta(x)P_\delta(y)$. Similarly the second product equals $\Dz(\alpha-1,\alpha-1+\delta+2)\,\Dz(M-\alpha+1,M-\alpha+1+\delta-2)$, the coefficient of $x^\alpha y^{M-\alpha}$ in $\frac{x}{y}P_{\delta+2}(x)P_{\delta-2}(y)$. Both statements remain true when an argument is negative, because then both sides vanish. By \eqref{eq:laurent}, the coefficient of $x^\alpha y^{M-\alpha}$ in the left-hand side of \eqref{eq:laurent} is $J_{\alpha,M-\alpha}-J_{\alpha-1,M-\alpha+1}$. Summing over $\alpha=k-r,\dots,k$, the sum telescopes to $J_{k,M-k}-J_{k-r-1,M-k+r+1}=J_{k,k-r}-J_{k-r-1,k+1}$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:kernel}]
+Since $N-k\ge k+2$, the polynomials $G_{N,k-1}$, $G_{N,k}$ and $G_{N,k+1}$ have degrees $k-1$, $k$ and $k+1$, so $\Delta_{N,k}$ has degree at most $2k$. For $k<r\le 2k$ both indices $k-r$ and $k-r-1$ are negative, and Proposition~\ref{prop:telescoping} gives $\coef{q^r}\Delta_{N,k}=0$.
+
+Let $0\le r\le k$ and put $U=k$ and $V=k-r$, so that $U\ge V\ge 0$. In $J_{U,V}$ and $J_{V-1,U+1}$ the terms with $0\le i\le V-1$ and $0\le j\le V$ coincide. What remains of $J_{V-1,U+1}$ are the terms with $0\le i\le V-1$ and $V+1\le j\le U+1$; we re-index them by the bijection $(i,j)\mapsto(j-1,i+1)$ onto the pairs with $V\le i\le U$ and $1\le j\le V$, which preserves $i+j$. We obtain
+\begin{equation}\label{eq:difference}
+J_{U,V}-J_{V-1,U+1}=\sum_{i=V}^{U}A_iB_0\,\rho_{U+V-i}+\sum_{i=V}^{U}\sum_{j=1}^{V}\rho_{U+V-i-j}\,\bigl(A_iB_j-A_{j-1}B_{i+1}\bigr).
+\end{equation}
+In the double sum we have $i\ge V\ge j>j-1$, so Corollary~\ref{cor:ratio} gives $A_i/B_{i+1}>A_{j-1}/B_j$, that is, $A_iB_j>A_{j-1}B_{i+1}$; moreover $U+V-i-j\ge 0$, so $\rho_{U+V-i-j}>0$ by Lemma~\ref{lem:diagonal}(i). The first sum is positive, since all its terms are positive and it contains the term $i=U$. Hence \eqref{eq:difference} is positive, and by Proposition~\ref{prop:telescoping} so is $\coef{q^r}\Delta_{N,k}$.
+\end{proof}
+
+\begin{remark}\label{rem:top}
+For $r=k$ the double sum in \eqref{eq:difference} is empty, and Lemma~\ref{lem:diagonal}(ii) gives
+\[
+\coef{q^k}\Delta_{N,k}=J_{k,0}=\coef{x^k}R(x)^2P_\delta(x)=\coef{x^k}P_{\delta+2}(x)=\Dz(k,N-k+2).
+\]
+The case $\delta=2$ is included; there $B_m=\Dz(m,m)$ and $P_{\delta-2}=P_0=1/S$.
+\end{remark}
+
+\section{Proof of the main theorem}\label{sec:proof}
+
+A sequence $(x_r)_{r\ge 0}$ of nonnegative real numbers is \emph{log-concave} if $x_r^2\ge x_{r-1}x_{r+1}$ for all $r\ge 1$, and it has \emph{no internal zeros} if $x_i>0$ and $x_j>0$ with $i<j$ imply $x_m>0$ for all $i<m<j$.
+
+\begin{lemma}[{cf.\ \cite[Theorem~1.2]{GLL}}]\label{lem:weights}
+Let $n\ge 1$ and $s=\lfloor (n-1)/2\rfloor$. Then $c_{n,r}>0$ for $0\le r\le s$, and $c_{n,r}^2>c_{n,r-1}c_{n,r+1}$ for $1\le r\le s-1$. In particular, the sequence $(c_{n,r})_{r\ge 0}$, extended by zero, is log-concave with no internal zeros.
+\end{lemma}
+
+\begin{proof}
+Positivity is clear from \eqref{eq:c}. The following computation is the first proof of \cite[Theorem~1.2]{GLL}, where the theorem is stated in the non-strict form. For $1\le r\le s-1$ we have $n-2r-2\ge 1$ and
+\[
+\frac{c_{n,r}^2}{c_{n,r-1}c_{n,r+1}}=\frac{(n-2r)^2}{(n-2r)^2-4}\cdot\frac{(r+1)(n-r+1)}{r(n-r)}>1. \qedhere
+\]
+\end{proof}
+
+\begin{lemma}[{cf.\ \cite[Lemmas~2.1 and~2.2, Theorem~2.3]{WY}}]\label{lem:tails}
+Let $(x_r)_{r\ge 0}$ be a finitely supported sequence of nonnegative real numbers which is log-concave with no internal zeros. Let $\kappa(j,r)\ge 0$ be real numbers, defined for integers $j$ and $r\ge 0$, such that for each $j$ only finitely many of them are nonzero, and put
+\[
+S_j=\sum_{r\ge 0}\kappa(j,r)\,x_r,\qquad T_{h,j}(q)=\sum_{r\ge h}\kappa(j,r)\,q^r\quad(h\ge 0).
+\]
+Fix an integer $k$, and suppose that for every $h\ge 0$ the polynomial $T_{h,k}^2-T_{h,k-1}T_{h,k+1}$ has nonnegative coefficients. Then
+\[
+S_k^2-S_{k-1}S_{k+1}\ge x_0^2\,\bigl(\kappa(k,0)^2-\kappa(k-1,0)\,\kappa(k+1,0)\bigr).
+\]
+\end{lemma}
+
+\begin{proof}
+Grouping the terms of $S_k^2-S_{k-1}S_{k+1}$ according to $R=r+r'$, we obtain $S_k^2-S_{k-1}S_{k+1}=\sum_{R\ge 0}\Sigma_R$ with
+\[
+\Sigma_R=\sum_{r=0}^{\lfloor R/2\rfloor}\gamma_r X_r,\qquad X_r=x_rx_{R-r},
+\]
+where $\gamma_r=2\kappa(k,r)\kappa(k,R-r)-\kappa(k-1,r)\kappa(k+1,R-r)-\kappa(k-1,R-r)\kappa(k+1,r)$ for $r<R/2$ and, if $R$ is even, $\gamma_{R/2}=\kappa(k,R/2)^2-\kappa(k-1,R/2)\kappa(k+1,R/2)$. Comparing coefficients, for $0\le h\le \lfloor R/2\rfloor$,
+\[
+\sum_{r=h}^{\lfloor R/2\rfloor}\gamma_r=\coef{q^R}\bigl(T_{h,k}^2-T_{h,k-1}T_{h,k+1}\bigr)\ge 0 .
+\]
+Since $(x_r)$ is log-concave with no internal zeros, $x_rx_{R-r}\ge x_{r-1}x_{R-r+1}$ for $1\le r\le R/2$: this is trivial if the right-hand side vanishes, and otherwise $x_{r-1},\dots,x_{R-r+1}$ are positive and $x_r/x_{r-1}\ge x_{R-r+1}/x_{R-r}$. Thus $X_0\le X_1\le\dots\le X_{\lfloor R/2\rfloor}$, and Abel summation gives
+\[
+\Sigma_R=X_0\sum_{r=0}^{\lfloor R/2\rfloor}\gamma_r+\sum_{h=1}^{\lfloor R/2\rfloor}(X_h-X_{h-1})\sum_{r=h}^{\lfloor R/2\rfloor}\gamma_r\ge 0 .
+\]
+Finally $\Sigma_0=x_0^2\bigl(\kappa(k,0)^2-\kappa(k-1,0)\kappa(k+1,0)\bigr)$, and the lemma follows from $\Sigma_R\ge 0$ for $R\ge 1$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Positivity and symmetry are Corollary~\ref{cor:positive}. Let $n\ge 2$. By symmetry, the inequality at $k$ is equivalent to the inequality at $n-k$, so we may assume $1\le k\le\lfloor n/2\rfloor$.
+
+\emph{Indices below the centre.} Let $1\le k\le\lfloor n/2\rfloor-1$, so that $n\ge 2k+2$. We apply Lemma~\ref{lem:tails} with $x_r=c_{n,r}$, which is admissible by Lemma~\ref{lem:weights}, and with $\kappa(j,r)=\Dh(j-r,n-j-r)$ for $r\ge 0$. By \eqref{eq:rep-intro}, $S_j=a_{n,j}$ for $0\le j\le n$. Substituting $r=h+r'$ we find
+\[
+T_{h,j}(q)=q^h\,G_{n-2h,\,j-h}(q;1/2),
+\]
+where $G_{N',k'}$ is understood to be $0$ if $N'<0$ or $k'\notin[0,N']$. Hence $T_{h,k}^2-T_{h,k-1}T_{h,k+1}=q^{2h}\,\Delta_{n-2h,k-h}(q;1/2)$ for $h<k$. For such $h$ we have $k-h\ge 1$ and $(n-2h)-2(k-h)=n-2k\ge 2$, so Theorem~\ref{thm:kernel} shows that this polynomial has nonnegative coefficients. For $h=k$, since $G_{n-2k,0}=1$ and $G_{n-2k,-1}=0$, the polynomial is $q^{2k}$. For $h>k$ we have $T_{h,k}=T_{h,k-1}=0$. Lemma~\ref{lem:tails} therefore gives
+\[
+a_{n,k}^2-a_{n,k-1}a_{n,k+1}\ge c_{n,0}^2\,\coef{q^0}\Delta_{n,k}(q;1/2)>0,
+\]
+the last inequality by Theorem~\ref{thm:kernel} with $N=n$.
+
+\emph{Central indices.} For $1\le j\le n/2$, \eqref{eq:rep-intro} gives
+\[
+a_{n,j}-a_{n,j-1}=\sum_{r\ge 0}c_{n,r}\bigl(\Dh(j-r,n-j-r)-\Dh(j-1-r,n-j+1-r)\bigr).
+\]
+Each bracket is nonnegative by Lemma~\ref{lem:monotone} (both terms vanish if $j-r<0$), and by the same lemma the bracket for $r=0$ is at least $(n-2j+1)/2>0$. Hence $a_{n,0}<a_{n,1}<\dots<a_{n,\lfloor n/2\rfloor}$. Let $k=\lfloor n/2\rfloor\ge 1$. If $n=2k$, then $a_{n,k+1}=a_{n,k-1}$ and
+\[
+a_{n,k}^2-a_{n,k-1}a_{n,k+1}=(a_{n,k}-a_{n,k-1})(a_{n,k}+a_{n,k-1})>0.
+\]
+If $n=2k+1$, then $a_{n,k+1}=a_{n,k}$ and $a_{n,k}^2-a_{n,k-1}a_{n,k+1}=a_{n,k}(a_{n,k}-a_{n,k-1})>0$. This covers every index $k\le\lfloor n/2\rfloor$, and in particular the cases $n=2$ and $n=3$.
+\end{proof}
+
+\begin{table}[ht]
+\caption{The coefficients $a_{n,0},\dots,a_{n,n}$ of $Y_n(t)$ for $1\le n\le 8$.}\label{tab:rows}
+\begin{tabular}{rl}
+\toprule
+$n$ & $a_{n,0},a_{n,1},\dots,a_{n,n}$\\
+\midrule
+1 & $1,\ 1$\\
+2 & $2,\ 3,\ 2$\\
+3 & $4,\ 9,\ 9,\ 4$\\
+4 & $8,\ 24,\ 32,\ 24,\ 8$\\
+5 & $16,\ 60,\ 102,\ 102,\ 60,\ 16$\\
+6 & $32,\ 144,\ 298,\ 371,\ 298,\ 144,\ 32$\\
+7 & $64,\ 336,\ 820,\ 1225,\ 1225,\ 820,\ 336,\ 64$\\
+8 & $128,\ 768,\ 2160,\ 3764,\ 4486,\ 3764,\ 2160,\ 768,\ 128$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Remarks}\label{sec:remarks}
+
+\subsection{Central indices of the kernel}
+Theorem~\ref{thm:kernel} concerns the indices with $N\ge 2k+2$; by the symmetry $\Delta_{N,k}=\Delta_{N,N-k}$ it also covers $k\ge \lceil N/2\rceil+1$. At the central indices $k\in\{\lfloor N/2\rfloor,\lceil N/2\rceil\}$, $N\ge 2$, the polynomial $\Delta_{N,k}(q;z)$ still has nonnegative coefficients and a positive constant term for every $z>0$, although it need not have degree $k$. Indeed, by Lemma~\ref{lem:monotone} the coefficients of $G_{N,j}-G_{N,j-1}$ are nonnegative for $1\le j\le N/2$, and its constant term is at least $(N-2j+1)z>0$. If $N=2k$, then $\Delta_{N,k}=(G_{N,k}-G_{N,k-1})(G_{N,k}+G_{N,k-1})$; if $N=2k+1$, then $\Delta_{N,k}=\Delta_{N,k+1}=G_{N,k}(G_{N,k}-G_{N,k-1})$. The proof of Theorem~\ref{thm:main} at the central indices is the same argument applied to \eqref{eq:rep-intro} directly.
+
+\subsection{Weighted Delannoy arrays}
+For $z=1$ and $z=2$ the numbers $\Dz(a,b)$ are the binomial coefficients $\binom{a+b}{a}$ and the Delannoy numbers, respectively. By Lemma~\ref{lem:bivariate}, they satisfy
+\[
+\Dz(a,b)=\Dz(a-1,b)+\Dz(a,b-1)+(z-1)\Dz(a-1,b-1)\qquad\bigl((a,b)\neq(0,0)\bigr),
+\]
+so the antidiagonals $(\Dz(k,N-k))_k$ are the rows of a weighted Delannoy triangle with weights $1,1,z-1$. Foldes and Major \cite[Section~3, Corollary]{FM} proved that the rows of weighted Delannoy triangles with nonnegative weights are log-concave. For $z=1/2$, the value needed here, the diagonal weight $z-1$ is negative, so their result does not apply even to the constant term of $\Delta_{N,k}$; moreover, Theorem~\ref{thm:kernel} concerns all coefficients of the polynomial in~$q$.
+
+\subsection{Computations}
+As an independent check, we computed $Y_n(t)$ for $n\le 80$ from the recurrence
+\[
+Y_n(t)=2(1+t)\,Y_{n-1}(t)-\sum_{j=0}^{\lfloor(n-2)/2\rfloor}\frac{1}{j+1}\binom{2j}{j}\,t^{j+1}\,Y_{n-2j-2}(t)\qquad(n\ge 2),
+\]
+which is \cite[(68)]{GLL} and is derived there from the deletion formula of Braden, Ferroni, Matherne and Nepal~\cite{BFMN}. In exact rational arithmetic the result agrees with \eqref{eq:rep-intro} and satisfies the inequalities of Theorem~\ref{thm:main}. We also verified the conclusion of Theorem~\ref{thm:kernel} for $z\in\{1/7,1/2,1,2,10\}$ and $4\le N\le 32$, and the identity \eqref{eq:ratio-identity} as a polynomial identity for $1\le a\le 10$ and $a<b\le 14$. These computations are not used in the proofs.
+
+\section*{Use of AI-assisted tools}
+
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{99}
+
+\bibitem{BFMN}
+T.~Braden, L.~Ferroni, J.~P.~Matherne, and N.~Nepal, \emph{Inverse Kazhdan--Lusztig polynomials of matroids under deletion}, preprint (2025), arXiv:2510.01086.
+
+\bibitem{EPW}
+B.~Elias, N.~Proudfoot, and M.~Wakefield, \emph{The Kazhdan--Lusztig polynomial of a matroid}, Adv. Math. \textbf{299} (2016), 36--70.
+
+\bibitem{FMSV}
+L.~Ferroni, J.~P.~Matherne, M.~Stevens, and L.~Vecchi, \emph{Hilbert--Poincar\'e series of matroid Chow rings and intersection cohomology}, Adv. Math. \textbf{449} (2024), 109733.
+
+\bibitem{FM}
+S.~Foldes and L.~Major, \emph{Log-concavity of rows of Pascal type triangles}, Util. Math. \textbf{116} (2020), 203--210; arXiv:1608.04126v2.
+
+\bibitem{GLL}
+A.~L.~L.~Gao, Y.-X.~Li, and Y.~Li, \emph{Inverse Kazhdan--Lusztig polynomials of fan matroids}, preprint (2026), arXiv:2603.25254v2.
+
+\bibitem{GRX}
+A.~L.~L.~Gao, X.~Ruan, and M.~H.~Y.~Xie, \emph{The inverse $Z$-polynomial of a matroid}, J. Combin. Theory Ser.~A \textbf{224} (2026), 106220; arXiv:2507.01332v1.
+
+\bibitem{GX}
+A.~L.~L.~Gao and M.~H.~Y.~Xie, \emph{The inverse Kazhdan--Lusztig polynomial of a matroid}, J. Combin. Theory Ser.~B \textbf{151} (2021), 375--392.
+
+\bibitem{Ge}
+I.~M.~Gessel, \emph{Lagrange inversion}, J. Combin. Theory Ser.~A \textbf{144} (2016), 212--249.
+
+\bibitem{He}
+G.~Hetyei, \emph{Shifted Jacobi polynomials and Delannoy numbers}, preprint (2009), arXiv:0909.5512v2.
+
+\bibitem{PXY}
+N.~Proudfoot, Y.~Xu, and B.~Young, \emph{The $Z$-polynomial of a matroid}, Electron. J. Combin. \textbf{25} (2018), no.~1, Paper No.~1.26.
+
+\bibitem{St}
+R.~P.~Stanley, \emph{Enumerative Combinatorics, Vol.~2}, Cambridge Studies in Advanced Mathematics, vol.~62, Cambridge University Press, Cambridge, 1999.
+
+\bibitem{Sz}
+G.~Szeg\H{o}, \emph{Orthogonal Polynomials}, 4th ed., American Mathematical Society Colloquium Publications, vol.~23, American Mathematical Society, Providence, RI, 1975.
+
+\bibitem{WY}
+Y.~Wang and Y.-N.~Yeh, \emph{Log-concavity and LC-positivity}, preprint (2006), arXiv:math/0504164v7.
+
+\end{thebibliography}
+
+\end{document}

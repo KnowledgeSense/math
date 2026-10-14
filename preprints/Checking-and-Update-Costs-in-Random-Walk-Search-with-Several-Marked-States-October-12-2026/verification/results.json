@@ -1,0 +1,261 @@
+{
+  "kind": "finite independent diagnostics; not a proof or novelty review",
+  "python": "3.12.10 (main, May 30 2025, 05:39:07) [MSC v.1943 64 bit (AMD64)]",
+  "checks": {
+    "all_cycle_marksets_exact_poisson": {
+      "N_min": 3,
+      "N_max": 8,
+      "cases": 498,
+      "passed": true
+    },
+    "actual_family_mass_gaps_poisson": [
+      {
+        "k": 2,
+        "L": 4,
+        "N": 256,
+        "D": 128,
+        "translates_checked": 256,
+        "epsilon": "5/8",
+        "H": "5/2"
+      },
+      {
+        "k": 3,
+        "L": 9,
+        "N": 6561,
+        "D": 2187,
+        "translates_checked": 10,
+        "epsilon": "11/27",
+        "H": "160/9"
+      },
+      {
+        "k": 4,
+        "L": 16,
+        "N": 65536,
+        "D": 16384,
+        "translates_checked": 10,
+        "epsilon": "19/64",
+        "H": "255/4"
+      },
+      {
+        "k": 5,
+        "L": 25,
+        "N": 390625,
+        "D": 78125,
+        "translates_checked": 10,
+        "epsilon": "29/125",
+        "H": "832/5"
+      }
+    ],
+    "cyclic_arc_counts": {
+      "cases": 3306,
+      "passed": true
+    },
+    "restoration_connected_range": {
+      "states": 4054,
+      "max_updates": 5,
+      "setup_cap": 2,
+      "passed": true
+    },
+    "adaptive_all_negative_coupling": {
+      "oracle_runs": 281880,
+      "increment_horizon": 4,
+      "results": [
+        {
+          "N": 16,
+          "L": 4,
+          "D": 4,
+          "restoration": false,
+          "exact_average_success": "12309/16384",
+          "exact_average_path_bound": "5425/4096"
+        },
+        {
+          "N": 16,
+          "L": 4,
+          "D": 4,
+          "restoration": true,
+          "exact_average_success": "146567/196608",
+          "exact_average_path_bound": "32267/24576"
+        },
+        {
+          "N": 18,
+          "L": 3,
+          "D": 6,
+          "restoration": false,
+          "exact_average_success": "71741/82944",
+          "exact_average_path_bound": "17005/10368"
+        },
+        {
+          "N": 18,
+          "L": 3,
+          "D": 6,
+          "restoration": true,
+          "exact_average_success": "107069/124416",
+          "exact_average_path_bound": "67445/41472"
+        }
+      ],
+      "passed": true
+    },
+    "Doob_range_exact": [
+      {
+        "T": 0,
+        "E_range_plus_one": "1",
+        "E_max_abs_squared": "0"
+      },
+      {
+        "T": 1,
+        "E_range_plus_one": "3/2",
+        "E_max_abs_squared": "1/2"
+      },
+      {
+        "T": 2,
+        "E_range_plus_one": "15/8",
+        "E_max_abs_squared": "9/8"
+      },
+      {
+        "T": 3,
+        "E_range_plus_one": "35/16",
+        "E_max_abs_squared": "57/32"
+      },
+      {
+        "T": 4,
+        "E_range_plus_one": "315/128",
+        "E_max_abs_squared": "315/128"
+      },
+      {
+        "T": 5,
+        "E_range_plus_one": "693/256",
+        "E_max_abs_squared": "405/128"
+      },
+      {
+        "T": 6,
+        "E_range_plus_one": "3003/1024",
+        "E_max_abs_squared": "7963/2048"
+      },
+      {
+        "T": 7,
+        "E_range_plus_one": "6435/2048",
+        "E_max_abs_squared": "37927/8192"
+      },
+      {
+        "T": 8,
+        "E_range_plus_one": "109395/32768",
+        "E_max_abs_squared": "176469/32768"
+      },
+      {
+        "T": 9,
+        "E_range_plus_one": "230945/65536",
+        "E_max_abs_squared": "806395/131072"
+      },
+      {
+        "T": 10,
+        "E_range_plus_one": "969969/262144",
+        "E_max_abs_squared": "1816199/262144"
+      },
+      {
+        "T": 11,
+        "E_range_plus_one": "2028117/524288",
+        "E_max_abs_squared": "16172289/2097152"
+      },
+      {
+        "T": 12,
+        "E_range_plus_one": "16900975/4194304",
+        "E_max_abs_squared": "71310921/8388608"
+      },
+      {
+        "T": 13,
+        "E_range_plus_one": "35102025/8388608",
+        "E_max_abs_squared": "155951147/16777216"
+      },
+      {
+        "T": 14,
+        "E_range_plus_one": "145422675/33554432",
+        "E_max_abs_squared": "1354831925/134217728"
+      },
+      {
+        "T": 15,
+        "E_range_plus_one": "300540195/67108864",
+        "E_max_abs_squared": "2925136837/268435456"
+      },
+      {
+        "T": 16,
+        "E_range_plus_one": "9917826435/2147483648",
+        "E_max_abs_squared": "25132179405/2147483648"
+      },
+      {
+        "T": 17,
+        "E_range_plus_one": "20419054425/4294967296",
+        "E_max_abs_squared": "3358730751/268435456"
+      },
+      {
+        "T": 18,
+        "E_range_plus_one": "83945001525/17179869184",
+        "E_max_abs_squared": "457816346269/34359738368"
+      },
+      {
+        "T": 19,
+        "E_range_plus_one": "172308161025/34359738368",
+        "E_max_abs_squared": "971607684575/68719476736"
+      },
+      {
+        "T": 20,
+        "E_range_plus_one": "1412926920405/274877906944",
+        "E_max_abs_squared": "4110990545367/274877906944"
+      }
+    ],
+    "lazy_exit_exact": [
+      {
+        "radius": 1,
+        "E_exit_at_zero": "2"
+      },
+      {
+        "radius": 2,
+        "E_exit_at_zero": "8"
+      },
+      {
+        "radius": 3,
+        "E_exit_at_zero": "18"
+      },
+      {
+        "radius": 4,
+        "E_exit_at_zero": "32"
+      },
+      {
+        "radius": 5,
+        "E_exit_at_zero": "50"
+      },
+      {
+        "radius": 6,
+        "E_exit_at_zero": "72"
+      },
+      {
+        "radius": 7,
+        "E_exit_at_zero": "98"
+      },
+      {
+        "radius": 8,
+        "E_exit_at_zero": "128"
+      },
+      {
+        "radius": 9,
+        "E_exit_at_zero": "162"
+      },
+      {
+        "radius": 10,
+        "E_exit_at_zero": "200"
+      },
+      {
+        "radius": 11,
+        "E_exit_at_zero": "242"
+      },
+      {
+        "radius": 12,
+        "E_exit_at_zero": "288"
+      }
+    ],
+    "net_interval_cover": {
+      "cases": 10095,
+      "passed": true
+    }
+  },
+  "all_passed": true
+}

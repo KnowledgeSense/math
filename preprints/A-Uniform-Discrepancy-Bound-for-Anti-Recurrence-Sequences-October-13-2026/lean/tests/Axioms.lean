@@ -1,0 +1,29 @@
+import WeakClergyman
+
+#print axioms WeakClergyman.AntiRecurrence.block_rank_bound
+#print axioms WeakClergyman.AntiRecurrence.block_span
+#print axioms WeakClergyman.AntiRecurrence.weighted_block_bounds
+#print axioms WeakClergyman.AntiRecurrence.disjoint_values
+#print axioms WeakClergyman.AntiRecurrence.complementary_rank_A
+#print axioms WeakClergyman.AntiRecurrence.complementary_rank
+#print axioms WeakClergyman.AntiRecurrence.initial_index_lower_A
+#print axioms WeakClergyman.AntiRecurrence.initial_index_lower_B
+#print axioms WeakClergyman.mem_valuesBelow
+#print axioms WeakClergyman.index_le_value
+#print axioms WeakClergyman.valuesBelow_at
+#print axioms WeakClergyman.card_valuesBelow_at
+#print axioms WeakClergyman.valuesBelow_mono
+#print axioms WeakClergyman.card_valuesBelow_le
+#print axioms WeakClergyman.card_valuesBelow_gt
+#print axioms WeakClergyman.rank_bracket
+#print axioms WeakClergyman.AntiRecurrence.initial_large
+#print axioms WeakClergyman.AntiRecurrence.iterated_separation
+#print axioms WeakClergyman.AntiRecurrence.earlier_anchor
+#print axioms WeakClergyman.discrepancy_bounds
+#print axioms WeakClergyman.uniform_discrepancy
+#print axioms WeakClergyman.AntiRecurrence.forward_position
+#print axioms WeakClergyman.AntiRecurrence.separation
+#print axioms WeakClergyman.AntiRecurrence.tau_lower
+#print axioms WeakClergyman.AntiRecurrence.first_block
+#print axioms WeakClergyman.AntiRecurrence.initial_value
+#print axioms WeakClergyman.AntiRecurrence.initial_bounds

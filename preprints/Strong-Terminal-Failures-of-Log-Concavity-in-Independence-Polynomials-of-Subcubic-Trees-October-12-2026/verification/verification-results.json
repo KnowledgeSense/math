@@ -1,0 +1,417 @@
+{
+  "method": "Explicit adjacency lists; generic minimum-vertex-cover DP; exact integer and Fraction arithmetic",
+  "blocks": [
+    {
+      "t": 0,
+      "s": 1,
+      "vertices": 1,
+      "d": 1,
+      "w": 1,
+      "brute_force": true
+    },
+    {
+      "t": 0,
+      "s": 2,
+      "vertices": 5,
+      "d": 4,
+      "w": 6,
+      "brute_force": true
+    },
+    {
+      "t": 0,
+      "s": 3,
+      "vertices": 9,
+      "d": 10,
+      "w": 17,
+      "brute_force": true
+    },
+    {
+      "t": 0,
+      "s": 4,
+      "vertices": 13,
+      "d": 25,
+      "w": 37,
+      "brute_force": true
+    },
+    {
+      "t": 0,
+      "s": 5,
+      "vertices": 17,
+      "d": 55,
+      "w": 78,
+      "brute_force": false
+    },
+    {
+      "t": 0,
+      "s": 6,
+      "vertices": 21,
+      "d": 121,
+      "w": 155,
+      "brute_force": false
+    },
+    {
+      "t": 1,
+      "s": 1,
+      "vertices": 5,
+      "d": 4,
+      "w": 6,
+      "brute_force": true
+    },
+    {
+      "t": 1,
+      "s": 2,
+      "vertices": 13,
+      "d": 25,
+      "w": 37,
+      "brute_force": true
+    },
+    {
+      "t": 1,
+      "s": 3,
+      "vertices": 21,
+      "d": 130,
+      "w": 173,
+      "brute_force": false
+    },
+    {
+      "t": 1,
+      "s": 4,
+      "vertices": 29,
+      "d": 676,
+      "w": 750,
+      "brute_force": false
+    },
+    {
+      "t": 1,
+      "s": 5,
+      "vertices": 37,
+      "d": 3406,
+      "w": 3616,
+      "brute_force": false
+    },
+    {
+      "t": 1,
+      "s": 6,
+      "vertices": 45,
+      "d": 17161,
+      "w": 17507,
+      "brute_force": false
+    },
+    {
+      "t": 2,
+      "s": 1,
+      "vertices": 13,
+      "d": 25,
+      "w": 37,
+      "brute_force": true
+    },
+    {
+      "t": 2,
+      "s": 2,
+      "vertices": 29,
+      "d": 676,
+      "w": 750,
+      "brute_force": false
+    },
+    {
+      "t": 2,
+      "s": 3,
+      "vertices": 45,
+      "d": 17602,
+      "w": 18389,
+      "brute_force": false
+    },
+    {
+      "t": 2,
+      "s": 4,
+      "vertices": 61,
+      "d": 458329,
+      "w": 459829,
+      "brute_force": false
+    },
+    {
+      "t": 2,
+      "s": 5,
+      "vertices": 77,
+      "d": 11917231,
+      "w": 11936370,
+      "brute_force": false
+    },
+    {
+      "t": 2,
+      "s": 6,
+      "vertices": 93,
+      "d": 309865609,
+      "w": 309902387,
+      "brute_force": false
+    }
+  ],
+  "positive_models": [
+    {
+      "q": 2,
+      "a": 256,
+      "phase_components": 2,
+      "gaussian_coefficients": 3
+    },
+    {
+      "q": 3,
+      "a": 256,
+      "phase_components": 3,
+      "gaussian_coefficients": 4
+    },
+    {
+      "q": 4,
+      "a": 256,
+      "phase_components": 4,
+      "gaussian_coefficients": 5
+    },
+    {
+      "q": 5,
+      "a": 256,
+      "phase_components": 5,
+      "gaussian_coefficients": 6
+    },
+    {
+      "q": 6,
+      "a": 256,
+      "phase_components": 6,
+      "gaussian_coefficients": 7
+    },
+    {
+      "q": 7,
+      "a": 256,
+      "phase_components": 7,
+      "gaussian_coefficients": 8
+    },
+    {
+      "q": 8,
+      "a": 256,
+      "phase_components": 8,
+      "gaussian_coefficients": 9
+    }
+  ],
+  "graphs": [
+    {
+      "r": 1,
+      "H": 1,
+      "t": 0,
+      "chosen_t": 4,
+      "theorem_parameters": false,
+      "vertices": 814,
+      "edges": 813,
+      "max_degree": 3,
+      "alpha": 409,
+      "strict_indices": [
+        true
+      ],
+      "coefficient_bounds": null,
+      "exact_example_checks": null,
+      "coefficient_bits": [
+        44,
+        84,
+        125
+      ],
+      "coefficient_digest": "fbc80bd8d1ecc3e7727ec623217ab0c75f40905ec5f66f8d8ff6ea7a24bce3da"
+    },
+    {
+      "r": 2,
+      "H": 1,
+      "t": 0,
+      "chosen_t": 5,
+      "theorem_parameters": false,
+      "vertices": 4467,
+      "edges": 4466,
+      "max_degree": 3,
+      "alpha": 2238,
+      "strict_indices": [
+        true,
+        false
+      ],
+      "coefficient_bounds": null,
+      "exact_example_checks": null,
+      "coefficient_bits": [
+        269,
+        356,
+        445,
+        533
+      ],
+      "coefficient_digest": "02cb5d2c149d5f75975f2370bd6214530c735af76cc3254951ecdd7891beaf46"
+    },
+    {
+      "r": 2,
+      "H": 1,
+      "t": 1,
+      "chosen_t": 5,
+      "theorem_parameters": false,
+      "vertices": 8987,
+      "edges": 8986,
+      "max_degree": 3,
+      "alpha": 4498,
+      "strict_indices": [
+        true,
+        true
+      ],
+      "coefficient_bounds": null,
+      "exact_example_checks": null,
+      "coefficient_bits": [
+        541,
+        714,
+        891,
+        1069
+      ],
+      "coefficient_digest": "e07090acd2be6985a6372206eb77c9a602fd51599f766d3588dcbfa12419aa2c"
+    },
+    {
+      "r": 1,
+      "H": 1,
+      "t": 4,
+      "chosen_t": 4,
+      "theorem_parameters": true,
+      "vertices": 13354,
+      "edges": 13353,
+      "max_degree": 3,
+      "alpha": 6679,
+      "strict_indices": [
+        true
+      ],
+      "coefficient_bounds": true,
+      "exact_example_checks": {
+        "power_bracket": true,
+        "relative_model_error_less_than_1e_5": true
+      },
+      "coefficient_bits": [
+        696,
+        1318,
+        1975
+      ],
+      "coefficient_digest": "856e4b82bb265fa5113880747b08c590704eb1f6a16f96590fc8b00ba688b19b"
+    },
+    {
+      "r": 2,
+      "H": 1,
+      "t": 5,
+      "chosen_t": 5,
+      "theorem_parameters": true,
+      "vertices": 144587,
+      "edges": 144586,
+      "max_degree": 3,
+      "alpha": 72298,
+      "strict_indices": [
+        true,
+        true
+      ],
+      "coefficient_bounds": true,
+      "exact_example_checks": null,
+      "coefficient_bits": [
+        8651,
+        11399,
+        14219,
+        17114
+      ],
+      "coefficient_digest": "ee756e2ba0c90d0ad992c45ff160cf07845042fa0fead42d478a30f1bda974d7"
+    },
+    {
+      "r": 3,
+      "H": 1,
+      "t": 5,
+      "chosen_t": 5,
+      "theorem_parameters": true,
+      "vertices": 472734,
+      "edges": 472733,
+      "max_degree": 3,
+      "alpha": 236375,
+      "strict_indices": [
+        true,
+        true,
+        true
+      ],
+      "coefficient_bounds": true,
+      "exact_example_checks": null,
+      "coefficient_bits": [
+        30015,
+        34869,
+        39797,
+        44798,
+        49874
+      ],
+      "coefficient_digest": "8f14f52a9ed4dfd031b19066bc911ec1295ed641656f83920e4fa69ce3ed1cfb"
+    },
+    {
+      "r": 4,
+      "H": 1,
+      "t": 5,
+      "chosen_t": 5,
+      "theorem_parameters": true,
+      "vertices": 1178083,
+      "edges": 1178082,
+      "max_degree": 3,
+      "alpha": 589054,
+      "strict_indices": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "coefficient_bounds": true,
+      "exact_example_checks": null,
+      "coefficient_bits": [
+        77293,
+        84856,
+        92492,
+        100202,
+        107987,
+        115846
+      ],
+      "coefficient_digest": "7dd6deed147c650f75d975c0acb13c462f776308305f0b0a2602f86bf3d547aa"
+    },
+    {
+      "r": 1,
+      "H": 1000000,
+      "t": 5,
+      "chosen_t": 5,
+      "theorem_parameters": true,
+      "vertices": 26730,
+      "edges": 26729,
+      "max_degree": 3,
+      "alpha": 13367,
+      "strict_indices": [
+        true
+      ],
+      "coefficient_bounds": true,
+      "exact_example_checks": null,
+      "coefficient_bits": [
+        1392,
+        2634,
+        3950
+      ],
+      "coefficient_digest": "3a9f322a9a00c80b490714a0b099ae31f996877ea26317f4aca57f1df8ea2921"
+    },
+    {
+      "r": 2,
+      "H": 1000000,
+      "t": 6,
+      "chosen_t": 6,
+      "theorem_parameters": true,
+      "vertices": 289227,
+      "edges": 289226,
+      "max_degree": 3,
+      "alpha": 144618,
+      "strict_indices": [
+        true,
+        true
+      ],
+      "coefficient_bounds": true,
+      "exact_example_checks": null,
+      "coefficient_bits": [
+        17302,
+        22795,
+        28437,
+        34227
+      ],
+      "coefficient_digest": "fad1e9f524097415e02e8b52b722207928b4f648da2dd0eb33c84117133192b2"
+    }
+  ],
+  "elapsed_seconds": 9.664845900028013,
+  "all_assertions_satisfied": true,
+  "scope": "Finite checks of the explicit construction and coefficient inequalities."
+}

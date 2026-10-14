@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "seed": 2026100811,
+  "arguments": {
+    "seed": 2026100811,
+    "random_padded": 20000,
+    "random_theorem": 10000,
+    "brute_force": 350,
+    "output": "results.json"
+  },
+  "counts": {
+    "bruteforce_construction_cases": 350,
+    "bruteforce_existence_cases": 350,
+    "cases_k1": 17420,
+    "cases_with_empty_rows": 257981,
+    "cases_with_missing_nonempty_root": 10596,
+    "cases_with_redundant_above_cardinality": 258092,
+    "cases_with_some_real_elements": 289145,
+    "cases_with_unequal_row_lengths": 250954,
+    "cases_with_zero_capacity_constraint": 93378,
+    "deep_chain_cases": 5,
+    "direct_cyclic_windows": 4261251,
+    "exhaustive_active_patterns": 74958,
+    "exhaustive_padded_cases": 277212,
+    "exhaustive_presentations": 4228,
+    "exhaustive_theorem_inputs": 1841,
+    "maximum_capacity": 52,
+    "maximum_ground_size": 256,
+    "maximum_row_count": 9,
+    "nested_support_comparisons": 182908,
+    "permutation_candidates": 42100,
+    "permutation_feasible_candidates": 24325,
+    "random_padded_cases": 20000,
+    "random_theorem_cases": 10000,
+    "rank_crosschecks": 4120,
+    "surviving_label_comparisons": 289177,
+    "targeted_cases": 32,
+    "theorem_cases": 10376,
+    "zero_length_window_cases": 4414
+  },
+  "suite_seconds": {
+    "exhaustive_labels": 0.516,
+    "exhaustive_padded": 8.656,
+    "targeted": 0.172,
+    "random_padded": 7.875,
+    "random_theorem": 8.875,
+    "brute_force_existence": 0.359
+  },
+  "elapsed_seconds": 26.453
+}

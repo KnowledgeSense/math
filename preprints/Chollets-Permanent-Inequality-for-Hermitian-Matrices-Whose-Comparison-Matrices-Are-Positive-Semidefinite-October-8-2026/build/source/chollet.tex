@@ -1,0 +1,568 @@
+\documentclass[11pt]{amsart}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1.1in]{geometry}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+\newcommand{\per}{\operatorname{per}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\conj}[1]{\overline{#1}}
+
+\begin{document}
+
+\title[Chollet's inequality and comparison matrices]{Chollet's permanent inequality for Hermitian matrices whose comparison matrices are positive semidefinite}
+
+\author{Knowledge Sense}
+\address{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{8 October 2026}
+
+\subjclass[2020]{Primary 15A15; Secondary 15A45, 15B48, 05C50}
+
+\keywords{Permanent, Hadamard product, Chollet's conjecture, comparison matrix, scaled diagonally dominant matrix, factor width, graph Laplacian}
+
+\begin{abstract}
+Chollet conjectured in 1982 that $\per(A\circ B)\le\per(A)\per(B)$ for Hermitian positive semidefinite matrices $A$ and $B$, where $\circ$ denotes the entrywise product. We prove this inequality for matrices of every order whose comparison matrices, obtained by replacing each off-diagonal entry by minus its modulus, are positive semidefinite; equivalently, for scaled diagonally dominant matrices, or matrices of factor width at most two. In particular $\per(A\circ\conj{A})\le\per(A)^2$ for every such $A$. The class contains all real symmetric positive semidefinite $Z$-matrices, so Chollet's inequality holds for any two graph Laplacians with nonnegative edge weights on a common vertex set. The proof is an induction on the order based on the identities for bordered permanents and the doubled permanental polynomial of Li, Zhao and Luo. The new ingredient is a bound, valid in every order, for the coefficients of $\per(B+s\,xx^*)$, where $B$ and $x$ come from a bordering of $A$: by grouping the terms of a permanental Cauchy--Binet expansion according to the tree components of the selected edges, we show that for $k\ge1$ the coefficient of $s^k$ is at most that of $s$, which in turn is at most $\per(B)$, and the comparison class is preserved along the rank-one pencil used in the induction.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+For an $n\times n$ matrix $A=(a_{ij})$ the permanent is
+\[
+\per(A)=\sum_{\sigma\in S_n}\prod_{i=1}^n a_{i,\sigma(i)},
+\]
+and the permanent of the empty matrix is $1$. We write $A\circ B$ for the entrywise (Hadamard) product of two matrices of the same size and $\conj{A}$ for the entrywise complex conjugate of $A$. We write $A\succeq 0$ when $A$ is Hermitian positive semidefinite. By the Schur product theorem, $A\circ B\succeq0$ whenever $A,B\succeq0$ \cite{HJ}, and the inequalities of Oppenheim and Hadamard give $\det(A\circ B)\ge\det(A)\prod_i b_{ii}\ge\det(A)\det(B)$. Chollet \cite{Cho} asked for the permanental analogue.
+
+\begin{conjecture}[Chollet]\label{conj:chollet}
+If $A$ and $B$ are $n\times n$ Hermitian positive semidefinite matrices, then
+\begin{equation}\label{eq:chollet}
+\per(A\circ B)\le\per(A)\per(B).
+\end{equation}
+\end{conjecture}
+
+Chollet also observed that it suffices to prove
+\begin{equation}\label{eq:self}
+\per(A\circ\conj{A})\le\per(A)^2
+\end{equation}
+for every $A\succeq0$. Indeed, the Cauchy--Schwarz inequality over permutations gives
+\begin{equation}\label{eq:cs}
+|\per(A\circ B)|^2\le\per(A\circ\conj{A})\,\per(B\circ\conj{B})
+\end{equation}
+for arbitrary complex matrices of the same order, and permanents of positive semidefinite matrices are nonnegative; see the proof of \cite[Lemma~2.2]{Bea}, \cite[Lemma~2]{PS} and \cite[Lemma~2.1]{Ma}.
+
+Conjecture~\ref{conj:chollet} was proved for $n\le3$ by Gregorac and Hentzel \cite{GH}, and for $n=4$ by Hutchinson \cite{Hut} for real matrices and by Rodtes \cite{Rod} in general. In a recent preprint, Li, Zhao and Luo \cite{LZL} prove it for $n\le6$ by an induction on the order based on bordered matrices. The stronger inequality $\per(A\circ B)\le\per(A)\prod_ib_{ii}$ proposed by Bapat and Sunder \cite{BS} fails in general \cite{Dru}, but it holds in several restricted classes. Beasley proved it when $A$ is a real symmetric positive semidefinite matrix with nonnegative entries and $B$ is an arbitrary Hermitian positive semidefinite matrix \cite[Theorem~3.2]{Bea}, and deduced it for tridiagonal Hermitian positive semidefinite $A$ \cite[Corollary~3.2.3]{Bea}. Pant and Singh \cite{PS} proved $|\per(A\circ B)|\le\per(A)\prod_i b_{ii}$ when $A$ is a real symmetric $Z$-matrix with nonnegative diagonal and bipartite support and $B\succeq0$ is arbitrary \cite[Theorem~1]{PS}, and deduced Chollet's inequality for graph Laplacians all of whose blocks are bipartite graphs, cycles or complete graphs \cite[Corollary~6]{PS}. Ma \cite{Ma} proved quantitative forms of \eqref{eq:self} for matrices of rank at most four and order at least ten \cite[Theorem~1.2]{Ma}, and for order-nine rank-four tight correlation matrices \cite[Theorem~1.3]{Ma}. We refer to \cite{Zha} for a survey.
+
+\subsection{The main result}
+
+For a Hermitian $n\times n$ matrix $A$, its \emph{comparison matrix} $M(A)$ is the real symmetric matrix with
+\[
+M(A)_{ii}=a_{ii},\qquad M(A)_{ij}=-|a_{ij}|\quad(i\ne j).
+\]
+Let $\cC_n$ denote the set of Hermitian $n\times n$ matrices $A$ with $M(A)\succeq0$. For $v\in\C^n$ write $|v|$ for the vector of moduli $(|v_1|,\dots,|v_n|)$. Since
+\[
+v^*Av=\sum_i a_{ii}|v_i|^2+\sum_{i\ne j}a_{ij}\conj{v_i}v_j\ \ge\ |v|^{T}M(A)\,|v|,
+\]
+every matrix in $\cC_n$ is positive semidefinite. It is known that, for Hermitian matrices with nonnegative diagonal, $M(A)\succeq0$ holds if and only if $A$ is scaled diagonally dominant, and if and only if $A$ has factor width at most two \cite[Theorem~3.9]{SN}; see also \cite[Theorem~9]{BCPT}. These notions are recalled in Section~\ref{subsec:class}. The class $\cC_n$ contains every diagonally dominant Hermitian matrix with nonnegative diagonal, and every real symmetric positive semidefinite $Z$-matrix $A$, for which $M(A)=A$. On the other hand, the all-ones matrix $J_3$ is positive semidefinite, but $M(J_3)=2I_3-J_3$ has eigenvalues $-1,2,2$, so $J_3\notin\cC_3$.
+
+\begin{theorem}\label{thm:main}
+Let $n\ge1$ and $A\in\cC_n$. Then
+\begin{equation}\label{eq:main}
+\per(A\circ\conj{A})\le\per(A)^2.
+\end{equation}
+Consequently, for all $A,B\in\cC_n$,
+\begin{equation}\label{eq:main2}
+\per(A\circ B)\le\per(A)\per(B).
+\end{equation}
+\end{theorem}
+
+No restriction on the rank, the support or the phases of the off-diagonal entries is imposed beyond $M(A)\succeq0$. We make no claim when $M(A)$ is indefinite, or when only one of $A$ and $B$ lies in $\cC_n$.
+
+For a graph $G$ with nonnegative edge weights $w_{ij}=w_{ji}$ on the vertex set $[n]=\{1,\dots,n\}$, the weighted Laplacian $L_G$ has entries $(L_G)_{ii}=\sum_{j\ne i}w_{ij}$ and $(L_G)_{ij}=-w_{ij}$ for $i\ne j$.
+
+\begin{corollary}\label{cor:laplacian}
+Let $G$ and $G'$ be graphs on the vertex set $[n]$ with nonnegative edge weights, and let $\Delta,\Delta'$ be $n\times n$ diagonal matrices with nonnegative entries. Then
+\[
+\per\bigl((L_G+\Delta)\circ(L_{G'}+\Delta')\bigr)\le\per(L_G+\Delta)\,\per(L_{G'}+\Delta').
+\]
+In particular $\per(L_G\circ L_G)\le\per(L_G)^2$ for every graph $G$.
+\end{corollary}
+
+Corollary~\ref{cor:laplacian} answers affirmatively a question of \cite[Section~6]{PS}, namely whether Chollet's inequality holds for the Laplacian of every graph. The stronger inequality $\per(L_G\circ L_G)\le\per(L_G)\prod_v\deg_G(v)$ asked there is not addressed here.
+
+For $n\le6$, Theorem~\ref{thm:main} is contained in \cite{LZL}. Tridiagonal Hermitian positive semidefinite matrices lie in $\cC_n$, since their support is a subgraph of a path and a diagonal unitary similarity takes such a matrix to its comparison matrix; for them Theorem~\ref{thm:main} follows from \cite[Corollary~3.2.3]{Bea} together with $\per(B)\ge\prod_ib_{ii}$ for $B\succeq0$ (see \cite[Corollary~1]{PS}). Weighted Laplacians with bipartite support are covered by \cite[Theorem~1]{PS}. The new content of Theorem~\ref{thm:main} therefore concerns matrices of order at least seven outside the classes of \cite{Bea}, \cite{PS} and \cite{Ma}. For example, let $W_8$ be the wheel with eight vertices, a cycle of length seven together with a vertex adjacent to all of its vertices. Its Laplacian has order eight and rank seven. Since $W_8$ contains triangles, no signature similarity makes its Laplacian entrywise nonnegative, and since $W_8$ is $2$-connected, its only block is neither bipartite, nor a cycle, nor complete.
+
+\subsection{Outline of the proof}
+
+The proof is an induction on the order. Let $A\in\cC_{m+1}$, and write
+\[
+A=\begin{pmatrix} a & z^*\\ z & B\end{pmatrix},\qquad a>0,\qquad x=a^{-1/2}z,\qquad H=B-xx^*,
+\]
+so that $H$ is the Schur complement of $a$. Put $B_t=H+t\,xx^*$ for real $t$, and $F(t)=\per(B_t)$. The identities for bordered permanents of Li, Zhao and Luo \cite[Proposition~3.2]{LZL}, which we call border identities, give $\per(A)/a=F(1)+F'(1)$, and their doubled polynomial with its evaluation at $(\sqrt2,2)$ \cite[Proposition~4.1]{LZL} gives
+\[
+\per(A\circ\conj{A})/a^2\le\per\bigl(B_{\sqrt2}\circ\conj{B_{\sqrt2}}\bigr);
+\]
+we reproduce both derivations in Lemmas~\ref{lem:border} and~\ref{lem:doubled}. If $B_{\sqrt2}$ satisfies \eqref{eq:main}, it remains to show $F(\sqrt2)\le F(1)+F'(1)$. Expanding
+\[
+F(1+s)=\per(B+s\,xx^*)=\sum_{k=0}^m\beta_ks^k,
+\]
+this inequality follows from $\beta_k\le\beta_1$ for $k\ge1$, because $\sum_{k\ge1}(\sqrt2-1)^k=1/\sqrt2<1$.
+
+The main new step is Theorem~\ref{thm:forest}, which proves $\beta_k\le\beta_1\le\beta_0$ for every $A\in\cC_{m+1}$ and every $m$. After a positive diagonal congruence we may assume that $A$ is diagonally dominant. Then $B$ is the sum of a nonnegative diagonal matrix and rank-one terms supported on two coordinates (cf.\ \cite[Lemma~3.7]{SN}), and the permanental Cauchy--Binet formula expands $\per(B+s\,xx^*)$ as a sum over multiplicities of the corresponding columns. When the terms are grouped according to the multigraph formed by the selected edges, the nonzero ones come from multigraphs whose components are trees or have as many edges as vertices. Each tree receives exactly one further column, either a diagonal column, which fixes a root, or a copy of $x$. Diagonal dominance shows that the relative masses $r_T$ of the trees, defined in Section~\ref{subsec:expansion}, add up to at most one, and the $k$ identical copies of $x$ contribute the factor $k!$. The elementary inequality $k!\,e_k(r)\le e_1(r)\le1$ then yields the claim. The second ingredient, Lemma~\ref{lem:closure}, shows that $B_t\in\cC_m$ for $0\le t\le2$, so that the induction hypothesis applies to $B_{\sqrt2}$. Neither ingredient depends on the rank, on the support, or on the order.
+
+\subsection*{Dependencies}
+Besides the Schur product theorem, the proof uses only elementary facts, for which we include proofs: the permanental Cauchy--Binet formula, the scaling of $\cC_n$ to diagonal dominance and the decomposition of a diagonally dominant matrix into rank-one terms supported on at most two coordinates, both known from \cite{SN,BCPT}, and the border identities and the doubled polynomial of \cite{LZL}. The equivalent descriptions of $\cC_n$ in Proposition~\ref{prop:known} are quoted from \cite{SN,BCPT} and are not used in the proof. The main theorem of \cite{LZL}, Chollet's inequality for $n\le6$, is not used as a hypothesis of the induction, which starts at $n=1$.
+
+\subsection*{Organization}
+Section~\ref{sec:prelim} collects facts on the comparison class, the permanental Cauchy--Binet formula and bordered permanents. Section~\ref{sec:forest} proves the coefficient bound. Section~\ref{sec:closure} shows that the pencil $B_t$ stays in the comparison class. Section~\ref{sec:proof} completes the proof of Theorem~\ref{thm:main}, and Section~\ref{sec:remarks} discusses graph Laplacians and the scope of the result.
+
+\subsection*{Notation}
+For a matrix $X$, $X(i|j)$ denotes the submatrix obtained by deleting row $i$ and column $j$. We write $e_i$ for the standard basis vectors, $\mathbf{1}$ for the all-ones vector, and $\N=\{0,1,2,\dots\}$. Inequalities between real matrices or vectors written with $\le$ or $\ge$ are entrywise, while $\succeq$ and $\succ$ refer to the positive semidefinite and positive definite orders. For a finite sequence $r=(r_1,\dots,r_p)$ of numbers, $e_k(r)$ is its $k$-th elementary symmetric polynomial, with $e_0(r)=1$ and $e_k(r)=0$ for $k>p$.
+
+\section{Preliminaries}\label{sec:prelim}
+
+\subsection{The comparison class}\label{subsec:class}
+
+\begin{lemma}\label{lem:class}
+Let $A\in\cC_n$.
+\begin{enumerate}
+\item[(a)] $A\succeq0$. In particular $a_{ii}\ge0$, and if $a_{ii}=0$ then the $i$-th row and the $i$-th column of $A$ vanish.
+\item[(b)] For every positive diagonal matrix $D$, $DAD\in\cC_n$ and $M(DAD)=D\,M(A)\,D$.
+\item[(c)] For every $\varepsilon\ge0$, $A+\varepsilon I\in\cC_n$ and $M(A+\varepsilon I)=M(A)+\varepsilon I$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Part (a) was shown in the introduction, and a vanishing diagonal entry of a positive semidefinite matrix forces its row and column to vanish, by the $2\times2$ principal minors. Parts (b) and (c) follow directly from the definition, since $|\theta_i\theta_ja_{ij}|=\theta_i\theta_j|a_{ij}|$ for $D=\diag(\theta_1,\dots,\theta_n)$ with $\theta_i>0$.
+\end{proof}
+
+A Hermitian matrix $A$ with nonnegative diagonal is \emph{diagonally dominant} if $a_{ii}\ge\sum_{j\ne i}|a_{ij}|$ for all $i$, and \emph{strictly} so if these inequalities are strict. It is \emph{scaled diagonally dominant} if $DAD$ is diagonally dominant for some positive diagonal matrix $D$. A matrix $A\succeq0$ has \emph{factor width at most two} if $A=\sum_\ell v_\ell v_\ell^*$ for finitely many vectors $v_\ell$, each with at most two nonzero entries \cite{BCPT,SN}.
+
+\begin{proposition}[{\cite[Theorem~3.9]{SN}, \cite[Theorem~9]{BCPT}}]\label{prop:known}
+For a Hermitian matrix $A$ with nonnegative diagonal entries the following are equivalent:
+\begin{enumerate}
+\item[(i)] $A\in\cC_n$;
+\item[(ii)] $A$ is scaled diagonally dominant;
+\item[(iii)] $A\succeq0$ and $A$ has factor width at most two.
+\end{enumerate}
+\end{proposition}
+
+In \cite{SN} the comparison matrix is defined with the diagonal entries $|a_{ii}|$; for matrices with nonnegative diagonal this agrees with the convention used here, and every matrix in $\cC_n$ has nonnegative diagonal by Lemma~\ref{lem:class}(a). We use only the following two facts, for which we include short proofs.
+
+\begin{lemma}\label{lem:scaling}
+Let $A$ be Hermitian with $M(A)\succ0$. Then there is a positive diagonal matrix $D$ such that $DAD$ is strictly diagonally dominant.
+\end{lemma}
+
+\begin{proof}
+Write $M=M(A)$ and choose $s\ge\lambda_{\max}(M)$. Then $N=sI-M$ is symmetric and entrywise nonnegative, since $s\ge\lambda_{\max}(M)\ge M_{ii}$ for every $i$. The eigenvalues of $N$ lie in $[0,s-\lambda_{\min}(M)]$, so its spectral radius is $s-\lambda_{\min}(M)<s$. Hence
+\[
+M^{-1}=s^{-1}\sum_{k\ge0}(N/s)^k
+\]
+is entrywise nonnegative with diagonal entries at least $s^{-1}>0$. Therefore $v=M^{-1}\mathbf{1}$ has entries $v_i\ge(M^{-1})_{ii}>0$. With $D=\diag(v)$ we obtain
+\[
+(DAD)_{ii}-\sum_{j\ne i}|(DAD)_{ij}|=v_i\Bigl(a_{ii}v_i-\sum_{j\ne i}|a_{ij}|v_j\Bigr)=v_i\,(Mv)_i=v_i>0.\qedhere
+\]
+\end{proof}
+
+\begin{lemma}[{cf.\ the proof of \cite[Lemma~3.7]{SN}}]\label{lem:gram}
+Let $B$ be an $m\times m$ Hermitian diagonally dominant matrix with nonnegative diagonal, and put $d_i=b_{ii}-\sum_{j\ne i}|b_{ij}|\ge0$. Let $E$ be the set of pairs $e=\{i,j\}$ with $i<j$ and $b_{ij}\ne0$, and for such $e$ put
+\[
+w_e=|b_{ij}|>0,\qquad h_e=e_i+\frac{\conj{b_{ij}}}{w_e}\,e_j.
+\]
+Then $h_e$ is supported on $e$, both of its nonzero entries have modulus one, $w_e(h_e)_i\conj{(h_e)_j}=b_{ij}$, and
+\begin{equation}\label{eq:gram}
+B=\diag(d_1,\dots,d_m)+\sum_{e\in E}w_e\,h_eh_e^*.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The matrix $w_eh_eh_e^*$ has entries $w_e$ in positions $(i,i)$ and $(j,j)$, the entry $b_{ij}$ in position $(i,j)$, the entry $\conj{b_{ij}}=b_{ji}$ in position $(j,i)$, and zeros elsewhere. Summing over $e$ reproduces the off-diagonal part of $B$ and contributes $\sum_{j\ne i}|b_{ij}|$ to the $i$-th diagonal entry.
+\end{proof}
+
+\subsection{Permanental Cauchy--Binet formula}
+
+Let $Q$ be an $m\times N$ complex matrix with columns $q_1,\dots,q_N$. For $\mu\in\N^N$ with $|\mu|=\mu_1+\dots+\mu_N=m$, let $Q[\mu]$ be the $m\times m$ matrix in which the column $q_j$ appears exactly $\mu_j$ times. Since the permanent is invariant under permutations of columns, the order of the columns of $Q[\mu]$ is immaterial. Put $\mu!=\prod_j\mu_j!$.
+
+\begin{lemma}\label{lem:cb}
+For every $m\times N$ complex matrix $Q$,
+\begin{equation}\label{eq:cb}
+\per(QQ^*)=\sum_{\mu\in\N^N,\ |\mu|=m}\frac{|\per Q[\mu]|^2}{\mu!}.
+\end{equation}
+\end{lemma}
+
+This is the permanental analogue of the Cauchy--Binet formula; see \cite{Min}. We include a short proof.
+
+\begin{proof}
+Expanding the entries $(QQ^*)_{ik}=\sum_jq_{ij}\conj{q_{kj}}$ gives
+\[
+\per(QQ^*)=\sum_{f:[m]\to[N]}\ \prod_{i}q_{i,f(i)}\ \conj{\sum_{\sigma\in S_m}\prod_iq_{\sigma(i),f(i)}}.
+\]
+Say that $f$ has type $\mu$ if $|f^{-1}(j)|=\mu_j$ for all $j$, and put $S_\mu=\sum_{f\text{ of type }\mu}\prod_iq_{i,f(i)}$. As $\sigma$ runs over $S_m$, the map $f\circ\sigma^{-1}$ runs over the maps of the same type as $f$, each exactly $\mu!$ times, so the inner sum equals $\mu!\,S_\mu$. Hence $\per(QQ^*)=\sum_\mu\mu!\,|S_\mu|^2$. On the other hand, the $\mu!$ bijections between the rows and the labeled columns of $Q[\mu]$ that induce the same map $f$ give the same product, so $\per Q[\mu]=\mu!\,S_\mu$, and \eqref{eq:cb} follows.
+\end{proof}
+
+\begin{corollary}\label{cor:nonneg}
+Let $P_1,\dots,P_r$ be positive semidefinite matrices of the same order. Then $\per(t_1P_1+\dots+t_rP_r)$ is a polynomial in $t_1,\dots,t_r$ with nonnegative coefficients. In particular $\per(P)\ge0$ for every $P\succeq0$.
+\end{corollary}
+
+\begin{proof}
+Write $P_j=Q_jQ_j^*$. For $t\in[0,\infty)^r$ we have $\sum_jt_jP_j=Q(t)Q(t)^*$, where $Q(t)$ is obtained by concatenating the blocks $\sqrt{t_j}\,Q_j$. By Lemma~\ref{lem:cb}, every summand of \eqref{eq:cb} for $Q(t)$ is a nonnegative constant times a monomial in $t$, namely $\prod_jt_j^{c_j}$ with $c_j$ the number of selected columns coming from $Q_j$. Two polynomials that agree on $[0,\infty)^r$ coincide.
+\end{proof}
+
+\subsection{Bordered permanents}
+
+\begin{lemma}\label{lem:bordergeneral}
+Let $B$ be an $m\times m$ complex matrix, $u,v\in\C^m$ and $c\in\C$. Then
+\begin{align}
+\per\begin{pmatrix}c&v^T\\ u&B\end{pmatrix}&=c\,\per(B)+\sum_{i,j=1}^mu_iv_j\,\per\bigl(B(i|j)\bigr),\label{eq:bordergen}\\
+\frac{d}{ds}\per(B+s\,uv^T)\Big|_{s=s_0}&=\sum_{i,j=1}^mu_iv_j\,\per\bigl((B+s_0uv^T)(i|j)\bigr).\label{eq:derivative}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+Index the bordered matrix by $\{0,1,\dots,m\}$. Permutations fixing $0$ contribute $c\,\per(B)$. A permutation with $\sigma(0)=j$ and $\sigma(i)=0$ for some $i,j\ge1$ contributes $v_j\,u_i$ times a term of $\per(B(i|j))$, and every term arises exactly once. Formula \eqref{eq:derivative} follows from the multilinearity of the permanent in the entries: $\partial\per(X)/\partial x_{ij}=\per(X(i|j))$.
+\end{proof}
+
+Finally we record the Cauchy--Schwarz step \eqref{eq:cs}, which goes back to Chollet; see the proof of \cite[Lemma~2.2]{Bea}, \cite[Lemma~2]{PS} and \cite[Lemma~2.1]{Ma}.
+
+\begin{lemma}\label{lem:cs}
+For complex $n\times n$ matrices $A$ and $B$, $|\per(A\circ B)|^2\le\per(A\circ\conj{A})\,\per(B\circ\conj{B})$.
+\end{lemma}
+
+\begin{proof}
+With $x_\sigma=\prod_ia_{i,\sigma(i)}$ and $y_\sigma=\prod_ib_{i,\sigma(i)}$ we have $\per(A\circ B)=\sum_\sigma x_\sigma y_\sigma$, $\per(A\circ\conj{A})=\sum_\sigma|x_\sigma|^2$ and $\per(B\circ\conj{B})=\sum_\sigma|y_\sigma|^2$.
+\end{proof}
+
+\section{Domination of the border coefficients}\label{sec:forest}
+
+Throughout this section and the next we work in the following setting.
+
+\medskip
+\noindent\textbf{Setting.} Let $m\ge1$ and
+\begin{equation}\label{eq:setting}
+A=\begin{pmatrix}a&z^*\\ z&B\end{pmatrix}\in\cC_{m+1},\qquad a>0,\qquad x=a^{-1/2}z\in\C^m.
+\end{equation}
+Define $\beta_0,\dots,\beta_m$ by
+\begin{equation}\label{eq:beta}
+\per(B+s\,xx^*)=\sum_{k=0}^m\beta_ks^k.
+\end{equation}
+\medskip
+
+The polynomial \eqref{eq:beta} has degree at most $m$ in $s$, but in contrast with the determinant it is in general not affine in $s$.
+
+\begin{theorem}\label{thm:forest}
+In the setting \eqref{eq:setting}, all $\beta_k$ are nonnegative, and
+\begin{equation}\label{eq:forestbound}
+\beta_k\le\beta_1\le\beta_0\qquad(1\le k\le m).
+\end{equation}
+\end{theorem}
+
+Nonnegativity follows from Corollary~\ref{cor:nonneg}, since $B\succeq0$ by Lemma~\ref{lem:class}(a) and $xx^*\succeq0$. The rest of this section proves \eqref{eq:forestbound}.
+
+\subsection{Reduction to diagonally dominant matrices}\label{subsec:reduction}
+
+Suppose first that $M(A)\succ0$, and let $D=\diag(\theta_0,D_1)$ be a positive diagonal matrix as in Lemma~\ref{lem:scaling}, so that $A'=DAD$ is strictly diagonally dominant. The block data of $A'$ are
+\[
+a'=\theta_0^2a,\qquad z'=\theta_0D_1z,\qquad B'=D_1BD_1,\qquad x'=a'^{-1/2}z'=D_1x .
+\]
+Hence $\per(B'+s\,x'x'^*)=\per\bigl(D_1(B+s\,xx^*)D_1\bigr)=\det(D_1)^2\per(B+s\,xx^*)$, and every $\beta_k$ is multiplied by the same positive factor $\det(D_1)^2$. Thus \eqref{eq:forestbound} for $A$ is equivalent to \eqref{eq:forestbound} for $A'\in\cC_{m+1}$.
+
+For general $A\in\cC_{m+1}$ and $\varepsilon>0$, the matrix $A_\varepsilon=A+\varepsilon I$ satisfies $M(A_\varepsilon)=M(A)+\varepsilon I\succ0$ by Lemma~\ref{lem:class}(c). Its block data are $a+\varepsilon$, $z$, $B+\varepsilon I$ and $x_\varepsilon=(a+\varepsilon)^{-1/2}z$. The coefficients $\beta_k(\varepsilon)$ are polynomials in the entries of $B+\varepsilon I$, $x_\varepsilon$ and $\conj{x_\varepsilon}$, hence continuous in $\varepsilon\in[0,1]$, with $\beta_k(0)=\beta_k$. Inequalities \eqref{eq:forestbound} for $A_\varepsilon$ therefore pass to the limit $\varepsilon\to0$.
+
+Consequently it suffices to prove \eqref{eq:forestbound} when $A$ is diagonally dominant. We assume this from now on. Diagonal dominance in the first row and in the rows of $B$ gives
+\begin{equation}\label{eq:dd}
+a\ge\sum_{i=1}^m|z_i|,\qquad d_i:=b_{ii}-\sum_{j\ne i}|b_{ij}|\ge|z_i|\quad(1\le i\le m).
+\end{equation}
+In particular $B$ is diagonally dominant with nonnegative diagonal, and we use the notation $d_i$, $E$, $w_e$, $h_e$ of Lemma~\ref{lem:gram}.
+
+\subsection{Expansion over components}\label{subsec:expansion}
+
+For $s\ge0$, Lemma~\ref{lem:gram} gives $B+s\,xx^*=G_sG_s^*$, where $G_s$ is the $m\times(m+|E|+1)$ matrix with columns
+\begin{equation}\label{eq:columns}
+\sqrt{d_i}\,e_i\ \ (1\le i\le m),\qquad\sqrt{w_e}\,h_e\ \ (e\in E),\qquad\sqrt{s}\,x .
+\end{equation}
+We call them diagonal columns, edge columns and the $x$-column. A multiplicity vector for \eqref{eq:cb} consists of $\nu\in\N^m$ for the diagonal columns, $\mu\in\N^E$ for the edge columns and $k\in\N$ for the $x$-column, with $|\nu|+|\mu|+k=m$.
+
+For $\mu\in\N^E$ let $\Phi_\mu$ be the multigraph on the vertex set $[m]$ that contains $\mu_e$ copies of each edge $e$. Its connected components partition $[m]$; isolated vertices are components. For a component $C$, let $E_\mu(C)$ be the matrix with rows indexed by $C$ whose columns are the restrictions $h_e|_C$ of the edge vectors of the edges of $C$, each repeated $\mu_e$ times. A connected multigraph with $c$ vertices has at least $c-1$ edges, and it has exactly $c-1$ edges if and only if it is a tree; in that case it has no repeated edges. We call $\mu$ \emph{admissible} if every component of $\Phi_\mu$ has at most as many edges as vertices. For admissible $\mu$ every component is either a tree, or has exactly as many edges as vertices; we call the latter components \emph{unicyclic}. A unicyclic component may consist of a single edge of multiplicity two. We write $\cT(\mu)$ and $\cU(\mu)$ for the sets of tree components and unicyclic components.
+
+For a tree $T\in\cT(\mu)$ and $i\in T$, put
+\[
+D_T=\sum_{j\in T}d_j,\qquad c_{T,i}=\per\bigl(E_\mu(T)\text{ with row }i\text{ deleted}\bigr),
+\]
+where for a single vertex $T=\{i\}$ the matrix $E_\mu(T)$ is $1\times0$ and $c_{T,i}=1$.
+
+\begin{lemma}\label{lem:tree}
+For every tree $T\in\cT(\mu)$ and every $i\in T$, $|c_{T,i}|=1$.
+\end{lemma}
+
+\begin{proof}
+The square matrix $Y$ obtained from $E_\mu(T)$ by deleting row $i$ has rows indexed by $T\setminus\{i\}$ and columns indexed by the edges of $T$, and its entry in position $(v,e)$ is nonzero if and only if $v\in e$, in which case it has modulus one. A nonzero term of $\per(Y)$ corresponds to a bijection $\phi$ from the edges of $T$ to $T\setminus\{i\}$ with $\phi(e)\in e$. There is exactly one such bijection: if $T$ has at least two vertices, it has a leaf $\ell\ne i$; since $\ell$ must be the image of an edge containing it, the only edge at $\ell$ is mapped to $\ell$, and removing $\ell$ and this edge leaves a smaller tree containing $i$. Hence $\per(Y)$ is a single product of entries of modulus one.
+\end{proof}
+
+Expanding along its last column, we get $\per[E_\mu(T),\,x|_T]=\sum_{i\in T}c_{T,i}x_i$. Put
+\begin{equation}\label{eq:RT}
+R_T=\Bigl|\sum_{i\in T}c_{T,i}\,x_i\Bigr|^2=\frac1a\Bigl|\sum_{i\in T}c_{T,i}\,z_i\Bigr|^2 .
+\end{equation}
+We call $D_T$ the \emph{root mass} of $T$: it is the sum of the squared norms $d_j$ of the diagonal columns that can occupy the row of $T$ left free by its edge columns. When $D_T>0$, we call $r_T=R_T/D_T$ the \emph{relative mass} of $T$.
+
+\begin{proposition}\label{prop:forest}
+For $0\le k\le m$,
+\begin{equation}\label{eq:forest}
+\beta_k=\sum_{\mu\text{ admissible}}W_\mu\ k!\sum_{\substack{K\subseteq\cT(\mu)\\ |K|=k}}\ \prod_{T\in\cT(\mu)\setminus K}D_T\ \prod_{T\in K}R_T,
+\end{equation}
+where
+\[
+W_\mu=\prod_{e\in E}\frac{w_e^{\mu_e}}{\mu_e!}\ \prod_{C\in\cU(\mu)}\bigl|\per E_\mu(C)\bigr|^2\ \ge0,
+\]
+and the inner sum is zero when $k>|\cT(\mu)|$.
+\end{proposition}
+
+\begin{proof}
+Fix $s\ge0$ and multiplicities $(\nu,\mu,k)$ with $|\nu|+|\mu|+k=m$, and let $Y$ be the $m\times m$ matrix formed by the correspondingly repeated columns of $G_s$. We regard the repeated columns as labeled, so that $\per(Y)$ is the sum over bijections $\pi$ from the set of columns of $Y$ to $[m]$ of the products $\prod_{\text{col}}Y_{\pi(\text{col}),\text{col}}$, where only bijections with all factors nonzero matter.
+
+An edge column of a component $C$ of $\Phi_\mu$ is supported in the rows of $C$, so $\pi$ maps the edge columns of $C$ injectively into $C$. If $\mu$ is not admissible, some component has more edge columns than rows, there is no such $\pi$, and $\per(Y)=0$. Let $\mu$ be admissible. Then the edge columns of a unicyclic component occupy all of its rows, and those of a tree $T$ occupy all rows of $T$ except one. The number of remaining columns is
+\[
+|\nu|+k=m-|\mu|=\sum_C\bigl(|C|-\#\text{edges of }C\bigr)=|\cT(\mu)|,
+\]
+and they must be mapped onto the rows not occupied by edge columns, exactly one in each tree. A diagonal column $\sqrt{d_i}\,e_i$ must be mapped to row $i$. Consequently $\per(Y)=0$ unless $\nu$ is a $0$--$1$ vector, $\nu_i=0$ for all $i$ in unicyclic components, and each tree contains at most one $i$ with $\nu_i=1$. In that case let $K$ be the set of trees containing no such $i$, so that $|K|=k$, and for $T\notin K$ let $i_T$ be the unique vertex of $T$ with $\nu_{i_T}=1$; we call it the root of $T$. The bijection $\pi$ then decomposes into independent bijections inside the unicyclic components, inside each rooted tree (its edge columns onto $T\setminus\{i_T\}$), inside each tree of $K$ (its edge columns together with one copy of $x$ onto $T$), and an assignment of the $k$ labeled copies of $x$ to the $k$ trees of $K$. All $k!$ assignments give the same contribution. Hence, using the expansion of $\per[E_\mu(T),x|_T]$,
+\[
+\per(Y)=k!\,s^{k/2}\prod_{e\in E}w_e^{\mu_e/2}\prod_{C\in\cU(\mu)}\per E_\mu(C)\prod_{T\notin K}\sqrt{d_{i_T}}\,c_{T,i_T}\prod_{T\in K}\sum_{i\in T}c_{T,i}x_i .
+\]
+The denominator in \eqref{eq:cb} is $\nu!\,\mu!\,k!=\mu!\,k!$. By Lemma~\ref{lem:tree},
+\[
+\frac{|\per(Y)|^2}{\nu!\,\mu!\,k!}=s^k\,k!\,W_\mu\prod_{T\notin K}d_{i_T}\prod_{T\in K}R_T .
+\]
+Thus the $k$ identical copies of the $x$-column contribute $(k!)^2/k!=k!$. For fixed $\mu$ and $k$, the vectors $\nu$ satisfying these conditions correspond bijectively to a set $K\subseteq\cT(\mu)$ with $|K|=k$ together with a root $i_T\in T$ for every $T\notin K$. Summing over the roots replaces $d_{i_T}$ by $D_T$. By Lemma~\ref{lem:cb}, $\per(B+s\,xx^*)$ equals the sum of these terms for every $s\ge0$; comparing coefficients of $s^k$ proves \eqref{eq:forest}.
+\end{proof}
+
+\subsection{Relative masses}
+
+\begin{lemma}\label{lem:mass}
+Let $\mu$ be admissible and $T\in\cT(\mu)$. If $T$ has root mass $D_T=0$, then $R_T=0$. Moreover, the relative masses of the trees $T\in\cT(\mu)$ with $D_T>0$ satisfy
+\[
+r_T\le\frac1a\sum_{i\in T}|z_i|,\qquad\sum_{T\in\cT(\mu),\ D_T>0}r_T\le1 .
+\]
+\end{lemma}
+
+\begin{proof}
+By \eqref{eq:dd}, $|z_i|\le d_i$ for every $i$. If $D_T=0$, then $d_i=0$ and hence $z_i=0$ for all $i\in T$, so $R_T=0$ by \eqref{eq:RT}. If $D_T>0$, Lemma~\ref{lem:tree}, the triangle inequality and $|z_i|\le d_i$ give
+\[
+R_T\le\frac1a\Bigl(\sum_{i\in T}|z_i|\Bigr)^2\le\frac1a\Bigl(\sum_{i\in T}|z_i|\Bigr)\Bigl(\sum_{i\in T}d_i\Bigr),
+\]
+which is the first bound. The trees are pairwise disjoint, so the second bound follows from the first and from $a\ge\sum_i|z_i|$ in \eqref{eq:dd}.
+\end{proof}
+
+\begin{lemma}\label{lem:esym}
+Let $r_1,\dots,r_p\ge0$ with $r_1+\dots+r_p\le1$. Then $k\,e_k(r)\le e_{k-1}(r)$ for $k\ge1$. Consequently
+\[
+k!\,e_k(r)\le(k-1)!\,e_{k-1}(r)\le\dots\le e_1(r)\le1\qquad(k\ge1).
+\]
+\end{lemma}
+
+\begin{proof}
+For $1\le k\le p$, every $k$-element subset of $[p]$ arises exactly $k$ times as $S\cup\{j\}$ with $|S|=k-1$ and $j\notin S$, so
+\[
+k\,e_k(r)=\sum_{|S|=k-1}\Bigl(\prod_{i\in S}r_i\Bigr)\Bigl(\sum_{j\notin S}r_j\Bigr)\le\sum_{|S|=k-1}\prod_{i\in S}r_i=e_{k-1}(r).
+\]
+For $k>p$ the left side vanishes. The chain follows by induction, and $e_1(r)\le1$ is the hypothesis.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:forest}}
+
+For admissible $\mu$ denote by $\beta_k(\mu)$ the summand of \eqref{eq:forest} indexed by $\mu$, so that $\beta_k=\sum_\mu\beta_k(\mu)$. If some tree $T\in\cT(\mu)$ has $D_T=0$, then also $R_T=0$ by Lemma~\ref{lem:mass}, so every product in \eqref{eq:forest} contains the factor $D_T$ or $R_T$ and $\beta_k(\mu)=0$ for all $k$. Such $\mu$ contribute nothing. Otherwise $D_T>0$ for all $T\in\cT(\mu)$, and with $r=(r_T)_{T\in\cT(\mu)}$,
+\[
+\beta_k(\mu)=W_\mu\Bigl(\prod_{T\in\cT(\mu)}D_T\Bigr)k!\,e_k(r),
+\]
+where $W_\mu\prod_TD_T\ge0$. By Lemma~\ref{lem:mass} the vector $r$ satisfies the hypothesis of Lemma~\ref{lem:esym}, which gives $\beta_k(\mu)\le\beta_1(\mu)\le\beta_0(\mu)$ for $1\le k\le m$. Summing over the finitely many admissible $\mu$ proves \eqref{eq:forestbound}. \qed
+
+\begin{remark}\label{rem:forest}
+The proof gives slightly more. By the first inequality of Lemma~\ref{lem:esym}, $\beta_k(\mu)\le\beta_{k-1}(\mu)$, hence $\beta_0\ge\beta_1\ge\dots\ge\beta_m\ge0$ when $A$ is diagonally dominant. Since the congruence of Section~\ref{subsec:reduction} multiplies all $\beta_k$ by the same positive factor and the limit $\varepsilon\to0$ preserves these inequalities, the same chain holds for every $A\in\cC_{m+1}$. Only \eqref{eq:forestbound} is used below.
+\end{remark}
+
+\section{Preservation of the comparison class}\label{sec:closure}
+
+In the setting \eqref{eq:setting} put
+\[
+H=B-xx^*,\qquad B_t=H+t\,xx^*=B+(t-1)\,xx^*\qquad(t\in\R).
+\]
+
+\begin{lemma}\label{lem:closure}
+In the setting \eqref{eq:setting}, $B_t\in\cC_m$ for every $t\in[0,2]$. In particular $H=B_0$ and $B_{\sqrt2}$ belong to $\cC_m$ and are positive semidefinite.
+\end{lemma}
+
+\begin{proof}
+Let $y=|x|$. Since
+\[
+M(A)=\begin{pmatrix}a&-\sqrt a\,y^T\\ -\sqrt a\,y&M(B)\end{pmatrix}\succeq0
+\]
+and $a>0$, the Schur complement of $a$ in $M(A)$ gives
+\begin{equation}\label{eq:schur}
+M(B)-yy^T\succeq0 .
+\end{equation}
+Let $\eta=t-1$, so that $|\eta|\le1$. The diagonal entries of $M(B_t)$ are $b_{ii}+\eta y_i^2$, and for $i\ne j$ the triangle inequality gives $-|b_{ij}+\eta\,x_i\conj{x_j}|\ge-|b_{ij}|-|\eta|\,y_iy_j$. Hence $M(B_t)\ge L_\eta$ entrywise, where
+\[
+L_\eta=M(B)-|\eta|\,yy^T+(\eta+|\eta|)\diag(y_1^2,\dots,y_m^2),
+\]
+and the diagonals of $M(B_t)$ and $L_\eta$ coincide. The matrix $L_\eta$ is positive semidefinite, being the sum of $M(B)-yy^T$, of $(1-|\eta|)\,yy^T$ and of the nonnegative diagonal matrix $(\eta+|\eta|)\diag(y_i^2)$. For real $v$, since the off-diagonal entries of $M(B_t)$ are nonpositive and $M(B_t)\ge L_\eta$ entrywise,
+\[
+v^TM(B_t)\,v\ \ge\ |v|^TM(B_t)\,|v|\ \ge\ |v|^TL_\eta\,|v|\ \ge\ 0 .
+\]
+Thus $M(B_t)\succeq0$, and $B_t$ is Hermitian, so $B_t\in\cC_m$. The last assertion follows from Lemma~\ref{lem:class}(a).
+\end{proof}
+
+\section{Proof of the main theorem}\label{sec:proof}
+
+We continue in the setting \eqref{eq:setting} and put $F(t)=\per(B_t)$. Since $B_{1+s}=B+s\,xx^*$, \eqref{eq:beta} reads
+\begin{equation}\label{eq:Fbeta}
+F(1+s)=\sum_{k=0}^m\beta_ks^k,\qquad\text{so that}\qquad F(1)=\beta_0,\quad F'(1)=\beta_1 .
+\end{equation}
+\begin{lemma}[{\cite[Proposition~3.2]{LZL}}]\label{lem:border}
+In the setting \eqref{eq:setting},
+\begin{equation}\label{eq:border}
+\frac{\per(A)}{a}=F(1)+F'(1)=\beta_0+\beta_1 .
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Apply \eqref{eq:bordergen} with $c=a$, $u=z$ and $v=\conj{z}$, so that $v^T=z^*$:
+\[
+\per(A)=a\,\per(B)+\sum_{i,j}z_i\conj{z_j}\,\per\bigl(B(i|j)\bigr)=a\Bigl(\per(B)+\sum_{i,j}x_i\conj{x_j}\,\per\bigl(B(i|j)\bigr)\Bigr).
+\]
+Since $(xx^*)_{ij}=x_i\conj{x_j}$ and $B_1=B$, formula \eqref{eq:derivative} with $u=x$, $v=\conj{x}$ and $s_0=0$ identifies the last sum with $\frac{d}{ds}\per(B+s\,xx^*)|_{s=0}=F'(1)$. Together with \eqref{eq:Fbeta} this gives \eqref{eq:border}.
+\end{proof}
+
+Put $X=xx^*$ and define
+\[
+U=H\circ\conj{H},\qquad V=H\circ\conj{X}+\conj{H}\circ X,\qquad W=X\circ\conj{X}=gg^T,\quad g_i=|x_i|^2,
+\]
+and the doubled polynomial
+\begin{equation}\label{eq:Gamma}
+\Gamma(p,q)=\per(U+p\,V+q\,W)=\sum_{r,k\ge0}\gamma_{r,k}\,p^rq^k .
+\end{equation}
+
+\begin{lemma}[{cf.\ \cite[Propositions~3.2 and~4.1]{LZL}}]\label{lem:doubled}
+In the setting \eqref{eq:setting}:
+\begin{enumerate}
+\item[(a)] $\gamma_{r,k}\ge0$ for all $r,k$;
+\item[(b)] $\Gamma(t,t^2)=\per\bigl(B_t\circ\conj{B_t}\bigr)$ for every real $t$;
+\item[(c)] $\per(A\circ\conj{A})/a^2=\Gamma(1,1)+\partial_q\Gamma(1,1)=\sum_{r,k}(1+k)\,\gamma_{r,k}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) By Lemma~\ref{lem:closure}, $H\succeq0$ (this also holds for every positive semidefinite $A$, since $H$ is the Schur complement of $a$), hence also $\conj{H}\succeq0$; moreover $X,\conj{X}\succeq0$. By the Schur product theorem $U$, both summands of $V$, and $W$ are positive semidefinite, and Corollary~\ref{cor:nonneg} applies to $U+pV+qW$.
+
+(b) For real $t$, $\conj{B_t}=\conj{H}+t\,\conj{X}$, and expanding the entrywise product gives $B_t\circ\conj{B_t}=U+t\,V+t^2\,W$.
+
+(c) The matrix $A\circ\conj{A}$ has corner entry $a^2$, border vector $\zeta=(|z_1|^2,\dots,|z_m|^2)^T=a\,g$ in both the first row and the first column, and lower right block $B\circ\conj{B}$. By \eqref{eq:bordergen} with $c=a^2$ and $u=v=\zeta$, and since $\zeta\zeta^T=a^2W$,
+\[
+\frac{\per(A\circ\conj{A})}{a^2}=\per(B\circ\conj{B})+\sum_{i,j}W_{ij}\,\per\bigl((B\circ\conj{B})(i|j)\bigr).
+\]
+By (b) with $t=1$, $B\circ\conj{B}=U+V+W$, so $\Gamma(1,1+s)=\per(B\circ\conj{B}+s\,W)$. By \eqref{eq:derivative} with $u=v=g$ and $s_0=0$, the last display equals $\Gamma(1,1)+\partial_q\Gamma(1,1)$, and differentiating \eqref{eq:Gamma} gives the coefficient form.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+We prove \eqref{eq:main} by induction on $n$. For $n=1$ both sides equal $a_{11}^2$. Let $m\ge1$, assume \eqref{eq:main} on $\cC_m$, and let $A\in\cC_{m+1}$. If $a_{11}=0$, the first row of $A$ vanishes by Lemma~\ref{lem:class}(a), hence so does the first row of $A\circ\conj{A}$, and both sides of \eqref{eq:main} are zero. Otherwise we are in the setting \eqref{eq:setting} with $a=a_{11}>0$.
+
+Since $(\sqrt2)^r2^k\ge1+k$ for all integers $r,k\ge0$, Lemma~\ref{lem:doubled} gives, as in \cite[Proposition~4.1]{LZL},
+\[
+\frac{\per(A\circ\conj{A})}{a^2}=\sum_{r,k}(1+k)\,\gamma_{r,k}\le\sum_{r,k}(\sqrt2)^r2^k\gamma_{r,k}=\Gamma(\sqrt2,2)=\per\bigl(B_{\sqrt2}\circ\conj{B_{\sqrt2}}\bigr).
+\]
+By Lemma~\ref{lem:closure}, $B_{\sqrt2}\in\cC_m$, and the induction hypothesis yields
+\begin{equation}\label{eq:step1}
+\per(A\circ\conj{A})\le a^2\,\per\bigl(B_{\sqrt2}\bigr)^2=a^2F(\sqrt2)^2 .
+\end{equation}
+Put $\delta=\sqrt2-1\in(0,1)$. By \eqref{eq:Fbeta}, Theorem~\ref{thm:forest} and Lemma~\ref{lem:border},
+\begin{equation}\label{eq:step2}
+F(\sqrt2)=\sum_{k=0}^m\beta_k\delta^k\le\beta_0+\beta_1\sum_{k\ge1}\delta^k=\beta_0+\frac{\beta_1}{\sqrt2}\le\beta_0+\beta_1=\frac{\per(A)}{a},
+\end{equation}
+where we used $\sum_{k\ge1}\delta^k=\delta/(1-\delta)=1/\sqrt2$ and $\beta_1\ge0$. Moreover $F(\sqrt2)=\per(B_{\sqrt2})\ge0$ by Lemma~\ref{lem:closure} and Corollary~\ref{cor:nonneg}. Squaring \eqref{eq:step2} and combining with \eqref{eq:step1} gives $\per(A\circ\conj{A})\le\per(A)^2$. This completes the induction.
+
+For \eqref{eq:main2}, let $A,B\in\cC_n$. Lemma~\ref{lem:cs} and \eqref{eq:main} for both $A$ and $B$ give $|\per(A\circ B)|^2\le\per(A)^2\per(B)^2$. Since $A\circ B\succeq0$ by the Schur product theorem, $\per(A\circ B)\ge0$ by Corollary~\ref{cor:nonneg}, as are $\per(A)$ and $\per(B)$. Taking square roots proves \eqref{eq:main2}.
+\end{proof}
+
+\begin{remark}\label{rem:where}
+Lemmas~\ref{lem:border} and~\ref{lem:doubled} and the evaluation at $(\sqrt2,2)$ are valid for every positive semidefinite $A$ with $a>0$, and Corollary~\ref{cor:nonneg} and Lemma~\ref{lem:cs} need no such restriction. The hypothesis $M(A)\succeq0$ is used at exactly two places: in Theorem~\ref{thm:forest}, through \eqref{eq:dd}, which bounds the relative masses in Lemma~\ref{lem:mass}, and in Lemma~\ref{lem:closure}, which guarantees that the induction hypothesis applies to $B_{\sqrt2}$ at every order.
+\end{remark}
+
+\section{Graph Laplacians and concluding remarks}\label{sec:remarks}
+
+\begin{proof}[Proof of Corollary~\ref{cor:laplacian}]
+The matrix $L_G+\Delta$ is real symmetric, its off-diagonal entries are nonpositive, and its diagonal entries satisfy $(L_G+\Delta)_{ii}\ge\sum_{j\ne i}w_{ij}$. Hence $M(L_G+\Delta)=L_G+\Delta$ is diagonally dominant with nonnegative diagonal, and therefore positive semidefinite. Thus $L_G+\Delta\in\cC_n$, and likewise $L_{G'}+\Delta'\in\cC_n$. Theorem~\ref{thm:main} applies.
+\end{proof}
+
+The same argument applies to every Hermitian matrix whose off-diagonal entries have moduli $w_{ij}$ and whose diagonal entries are at least $\sum_{j\ne i}w_{ij}$, since its comparison matrix is $L_G+\Delta$ for some nonnegative diagonal $\Delta$. This includes signless Laplacians $\diag(\deg_G)+A_G$ and Laplacians of graphs with complex unit gains, whose off-diagonal entries are $-w_{ij}\omega_{ij}$ with $|\omega_{ij}|=1$ and $\omega_{ji}=\conj{\omega_{ij}}$, and whose diagonal entries are $\sum_{j\ne i}w_{ij}$. More generally, by Proposition~\ref{prop:known}, Theorem~\ref{thm:main} applies to every Hermitian positive semidefinite matrix of factor width at most two.
+
+Chollet's conjecture for arbitrary Hermitian positive semidefinite matrices remains open. By Remark~\ref{rem:where}, the present argument applies without change to every family of classes $\mathcal{K}_n$ of positive semidefinite matrices such that $B_{\sqrt2}\in\mathcal{K}_m$ whenever $A\in\mathcal{K}_{m+1}$ has $a_{11}>0$, and such that the coefficient bound $\beta_k\le\beta_1$ for $k\ge1$ holds on $\mathcal{K}_{m+1}$. It would be interesting to know whether such families exist beyond factor width two.
+
+\section*{Use of AI-assisted tools}
+
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{99}
+
+\bibitem{BS}
+R.~B. Bapat and V.~S. Sunder, \emph{On majorization and Schur products}, Linear Algebra Appl. \textbf{72} (1985), 107--117.
+
+\bibitem{Bea}
+L.~B. Beasley, \emph{An inequality on permanents of Hadamard products}, Bull. Korean Math. Soc. \textbf{37} (2000), no.~3, 633--639.
+
+\bibitem{BCPT}
+E.~G. Boman, D.~Chen, O.~Parekh, and S.~Toledo, \emph{On factor width and symmetric $H$-matrices}, Linear Algebra Appl. \textbf{405} (2005), 239--248.
+
+\bibitem{Cho}
+J.~Chollet, \emph{Is there a permanental analogue to Oppenheim's inequality?}, Amer. Math. Monthly \textbf{89} (1982), no.~1, 57--58, doi:10.1080/00029890.1982.11995380.
+
+\bibitem{Dru}
+S.~W. Drury, \emph{A counterexample to a question of Bapat and Sunder}, Electron. J. Linear Algebra \textbf{31} (2016), 69--70.
+
+\bibitem{GH}
+R.~J. Gregorac and I.~R. Hentzel, \emph{A note on the analogue of Oppenheim's inequality for permanents}, Linear Algebra Appl. \textbf{94} (1987), 109--112.
+
+\bibitem{HJ}
+R.~A. Horn and C.~R. Johnson, \emph{Matrix Analysis}, 2nd ed., Cambridge University Press, Cambridge, 2012.
+
+\bibitem{Hut}
+G.~Hutchinson, \emph{An elementary proof of Chollet's permanent conjecture for $4\times4$ real matrices}, Spec. Matrices \textbf{9} (2021), no.~1, 83--102.
+
+\bibitem{LZL}
+Q.~Li, Q.~Zhao, and W.~Luo, \emph{Chollet's permanent conjecture through order six via border induction}, preprint, Preprints.org 202608.2196, version~1 (2026), doi:10.20944/preprints202608.2196.v1.
+
+\bibitem{Ma}
+Y.~Ma, \emph{Quantitative Chollet inequalities for matrices of rank at most four: spectral bounds and an order-nine tight-frame construction}, preprint (2026), arXiv:2609.37461v1.
+
+\bibitem{Min}
+H.~Minc, \emph{Permanents}, Encyclopedia of Mathematics and its Applications, vol.~6, Addison-Wesley, Reading, MA, 1978.
+
+\bibitem{PS}
+P.~Pant and R.~Singh, \emph{Structural classes for Chollet's permanent conjecture}, preprint (2026), arXiv:2604.24192v2.
+
+\bibitem{Rod}
+K.~Rodtes, \emph{Chollet's permanent conjecture for $4\times4$ matrices}, Linear Multilinear Algebra \textbf{72} (2024), no.~16, 2633--2638.
+
+\bibitem{SN}
+S.~Singh and I.~Nechita, \emph{The PPT$^2$ conjecture holds for all Choi-type maps}, Ann. Henri Poincar\'e \textbf{23} (2022), 3311--3329, doi:10.1007/s00023-022-01166-0; arXiv:2011.03809.
+
+\bibitem{Zha}
+F.~Zhang, \emph{An update on a few permanent conjectures}, Spec. Matrices \textbf{4} (2016), 305--316.
+
+\end{thebibliography}
+
+\end{document}

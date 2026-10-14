@@ -1,0 +1,7 @@
+import FourGeneratedSemigroups
+
+#print axioms FourGeneratedSemigroups.type_and_relations
+#print axioms FourGeneratedSemigroups.minimal_presentation_type_and_relations
+#print axioms FourGeneratedSemigroups.presentation_type_lower_bound
+#print axioms FourGeneratedSemigroups.definingIdeal_eq_presentation_span
+#print axioms FourGeneratedSemigroups.type_eq_finrank_reductionSocle

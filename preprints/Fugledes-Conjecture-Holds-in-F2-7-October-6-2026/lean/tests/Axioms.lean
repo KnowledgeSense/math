@@ -1,0 +1,15 @@
+import FugledeCertificates
+
+open FugledeCertificates
+
+#print axioms tiles_give_unique_representation
+#print axioms order16_certificates_valid
+#print axioms order32_certificates_valid
+#print axioms order16_certificates_tile
+#print axioms order32_certificates_tile
+#print axioms eight_point_certificates_valid
+#print axioms eight_point_certificates_tile
+#print axioms eight_point_certificates_spectral
+#print axioms smith_exponents_count
+#print axioms excluded_order_inequalities
+#print axioms excluded_orders_exhaust_multiples

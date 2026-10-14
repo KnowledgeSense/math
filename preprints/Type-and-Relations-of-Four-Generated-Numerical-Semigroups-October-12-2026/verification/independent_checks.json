@@ -1,0 +1,751 @@
+{
+  "method": "residue shortest paths and squarefree divisor graph",
+  "range": "all minimal four-generated semigroups with sorted generators between 2 and 28",
+  "graph_configurations": 4087,
+  "counts": {
+    "total": 4771,
+    "primary": 4758,
+    "monomial": 3326,
+    "r_0": 4771,
+    "corner_gap_0": 4161,
+    "generator_gap_0": 4322,
+    "type_3": 1978,
+    "nonmonomial": 1445,
+    "corner_gap_1": 610,
+    "type_1": 514,
+    "type_2": 1521,
+    "generator_gap_1": 449,
+    "type_4": 461,
+    "type_5": 262,
+    "secondary": 13,
+    "type_6": 19,
+    "type_7": 16
+  },
+  "violations": [],
+  "all_legal_orders_up_to_20": {
+    "total": 10112,
+    "r_0": 8898,
+    "corner_gap_0": 8412,
+    "r_1": 1214,
+    "corner_gap_1": 1690,
+    "corner_gap_2": 10
+  },
+  "r1_examples": [
+    {
+      "generators": [
+        4,
+        7,
+        9,
+        10
+      ],
+      "t": 3,
+      "eta": 6,
+      "order": [
+        10,
+        7,
+        9,
+        4
+      ],
+      "kind": "primary",
+      "a": [
+        2,
+        2,
+        2,
+        4
+      ],
+      "mu": 6,
+      "t_prime": 4,
+      "r": 1,
+      "monomial": false,
+      "corner_gap": 1,
+      "generator_gap": 0
+    },
+    {
+      "generators": [
+        4,
+        7,
+        9,
+        10
+      ],
+      "t": 3,
+      "eta": 6,
+      "order": [
+        10,
+        9,
+        7,
+        4
+      ],
+      "kind": "primary",
+      "a": [
+        2,
+        2,
+        2,
+        4
+      ],
+      "mu": 6,
+      "t_prime": 4,
+      "r": 1,
+      "monomial": false,
+      "corner_gap": 1,
+      "generator_gap": 0
+    },
+    {
+      "generators": [
+        4,
+        9,
+        11,
+        14
+      ],
+      "t": 3,
+      "eta": 6,
+      "order": [
+        14,
+        9,
+        11,
+        4
+      ],
+      "kind": "primary",
+      "a": [
+        2,
+        2,
+        2,
+        5
+      ],
+      "mu": 6,
+      "t_prime": 4,
+      "r": 1,
+      "monomial": false,
+      "corner_gap": 1,
+      "generator_gap": 0
+    },
+    {
+      "generators": [
+        4,
+        9,
+        11,
+        14
+      ],
+      "t": 3,
+      "eta": 6,
+      "order": [
+        14,
+        11,
+        9,
+        4
+      ],
+      "kind": "primary",
+      "a": [
+        2,
+        2,
+        2,
+        5
+      ],
+      "mu": 6,
+      "t_prime": 4,
+      "r": 1,
+      "monomial": false,
+      "corner_gap": 1,
+      "generator_gap": 0
+    }
+  ],
+  "small_order_ideals": {
+    "ideals": 979,
+    "tails": 11748,
+    "injections": 485
+  },
+  "examples": [
+    {
+      "generators": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "F": 9,
+      "PF": [
+        9
+      ],
+      "t": 1,
+      "eta": 5,
+      "betti": [
+        {
+          "degree": 12,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 13,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 14,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 15,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 16,
+          "components": 2,
+          "contribution": 1
+        }
+      ],
+      "geometry": {
+        "order": [
+          5,
+          6,
+          8,
+          7
+        ],
+        "kind": "primary",
+        "a": [
+          3,
+          2,
+          2,
+          2
+        ],
+        "mu": 5,
+        "t_prime": 2,
+        "r": 0,
+        "monomial": false,
+        "corner_gap": 1,
+        "generator_gap": 0
+      }
+    },
+    {
+      "generators": [
+        37,
+        57,
+        174,
+        234
+      ],
+      "F": 1127,
+      "PF": [
+        1127
+      ],
+      "t": 1,
+      "eta": 5,
+      "betti": [
+        {
+          "degree": 285,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 345,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 348,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 1110,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 1170,
+          "components": 2,
+          "contribution": 1
+        }
+      ],
+      "geometry": {
+        "order": [
+          37,
+          57,
+          234,
+          174
+        ],
+        "kind": "primary",
+        "a": [
+          30,
+          5,
+          5,
+          2
+        ],
+        "mu": 5,
+        "t_prime": 2,
+        "r": 0,
+        "monomial": false,
+        "corner_gap": 1,
+        "generator_gap": 0
+      }
+    },
+    {
+      "generators": [
+        77,
+        85,
+        89,
+        131
+      ],
+      "F": 982,
+      "PF": [
+        805,
+        889,
+        982
+      ],
+      "t": 3,
+      "eta": 4,
+      "betti": [
+        {
+          "degree": 255,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 393,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 801,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 924,
+          "components": 2,
+          "contribution": 1
+        }
+      ],
+      "geometry": {
+        "order": [
+          85,
+          77,
+          131,
+          89
+        ],
+        "kind": "primary",
+        "a": [
+          3,
+          12,
+          3,
+          9
+        ],
+        "mu": 5,
+        "t_prime": 3,
+        "r": 0,
+        "monomial": false,
+        "corner_gap": 0,
+        "generator_gap": 1
+      }
+    },
+    {
+      "generators": [
+        76,
+        99,
+        143,
+        223
+      ],
+      "F": 1102,
+      "PF": [
+        848,
+        1005,
+        1008,
+        1058,
+        1079,
+        1102
+      ],
+      "t": 6,
+      "eta": 7,
+      "betti": [
+        {
+          "degree": 594,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 608,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 867,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 875,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 968,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 1001,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 1115,
+          "components": 2,
+          "contribution": 1
+        }
+      ],
+      "geometry": {
+        "order": [
+          76,
+          99,
+          143,
+          223
+        ],
+        "kind": "primary",
+        "a": [
+          8,
+          6,
+          7,
+          5
+        ],
+        "mu": 7,
+        "t_prime": 6,
+        "r": 1,
+        "monomial": true,
+        "corner_gap": 0,
+        "generator_gap": 0
+      }
+    },
+    {
+      "generators": [
+        195,
+        200,
+        209,
+        226
+      ],
+      "F": 2363,
+      "PF": [
+        1823,
+        1961,
+        1987,
+        2153,
+        2162,
+        2171,
+        2337,
+        2363
+      ],
+      "t": 8,
+      "eta": 9,
+      "betti": [
+        {
+          "degree": 1226,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 1427,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 1463,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 1565,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 1800,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 1808,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 2175,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 2340,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 2382,
+          "components": 2,
+          "contribution": 1
+        }
+      ],
+      "geometry": {
+        "order": [
+          195,
+          200,
+          209,
+          226
+        ],
+        "kind": "primary",
+        "a": [
+          12,
+          9,
+          7,
+          8
+        ],
+        "mu": 9,
+        "t_prime": 8,
+        "r": 1,
+        "monomial": true,
+        "corner_gap": 0,
+        "generator_gap": 0
+      }
+    },
+    {
+      "generators": [
+        145,
+        203,
+        74,
+        111
+      ],
+      "F": 1777,
+      "PF": [
+        1777
+      ],
+      "t": 1,
+      "eta": 3,
+      "betti": [
+        {
+          "degree": 222,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 1015,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 1073,
+          "components": 2,
+          "contribution": 1
+        }
+      ],
+      "geometry": {
+        "order": [
+          145,
+          203,
+          74,
+          111
+        ],
+        "kind": "secondary",
+        "a": [
+          7,
+          5,
+          3,
+          2
+        ],
+        "mu": 4,
+        "t_prime": 2,
+        "r": 0,
+        "monomial": false,
+        "corner_gap": 1,
+        "generator_gap": 1
+      }
+    },
+    {
+      "generators": [
+        196,
+        225,
+        256,
+        289
+      ],
+      "F": 4001,
+      "PF": [
+        3359,
+        3458,
+        3838,
+        4001
+      ],
+      "t": 4,
+      "eta": 7,
+      "betti": [
+        {
+          "degree": 964,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 1156,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 1575,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 3332,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 3361,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 3840,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 4003,
+          "components": 2,
+          "contribution": 1
+        }
+      ],
+      "geometry": {
+        "order": [
+          256,
+          196,
+          225,
+          289
+        ],
+        "kind": "primary",
+        "a": [
+          15,
+          17,
+          7,
+          4
+        ],
+        "mu": 7,
+        "t_prime": 4,
+        "r": 0,
+        "monomial": true,
+        "corner_gap": 0,
+        "generator_gap": 0
+      }
+    },
+    {
+      "generators": [
+        8,
+        12,
+        18,
+        27
+      ],
+      "F": 49,
+      "PF": [
+        49
+      ],
+      "t": 1,
+      "eta": 3,
+      "betti": [
+        {
+          "degree": 24,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 36,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 54,
+          "components": 2,
+          "contribution": 1
+        }
+      ],
+      "geometry": {
+        "order": [
+          8,
+          12,
+          18,
+          27
+        ],
+        "kind": "primary",
+        "a": [
+          3,
+          2,
+          2,
+          2
+        ],
+        "mu": 3,
+        "t_prime": 1,
+        "r": 0,
+        "monomial": true,
+        "corner_gap": 0,
+        "generator_gap": 0
+      }
+    },
+    {
+      "generators": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "F": 3,
+      "PF": [
+        1,
+        2,
+        3
+      ],
+      "t": 3,
+      "eta": 6,
+      "betti": [
+        {
+          "degree": 10,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 11,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 12,
+          "components": 3,
+          "contribution": 2
+        },
+        {
+          "degree": 13,
+          "components": 2,
+          "contribution": 1
+        },
+        {
+          "degree": 14,
+          "components": 2,
+          "contribution": 1
+        }
+      ],
+      "geometry": {
+        "order": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "kind": "primary",
+        "a": [
+          3,
+          2,
+          2,
+          2
+        ],
+        "mu": 6,
+        "t_prime": 3,
+        "r": 0,
+        "monomial": true,
+        "corner_gap": 0,
+        "generator_gap": 0
+      }
+    }
+  ],
+  "elapsed_seconds": 1.995123100001365
+}

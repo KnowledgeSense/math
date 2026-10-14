@@ -1,0 +1,620 @@
+\documentclass[11pt]{amsart}
+
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage[hidelinks,
+  pdftitle={Order-zero operators and irreducibility of power-related matrix weights},
+  pdfauthor={Knowledge Sense},
+  pdfsubject={Matrix-valued orthogonal polynomials},
+  pdfkeywords={matrix-valued orthogonal polynomials, irreducible weights, algebra D(W), operators of order zero}
+  ]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+\hyphenation{manuscript}
+\setlength{\emergencystretch}{1.5em}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Mat}{\operatorname{Mat}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\CR}{\mathcal{C}_{\R}}
+\newcommand{\sL}{\mathsf{L}}
+\newcommand{\sE}{\mathsf{E}}
+\newcommand{\ip}[2]{\langle #1,#2\rangle}
+\newcommand{\conj}[1]{\overline{#1}}
+
+\begin{document}
+
+\title[Power-related matrix weights]{Order-zero operators and irreducibility of power-related matrix weights}
+
+\author{Knowledge Sense}
+\address{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{13 October 2026}
+
+\subjclass[2020]{Primary 42C05; Secondary 33C45, 15A21}
+
+\keywords{Matrix-valued orthogonal polynomials, irreducible weight matrices, algebra $\cD(W)$, operators of order zero}
+
+\begin{abstract}
+Weight matrices $W=T\diag(w_1,\dots,w_N)T^*$ of every size $N$, with
+$T(x)=I+xA$ for an explicit nilpotent matrix $A$ depending on nonzero real
+parameters, were introduced by Bono Parisi and Pacharoni for certain
+classical scalar weights and studied by Bono Parisi for arbitrary scalar
+weights. Bono Parisi conjectured that, when the scalar weights are related by
+powers of $x$, the algebra $\cD(W)$ contains only scalar operators of order
+zero, and he stated that this holds for $N\le 10$. The power relation can be
+read in two ways, giving $w_j=w\,x^{s_j}$ with $(s_j)=(0,0,1,\dots,N-2)$ or
+$(s_j)=(0,1,\dots,N-1)$. We prove the conjecture for both exponent lists and
+every $N$. More precisely, for all nonzero real parameters and every
+admissible scalar weight $w$ on an interval, bounded or unbounded, the
+operators of order zero in $\cD(W)$ are the complex multiples of the
+identity, and $W$ is irreducible. Since the interval may be unbounded, we
+show directly that for weights $W=wP$, with $w$ a scalar weight and $P$ a
+polynomial matrix, the existence of a non-scalar operator of order zero
+implies the existence of a non-scalar $W$-symmetric constant matrix. As a
+consequence, the Laguerre-type examples give, in every size, irreducible
+weight matrices that are Darboux transformations of diagonal scalar weights
+and whose orthogonal polynomials satisfy a second-order differential
+equation.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+A weight matrix of size $N$ on an interval $\Delta=(x_0,x_1)$, with
+$-\infty\le x_0<x_1\le\infty$, is an integrable function
+$W\colon\R\to\Mat_N(\C)$ that is positive definite almost everywhere on
+$\Delta$, vanishes outside $\Delta$, and has finite moments of all orders.
+For a sequence $(Q_n)_{n\ge0}$ of matrix-valued orthogonal polynomials for
+$W$, the algebra $\cD(W)$ consists of the differential operators
+$D=\sum_{j=0}^m\partial^jF_j(x)$, acting on the right by
+$P\cdot D=\sum_j\partial^j(P)F_j$, such that
+$Q_n\cdot D=\Lambda_n(D)Q_n$ with $\Lambda_n(D)\in\Mat_N(\C)$ for every $n$
+\cite{GT07}, \cite[Definition~2.2]{BP26}; it does not depend on the choice
+of the sequence. A weight matrix is \emph{reducible} if there are a
+nonsingular $M\in\Mat_N(\C)$ and weight matrices $W_1,W_2$ of positive sizes
+with $W=M\diag(W_1,W_2)M^*$ on $\Delta$, and \emph{irreducible} otherwise
+\cite[Definition~2.4]{BP26}. Tirao and Zurri\'an \cite{TZ18} showed that $W$
+is reducible if and only if the real vector space
+\[
+\CR(W)=\{F\in\Mat_N(\C)\colon FW(x)=W(x)F^*\text{ for almost every }x\in\Delta\}
+\]
+of \emph{$W$-symmetric} matrices is larger than $\R I$, and that a reducible
+weight has non-scalar operators of order zero in $\cD(W)$; the converse part
+of \cite[Theorem~4.3]{TZ18} assumes a bounded interval.
+
+Let $N\ge1$ and let $a_1,\dots,a_{N-1}$ be nonzero real numbers. With the
+standard matrix units $E_{ij}$ put
+\begin{equation}\label{eq:A}
+A=\sum_{r=1}^{\lfloor N/2\rfloor}a_{2r-1}E_{2r-1,2r}
+ +\sum_{r=1}^{\lfloor (N-1)/2\rfloor}a_{2r}E_{2r+1,2r},
+\end{equation}
+and $T(x)=e^{xA}$ for real $x$. Every nonzero entry of $A$ has an odd row index and an even column index, so
+$A^2=0$, $T(x)=I+xA$ and $T(x)^{-1}=I-xA$. Weight matrices of the form
+\begin{equation}\label{eq:BPweight}
+W(x)=T(x)\diag\bigl(w_1(x),\dots,w_N(x)\bigr)T(x)^*
+\end{equation}
+were introduced by Bono Parisi and Pacharoni \cite[Definition~1.1]{BPP} for
+classical scalar weights of the same type whose quotients $w_i/w_j$ are not
+rational functions. Bono Parisi \cite{BP26} studied \eqref{eq:BPweight} for
+arbitrary scalar weights $w_1,\dots,w_N$ on a common interval. He gave
+explicit orthogonal polynomials for $W$, sufficient conditions for
+bispectrality, and several irreducibility results. For $N=2$ the weight
+reduces if and only if $w_1(x)=-a_1^2w_2(x)(b-x)(c-x)$ for some real $b<c$
+with $\Delta\subseteq(b,c)$ \cite[Proposition~5.1]{BP26}; for arbitrary $N$ it is
+irreducible when no quotient $w_i/w_j$ with $i\ne j$ is a rational function
+\cite[Proposition~5.6]{BP26}, a statement attributed there to
+\cite[Proposition~3.7]{BPP}, where it is proved for the Hermite-, Laguerre-
+and Jacobi-type families of \cite[Definition~1.1]{BPP}. At the end of
+\cite[Section~5]{BP26} the weights are related instead by powers of $x$,
+$w_{i+1}(x)=w_1(x)x^{i-1}$, so that all these quotients are rational. It is
+stated there that for $N\le10$ the algebra $\cD(W)$ contains only scalar
+operators of order zero, and conjectured that this holds for arbitrary $N$.
+Read with $i=1,\dots,N-1$, the displayed relation gives the exponents
+$(0,0,1,\dots,N-2)$, whereas the $10\times10$ Laguerre-type example that
+follows it, with $w_j(x)=e^{-x}x^{\alpha+j-1}$, has the exponents
+$(0,1,\dots,9)$. We prove the conjecture for both exponent lists.
+
+For $N\ge1$ let
+\[
+\sL_N=(0,0,1,2,\dots,N-2)\ \ (N\ge2),\quad \sL_1=(0),\quad
+\sE_N=(0,1,2,\dots,N-1).
+\]
+A scalar weight is a weight matrix of size one. For a list
+$s=(s_1,\dots,s_N)$ of nonnegative integers we call a scalar weight $w$
+\emph{$s$-admissible} on $\Delta$ if $w(x)x^{s_j}$ is a scalar weight on
+$\Delta$ for every $j$ (with $x^0=1$). We put
+\begin{equation}\label{eq:Ws}
+\begin{gathered}
+D_s(x)=\diag(x^{s_1},\dots,x^{s_N}),\qquad P_s(x)=T(x)D_s(x)T(x)^*,\\
+W_s(x)=w(x)P_s(x).
+\end{gathered}
+\end{equation}
+Thus $W_s$ is the weight \eqref{eq:BPweight} with $w_j=w\,x^{s_j}$. Since
+$s_1=0$ for both exponent lists, $w$ itself is a scalar weight. If $s$ contains an odd
+exponent, which happens for $\sE_N$ with $N\ge2$ and for $\sL_N$ with
+$N\ge3$, admissibility forces $x_0\ge0$; for $\sL_2=(0,0)$ and $N=1$ any
+interval is possible. In all cases $W_s$ is a weight matrix on $\Delta$:
+it is positive definite wherever all $w(x)x^{s_j}$ are positive, because
+$T(x)$ is invertible, and its entries are $w$ times polynomials. Write
+$\cD_0(W)$ for the set of operators of order zero in $\cD(W)$.
+
+\begin{theorem}\label{thm:main}
+Let $N\ge1$, let $a_1,\dots,a_{N-1}$ be nonzero real numbers, let
+$s\in\{\sL_N,\sE_N\}$, and let $w$ be an $s$-admissible scalar weight on an
+interval $\Delta$, bounded or not. Then:
+\begin{enumerate}
+\item[(a)] $\CR(W_s)=\R I$;
+\item[(b)] $W_s$ is irreducible;
+\item[(c)] $\cD_0(W_s)=\C I$, that is, every operator of order zero in
+$\cD(W_s)$ is a complex multiple of the identity.
+\end{enumerate}
+\end{theorem}
+
+Thus the conjecture at the end of \cite[Section~5]{BP26} holds for every
+$N$ and for both exponent lists.
+
+\begin{corollary}\label{cor:conjecture}
+Let $N\ge1$, let $a_1,\dots,a_{N-1}$ be nonzero real numbers, and let
+$w_1,\dots,w_N$ be scalar weights on a common interval with either $w_{i+1}(x)=w_1(x)x^{i-1}$ for $1\le i\le N-1$, or
+$w_{i+1}(x)=w_1(x)x^{i}$ for $1\le i\le N-1$. Then the weight matrix
+\eqref{eq:BPweight} is irreducible and $\cD(W)$ contains only scalar
+operators of order zero.
+\end{corollary}
+
+Combined with the Laguerre-type results of \cite[Section~4.1]{BP26},
+Theorem~\ref{thm:main} gives irreducible examples of every size with the
+following properties.
+
+\begin{corollary}\label{cor:laguerre}
+Let $N\ge1$, $\alpha>-1$, $s\in\{\sL_N,\sE_N\}$, and let $a_1,\dots,a_{N-1}$
+be nonzero real numbers. The weight matrix
+\[
+W(x)=T(x)\diag\bigl(e^{-x}x^{\alpha+s_1},\dots,e^{-x}x^{\alpha+s_N}\bigr)
+T(x)^*,\qquad x\in(0,\infty),
+\]
+is irreducible and satisfies $\cD_0(W)=\C I$. The orthogonal polynomials of
+$W$ given in \cite[Theorem~3.1]{BP26} are eigenfunctions of a second-order differential
+operator, and $W$ is a Darboux transformation of
+$\diag(e^{-x}x^{\alpha+s_1},\dots,e^{-x}x^{\alpha+s_N})$ in the sense of
+\cite[Definition~2.6]{BP26}.
+\end{corollary}
+
+\begin{proof}
+The function $w(x)=e^{-x}x^\alpha$ on $(0,\infty)$ is $s$-admissible because
+$\alpha+s_j>-1$, so the first assertion is Theorem~\ref{thm:main}. The
+second-order operator is the one constructed in \cite[Section~4.1]{BP26}
+from \cite[Theorem~4.1]{BP26}, which applies to arbitrary Laguerre
+parameters. The parameters $\alpha+s_j$ have integral differences, so
+\cite[Theorem~4.3]{BP26} gives the Darboux transformation.
+\end{proof}
+
+For $N=10$ and $s=\sE_{10}$ this is the example at the end of
+\cite[Section~5]{BP26}. Irreducible weights \eqref{eq:BPweight} of every size
+were known from the criterion on non-rational quotients
+\cite[Proposition~5.6]{BP26}; for the Hermite-, Laguerre- and Jacobi-type
+families of \cite[Definition~1.1]{BPP} those weights are not Darboux
+transformations of direct sums of classical scalar weights in the sense of
+\cite[Definition~2.5]{BPP}, by \cite[Theorem~1.4]{BPP}; see also
+\cite[Section~4]{BP26}. Irreducible Laguerre-type weights that are Darboux
+transformations of diagonal scalar weights in the sense of
+\cite[Definition~2.6]{BP26} were exhibited in \cite{BP26} for
+$N=5$, with exponents $(0,0,1,1,2)$ \cite[(4.3) and Section~5]{BP26}, and in
+the power-related cases stated for $N\le10$; Corollary~\ref{cor:laguerre}
+provides them in every size.
+
+\subsection*{Known and new parts}
+The construction \eqref{eq:A}--\eqref{eq:BPweight} was introduced by Bono
+Parisi and Pacharoni \cite{BPP} for the classical families of
+\cite[Definition~1.1]{BPP} and extended to arbitrary scalar weights by Bono
+Parisi \cite{BP26}. The power-related weights, the conjecture and the
+statement for $N\le10$ are due to Bono Parisi \cite{BP26}; the case $N=2$ of
+the irreducibility in (b) also follows from \cite[Proposition~5.1]{BP26}.
+The reducibility criterion that turns (a) into (b) is
+\cite[Theorem~2.8, Corollary~2.11]{TZ18}. New in this paper are a uniform
+proof of (a)--(c) for all $N$ and both exponent lists, which includes the
+sizes $N\le10$ stated in \cite{BP26}, and the implication (a)$\Rightarrow$(c)
+on unbounded intervals for weights of the form $W=wP$
+(Proposition~\ref{prop:bridge}). The latter is needed because the converse
+part of \cite[Theorem~4.3]{TZ18} assumes a bounded interval, while the
+Laguerre-type weights live on $(0,\infty)$; we therefore prove the required
+implication directly for the weights $W=wP$ considered here. Our argument
+uses only that $W_s$ is a scalar weight times a polynomial matrix, and
+assumes neither bounded support nor determinacy of the moment problem.
+
+\subsection*{Method}
+The core of the proof is a direct computation of $\CR(W_s)$. Conjugating a
+$W_s$-symmetric matrix $F$ by $T(x)$ and ordering the coordinates as odd
+indices followed by even indices, the condition $FW_s=W_sF^*$ becomes the
+identity $G(x)D_s(x)=D_s(x)G^*(x)$ between matrix polynomials, where $G^*$
+is the coefficientwise adjoint and the lower-left block of $G$ is a constant
+matrix $U$. Degree comparisons, together with the full column rank of the
+rectangular block of $A$, force $U=0$; the identity then forces $G$ to be
+real diagonal, and the path structure of $A$ forces all diagonal entries to
+coincide. The repeated exponent $0$ in $\sL_N$ needs one
+additional equation from the odd block.
+
+\subsection*{Organization}
+Section~\ref{sec:prelim} collects facts on operators of order zero and
+proves the implication (a)$\Rightarrow$(c) for weights of the form $W=wP$. Section~\ref{sec:block} introduces the block form, and
+Section~\ref{sec:proof} proves Theorem~\ref{thm:main}.
+
+\section{Operators of order zero and \texorpdfstring{$W$}{W}-symmetric matrices}\label{sec:prelim}
+
+Throughout this section $W$ is a weight matrix of size $N$ on an interval
+$\Delta$, which may be unbounded, and
+$\ip PQ=\int_\Delta P(x)W(x)Q(x)^*\,dx$ for matrix polynomials $P,Q$. If $v$
+is a nonzero row vector polynomial, then $v(x)W(x)v(x)^*>0$ for almost every
+$x\in\Delta$, since $v$ has finitely many zeros; hence $\int v W v^*>0$. Thus
+the block Hankel matrices of the moments of $W$ are positive definite, and
+there is a unique sequence $(Q_n)_{n\ge0}$ of monic orthogonal polynomials,
+$Q_n(x)=x^nI+\text{(lower terms)}$ and $\ip{Q_n}{Q_m}=0$ for $n\ne m$; see
+\cite{Kre49} and \cite[Section~2.1]{BP26}. In particular $Q_0=I$.
+
+\begin{lemma}\label{lem:orderzero}
+An operator $D=F_0(x)$ of order zero belongs to $\cD(W)$ if and only if $F_0$
+is a constant matrix $C$ such that $CQ_n=Q_nC$ for every $n\ge0$.
+\end{lemma}
+
+\begin{proof}
+Since $\cD(W)$ does not depend on the sequence of orthogonal polynomials
+\cite[Remark~2.3]{BP26}, we use $(Q_n)$. If $D\in\cD(W)$, then
+$Q_0\cdot D=F_0(x)=\Lambda_0(D)$ is constant, say $F_0=C$. For $n\ge0$ the
+identity $Q_n(x)C=\Lambda_n(D)Q_n(x)$ gives $C=\Lambda_n(D)$ on comparing
+the coefficients of $x^n$. Conversely, if $C$ commutes with every $Q_n$, then
+$Q_n\cdot C=CQ_n$, so $C\in\cD(W)$ with $\Lambda_n(C)=C$.
+\end{proof}
+
+We identify $\cD_0(W)$ with the algebra of constant matrices described in
+Lemma~\ref{lem:orderzero}. The next lemma records the facts from
+\cite{TZ18} and \cite{KR16} that we use; their proofs do not use the
+boundedness of $\Delta$. Part (i) concerns only the values $W(x)$, and the
+proof of part (ii) uses only the integral inner product and orthogonality.
+
+\begin{lemma}\label{lem:TZ}
+Let $W$ be a weight matrix on an interval $\Delta$, bounded or not.
+\begin{enumerate}
+\item[(i)] $W$ is irreducible if and only if $\CR(W)=\R I$
+\cite[Theorem~2.8, Corollary~2.11]{TZ18}.
+\item[(ii)] $\CR(W)\subseteq\cD_0(W)$ \cite[Theorem~4.2]{TZ18},
+\cite[Lemma~3.1]{KR16}.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Part (ii) is the inclusion proved in the first half of the proof of
+\cite[Theorem~4.2]{TZ18}; we recall the argument. Let $F\in\CR(W)$, so that
+$\ip{PF}{Q}=\ip{P}{QF}$ for all matrix polynomials $P,Q$. Suppose that $F$
+commutes with $Q_j$ for $j<n$. Then
+$\ip{Q_nF-FQ_n}{Q_j}=\ip{Q_n}{Q_jF}-F\ip{Q_n}{Q_j}=\ip{Q_n}{FQ_j}=0$ for
+$j<n$. Since $Q_n$ is monic, $Q_nF-FQ_n$ has degree less than $n$ and is
+orthogonal to all polynomials of degree less than $n$; hence it vanishes.
+By induction $F$ commutes with every $Q_n$, and $F\in\cD_0(W)$ by
+Lemma~\ref{lem:orderzero}.
+\end{proof}
+
+On a bounded interval the reverse implication, from a non-scalar element of
+$\cD_0(W)$ to a non-scalar element of $\CR(W)$, is
+\cite[Theorems~4.2 and~4.3]{TZ18}; its proof uses that a function on a
+bounded interval whose moments all vanish is zero. For the weights of this
+paper the following replaces that step.
+
+\begin{proposition}\label{prop:bridge}
+Let $W=wP$, where $w$ is a scalar weight on an interval $\Delta$, possibly
+unbounded, and $P$ is an $N\times N$ matrix polynomial with $P(x)^*=P(x)$
+for real $x$, such that $W$ is a weight matrix on $\Delta$. Let
+$M_0=\int_\Delta W(x)\,dx$ and $K=M_0^{-1/2}$. If $C\in\cD_0(W)$, then
+$KCK^{-1}$ commutes with $KP(x)K$ for every $x\in\R$. Consequently,
+$\cD_0(W)=\C I$ if and only if $\CR(W)=\R I$.
+\end{proposition}
+
+\begin{proof}
+The matrix $M_0$ is positive definite by the remarks at the beginning of
+this section. Put $\widetilde P=KPK$ and $\widetilde W=KWK=w\widetilde P$,
+so that $\int_\Delta\widetilde W=I$. The polynomials
+$R_n=KQ_nK^{-1}$ are monic, and
+$\int_\Delta R_n\widetilde WR_m^*=K\ip{Q_n}{Q_m}K$ vanishes for $n\ne m$;
+thus $(R_n)$ is the monic orthogonal sequence of $\widetilde W$. The matrix
+$C'=KCK^{-1}$ commutes with every $R_n$, hence with every coefficient of
+$R_n$. Write $R_n(x)=\sum_{j=0}^nL_{n,j}x^j$ with $L_{n,n}=I$, and let
+$\widetilde M_k=\int_\Delta x^k\widetilde W(x)\,dx$. Orthogonality of $R_n$
+to $R_0=I$ gives
+\[
+\widetilde M_n=-\sum_{j=0}^{n-1}L_{n,j}\widetilde M_j\qquad(n\ge1).
+\]
+Since $\widetilde M_0=I$, induction on $n$ shows that $C'$ commutes with
+every $\widetilde M_k$. Let $z$ be an entry of the matrix polynomial
+$C'\widetilde P-\widetilde PC'$, say $z(x)=\sum_{j=0}^dc_jx^j$. Then
+\begin{equation}\label{eq:moments}
+\int_\Delta x^kw(x)z(x)\,dx=0\qquad(k\ge0),
+\end{equation}
+because the left-hand side is an entry of
+$C'\widetilde M_k-\widetilde M_kC'$; all these integrals converge absolutely
+because $w$ has finite moments. Multiplying \eqref{eq:moments} for
+$k=0,\dots,d$ by $\conj{c_k}$ and adding, we obtain
+$\int_\Delta w(x)\lvert z(x)\rvert^2\,dx=0$, where we used that $x$ is
+real. As $w>0$ almost everywhere on $\Delta$, the polynomial $z$ vanishes
+almost everywhere on the interval $\Delta$ and hence identically. This
+proves the first assertion.
+
+If $\CR(W)=\R I$ and $C\in\cD_0(W)$, then $C'$ commutes with the Hermitian
+matrices $\widetilde P(x)$, $x\in\R$, and so does $C'^*$. Both
+$H_1=(C'+C'^*)/2$ and $H_2=(C'-C'^*)/(2i)$ are Hermitian and commute with
+every $\widetilde W(x)$. For $H\in\{H_1,H_2\}$ the matrix $F=K^{-1}HK$
+satisfies $F^*=KHK^{-1}$ and therefore
+\[
+FW=K^{-1}H\widetilde WK^{-1}=K^{-1}\widetilde WHK^{-1}=WF^*,
+\]
+that is, $F\in\CR(W)=\R I$. Hence $H_1$ and $H_2$ are real multiples of $I$,
+and $C=K^{-1}(H_1+iH_2)K\in\C I$. Conversely, if $\cD_0(W)=\C I$, then
+Lemma~\ref{lem:TZ}(ii) gives $\CR(W)\subseteq\C I$, and $cW=W\conj c$ with
+$W\ne0$ forces $c\in\R$.
+\end{proof}
+
+\section{The block form}\label{sec:block}
+
+Let $N\ge2$, put $p=\lceil N/2\rceil$ and $q=\lfloor N/2\rfloor$, and order
+the coordinates of $\C^N$ as the odd indices $1,3,\dots,2p-1$ followed by
+the even indices $2,4,\dots,2q$. This reordering is a conjugation by a
+permutation matrix; it preserves irreducibility and transforms $\CR(W)$ by
+the same conjugation, so we may work in the new coordinates. There
+\[
+A=\begin{pmatrix}0&B\\0&0\end{pmatrix},\qquad
+T(x)=\begin{pmatrix}I_p&xB\\0&I_q\end{pmatrix},\qquad
+T(x)^{-1}=\begin{pmatrix}I_p&-xB\\0&I_q\end{pmatrix},
+\]
+where $B$ is the real $p\times q$ matrix whose only nonzero entries are
+\begin{equation}\label{eq:B}
+B_{r,r}=a_{2r-1}\quad(1\le r\le q),\qquad
+B_{r+1,r}=a_{2r}\quad(1\le r\le q,\ r+1\le p).
+\end{equation}
+Indeed, the entry $a_{2r-1}$ of $A$ sits in row $2r-1$ and column $2r$, and
+the entry $a_{2r}$ sits in row $2r+1$ and column $2r$; the condition
+$r\le\lfloor(N-1)/2\rfloor$ in \eqref{eq:A} is equivalent to $r+1\le p$.
+In particular $B$ is the biadjacency matrix of a path through all $N$
+coordinates, with nonzero weights.
+
+\begin{lemma}\label{lem:rank}
+The matrix $B$ has rank $q$. Consequently $BY=0$ implies $Y=0$ for every
+complex matrix $Y$ with $q$ rows.
+\end{lemma}
+
+\begin{proof}
+By \eqref{eq:B} the first $q$ rows of $B$ form a lower bidiagonal matrix
+with diagonal $a_1,a_3,\dots,a_{2q-1}$, whose determinant is nonzero.
+\end{proof}
+
+In the new coordinates $D_s=\diag(D_o,D_e)$ with
+$D_o=\diag(x^{o_1},\dots,x^{o_p})$ and $D_e=\diag(x^{e_1},\dots,x^{e_q})$,
+where $o_r=s_{2r-1}$ and $e_t=s_{2t}$. Explicitly,
+\begin{equation}\label{eq:exponents}
+\begin{aligned}
+s=\sE_N&\colon\quad o_r=2r-2,\qquad e_t=2t-1;\\
+s=\sL_N&\colon\quad o_1=0,\quad o_r=2r-3\ (r\ge2),\qquad e_t=2t-2.
+\end{aligned}
+\end{equation}
+
+\begin{lemma}\label{lem:exponents}
+For $s\in\{\sL_N,\sE_N\}$:
+\begin{enumerate}
+\item[(i)] $o_1,\dots,o_p$ are pairwise distinct, and so are
+$e_1,\dots,e_q$;
+\item[(ii)] for $1\le r\le p$ and $1\le t\le q$ we have
+$o_r-e_t\in\{0,1,2\}$ if and only if either $r=t+1$, in which case
+$o_r-e_t=1$, or $s=\sL_N$ and $r=t=1$, in which case $o_r-e_t=0$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Part (i) is clear from \eqref{eq:exponents}. In both cases
+$o_r-e_t=2(r-t)-1$ unless $s=\sL_N$ and $r=1$; this odd number lies in
+$\{0,1,2\}$ exactly when $r=t+1$. If $s=\sL_N$ and $r=1$, then
+$o_1-e_t=2-2t$, which lies in $\{0,1,2\}$ exactly when $t=1$.
+\end{proof}
+
+Let $F\in\Mat_N(\C)$, written in blocks of sizes $p$ and $q$ as
+\[
+F=\begin{pmatrix}R&Y\\U&S\end{pmatrix}.
+\]
+Multiplying the triangular block matrices gives
+\begin{equation}\label{eq:G}
+G(x)=T(x)^{-1}FT(x)=
+\begin{pmatrix}
+R-xBU & Y+x(RB-BS)-x^2BUB\\
+U & S+xUB
+\end{pmatrix}.
+\end{equation}
+For a matrix polynomial $Z(x)=\sum_jZ_jx^j$ we write
+$Z^*(x)=\sum_jZ_j^*x^j$, so that $Z^*(x)=Z(x)^*$ for real $x$.
+
+\begin{lemma}\label{lem:polyidentity}
+If $F\in\CR(W_s)$, then
+\begin{equation}\label{eq:GD}
+G(x)D_s(x)=D_s(x)G^*(x)
+\end{equation}
+as an identity of matrix polynomials.
+\end{lemma}
+
+\begin{proof}
+Since $w>0$ almost everywhere on $\Delta$, the relation $FW_s=W_sF^*$ gives
+$FP_s(x)=P_s(x)F^*$ for almost every $x\in\Delta$. Both sides are matrix
+polynomials, and a polynomial vanishing on a set of positive measure is zero,
+so this is an identity of matrix polynomials. Since $T$ has real
+coefficients, $T^*=T^{\mathsf T}$ and $(T^{-1}FT)^*=T^*F^*(T^*)^{-1}$;
+multiplying the identity on the left by $T^{-1}$ and on the right by
+$(T^*)^{-1}$ gives \eqref{eq:GD}.
+\end{proof}
+
+In blocks, \eqref{eq:GD} consists of the three identities
+\begin{gather}
+(R-xBU)D_o=D_o(R-xBU)^*,\label{eq:oo}\\
+\bigl(Y+x(RB-BS)-x^2BUB\bigr)D_e=D_oU^*,\label{eq:oe}\\
+(S+xUB)D_e=D_e(S+xUB)^*,\label{eq:ee}
+\end{gather}
+the fourth block being the adjoint of \eqref{eq:oe}.
+
+\section{Proof of Theorem~\ref{thm:main}}\label{sec:proof}
+
+\begin{proposition}\label{prop:CR}
+Under the hypotheses of Theorem~\ref{thm:main}, $\CR(W_s)=\R I$.
+\end{proposition}
+
+We first treat $N=1$. Then $W_s=w$ is scalar, and $cw=w\conj c$ forces
+$c\in\R$, so $\CR(W_s)=\R I$. From now on let $N\ge2$ and
+$F\in\CR(W_s)$, with the notation of Section~\ref{sec:block}. We show that
+the lower-left block of $G$ vanishes.
+
+\begin{lemma}\label{lem:U}
+$U=0$.
+\end{lemma}
+
+\begin{proof}
+Write $G_{12}=Y+x(RB-BS)-x^2BUB$ for the upper-right block of $G$, a
+matrix polynomial of degree at most two. The $(r,t)$ entry of
+\eqref{eq:oe} reads
+\begin{equation}\label{eq:entry}
+(G_{12})_{r,t}(x)\,x^{e_t}=\conj{U_{t,r}}\,x^{o_r}.
+\end{equation}
+If $U_{t,r}\ne0$, the right-hand side is a nonzero monomial divisible by
+$x^{e_t}$, so $o_r\ge e_t$ and $(G_{12})_{r,t}=\conj{U_{t,r}}x^{o_r-e_t}$;
+as $G_{12}$ has degree at most two, $o_r-e_t\in\{0,1,2\}$. By
+Lemma~\ref{lem:exponents}(ii) the only entries of $U$ that can be nonzero
+are
+\begin{equation}\label{eq:Uentries}
+u_t=U_{t,t+1}\quad(1\le t\le q,\ t+1\le p),\qquad
+v=U_{1,1}\quad\text{(only if $s=\sL_N$)},
+\end{equation}
+and for each of them $(G_{12})_{r,t}$ has degree at most one. All other
+entries of $G_{12}$ vanish by \eqref{eq:entry}. Hence the coefficient of
+$x^2$ in $G_{12}$ vanishes, that is, $BUB=0$, and Lemma~\ref{lem:rank}
+gives
+\begin{equation}\label{eq:UB}
+UB=0.
+\end{equation}
+
+Let $1\le t\le q$ with $t+1\le p$. By \eqref{eq:B} and
+\eqref{eq:Uentries},
+\begin{equation}\label{eq:UBdiag}
+(UB)_{t,t}=U_{t,t}a_{2t-1}+u_ta_{2t},
+\end{equation}
+where $U_{t,t}=0$ unless $s=\sL_N$ and $t=1$.
+
+\emph{Case $s=\sE_N$.} Here $U_{t,t}=0$ for all $t$, so \eqref{eq:UB} and
+\eqref{eq:UBdiag} give $u_ta_{2t}=0$, hence $u_t=0$, for every $t$ in
+\eqref{eq:Uentries}. Thus $U=0$.
+
+\emph{Case $s=\sL_N$, $N=2$.} Here $p=q=1$, the only possible entry is $v$,
+and \eqref{eq:UB} reads $va_1=0$. Thus $U=0$.
+
+\emph{Case $s=\sL_N$, $N\ge3$.} Now $p\ge2$, $o_1=0$ and $o_2=1$. The
+$(2,1)$ entry of \eqref{eq:oo} is
+\[
+(R-xBU)_{2,1}(x)=x\,\conj{(R-xBU)_{1,2}}(x)
+=x\,\conj{R_{1,2}}-x^2\,\conj{(BU)_{1,2}}.
+\]
+The left-hand side has degree at most one, so $(BU)_{1,2}=0$. The first row
+of $B$ has the single nonzero entry $B_{1,1}=a_1$, and $U_{1,2}=u_1$, so
+$a_1u_1=0$ and $u_1=0$. Now \eqref{eq:UB} and \eqref{eq:UBdiag} with $t=1$
+give $va_1=0$, so $v=0$. For $t\ge2$ we have $U_{t,t}=0$, and as in the case
+$s=\sE_N$ we get $u_t=0$. Thus $U=0$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:CR}]
+By Lemma~\ref{lem:U}, $G_{12}=Y+x(RB-BS)$ and \eqref{eq:oe} becomes
+$G_{12}D_e=0$. Since the diagonal entries of $D_e$ are nonzero monomials,
+$G_{12}=0$, that is,
+\begin{equation}\label{eq:RBBS}
+Y=0,\qquad RB=BS.
+\end{equation}
+With $U=0$, identity \eqref{eq:oo} reads $R_{r,t}x^{o_t}=\conj{R_{t,r}}x^{o_r}$
+for all $r,t$. For $r\ne t$ the exponents differ by
+Lemma~\ref{lem:exponents}(i), so $R_{r,t}=0$; for $r=t$ we get
+$R_{r,r}\in\R$. Thus $R=\diag(\rho_1,\dots,\rho_p)$ is real, and in the same
+way \eqref{eq:ee} shows that $S=\diag(\sigma_1,\dots,\sigma_q)$ is real.
+Comparing the entries of $RB=BS$ at the nonzero entries \eqref{eq:B} of
+$B$ gives
+\[
+\rho_t=\sigma_t\quad(1\le t\le q),\qquad
+\rho_{t+1}=\sigma_t\quad(1\le t\le q,\ t+1\le p).
+\]
+Starting from $\rho_1=\sigma_1$ and using the two relations alternately we
+obtain $\rho_1=\sigma_1=\rho_2=\sigma_2=\cdots$, which reaches $\rho_p$ and
+$\sigma_q$. Hence $F=G=\rho_1I$ with $\rho_1\in\R$. Conversely, every real
+multiple of $I$ lies in $\CR(W_s)$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Part (a) is Proposition~\ref{prop:CR}, and part (b) follows from (a) and
+Lemma~\ref{lem:TZ}(i). For part (c), $W_s=wP_s$, where $w$ is a scalar weight
+on $\Delta$ because $s_1=0$, and $P_s=TD_sT^*$ is a matrix polynomial with
+$P_s(x)^*=P_s(x)$ for real $x$. Proposition~\ref{prop:bridge} and part (a)
+give $\cD_0(W_s)=\C I$.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:conjecture}]
+Put $w=w_1$. In the first case $w_j=w\,x^{s_j}$ with $s=\sL_N$, in the
+second with $s=\sE_N$, and $w$ is $s$-admissible because each $w_j$ is a
+scalar weight on the common interval. The weight \eqref{eq:BPweight} is
+$W_s$, and Theorem~\ref{thm:main} applies.
+\end{proof}
+
+\begin{remark}
+The proof of Proposition~\ref{prop:CR} compares coefficients and degrees in
+identities of matrix polynomials, so it does not require that $0$ lie in
+$\Delta$. The scalar weight $w$ enters Theorem~\ref{thm:main} only through
+Lemma~\ref{lem:polyidentity} and Proposition~\ref{prop:bridge}, and neither
+uses determinacy of the moment problem.
+\end{remark}
+
+\section*{Use of AI-assisted tools}
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{99}
+
+\bibitem{BP26}
+I.~Bono Parisi, \emph{Explicit construction of matrix-valued orthogonal
+polynomials of arbitrary size}, J. Spectr. Theory \textbf{16} (2026), no.~1,
+299--328.
+
+\bibitem{BPP}
+I.~Bono Parisi and I.~Pacharoni, \emph{Singular solutions of the matrix
+Bochner problem: the $N$-dimensional cases}, preprint (2024),
+arXiv:2411.00798v1.
+
+\bibitem{GT07}
+F.~A. Gr\"unbaum and J.~Tirao, \emph{The algebra of differential operators
+associated to a weight matrix}, Integral Equations Operator Theory
+\textbf{58} (2007), no.~4, 449--475.
+
+\bibitem{KR16}
+E.~Koelink and P.~Rom\'an, \emph{Orthogonal vs.\ non-orthogonal
+reducibility of matrix-valued measures}, SIGMA Symmetry Integrability Geom.
+Methods Appl. \textbf{12} (2016), Paper No.~008, 9~pp.
+
+\bibitem{Kre49}
+M.~G. Kre\u{\i}n, \emph{Infinite $J$-matrices and a matrix-moment problem},
+Doklady Akad. Nauk SSSR (N.S.) \textbf{69} (1949), 125--128 (Russian).
+
+\bibitem{TZ18}
+J.~Tirao and I.~Zurri\'an, \emph{Reducibility of matrix weights}, Ramanujan
+J. \textbf{45} (2018), no.~2, 349--374; numbered results are cited from
+arXiv:1501.04059v5.
+
+\end{thebibliography}
+
+\end{document}

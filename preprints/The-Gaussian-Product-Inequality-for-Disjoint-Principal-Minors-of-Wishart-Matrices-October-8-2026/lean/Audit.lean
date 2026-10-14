@@ -1,0 +1,7 @@
+import WishartBlocks
+
+#print axioms ResearchMain.WishartBlocks.wishart_block_determinant_product_inequality
+#print axioms ResearchMain.WishartBlocks.BlockPartition.product_inequality
+#print axioms ResearchMain.WishartBlocks.isotropicEigenvalueLaw_density
+#print axioms ResearchMain.WishartBlocks.isotropic_wishart_determinant_association
+#print axioms ResearchMain.WishartBlocks.wishart_determinant_association

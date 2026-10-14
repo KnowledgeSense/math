@@ -1,0 +1,935 @@
+\documentclass[11pt]{amsart}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[margin=1.15in]{geometry}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+  pdftitle={Maximal central sections of three-dimensional lp-balls},
+  pdfauthor={Knowledge Sense},
+  pdfsubject={Mathematics},
+  pdfkeywords={lp-ball, central section, hyperplane section, phase transition, interval arithmetic}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\numberwithin{equation}{section}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\area}{\operatorname{area}}
+\newcommand{\Hess}{\operatorname{Hess}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\ve}{\varepsilon}
+
+\begin{document}
+
+\title{Maximal central sections of three-dimensional $\ell_p$-balls}
+\author{Knowledge Sense}
+\address{Knowledge Sense}
+\email{math@knowledgesense.jp}
+\date{12 October 2026}
+\subjclass[2020]{Primary 52A40; Secondary 52A20, 52A38, 65G30}
+\keywords{$\ell_p$-ball, central section, hyperplane section, phase transition, Ball's cube slicing, interval arithmetic, computer-assisted proof}
+
+\begin{abstract}
+Let $B_p^3$ be the closed unit ball of $\ell_p^3$. We prove that for every real $p>2$ the largest area of a central planar section of $B_p^3$ is attained by the plane orthogonal to $(1,1,1)$ or by the plane orthogonal to $(1,1,0)$, and that the two areas coincide for exactly one value $p_*$, which lies in $(4.99,5)$. For $2<p<p_*$ the maximizing normals are precisely the signed permutations of $(1,1,1)$ and their nonzero multiples, for $p>p_*$ they are precisely those of $(1,1,0)$, and for $p=p_*$ they are the union of the two families. This is the three-dimensional case of the phase transition conjectured by Nayar and Tkocz and by Eskenazis, Nayar and Tkocz. Both normals are strict local maximizers for $4.9\le p\le 5.1$, and the maximal area, as a function of $p$, has a corner at $p_*$ whose one-sided derivatives differ by more than $1/50$. For $2<p\le 6$ we also obtain explicit quadratic stability estimates. The proof combines exact symmetry and stationarity identities, explicit bounds for derivatives of the section area with respect to the normal, the exponent and the polar angle, a concavity argument for short chords when $p$ is large, and validated interval computations on closed parameter boxes for $2<p\le 100$.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+For $1\le p\le\infty$ let $B_p^n=\{x\in\R^n:\|x\|_p\le 1\}$ be the closed unit ball of $\ell_p^n$. Determining the central hyperplane sections of $B_p^n$ of extremal volume is a classical problem; we refer to the survey of Nayar and Tkocz \cite{NT} for its history. Hadwiger \cite{Had} and Hensley \cite{Hen} showed that coordinate hyperplanes give the smallest sections of the cube, and Ball \cite{Ball} showed that the largest section of the cube $B_\infty^n$ is the one orthogonal to $(1,1,0,\dots,0)$. Meyer and Pajor \cite{MP} proved that coordinate hyperplanes give the smallest sections of $B_p^n$ for $p\ge 2$ and the largest ones for $1\le p\le 2$, and that the hyperplane orthogonal to $(1,\dots,1)$ gives the smallest section of $B_1^n$; Koldobsky \cite{Kol} extended the last statement to $0<p<2$. Stability versions of these results were obtained by Chasapis, Nayar and Tkocz \cite{CNT}.
+
+The remaining case is that of maximal sections of $B_p^n$ for $2<p<\infty$. Oleszkiewicz \cite{Ole} observed that for $2<p<26.265\ldots$ and $n$ large the hyperplane orthogonal to $(1,\dots,1)$ has a larger section than the one orthogonal to $(1,1,0,\dots,0)$, so that Ball's extremizer cannot be maximal for all $p>2$. Eskenazis, Nayar and Tkocz \cite{ENT} proved that Ball's hyperplane is maximal in every dimension for $p\ge p_0$ with some $p_0<10^{15}$, and König \cite{Koe} established the same conclusion for $p\ge 26.265\ldots$ under a condition on the distance of $p$ to the even integers and outside a narrow band of values of the largest normalized coordinate. The expected picture is a phase transition between the two candidate hyperplanes.
+
+\begin{quote}
+\emph{Conjecture} (\cite[Conjecture~2]{NT}, \cite[Conjecture~2]{ENT}). For every $n\ge 3$ there is a unique $p_0(n)$ such that the maximal volume of a central hyperplane section of $B_p^n$ is attained by the hyperplane orthogonal to $(1,\dots,1)$ for $2<p\le p_0(n)$ and by the hyperplane orthogonal to $(1,1,0,\dots,0)$ for $p\ge p_0(n)$.
+\end{quote}
+
+In \cite{ENT} the conjecture also predicts that $p_0(n)\to 26.265\ldots$ as $n\to\infty$. The purpose of this paper is to settle the case $n=3$, including the identification of all maximizers and the behavior at the transition.
+
+\subsection{Notation and main results}
+For a nonzero vector $a\in\R^3$ put
+\[
+\sigma_p(a)=\area\bigl(B_p^3\cap a^\perp\bigr),
+\]
+the two-dimensional Lebesgue measure of the section. For $a\in\R^3\setminus\{0\}$ let $[a]$ be the set of vectors obtained from $a$ by permuting its coordinates, changing the signs of some coordinates, and multiplying by a nonzero real number. We call $[a]$ the \emph{orbit} of $a$; $\sigma_p$ is constant on orbits. Put
+\[
+\cD=[(1,1,1)],\qquad \cT=[(1,1,0)],\qquad D(p)=\sigma_p(1,1,1),\qquad T(p)=\sigma_p(1,1,0),
+\]
+and $M(p)=\max\{D(p),T(p)\}$.
+
+\begin{theorem}\label{thm:main}
+Let $p>2$ be real. Then $\sigma_p(a)\le M(p)$ for every nonzero $a\in\R^3$. There is exactly one $p_*>2$ with $D(p_*)=T(p_*)$; it satisfies $4.99<p_*<5$, and $D(p)>T(p)$ for $2<p<p_*$, $D(p)<T(p)$ for $p>p_*$. Moreover $\sigma_p(a)=M(p)$ holds exactly for
+\[
+a\in\cD \ \text{ if } 2<p<p_*,\qquad a\in\cD\cup\cT \ \text{ if } p=p_*,\qquad a\in\cT \ \text{ if } p>p_*.
+\]
+\end{theorem}
+
+In particular the conjecture above holds for $n=3$ with $p_0(3)=p_*$, and for $p\ne p_*$ the maximizing hyperplanes are unique up to the symmetries of $B_p^3$; for $p=p_*$ they form exactly two orbits. For $p=2$ every central section is a unit disc, so the restriction $p>2$ is necessary for the uniqueness statement.
+
+\begin{theorem}\label{thm:transition}
+The following hold.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The function $D-T$ is continuously differentiable on $[4,6]$ and $(D-T)'(p)<-1/50$ for $4\le p\le 6$.
+\item $M$ has one-sided derivatives at $p_*$, and $M'_+(p_*)-M'_-(p_*)>1/50$.
+\item For every $p\in[49/10,51/10]$, every unit vector in $\cD$ and every unit vector in $\cT$ is a strict local maximizer of the restriction of $\sigma_p$ to the unit sphere $S^2$.
+\item The smallest angle between a line spanned by a vector of $\cD$ and a line spanned by a vector of $\cT$ is $\arccos\sqrt{2/3}$. Consequently, any choice of a maximizing unit normal as a function of $p$ is discontinuous at $p_*$.
+\end{enumerate}
+\end{theorem}
+
+Every orbit contains exactly one vector of the form $(1,u,v)$ with $(u,v)$ in the triangle
+\[
+\Delta=\{(u,v)\in\R^2:0\le v\le u\le 1\}
+\]
+(Lemma~\ref{lem:chart}). We write $A(p,u,v)=\sigma_p(1,u,v)$ for $(u,v)\in[0,1]^2$, so that $D(p)=A(p,1,1)$ and $T(p)=A(p,1,0)$, and we measure the distance to the two candidate normals by
+\[
+d_\cD(u,v)^2=(1-u)^2+(1-v)^2,\qquad d_\cT(u,v)^2=(1-u)^2+v^2.
+\]
+
+\begin{theorem}\label{thm:stability}
+For $(u,v)\in\Delta$ the following inequalities hold.
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item If $2<p\le 3$, then $D(p)-A(p,u,v)\ge \dfrac{p-2}{2\cdot 10^{6}}\,d_\cD(u,v)^2$.
+\item If $3\le p\le 4$, then $D(p)-A(p,u,v)\ge \dfrac{1}{1000}\,d_\cD(u,v)^2$.
+\item If $4\le p\le 6$, then $M(p)-A(p,u,v)\ge 10^{-5}\min\{d_\cD(u,v)^2,d_\cT(u,v)^2\}$.
+\end{enumerate}
+\end{theorem}
+
+The factor $p-2$ in (a) is unavoidable in order of magnitude, since $A(2,u,v)=\pi$ for all $(u,v)$ and $A$ is differentiable in $p$. In (c) the distance is taken to the union of the two candidate normals. Near $p_*$ the gap $M-A$ is small at both $(1,1)$ and $(1,0)$, so no bound of the form $c\,d_\cT^2$ with $c>0$ independent of $p$ can hold for $p$ slightly above $p_*$.
+
+\begin{remark}\label{rem:numerics}
+High-precision quadrature gives
+\[
+p_*=4.9982155968\ldots,\quad M(p_*)=4.6787044454\ldots,\quad T'(p_*)-D'(p_*)=0.0366483206\ldots
+\]
+These decimals are not used in the proofs; the rigorous statements are $4.99<p_*<5$ and Theorem~\ref{thm:transition}(i). For comparison, Oleszkiewicz's limiting value $26.265\ldots$ corresponds to $n\to\infty$; in dimension three the transition occurs near $5$.
+\end{remark}
+
+\begin{remark}
+For $n=3$ and $p\ge 26.265\ldots$, \cite[Theorem~1.1]{Koe} gives $\sigma_p(a)\le T(p)$ for unit normals whose largest absolute coordinate lies outside $[2^{-1/2},2^{1/p-1/2}]$, provided that $p$ is at distance at least $2^{-p}$ from the even integers. Theorem~\ref{thm:main} removes these restrictions in dimension three and covers the entire range $p>2$. We do not address dimensions $n\ge 4$.
+\end{remark}
+
+\subsection{Strategy of the proof}
+We work in the chart $(u,v)\in\Delta$. The two candidates $(1,1)$ and $(1,0)$ are critical points of $A(p,\cdot,\cdot)$ for every $p$, by symmetry and homogeneity (Lemma~\ref{lem:stationary}). The range $p>2$ is divided into the intervals
+\[
+(2,3],\quad [3,4],\quad [4,6],\quad [6,100],\quad [100,\infty).
+\]
+For $2<p\le16$ a neighborhood of each expected maximizer is treated by a uniform bound $\Hess_{u,v}\le -\eta I$, applied to $\partial_pA$ when $2<p\le3$ and to $A$ itself when $3\le p\le16$; together with exact stationarity it gives a quadratic gap. For $2<p\le100$ the complement of these neighborhoods is treated by a strictly positive lower bound for a fixed reference gap on closed boxes. Both steps are carried out by interval arithmetic with directed rounding, and every passage from finitely many enclosures to a closed box uses an explicit analytic bound: a bound on third derivatives for the Hessian, and one-sided second derivative bounds together with a quadrature error bound for the gap. All these analytic bounds are proved in the text.
+
+At $p=2$ all sections have area $\pi$, so the gap vanishes identically there. We therefore compare $p$-derivatives: we show that $D'(p)-\partial_pA(p,u,v)\ge d_\cD^2/(2\cdot 10^6)$ for $2\le p\le 3$ and integrate from $p=2$. Near $(1,1)$ we use a parametrization of the section by three sectors on which all coordinates have fixed signs; it removes the logarithmic singularities that appear at $p=2$ in the polar parametrization.
+
+For $p\ge 100$ the proof is analytic. Comparison with the cube and a Bernstein certificate for a polynomial of bidegree $(6,6)$ confine a potential competitor to the region $1-u\le 8/(5p)$, $v\le 16/(5p)$. There, writing the section as a union of parallel chords, we show that short chords are uniformly concave in their displacement, which yields $A(p,u,v)<A(p,u,0)\le T(p)$ unless $v=0$. The same chord argument, with different constants, handles the neighborhood of $(1,0)$ for $16\le p\le 100$, and for $50\le p\le100$ the comparison with the cube confines a potential competitor to a neighborhood of $(1,0)$ of size $O(1/p)$ before the complement is certified.
+
+\subsection{Dependencies}
+Besides elementary calculus, the proof uses two ingredients. The first is Ball's cube slicing theorem \cite{Ball} in dimension three, which serves only to bound the section area by $4\sqrt2$ when $p\ge 6$. The second is the correctness of the interval enclosures produced by our programs, which use the libraries MPFR \cite{MPFR} and MPFI \cite{MPFI} with $80$-bit precision and outward rounding. Every inequality that is derived from the saved enclosures, and the coverage of every parameter domain by closed boxes, is verified a second time by programs that use exact rational arithmetic only (Section~\ref{sec:numerics} and Appendix~\ref{app:data}). To our knowledge, Theorems~\ref{thm:main}--\ref{thm:stability} have not appeared in the literature.
+
+\subsection{Organization}
+Section~\ref{sec:prelim} collects area formulas, symmetries and analytic bounds for derivatives. Section~\ref{sec:numerics} describes the interval certificates and the elementary lemmas that turn them into statements on closed boxes. Sections~\ref{sec:near2}, \ref{sec:34} and \ref{sec:46} treat the ranges $(2,3]$, $[3,4]$ and $[4,6]$. Section~\ref{sec:chords} contains the analytic lemmas for large $p$, which are applied in Sections~\ref{sec:6100} and \ref{sec:tail} to the ranges $[6,100]$ and $[100,\infty)$. Section~\ref{sec:proofs} completes the proofs. Appendix~\ref{app:identities} lists the derivative identities used by the programs, and Appendix~\ref{app:data} lists the certificates.
+
+\section{Preliminaries}\label{sec:prelim}
+
+Throughout, $p>2$ unless stated otherwise, and for $0\le\theta\le\pi/2$ we write $c=\cos\theta$, $s=\sin\theta$.
+
+\subsection{The chart}
+
+\begin{lemma}\label{lem:chart}
+For every nonzero $a\in\R^3$ the orbit $[a]$ contains exactly one vector $(1,u,v)$ with $(u,v)\in\Delta$. In particular, $(1,1,1)$ represents $\cD$ and $(1,1,0)$ represents $\cT$, and for every $p$ the function $A(p,u,v)=\sigma_p(1,u,v)$ on $[0,1]^2$ satisfies $A(p,u,v)=A(p,v,u)$.
+\end{lemma}
+
+\begin{proof}
+Signed permutations of coordinates preserve $B_p^3$ and map $a^\perp$ to the orthogonal complement of the transformed vector, and $(\lambda a)^\perp=a^\perp$; hence $\sigma_p$ is constant on orbits. Replacing the coordinates of $a$ by their absolute values, ordering them decreasingly and dividing by the largest one gives $(1,u,v)$ with $(u,v)\in\Delta$. The resulting vector depends only on the orbit, since the multiset of ratios $|a_i|/\max_j|a_j|$ is an orbit invariant. Exchanging the last two coordinates gives $A(p,u,v)=A(p,v,u)$.
+\end{proof}
+
+\subsection{Area formulas}
+
+For $(u,v)\in[0,1]^2$ and $\ve\in\{1,-1\}$ put
+\begin{equation}\label{eq:defs}
+S=1+u^2+v^2,\qquad z_\ve=uc+\ve vs,\qquad Q_\ve=c^p+s^p+|z_\ve|^p,\qquad g_\ve=\sqrt S\,Q_\ve^{-2/p}.
+\end{equation}
+We often suppress $\ve$ and write $B=c^p+s^p$. Since $t\mapsto t^{p/2}$ is convex, $B\ge 2^{1-p/2}$.
+
+\begin{lemma}[Polar formula]\label{lem:polar}
+For $p>0$ and $(u,v)\in[0,1]^2$,
+\begin{equation}\label{eq:polar}
+A(p,u,v)=\int_0^{\pi/2}\bigl(g_+(\theta)+g_-(\theta)\bigr)\dd\theta.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The plane $x_1+ux_2+vx_3=0$ is the graph of $(y,z)\mapsto -uy-vz$, whose area element is $\sqrt S\dd y\dd z$. The section corresponds to $\{(y,z):|y|^p+|z|^p+|uy+vz|^p\le1\}$. In polar coordinates $(y,z)=r(\cos\theta,\sin\theta)$ its radial function is $Q(\theta)^{-1/p}$ with $Q(\theta)=|\cos\theta|^p+|\sin\theta|^p+|u\cos\theta+v\sin\theta|^p$, so $A=\tfrac12\int_0^{2\pi}\sqrt S\,Q^{-2/p}\dd\theta$. Since $Q(\theta+\pi)=Q(\theta)$ and the substitution $\theta\mapsto\pi-\theta$ maps $[\pi/2,\pi]$ onto $[0,\pi/2]$ and $u\cos\theta+v\sin\theta$ to $-(uc-vs)$, the formula follows.
+\end{proof}
+
+\begin{lemma}[Sector formula]\label{lem:sector}
+For $p>0$ and $0<u,v\le 1$,
+\begin{equation}\label{eq:sector}
+A(p,u,v)=uv\sqrt S\sum_{k=0}^{2}\int_0^1 Q^{(k)}(t)^{-2/p}\dd t,\qquad
+Q^{(k)}=(uv\,\tau_0)^p+(v\,\tau_1)^p+(u\,\tau_2)^p,
+\end{equation}
+where $(\tau_0,\tau_1,\tau_2)$ equals $(1,t,1-t)$, $(t,1,1-t)$ and $(t,1-t,1)$ for $k=0,1,2$.
+\end{lemma}
+
+\begin{proof}
+Since $u,v>0$, the only point of the plane whose coordinates are all nonnegative, or all nonpositive, is $0$. Hence the plane is the union of six closed sectors on which the signs of the coordinates are fixed; opposite sectors are exchanged by $x\mapsto -x$. For $k=0$ consider $\alpha=(-uv,0,u)$ and $\beta=(-uv,v,0)$, and the map $(r,t)\mapsto r\bigl(t\alpha+(1-t)\beta\bigr)$ for $r\ge0$, $0\le t\le 1$. It parametrizes the sector on which $x_1\le0\le x_2,x_3$, the $\ell_p^p$ norm of $t\alpha+(1-t)\beta$ is $(uv)^p+v^p(1-t)^p+u^pt^p$, and the area element is $r|\alpha\times\beta|\dd r\dd t=r\,uv\sqrt S\dd r\dd t$. Integrating in $r$ and adding the opposite sector gives the $k=0$ term after the substitution $t\mapsto 1-t$. The sectors where $x_2$ or $x_3$ is the coordinate of exceptional sign are parametrized by the vectors $(uv,-v,0),(0,-v,u)$ and $(uv,0,-u),(0,v,-u)$ in the same way and give the terms $k=1,2$.
+\end{proof}
+
+For the chord formula fix $0<u\le1$, $R>0$ and $h\in\R$, and let $W(u,h;R)$ be the length of the interval $\{y\in\R:|y|^p+|uy-h|^p\le R^p\}$ (zero if it is empty).
+
+\begin{lemma}[Chord formula]\label{lem:chord}
+For $p\ge1$, $0<u\le1$ and $0\le v\le 1$, with $R(z)=(1-|z|^p)^{1/p}$,
+\begin{equation}\label{eq:chord}
+A(p,u,v)=\sqrt S\int_{-1}^1 W\bigl(u,-vz;R(z)\bigr)\dd z.
+\end{equation}
+The function $h\mapsto W(u,h;R)$ is even, concave on the interval where it is positive, and satisfies $W(u,h;R)\le W(u,0;R)$ for all $h$.
+\end{lemma}
+
+\begin{proof}
+In the graph parametrization of Lemma~\ref{lem:polar} the point $(y,z)$ lies in the section if and only if $|y|^p+|uy-(-vz)|^p\le 1-|z|^p$, which gives \eqref{eq:chord}. The set $K=\{(y,h):|y|^p+|uy-h|^p\le R^p\}$ is convex and symmetric with respect to the origin, and $W(u,h;R)$ is the length of its slice at height $h$. Hence $W$ is even, and concave where positive by convexity of $K$; in particular $W(u,h;R)\le\tfrac12\bigl(W(u,h;R)+W(u,-h;R)\bigr)\le W(u,0;R)$ whenever $W(u,h;R)>0$.
+\end{proof}
+
+Let $V_p$ be the area of $B_p^2$. Recall $V_p=4\Gamma(1+1/p)^2/\Gamma(1+2/p)$.
+
+\begin{lemma}[The two branches]\label{lem:branches}
+For $p>0$ and $0\le u\le1$,
+\begin{align}
+A(p,u,0)&=V_p\,\frac{\sqrt{1+u^2}}{(1+u^p)^{1/p}},\label{eq:Au0}\\
+T(p)&=2^{1/2-1/p}V_p=4\sqrt2\,2^{-1/p}\int_0^1(1+t^p)^{-2/p}\dd t,\label{eq:T}\\
+D(p)&=3\sqrt3\int_0^1\bigl(1+t^p+(1-t)^p\bigr)^{-2/p}\dd t.\label{eq:D}
+\end{align}
+For $p>2$ the function $u\mapsto A(p,u,0)$ is strictly increasing on $[0,1]$; in particular $A(p,u,0)<T(p)$ for $0\le u<1$.
+\end{lemma}
+
+\begin{proof}
+The section by $x_1+ux_2=0$ is parametrized by $(x_2,x_3)$ with area element $\sqrt{1+u^2}$, and it corresponds to $\{(y,z):(1+u^p)|y|^p+|z|^p\le1\}$, an image of $B_p^2$ under a linear map of determinant $(1+u^p)^{-1/p}$. This proves \eqref{eq:Au0}. In polar coordinates the area of the quarter of $B_p^2$ in the first quadrant is $\frac12\int_0^{\pi/2}(c^p+s^p)^{-2/p}\dd\theta=\int_0^{\pi/4}(c^p+s^p)^{-2/p}\dd\theta$, and the substitution $t=\tan\theta$ turns this into $\int_0^1(1+t^p)^{-2/p}\dd t$; this gives the second expression in \eqref{eq:T}. Formula \eqref{eq:D} is \eqref{eq:sector} with $u=v=1$. Finally the logarithmic derivative of $\sqrt{1+u^2}(1+u^p)^{-1/p}$ equals
+\[
+\frac{u}{1+u^2}-\frac{u^{p-1}}{1+u^p}=\frac{u\,(1-u^{p-2})}{(1+u^2)(1+u^p)},
+\]
+which is positive for $0<u<1$ when $p>2$.
+\end{proof}
+
+\subsection{Comparison bounds}
+
+\begin{lemma}\label{lem:comparison}
+Let $p\ge 2$ and $(u,v)\in[0,1]^2$.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $A(p,u,v)\le \pi\,3^{1-2/p}$.
+\item $A(p,u,v)\le A_\infty(u,v)$, where $A_\infty(u,v)$ is the area of the section of $[-1,1]^3$ by $x_1+ux_2+vx_3=0$, and
+\begin{equation}\label{eq:cube}
+A_\infty(u,v)=4\sqrt S\ \ \text{if } u+v\le1,\qquad A_\infty(u,v)=\sqrt S\Bigl(4-\frac{(u+v-1)^2}{uv}\Bigr)\ \ \text{if } u+v\ge1.
+\end{equation}
+\item $A_\infty(u,v)\le 4\sqrt2$; consequently $A(p,u,v)<6$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) follows from $\|x\|_2\le 3^{1/2-1/p}\|x\|_p$. (ii) follows from $B_p^3\subset[-1,1]^3$. In the graph parametrization the cube section corresponds to $\{(y,z)\in[-1,1]^2:|uy+vz|\le1\}$. If $u+v\le1$ this is the whole square. Otherwise the two corners $\pm\{uy+vz>1\}$ are triangles with legs $(u+v-1)/v$ and $(u+v-1)/u$ (both at most $2$), which gives \eqref{eq:cube}. (iii) is Ball's theorem \cite{Ball} for $n=3$, applied to the cube $[-1,1]^3$ of edge length $2$, together with $4\sqrt2<6$.
+\end{proof}
+
+\subsection{Derivatives with respect to the exponent}
+
+At a fixed $\theta$ and $\ve$ let $x=(c,s,|z|)$ and $\omega_j=x_j^p/Q$, so that $\omega$ is a probability vector. Put
+\[
+H=-\sum_j\omega_j\log\omega_j,\qquad V=\sum_j\omega_j(\log\omega_j+H)^2,\qquad \kappa_3=\sum_j\omega_j(\log\omega_j+H)^3,
+\]
+with the convention $0\log0=0$.
+
+\begin{lemma}\label{lem:pderiv}
+With $R=\partial_p\log g$ we have
+\begin{equation}\label{eq:pderiv}
+R=\frac{2H}{p^2},\qquad \partial_pR=-\frac{4H+2V}{p^3},\qquad \partial_p^2R=\frac{12H+6V-2\kappa_3}{p^4},
+\end{equation}
+and therefore
+\begin{equation}\label{eq:gpp}
+\frac{\partial_p^2g}{g}=\frac{4H^2}{p^4}-\frac{4H+2V}{p^3},\qquad \frac{\partial_p^3g}{g}=R^3+3R\,\partial_pR+\partial_p^2R .
+\end{equation}
+Moreover $0\le H\le\log3<\tfrac{11}{10}$, $0\le V\le 12/e^2<2$ and $-7<\kappa_3<8$. Consequently, for every $(u,v)$ the function $p\mapsto A(p,u,v)$ is nondecreasing and concave on $[2,\infty)$; in particular $D$ and $T$ are nondecreasing and concave.
+\end{lemma}
+
+\begin{proof}
+Write $Q_p=\partial_pQ=\sum_jx_j^p\log x_j$. Since $\log\omega_j=p\log x_j-\log Q$, we have $Q_p/Q=(\log Q-H)/p$, so $R=\partial_p(-\tfrac2p\log Q)=\tfrac{2}{p^2}\log Q-\tfrac2p\cdot\tfrac{Q_p}{Q}=2H/p^2$. Put $Y_j=\log\omega_j+H$; then $\partial_p\omega_j=\omega_jY_j/p$ and $\partial_p\log\omega_j=Y_j/p$. Writing $\mathbb E$ for expectation with respect to $\omega$, one gets $\partial_pH=-V/p$ and $\partial_pV=(2V+\kappa_3)/p$, which give \eqref{eq:pderiv}; \eqref{eq:gpp} follows from $\partial_p g=gR$.
+
+The bound on $H$ is the maximum of the entropy on three points. With $X=-\log\omega\ge0$ we have $\max_{0<x\le1}x(-\log x)^r=(r/e)^r$, hence $V\le\mathbb EX^2\le 12/e^2$ and $\mathbb EX^3\le 81/e^3<4.3$. Since $\mathbb EX=H$, $\kappa_3=-\mathbb EX^3+3H\,\mathbb EX^2-2H^3=-\mathbb EX^3+3HV+H^3$; the first expression gives $\kappa_3\ge -\mathbb EX^3-2H^3>-7$ and the second $\kappa_3\le 3HV+H^3<8$.
+
+Finally $R\ge0$ and $\partial_p^2g/g=\tfrac{4H}{p^3}(\tfrac Hp-1)-\tfrac{2V}{p^3}\le0$ because $H<2\le p$. The integrands of $\partial_pA$ and $\partial_p^2A$ are bounded uniformly for $p$ in compact subsets of $[2,\infty)$, since $x^p|\log x|^r$ is bounded on $[0,\sqrt2]$ and $Q\ge 2^{1-p/2}$; hence differentiation under the integral sign in \eqref{eq:polar} is legitimate and $\partial_pA\ge0$, $\partial_p^2A\le0$.
+\end{proof}
+
+\subsection{Derivatives with respect to the normal}
+
+Fix $\ve$, write $w=(w_1,w_2)=(u,v)$, $d=(d_1,d_2)=(c,\ve s)$, so that $z=w\cdot d$, and put
+\[
+\ell_i=\frac{w_i}{S},\qquad b=\frac{z|z|^{p-2}}{Q},\qquad t=\frac{|z|^{p-2}}{Q}.
+\]
+
+\begin{lemma}\label{lem:normal}
+Wherever the derivatives exist (in particular for $z\ne0$),
+\begin{align}
+\partial_i\log g&=\ell_i-2b\,d_i,\label{eq:L1}\\
+\frac{\partial_i\partial_jg}{g}&=\frac{\delta_{ij}}{S}-\frac{w_iw_j}{S^2}-2b(\ell_id_j+\ell_jd_i)+\bigl[2(p+2)b^2-2(p-1)t\bigr]d_id_j .\label{eq:Mij}
+\end{align}
+Moreover $|\ell_i|\le\frac12$, $0\le\frac1S-\frac{w_i^2}{S^2}\le1$, $|b|\le B^{-1/p}$ and $0\le t\le B^{-2/p}$, and $b^2=t\,\omega_3$ where $\omega_3=|z|^p/Q$.
+\end{lemma}
+
+\begin{proof}
+We have $\log g=\frac12\log S-\frac2p\log Q$ and $\partial_zQ=p\,z|z|^{p-2}$, which gives \eqref{eq:L1}; differentiating once more and using $\partial_zb=(p-1)t-pb^2$ gives $\partial_i\partial_j\log g=\delta_{ij}/S-2w_iw_j/S^2-2[(p-1)t-pb^2]d_id_j$, and \eqref{eq:Mij} follows from $\partial_i\partial_jg/g=\partial_i\log g\,\partial_j\log g+\partial_i\partial_j\log g$. The bound $|\ell_i|\le w_i/(1+w_i^2)\le\frac12$ is clear. Writing $|z|=B^{1/p}y$ we get $|b|=B^{-1/p}y^{p-1}/(1+y^p)$ and $t=B^{-2/p}y^{p-2}/(1+y^p)$, and $y^r\le1+y^p$ for $0\le r\le p$.
+\end{proof}
+
+Higher derivatives in the normal and mixed normal-exponent derivatives are listed in Appendix~\ref{app:identities}.
+
+\subsection{Derivatives with respect to the angle}
+
+Let $\lambda_1=c$, $\lambda_2=s$, $\lambda_3=z$, viewed as functions of $\theta$, so that $\lambda_j''=-\lambda_j$ and $\lambda_j'(\theta)=\lambda_j(\theta+\pi/2)$. Put
+\[
+U=\sum_j\frac{|\lambda_j|^{p-2}(\lambda_j')^2}{Q},\qquad P=\sum_j\frac{|\lambda_j|^{p-2}\lambda_j\lambda_j'}{Q}.
+\]
+
+\begin{lemma}\label{lem:angle}
+For $p\ge2$ and away from the zeros of $\lambda_1\lambda_2\lambda_3$,
+\begin{equation}\label{eq:gtt}
+\frac{g''}{g}=2-2(p-1)U+2(p+2)P^2,\qquad P^2\le U\le\Bigl(\frac{Q(\theta+\pi/2)}{Q(\theta)}\Bigr)^{2/p}.
+\end{equation}
+If $p\ge3$, then $g$ is twice continuously differentiable in $\theta$ and \eqref{eq:gtt} holds everywhere.
+\end{lemma}
+
+\begin{proof}
+We have $(\log g)'=-2P$ and $P'=(p-1)U+\sum_j|\lambda_j|^{p-2}\lambda_j\lambda_j''/Q-pP^2=(p-1)U-1-pP^2$, so $g''/g=4P^2-2P'$ gives \eqref{eq:gtt}. The weighted Cauchy--Schwarz inequality gives $P^2\le U$, and Hölder's inequality with exponents $p/(p-2)$ and $p/2$ gives $\sum_j|\lambda_j|^{p-2}|\lambda_j'|^2\le Q^{1-2/p}\bigl(\sum_j|\lambda_j'|^p\bigr)^{2/p}$, where $\sum_j|\lambda_j'(\theta)|^p=Q(\theta+\pi/2)$. For $p\ge3$ the functions $|\lambda|^p$ are of class $C^2$.
+\end{proof}
+
+\subsection{Stationarity}
+
+\begin{lemma}\label{lem:stationary}
+For every $p>2$ we have $\nabla_{u,v}A(p,1,1)=0$ and $\nabla_{u,v}A(p,1,0)=0$, where at $(1,0)$ the derivative in $v$ is understood for the function extended evenly to $v<0$. Moreover $\nabla_{u,v}\partial_pA(p,1,1)=0$ for $2\le p\le 3$, the value at $p=2$ being the continuous extension.
+\end{lemma}
+
+\begin{proof}
+The function $\sigma_p$ is homogeneous of degree zero and, by Lemma~\ref{lem:sector} with $u,v$ replaced by arbitrary positive coordinates, it is smooth near $(1,1,1)$. Euler's identity gives $\sum_ia_i\partial_i\sigma_p(a)=0$, and at $a=(1,1,1)$ the three partial derivatives coincide by permutation invariance. Hence they vanish, and $\partial_uA(p,1,1)=\partial_vA(p,1,1)=0$. The function $A(p,u,v)$ is even in $v$, which gives $\partial_vA(p,1,0)=0$ whenever it exists; and $\partial_uA(p,1,0)=0$ by \eqref{eq:Au0}, since the logarithmic derivative computed in the proof of Lemma~\ref{lem:branches} vanishes at $u=1$. The derivatives near $(1,0)$ exist by Lemma~\ref{lem:regularity} below. The sector integrands in \eqref{eq:sector} and their derivatives in $u,v$ and $p$ are continuous on $[2,3]\times[9/10,1]^2\times[0,1]$, because $Q^{(k)}\ge (81/100)^3$ and $\tau^p|\log\tau|^r$ extends continuously to $\tau=0$; hence the identity $\nabla A(p,1,1)=0$ may be differentiated in $p$.
+\end{proof}
+
+\subsection{Regularity}
+
+We record when derivatives may be taken under the integrals \eqref{eq:polar}, \eqref{eq:sector}. The integrands are finite sums of products of bounded functions of $(\theta,u,v)$, of powers $Q^{-m-2/p}$, of $\log Q$, and of factors $|x|^{p-k}\sgn(x)^j\log^r|x|$ with $x\in\{c,s,z\}$.
+
+\begin{lemma}\label{lem:regularity}
+Let $P_0$ be a compact box of parameters $(p,u,v)$ with $p\ge2$ and $(u,v)\in[0,1]^2$, and let $\partial^\alpha$ be a derivative in the parameters. Consider factors $|x|^{p-k}\sgn(x)^j\log^r|x|$, $x\in\{c,s,z\}$, of two types: \textup{(a)} $p-k>0$ on $P_0$; \textup{(b)} $x=z$, $r=0$ and $p-k\ge0$ on $P_0$. Suppose that for every $\beta\le\alpha$ (componentwise) with $\beta\ne\alpha$ the formal derivative $\partial^\beta(g_++g_-)$ involves only factors of type \textup{(a)}, and that $\partial^\alpha(g_++g_-)$ involves only factors of types \textup{(a)} and \textup{(b)}. If a factor of type \textup{(b)} occurs, assume in addition that $(u,v)\ne(0,0)$ on $P_0$. Then $\partial^\alpha A$ exists on $P_0$, equals the integral of $\partial^\alpha(g_++g_-)$ over $[0,\pi/2]$, and is continuous on $P_0$.
+\end{lemma}
+
+\begin{proof}
+The functions $|x|^{a}\sgn(x)^j\log^r|x|$, $a>0$, extend continuously by $0$ at $x=0$, jointly in $(a,x)$, and factors of type (b) are bounded and continuous away from $z=0$. Since moreover $Q\ge2^{1-p/2}$, every $\partial^\beta(g_++g_-)$ with $\beta\le\alpha$ is bounded on $P_0\times[0,\pi/2]$, and for $\beta\ne\alpha$ it is continuous there. Choose $0=\beta_0<\beta_1<\dots<\beta_m=\alpha$ such that each $\beta_{i+1}$ arises from $\beta_i$ by one differentiation in a parameter $y$. Fix $\theta\in(0,\pi/2)$ and the parameters other than $y$. Then $c,s>0$, and $z_+$ and $z_-$ are either independent of $y$ (if $y=p$) or vanish for at most one value of $y$ each. Hence $\partial^{\beta_i}(g_++g_-)$ is continuous in $y$ and continuously differentiable in $y$ outside at most two points, with derivative $\partial^{\beta_{i+1}}(g_++g_-)$; it is therefore Lipschitz in $y$ with the constant $\sup|\partial^{\beta_{i+1}}(g_++g_-)|$. Dominated convergence applied to difference quotients shows inductively that $\partial^{\beta_{i+1}}A$ exists and is the integral of $\partial^{\beta_{i+1}}(g_++g_-)$. Finally, $\partial^\alpha(g_++g_-)$ is continuous at every point of $P_0\times[0,\pi/2]$, except, when factors of type (b) occur, at points with $z_+z_-=0$; for fixed $(u,v)\ne(0,0)$ these are at most two angles, and dominated convergence gives the continuity of $\partial^\alpha A$. Only the derivatives $\partial^\beta$ with $\beta\le\alpha$ enter this argument.
+\end{proof}
+
+In the polar formula a derivative of normal order $k$ involves $|z|^{p-j}$ with $j\le k$, and each $p$-derivative may add a factor $\log|z|$; for $\beta\le\alpha$ the normal order of $\partial^\beta$ is at most that of $\partial^\alpha$, and a factor of type (b) can only arise from $|z|^{p-k}$ without logarithm, at the top order. Thus, by Lemma~\ref{lem:regularity}, for $p>2$ the second normal derivatives of $A$ and the derivatives $\partial_p^kA$ exist and are continuous on $[0,1]^2$; for $p\ge3$ the normal derivatives of order three and the derivatives $\partial_i\partial_j\partial_pA$ exist and are continuous on compact sets of parameters avoiding $(u,v)=(0,0)$. Near $p=2$ the polar formula is used only for $\partial_pA$ and for one-sided second derivatives (Lemma~\ref{lem:n2constants}), and the sector formula is used near the diagonal.
+
+\section{Interval certificates}\label{sec:numerics}
+
+\subsection{Elementary lemmas}
+The following facts turn finitely many enclosures into statements on closed boxes.
+
+\begin{lemma}[One-sided interpolation]\label{lem:interp}
+Let $f$ be continuous on $[0,h]$ and suppose that $x\mapsto f(x)-\frac M2x^2$ is concave. Then
+\[
+f(x)\ge\Bigl(1-\frac xh\Bigr)f(0)+\frac xhf(h)-\frac{Mh^2}{8}\qquad(0\le x\le h).
+\]
+Let $P=\prod_{k=1}^3[\alpha_k,\alpha_k+h_k]$ be a box and $F$ a continuous function on $P$ such that, for each $k$, the restriction of $F$ to every segment in $P$ parallel to the $k$-th axis has the above property with constant $M_k$. Then
+\begin{equation}\label{eq:tensor}
+\min_PF\ \ge\ \min_{\text{vertices of }P}F-\frac18\sum_{k=1}^3M_kh_k^2.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The function $f(x)+\frac M2x(h-x)$ minus the linear interpolation of its endpoint values is concave and vanishes at $0$ and $h$, hence is nonnegative; and $x(h-x)\le h^2/4$. For \eqref{eq:tensor} apply the one-dimensional inequality in the first coordinate, then, at the two resulting faces, in the second coordinate, and then in the third; the interpolation weights are nonnegative and sum to one.
+\end{proof}
+
+The hypothesis of Lemma~\ref{lem:interp} holds when $f''\le M$ in the classical sense; it is preserved under pointwise limits, which we use at $p=2$.
+
+\begin{lemma}[Quadrature]\label{lem:quad}
+Let $f\in C^2[a,b]$, $|f''|\le K$, $h=(b-a)/N$ and $m_i=a+(i-\frac12)h$. Then $\bigl|\int_a^bf-h\sum_{i=1}^Nf(m_i)\bigr|\le (b-a)h^2K/24$. If $f$ is $C^2$ on a single cell $[m-\frac h2,m+\frac h2]$, then
+\[
+\int_{m-h/2}^{m+h/2}f=h f(m)+\frac{h^3}{12}\,\xi\qquad\text{for some }\xi\in\overline{\operatorname{conv}}\{\tfrac12f''(x):|x-m|\le\tfrac h2\}.
+\]
+\end{lemma}
+
+\begin{proof}
+By Taylor's formula with integral remainder, $\int f-hf(m)=\int K(x)f''(x)\dd x$ with a nonnegative kernel $K$ of total mass $h^3/24$ on each cell. Both statements follow.
+\end{proof}
+
+\begin{lemma}[Hessian test]\label{lem:schur}
+Let $P$ be a box of parameters $(p,u,v)$ with center $x_0$ and half-widths $(r_p,r_u,r_v)$, and let $H(x)$ be a symmetric $2\times2$ matrix function on $P$ whose entries are $C^1$ with
+\[
+\begin{gathered}
+|\partial_uH_{11}|\le B_0,\quad |\partial_vH_{11}|,\,|\partial_uH_{12}|\le B_1,\quad |\partial_vH_{12}|,\,|\partial_uH_{22}|\le B_2,\quad |\partial_vH_{22}|\le B_3,\\
+|\partial_pH_{11}|\le B_4,\quad |\partial_pH_{12}|\le B_5,\quad |\partial_pH_{22}|\le B_6
+\end{gathered}
+\]
+on $P$. Let $H_{11}(x_0)\le h_{11}$, $H_{22}(x_0)\le h_{22}$, $|H_{12}(x_0)|\le h_{12}$, and put
+\[
+a=h_{11}+B_0r_u+B_1r_v+B_4r_p,\quad b=h_{12}+B_1r_u+B_2r_v+B_5r_p,\quad c=h_{22}+B_2r_u+B_3r_v+B_6r_p.
+\]
+If $\eta\ge0$, $a+\eta<0$, $c+\eta<0$ and $(a+\eta)(c+\eta)>b^2$, then $H(x)\le-\eta I$ on $P$.
+\end{lemma}
+
+\begin{proof}
+Moving from $x_0$ to $x$ along three segments parallel to the axes stays in $P$, so $H_{11}(x)\le a$, $|H_{12}(x)|\le b$, $H_{22}(x)\le c$. For $\xi\in\R^2$, $\xi^{\mathsf T}H(x)\xi\le a\xi_1^2+2b|\xi_1\xi_2|+c\xi_2^2$, and the matrix $\begin{pmatrix}a+\eta&b\\b&c+\eta\end{pmatrix}$ is negative definite.
+\end{proof}
+
+\begin{lemma}[Quadratic gap]\label{lem:gap}
+Let $f$ be $C^2$ on a convex set $C\subset\R^2$ containing $x_0$, with $\nabla f(x_0)=0$ and $\Hess f\le-\eta I$ on $C$. Then $f(x_0)-f(x)\ge\frac\eta2|x-x_0|^2$ for $x\in C$.
+\end{lemma}
+
+\begin{proof}
+Taylor's formula with integral remainder along the segment from $x_0$ to $x$.
+\end{proof}
+
+\subsection{Arithmetic and certificates}\label{sec:arith}
+All enclosures are computed with the interval library MPFI \cite{MPFI}, built on MPFR \cite{MPFR}, at a precision of $80$ bits. Each operation returns an interval containing the exact result of the operation applied to all points of its arguments. Rational parameters are entered as quotients of exactly representable integers, and $\pi$ is enclosed by the library. Real powers $x^\alpha$ of intervals with $x\ge0$ are enclosed using monotonicity in $x$ and in $\alpha$ on each side of $x=1$. On cells where one of the bases $c$, $s$, $z_+$, $z_-$ may vanish (for the sector formula, $t$ or $1-t$), we use the following valid enclosures, in which $x^\alpha\log^rx$ with $\alpha>0$ stands for its continuous extension by $0$ at $x=0$: $\sgn(x)\in[-1,1]$; a power $|x|^{\alpha}$ with an exponent interval $\alpha\subset[0,\infty)$ is enclosed by an interval containing its values at all $x\ne0$ in the cell (so that $|x|^0=1$ is included); for $\alpha\ge2$ and $0\le x\le\beta\le\frac12$, $x^\alpha\log x\in[\beta^\alpha\log\beta,0]$ (the function is decreasing on $[0,e^{-1/\alpha}]$); for $\alpha>0$ and $0\le x\le 1$, $x^\alpha\log x\in[-1/(e\alpha),0]$, which is contained in $[-1,0]$ when $\alpha\ge1$; and for $\alpha\in[2,3]$ and $0\le x\le\beta\le\frac14$, $x^\alpha\log^2x\in[0,\beta^\alpha\log^2\beta]$. No logarithm of zero is evaluated.
+
+Integrals over $\theta\in[0,\pi/2]$ (or $t\in[0,1]$) are enclosed in one of three ways.
+\begin{enumerate}[label=(Q\arabic*)]
+\item \emph{Direct cells.} The interval image of the integrand on a closed cell, multiplied by the width, encloses the integral over the cell. This requires only boundedness, and it is used on every cell where $c$, $s$, $z_+$ or $z_-$ may vanish, as well as for parameter derivatives integrated over a whole parameter box.
+\item \emph{Jet cells.} On the remaining cells all bases of powers are positive. The programs propagate interval jets $(f,f',\frac12f'')$ in the integration variable, and the integral is enclosed by $hf(m)+\frac{h^3}{12}J_2$, where $J_2$ encloses $\frac12f''$ on the whole cell (Lemma~\ref{lem:quad}).
+\item \emph{Midpoint sums.} The composite midpoint sum is enclosed in interval arithmetic and widened by an analytic bound for the quadrature error (Lemma~\ref{lem:quad}).
+\end{enumerate}
+
+A \emph{certificate} for a statement on a closed domain consists of a list of closed root boxes covering the domain, a binary tree for each root in which every node is split at the exact midpoint of one coordinate into two closed children, and, for every leaf, the enclosures needed for one of the box tests below. All box endpoints are integers divided by a fixed denominator ($1000\cdot2^{20}$ or $100800\cdot2^{20}$). The programs print every interval endpoint as a binary64 number rounded outward and written with $17$ significant digits; these strings determine the binary64 numbers exactly, and all subsequent inequalities are checked in exact rational arithmetic. The checking programs rebuild every tree from its root, reject missing, duplicated or malformed nodes, recompute from the saved data every interpolation loss, every bound for the variation of derivatives over a box and every Hessian test of Lemma~\ref{lem:schur}, and compare with the stated thresholds. Floating-point numbers are used only to choose the next coordinate to split, which does not affect correctness since both children are kept.
+
+Two box tests are used. A \emph{Hessian leaf} applies Lemma~\ref{lem:schur}: the center Hessian is enclosed with (Q1) and (Q2), and the seven derivatives $B_0,\dots,B_6$ with (Q1) over the whole box, each signed integrand being integrated before its absolute value is taken. A \emph{gap leaf} applies Lemma~\ref{lem:interp} to a gap function $F$: the values of $F$ at the eight vertices are enclosed, the constants $M_k$ are analytic bounds valid on the box, and the leaf is accepted when the lower bound in \eqref{eq:tensor} exceeds a prescribed margin.
+
+\section{The range \texorpdfstring{$2<p\le3$}{2<p<=3}}\label{sec:near2}
+
+At $p=2$ all central sections are discs of area $\pi$, so we compare derivatives in $p$. Define on $[2,3]\times[0,1]^2$
+\[
+F(p,u,v)=D'(p)-\partial_pA(p,u,v).
+\]
+By Lemma~\ref{lem:pderiv}, $\partial_pA$ is the integral of $\sum_\ve g_\ve\cdot 2H_\ve/p^2$, a bounded integrand that depends continuously on all variables; hence $F$ is continuous on the closed domain, including $p=2$. Since $\partial_pA(p,1,1)=D'(p)$, Lemma~\ref{lem:stationary} gives $F(p,1,1)=0$ and $\nabla_{u,v}F(p,1,1)=0$.
+
+\begin{proposition}\label{prop:near2}
+For $2<p\le3$ and $(u,v)\in\Delta$, $D(p)-A(p,u,v)\ge (p-2)\,d_\cD(u,v)^2/(2\cdot10^6)$.
+\end{proposition}
+
+The proof occupies the rest of this section.
+
+\begin{lemma}\label{lem:n2local}
+On $[2,3]\times[9/10,1]^2$ we have $\Hess_{u,v}\partial_pA\le-\frac1{1000}I$. Consequently $F(p,u,v)\ge d_\cD(u,v)^2/2000$ there.
+\end{lemma}
+
+\begin{proof}
+On this domain we use the sector formula \eqref{eq:sector}. Its integrands are smooth functions of $(p,u,v)$ and of the factors $\tau_j^p\log^r\tau_j$, $r\le 2$, which are continuous on $[0,1]\times[2,3]$; moreover $Q^{(k)}\ge(81/100)^3$ because one $\tau_j$ equals $1$. Hence all derivatives used below pass under the integral, and no singularity occurs at $p=2$. The derivatives of the summands with respect to $\log u$, $\log v$ and $p$ are given in Appendix~\ref{app:sector} together with their conversion to derivatives in $u,v$.
+
+The certificate has $40$ closed root boxes $[2+\frac k{10},2+\frac{k+1}{10}]\times[\frac9{10}+\frac i{20},\frac9{10}+\frac{i+1}{20}]\times[\frac9{10}+\frac j{20},\frac9{10}+\frac{j+1}{20}]$, $0\le k\le9$, $i,j\in\{0,1\}$. Every leaf is a Hessian leaf (Section~\ref{sec:arith}) for $H=\Hess_{u,v}\partial_pA$ with $\eta=1/1000$: the center Hessian is integrated over $128$ cells in $t$, the first and last directly and the others by jets, and the seven derivatives $\partial_u^3\partial_pA$, $\partial_u^2\partial_v\partial_pA$, $\partial_u\partial_v^2\partial_pA$, $\partial_v^3\partial_pA$, $\partial_u^2\partial_p^2A$, $\partial_u\partial_v\partial_p^2A$, $\partial_v^2\partial_p^2A$ over each box by $128$ direct cells. The trees have $7074$ nodes and $3557$ leaves, and every leaf passes the test of Lemma~\ref{lem:schur}; the smallest value of $(a+\eta)(c+\eta)-b^2$ over the leaves is
+\[
+\frac{2528778127552353830529993935126231}{324518553658426726783156020576256000000}\approx7.79\cdot10^{-6}.
+\] The square includes points with $u<v$; this is harmless since all formulas are valid on it. Since $F$ and $\nabla_{u,v}F$ vanish at $(1,1)$ and $\Hess_{u,v}F=-\Hess_{u,v}\partial_pA\ge\frac1{1000}I$, Lemma~\ref{lem:gap} applied to $-F$ gives the second claim.
+\end{proof}
+
+\begin{lemma}\label{lem:n2constants}
+For $2<p\le3$ and $(u,v)\in[0,1]^2$,
+\[
+\partial_p^2F<\frac{448}{p^4},\qquad \partial_u^2F<\frac{130}p,\qquad \partial_v^2F<\frac{130}p .
+\]
+Consequently, on every box $[p_l,p_h]\times[u_l,u_h]\times[v_l,v_h]\subset[2,3]\times[0,1]^2$ the function $F$ satisfies the hypotheses of Lemma~\ref{lem:interp} with $(M_p,M_u,M_v)=(448/p_l^4,130/p_l,130/p_l)$, also when $p_l=2$.
+\end{lemma}
+
+\begin{proof}
+On $[2,3]$ we have $B\ge2^{-1/2}$, $Q^{-1/p}\le B^{-1/p}\le2^{1/6}<\frac65$, $Q^{-2/p}<\frac{13}{10}$, and $A<\pi3^{1/3}<5$ by Lemma~\ref{lem:comparison}. By Lemma~\ref{lem:normal}, $|b|<\frac65$ and $t<\frac{13}{10}$.
+
+\emph{Exponent.} We have $\partial_p^2F=D'''-\partial_p^3A$. By \eqref{eq:pderiv}, $0\le R\le 2H/p^2$ and $\partial_pR\ge-(4H+2V)/p^3$, so dropping $R^3\ge0$ in \eqref{eq:gpp},
+\[
+\frac{\partial_p^3g}{g}\ge -\frac{6\cdot\frac{11}{10}\cdot\frac{42}5}{p^5}-\frac{16}{p^4},\qquad \partial_p^3A>-\frac{1386}{5p^5}-\frac{80}{p^4}.
+\]
+For the upper bound we drop $3R\,\partial_pR\le0$ and get $\partial_p^3g/g<8(\frac{11}{10})^3/p^6+(12\cdot\frac{11}{10}+12+14)/p^4$; applied to $D$ this gives $D'''<1331/(25p^6)+196/p^4$. Hence, using $p\ge2$,
+\[
+\partial_p^2F<\frac{1331}{25p^6}+\frac{1386}{5p^5}+\frac{276}{p^4}\le\Bigl(\frac{1331}{100}+\frac{693}{5}+276\Bigr)\frac1{p^4}=\frac{42791}{100\,p^4}<\frac{448}{p^4}.
+\]
+
+\emph{Normal.} Since $D'$ does not depend on $(u,v)$, $\partial_i^2F=-\partial_i^2\partial_pA$, and $\partial_i^2\partial_pg=g(R\,\mathcal M+\partial_p\mathcal M)$ with $\mathcal M=\partial_i^2g/g$ given by \eqref{eq:Mij}. Dropping the nonnegative terms of \eqref{eq:Mij}, $\mathcal M\ge-4\cdot\frac12\cdot\frac65-2(p-1)\frac{13}{10}=-\frac{13p-1}5$, hence $R\mathcal M\ge-\frac{11(13p-1)}{25p^2}$. Put $\omega=\omega_3=|z|^p/Q$ and $\eta_z=\log|z|-Q_p/Q=(\log\omega+H)/p$. Then $\partial_pb=b\eta_z$, $\partial_pt=t\eta_z$, and $b^2=t\omega$, so
+\[
+\partial_p\mathcal M=-4\ell_id_i\,b\eta_z+\bigl\{2(\omega-1)t+K t\eta_z\bigr\}d_i^2,\qquad K=4(p+2)\omega-2(p-1).
+\]
+The term $Kt\eta_z=\frac tpK(\log\omega+H)$ is bounded below as follows. If $K<0$, then $K\log\omega\ge0$ and $KH\ge-2(p-1)H$, so $Kt\eta_z\ge-\frac{143(p-1)}{50p}$. If $K\ge0$, then $KH\ge0$ and $K\log\omega\ge4(p+2)\omega\log\omega$; with $t=Q^{-2/p}\omega^{1-2/p}$ and $\max_{0<x\le1}x^\gamma(-\log x)=1/(e\gamma)$ we get $Kt\eta_z\ge-Q^{-2/p}\frac{2(p+2)}{e(p-1)}\ge-\frac{39(p+2)}{40(p-1)}$, using $e>\frac83$. On $[2,3]$ the second bound is the smaller one, since $\frac{39(p+2)}{40(p-1)}-\frac{143(p-1)}{50p}=\frac{-377p^2+1534p-572}{200p(p-1)}$ and the concave numerator equals $988$ at $p=2$ and $637$ at $p=3$. Also $2(\omega-1)t\ge-\frac{13}5$. Finally $|b|=Q^{-1/p}\omega^{1-1/p}$ and $|\eta_z|\le(|\log\omega|+H)/p$ give
+\[
+|\partial_pb|\le\frac6{5p}\Bigl(\frac{p}{e(p-1)}+\frac{11}{10}\Bigr)<\frac9{20(p-1)}+\frac{33}{25p},
+\]
+so the first term of $\partial_p\mathcal M$ is at least $-\frac9{10(p-1)}-\frac{66}{25p}$. Integrating against $g$ and using $\int(g_++g_-)=A<5$,
+\[
+\partial_i^2F<C(p)=5\Bigl[\frac{11(13p-1)}{25p^2}+\frac9{10(p-1)}+\frac{66}{25p}+\frac{13}5+\frac{39(p+2)}{40(p-1)}\Bigr].
+\]
+With $(13p-1)/p<13$, $p/(p-1)\le2$, $p\le3$ and $p(p+2)/(p-1)\le8$ (equivalent to $(p-2)(p-4)\le0$) we obtain $pC(p)<5\cdot\frac{644}{25}<130$.
+
+For $p>2$ these are classical derivatives by Lemma~\ref{lem:regularity}, since the exponents of $|z|$ are $p-2>0$ and $p>0$ (with logarithmic factors). The hypotheses of Lemma~\ref{lem:interp} along normal segments at $p=2$ follow by letting $p\downarrow2$, since $F$ is continuous and concavity is preserved under pointwise limits. In the $p$ direction, $\partial_p^2F$ is continuous on $[2,3]$ (all factors are $x^p\log^rx$).
+\end{proof}
+
+\begin{lemma}\label{lem:n2compl}
+$F>10^{-6}$ on $[2,3]\times\bigl([0,\frac9{10}]^2\cup[\frac9{10},1]\times[0,\frac9{10}]\bigr)$.
+\end{lemma}
+
+\begin{proof}
+The certificate has $20$ root boxes, the products of $[2+\frac k{10},2+\frac{k+1}{10}]$, $0\le k\le9$, with the two rectangles in the $(u,v)$-coordinates. Every leaf is a gap leaf for $F$ with the constants of Lemma~\ref{lem:n2constants} and margin $10^{-6}$. At each vertex, $D'(p)$ is enclosed by differentiating \eqref{eq:D} in $p$ under the integral and integrating over $256$ cells in $t$, the first and last cell directly with $16$ subcells and the others by jets; $\partial_pA$ is enclosed from \eqref{eq:polar} with $256$ cells in $\theta$. A cell on which $c$, $s$ or $uc-vs$ may vanish, or on which the lower bound of $|uc-vs|$ does not exceed the upper bound of $(u+v)h$, is integrated directly with $16$ subcells; on every other cell all nonconstant bases are positive and jets are used. When $u=v=0$ the term $|z|^p\log|z|$ vanishes identically. The trees have $46988$ nodes and $23504$ leaves, and the smallest certified lower bound for $F$ over all leaves is $400690021173681367/367150017121671371030528\approx1.091\cdot10^{-6}$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:near2}]
+Every $(u,v)\in\Delta$ lies in $[\frac9{10},1]^2$ or in one of the two rectangles of Lemma~\ref{lem:n2compl}. Since $d_\cD^2\le2$, Lemmas~\ref{lem:n2local} and \ref{lem:n2compl} give $F(q,u,v)\ge d_\cD(u,v)^2/(2\cdot10^6)$ for $2\le q\le3$. As $D(2)=A(2,u,v)=\pi$, integrating over $q\in[2,p]$ gives the claim.
+\end{proof}
+
+\section{The range \texorpdfstring{$3\le p\le4$}{3<=p<=4}}\label{sec:34}
+
+\begin{proposition}\label{prop:34}
+For $3\le p\le4$ and $(u,v)\in\Delta$, $D(p)-A(p,u,v)\ge d_\cD(u,v)^2/1000$.
+\end{proposition}
+
+\begin{lemma}\label{lem:34constants}
+For $3\le p\le4$ and $(u,v)\in[0,1]^2$,
+\[
+-42<\partial_u^2A,\ \partial_v^2A<31,\qquad -2<\partial_p^2A\le0,
+\]
+and for every $N\ge1$ the composite midpoint rule with $N$ cells on $[0,\pi/2]$ approximates \eqref{eq:polar} with error less than $26/N^2$.
+\end{lemma}
+
+\begin{proof}
+Here $B\ge\frac12$, so $Q\ge\frac12+|z|^p$, and $A\le\pi\sqrt3<\frac{11}2$. First $|b|\le\frac34$: it suffices that $x^{p-1}(4-3x)\le\frac32$ for $x\ge0$, which follows from $x^{p-1}\le x^2$ and $\max_{[0,1]}x^2(4-3x)=\frac{256}{243}<\frac32$, from $x^{p-1}\le x^3$ and monotonicity of $x^3(4-3x)$ on $[1,\frac43]$, and trivially for $x\ge\frac43$. Next $t\le1$, since $x^{p-2}(1-x^2)\le x(1-x^2)\le\frac{2}{3\sqrt3}<\frac12$ on $[0,1]$. The bracket in \eqref{eq:Mij} equals $2t[(p+2)\omega-(p-1)]$ with $\omega=|z|^p/Q$; when it is positive it is at most $2t(5\omega-2)$, and $t=B^{-2/p}\omega^{1-2/p}(1-\omega)^{2/p}\le2^{2/3}\sqrt{1-\omega}$, so the bracket is at most ${2\cdot2^{2/3}\max_{\omega}\bigl(\sqrt{1-\omega}\,(5\omega-2)\bigr)}=4\cdot2^{2/3}/\sqrt5<3$. With $u/S\le\frac12$ this gives $-\frac{15}2g\le\partial_u^2g\le\frac{11}2g$, and integration gives the first bounds. The second follows from \eqref{eq:gpp}: $\partial_p^2g\le0$ and $\partial_p^2g/g\ge-(4\cdot\frac{11}{10}+4)/27=-\frac{14}{45}$.
+
+For the quadrature, in \eqref{eq:gtt} we have $Q(\theta+\pi/2)\le1+(\sqrt2)^p\le5$ and $Q\ge\frac12$, so $U\le10^{2/3}<5$ and $-28<g''/g<32$. Also $Q^{-2/p}\le B^{-2/p}\le\sqrt2$, so $g<\frac52$ and $|(g_++g_-)''|<160$. Lemma~\ref{lem:quad} gives the error bound $160(\pi/2)^3/(24N^2)<26/N^2$; the integrand is $C^2$ because $p\ge3$.
+\end{proof}
+
+\begin{lemma}\label{lem:34local}
+On $[3,4]\times[\frac{17}{20},1]^2$ we have $\Hess_{u,v}A\le-\frac1{500}I$.
+\end{lemma}
+
+\begin{proof}
+\emph{Third derivatives.} On this domain
+\begin{equation}\label{eq:third34}
+|A_{uuu}|,|A_{vvv}|<9,\quad |A_{uuv}|,|A_{uvv}|<6,\quad |A_{uup}|,|A_{vvp}|<2,\quad |A_{uvp}|<1.
+\end{equation}
+These derivatives exist and are continuous by Lemma~\ref{lem:regularity}; at $p=3$ the integrands of the third normal derivatives contain $\sgn(z)$. Their integrands are given by \eqref{eq:third} and \eqref{eq:Hp}. The bounds are certified on $2400$ boxes: $8$ intervals of width $\frac18$ in $p$ times the $300$ rectangles $I_i\times I_j$ with $0\le j\le i\le23$, where $I_i=[\frac{17}{20}+\frac i{160},\frac{17}{20}+\frac{i+1}{160}]$; on each box every signed integrand is integrated over $512$ direct cells in $\theta$. The largest absolute enclosures in the four groups of \eqref{eq:third34} are $8.2884$, $5.3331$, $1.3074$ and $0.9454$. Boxes on the diagonal also contain points with $u<v$, and the symmetry $A(p,u,v)=A(p,v,u)$ extends \eqref{eq:third34} to the whole square.
+
+\emph{Box test.} If $x_0$ is the center of a box with half-widths $(r_p,r_u,r_v)$, then by \eqref{eq:third34} each entry of $\Hess A(x)-\Hess A(x_0)$ is bounded by $9r_u+6r_v+2r_p$, $6r_u+6r_v+r_p$ or $6r_u+9r_v+2r_p$, and since the operator norm of a symmetric matrix is at most its largest absolute row sum,
+\[
+\lambda_{\max}(\Hess A(x))\le\lambda_{\max}(\Hess A(x_0))+\max\{15r_u+12r_v+3r_p,\,12r_u+15r_v+3r_p\}.
+\]
+The center Hessian is enclosed with $128$ cells in $\theta$, using direct cells where $c$, $s$ or $uc-vs$ may vanish and jets elsewhere, and its largest eigenvalue by $\frac12(H_{11}+H_{22})+\sqrt{\frac14(H_{11}-H_{22})^2+H_{12}^2}$. There are $150$ roots, the products of $10$ intervals of width $\frac1{10}$ in $p$ with the $15$ rectangles $J_i\times J_j$, $0\le j\le i\le4$, where $J_i=[\frac{17}{20}+\frac{3i}{100},\frac{17}{20}+\frac{3(i+1)}{100}]$; boxes with $i=j$ contain points with $u<v$, where the test remains valid. A leaf is accepted when the right-hand side above is less than $-\frac1{500}$. The trees have $11316$ nodes, at whose centers the Hessian was enclosed, and $5733$ leaves; the largest upper bound over all leaves is $-1212050281292867/112589990684262400\approx-0.01077$.
+\end{proof}
+
+\begin{lemma}\label{lem:34compl}
+The function $F(p,u,v)=D(p)-A(p,u,v)-d_\cD(u,v)^2/1000$ is positive on $[3,4]\times\{(u,v)\in\Delta:v\le\frac{17}{20}\}$.
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:34constants}, $\partial_u^2F<42$, $\partial_v^2F<42$ and $\partial_p^2F=D''-\partial_p^2A<2$ on $[3,4]\times[0,1]^2$. We use the cells $[3+\frac k{20},3+\frac{k+1}{20}]\times[\frac i{100},\frac{i+1}{100}]\times[\frac j{100},\frac{j+1}{100}]$ with $0\le k<20$, $0\le j<85$, $j\le i<100$; there are $98600$ of them and they cover the domain. By \eqref{eq:tensor} the interpolation loss on each cell is $(42\cdot10^{-4}+42\cdot10^{-4}+2\cdot\frac1{400})/8=\frac{67}{40000}$. The vertices are the $105651$ points $(3+\frac k{20},\frac i{100},\frac j{100})$ with $0\le k\le20$, $0\le i\le100$, $0\le j\le\min(i,85)$; a cell with $i=j$ has one vertex with $u<v$, which is replaced by the symmetric vertex. At every vertex the two areas $D(p)=A(p,1,1)$ and $A(p,u,v)$ are enclosed by the midpoint sum with $N=384$ cells in interval arithmetic, and the lower bound of
+\[
+D_N-A_N-\frac{d_\cD^2}{1000}-\frac{67}{40000}-\frac{52}{384^2}
+\]
+is positive, the last term accounting for both quadrature errors of Lemma~\ref{lem:34constants}. The smallest of these lower bounds is $7726427080913609/2^{64}\approx4.19\cdot10^{-4}$. Hence every vertex value exceeds the interpolation loss, and $F>0$ on every cell.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:34}]
+On $[\frac{17}{20},1]^2$ combine Lemma~\ref{lem:34local}, Lemma~\ref{lem:stationary} and Lemma~\ref{lem:gap} with $\eta=\frac1{500}$. The rest of $\Delta$ is covered by Lemma~\ref{lem:34compl}.
+\end{proof}
+
+\section{The range \texorpdfstring{$4\le p\le6$}{4<=p<=6} and the transition}\label{sec:46}
+
+\begin{lemma}\label{lem:branchcmp}
+$D-T$ is $C^1$ on $[4,6]$ and $(D-T)'<-\frac1{50}$ there. Moreover
+\[
+D\bigl(\tfrac{499}{100}\bigr)-T\bigl(\tfrac{499}{100}\bigr)\in\Bigl[\frac{299}{10^6},\frac{303}{10^6}\Bigr],\qquad D(5)-T(5)\in\Bigl[-\frac{67}{10^6},-\frac{64}{10^6}\Bigr].
+\]
+Consequently $D-T$ has exactly one zero $p_*$ in $[4,6]$, and $\frac{499}{100}<p_*<5$.
+\end{lemma}
+
+\begin{proof}
+Put $\Sigma=1+t^p+(1-t)^p$ and $\Theta=1+t^p$. Differentiating \eqref{eq:D} and \eqref{eq:T} under the integral,
+\[
+(D-T)'(p)=\int_0^1\Bigl(3\sqrt3\,\Sigma^{-2/p}\Bigl[\frac{2\log\Sigma}{p^2}-\frac{2\partial_p\Sigma}{p\Sigma}\Bigr]-4\sqrt2\,2^{-1/p}\Theta^{-2/p}\Bigl[\frac{\log2}{p^2}+\frac{2\log\Theta}{p^2}-\frac{2t^p\log t}{p\Theta}\Bigr]\Bigr)\dd t,
+\]
+with $\partial_p\Sigma=t^p\log t+(1-t)^p\log(1-t)$; the integrand is continuous on $[4,6]\times[0,1]$. Its interval image is enclosed on each of the $200\times1024$ rectangles $[4+\frac k{100},4+\frac{k+1}{100}]\times[\frac j{1024},\frac{j+1}{1024}]$ and multiplied by $\frac1{1024}$ (direct cells). For every $k$ the resulting upper bound is less than $-\frac1{50}$; the largest one is $\approx-0.02105$.
+
+For the two values we use the midpoint rule with $N=4096$ cells. On $[4,6]$ we have $\Sigma,\Theta\ge1$, $|\Sigma'|,|\Theta'|\le6$, $|\Sigma''|,|\Theta''|\le30$, $\frac2p\le\frac12$ and $\frac2p(\frac2p+1)\le\frac34$, so the second derivatives of $\Sigma^{-2/p}$ and $\Theta^{-2/p}$ in $t$ are bounded by $\frac34\cdot36+\frac12\cdot30=42$, and that of the integrand of $D-T$ by $(3\sqrt3+4\sqrt2)\cdot42<500$. Lemma~\ref{lem:quad} bounds the error by $500/(24N^2)$, and interval evaluation of the sums gives the stated enclosures.
+\end{proof}
+
+\begin{lemma}\label{lem:46constants}
+For $4\le p\le6$ and $(u,v)\in[0,1]^2$,
+\[
+\partial_u^2A,\ \partial_v^2A>-84,\qquad -1<\partial_p^2A\le0,
+\]
+and the composite midpoint rule with $N$ cells approximates \eqref{eq:polar} with error less than $60/N^2$.
+\end{lemma}
+
+\begin{proof}
+Here $B\ge\frac14$ and $A\le\pi3^{2/3}<7$. We have $|b|\le1$ and $t\le1$: for $x=|z|\le1$, $x^{p-1}(1-x)\le x^3(1-x)\le\frac{27}{256}<\frac14$ and $x^{p-2}(1-x^2)\le x^2(1-x^2)\le\frac14$, and for $x\ge1$ the claims are immediate. Then \eqref{eq:Mij} gives $\partial_i^2g/g\ge-4\cdot\frac12-2\cdot5=-12$, and $\partial_i^2A>-84$. By \eqref{eq:gpp}, $0\ge\partial_p^2g/g\ge-\frac{8.4}{64}$, hence $\partial_p^2A>-1$. For the quadrature, $Q(\theta+\pi/2)\le1+2^{p/2}\le9$ and $Q\ge\frac14$ give $U\le36^{2/p}\le6$ and $|g''/g|\le58$ in \eqref{eq:gtt}; with $g\le\sqrt3\,2^{2/3}<3$ we get $|(g_++g_-)''|\le348$, and $348(\pi/2)^3/(24N^2)<60/N^2$.
+\end{proof}
+
+\begin{lemma}\label{lem:46local}
+Put $L_\cD=[4,\frac{51}{10}]\times[\frac9{10},1]^2$ and $L_\cT=[\frac{49}{10},6]\times[\frac{19}{20},1]\times[0,\frac1{10}]$. Then $\Hess_{u,v}A\le-\frac1{1000}I$ on $L_\cD\cup L_\cT$. Consequently
+\[
+D(p)-A(p,u,v)\ge\frac{d_\cD(u,v)^2}{2000}\ \text{ on }L_\cD,\qquad T(p)-A(p,u,v)\ge\frac{d_\cT(u,v)^2}{2000}\ \text{ on }L_\cT .
+\]
+\end{lemma}
+
+\begin{proof}
+The derivatives needed exist and are continuous by Lemma~\ref{lem:regularity}, and their integrands are \eqref{eq:Mij}, \eqref{eq:third} and \eqref{eq:Hp}. The certificate has $66$ roots: $44$ for $L_\cD$, namely $11$ intervals of width $\frac1{10}$ in $p$ times the $2\times2$ grid of width $\frac1{20}$ on $[\frac9{10},1]^2$, and $22$ for $L_\cT$, namely $11$ intervals of width $\frac1{10}$ covering $[\frac{49}{10},6]$ times $[\frac{19}{20},1]\times[0,\frac1{20}]$ and $[\frac{19}{20},1]\times[\frac1{20},\frac1{10}]$. All leaves are Hessian leaves with $\eta=\frac1{1000}$, with $128$ cells in $\theta$ both for the centers and for the seven derivatives. The trees have $19494$ nodes and $9780$ leaves; the smallest value of $(a+\eta)(c+\eta)-b^2$ is $\approx1.065\cdot10^{-5}$, and the largest upper bound for the largest eigenvalue is $\approx-0.001032$. The gap estimates follow from Lemmas~\ref{lem:stationary} and \ref{lem:gap}; at $(1,0)$ we use that $A$ is even in $v$, so that the segment argument may be carried out in $[\frac{19}{20},1]\times[-\frac1{10},\frac1{10}]$.
+\end{proof}
+
+Let $C_{46}$ be the closed set of $(p,u,v)$ with $(u,v)\in\Delta$ and
+\begin{enumerate}[label=(\arabic*)]
+\item $4\le p\le\frac{49}{10}$ and $v\le\frac9{10}$; or
+\item $\frac{49}{10}\le p\le\frac{51}{10}$, $v\le\frac9{10}$, and ($u\le\frac{19}{20}$ or $v\ge\frac1{10}$); or
+\item $\frac{51}{10}\le p\le6$, and ($u\le\frac{19}{20}$ or $v\ge\frac1{10}$).
+\end{enumerate}
+Then $[4,6]\times\Delta\subset L_\cD\cup L_\cT\cup C_{46}$, as one checks by distinguishing the cases $v\ge\frac9{10}$ and $v\le\frac9{10}$.
+
+\begin{lemma}\label{lem:46compl}
+On $C_{46}\cap\{p\le5\}$ we have $D-A>10^{-5}$, and on $C_{46}\cap\{p\ge5\}$ we have $T-A>10^{-5}$.
+\end{lemma}
+
+\begin{proof}
+Let $J=D-A$ for $p\le5$ and $J=T-A$ for $p\ge5$. By Lemma~\ref{lem:46constants} and the concavity of $D$ and $T$ (Lemma~\ref{lem:pderiv}), $\partial_u^2J,\partial_v^2J<84$ and $\partial_p^2J<1$. The roots are the boxes $P\times I_i\times I_j$ with $P\in\{[4,\frac{49}{10}],[\frac{49}{10},5],[5,\frac{51}{10}],[\frac{51}{10},6]\}$, $I_0=[0,\frac1{10}]$, $I_1=[\frac1{10},\frac9{10}]$, $I_2=[\frac9{10},\frac{19}{20}]$, $I_3=[\frac{19}{20},1]$ and $i\ge j$, omitting those contained in $L_\cD$ or $L_\cT$; there are $28$ of them, they cover $C_{46}$, and boxes with $i=j$ also contain points with $u<v$, where all bounds remain valid. The reference branch is fixed on each root. Every leaf is a gap leaf with $(M_p,M_u,M_v)=(1,84,84)$ and margin $10^{-5}$; all areas at the vertices, including $D$ and $T$, are enclosed by midpoint sums with $N=512$ widened by $\pm60/N^2$. The trees have $32712$ nodes and $16370$ leaves with $21391$ distinct vertices, and the smallest certified lower bound for $J$ is $283798894833/28147497671065600\approx1.008\cdot10^{-5}$.
+\end{proof}
+
+\begin{proposition}\label{prop:46}
+Let $4\le p\le6$ and $(u,v)\in\Delta$. Then $M(p)-A(p,u,v)\ge10^{-5}\min\{d_\cD^2,d_\cT^2\}$. Equality $A(p,u,v)=M(p)$ holds exactly for $(u,v)=(1,1)$ if $p<p_*$, for $(u,v)\in\{(1,1),(1,0)\}$ if $p=p_*$, and for $(u,v)=(1,0)$ if $p>p_*$.
+\end{proposition}
+
+\begin{proof}
+On $L_\cD$ and $L_\cT$ use Lemma~\ref{lem:46local} and $M\ge D$, $M\ge T$. On $C_{46}$, Lemma~\ref{lem:46compl} gives $M-A>10^{-5}$, and $\min\{d_\cD^2,d_\cT^2\}\le d_\cT^2\le(1-u)^2+u^2\le1$. Equality forces $(u,v)=(1,1)$ with $D(p)=M(p)$, or $(u,v)=(1,0)$ with $T(p)=M(p)$, and Lemma~\ref{lem:branchcmp} decides which of these occur.
+\end{proof}
+
+\section{Large exponents: cube comparison and short chords}\label{sec:chords}
+
+\begin{lemma}\label{lem:Tlower}
+For $p\ge2$, $V_p>4(1-2/p^2)$ and $T(p)>4\sqrt2\bigl(1-\frac{\log2}p-\frac2{p^2}\bigr)$. Consequently $T(p)>4\sqrt2(1-\frac{37}{50p})$ and $T(p)>\sqrt{31}$ for $p\ge50$, and $T(p)>4\sqrt2(1-\frac{18}{25p})$ for $p\ge100$. Moreover $T(p)\le4\sqrt2$.
+\end{lemma}
+
+\begin{proof}
+By $e^y\ge1+y$,
+\[
+V_p=4\int_0^1(1-x^p)^{1/p}\dd x\ge4\Bigl(1+\frac1p\int_0^1\log(1-x^p)\dd x\Bigr)=4\Bigl(1-\frac1p\sum_{k\ge1}\frac1{k(pk+1)}\Bigr)>4\Bigl(1-\frac2{p^2}\Bigr),
+\]
+since $\sum_kk^{-2}<2$. With $2^{-1/p}\ge1-\frac{\log2}p$ and \eqref{eq:T} the first bound follows. Since $\log2<\frac7{10}$, for $p\ge50$ we have $\frac{\log 2}p+\frac2{p^2}\le\frac{37}{50p}\le\frac{37}{2500}$, and $32(\frac{2463}{2500})^2>31$. For $p\ge100$ we have $\frac{\log 2}p+\frac2{p^2}\le\frac{18}{25p}$. Finally $V_p\le4$ and $2^{1/2-1/p}<\sqrt2$.
+\end{proof}
+
+Let $N_0=\{(u,v)\in\Delta:u\ge\frac9{10},\,v\le\frac1{10}\}$.
+
+\begin{lemma}\label{lem:bernstein}
+$A_\infty(u,v)^2<31$ for $(u,v)\in\Delta\setminus N_0$.
+\end{lemma}
+
+\begin{proof}
+If $u+v\le1$ and $(u,v)\notin N_0$, then $u<\frac9{10}$ and $v\le\min(u,1-u)$, so $S\le\max\{\frac32,1+(\frac9{10})^2+(\frac1{10})^2\}=\frac{91}{50}$ and $A_\infty^2=16S\le\frac{728}{25}<31$. If $u+v\ge1$ and $(u,v)\notin N_0$, then $v\ge\frac1{10}$, and $A_\infty^2<31$ is equivalent to the positivity of
+\[
+\Pi(u,v)=31u^2v^2-(1+u^2+v^2)\bigl(4uv-(u+v-1)^2\bigr)^2 .
+\]
+The region $\{(u,v)\in\Delta:u+v\ge1,\,v\ge\frac1{10}\}$ is the union of the images of $[0,1]^2$ under
+\[
+(x,y)\mapsto\bigl(1-v+vy,\ v\bigr),\ v=\tfrac1{10}+\tfrac25x,\qquad\text{and}\qquad (x,y)\mapsto\bigl(v+(1-v)y,\ v\bigr),\ v=\tfrac12+\tfrac x2 .
+\]
+After either substitution $\Pi$ becomes a polynomial $\sum_{a,b\le6}c_{ab}x^ay^b$ with rational coefficients, and its coefficients in the tensor Bernstein basis $\binom6ix^i(1-x)^{6-i}\binom6jy^j(1-y)^{6-j}$ are
+\[
+\beta_{ij}=\sum_{a\le i,\ b\le j}c_{ab}\binom ia\binom6a^{-1}\binom jb\binom6b^{-1}.
+\]
+All $98$ coefficients $\beta_{ij}$ are positive, the smallest being $\frac{509}{120000}$; they are computed in exact rational arithmetic and listed in the supplementary files. Since the Bernstein basis functions are nonnegative and sum to $1$, $\Pi\ge\frac{509}{120000}$ on both squares.
+\end{proof}
+
+\begin{lemma}\label{lem:cubemargin}
+For $(u,v)\in N_0$ and $\delta=1-u$,
+\[
+4\sqrt2-A_\infty(u,v)\ge\max\Bigl\{\frac95\sqrt2\,\delta,\ \frac9{10}\sqrt2\,v\Bigr\}.
+\]
+\end{lemma}
+
+\begin{proof}
+For every $S>0$, $4\sqrt2-4\sqrt S=4(2-S)/(\sqrt2+\sqrt S)\ge\sqrt2(2-S)$, and $2-S=2\delta-\delta^2-v^2$. If $v\le\delta$, then $u+v\le1$ and $4\sqrt2-A_\infty\ge\sqrt2(2\delta-2\delta^2)\ge\frac95\sqrt2\delta\ge\frac9{10}\sqrt2 v$. If $v>\delta$, then $u+v>1$, $(u+v-1)^2=(v-\delta)^2$ and $\sqrt S/u\ge\sqrt2$, so
+\[
+4\sqrt2-A_\infty\ge\sqrt2\Bigl(2\delta-\delta^2-v^2+\frac{(v-\delta)^2}v\Bigr)=\sqrt2(1-v)\Bigl(v+\frac{\delta^2}v\Bigr),
+\]
+and $v+\delta^2/v\ge\max\{2\delta,v\}$, $1-v\ge\frac9{10}$.
+\end{proof}
+
+\begin{corollary}\label{cor:confine}
+Let $(u,v)\in\Delta$ with $A(p,u,v)\ge T(p)$. If $p\ge50$, then $1-u<\frac{74}{45p}<\frac5{3p}$ and $v<\frac{148}{45p}<\frac{10}{3p}$. If $p\ge100$, then $1-u<\frac8{5p}$ and $v<\frac{16}{5p}$.
+\end{corollary}
+
+\begin{proof}
+By Lemmas~\ref{lem:comparison}(ii), \ref{lem:Tlower} and \ref{lem:bernstein}, $A_\infty(u,v)\ge A(p,u,v)\ge T(p)>\sqrt{31}$, so $(u,v)\in N_0$. Then Lemmas~\ref{lem:cubemargin} and \ref{lem:Tlower} give $\frac95\sqrt2(1-u)<4\sqrt2\cdot\frac{37}{50p}$ and $\frac9{10}\sqrt2v<4\sqrt2\cdot\frac{37}{50p}$ for $p\ge50$, and the same with $\frac{18}{25p}$ for $p\ge100$.
+\end{proof}
+
+\begin{lemma}[Short chords]\label{lem:shortchord}
+Let $p>2$, $0<u\le1$, $R>0$, $0\le h_0<uR$ and $\delta=1-u$. For $|h|<uR$ the interval $\{y:|y|^p+|uy-h|^p\le R^p\}$ equals $[-a(-h),a(h)]$, where $a(h)>0$, $b(h)=ua(h)-h>0$ and $a^p+b^p=R^p$; the function $a$ is $C^2$ and
+\begin{equation}\label{eq:app}
+a''=-\frac{(p-1)a^{p-2}b^{p-2}R^p}{(a^{p-1}+ub^{p-1})^3}.
+\end{equation}
+Suppose that $\lambda\ge2^{1/p}$, $\rho\in(0,1]$, $\lambda(\delta+h_0/R)<1$ and $(1-\lambda(\delta+h_0/R))^p\ge\rho$. Then for $|h|\le h_0$,
+\[
+W(u,h;R)\le W(u,0;R)-(p-1)\,\kappa\,\frac{h^2}R,\qquad \kappa=\lambda^{-3}\frac{\rho}{(1+\rho)^2}.
+\]
+\end{lemma}
+
+\begin{proof}
+For fixed $h$ the function $y\mapsto|y|^p+|uy-h|^p$ is convex and tends to infinity, so the set is an interval. At $h=0$ its right endpoint is $a=R(1+u^p)^{-1/p}$, with $b=ua>0$. On the curve $a^p+(ua-h)^p=R^p$ with $a,b>0$ the derivative of the left-hand side in $a$ is $p(a^{p-1}+ub^{p-1})>0$, so by the implicit function theorem $a(h)$ continues as a $C^2$ function as long as $a,b>0$; $a=0$ would force $|h|=R$ and $b=0$ would force $h=uR$, both excluded. It is the right endpoint because the convex function above is increasing there. Reflecting $(y,h)\mapsto(-y,-h)$ gives the left endpoint. Differentiating twice, $a'=b^{p-1}/\mathcal Q$ and \eqref{eq:app} with $\mathcal Q=a^{p-1}+ub^{p-1}$.
+
+For $|h|\le h_0$ we have $|a-b|\le\delta a+|h|\le\delta R+h_0$ and $\max(a,b)\ge2^{-1/p}R$, so that $\min(a,b)/\max(a,b)\ge1-\lambda(\delta+h_0/R)$, and therefore the ratio $r=\min(a,b)^p/\max(a,b)^p$ satisfies $r\ge\rho$. With $w=a^p/R^p$ we get $w(1-w)=r/(1+r)^2\ge\rho/(1+\rho)^2$. By Hölder's inequality $\mathcal Q\le a^{p-1}+b^{p-1}\le2^{1/p}R^{p-1}$, hence, since $(w(1-w))^{1-2/p}\ge w(1-w)$,
+\[
+-a''\ge\frac{(p-1)}{2^{3/p}R}\,\bigl(w(1-w)\bigr)^{1-2/p}\ge\frac{(p-1)\kappa}{R}.
+\]
+The function $W(h)=a(h)+a(-h)$ is even with $W''\le-2(p-1)\kappa/R$ on $[-h_0,h_0]$, and integrating twice from $0$ gives the claim.
+\end{proof}
+
+\begin{lemma}\label{lem:chord16}
+Let $p\ge16$, $1-\frac1{4p}\le u\le1$ and $0\le v\le\frac1{2p}$. Then
+\[
+A(p,u,v)\le A(p,u,0)-\tfrac23v^2\le T(p)-\tfrac23v^2 .
+\]
+\end{lemma}
+
+\begin{proof}
+Let $r=\frac{19}{20}$; then $r^{16}<\frac12$ and $(\frac{21}{20})^{16}>2$, so $2^{1/p}<\frac{21}{20}$, $u\ge\frac{63}{64}$, and for $|z|\le r$ we have $R(z)^p=1-|z|^p>r^p$, that is $R(z)>r\ge|z|$. Apply Lemma~\ref{lem:shortchord} with $R=R(z)$, $h_0=v|z|$, $\lambda=\frac{21}{20}$: then $h_0/R<v\le\frac1{2p}<u$, $\lambda(\delta+h_0/R)\le\frac{21}{20}\cdot\frac34\cdot\frac1p<\frac4{5p}$ and $(1-\frac4{5p})^p\ge(\frac{19}{20})^{16}=:\rho$, because $(1-K/p)^p$ is increasing in $p>K$ (its logarithmic derivative is $\log(1-x)+x/(1-x)\ge0$ with $x=K/p$). Thus $W(u,-vz;R)\le W(u,0;R)-(p-1)\kappa v^2z^2/R$ for $|z|\le r$ with $\kappa=(\frac{20}{21})^3\rho/(1+\rho)^2$, and $W(u,-vz;R)\le W(u,0;R)$ for all $z$ (Lemma~\ref{lem:chord}). Since $R\le1$, Lemma~\ref{lem:chord} gives, with $S_0=1+u^2$ and $I=\frac23r^3\kappa$,
+\[
+A(p,u,v)\le\sqrt{S/S_0}\,A(p,u,0)-\sqrt S(p-1)Iv^2\le A(p,u,0)+\Bigl[\frac{A(p,u,0)}{2S_0}-\sqrt S(p-1)I\Bigr]v^2,
+\]
+using $\sqrt{1+x}\le1+\frac x2$. Here $A(p,u,0)\le T(p)<6$, $S_0>\frac{49}{25}$ and $\sqrt S>\frac75$, so the bracket is less than $\frac{75}{49}-\frac75\cdot15\cdot I$, and exact rational arithmetic gives $\frac75\cdot15\cdot I-\frac{75}{49}>\frac23$. The last inequality of the lemma is Lemma~\ref{lem:branches}.
+\end{proof}
+
+\begin{lemma}\label{lem:chord100}
+Let $p\ge100$, $1-\frac8{5p}\le u\le1$ and $0\le v\le\frac{16}{5p}$. Then
+\[
+A(p,u,v)\le A(p,u,0)-c_0v^2,\qquad c_0=\frac{2050017207711376971}{25690112000000000000}>0.079 .
+\]
+\end{lemma}
+
+\begin{proof}
+For $|z|\le\frac{19}{20}$ we have $R(z)\ge1-(\frac{19}{20})^{100}>\frac{497}{500}$, and $2^{1/p}\le2^{1/100}<\frac{1007}{1000}$, $u\ge\frac{123}{125}$; these follow from $(\frac{19}{20})^{100}<\frac3{500}$ and $(\frac{1007}{1000})^{100}>2$. Divide $[0,\frac{19}{20}]$ into $64$ equal bins $[z_{k-1},z_k]$. For $z$ in the $k$-th bin apply Lemma~\ref{lem:shortchord} with $R=R(z)$, $h_0=vz_k$ and $\lambda=\frac{1007}{1000}$. Then $h_0/R\le\frac{16}{5p}\cdot\frac{19}{20}\cdot\frac{500}{497}<u$, and
+\[
+\lambda\Bigl(\delta+\frac{h_0}R\Bigr)\le\frac{K_k}p,\qquad K_k=\frac{1007}{1000}\Bigl(\frac85+\frac{16}5\cdot\frac{500}{497}z_k\Bigr)<5,
+\]
+so we may take $\rho_k=(1-K_k/100)^{100}$ by the same monotonicity. Let $\kappa_k$ be $(\frac{1000}{1007})^3\rho_k/(1+\rho_k)^2$ rounded down to a multiple of $10^{-8}$. By evenness the same bound holds on the reflected bins. As in the previous proof, with
+\[
+I=\sum_{k=1}^{64}\frac{2\kappa_k(z_k^3-z_{k-1}^3)}3=\frac{1218353129184303}{104857600000000000},
+\]
+we get $A(p,u,v)\le A(p,u,0)+\bigl[\frac{A(p,u,0)}{2S_0}-\sqrt S(p-1)I\bigr]v^2$, where $A(p,u,0)<6$, $S_0>\frac{49}{25}$, $\sqrt S>\frac75$ and $p-1\ge99$. Exact rational arithmetic gives $\frac75\cdot99\cdot I-\frac{75}{49}=c_0$.
+\end{proof}
+
+\section{The range \texorpdfstring{$6\le p\le100$}{6<=p<=100}}\label{sec:6100}
+
+\begin{proposition}\label{prop:6100}
+For $6\le p\le100$ and $(u,v)\in\Delta$, $A(p,u,v)\le T(p)$, with equality only for $(u,v)=(1,0)$.
+\end{proposition}
+
+\begin{lemma}\label{lem:6constants}
+Let $p\ge6$ and $J=T-A$. On $[0,1]^2$, $\partial_u^2J,\partial_v^2J<24p$ and $\partial_p^2J<51/p^3$, and the midpoint rule with $N$ cells approximates \eqref{eq:polar} with error less than $10p/N^2$.
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:comparison}, $A<6$. By Lemma~\ref{lem:normal}, $|b|\le B^{-1/p}<\frac32$ and $t\le B^{-2/p}<2$, so \eqref{eq:Mij} gives $\partial_i^2g/g>-3-4(p-1)=1-4p$, and $\partial_i^2A>-24p$. By \eqref{eq:gpp}, $\partial_p^2A>-6\cdot\frac{42}{5p^3}>-\frac{51}{p^3}$, while $T''\le0$. For the quadrature, $Q\ge2^{1-p/2}$ and $Q(\theta+\pi/2)\le1+2^{p/2}\le2^{1+p/2}$ give $U\le4$, so $10-8p\le g''/g\le26$ and $|g''/g|<8p$; with $g\le\sqrt3\,2^{1-2/p}<\frac72$ we get $|(g_++g_-)''|<56p$ and $56p(\pi/2)^3/(24N^2)<10p/N^2$.
+\end{proof}
+
+We use the exponents $6,7,8,10,12,16,20,30,50,75,100$ and the ten slabs $[p_l,p_h]$ between consecutive exponents. For each slab put $\alpha=\frac1{4p_h}$, $\beta=\frac1{2p_h}$ and $L=[1-\alpha,1]\times[0,\beta]$. If $p_l<50$ put $R_0=[0,1-\alpha]^2$ and $R_1=[1-\alpha,1]\times[\beta,1]$; then $\Delta\subset L\cup R_0\cup R_1$. If $p_l\ge50$ put $u_{\min}=1-\frac5{3p_l}$, $v_{\max}=\frac{10}{3p_l}$, $R_0=[u_{\min},1-\alpha]\times[0,v_{\max}]$ and $R_1=[1-\alpha,1]\times[\beta,v_{\max}]$; then $L\cup R_0\cup R_1$ contains every $(u,v)\in\Delta$ with $1-u\le\frac5{3p_l}$ and $v\le\frac{10}{3p_l}$. All these endpoints are integer multiples of $1/100800$.
+
+\begin{lemma}\label{lem:6local}
+For each of the five slabs contained in $[6,16]$, $\Hess_{u,v}A\le-\frac1{1000}I$ on $[p_l,p_h]\times L$. Consequently $T-A\ge d_\cT^2/2000$ there.
+\end{lemma}
+
+\begin{proof}
+The five rectangles are the roots of a certificate of Hessian leaves with $\eta=\frac1{1000}$, computed as in Lemma~\ref{lem:46local} with $128$ cells for the centers and for the seven derivatives; on $[6,16]$ all integrands are continuous, the smallest exponent of $|z|$ being $p-3\ge3$. The trees have $2035$ nodes and $1020$ leaves, and the smallest value of $(a+\eta)(c+\eta)-b^2$ is $\approx0.0196$. The gap follows from Lemmas~\ref{lem:stationary} and \ref{lem:gap}, using evenness in $v$ as before.
+\end{proof}
+
+\begin{lemma}\label{lem:6compl}
+For each of the ten slabs, $T-A>10^{-7}$ on $[p_l,p_h]\times(R_0\cup R_1)$.
+\end{lemma}
+
+\begin{proof}
+The $20$ boxes $[p_l,p_h]\times R_0$ and $[p_l,p_h]\times R_1$ are the roots. A leaf $[p_l',p_h']\times[u_l,u_h]\times[v_l,v_h]$ is accepted by one of two tests.
+
+\emph{Gap leaf.} By Lemma~\ref{lem:6constants}, $J=T-A$ satisfies the hypotheses of Lemma~\ref{lem:interp} with
+\[
+(M_p,M_u,M_v)=\bigl(51/(p_l')^3,\,24p_h',\,24p_h'\bigr).
+\]
+All areas at the vertices, including $T$, are enclosed by midpoint sums with $N=64p_h$ cells, $p_h$ the upper end of the root slab, each widened by $\pm10p/N^2$. The leaf is accepted if the lower bound in \eqref{eq:tensor} exceeds $10^{-7}$.
+
+\emph{Cube leaf.} Put $\gamma=(u_l+v_l-1)^2/(u_hv_h)$ if $u_l+v_l>1$ and $\gamma=0$ otherwise, and $\Gamma=(1+u_h^2+v_h^2)(4-\gamma)^2$. By \eqref{eq:cube}, $A_\infty\le\sqrt\Gamma$ on the box, so $A\le\sqrt\Gamma$ by Lemma~\ref{lem:comparison}. Since $T$ is nondecreasing (Lemma~\ref{lem:pderiv}), $T(p)\ge T(p_l')$ on the box. The leaf is accepted if a certified lower bound $\tau$ for $T(p_l')$ satisfies $\tau>10^{-7}$ and $(\tau-10^{-7})^2>\Gamma$, which is checked in exact arithmetic.
+
+The trees have $36546$ nodes and $18283$ leaves, of which $1129$ are cube leaves and $17154$ gap leaves. The smallest certified lower bound for $J$ on a gap leaf is
+\[
+\frac{23638152279517}{132460998140127870976}\approx1.78\cdot10^{-7}.\qedhere
+\]
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:6100}]
+Fix $p\in[6,100]$ and a slab containing it. If $(u,v)\in\Delta$ and $A(p,u,v)\ge T(p)$, then $(u,v)\in L\cup R_0\cup R_1$: this is clear for $p_l<50$, and for $p_l\ge50$ it follows from Corollary~\ref{cor:confine} and $p\ge p_l$. By Lemma~\ref{lem:6compl}, $(u,v)\notin R_0\cup R_1$. Hence $(u,v)\in L$. If $p_h\le16$, Lemma~\ref{lem:6local} gives $T-A\ge d_\cT^2/2000$. If $p_l\ge16$, then $1-u\le\frac1{4p_h}\le\frac1{4p}$ and $v\le\frac1{2p}$, and Lemma~\ref{lem:chord16} gives $A\le A(p,u,0)-\frac23v^2$. In both cases $A\le T$, and equality forces $v=0$ and $A(p,u,0)=T(p)$, hence $u=1$ by Lemma~\ref{lem:branches}.
+\end{proof}
+
+\section{The range \texorpdfstring{$p\ge100$}{p>=100}}\label{sec:tail}
+
+\begin{proposition}\label{prop:tail}
+For $p\ge100$ and $(u,v)\in\Delta$, $A(p,u,v)\le T(p)$, with equality only for $(u,v)=(1,0)$.
+\end{proposition}
+
+\begin{proof}
+Let $A(p,u,v)\ge T(p)$. By Corollary~\ref{cor:confine}, $1-u<\frac8{5p}$ and $v<\frac{16}{5p}$. By Lemma~\ref{lem:chord100}, $T(p)\le A(p,u,v)\le A(p,u,0)-c_0v^2\le T(p)-c_0v^2$, so $v=0$ and $A(p,u,0)=T(p)$, whence $u=1$ by Lemma~\ref{lem:branches}.
+\end{proof}
+
+This part of the proof uses no interval arithmetic: besides elementary analysis it relies on Lemmas~\ref{lem:Tlower}--\ref{lem:cubemargin}, Corollary~\ref{cor:confine} and Lemmas~\ref{lem:shortchord} and \ref{lem:chord100}, whose numerical steps are exact rational computations.
+
+\section{Proofs of the main results}\label{sec:proofs}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Let $a\ne0$, and let $(1,u,v)$ be the representative of the orbit $[a]$ given by Lemma~\ref{lem:chart}. Then $\sigma_p(a)=A(p,u,v)$, $a\in\cD$ if and only if $(u,v)=(1,1)$, and $a\in\cT$ if and only if $(u,v)=(1,0)$. The ranges $(2,3]$, $[3,4]$, $[4,6]$, $[6,100]$, $[100,\infty)$ cover $(2,\infty)$.
+
+For $2<p\le4$, Propositions~\ref{prop:near2} and \ref{prop:34} give $A(p,u,v)\le D(p)$ with equality only at $(1,1)$; in particular $T(p)=A(p,1,0)<D(p)$. For $p\ge6$, Propositions~\ref{prop:6100} and \ref{prop:tail} give $A(p,u,v)\le T(p)$ with equality only at $(1,0)$; in particular $D(p)<T(p)$. Hence $D-T$ has no zero outside $(4,6)$, and by Lemma~\ref{lem:branchcmp} it has exactly one zero $p_*\in(\frac{499}{100},5)$, is positive on $(2,p_*)$ and negative on $(p_*,\infty)$. For $4\le p\le6$ the remaining claims are Proposition~\ref{prop:46}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:transition}]
+(i) is Lemma~\ref{lem:branchcmp}. (ii) By Theorem~\ref{thm:main}, $M=D$ on $(2,p_*]$ and $M=T$ on $[p_*,\infty)$; since $D$ and $T$ are differentiable, $M'_-(p_*)=D'(p_*)$, $M'_+(p_*)=T'(p_*)$, and $M'_+(p_*)-M'_-(p_*)=-(D-T)'(p_*)>\frac1{50}$.
+
+(iii) Let $p\in[\frac{49}{10},\frac{51}{10}]$. The map sending a unit vector to its representative $(u,v)\in\Delta$ is continuous, since it is obtained by ordering absolute values and dividing by the largest. Hence every unit vector $a$ close enough to a unit vector of $\cD$ has its representative in $[\frac9{10},1]^2$, and Lemma~\ref{lem:46local} gives $\sigma_p(a)\le D(p)$ with equality only if $a\in\cD$. Since $\cD\cap S^2$ is finite, this proves strict local maximality; the argument for $\cT$ uses $L_\cT$.
+
+(iv) The unit vectors of $\cD$ are $(\pm1,\pm1,\pm1)/\sqrt3$, and those of $\cT$ are the vectors with two coordinates $\pm1/\sqrt2$ and one coordinate $0$. The largest absolute inner product between such vectors is $2/\sqrt6=\sqrt{2/3}$. By Theorem~\ref{thm:main} the set of maximizing unit normals is $\cD\cap S^2$ for $p<p_*$ and $\cT\cap S^2$ for $p>p_*$, so a maximizing unit normal cannot depend continuously on $p$ at $p_*$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:stability}]
+Parts (a), (b) and (c) are Propositions~\ref{prop:near2}, \ref{prop:34} and \ref{prop:46}.
+\end{proof}
+
+\begin{remark}
+For $6\le p\le16$ the proof of Proposition~\ref{prop:6100} gives $T-A\ge d_\cT^2/2000$ near $(1,0)$, and Lemmas~\ref{lem:chord16} and \ref{lem:chord100} give $T-A\ge c\,v^2$ near $(1,0)$ for larger $p$. We do not record a uniform stability estimate for $p\ge6$.
+\end{remark}
+
+\appendix
+
+\section{Derivative identities}\label{app:identities}
+
+\subsection{Polar formula}
+We keep the notation of Lemma~\ref{lem:normal}, write $L_i=\partial_i\log g$, $L_{ij}=\partial_i\partial_j\log g$, and indices refer to $w=(u,v)$. Then $L_i=\ell_i-2bd_i$, $L_{ij}=\delta_{ij}/S-2w_iw_j/S^2-2[(p-1)t-pb^2]d_id_j$, and with
+\[
+C_3=(p-1)(p-2)\frac{\sgn(z)|z|^{p-3}}{Q}-3p(p-1)bt+2p^2b^3,
+\]
+\begin{equation}\label{eq:third}
+\begin{aligned}
+L_{ijk}&=-\frac{2(\delta_{ij}w_k+\delta_{ik}w_j+\delta_{jk}w_i)}{S^2}+\frac{8w_iw_jw_k}{S^3}-2C_3d_id_jd_k,\\
+\frac{\partial_i\partial_j\partial_kg}g&=L_iL_jL_k+L_{ij}L_k+L_{ik}L_j+L_{jk}L_i+L_{ijk}.
+\end{aligned}
+\end{equation}
+Let $\mathcal M_{ij}=\partial_i\partial_jg/g$ be given by \eqref{eq:Mij}, $\ell_Q=\partial_pQ/Q$, $R=\partial_p\log g=2\log Q/p^2-2\ell_Q/p$ as in Lemma~\ref{lem:pderiv}, $t_p=|z|^{p-2}\log|z|/Q-t\ell_Q$ and $b_p=zt_p$. Then
+\begin{equation}\label{eq:Hp}
+\begin{aligned}
+\partial_p\mathcal M_{ij}&=-2b_p(\ell_id_j+\ell_jd_i)+\bigl[2b^2+4(p+2)bb_p-2t-2(p-1)t_p\bigr]d_id_j,\\
+\frac{\partial_i\partial_j\partial_pg}{g}&=R\,\mathcal M_{ij}+\partial_p\mathcal M_{ij}.
+\end{aligned}
+\end{equation}
+These follow by differentiating $\log g$ and using $\partial_zb=(p-1)t-pb^2$. The seven derivatives in Lemma~\ref{lem:schur} are the integrals of $\partial_u^3g$, $\partial_u^2\partial_vg$, $\partial_u\partial_v^2g$, $\partial_v^3g$, $\partial_u^2\partial_pg$, $\partial_u\partial_v\partial_pg$, $\partial_v^2\partial_pg$, summed over $\ve$.
+
+\subsection{Sector formula}\label{app:sector}
+Each summand of \eqref{eq:sector} has the form $G=uv\sqrt S\,Q^{-2/p}$ with $Q=q_0+q_1+q_2$, $q_0=(uv\tau_0)^p$, $q_1=(v\tau_1)^p$, $q_2=(u\tau_2)^p$. Use the coordinates $\alpha=\log u$, $\beta=\log v$, indexed by $i=0,1$, and put $a_0=u^2/S$, $a_1=v^2/S$, $w_0=q_1/Q$, $w_1=q_2/Q$ (the weight of the term not containing the respective coordinate), $e_j=\log(\mathrm{coef}_j\tau_j)$ with $(\mathrm{coef}_0,\mathrm{coef}_1,\mathrm{coef}_2)=(uv,v,u)$, $E=\sum_jq_je_j/Q$, $E_2=\sum_jq_je_j^2/Q$, and
+\[
+c_i=\frac{q_{i+1}e_{i+1}}Q-w_iE,\qquad d_i=\frac{q_{i+1}e_{i+1}^2}{Q}-2E\frac{q_{i+1}e_{i+1}}Q+2w_iE^2-w_iE_2,
+\]
+so that $c_i=\partial_pw_i$ and $d_i=\partial_p^2w_i$. The products $q_je_j$ and $q_je_j^2$ extend continuously by $0$ where $\tau_j=0$. Moreover $\partial_iw_i=-pw_i(1-w_i)$ and $\partial_jw_i=pw_iw_j$ for $i\ne j$. With $L$ now denoting derivatives of $\log G$ in $(\alpha,\beta,p)$, and $i\ne j$,
+\[
+\begin{aligned}
+&L_i=-1+a_i+2w_i,\quad L_{ip}=2c_i,\quad L_{ipp}=2d_i,\\
+&L_{ii}=2a_i(1-a_i)-2pw_i(1-w_i),\qquad L_{ij}=-2a_ia_j+2pw_iw_j,\\
+&L_{iip}=-2w_i(1-w_i)-2pc_i(1-2w_i),\qquad L_{ijp}=2w_iw_j+2p(c_iw_j+w_ic_j),\\
+&L_{iipp}=-4c_i(1-2w_i)-2p\bigl[d_i(1-2w_i)-2c_i^2\bigr],\\
+&L_{ijpp}=4(c_iw_j+w_ic_j)+2p(d_iw_j+2c_ic_j+w_id_j),\\
+&L_{iii}=4a_i(1-a_i)(1-2a_i)+2p^2w_i(1-w_i)(1-2w_i),\\
+&L_{iij}=-4a_ia_j(1-2a_i)-2p^2w_iw_j(1-2w_i),\\
+&L_{iiip}=4pw_i(1-w_i)(1-2w_i)+2p^2c_i(1-6w_i+6w_i^2),\\
+&L_{iijp}=-4pw_iw_j(1-2w_i)-2p^2\bigl[c_iw_j(1-4w_i)+w_ic_j(1-2w_i)\bigr],
+\end{aligned}
+\]
+and $R=\partial_p\log G=2\log Q/p^2-2E/p$, $\partial_pR=-4\log Q/p^3+4E/p^2-2(E_2-E^2)/p$. With $M_{ij}=L_iL_j+L_{ij}$ and $B_{ijk}=L_iL_jL_k+L_{ij}L_k+L_{ik}L_j+L_{jk}L_i+L_{ijk}$,
+\[
+\begin{aligned}
+\frac{G_{ijp}}G&=RM_{ij}+\partial_pM_{ij},\\
+\frac{G_{ijkp}}G&=RB_{ijk}+\partial_pB_{ijk},\\
+\frac{G_{ijpp}}G&=(R^2+\partial_pR)M_{ij}+2R\,\partial_pM_{ij}+\partial_p^2M_{ij},
+\end{aligned}
+\]
+where $\partial_pM_{ij}$, $\partial_p^2M_{ij}$, $\partial_pB_{ijk}$ are expanded by the product rule. Derivatives in $u,v$ are recovered from
+\[
+\begin{gathered}
+G_{uup}=\frac{G_{\alpha\alpha p}-G_{\alpha p}}{u^2},\qquad G_{uvp}=\frac{G_{\alpha\beta p}}{uv},\\
+G_{uuup}=\frac{G_{\alpha\alpha\alpha p}-3G_{\alpha\alpha p}+2G_{\alpha p}}{u^3},\qquad G_{uuvp}=\frac{G_{\alpha\alpha\beta p}-G_{\alpha\beta p}}{u^2v},
+\end{gathered}
+\]
+the symmetric formulas in $v$, and the same formulas with $p$ replaced by $pp$.
+
+\section{Certificates and reproduction}\label{app:data}
+
+Table~\ref{tab:certs} summarizes the certificates. The upper part lists the adaptive certificates of Section~\ref{sec:arith}, with the numbers of root boxes, nodes and leaves of their trees; the lower part lists the two computations on fixed grids. The last column gives a bound that holds over all leaves or cells, rounded in the direction in which it is certified: a lower bound for the gap function (gap), a lower bound for $(a+\eta)(c+\eta)-b^2$ in Lemma~\ref{lem:schur} (Schur), an upper bound for the largest eigenvalue of the Hessian ($\lambda_{\max}$), or an upper bound for $(D-T)'$. The exact values are stated in the corresponding lemmas or in the supplementary files.
+
+\begin{table}[ht]
+\caption{Certificates. H: Hessian leaves (Lemma~\ref{lem:schur}); G: gap leaves (Lemma~\ref{lem:interp}); E: eigenvalue leaves (Lemma~\ref{lem:34local}).}\label{tab:certs}
+\small
+\begin{tabular}{@{}lllrrrl@{}}
+\toprule
+Lemma & domain & test & roots & nodes & leaves & certified bound\\
+\midrule
+\ref{lem:n2local} & $[2,3]\times[\frac9{10},1]^2$ & H, $\eta=10^{-3}$ & 40 & 7074 & 3557 & Schur $\ge7.79\cdot10^{-6}$\\
+\ref{lem:n2compl} & $[2,3]$, complement & G, $>10^{-6}$ & 20 & 46988 & 23504 & gap $\ge1.09\cdot10^{-6}$\\
+\ref{lem:34local} & $[3,4]\times[\frac{17}{20},1]^2$ & E, $<-\frac1{500}$ & 150 & 11316 & 5733 & $\lambda_{\max}\le-0.0107$\\
+\ref{lem:46local} & $L_\cD\cup L_\cT$ & H, $\eta=10^{-3}$ & 66 & 19494 & 9780 & Schur $\ge1.06\cdot10^{-5}$\\
+\ref{lem:46compl} & $C_{46}$ & G, $>10^{-5}$ & 28 & 32712 & 16370 & gap $\ge1.008\cdot10^{-5}$\\
+\ref{lem:6local} & $[6,16]$, near $(1,0)$ & H, $\eta=10^{-3}$ & 5 & 2035 & 1020 & Schur $\ge0.0195$\\
+\ref{lem:6compl} & $[6,100]$, complement & G and cube, $>10^{-7}$ & 20 & 36546 & 18283 & gap $\ge1.78\cdot10^{-7}$\\
+\midrule
+Lemma & domain & test & \multicolumn{3}{l}{fixed grid} & certified bound\\
+\midrule
+\ref{lem:34compl} & $[3,4]$, complement & G, $>0$ & \multicolumn{3}{l}{$98600$ cells} & gap $\ge4.18\cdot10^{-4}$\\
+\ref{lem:branchcmp} & $[4,6]$ & $(D-T)'<-\frac1{50}$ & \multicolumn{3}{l}{$200\times1024$ cells in $(p,t)$} & $(D-T)'\le-0.0210$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The derivative bounds \eqref{eq:third34} are certified on $2400$ boxes, and Lemmas~\ref{lem:bernstein} and \ref{lem:chord100} use $98$ Bernstein coefficients and $64$ chord bins, computed in exact rational arithmetic.
+
+The supplementary files accompanying this paper contain the C++17 programs that produce the interval enclosures, the saved interval certificates, the Python programs that check them, a README file describing their use, and a manifest giving the size and SHA-256 hash of every file. The enclosures were computed with MPFI 1.5.4 and MPFR 4.2.2 at $80$-bit precision on 64-bit Linux. A single script, which uses only the Python standard library, compares the files with the manifest and then runs all checks of Section~\ref{sec:arith}: it rebuilds every tree from its roots, checks that the boxes cover each parameter domain, and verifies every inequality listed above in exact rational arithmetic. These checks take the saved enclosures of transcendental quantities as input and do not recompute them; the enclosures themselves can be regenerated by compiling and running the C++ programs.
+
+\section*{Use of AI-assisted tools}
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{99}
+
+\bibitem{Ball}
+K.~Ball, \emph{Cube slicing in $\mathbb R^n$}, Proc. Amer. Math. Soc. \textbf{97} (1986), no.~3, 465--473.
+
+\bibitem{CNT}
+G.~Chasapis, P.~Nayar, and T.~Tkocz, \emph{Slicing $\ell_p$-balls reloaded: stability, planar sections in $\ell_1$}, Ann. Probab. \textbf{50} (2022), no.~6, 2344--2372.
+
+\bibitem{ENT}
+A.~Eskenazis, P.~Nayar, and T.~Tkocz, \emph{Resilience of cube slicing in $\ell_p$}, Duke Math. J. \textbf{173} (2024), no.~17, 3377--3412.
+
+\bibitem{MPFR}
+L.~Fousse, G.~Hanrot, V.~Lef\`evre, P.~P\'elissier, and P.~Zimmermann, \emph{MPFR: a multiple-precision binary floating-point library with correct rounding}, ACM Trans. Math. Software \textbf{33} (2007), no.~2, Art.~13.
+
+\bibitem{Had}
+H.~Hadwiger, \emph{Gitterperiodische Punktmengen und Isoperimetrie}, Monatsh. Math. \textbf{76} (1972), 410--418.
+
+\bibitem{Hen}
+D.~Hensley, \emph{Slicing the cube in $\mathbb R^n$ and probability}, Proc. Amer. Math. Soc. \textbf{73} (1979), no.~1, 95--100.
+
+\bibitem{Kol}
+A.~Koldobsky, \emph{An application of the Fourier transform to sections of star bodies}, Israel J. Math. \textbf{106} (1998), 157--164.
+
+\bibitem{Koe}
+H.~K\"onig, \emph{On maximal hyperplane sections of the unit ball of $\ell_p^n$ for $p>2$}, Adv. Oper. Theory \textbf{10} (2025), Paper No.~15.
+
+\bibitem{MP}
+M.~Meyer and A.~Pajor, \emph{Sections of the unit ball of $L_p^n$}, J. Funct. Anal. \textbf{80} (1988), no.~1, 109--123.
+
+\bibitem{NT}
+P.~Nayar and T.~Tkocz, \emph{Extremal sections and projections of certain convex bodies: a survey}, in: Harmonic Analysis and Convexity, Adv. Anal. Geom. \textbf{9}, De Gruyter, Berlin, 2023, 343--390; arXiv:2210.00885.
+
+\bibitem{Ole}
+K.~Oleszkiewicz, \emph{On $p$-pseudostable random variables, Rosenthal spaces and $l_p^n$ ball slicing}, in: Geometric Aspects of Functional Analysis, Lecture Notes in Math. \textbf{1807}, Springer, Berlin, 2003, 188--210.
+
+\bibitem{MPFI}
+N.~Revol and F.~Rouillier, \emph{Motivations for an arbitrary precision interval arithmetic and the MPFI library}, Reliab. Comput. \textbf{11} (2005), no.~4, 275--290.
+
+\end{thebibliography}
+
+\end{document}

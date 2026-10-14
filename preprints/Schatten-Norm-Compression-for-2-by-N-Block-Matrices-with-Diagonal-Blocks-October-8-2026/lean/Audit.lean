@@ -1,0 +1,5 @@
+import DiagonalSchatten
+
+#print axioms ResearchMain.DiagonalSchatten.diagonal_schatten_compression_lower
+#print axioms ResearchMain.DiagonalSchatten.diagonal_schatten_compression_upper
+#print axioms ResearchMain.DiagonalSchatten.diagonal_schatten_compression_infinity

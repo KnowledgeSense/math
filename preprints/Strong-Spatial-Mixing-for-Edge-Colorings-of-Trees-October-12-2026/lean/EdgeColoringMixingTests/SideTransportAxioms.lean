@@ -1,0 +1,13 @@
+import EdgeColoringMixing.ObservedPlacement
+import EdgeColoringMixing.ObservedBudgets
+
+set_option autoImplicit false
+
+#print axioms EdgeColoringMixing.ObservedCounting.side_card_lt
+#print axioms EdgeColoringMixing.ObservedCounting.side_rootBudget
+#print axioms EdgeColoringMixing.PinningForbidden.observedCopy_edge_free
+#print axioms EdgeColoringMixing.PinningForbidden.observedCopy_observedEdge
+#print axioms EdgeColoringMixing.ObservedCounting.observedSidePlacement
+#print axioms EdgeColoringMixing.ObservedCounting.observedSide_agreeToDepth
+#print axioms EdgeColoringMixing.ObservedCounting.observedSide_vertexBudget
+#print axioms EdgeColoringMixing.ObservedCounting.observedSide_rootBudget

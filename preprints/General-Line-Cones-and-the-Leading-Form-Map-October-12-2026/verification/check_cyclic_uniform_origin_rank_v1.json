@@ -1,0 +1,3289 @@
+{
+  "scope": "Symbolic all-n identities for cyclic origin ranks and additional finite Taylor consistency checks. The manuscript proves the first-opening rank in Section 7 and Appendix A.",
+  "symbolic_identities": {
+    "residue_coefficients": [
+      "1",
+      "a - 1",
+      "(L + 1)*(a - 1)/a",
+      "(L*a**2 - 2*L*a + 2*L - 2*a + 2)/a"
+    ],
+    "P0": "u**3/6 + 7*u**2/36 - 203*u/216 - 161/1296",
+    "P1": "-u**7 - 7*u**6/6 - 49*u**5/36 - 307*u**4/216 - 1897*u**3/1296 - 12811*u**2/7776 - 41041*u/46656 + 44093/279936",
+    "positive_boundaries": 7,
+    "negative_boundaries": 11,
+    "nonvanishing_bounds": "exact rational inequalities at n>=29"
+  },
+  "modular_taylor_checks": [
+    {
+      "n": 29,
+      "p": 32191,
+      "omega": 18740,
+      "characters": [
+        {
+          "chi": 0,
+          "columns": [
+            1,
+            3,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 20388
+        },
+        {
+          "chi": 1,
+          "columns": [
+            0,
+            3,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 6436
+        },
+        {
+          "chi": 2,
+          "columns": [
+            0,
+            3,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 8289
+        },
+        {
+          "chi": 3,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 8473
+        },
+        {
+          "chi": 4,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 1,
+          "leading_residue": 5373
+        },
+        {
+          "chi": 5,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 19919
+        },
+        {
+          "chi": 6,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 1,
+          "leading_residue": 944
+        },
+        {
+          "chi": 7,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 3,
+          "leading_residue": 16760
+        },
+        {
+          "chi": 8,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 3,
+          "leading_residue": 31306
+        },
+        {
+          "chi": 9,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 3,
+          "leading_residue": 4231
+        },
+        {
+          "chi": 10,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 2,
+          "leading_residue": 29702
+        },
+        {
+          "chi": 11,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 2,
+          "leading_residue": 14768
+        },
+        {
+          "chi": 12,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 2,
+          "leading_residue": 17585
+        },
+        {
+          "chi": 13,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 2,
+          "leading_residue": 31812
+        },
+        {
+          "chi": 14,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 9623
+        },
+        {
+          "chi": 15,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 2979
+        },
+        {
+          "chi": 16,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 21342
+        },
+        {
+          "chi": 17,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 23094
+        },
+        {
+          "chi": 18,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 18344
+        },
+        {
+          "chi": 19,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 31835
+        },
+        {
+          "chi": 20,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 19375
+        },
+        {
+          "chi": 21,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 7163
+        },
+        {
+          "chi": 22,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 16866
+        },
+        {
+          "chi": 23,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 21489
+        },
+        {
+          "chi": 24,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 15527
+        },
+        {
+          "chi": 25,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 4453
+        },
+        {
+          "chi": 26,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 32040
+        },
+        {
+          "chi": 27,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 31134
+        },
+        {
+          "chi": 28,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 14264
+        }
+      ]
+    },
+    {
+      "n": 30,
+      "p": 32191,
+      "omega": 205,
+      "characters": [
+        {
+          "chi": 0,
+          "columns": [
+            1,
+            3,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 2703
+        },
+        {
+          "chi": 1,
+          "columns": [
+            0,
+            3,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 15973
+        },
+        {
+          "chi": 2,
+          "columns": [
+            0,
+            3,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 630
+        },
+        {
+          "chi": 3,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 7949
+        },
+        {
+          "chi": 4,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 1,
+          "leading_residue": 19702
+        },
+        {
+          "chi": 5,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 7316
+        },
+        {
+          "chi": 6,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 1,
+          "leading_residue": 29152
+        },
+        {
+          "chi": 7,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 3,
+          "leading_residue": 31204
+        },
+        {
+          "chi": 8,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 3,
+          "leading_residue": 25282
+        },
+        {
+          "chi": 9,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 3,
+          "leading_residue": 3025
+        },
+        {
+          "chi": 10,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 3,
+          "leading_residue": 26277
+        },
+        {
+          "chi": 11,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 2,
+          "leading_residue": 12145
+        },
+        {
+          "chi": 12,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 2,
+          "leading_residue": 20633
+        },
+        {
+          "chi": 13,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 2,
+          "leading_residue": 7185
+        },
+        {
+          "chi": 14,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 2,
+          "leading_residue": 27121
+        },
+        {
+          "chi": 15,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 15849
+        },
+        {
+          "chi": 16,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 14370
+        },
+        {
+          "chi": 17,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 4528
+        },
+        {
+          "chi": 18,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 13271
+        },
+        {
+          "chi": 19,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 11138
+        },
+        {
+          "chi": 20,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 13584
+        },
+        {
+          "chi": 21,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 6159
+        },
+        {
+          "chi": 22,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 9526
+        },
+        {
+          "chi": 23,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 13280
+        },
+        {
+          "chi": 24,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 28578
+        },
+        {
+          "chi": 25,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 9204
+        },
+        {
+          "chi": 26,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 4785
+        },
+        {
+          "chi": 27,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 21359
+        },
+        {
+          "chi": 28,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 20749
+        },
+        {
+          "chi": 29,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 1872
+        }
+      ]
+    },
+    {
+      "n": 31,
+      "p": 32117,
+      "omega": 5220,
+      "characters": [
+        {
+          "chi": 0,
+          "columns": [
+            1,
+            3,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 12495
+        },
+        {
+          "chi": 1,
+          "columns": [
+            0,
+            3,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 21381
+        },
+        {
+          "chi": 2,
+          "columns": [
+            0,
+            3,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 156
+        },
+        {
+          "chi": 3,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 742
+        },
+        {
+          "chi": 4,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 1,
+          "leading_residue": 2491
+        },
+        {
+          "chi": 5,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 1579
+        },
+        {
+          "chi": 6,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 1,
+          "leading_residue": 29525
+        },
+        {
+          "chi": 7,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 4,
+          "leading_residue": 7115
+        },
+        {
+          "chi": 8,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 3,
+          "leading_residue": 6009
+        },
+        {
+          "chi": 9,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 3,
+          "leading_residue": 9946
+        },
+        {
+          "chi": 10,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 3,
+          "leading_residue": 19076
+        },
+        {
+          "chi": 11,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 3,
+          "leading_residue": 10725
+        },
+        {
+          "chi": 12,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 2,
+          "leading_residue": 13264
+        },
+        {
+          "chi": 13,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 2,
+          "leading_residue": 28614
+        },
+        {
+          "chi": 14,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 2,
+          "leading_residue": 7080
+        },
+        {
+          "chi": 15,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 2,
+          "leading_residue": 12224
+        },
+        {
+          "chi": 16,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 6611
+        },
+        {
+          "chi": 17,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 14160
+        },
+        {
+          "chi": 18,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 23893
+        },
+        {
+          "chi": 19,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 10840
+        },
+        {
+          "chi": 20,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 14828
+        },
+        {
+          "chi": 21,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 7445
+        },
+        {
+          "chi": 22,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 11084
+        },
+        {
+          "chi": 23,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 4540
+        },
+        {
+          "chi": 24,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 11122
+        },
+        {
+          "chi": 25,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 13620
+        },
+        {
+          "chi": 26,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 29169
+        },
+        {
+          "chi": 27,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 17129
+        },
+        {
+          "chi": 28,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 2821
+        },
+        {
+          "chi": 29,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 19747
+        },
+        {
+          "chi": 30,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 13359
+        }
+      ]
+    },
+    {
+      "n": 37,
+      "p": 32117,
+      "omega": 17815,
+      "characters": [
+        {
+          "chi": 0,
+          "columns": [
+            1,
+            3,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 30575
+        },
+        {
+          "chi": 1,
+          "columns": [
+            0,
+            3,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 9252
+        },
+        {
+          "chi": 2,
+          "columns": [
+            0,
+            3,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 7476
+        },
+        {
+          "chi": 3,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 8383
+        },
+        {
+          "chi": 4,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 1,
+          "leading_residue": 30437
+        },
+        {
+          "chi": 5,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 8966
+        },
+        {
+          "chi": 6,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 1,
+          "leading_residue": 11663
+        },
+        {
+          "chi": 7,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 5,
+          "leading_residue": 31946
+        },
+        {
+          "chi": 8,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 5,
+          "leading_residue": 27298
+        },
+        {
+          "chi": 9,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 5,
+          "leading_residue": 6597
+        },
+        {
+          "chi": 10,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 4,
+          "leading_residue": 13076
+        },
+        {
+          "chi": 11,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 4,
+          "leading_residue": 27298
+        },
+        {
+          "chi": 12,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 4,
+          "leading_residue": 31856
+        },
+        {
+          "chi": 13,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 4,
+          "leading_residue": 17026
+        },
+        {
+          "chi": 14,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 3,
+          "leading_residue": 30237
+        },
+        {
+          "chi": 15,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 3,
+          "leading_residue": 18957
+        },
+        {
+          "chi": 16,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 3,
+          "leading_residue": 31980
+        },
+        {
+          "chi": 17,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 3,
+          "leading_residue": 20135
+        },
+        {
+          "chi": 18,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 2,
+          "leading_residue": 11441
+        },
+        {
+          "chi": 19,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 2,
+          "leading_residue": 15853
+        },
+        {
+          "chi": 20,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 2,
+          "leading_residue": 9923
+        },
+        {
+          "chi": 21,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 2,
+          "leading_residue": 11435
+        },
+        {
+          "chi": 22,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 30364
+        },
+        {
+          "chi": 23,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 19846
+        },
+        {
+          "chi": 24,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 15764
+        },
+        {
+          "chi": 25,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 29709
+        },
+        {
+          "chi": 26,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 6756
+        },
+        {
+          "chi": 27,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 15175
+        },
+        {
+          "chi": 28,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 311
+        },
+        {
+          "chi": 29,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 3732
+        },
+        {
+          "chi": 30,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 19952
+        },
+        {
+          "chi": 31,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 11196
+        },
+        {
+          "chi": 32,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 24981
+        },
+        {
+          "chi": 33,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 20419
+        },
+        {
+          "chi": 34,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 9999
+        },
+        {
+          "chi": 35,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 5759
+        },
+        {
+          "chi": 36,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 6264
+        }
+      ]
+    },
+    {
+      "n": 45,
+      "p": 32401,
+      "omega": 12258,
+      "characters": [
+        {
+          "chi": 0,
+          "columns": [
+            1,
+            3,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 16867
+        },
+        {
+          "chi": 1,
+          "columns": [
+            0,
+            3,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 28402
+        },
+        {
+          "chi": 2,
+          "columns": [
+            0,
+            3,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 25195
+        },
+        {
+          "chi": 3,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 15573
+        },
+        {
+          "chi": 4,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 1,
+          "leading_residue": 32031
+        },
+        {
+          "chi": 5,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 31153
+        },
+        {
+          "chi": 6,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 1,
+          "leading_residue": 96
+        },
+        {
+          "chi": 7,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 7,
+          "leading_residue": 21746
+        },
+        {
+          "chi": 8,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 7,
+          "leading_residue": 9455
+        },
+        {
+          "chi": 9,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 7,
+          "leading_residue": 21489
+        },
+        {
+          "chi": 10,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 6,
+          "leading_residue": 13742
+        },
+        {
+          "chi": 11,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 6,
+          "leading_residue": 31392
+        },
+        {
+          "chi": 12,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 6,
+          "leading_residue": 4940
+        },
+        {
+          "chi": 13,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 6,
+          "leading_residue": 14259
+        },
+        {
+          "chi": 14,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 5,
+          "leading_residue": 19781
+        },
+        {
+          "chi": 15,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 5,
+          "leading_residue": 8863
+        },
+        {
+          "chi": 16,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 5,
+          "leading_residue": 2749
+        },
+        {
+          "chi": 17,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 5,
+          "leading_residue": 29458
+        },
+        {
+          "chi": 18,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 4,
+          "leading_residue": 28165
+        },
+        {
+          "chi": 19,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 4,
+          "leading_residue": 2749
+        },
+        {
+          "chi": 20,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 4,
+          "leading_residue": 8805
+        },
+        {
+          "chi": 21,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 4,
+          "leading_residue": 14092
+        },
+        {
+          "chi": 22,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 3,
+          "leading_residue": 24653
+        },
+        {
+          "chi": 23,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 3,
+          "leading_residue": 10566
+        },
+        {
+          "chi": 24,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 3,
+          "leading_residue": 31058
+        },
+        {
+          "chi": 25,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 3,
+          "leading_residue": 21927
+        },
+        {
+          "chi": 26,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 2,
+          "leading_residue": 11284
+        },
+        {
+          "chi": 27,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 2,
+          "leading_residue": 14186
+        },
+        {
+          "chi": 28,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 2,
+          "leading_residue": 9241
+        },
+        {
+          "chi": 29,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 2,
+          "leading_residue": 16112
+        },
+        {
+          "chi": 30,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 7269
+        },
+        {
+          "chi": 31,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 18482
+        },
+        {
+          "chi": 32,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 2263
+        },
+        {
+          "chi": 33,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 29632
+        },
+        {
+          "chi": 34,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 14856
+        },
+        {
+          "chi": 35,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 6789
+        },
+        {
+          "chi": 36,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 17597
+        },
+        {
+          "chi": 37,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 16758
+        },
+        {
+          "chi": 38,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 7182
+        },
+        {
+          "chi": 39,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 17873
+        },
+        {
+          "chi": 40,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 9275
+        },
+        {
+          "chi": 41,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 656
+        },
+        {
+          "chi": 42,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 10818
+        },
+        {
+          "chi": 43,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 10924
+        },
+        {
+          "chi": 44,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 10592
+        }
+      ]
+    },
+    {
+      "n": 61,
+      "p": 32941,
+      "omega": 30384,
+      "characters": [
+        {
+          "chi": 0,
+          "columns": [
+            1,
+            3,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 32213
+        },
+        {
+          "chi": 1,
+          "columns": [
+            0,
+            3,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 4368
+        },
+        {
+          "chi": 2,
+          "columns": [
+            0,
+            3,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 10477
+        },
+        {
+          "chi": 3,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 24916
+        },
+        {
+          "chi": 4,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 1,
+          "leading_residue": 14791
+        },
+        {
+          "chi": 5,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 23044
+        },
+        {
+          "chi": 6,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 1,
+          "leading_residue": 10897
+        },
+        {
+          "chi": 7,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 11,
+          "leading_residue": 13065
+        },
+        {
+          "chi": 8,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 11,
+          "leading_residue": 11169
+        },
+        {
+          "chi": 9,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 11,
+          "leading_residue": 7256
+        },
+        {
+          "chi": 10,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 10,
+          "leading_residue": 26680
+        },
+        {
+          "chi": 11,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 10,
+          "leading_residue": 22055
+        },
+        {
+          "chi": 12,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 10,
+          "leading_residue": 4415
+        },
+        {
+          "chi": 13,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 10,
+          "leading_residue": 6067
+        },
+        {
+          "chi": 14,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 9,
+          "leading_residue": 31146
+        },
+        {
+          "chi": 15,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 9,
+          "leading_residue": 20376
+        },
+        {
+          "chi": 16,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 9,
+          "leading_residue": 22458
+        },
+        {
+          "chi": 17,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 9,
+          "leading_residue": 17326
+        },
+        {
+          "chi": 18,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 8,
+          "leading_residue": 7572
+        },
+        {
+          "chi": 19,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 8,
+          "leading_residue": 20063
+        },
+        {
+          "chi": 20,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 8,
+          "leading_residue": 11035
+        },
+        {
+          "chi": 21,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 8,
+          "leading_residue": 7286
+        },
+        {
+          "chi": 22,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 7,
+          "leading_residue": 21443
+        },
+        {
+          "chi": 23,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 7,
+          "leading_residue": 18337
+        },
+        {
+          "chi": 24,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 7,
+          "leading_residue": 10496
+        },
+        {
+          "chi": 25,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 7,
+          "leading_residue": 28441
+        },
+        {
+          "chi": 26,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 6,
+          "leading_residue": 19948
+        },
+        {
+          "chi": 27,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 6,
+          "leading_residue": 7872
+        },
+        {
+          "chi": 28,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 6,
+          "leading_residue": 7284
+        },
+        {
+          "chi": 29,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 6,
+          "leading_residue": 15023
+        },
+        {
+          "chi": 30,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 5,
+          "leading_residue": 26438
+        },
+        {
+          "chi": 31,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 5,
+          "leading_residue": 20361
+        },
+        {
+          "chi": 32,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 5,
+          "leading_residue": 16823
+        },
+        {
+          "chi": 33,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 5,
+          "leading_residue": 19566
+        },
+        {
+          "chi": 34,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 4,
+          "leading_residue": 11815
+        },
+        {
+          "chi": 35,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 4,
+          "leading_residue": 16823
+        },
+        {
+          "chi": 36,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 4,
+          "leading_residue": 30509
+        },
+        {
+          "chi": 37,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 4,
+          "leading_residue": 25126
+        },
+        {
+          "chi": 38,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 3,
+          "leading_residue": 15583
+        },
+        {
+          "chi": 39,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 3,
+          "leading_residue": 10258
+        },
+        {
+          "chi": 40,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 3,
+          "leading_residue": 27748
+        },
+        {
+          "chi": 41,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 3,
+          "leading_residue": 6539
+        },
+        {
+          "chi": 42,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 2,
+          "leading_residue": 5946
+        },
+        {
+          "chi": 43,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 2,
+          "leading_residue": 8681
+        },
+        {
+          "chi": 44,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 2,
+          "leading_residue": 15200
+        },
+        {
+          "chi": 45,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 2,
+          "leading_residue": 17574
+        },
+        {
+          "chi": 46,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 32578
+        },
+        {
+          "chi": 47,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 30400
+        },
+        {
+          "chi": 48,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 14694
+        },
+        {
+          "chi": 49,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 31496
+        },
+        {
+          "chi": 50,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 20415
+        },
+        {
+          "chi": 51,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 11141
+        },
+        {
+          "chi": 52,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 5784
+        },
+        {
+          "chi": 53,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 3526
+        },
+        {
+          "chi": 54,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 6217
+        },
+        {
+          "chi": 55,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 10578
+        },
+        {
+          "chi": 56,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 17699
+        },
+        {
+          "chi": 57,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 6775
+        },
+        {
+          "chi": 58,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 12661
+        },
+        {
+          "chi": 59,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 22745
+        },
+        {
+          "chi": 60,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 13533
+        }
+      ]
+    },
+    {
+      "n": 89,
+      "p": 33287,
+      "omega": 7018,
+      "characters": [
+        {
+          "chi": 0,
+          "columns": [
+            1,
+            3,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 14485
+        },
+        {
+          "chi": 1,
+          "columns": [
+            0,
+            3,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 12951
+        },
+        {
+          "chi": 2,
+          "columns": [
+            0,
+            3,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 18990
+        },
+        {
+          "chi": 3,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 8387
+        },
+        {
+          "chi": 4,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 1,
+          "leading_residue": 23566
+        },
+        {
+          "chi": 5,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 7539
+        },
+        {
+          "chi": 6,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 1,
+          "leading_residue": 27586
+        },
+        {
+          "chi": 7,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 18,
+          "leading_residue": 26334
+        },
+        {
+          "chi": 8,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 18,
+          "leading_residue": 4189
+        },
+        {
+          "chi": 9,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 18,
+          "leading_residue": 24806
+        },
+        {
+          "chi": 10,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 17,
+          "leading_residue": 13704
+        },
+        {
+          "chi": 11,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 17,
+          "leading_residue": 29354
+        },
+        {
+          "chi": 12,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 17,
+          "leading_residue": 14515
+        },
+        {
+          "chi": 13,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 17,
+          "leading_residue": 6269
+        },
+        {
+          "chi": 14,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 16,
+          "leading_residue": 30808
+        },
+        {
+          "chi": 15,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 16,
+          "leading_residue": 15934
+        },
+        {
+          "chi": 16,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 16,
+          "leading_residue": 31804
+        },
+        {
+          "chi": 17,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 16,
+          "leading_residue": 18928
+        },
+        {
+          "chi": 18,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 15,
+          "leading_residue": 30415
+        },
+        {
+          "chi": 19,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 15,
+          "leading_residue": 13183
+        },
+        {
+          "chi": 20,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 15,
+          "leading_residue": 3972
+        },
+        {
+          "chi": 21,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 15,
+          "leading_residue": 27986
+        },
+        {
+          "chi": 22,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 14,
+          "leading_residue": 12101
+        },
+        {
+          "chi": 23,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 14,
+          "leading_residue": 18133
+        },
+        {
+          "chi": 24,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 14,
+          "leading_residue": 5442
+        },
+        {
+          "chi": 25,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 14,
+          "leading_residue": 6113
+        },
+        {
+          "chi": 26,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 13,
+          "leading_residue": 17430
+        },
+        {
+          "chi": 27,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 13,
+          "leading_residue": 22149
+        },
+        {
+          "chi": 28,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 13,
+          "leading_residue": 11951
+        },
+        {
+          "chi": 29,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 13,
+          "leading_residue": 12189
+        },
+        {
+          "chi": 30,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 12,
+          "leading_residue": 3449
+        },
+        {
+          "chi": 31,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 12,
+          "leading_residue": 24143
+        },
+        {
+          "chi": 32,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 12,
+          "leading_residue": 14631
+        },
+        {
+          "chi": 33,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 12,
+          "leading_residue": 1190
+        },
+        {
+          "chi": 34,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 11,
+          "leading_residue": 12670
+        },
+        {
+          "chi": 35,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 11,
+          "leading_residue": 22116
+        },
+        {
+          "chi": 36,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 11,
+          "leading_residue": 743
+        },
+        {
+          "chi": 37,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 11,
+          "leading_residue": 33186
+        },
+        {
+          "chi": 38,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 10,
+          "leading_residue": 7186
+        },
+        {
+          "chi": 39,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 10,
+          "leading_residue": 17015
+        },
+        {
+          "chi": 40,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 10,
+          "leading_residue": 13966
+        },
+        {
+          "chi": 41,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 10,
+          "leading_residue": 25018
+        },
+        {
+          "chi": 42,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 9,
+          "leading_residue": 20974
+        },
+        {
+          "chi": 43,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 9,
+          "leading_residue": 13670
+        },
+        {
+          "chi": 44,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 9,
+          "leading_residue": 28011
+        },
+        {
+          "chi": 45,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 9,
+          "leading_residue": 8290
+        },
+        {
+          "chi": 46,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 8,
+          "leading_residue": 3352
+        },
+        {
+          "chi": 47,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 8,
+          "leading_residue": 23464
+        },
+        {
+          "chi": 48,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 8,
+          "leading_residue": 12900
+        },
+        {
+          "chi": 49,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 8,
+          "leading_residue": 21705
+        },
+        {
+          "chi": 50,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 7,
+          "leading_residue": 25005
+        },
+        {
+          "chi": 51,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 7,
+          "leading_residue": 8600
+        },
+        {
+          "chi": 52,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 7,
+          "leading_residue": 13562
+        },
+        {
+          "chi": 53,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 7,
+          "leading_residue": 6326
+        },
+        {
+          "chi": 54,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 6,
+          "leading_residue": 8586
+        },
+        {
+          "chi": 55,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 6,
+          "leading_residue": 26815
+        },
+        {
+          "chi": 56,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 6,
+          "leading_residue": 119
+        },
+        {
+          "chi": 57,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 6,
+          "leading_residue": 25219
+        },
+        {
+          "chi": 58,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 5,
+          "leading_residue": 23791
+        },
+        {
+          "chi": 59,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 5,
+          "leading_residue": 102
+        },
+        {
+          "chi": 60,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 5,
+          "leading_residue": 22032
+        },
+        {
+          "chi": 61,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 5,
+          "leading_residue": 19732
+        },
+        {
+          "chi": 62,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 4,
+          "leading_residue": 12658
+        },
+        {
+          "chi": 63,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 4,
+          "leading_residue": 22032
+        },
+        {
+          "chi": 64,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 4,
+          "leading_residue": 4607
+        },
+        {
+          "chi": 65,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 4,
+          "leading_residue": 13964
+        },
+        {
+          "chi": 66,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 3,
+          "leading_residue": 4594
+        },
+        {
+          "chi": 67,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 3,
+          "leading_residue": 32158
+        },
+        {
+          "chi": 68,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 3,
+          "leading_residue": 3859
+        },
+        {
+          "chi": 69,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 3,
+          "leading_residue": 9868
+        },
+        {
+          "chi": 70,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 2,
+          "leading_residue": 26981
+        },
+        {
+          "chi": 71,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 2,
+          "leading_residue": 22432
+        },
+        {
+          "chi": 72,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 2,
+          "leading_residue": 25992
+        },
+        {
+          "chi": 73,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 2,
+          "leading_residue": 24307
+        },
+        {
+          "chi": 74,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 2671
+        },
+        {
+          "chi": 75,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 18697
+        },
+        {
+          "chi": 76,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 14704
+        },
+        {
+          "chi": 77,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 1,
+          "leading_residue": 6308
+        },
+        {
+          "chi": 78,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 11057
+        },
+        {
+          "chi": 79,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 10825
+        },
+        {
+          "chi": 80,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 23543
+        },
+        {
+          "chi": 81,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 16220
+        },
+        {
+          "chi": 82,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 16462
+        },
+        {
+          "chi": 83,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 15373
+        },
+        {
+          "chi": 84,
+          "columns": [
+            0,
+            1,
+            7
+          ],
+          "order": 0,
+          "leading_residue": 10199
+        },
+        {
+          "chi": 85,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 6534
+        },
+        {
+          "chi": 86,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 20345
+        },
+        {
+          "chi": 87,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 9267
+        },
+        {
+          "chi": 88,
+          "columns": [
+            0,
+            1,
+            3
+          ],
+          "order": 0,
+          "leading_residue": 30743
+        }
+      ]
+    }
+  ],
+  "total_characters": 322,
+  "all_pass": true
+}

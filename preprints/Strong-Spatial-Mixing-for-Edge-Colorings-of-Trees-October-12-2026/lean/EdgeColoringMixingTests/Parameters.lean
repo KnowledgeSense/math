@@ -1,0 +1,4 @@
+import EdgeColoringMixing.Parameters
+
+#print axioms EdgeColoringMixing.release_parameter_choice
+#print axioms EdgeColoringMixing.contractionRate_bounds

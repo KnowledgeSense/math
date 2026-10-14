@@ -1,0 +1,37 @@
+import PathCycleTuza
+
+#print axioms ResearchMain.PathCycleTuza.path_inequality
+#print axioms ResearchMain.PathCycleTuza.cycle_inequality
+#print axioms ResearchMain.PathCycleTuza.powerUnion_inequality
+#print axioms ResearchMain.PathCycleTuza.powers_tuza
+#print axioms ResearchMain.PathCycleTuza.path_cycle_sharpness
+#print axioms ResearchMain.PathCycleTuza.path_two_inequality
+#print axioms ResearchMain.PathCycleTuza.path_three_to_five
+#print axioms ResearchMain.PathCycleTuza.path_six_inequality
+#print axioms ResearchMain.PathCycleTuza.path_eight_or_nine
+#print axioms ResearchMain.PathCycleTuza.path_large_inequality
+#print axioms ResearchMain.PathCycleTuza.pathPower_short_isCoChain
+#print axioms ResearchMain.PathCycleTuza.exists_skolem
+#print axioms ResearchMain.PathCycleTuza.SkolemData.endpoint_image
+#print axioms ResearchMain.PathCycleTuza.SkolemData.difference_mass
+#print axioms ResearchMain.PathCycleTuza.pathPacking_bound
+#print axioms ResearchMain.PathCycleTuza.skolem_path_bound
+#print axioms ResearchMain.PathCycleTuza.path_parity_cover
+#print axioms ResearchMain.PathCycleTuza.path_exponent_arithmetic
+#print axioms ResearchMain.PathCycleTuza.cyclicPacking_bound
+#print axioms ResearchMain.PathCycleTuza.skolem_cycle_bound
+#print axioms ResearchMain.PathCycleTuza.cycle_run_cover
+#print axioms ResearchMain.PathCycleTuza.cycle_run_cover_even_odd
+#print axioms ResearchMain.PathCycleTuza.CircularRuns.coloredCover_subset
+#print axioms ResearchMain.PathCycleTuza.CircularRuns.cover_bound
+#print axioms ResearchMain.PathCycleTuza.CircularRuns.vertexEquiv
+#print axioms ResearchMain.PathCycleTuza.consecutiveCycle_bound
+#print axioms ResearchMain.PathCycleTuza.evenSixCycle_bound
+#print axioms ResearchMain.PathCycleTuza.oddSixCycle_bound
+#print axioms ResearchMain.PathCycleTuza.cycle_two_inequality
+#print axioms ResearchMain.PathCycleTuza.cycle_six_inequality
+#print axioms ResearchMain.PathCycleTuza.cycle_exponent_arithmetic
+#print axioms ResearchMain.PathCycleTuza.sum_packing_bound
+#print axioms ResearchMain.PathCycleTuza.sum_cover_bound
+#print axioms ResearchMain.PathCycleTuza.sum_inequality
+#print axioms ResearchMain.PathCycleTuza.unionGraph_inequality

@@ -1,0 +1,319 @@
+\documentclass{amsart}
+
+\usepackage{amssymb}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+  pdftitle={Strict sign regularity of the reciprocal Jackson q-gamma kernel},
+  pdfauthor={Knowledge Sense},
+  pdfsubject={Sign regular kernels and the Jackson q-gamma function},
+  pdfkeywords={sign regular kernel, total positivity, Jackson q-gamma function, q-binomial theorem, Newton basis}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+
+\begin{document}
+
+\title[The reciprocal Jackson $q$-gamma kernel]{Strict sign regularity of the reciprocal Jackson $q$-gamma kernel}
+
+\author{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{13 October 2026}
+
+\subjclass[2020]{Primary 33D05; Secondary 15A15, 15B48}
+
+\keywords{Sign regular kernel, total positivity, Jackson $q$-gamma function, $q$-binomial theorem, Newton basis, Cauchy--Binet formula}
+
+\begin{abstract}
+Let $0<q<1$ and let $\Gamma_q$ be the Jackson $q$-gamma function. We prove that for every $r\ge 1$ and all real numbers $0<x_1<\dots<x_r$ and $0<y_1<\dots<y_r$ the determinant $\det[1/\Gamma_q(x_i+y_j)]_{i,j=1}^r$ is nonzero and has the sign $(-1)^{r(r-1)/2}$. Thus the kernel $(x,y)\mapsto 1/\Gamma_q(x+y)$ is strictly sign regular of every finite order on $(0,\infty)^2$, as conjectured by Karp, Vishnyakova and Zhang. The proof expands $(q^{x+y};q)_\infty$ by the $q$-binomial theorem as a power series in $q^{y}$ whose coefficients are polynomials in $1-q^{x}$. A total nonnegativity theorem of Mainar, Pe\~na and Rubio for the change of basis between monomial and Newton bases, combined with the sign of generalized Vandermonde determinants, shows that every term in the Cauchy--Binet expansion of a truncation has the predicted sign. The term of lowest degrees does not depend on the truncation and gives an explicit lower bound that persists in the limit. As a consequence, the discrete kernel $(x,n)\mapsto 1/(q^x;q)_n$ is strictly sign regular of every order, which extends a result of Karp, Vishnyakova and Zhang for orders at most three.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $X,Y\subseteq\R$. Following Karlin \cite[Chapter~2, \S1]{Karlin} (see also \cite[Definition~2.1]{KVZ}), a kernel $K\colon X\times Y\to\R$ is \emph{sign regular of order $r$}, written $K\in SR_r$, if there are signs $\varepsilon_1,\dots,\varepsilon_r\in\{1,-1\}$ such that
+\begin{equation}\label{eq:SR}
+\varepsilon_m\det\bigl[K(x_i,y_j)\bigr]_{i,j=1}^m\ge 0
+\end{equation}
+for all $m\le r$ and all $x_1<\dots<x_m$ in $X$ and $y_1<\dots<y_m$ in $Y$. If the inequality in \eqref{eq:SR} is always strict, $K$ is \emph{strictly sign regular of order $r$}, written $K\in SSR_r$; if this holds for every $r$, we write $K\in SSR_\infty$. When all $\varepsilon_m$ equal $1$ one speaks of (strict) total positivity. Sign regular kernels are the natural setting for variation diminishing properties \cite[Chapter~5]{Karlin}.
+
+Karp, Vishnyakova and Zhang \cite{KVZ} used kernels in $SR_3$ to show that ratios of functional series and of integral transforms preserve unimodality, and listed many kernels to which their theorems apply. For $0<q<1$ let
+\[
+(a;q)_n=\prod_{j=0}^{n-1}(1-aq^j),\qquad (a;q)_\infty=\prod_{j=0}^{\infty}(1-aq^j),
+\]
+and let
+\begin{equation}\label{eq:Gq}
+\Gamma_q(z)=(1-q)^{1-z}\,\frac{(q;q)_\infty}{(q^z;q)_\infty},\qquad z>0,
+\end{equation}
+be the Jackson $q$-gamma function \cite[\S5.18(ii)]{DLMF}. In \cite[Section~3, Examples~7 and~8]{KVZ} it is conjectured that the Hankel kernel $\Gamma_q(x+y)$ is strictly totally positive of every order and that the reciprocal kernel $1/\Gamma_q(x+y)$ belongs to $SSR_\infty$. For the purposes of their unimodality theorem, Karp, Vishnyakova and Zhang proved the discrete statements that $(q^x;q)_n$ is strictly totally positive of order three, and that $1/(q^x;q)_n$ belongs to $SSR_3$ with the sign pattern $(+,-,-)$, on $(0,\infty)\times\N_0$ \cite[Lemmas~A.1 and~A.2]{KVZ}. Salazar \cite[Theorem~4.1]{Salazar} proved the first conjecture by writing $\Gamma_q$ as the Mellin transform of a positive atomic measure. As he points out \cite[Remark~4.2]{Salazar}, the reciprocal kernel is not a positive moment kernel, and the second conjecture lies outside that method.
+
+Throughout we write
+\[
+\varepsilon_r=(-1)^{r(r-1)/2},
+\]
+so that $(\varepsilon_1,\varepsilon_2,\varepsilon_3,\varepsilon_4,\dots)=(+,-,-,+,\dots)$. Our main result settles the second conjecture.
+
+\begin{theorem}\label{thm:main}
+Let $0<q<1$ and $r\ge1$. If $0<x_1<\dots<x_r$ and $0<y_1<\dots<y_r$, then
+\[
+\varepsilon_r\det\Bigl[\frac{1}{\Gamma_q(x_i+y_j)}\Bigr]_{i,j=1}^r>0.
+\]
+Consequently $(x,y)\mapsto 1/\Gamma_q(x+y)$ belongs to $SSR_\infty$ on $(0,\infty)^2$, with the signs $\varepsilon_r$.
+\end{theorem}
+
+The proof gives an explicit lower bound, which remains valid when $x_1=0$.
+
+\begin{theorem}\label{thm:bound}
+Let $0<q<1$ and $r\ge1$. If $0\le x_1<\dots<x_r$ and $0<y_1<\dots<y_r$, then
+\begin{multline}\label{eq:bound}
+\varepsilon_r\det\Bigl[\frac{1}{\Gamma_q(x_i+y_j)}\Bigr]_{i,j=1}^r
+\ge \frac{q^{\binom r3}\,(1-q)^{\sum_i x_i+\sum_j y_j-r}}{(q;q)_\infty^{\,r}\,\prod_{k=0}^{r-1}(q;q)_k}
+\\
+\times\prod_{j=1}^r(q^{y_j};q)_\infty
+\prod_{1\le i<j\le r}(q^{x_i}-q^{x_j})(q^{y_i}-q^{y_j}).
+\end{multline}
+The right-hand side is positive.
+\end{theorem}
+
+Since the kernel is symmetric in $x$ and $y$ and transposition does not change determinants, the roles of $(x_i)$ and $(y_j)$ in Theorem~\ref{thm:bound} may be interchanged. The case $x_1=0$ extends the strict sign regularity of the discrete kernel in \cite[Lemma~A.2]{KVZ} from order three to all orders.
+
+\begin{corollary}\label{cor:discrete}
+Let $0<q<1$ and $r\ge1$. If $0<\mu_1<\dots<\mu_r$ are real and $0\le n_1<\dots<n_r$ are integers, then
+\[
+\varepsilon_r\det\Bigl[\frac{1}{(q^{\mu_j};q)_{n_i}}\Bigr]_{i,j=1}^r>0.
+\]
+Thus $(\mu,n)\mapsto 1/(q^\mu;q)_n$ belongs to $SSR_\infty$ on $(0,\infty)\times\N_0$, with the signs $\varepsilon_r$. For $r\le3$ this is \cite[Lemma~A.2]{KVZ}.
+\end{corollary}
+
+\subsection*{Method}
+Up to positive row and column factors, $1/\Gamma_q(x+y)$ equals $(q^{x+y};q)_\infty$. With $u=q^x$ and $v=q^y$, the $q$-binomial theorem gives
+\[
+\frac{(uv;q)_\infty}{(v;q)_\infty}=\sum_{k=0}^\infty\frac{(u;q)_k}{(q;q)_k}\,v^k .
+\]
+As a polynomial in $s=1-u$, the coefficient $(u;q)_k$ is a positive multiple of $\prod_{j<k}(s+q^{-j}-1)$, which is, up to the sign $(-1)^k$, the Newton polynomial with the nonnegative nodes $q^{-j}-1$ evaluated at $-s$. Mainar, Pe\~na and Rubio \cite{MPR} obtained bidiagonal factorizations of the change of basis matrices between monomial and Newton bases and characterized their total positivity in terms of the signs of the nodes. Lemma~\ref{lem:MPR} translates their Corollary~5 into the present notation: the coefficient matrix of these polynomials is totally nonnegative. Combined with the sign of generalized Vandermonde determinants, the Cauchy--Binet formula shows that every term in the expansion of a truncated determinant becomes nonnegative after multiplication by $\varepsilon_r$. The term indexed by the degrees $0,1,\dots,r-1$ is the same for every truncation and is an explicit product of positive factors; it gives the bound \eqref{eq:bound}. The truncated matrices converge entrywise, so their determinants converge by continuity, and the bound persists in the limit.
+
+\subsection*{Dependencies}
+Besides the Cauchy--Binet formula, the proof uses two known results that we do not reprove: the $q$-binomial theorem, and \cite[Corollary~5]{MPR} for increasing nonnegative nodes. Theorem~\ref{thm:main} is obtained by applying these ingredients to the reciprocal $q$-gamma kernel. To our knowledge, Theorem~\ref{thm:main} has not appeared in the literature.
+
+\subsection*{Organization}
+Section~\ref{sec:prelim} recalls the $q$-binomial theorem and a sign lemma for generalized Vandermonde determinants. Section~\ref{sec:newton} treats the coefficient polynomials. Section~\ref{sec:proof} proves Theorems~\ref{thm:main} and~\ref{thm:bound} and Corollary~\ref{cor:discrete}. Section~\ref{sec:remarks} records a consequence for the classical gamma function.
+
+\section{Preliminaries}\label{sec:prelim}
+
+Throughout, $0<q<1$ is fixed. If $a<1$, every factor of $(a;q)_\infty$ is positive, and the product converges to a positive number because $\sum_j |a|q^j<\infty$. In particular $(q;q)_\infty>0$ and $(q;q)_k\ge(q;q)_\infty$ for all $k\ge0$.
+
+\begin{lemma}[$q$-binomial theorem]\label{lem:qbinom}
+For every real $a$ and every real $z$ with $|z|<1$,
+\[
+\sum_{k=0}^{\infty}\frac{(a;q)_k}{(q;q)_k}\,z^k=\frac{(az;q)_\infty}{(z;q)_\infty},
+\]
+and the series converges absolutely.
+\end{lemma}
+
+\begin{proof}
+This is \cite[(17.5.2)]{DLMF}, with the series definition \cite[(17.4.1)]{DLMF}; see also \cite[Section~1.3]{GR}. Absolute convergence follows from $|(a;q)_k|\le(-|a|;q)_\infty$ and $(q;q)_k\ge(q;q)_\infty>0$.
+\end{proof}
+
+For matrices we use the following notation. If $F$ has $r$ rows and $K$ is a set of $r$ column indices, $F[\,\cdot\,,K]$ is the submatrix with these columns; similarly $G[K,\cdot\,]$ consists of the rows of $G$ indexed by $K$, and $F[I,K]$ has rows $I$ and columns $K$, all in increasing order. The Cauchy--Binet formula states that if $F$ is $r\times N$ and $G$ is $N\times r$, then
+\begin{equation}\label{eq:CB}
+\det(FG)=\sum_{K}\det F[\,\cdot\,,K]\,\det G[K,\cdot\,],
+\end{equation}
+the sum running over all $r$-element subsets $K$ of the index set of size $N$.
+
+The next lemma is classical \cite[Chapter~2]{Karlin}; we include the short argument.
+
+\begin{lemma}\label{lem:vandermonde}
+Let $0<t_1<\dots<t_r$ and let $\alpha_1<\dots<\alpha_r$ be real. Then $\det[t_i^{\alpha_j}]_{i,j=1}^r>0$. If instead $0=t_1<t_2<\dots<t_r$ and $0\le\alpha_1<\dots<\alpha_r$, with $0^0=1$, then $\det[t_i^{\alpha_j}]_{i,j=1}^r\ge0$.
+\end{lemma}
+
+\begin{proof}
+We first show that a function $f(t)=\sum_{j=1}^m a_jt^{\beta_j}$ with distinct real exponents and nonzero coefficients has at most $m-1$ zeros in $(0,\infty)$. For $m=1$ this is clear. For $m\ge2$ we may assume $\beta_1<\dots<\beta_m$; then the derivative of $t^{-\beta_1}f(t)$ is $\sum_{j=2}^m a_j(\beta_j-\beta_1)t^{\beta_j-\beta_1-1}$, which by induction has at most $m-2$ positive zeros, and Rolle's theorem gives at most $m-1$ positive zeros of $f$.
+
+If $\det[t_i^{\alpha_j}]=0$ for some $0<t_1<\dots<t_r$, a nonzero vector $(a_1,\dots,a_r)$ satisfies $\sum_j a_jt_i^{\alpha_j}=0$ for all $i$; discarding the vanishing $a_j$ contradicts the bound just proved. Hence the determinant does not vanish on the convex set $\{0<t_1<\dots<t_r\}$, and by continuity its sign is constant there. Take $t_i=\lambda^i$ with $\lambda>1$. Then
+\[
+\det[t_i^{\alpha_j}]=\sum_{\sigma}\operatorname{sgn}(\sigma)\,\lambda^{\sum_i i\,\alpha_{\sigma(i)}},
+\]
+and since both $i$ and $\alpha_i$ are strictly increasing, the exponent $\sum_i i\,\alpha_{\sigma(i)}$ is uniquely maximized by the identity permutation. Hence the determinant is positive for large $\lambda$, and therefore everywhere.
+
+If $t_1=0$, the first row is $(1,0,\dots,0)$ when $\alpha_1=0$ and vanishes when $\alpha_1>0$. Expanding along it, the determinant is either $0$ or the determinant for the nodes $t_2,\dots,t_r$ and exponents $\alpha_2,\dots,\alpha_r$, which is positive by the first part.
+\end{proof}
+
+\section{Newton coefficient polynomials}\label{sec:newton}
+
+Put $c_j=q^{-j}-1$ for $j\ge0$, so that $0=c_0<c_1<c_2<\cdots$, and define
+\[
+a_k(s)=\prod_{j=0}^{k-1}(s+c_j)=\sum_{d=0}^{k}A_{k,d}\,s^d,\qquad
+p_k(s)=q^{\binom k2}a_k(s)\qquad(k\ge0).
+\]
+Since $1-(1-s)q^j=q^j(s+c_j)$ and $\sum_{j<k}j=\binom k2$, we have
+\begin{equation}\label{eq:pk}
+p_k(1-u)=(u;q)_k\qquad\text{for all real }u.
+\end{equation}
+
+A matrix is \emph{totally nonnegative} if all its minors are nonnegative; in \cite{MPR} such matrices are called totally positive.
+
+\begin{lemma}[Mainar--Pe\~na--Rubio]\label{lem:MPR}
+Let $M\ge0$, and let $A^{(M)}$ be the matrix with entries $A_{k,d}$, where $0\le k,d\le M$. Then $A^{(M)}$ is lower triangular with unit diagonal, and it is totally nonnegative.
+\end{lemma}
+
+\begin{proof}
+The triangular structure and the unit diagonal are clear, since $a_k$ is monic of degree $k$. For the total nonnegativity we translate \cite[Corollary~5]{MPR}; we index rows and columns from $0$ instead of $1$. Let $t_0\le t_1\le\dots\le t_{M-1}$ be nodes, let $w_k(t)=\prod_{j<k}(t-t_j)$ be the Newton basis and $m_d(t)=t^d$ the monomial basis of the polynomials of degree at most $M$, and let $U$ be the upper triangular matrix with
+\[
+(m_0,\dots,m_M)=(w_0,\dots,w_M)\,U,
+\]
+see \cite[(19)--(20)]{MPR}. With $J=\operatorname{diag}((-1)^k)_{0\le k\le M}$, \cite[Corollary~5]{MPR} states that $JU^{-1}J$ is totally nonnegative when all nodes are nonnegative.
+
+Take $t_j=c_j$, which are nonnegative and increasing. Since $(w_0,\dots,w_M)=(m_0,\dots,m_M)U^{-1}$, we have $w_k(t)=\sum_d(U^{-1})_{d,k}t^d$, and therefore
+\[
+a_k(s)=(-1)^k w_k(-s)=\sum_{d}(-1)^{k+d}(U^{-1})_{d,k}\,s^d .
+\]
+Thus $A_{k,d}=(JU^{-1}J)_{d,k}$, that is, $A^{(M)}=(JU^{-1}J)^{T}$, and the transpose of a totally nonnegative matrix is totally nonnegative.
+\end{proof}
+
+\begin{remark}
+The total nonnegativity in Lemma~\ref{lem:MPR} can also be read off from \cite[Theorem~3]{MPR}. By \cite[(24)--(25)]{MPR}, $U^{-1}=G'_1\cdots G'_M$, where each $G'_i$ is upper bidiagonal with unit diagonal and with off-diagonal entries of the form $-t_l$. Conjugation by $J$ changes the sign of the off-diagonal entries of a bidiagonal matrix, so $JU^{-1}J=(JG'_1J)\cdots(JG'_MJ)$ is a product of upper bidiagonal matrices whose off-diagonal entries are nodes $c_l\ge0$. Since transposition reverses the order of the factors,
+\[
+A^{(M)}=(JU^{-1}J)^{T}=(JG'_MJ)^{T}\cdots(JG'_1J)^{T}
+\]
+is a product of lower bidiagonal matrices with nonnegative entries.
+\end{remark}
+
+\begin{proposition}\label{prop:poly}
+Let $0\le s_1<\dots<s_r$ be real.
+\begin{enumerate}
+\item[(a)] For all integers $0\le k_1<\dots<k_r$,
+\[
+\det\bigl[p_{k_j}(s_i)\bigr]_{i,j=1}^r\ge0 .
+\]
+\item[(b)] For the consecutive degrees $0,1,\dots,r-1$,
+\[
+\det\bigl[p_{j-1}(s_i)\bigr]_{i,j=1}^r=q^{\binom r3}\prod_{1\le i<j\le r}(s_j-s_i)>0 .
+\]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Choose $M\ge k_r$, let $V=(s_i^d)$ be the $r\times(M+1)$ matrix with $1\le i\le r$ and $0\le d\le M$, and let $C=(q^{\binom k2}A_{k,d})_{0\le k,d\le M}$. Then $p_k(s)=\sum_dC_{k,d}s^d$, so with $K=\{k_1,\dots,k_r\}$ we have $[p_{k_j}(s_i)]=V\,(C[K,\cdot\,])^{T}$, and \eqref{eq:CB} gives
+\[
+\det\bigl[p_{k_j}(s_i)\bigr]=\sum_{D}\det V[\,\cdot\,,D]\,\det C[K,D],
+\]
+where $D$ runs over the $r$-element subsets of $\{0,\dots,M\}$. Every $\det V[\,\cdot\,,D]$ is nonnegative by Lemma~\ref{lem:vandermonde}, and $\det C[K,D]=q^{\sum_{k\in K}\binom k2}\det A^{(M)}[K,D]\ge0$ by Lemma~\ref{lem:MPR}. This proves (a).
+
+For (b), the polynomial $p_k$ has degree $k$ and leading coefficient $q^{\binom k2}$. Subtracting from each column suitable multiples of the preceding columns reduces the matrix to $[q^{\binom{j-1}2}s_i^{j-1}]$, whose determinant is $q^{\sum_{k=0}^{r-1}\binom k2}$ times a Vandermonde determinant. Since $\sum_{k=0}^{r-1}\binom k2=\binom r3$, the formula follows.
+\end{proof}
+
+If $s_1>0$, the term $D=K$ in the proof of (a) is positive, because $C[K,K]$ is lower triangular with positive diagonal; hence the inequality in (a) is then strict. We shall not need this.
+
+\section{Proof of the main results}\label{sec:proof}
+
+\begin{proposition}\label{prop:key}
+Let $r\ge1$, $1\ge u_1>\dots>u_r>0$ and $1>v_1>\dots>v_r>0$. Then
+\[
+\varepsilon_r\det\bigl[(u_iv_j;q)_\infty\bigr]_{i,j=1}^r
+\ge\frac{q^{\binom r3}\prod_{j=1}^r(v_j;q)_\infty}{\prod_{k=0}^{r-1}(q;q)_k}
+\prod_{1\le i<j\le r}(u_i-u_j)(v_i-v_j)>0 .
+\]
+\end{proposition}
+
+\begin{proof}
+Put $s_i=1-u_i$, so that $0\le s_1<\dots<s_r<1$ and $s_j-s_i=u_i-u_j$. For $M\ge r-1$ let $H_M$ be the $r\times r$ matrix with entries
+\[
+H_M(i,j)=\sum_{k=0}^{M}\frac{p_k(s_i)}{(q;q)_k}\,v_j^k .
+\]
+Then $H_M=P\,\Delta\,W$, where $P=(p_k(s_i))$ is $r\times(M+1)$, $\Delta=\operatorname{diag}(1/(q;q)_k)_{0\le k\le M}$ and $W=(v_j^k)$ is $(M+1)\times r$. By \eqref{eq:CB},
+\begin{equation}\label{eq:HM}
+\det H_M=\sum_{K}\det P[\,\cdot\,,K]\,\Bigl(\prod_{k\in K}\frac{1}{(q;q)_k}\Bigr)\det W[K,\cdot\,],
+\end{equation}
+the sum running over the $r$-element subsets $K=\{k_1<\dots<k_r\}$ of $\{0,\dots,M\}$.
+
+We determine the signs of the factors. By Proposition~\ref{prop:poly}(a), $\det P[\,\cdot\,,K]\ge0$. Next, $\det W[K,\cdot\,]=\det[v_j^{k_l}]_{l,j=1}^r$ equals the determinant of its transpose $[v_j^{k_l}]_{j,l=1}^r$, whose rows correspond to the decreasing nodes $v_1>\dots>v_r$. Reversing the order of the rows, a permutation of sign $\varepsilon_r$, produces a matrix with increasing positive nodes and increasing exponents, whose determinant is positive by Lemma~\ref{lem:vandermonde}. Hence $\varepsilon_r\det W[K,\cdot\,]>0$, and every term of $\varepsilon_r\det H_M$ in \eqref{eq:HM} is nonnegative.
+
+Keep only the term $K_0=\{0,1,\dots,r-1\}$, which occurs for every $M\ge r-1$. By Proposition~\ref{prop:poly}(b) and the Vandermonde formula $\det[v_j^{l-1}]_{l,j=1}^r=\prod_{i<j}(v_j-v_i)$,
+\begin{equation}\label{eq:HMbound}
+\varepsilon_r\det H_M\ge\frac{q^{\binom r3}}{\prod_{k=0}^{r-1}(q;q)_k}\prod_{1\le i<j\le r}(u_i-u_j)(v_i-v_j)
+\qquad(M\ge r-1).
+\end{equation}
+The right-hand side is positive and does not depend on $M$.
+
+By \eqref{eq:pk} and Lemma~\ref{lem:qbinom} with $a=u_i$ and $z=v_j$,
+\[
+\lim_{M\to\infty}H_M(i,j)=\sum_{k=0}^\infty\frac{(u_i;q)_k}{(q;q)_k}\,v_j^k=\frac{(u_iv_j;q)_\infty}{(v_j;q)_\infty}
+\]
+for all $i,j$. The determinant of an $r\times r$ matrix is a polynomial in its entries, so $\det H_M$ converges to $\det[(u_iv_j;q)_\infty/(v_j;q)_\infty]$, and \eqref{eq:HMbound} passes to the limit. Multiplying column $j$ by $(v_j;q)_\infty>0$ for each $j$ gives the assertion.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:bound}]
+Put $u_i=q^{x_i}$ and $v_j=q^{y_j}$. Since $0\le x_1<\dots<x_r$ and $0<y_1<\dots<y_r$, we have $1\ge u_1>\dots>u_r>0$ and $1>v_1>\dots>v_r>0$. By \eqref{eq:Gq},
+\[
+\frac{1}{\Gamma_q(x_i+y_j)}=\frac{(1-q)^{x_i}\,(1-q)^{y_j}}{(1-q)\,(q;q)_\infty}\,(u_iv_j;q)_\infty .
+\]
+Taking out the positive row factors $(1-q)^{x_i}$, the positive column factors $(1-q)^{y_j}$ and the positive scalar $((1-q)(q;q)_\infty)^{-1}$ common to all entries, we obtain
+\[
+\det\Bigl[\frac{1}{\Gamma_q(x_i+y_j)}\Bigr]=\frac{(1-q)^{\sum_ix_i+\sum_jy_j}}{(1-q)^r(q;q)_\infty^{\,r}}\det\bigl[(u_iv_j;q)_\infty\bigr],
+\]
+and Proposition~\ref{prop:key} gives \eqref{eq:bound}. Every factor on the right-hand side of \eqref{eq:bound} is positive: $(q^{y_j};q)_\infty>0$ because $q^{y_j}<1$, and $q^{x_i}>q^{x_j}$, $q^{y_i}>q^{y_j}$ for $i<j$. For $r=1$ all empty products equal $1$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+This is the special case $x_1>0$ of Theorem~\ref{thm:bound}. Since the bound holds for every $r\ge1$, the kernel belongs to $SSR_\infty$ with the signs $\varepsilon_r$.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:discrete}]
+By \eqref{eq:Gq}, for $\mu>0$ and $n\in\N_0$,
+\[
+\frac{\Gamma_q(\mu+n)}{\Gamma_q(\mu)}=(1-q)^{-n}\,\frac{(q^\mu;q)_\infty}{(q^{\mu+n};q)_\infty}=(1-q)^{-n}(q^\mu;q)_n ,
+\]
+so that
+\[
+\frac{1}{(q^{\mu};q)_n}=(1-q)^{-n}\,\Gamma_q(\mu)\,\frac{1}{\Gamma_q(n+\mu)} .
+\]
+The factors $(1-q)^{-n}$ and $\Gamma_q(\mu)$ are positive row and column factors. Apply Theorem~\ref{thm:bound} with $x_i=n_i$ and $y_j=\mu_j$; the case $n_1=0$ is allowed there.
+\end{proof}
+
+\section{A remark on the classical gamma function}\label{sec:remarks}
+
+\begin{remark}
+In \cite[Section~3, Example~6]{KVZ} it is conjectured, on the basis of numerical evidence, that $1/\Gamma(x+y)$ belongs to $SSR_\infty$ on $(0,\infty)^2$. Since $\Gamma_q(z)\to\Gamma(z)$ as $q\to1^-$ for every $z>0$ \cite[Section~1.10]{GR}, the matrices in Theorem~\ref{thm:main} converge entrywise, and hence their determinants converge. We obtain
+\[
+\varepsilon_r\det\Bigl[\frac{1}{\Gamma(x_i+y_j)}\Bigr]_{i,j=1}^r\ge0
+\]
+for all $r\ge1$, $0<x_1<\dots<x_r$ and $0<y_1<\dots<y_r$. Thus $1/\Gamma(x+y)$ is sign regular of every order on $(0,\infty)^2$, with the signs $\varepsilon_r$. This limiting argument establishes sign regularity only; strict sign regularity of $1/\Gamma(x+y)$ would require a separate argument.
+\end{remark}
+
+\section*{Use of AI-assisted tools}
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{9}
+
+\bibitem{GR}
+G.~Gasper and M.~Rahman, \emph{Basic hypergeometric series}, 2nd ed., Encyclopedia of Mathematics and its Applications, vol.~96, Cambridge University Press, Cambridge, 2004.
+
+\bibitem{Karlin}
+S.~Karlin, \emph{Total positivity}, Vol.~I, Stanford University Press, Stanford, CA, 1968.
+
+\bibitem{KVZ}
+D.~Karp, A.~Vishnyakova, and Y.~Zhang, \emph{Unimodality preservation by ratios of functional series and integral transforms}, Results Math. \textbf{80} (2025), Paper No.~112; arXiv:2408.01755v2.
+
+\bibitem{MPR}
+E.~Mainar, J.~M.~Pe\~na, and B.~Rubio, \emph{High relative accuracy through Newton bases}, Numer. Algorithms \textbf{95} (2024), 747--772.
+
+\bibitem{DLMF}
+\emph{NIST Digital Library of Mathematical Functions}, \url{https://dlmf.nist.gov/}, Release 1.2.8 of 2026-09-15, F.~W.~J. Olver, A.~B. Olde Daalhuis, D.~W. Lozier, B.~I. Schneider, R.~F. Boisvert, C.~W. Clark, B.~R. Miller, B.~V. Saunders, H.~S. Cohl, and M.~A. McClain, eds.
+
+\bibitem{Salazar}
+D.~S.~P. Salazar, \emph{Order-moment transport and Hankel determinants in special-function inequalities}, preprint (2026), arXiv:2606.31647v2.
+
+\end{thebibliography}
+
+\end{document}

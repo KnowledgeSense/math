@@ -1,0 +1,92 @@
+{
+  "status": "all exact assertions passed",
+  "executed_at_utc": "2026-10-12T13:13:50.216450+00:00",
+  "arithmetic": "integer and Fraction; no floats",
+  "fan_rank_range": [
+    1,
+    80
+  ],
+  "kernel_N_range": [
+    4,
+    32
+  ],
+  "kernel_z_values": [
+    "1/7",
+    "1/2",
+    "1",
+    "2",
+    "10"
+  ],
+  "counts": {
+    "fan_ranks": 80,
+    "fan_coefficients_compared": 3320,
+    "fan_internal_inequalities": 3160,
+    "kernel_lower_half_pairs": 1125,
+    "kernel_coefficient_comparisons": 13525,
+    "kernel_central_pairs": 230,
+    "ratio_polynomial_identities": 85
+  },
+  "first_rows": {
+    "1": [
+      1,
+      1
+    ],
+    "2": [
+      2,
+      3,
+      2
+    ],
+    "3": [
+      4,
+      9,
+      9,
+      4
+    ],
+    "4": [
+      8,
+      24,
+      32,
+      24,
+      8
+    ],
+    "5": [
+      16,
+      60,
+      102,
+      102,
+      60,
+      16
+    ],
+    "6": [
+      32,
+      144,
+      298,
+      371,
+      298,
+      144,
+      32
+    ],
+    "7": [
+      64,
+      336,
+      820,
+      1225,
+      1225,
+      820,
+      336,
+      64
+    ],
+    "8": [
+      128,
+      768,
+      2160,
+      3764,
+      4486,
+      3764,
+      2160,
+      768,
+      128
+    ]
+  },
+  "interpretation": "Finite cross-checks corroborate formulas and boundaries. The all-rank and all-positive-z claims rely on the analytic proof in the accompanying manuscript."
+}

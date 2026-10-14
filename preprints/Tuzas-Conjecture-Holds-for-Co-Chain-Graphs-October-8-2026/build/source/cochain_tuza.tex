@@ -1,0 +1,697 @@
+\documentclass{amsart}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Tuza's conjecture holds for co-chain graphs},pdfauthor={Knowledge Sense}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{notation}[theorem]{Notation}
+
+\raggedbottom
+\numberwithin{equation}{section}
+\numberwithin{table}{section}
+
+\newcommand{\binomtwo}[1]{\tbinom{#1}{2}}
+\newcommand{\rep}[2]{#1^{\times #2}}
+
+\begin{document}
+
+\title{Tuza's conjecture holds for co-chain graphs}
+
+\author{Knowledge Sense}
+\address{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{8 October 2026}
+
+\subjclass[2020]{Primary 05C70; Secondary 05C75, 68V05}
+\keywords{Tuza's conjecture, triangle packing, triangle cover, co-chain graph, interval graph, computer-assisted proof}
+
+\begin{abstract}
+Tuza conjectured that every graph $G$ satisfies $\tau(G)\le 2\nu(G)$, where $\nu(G)$ is the maximum number of pairwise edge-disjoint triangles of $G$ and $\tau(G)$ is the minimum number of edges meeting every triangle of $G$. We prove this inequality for every co-chain graph, that is, for every graph whose vertex set is the union of two cliques with nested neighborhoods across the two cliques. This answers a question of Chahua and Guti\'errez, who proved the case in which both cliques have even size. We split each clique into two halves and distinguish two cases according to the edges between the halves. In each case we construct an explicit triangle cover and several triangle packings, and quadratic lower bounds show that the packings suffice for all large graphs. The finitely many remaining parameter values are verified by exact computation: either the packing bounds suffice, or an explicit packing exists in a subgraph contained in every co-chain graph with the same parameters.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+All graphs in this paper are finite and simple. A \emph{triangle packing} of a graph $G$ is a set of pairwise edge-disjoint triangles of $G$, and a \emph{triangle cover} of $G$ is a set of edges of $G$ that meets every triangle of $G$. We write $\nu(G)$ for the maximum size of a triangle packing and $\tau(G)$ for the minimum size of a triangle cover. The edges of the triangles of a maximum packing form a triangle cover, so $\tau(G)\le 3\nu(G)$. Tuza \cite{Tuz84,Tuz90} conjectured that
+\[
+\tau(G)\le 2\nu(G)
+\]
+for every graph $G$. The factor $2$ is attained by $K_4$ and $K_5$. For general graphs, Haxell \cite{Hax99} replaced the factor $3$ by a constant slightly below $2.87$, Krivelevich \cite{Kri95} proved fractional versions of the conjecture, and Haxell and R\"odl \cite{HR01} showed that $\tau(G)\le 2\nu(G)+o(|V(G)|^2)$. The conjecture is known for several classes, for instance for graphs of treewidth at most six \cite{BFG21}, for graphs of maximum average degree less than seven \cite{Pul15}, and for $4$-colorable graphs \cite{ABT12}.
+
+For dense hereditary classes much less is known. The conjecture is open for chordal graphs, and even for split graphs and for interval graphs \cite{BBG22,CG23}. Bonamy et~al.\ \cite{BBG22} proved it for threshold graphs and for co-chain graphs whose two cliques have the same size divisible by four. Chahua and Guti\'errez \cite{CG23} proved it for all co-chain graphs in which both cliques have even size, and asked whether it holds for every co-chain graph \cite[Section~4, Question~1]{CG23}.
+
+A graph $G$ is a \emph{co-chain graph} if $V(G)$ is the disjoint union of two cliques $A$ and $B$ such that the sets $N(v)\cap B$, $v\in A$, are linearly ordered by inclusion. The sets $N(v)\cap A$, $v\in B$, are then linearly ordered as well (Lemma~\ref{lem:representation}). These graphs are also called co-bipartite chain graphs \cite{BES18,HK07}, and they form a subclass of unit interval graphs \cite{BLS99,CG23}. We allow $A$ or $B$ to be empty, in which case $G$ is a complete graph. Our main result answers the question of Chahua and Guti\'errez.
+
+\begin{theorem}\label{thm:main}
+Every co-chain graph $G$ satisfies $\tau(G)\le 2\nu(G)$.
+\end{theorem}
+
+The two cliques may have any sizes and parities, and the edges between them are restricted only by the nesting condition in the definition. Since $K_4$ is a co-chain graph with $\nu(K_4)=1$ and $\tau(K_4)=2$ (any two of its triangles share an edge, and each edge lies in only two of its four triangles), the factor $2$ is best possible within the class.
+
+\subsection*{Method}
+A co-chain graph is determined by the sizes $a=|A|$ and $b=|B|$ and a Ferrers profile describing the edges between $A$ and $B$ (Section~\ref{sec:prelim}). If $a$ or $b$ is zero the graph is complete, and if $a$ and $b$ are both even and positive we use the theorem of Chahua and Guti\'errez. In the remaining cases we split $A$ and $B$, following the nested order, into upper halves of sizes $r=\lceil a/2\rceil$ and $t=\lceil b/2\rceil$ and the corresponding lower halves. Let $x$ and $y$ be the numbers of vertices of $A$ and of $B$ that are complete to the upper half of the other clique. We call the graph \emph{sparse} if $x<r$ (equivalently $y<t$) and \emph{dense} otherwise.
+
+In the sparse case (Section~\ref{sec:sparse}) a single triangle cover, whose size depends only on $(a,b,x,y)$, serves every graph with these parameters, and all these graphs contain a common canonical spanning subgraph. Hence any packing of that subgraph with at least half as many triangles as the cover proves the inequality for the whole parameter class. A quadratic lower bound shows that one of two explicit packings suffices when $a+b\ge 111$.
+
+In the dense case (Section~\ref{sec:dense}) the cover depends in addition on the number $e$ of edges between the two lower halves. Three packing bounds, combined with weights $1$, $3/4$ and $1/4$, give a quadratic expression in which $e$ cancels. An explicit computation with four quadratic polynomials shows that this expression is at least $\frac{29}{768}(r+t)^2$ (Lemma~\ref{lem:quadratic}), and estimates for the rounding errors (Lemma~\ref{lem:errors}) then settle every graph with $r+t\ge 88$. For $r+t\le 87$ the values of $e$ not handled by bounds independent of $e$ form an explicit interval for each $(a,b,x,y)$. Above order $12$ each such value is $0$ or the largest value permitted by $(a,b,x,y)$. In both cases the edges between the lower halves are determined by the parameters, so a canonical subgraph is again available.
+
+The remaining bounded domain is treated by exact computation (Section~\ref{sec:computations}). All profiles of order at most $12$ are checked directly. For larger orders the computation runs over the parameter tuples, not over profiles, and each remaining tuple is handled by an explicit packing of a canonical subgraph. The packings were found by computer search, but the search plays no role in the proof: each packing is a list of triangles that is checked directly.
+
+\subsection*{Dependencies}
+Besides the elementary facts of Section~\ref{sec:prelim}, the proof uses two known results that we do not reprove: Theorem~1 of Chahua and Guti\'errez \cite{CG23}, for two positive cliques of even size, and the formula of Feder and Subi \cite[Theorem~2]{FS12} for the maximum number of edge-disjoint triangles in a complete graph, which is also used in \cite[Lemma~6]{BBG22} and \cite[Proposition~2]{CG23}. The finite computations of Section~\ref{sec:computations} are not a citation but part of the proof. They use exact arithmetic, and the certificates on which they rest are explicit lists of triangles and edges that can be checked independently (Appendix~\ref{app:data}). The fan packings of Lemma~\ref{lem:fan}, and several of the specific packings and covers below, follow \cite{BBG22,CG23}. The new parts are the reduction of the sparse case to finitely many parameters (Proposition~\ref{prop:sparse-large}), the quadratic lower bound of Lemma~\ref{lem:quadratic} with the error estimates of Lemma~\ref{lem:errors}, the elimination of $e$ (Lemma~\ref{lem:interval}), and the canonical subgraphs of Lemmas~\ref{lem:sparse-canonical} and~\ref{lem:dense-canonical}, which carry explicit packings to all graphs with the same parameters.
+
+\subsection*{Organization}
+Section~\ref{sec:prelim} fixes notation and collects the standard packing facts. Section~\ref{sec:general} gives packing and cover bounds valid for every co-chain graph. Section~\ref{sec:halves} introduces the halves and the parameters $(a,b,x,y)$. Sections~\ref{sec:sparse} and~\ref{sec:dense} treat the sparse and the dense case. Section~\ref{sec:computations} describes the finite computations, and Section~\ref{sec:proof} completes the proof. Appendix~\ref{app:data} describes the supplementary programs, and Appendix~\ref{app:tables} lists the exceptional parameter tuples.
+
+\section{Preliminaries}\label{sec:prelim}
+
+For a set $U$ of vertices, $E(U)$ denotes the set of edges with both ends in $U$, and for disjoint sets $U,V$, $E(U,V)$ denotes the set of edges with one end in each. Two vertex sets are \emph{complete} to each other if they are disjoint and every vertex of one is adjacent to every vertex of the other. For a nonnegative integer $k$ we write $\binomtwo{k}=k(k-1)/2$. In a sequence, $\rep{c}{k}$ denotes $k$ consecutive entries equal to $c$.
+
+\subsection{Co-chain graphs}
+Let $a,b\ge 0$ be integers. A \emph{profile} of type $(a,b)$ is a sequence $\lambda=(\lambda_1,\dots,\lambda_a)$ of integers with $b\ge\lambda_1\ge\dots\ge\lambda_a\ge 0$. The graph $G(a,b;\lambda)$ has vertex set $A\cup B$ with $A=\{\alpha_1,\dots,\alpha_a\}$ and $B=\{\beta_1,\dots,\beta_b\}$; the sets $A$ and $B$ are cliques, and $\alpha_i\beta_j$ is an edge if and only if $j\le\lambda_i$. Its \emph{order} is $a+b$. The \emph{conjugate} profile $\lambda^*$, of type $(b,a)$, is given by $\lambda^*_j=|\{i:\lambda_i\ge j\}|$. For $0\le k\le b$ put $p_k(\lambda)=|\{i:\lambda_i\ge k\}|$, so that $p_0(\lambda)=a$ and $p_k(\lambda)=\lambda^*_k$ for $k\ge 1$. By construction, $\{\alpha_1,\dots,\alpha_{p_k(\lambda)}\}$ is complete to $\{\beta_1,\dots,\beta_k\}$.
+
+\begin{lemma}\label{lem:representation}
+\textup{(i)} The graph $G(a,b;\lambda)$ is a co-chain graph, and exchanging the roles of $A$ and $B$ identifies it with $G(b,a;\lambda^*)$.
+
+\textup{(ii)} Every co-chain graph with cliques of sizes $a$ and $b$ is isomorphic to $G(a,b;\lambda)$ for some profile $\lambda$ of type $(a,b)$.
+\end{lemma}
+
+\begin{proof}
+(i) We have $N(\alpha_i)\cap B=\{\beta_1,\dots,\beta_{\lambda_i}\}$, and these sets are nested. Moreover $j\le\lambda_i$ holds if and only if $i\le\lambda^*_j$, which is the adjacency rule of $G(b,a;\lambda^*)$ with $\beta_j$ in the first clique.
+
+(ii) Let $A$ and $B$ be the two cliques, and order $A$ as $\alpha_1,\dots,\alpha_a$ so that $N(\alpha_1)\cap B\supseteq\dots\supseteq N(\alpha_a)\cap B$. For $\beta\in B$ let $k(\beta)$ be the number of indices $i$ with $\beta\in N(\alpha_i)$. By nesting, $\beta\in N(\alpha_i)$ if and only if $i\le k(\beta)$. Order $B$ by nonincreasing $k(\beta)$. Then $N(\alpha_i)\cap B=\{\beta:k(\beta)\ge i\}$ is an initial segment $\{\beta_1,\dots,\beta_{\lambda_i}\}$ with $\lambda_i=|N(\alpha_i)\cap B|$.
+\end{proof}
+
+\subsection{Packings in cliques}
+For $n\ge 0$ let $C(n)=\nu(K_n)$. Write $n=6m+i$ with $0\le i\le 5$ and put $\kappa(n)=0$ if $i\in\{1,3\}$, $\kappa(n)=4$ if $i=5$, $\kappa(n)=n/2$ if $i\in\{0,2\}$, and $\kappa(n)=n/2+1$ if $i=4$.
+
+\begin{theorem}[{Feder and Subi \cite[Theorem~2]{FS12}}]\label{thm:FS}
+For every $n\ge 0$,
+\[
+C(n)=\frac{1}{3}\Bigl(\binom{n}{2}-\kappa(n)\Bigr).
+\]
+\end{theorem}
+
+For $n\le 2$ both sides vanish. Since $2\kappa(n)\le n+3$ for all $n$ (for $i=5$ we have $n\ge 5$), Theorem~\ref{thm:FS} gives
+\begin{equation}\label{eq:Cbound}
+6C(n)=n(n-1)-2\kappa(n)\ge n^2-2n-3\qquad(n\ge 0).
+\end{equation}
+
+For integers $c\ge 0$ and $q\ge 0$ put
+\[
+J(c,q)=
+\begin{cases}
+\frac{q}{2}\min\{c,q-1\} & \text{if $q\ge 2$ is even},\\[2pt]
+\frac{q-1}{2}\min\{c,q\} & \text{if $q$ is odd},\\[2pt]
+0 & \text{if $q=0$}.
+\end{cases}
+\]
+
+\begin{lemma}[Fan packings]\label{lem:fan}
+Let $Q$ be a clique of a graph $G$ with $|Q|=q$, and let $S$ be a set of $c$ vertices outside $Q$ such that every vertex of $S$ is adjacent to every vertex of $Q$. Then $G$ has a triangle packing of size $J(c,q)$ in which every triangle consists of a vertex of $S$ and an edge of $Q$; all its edges lie in $E(Q)\cup E(S,Q)$. Moreover $J(c,q)$ is nondecreasing in $c$,
+\begin{equation}\label{eq:Jbound}
+2J(c,q)\ge (q-1)\min\{c,q\}\quad(q\ge 1),\qquad\text{and}\qquad J(c,q)=\binomtwo{q}\quad(c\ge q).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The edge set of $K_q$ decomposes into $q-1$ perfect matchings if $q$ is even and into $q$ matchings of size $(q-1)/2$ if $q$ is odd; this is the Walecki construction, see \cite[Lemma~1]{FS12} and \cite[Lemma~3]{BBG22}. Assign distinct matchings $M_s$ to $\min\{c,q-1\}$ vertices $s\in S$ if $q$ is even, and to $\min\{c,q\}$ vertices if $q$ is odd, and take all triangles $\{s\}\cup e$ with $e\in M_s$. An edge of $Q$ lies in only one matching, and an edge $sv$ with $v\in Q$ lies only in the triangle formed with the edge of $M_s$ at $v$. No edge inside $S$ is used. The inequality is an equality unless $q$ is even and $c\le q-1$, in which case it reads $qc\ge(q-1)c$. The remaining assertions are immediate.
+\end{proof}
+
+We call the packing of Lemma~\ref{lem:fan} the \emph{fan packing with centers $S$ and base $Q$}. The count $J(c,q)$ is the one of \cite[Proposition~1]{CG23}; see also \cite[Corollary~5]{BBG22}.
+
+\begin{lemma}\label{lem:complete}
+For every $n\ge 0$, $\tau(K_n)\le 2C(n)$.
+\end{lemma}
+
+\begin{proof}
+Split the vertices into two sets of sizes $\lfloor n/2\rfloor$ and $\lceil n/2\rceil$ and delete the edges inside both sets. The remaining graph is bipartite, so $\tau(K_n)\le\binomtwo{n}-\lfloor n^2/4\rfloor=\lfloor (n-1)^2/4\rfloor$. For $n\ge 5$, \eqref{eq:Cbound} gives
+\[
+2C(n)-\Bigl\lfloor\frac{(n-1)^2}{4}\Bigr\rfloor\ge \frac{n^2-2n-3}{3}-\frac{(n-1)^2}{4}=\frac{(n-5)(n+3)}{12}\ge 0.
+\] For $n\le 2$ there is no triangle, and $(\tau,C)=(1,1)$ for $n=3$ and $(2,1)$ for $n=4$.
+\end{proof}
+
+We shall use the following simple observation.
+
+\begin{lemma}[Transfer]\label{lem:transfer}
+Let $\mathcal G$ be a set of graphs on a common vertex set and $T$ an integer such that $\tau(G)\le T$ for every $G\in\mathcal G$. If a graph $\Phi$ is a subgraph of every member of $\mathcal G$ and has a triangle packing with at least $T/2$ triangles, then $\tau(G)\le 2\nu(G)$ for every $G\in\mathcal G$.
+\end{lemma}
+
+\begin{proof}
+A triangle packing of $\Phi$ is a triangle packing of every $G\in\mathcal G$.
+\end{proof}
+
+\section{Bounds valid for all co-chain graphs}\label{sec:general}
+
+Throughout this section $G=G(a,b;\lambda)$. Here and in Sections~\ref{sec:sparse} and~\ref{sec:dense}, each packing is the union of several sub-packings, each a fan packing or a packing of a clique. For each sub-packing we list an edge set containing its edges; these edge sets are pairwise disjoint, so the union is a triangle packing.
+
+\begin{lemma}\label{lem:pivot}
+Let $0\le k\le b$ and $p=p_k(\lambda)$. Then
+\begin{align}
+\nu(G)&\ge C(a)+C(b), \label{eq:L0}\\
+\nu(G)&\ge C(a)+J(p,k)+J(k,b-k), \label{eq:L1}\\
+\nu(G)&\ge C(p+k)+J(p,a-p)+J(k,b-k). \label{eq:L2}
+\end{align}
+The same bounds hold with $(a,b,\lambda)$ replaced by $(b,a,\lambda^*)$.
+\end{lemma}
+
+\begin{proof}
+Let $A_k=\{\alpha_1,\dots,\alpha_p\}$ and $B_k=\{\beta_1,\dots,\beta_k\}$; these sets are complete to each other. For \eqref{eq:L0} pack $A$ and $B$ separately. For \eqref{eq:L1} take a maximum packing of $A$, the fan packing with centers $A_k$ and base $B_k$, and the fan packing with centers $B_k$ and base $B\setminus B_k$; their edges lie in $E(A)$, in $E(B_k)\cup E(A_k,B_k)$ and in $E(B\setminus B_k)\cup E(B_k,B\setminus B_k)$. For \eqref{eq:L2} take a maximum packing of the clique $A_k\cup B_k$, the fan packing with centers $A_k$ and base $A\setminus A_k$, and the fan packing with centers $B_k$ and base $B\setminus B_k$; their edges lie in $E(A_k\cup B_k)$, in $E(A\setminus A_k)\cup E(A_k,A\setminus A_k)$ and in $E(B\setminus B_k)\cup E(B_k,B\setminus B_k)$. The last statement follows from Lemma~\ref{lem:representation}(i).
+\end{proof}
+
+\begin{lemma}[Ordered cuts]\label{lem:cut}
+For $0\le i\le a$ and $0\le j\le b$ let
+\[
+R(i,j)=\sum_{h\le i}\max\{0,\lambda_h-j\}+\sum_{h>i}\min\{\lambda_h,j\}.
+\]
+Then $\tau(G)\le |E(G)|-i(a-i)-j(b-j)-\max\{R(i,j),\,\sum_h\lambda_h-R(i,j)\}$.
+\end{lemma}
+
+\begin{proof}
+Color $\alpha_h$ with $0$ if $h\le i$ and with $1$ otherwise, and color $\beta_g$ with $0$ if $g\le j$ and with $1$ otherwise, or with the opposite colors on $B$. Deleting the monochromatic edges leaves a bipartite graph, hence a triangle-free one. There are $i(a-i)$ bichromatic edges in $A$ and $j(b-j)$ in $B$. With the first coloring, the bichromatic edges between $A$ and $B$ are the edges $\alpha_h\beta_g$ with either $h\le i$ and $j<g\le\lambda_h$, or $h>i$ and $g\le\min\{\lambda_h,j\}$; there are $R(i,j)$ of them. With the second coloring there are $\sum_h\lambda_h-R(i,j)$.
+\end{proof}
+
+\section{Halves and parameters}\label{sec:halves}
+
+\begin{notation}\label{not:halves}
+Let $G=G(a,b;\lambda)$ with $a,b\ge 1$. Put
+\[
+r=\lceil a/2\rceil,\quad s=a-r,\quad t=\lceil b/2\rceil,\quad u=b-t,
+\]
+and $\delta=r-s$, $\varepsilon=t-u$,
+so that $r,t\ge 1$ and $\delta,\varepsilon\in\{0,1\}$. The upper halves are $A^+=\{\alpha_1,\dots,\alpha_r\}$ and $B^+=\{\beta_1,\dots,\beta_t\}$, and the lower halves are $A^-=A\setminus A^+$ and $B^-=B\setminus B^+$. Define
+\[
+x=p_t(\lambda)=|\{i:\lambda_i\ge t\}|,\qquad y=\lambda_r,
+\]
+and $X=\{\alpha_1,\dots,\alpha_x\}$, $Y=\{\beta_1,\dots,\beta_y\}$.
+Finally put $H=\binomtwo r+\binomtwo s+\binomtwo t+\binomtwo u$, $m_0=\binomtwo s+\binomtwo u$ and $\rho=\delta(r-1)+\varepsilon(t-1)$. Since $\binomtwo{r-\delta}-\binomtwo r=-\delta(r-1)$, and similarly for $t$,
+\begin{equation}\label{eq:m0}
+2m_0-H=-\rho,\qquad 0\le\rho\le r+t-2,\qquad m_0=J(r,s)+J(t,u).
+\end{equation}
+We call $G$ \emph{sparse} if $x<r$ and \emph{dense} if $x\ge r$, and we call $(a,b,x,y)$ its \emph{parameters}.
+\end{notation}
+
+\begin{lemma}\label{lem:halves}
+\textup{(i)} $X$ is the set of vertices of $A$ adjacent to all of $B^+$, and $Y$ is the set of vertices of $B$ adjacent to all of $A^+$.
+
+\textup{(ii)} $x<r$ if and only if $y<t$.
+
+\textup{(iii)} Under the identification of Lemma~\ref{lem:representation}(i), the halves of $G(b,a;\lambda^*)$ are $B^\pm$ and $A^\pm$, and its parameters are $(b,a,y,x)$. In particular, the sparse and the dense cases are preserved.
+\end{lemma}
+
+\begin{proof}
+(i) $\alpha_i$ is adjacent to all of $B^+$ if and only if $\lambda_i\ge t$, and $\beta_j$ is adjacent to all of $A^+$ if and only if $j\le\lambda_i$ for all $i\le r$, that is, $j\le\lambda_r$. (ii) Both conditions mean $\lambda_r<t$. (iii) The upper halves of $G(b,a;\lambda^*)$ have sizes $t$ and $r$, and its parameters are $p_r(\lambda^*)=|\{j:\lambda_r\ge j\}|=y$ and $\lambda^*_t=x$.
+\end{proof}
+
+\section{The sparse case}\label{sec:sparse}
+
+In this section $a,b\ge 1$ and $x<r$, so that $X\subsetneq A^+$ and $Y\subsetneq B^+$ by Lemma~\ref{lem:halves}. For fixed $(a,b,x,y)$ let $\mathcal G_S(a,b,x,y)$ be the set of graphs $G(a,b;\lambda)$ with these parameters, all on the vertex set $A\cup B$, and put
+\[
+T_S=T_S(a,b,x,y)=H+tx+ry-xy.
+\]
+
+\begin{lemma}[Sparse cover]\label{lem:sparse-cover}
+For $G\in\mathcal G_S(a,b,x,y)$ the set
+\[
+E(A^+)\cup E(A^-)\cup E(B^+)\cup E(B^-)\cup E(X,B^+)\cup E(A^+,Y)
+\]
+is a triangle cover of $G$ of size $T_S$. In particular $\tau(G)\le T_S$.
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:halves}(i), $E(X,B^+)$ and $E(A^+,Y)$ are complete bipartite with $tx$ and $ry$ edges, and they share exactly the $xy$ edges of $E(X,Y)$. Let $\Delta$ be a triangle. If two of its vertices lie in the same half, their edge belongs to the set; this happens in particular when all three vertices lie in $A$ or all three in $B$. Otherwise two vertices lie in opposite halves of one clique and the third lies in the other clique. Suppose $\alpha_i\in A^+$, $\alpha_k\in A^-$ and $\beta_j\in B$. Then $j\le\lambda_k\le\lambda_r=y$, so $\beta_j\in Y$ and $\alpha_i\beta_j\in E(A^+,Y)$. Suppose $\beta_g\in B^+$, $\beta_h\in B^-$ and $\alpha_i\in A$. Then $\lambda_i\ge h>t$, so $\alpha_i\in X$ and $\alpha_i\beta_g\in E(X,B^+)$.
+\end{proof}
+
+\begin{lemma}[Sparse canonical subgraph]\label{lem:sparse-canonical}
+Let $\varphi=(\rep{t}{x},\rep{y}{(r-x)},\rep{0}{s})$ and $\Phi_S=G(a,b;\varphi)$. Then $\Phi_S\in\mathcal G_S(a,b,x,y)$, and $\Phi_S$ is a spanning subgraph of every member of $\mathcal G_S(a,b,x,y)$.
+\end{lemma}
+
+\begin{proof}
+Since $y<t$, $\varphi$ is a profile with $p_t(\varphi)=x$ and $\varphi_r=y$. If $\lambda$ has parameters $(a,b,x,y)$, then $\lambda_i\ge t$ for $i\le x$ and $\lambda_i\ge\lambda_r=y$ for $i\le r$, so $\varphi_i\le\lambda_i$ for all $i$.
+\end{proof}
+
+\begin{lemma}[Sparse packings]\label{lem:sparse-packings}
+Every $G\in\mathcal G_S(a,b,x,y)$ satisfies $\nu(G)\ge P$ for each of the following quantities $P$:
+\begin{align*}
+&(\mathrm{S}1)\quad C(a)+C(b),\\
+&(\mathrm{S}2)\quad P_S=C(t+x)+J(x+y,r-x)+m_0,\\
+&(\mathrm{S}3)\quad J(r+t-x-y,x+y)+m_0,\\
+&(\mathrm{S}4)\quad C(r)+J(x,t)+m_0,\\
+&(\mathrm{S}5)\quad C(a)+J(x,t)+J(t,u),\\
+&(\mathrm{S}6)\quad C(a)+J(x,t-1)+J(t-1,u+1),\\
+&(\mathrm{S}7)\quad C(x+t)+J(x,a-x)+J(t,u),\\
+&(\mathrm{S}8)\quad C(r+t)-(r-x)(t-y)+m_0,
+\end{align*}
+and for the quantities obtained from (S2) and (S4)--(S7) by the exchange
+\[
+(a,b,x,y,r,s,t,u)\leftrightarrow(b,a,y,x,t,u,r,s).
+\]
+Writing ${}^{\top}$ for this exchange of the roles of $A$ and $B$, in particular $\nu(G)\ge P_S^{\top}=C(r+y)+J(x+y,t-y)+m_0$.
+\end{lemma}
+
+\begin{proof}
+Every adjacency used below is guaranteed by Lemma~\ref{lem:halves}(i) and the clique structure, so each construction also works in $\Phi_S$. In all packings containing $m_0$, the term $m_0=J(r,s)+J(t,u)$ is realized by the fan packings with centers $A^+$ and base $A^-$ and with centers $B^+$ and base $B^-$. Their edges lie in $E(A^-)\cup E(A^+,A^-)$ and $E(B^-)\cup E(B^+,B^-)$, and every such edge meets $A^-\cup B^-$ inside one clique. In (S2), (S3), (S4) and (S8) the remaining sub-packings use only vertices of $A^+\cup B^+$, so they are edge-disjoint from these two fan packings.
+
+(S1) is \eqref{eq:L0}. (S5) and (S7) are \eqref{eq:L1} and \eqref{eq:L2} with $k=t$, because $p_t(\lambda)=x$. (S6) is a lower bound for $\nu(G)$ because it is at most \eqref{eq:L1} with $k=t-1$: indeed $p_{t-1}(\lambda)\ge x$, and $J$ is nondecreasing in its first argument.
+
+(S2) The set $X\cup B^+$ is a clique, since $X$ is complete to $B^+$; take a maximum packing of it. Every vertex of $X\cup Y$ is adjacent to every vertex of $A^+\setminus X$, by Lemma~\ref{lem:halves}(i) for $Y$; take the fan packing with centers $X\cup Y$ and base $A^+\setminus X$. The first sub-packing uses edges of $E(X\cup B^+)$, and every edge of the second has an end in $A^+\setminus X$.
+
+(S3) The set $X\cup Y$ is a clique, and every vertex of $(A^+\setminus X)\cup(B^+\setminus Y)$ is adjacent to all of $X\cup Y$. Take the fan packing with these centers and base $X\cup Y$.
+
+(S4) Take a maximum packing of $A^+$ and the fan packing with centers $X$ and base $B^+$. Their edges lie in $E(A^+)$ and in $E(B^+)\cup E(X,B^+)$.
+
+(S8) The graph $G[A^+\cup B^+]$ is a complete graph on $r+t$ vertices minus some edges between $A^+\setminus X$ and $B^+\setminus Y$, by Lemma~\ref{lem:halves}(i); at most $(r-x)(t-y)$ edges are missing. Delete from a maximum packing of $K_{r+t}$ on $A^+\cup B^+$ every triangle containing a missing edge. Each missing edge lies in at most one triangle of the packing.
+
+The exchanged bounds follow from Lemma~\ref{lem:halves}(iii).
+\end{proof}
+
+\begin{proposition}[Large sparse graphs]\label{prop:sparse-large}
+Suppose that $3(r^2+t^2)\ge 84(r+t)$; this holds whenever $a+b\ge 111$. Then $2\max\{P_S,P_S^{\top}\}\ge T_S$, and $\tau(G)\le 2\nu(G)$ for every $G\in\mathcal G_S(a,b,x,y)$.
+\end{proposition}
+
+\begin{proof}
+The quantity $T_S$ is invariant under the exchange of Lemma~\ref{lem:sparse-packings}, which exchanges $P_S$ and $P_S^{\top}$. We may therefore assume $t+x\ge r+y$ and show that $\Psi=6P_S-3T_S$ is positive. Since $r-x\ge 1$, the bounds \eqref{eq:Cbound}, \eqref{eq:Jbound} and \eqref{eq:m0} give
+\begin{multline}\label{eq:Psi}
+\Psi\ge (t+x)(t+x-2)-3+3(r-x-1)\min\{x+y,r-x\}\\
+-3tx-3ry+3xy-3\rho .
+\end{multline}
+We show that
+\begin{equation}\label{eq:quadlower}
+\Psi\ge \tfrac{3}{14}(r^2+t^2)-6(r+t)+\tfrac{83}{28}.
+\end{equation}
+
+\emph{Case $x+y<r-x$.} Then $2x+y\le r-1$, and $t+x\ge r+y$ gives $x\ge r-t$. Hence $\max\{0,r-t\}\le x\le r/2$ and $5x+3y\le 3r-3-x\le 3r$. With the minimum equal to $x+y$, the right-hand side of \eqref{eq:Psi} equals $g(x)-2t-5x-3y-3-3\rho$ with $g(x)=t^2-tx-2x^2+3rx$. The function $g$ is concave, so on the above interval it is at least its value at an endpoint. If $t\ge r$ the left endpoint is $0$ and $g(0)=t^2$; if $t<r$ it is $r-t$ and $g(r-t)=r^2$; and $g(r/2)=r^2+t^2-rt/2$. Each of these values is at least $(r^2+t^2)/2$. Using $\rho\le r+t-2$ we obtain $\Psi\ge(r^2+t^2)/2-6r-5t+3$, which exceeds the right-hand side of \eqref{eq:quadlower} by $\frac27(r^2+t^2)+t+\frac1{28}$.
+
+\emph{Case $x+y\ge r-x$.} Now the minimum equals $r-x$, and the terms of \eqref{eq:Psi} containing $y$ add up to $-3(r-x)y$ with $r-x>0$. Replacing $y$ by its upper bound $t+x-r$ and expanding, we get
+\begin{align*}
+\Psi&\ge 7x^2-(12r-2t-1)x+6r^2-3rt+t^2-3r-2t-3-3\rho\\
+&\ge \frac{24r^2+24t^2-36rt-60r-60t-85}{28}-3\rho,
+\end{align*}
+where the second step minimizes over real $x$. Since $24r^2+24t^2-36rt=6(r^2+t^2)+18(r-t)^2$ and $\rho\le r+t-2$, we obtain $\Psi\ge\frac{3}{14}(r^2+t^2)-\frac{36}{7}(r+t)+\frac{83}{28}$, which implies \eqref{eq:quadlower}.
+
+If $3(r^2+t^2)\ge 84(r+t)$, the right-hand side of \eqref{eq:quadlower} is at least $83/28>0$. Then $2P_S>T_S$, and Lemmas~\ref{lem:sparse-cover} and~\ref{lem:sparse-packings} give $\tau(G)\le T_S\le 2\nu(G)$. Finally, if $a+b\ge 111$ then $r+t\ge 56$, so $r^2+t^2\ge(r+t)^2/2\ge 28(r+t)$.
+\end{proof}
+
+\section{The dense case}\label{sec:dense}
+
+In this section $a,b\ge 1$ and $x\ge r$, so that $y\ge t$, $A^+\subseteq X$ and $B^+\subseteq Y$. Put
+\[
+w=x-r,\quad z=y-t,\quad W=X\setminus A^+,\quad Z=Y\setminus B^+,\quad e=|E(W,Z)|,\quad T_0=H+rt,
+\]
+so that $0\le w\le s$, $0\le z\le u$ and $0\le e\le wz$. For fixed $(a,b,x,y)$ let $\mathcal G_D(a,b,x,y)$ be the set of graphs $G(a,b;\lambda)$ with these parameters on the vertex set $A\cup B$, and let $\mathcal G_D(a,b,x,y;e)$ be its subset of graphs with $|E(W,Z)|=e$.
+
+\begin{lemma}[Dense cover]\label{lem:dense-cover}
+Let $G\in\mathcal G_D(a,b,x,y;e)$. Then $A^+$ is complete to $B^+$, every edge between $A^-$ and $B^-$ lies in $E(W,Z)$, and
+\[
+E(A^+)\cup E(A^-)\cup E(B^+)\cup E(B^-)\cup E(A^+,B^+)\cup E(W,Z)
+\]
+is a triangle cover of $G$ of size $T_0+e$.
+\end{lemma}
+
+\begin{proof}
+The first claim is $\lambda_r=y\ge t$. If $\alpha_i\in A^-$ and $\beta_j\in B^-$ are adjacent, then $\lambda_i\ge j>t$, so $\alpha_i\in W$, and $j\le\lambda_i\le\lambda_r=y$, so $\beta_j\in Z$. After deleting the listed edges, every remaining edge joins $A^+\cup B^+$ to $A^-\cup B^-$, so the remaining graph is bipartite. The deleted sets are disjoint, of total size $H+rt+e$.
+\end{proof}
+
+\begin{lemma}[Dense canonical subgraphs]\label{lem:dense-canonical}
+Let
+\[
+\varphi^0=(\rep{y}{r},\rep{t}{w},\rep{0}{(a-x)}),\qquad \varphi^1=(\rep{y}{x},\rep{0}{(a-x)}),
+\]
+and put $\Phi^0=G(a,b;\varphi^0)$ and $\Phi^1=G(a,b;\varphi^1)$. Then $\Phi^0\in\mathcal G_D(a,b,x,y;0)$ is a spanning subgraph of every member of $\mathcal G_D(a,b,x,y)$, and $\Phi^1\in\mathcal G_D(a,b,x,y;wz)$ is a spanning subgraph of every member of $\mathcal G_D(a,b,x,y;wz)$. If $wz=0$, then $\Phi^0=\Phi^1$.
+\end{lemma}
+
+\begin{proof}
+Both sequences are profiles with $p_t=x$ and $r$-th entry $y$. In $\Phi^0$ the vertices of $W$ have no neighbor in $Z$, and in $\Phi^1$ they are adjacent to all of $Z$. For $\lambda$ with parameters $(a,b,x,y)$ we have $\lambda_i\ge y$ for $i\le r$ and $\lambda_i\ge t$ for $i\le x$, so $\varphi^0\le\lambda$ entrywise. If moreover $E(W,Z)$ is complete, then $\lambda_i\ge y$ for all $i\le x$ (for $z=0$ this is $\lambda_i\ge t$), so $\varphi^1\le\lambda$. If $w=0$ or $z=0$ the two profiles coincide.
+\end{proof}
+
+\begin{lemma}[Dense packings]\label{lem:dense-packings}
+Put $S_0=C(x+y)-wz+J(x,a-x)+J(y,b-y)$. Every $G\in\mathcal G_D(a,b,x,y;e)$ satisfies $\nu(G)\ge P$ for each of the quantities $P$ listed below:
+{\allowdisplaybreaks
+\begin{align*}
+&(\mathrm{D}1)\quad C(a)+C(b),\\
+&(\mathrm{D}2)\quad P_D=J(x,t)+J(z,r)+m_0,\\
+&(\mathrm{D}3)\quad C(a)+J(x,t)+J(t,u),\\
+&(\mathrm{D}4)\quad C(x+t)+J(x,a-x)+J(t,u),\\
+&(\mathrm{D}5)\quad J(t,x)+J(r,z)+J(u,t)\\
+&\qquad\qquad +\max\{C(a-x),J(x,a-x)\}+\max\{C(b-y),J(z,b-y)\},\\
+&(\mathrm{D}6)\quad S_0+e,
+\end{align*}}
+and for the quantities obtained from (D2)--(D5) by the exchange
+\[
+(a,b,x,y,r,s,t,u,w,z)\leftrightarrow(b,a,y,x,t,u,r,s,z,w).
+\] Moreover $J(x,a-x)=\binomtwo{s-w}$ and $J(y,b-y)=\binomtwo{u-z}$.
+\end{lemma}
+
+\begin{proof}
+(D1), (D3) and (D4) are \eqref{eq:L0}, \eqref{eq:L1} and \eqref{eq:L2} with $k=t$, since $p_t(\lambda)=x$.
+
+(D2) Take the fan packings with centers $X$ and base $B^+$, with centers $Z$ and base $A^+$, with centers $A^+$ and base $A^-$, and with centers $B^+$ and base $B^-$; the required adjacencies hold by Lemma~\ref{lem:halves}(i), since $Z\subseteq Y$. The edges lie in $E(B^+)\cup E(X,B^+)$, $E(A^+)\cup E(A^+,Z)$, $E(A^-)\cup E(A^+,A^-)$ and $E(B^-)\cup E(B^+,B^-)$. These sets are disjoint; note that $E(A^+,Z)$ joins $A$ to $B^-$, while $E(X,B^+)$ joins $A$ to $B^+$. The last two fan packings have $m_0$ triangles by \eqref{eq:m0}.
+
+(D5) Take the fan packings with centers $B^+$ and base $X$, with centers $A^+$ and base $Z$, and with centers $B^-$ and base $B^+$. Add either a maximum packing of $A\setminus X$ or the fan packing with centers $X$ and base $A\setminus X$, and either a maximum packing of $B\setminus Y$ or the fan packing with centers $Z$ and base $B\setminus Y$. The five sub-packings use edges in
+\begin{gather*}
+E(X)\cup E(X,B^+),\qquad E(Z)\cup E(A^+,Z),\qquad E(B^+)\cup E(B^+,B^-),\\
+E(A\setminus X)\cup E(X,A\setminus X),\qquad E(B\setminus Y)\cup E(Z,B\setminus Y).
+\end{gather*}
+The edges inside $A$ are split between the first and the fourth sets according to the number of ends in $X$. The edges between $A$ and $B$ in the first and second sets end in $B^+$ and in $B^-$, respectively. Inside $B$, the third set consists of edges meeting $B^+$, while the second and the fifth lie in $B^-$ and are disjoint because $Z\cap(B\setminus Y)=\emptyset$.
+
+(D6) The edges between $X$ and $Y$ form $E(A^+,B^+)\cup E(A^+,Z)\cup E(W,B^+)\cup E(W,Z)$, and the first three sets are complete. Hence $G[X\cup Y]$ is a complete graph on $x+y$ vertices minus $wz-e$ edges. Deleting from a maximum packing of this complete graph the triangles that contain a missing edge leaves at least $C(x+y)-(wz-e)$ triangles. Add the fan packings with centers $X$ and base $A\setminus X$ and with centers $Y$ and base $B\setminus Y$; their edges lie in $E(A\setminus X)\cup E(X,A\setminus X)$ and $E(B\setminus Y)\cup E(Y,B\setminus Y)$. Since $|A\setminus X|=s-w\le r\le x$ and $|B\setminus Y|=u-z\le y$, these fan packings have $\binomtwo{s-w}$ and $\binomtwo{u-z}$ triangles by \eqref{eq:Jbound}.
+
+The exchanged bounds follow from Lemma~\ref{lem:halves}(iii), which maps $W$, $Z$ to $Z$, $W$.
+\end{proof}
+
+\subsection{Large dense graphs}
+For real numbers $r,t,w,z,e$ define
+\begin{align*}
+\Theta_D&=t\min\{r+w,t\}+r\min\{z,r\}-rt-e,\\
+\Theta_F&=\tfrac13(r+t+w+z)^2+(r-w)^2+(t-z)^2-r^2-t^2-rt-2wz+e,\\
+\Theta_L&=\tfrac13(r^2+t^2)-rt-e,
+\end{align*}
+and $\Theta=\Theta_F+\frac34\Theta_D+\frac14\Theta_L$. Up to terms linear in $r+t$ (Lemma~\ref{lem:errors}), these are the values of $2P-T_0-e$ for $P=P_D$, $P=S_0+e$ and $P=C(a)+C(b)$, respectively.
+
+\begin{lemma}[A quadratic lower bound]\label{lem:quadratic}
+If $0\le r\le t$, $r+t>0$, $w\ge 0$ and $z\ge 0$, then $\Theta\ge\frac{29}{768}(r+t)^2$.
+\end{lemma}
+
+\begin{proof}
+The coefficient of $e$ in $\Theta$ is $1-\frac34-\frac14=0$. Write $\Theta_{\gamma\eta}$, for $\gamma,\eta\in\{0,1\}$, for the polynomial obtained by replacing $\min\{r+w,t\}$ by $r+w$ if $\gamma=0$ and by $t$ if $\gamma=1$, and $\min\{z,r\}$ by $z$ if $\eta=0$ and by $r$ if $\eta=1$. Then $\Theta=\Theta_{\gamma\eta}$ on the region where $r+w\le t$ ($\gamma=0$) or $r+w\ge t$ ($\gamma=1$), and $z\le r$ ($\eta=0$) or $z\ge r$ ($\eta=1$). Expanding,
+\[
+\Theta_{\gamma\eta}=\tfrac43(w^2-wz+z^2)-\tfrac43(rw+tz)+q_{\gamma\eta},
+\]
+where
+\begin{align*}
+q_{00}&=\tfrac{5}{12}r^2-\tfrac{7}{12}rt+\tfrac{5}{12}t^2+\tfrac{17}{12}tw+\tfrac{17}{12}rz,\\
+q_{01}&=\tfrac{7}{6}r^2-\tfrac{7}{12}rt+\tfrac{5}{12}t^2+\tfrac{17}{12}tw+\tfrac23rz,\\
+q_{10}&=\tfrac{5}{12}r^2-\tfrac{4}{3}rt+\tfrac{7}{6}t^2+\tfrac23tw+\tfrac{17}{12}rz,\\
+q_{11}&=\tfrac{7}{6}r^2-\tfrac{4}{3}rt+\tfrac{7}{6}t^2+\tfrac23tw+\tfrac23rz.
+\end{align*}
+
+\emph{Branch $00$.} With $h=t-r\ge 0$, direct expansion gives the identity
+\[
+\Theta_{00}-\tfrac{1}{16}(r+t)^2=\tfrac43\Bigl(z-\tfrac{h+w}{2}\Bigr)^2+\tfrac{1}{48}h^2+\tfrac{1}{12}rw+\tfrac34hw+w^2+\tfrac1{12}rz,
+\]
+whose right-hand side is nonnegative. Since $\frac1{16}>\frac{29}{768}$, the claim follows on this branch.
+
+\emph{Branches $01$, $10$, $11$.} The polynomials $\Theta_{\gamma\eta}$ and the branch conditions are homogeneous, so we may assume $r+t=1$. Substitute $t=1-r$ and regard $\Theta_{\gamma\eta}$ as a quadratic polynomial in $v=(r,w,z)$. A quadratic polynomial equals its Taylor expansion of order two at any point $p$:
+\[
+\Theta_{\gamma\eta}(v)=\Theta_{\gamma\eta}(p)+\ell_{\gamma\eta}(v)+(v-p)^{\top}M_{\gamma\eta}(v-p),
+\]
+where $\ell_{\gamma\eta}(v)=\nabla\Theta_{\gamma\eta}(p)\cdot(v-p)$ and $M_{\gamma\eta}$ is half the Hessian. The data are as follows.
+\begin{itemize}
+\item[$01$:] $p=\bigl(\frac5{34},0,\frac{53}{136}\bigr)$, $\Theta_{01}(p)=\frac{43}{816}$, $\ell_{01}(v)=\frac{67}{136}w$, and
+\[
+M_{01}=\begin{pmatrix}\frac{13}6&-\frac{11}8&1\\[2pt]-\frac{11}8&\frac43&-\frac23\\[2pt]1&-\frac23&\frac43\end{pmatrix},\qquad\text{leading principal minors } \tfrac{13}6,\ \tfrac{575}{576},\ \tfrac{125}{144}.
+\]
+\item[$10$:] $p=\bigl(\frac12,\frac5{32},\frac1{16}\bigr)$, $\Theta_{10}(p)=\frac{29}{768}$, $\ell_{10}(v)=\frac{57}{64}\bigl(\frac12-r\bigr)$, and
+\[
+M_{10}=\begin{pmatrix}\frac{35}{12}&-1&\frac{11}8\\[2pt]-1&\frac43&-\frac23\\[2pt]\frac{11}8&-\frac23&\frac43\end{pmatrix},\qquad\text{leading principal minors } \tfrac{35}{12},\ \tfrac{26}{9},\ \tfrac{269}{144}.
+\]
+\item[$11$:] $p=\bigl(\frac{25}{59},\frac{33}{118},\frac{25}{59}\bigr)$, $\Theta_{11}(p)=\frac{71}{354}$, $\ell_{11}(v)=\frac{16}{59}(z-r)$, and
+\[
+M_{11}=\begin{pmatrix}\frac{11}3&-1&1\\[2pt]-1&\frac43&-\frac23\\[2pt]1&-\frac23&\frac43\end{pmatrix},\qquad\text{leading principal minors } \tfrac{11}3,\ \tfrac{35}9,\ \tfrac{32}9.
+\]
+\end{itemize}
+By Sylvester's criterion each $M_{\gamma\eta}$ is positive definite, so the quadratic term is nonnegative. The linear term is nonnegative on the corresponding branch: $w\ge 0$ for $01$, $r\le\frac12$ (that is, $r\le t$) for $10$, and $z\ge r$ for $11$. Hence $\Theta_{\gamma\eta}\ge\Theta_{\gamma\eta}(p)$ on the corresponding branch. Since $\Theta_{10}(p)=\frac{29}{768}$ and the values $\frac{43}{816}$ and $\frac{71}{354}$ are larger, the lemma follows.
+\end{proof}
+
+\begin{lemma}[Parity and integer corrections]\label{lem:errors}
+Let $G\in\mathcal G_D(a,b,x,y;e)$ and $N=r+t$, and put
+\[
+\sigma_D=2P_D-T_0-e,\qquad \sigma_F=2(S_0+e)-T_0-e,\qquad \sigma_L=2\bigl(C(a)+C(b)\bigr)-T_0-e.
+\]
+Then, with $\Theta_D,\Theta_F,\Theta_L$ evaluated at the integers $r,t,w,z,e$,
+\[
+\sigma_D\ge\Theta_D-2N+2,\qquad \sigma_F\ge\Theta_F-\tfrac53N+1,\qquad \sigma_L\ge\Theta_L-\tfrac23N-2.
+\]
+\end{lemma}
+
+\begin{proof}
+We use $s=r-\delta$, $u=t-\varepsilon$, $\delta^2=\delta$, $\varepsilon^2=\varepsilon$ and the identities
+\[
+H=r^2+t^2-(\delta+1)r-(\varepsilon+1)t+\delta+\varepsilon,\qquad 2\tbinom{s-w}{2}=(r-w)^2-(2\delta+1)(r-w)+2\delta,
+\]
+and the analogue of the second identity for $u-z$. Also $\delta(r-1)+\varepsilon(t-1)\le N-2$.
+
+For $\sigma_D=2J(x,t)+2J(z,r)+2m_0-H-rt-e$, \eqref{eq:Jbound} and \eqref{eq:m0} give
+\[
+2J(x,t)\ge t\min\{r+w,t\}-t,\quad 2J(z,r)\ge r\min\{z,r\}-r,\quad 2m_0-H\ge-(N-2).
+\]
+Hence $\sigma_D\ge\Theta_D-N-(N-2)$.
+
+For $\sigma_F$, \eqref{eq:Cbound} gives $2C(x+y)\ge\frac13(N+w+z)^2-\frac23(N+w+z)-1$. Together with the identities above and Lemma~\ref{lem:dense-packings},
+\[
+\sigma_F\ge\Theta_F-\tfrac23N-1-\delta(r-1)-\varepsilon(t-1)+\bigl(2\delta+\tfrac13\bigr)w+\bigl(2\varepsilon+\tfrac13\bigr)z\ge\Theta_F-\tfrac53N+1.
+\]
+
+For $\sigma_L$, \eqref{eq:Cbound} gives $2C(2r-\delta)\ge\frac13\bigl(4r^2-4(\delta+1)r+3\delta-3\bigr)$, and similarly for $2C(2t-\varepsilon)$. Subtracting $H+rt+e$ yields $\sigma_L\ge\Theta_L-\frac13\bigl((\delta+1)r+(\varepsilon+1)t\bigr)-2\ge\Theta_L-\frac23N-2$.
+\end{proof}
+
+\begin{proposition}[Large dense graphs]\label{prop:dense-large}
+If $r+t\ge 88$, then $\tau(G)\le 2\nu(G)$ for every $G\in\mathcal G_D(a,b,x,y)$.
+\end{proposition}
+
+\begin{proof}
+Let $G\in\mathcal G_D(a,b,x,y;e)$. By Lemma~\ref{lem:halves}(iii) we may exchange $A$ and $B$; this preserves the dense case and the cover size $T_0+e$. We may therefore assume $r\le t$, and Lemmas~\ref{lem:errors} and~\ref{lem:quadratic} give
+\[
+\sigma_F+\tfrac34\sigma_D+\tfrac14\sigma_L\ge\Theta-\tfrac{10}{3}N+2\ge\tfrac{29}{768}N^2-\tfrac{10}{3}N+2 .
+\]
+The right-hand side equals $\frac{13}{12}$ at $N=88$, and its derivative $\frac{29}{384}N-\frac{10}3$ is positive for $N\ge 88$. Hence one of $\sigma_D,\sigma_F,\sigma_L$ is positive, so one of the packing bounds (D2), (D6), (D1) is at least $(T_0+e)/2$. Lemma~\ref{lem:dense-cover} gives $\tau(G)\le T_0+e\le 2\nu(G)$.
+\end{proof}
+
+\subsection{Elimination of \texorpdfstring{$e$}{e}}
+For $r+t\le 87$ we eliminate $e$ as follows. Let $P^0=P^0(a,b,x,y)$ be the maximum of (D1)--(D5), of their exchanged versions, and of the bounds \eqref{eq:L1} and \eqref{eq:L2} for $\Phi^0$ over all $k$ and both orientations. By Lemmas~\ref{lem:dense-packings}, \ref{lem:dense-canonical} and~\ref{lem:pivot}, $\nu(G)\ge P^0$ for every $G\in\mathcal G_D(a,b,x,y)$. Define the integer interval
+\begin{equation}\label{eq:interval}
+I(a,b,x,y)=\bigl[\max\{0,\,2P^0-T_0+1\},\ \min\{wz,\,T_0-2S_0-1\}\bigr].
+\end{equation}
+
+\begin{lemma}\label{lem:interval}
+If $G\in\mathcal G_D(a,b,x,y;e)$ and $e\notin I(a,b,x,y)$, then $\tau(G)\le 2\nu(G)$.
+\end{lemma}
+
+\begin{proof}
+Since $0\le e\le wz$, either $e\le 2P^0-T_0$, and then $T_0+e\le 2P^0\le 2\nu(G)$, or $e\ge T_0-2S_0$, and then $T_0+e\le 2(S_0+e)\le 2\nu(G)$ by (D6). In both cases Lemma~\ref{lem:dense-cover} gives the claim.
+\end{proof}
+
+\section{The finite computations}\label{sec:computations}
+
+The computations use exact integer arithmetic, and the identities of Lemma~\ref{lem:quadratic} are checked in exact rational arithmetic. The programs use only the standard library of Python; see Appendix~\ref{app:data}. By Lemma~\ref{lem:representation}(i) and Lemma~\ref{lem:halves}(iii) it suffices to consider $a\le b$. Table~\ref{tab:summary} summarizes the results.
+
+\begin{table}[H]
+\caption{Summary of the finite computations. Cases are profiles in the first row and tuples $(a,b,x,y)$ in the other two. Exceptional cases of order at most $12$ are covered by the first row. In the sparse row, $14$ of the $61$ certificates concern tuples of order $11$ or $12$ and are not needed. In the dense row, the $70$ exceptional tuples carry $73$ values of $e$, and the $28$ exceptional tuples of order at least $13$ give $30$ pairs $\bigl((a,b,x,y),e\bigr)$, each with one certificate.}\label{tab:summary}
+\centering
+\vspace{6pt}
+\small
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+domain & cases & settled by bounds & exceptional & certificates\\
+\midrule
+orders $\le 12$ (profiles) & 2,861 & 2,850 & 11 & 11\\
+sparse, bounded (tuples) & 374,409 & 374,327 & 82 & 61\\
+dense, $r+t\le 87$ (tuples) & 3,785,892 & 3,785,822 & 70 & 30\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{proposition}[Small orders]\label{prop:small}
+Let $a,b\ge 1$ with $a+b\le 12$, not both even. Then $\tau(G)\le 2\nu(G)$ for every profile $\lambda$ of type $(a,b)$ and $G=G(a,b;\lambda)$.
+\end{proposition}
+
+\begin{proof}
+For $a\le b$ the profiles of type $(a,b)$ are the $\binom{a+b}{a}$ nonincreasing sequences of length $a$ with entries in $\{0,\dots,b\}$, and the program generates all of them; there are $2{,}861$ in total. For each it computes the maximum $L$ of the bounds of Lemma~\ref{lem:pivot} over all $k$ and both orientations, and the minimum $U$ of the bounds of Lemma~\ref{lem:cut} over all $(i,j)$. For $2{,}850$ profiles $U\le 2L$. The remaining $11$ profiles, all of order $9$ or $10$, are listed in Table~\ref{tab:small}. For each of them the certificate file contains a triangle packing $\mathcal P$ and an edge set $\mathcal C$ with $|\mathcal C|\le 2|\mathcal P|$. The program checks that $\mathcal P$ is a triangle packing of $G$ and, enumerating all triples of vertices, that $\mathcal C$ meets every triangle of $G$.
+\end{proof}
+
+\begin{proposition}[Bounded sparse domain]\label{prop:sparse-bounded}
+Let $1\le a\le b$, not both even, with $3(r^2+t^2)<84(r+t)$, so that $a+b\le 110$ by Proposition~\ref{prop:sparse-large}, and let $0\le x<r$ and $0\le y<t$. Let $P_S^{\max}=P_S^{\max}(a,b,x,y)$ be the maximum of the bounds of Lemma~\ref{lem:sparse-packings} and of the bounds \eqref{eq:L1} and \eqref{eq:L2} for $\Phi_S$ over all $k$ and both orientations. Then $2P_S^{\max}\ge T_S$, except for $82$ tuples $(a,b,x,y)$, all of order at most $34$. Of these, $21$ have order at most $10$, and for each of the other $61$, listed in Table~\ref{tab:sparse}, the certificate file contains a triangle packing of $\Phi_S$ with at least $T_S/2$ triangles.
+\end{proposition}
+
+\begin{proof}
+The program runs over the pairs $(a,b)$ with $a\le b$, not both even and $a+b\le 113$, and discards the $929$ of them with $3(r^2+t^2)\ge 84(r+t)$. Since every pair with $3(r^2+t^2)<84(r+t)$ has $a+b\le 110$, the pairs that are kept cover the domain of the proposition. They give $374{,}409$ tuples. For each of them the program evaluates the bounds of Lemma~\ref{lem:sparse-packings}, and it adds the bounds for $\Phi_S$ only when these do not suffice. The statement about the certificates is checked as described in Section~\ref{sec:checks}.
+\end{proof}
+
+\begin{proposition}[Bounded dense domain]\label{prop:dense-bounded}
+Let $1\le a\le b$, not both even, with $r+t\le 87$, and let $r\le x\le a$ and $t\le y\le b$. The interval \eqref{eq:interval} is empty for all but $70$ of these $3{,}785{,}892$ tuples. The $70$ exceptional tuples have order at most $30$, and their intervals contain $73$ integers in total. Of these tuples, $42$, with $43$ integers, have order at most $12$. For each of the other $28$ tuples, every $e\in I(a,b,x,y)$ satisfies $e\in\{0,wz\}$, and for each of the resulting $30$ pairs $\bigl((a,b,x,y),e\bigr)$, listed in Table~\ref{tab:dense}, the certificate file contains a triangle packing of $\Phi^0$ if $e=0$, and of $\Phi^1$ if $e=wz>0$, with at least $(T_0+e)/2$ triangles.
+\end{proposition}
+
+\begin{proof}
+The program enumerates the $3{,}785{,}892$ tuples and computes $P^0$, $S_0$, $T_0$ and the interval \eqref{eq:interval} for each. In the course of computing $P^0$ it first evaluates (D1)--(D5) and their exchanged versions, and adds the bounds for $\Phi^0$ only when the interval is nonempty. The statements about the remaining tuples and the certificates are checked as described in Section~\ref{sec:checks}.
+\end{proof}
+
+\subsection{Checks performed by the verification program}\label{sec:checks}
+The verification program performs the following checks, each by an assertion, and stops if one fails.
+\begin{enumerate}
+\item In the proof of Lemma~\ref{lem:quadratic}: the identity for $\Theta_{00}-\frac1{16}(r+t)^2$ and the three second-order expansions about the points $p$, with $\Theta_{\gamma\eta}$ formed directly from the definitions of $\Theta_D$, $\Theta_F$ and $\Theta_L$ (the variable $e$, which cancels, is omitted); the nine leading principal minors and their positivity; and the inequalities $\Theta_{\gamma\eta}(p)\ge\frac{29}{768}$. In the proof of Proposition~\ref{prop:dense-large}: the value $13/12$ at $N=88$ and the positivity of the derivative there.
+\item For orders at most $12$: the number $2{,}861$ of profiles, the split $2{,}850$ and $11$, and, for the $11$ certificates, the packing and cover conditions of Proposition~\ref{prop:small}.
+\item In the sparse domain: the counts $374{,}409$ and $929$, and equality of the recomputed list of $82$ exceptional tuples with the stored list. For every certificate it reconstructs $\Phi_S$ from $(a,b,x,y)$, checks that the stored profile equals $\varphi$, that every listed triple consists of three distinct vertices spanning a triangle of $\Phi_S$, that the listed triangles are pairwise edge-disjoint, and that twice their number is at least $T_S$. It checks that every exceptional tuple of order at least $13$ has a certificate.
+\item In the dense domain: the counts $3{,}785{,}892$, $70$ and $73$, equality of the recomputed exceptional list with the stored list, and the assertion $e\in\{0,wz\}$ for every value $e$ in an exceptional interval of order at least $13$. For every certificate it reconstructs $\Phi^0$ or $\Phi^1$, checks that the stored profile is $\varphi^0$ or $\varphi^1$ and that the number of edges between $W$ and $Z$ equals $e$, checks the packing as in (3), and checks that twice its size is at least $T_0+e$. Finally it checks that the set of certified pairs equals the set of required pairs.
+\end{enumerate}
+
+\section{Proof of Theorem~\ref{thm:main}}\label{sec:proof}
+
+Let $G$ be a co-chain graph. By Lemma~\ref{lem:representation}(ii) we may assume $G=G(a,b;\lambda)$. If $a=0$ or $b=0$, then $G$ is complete and Lemma~\ref{lem:complete} applies. If $a$ and $b$ are positive and even, the inequality is Theorem~1 of \cite{CG23}. We may therefore assume $a,b\ge 1$ and that $a$ or $b$ is odd. By Lemma~\ref{lem:representation}(i) and Lemma~\ref{lem:halves}(iii) we may also assume $a\le b$. If $a+b\le 12$, Proposition~\ref{prop:small} applies. Let $a+b\ge 13$.
+
+Suppose that $G$ is sparse. If $3(r^2+t^2)\ge 84(r+t)$, Proposition~\ref{prop:sparse-large} applies. Otherwise $a+b\le 110$ by the same proposition, and $(a,b,x,y)$ lies in the domain of Proposition~\ref{prop:sparse-bounded}. All bounds evaluated there are lower bounds for $\nu$ of every member of $\mathcal G_S(a,b,x,y)$, by Lemma~\ref{lem:sparse-packings} and by Lemmas~\ref{lem:pivot} and~\ref{lem:sparse-canonical}. If $2P_S^{\max}\ge T_S$, Lemma~\ref{lem:sparse-cover} gives $\tau(G)\le T_S\le 2\nu(G)$. Otherwise $(a,b,x,y)$ is one of the $61$ certified tuples, since $a+b\ge 13$, and Lemmas~\ref{lem:sparse-cover}, \ref{lem:sparse-canonical} and~\ref{lem:transfer} apply with $\Phi=\Phi_S$ and $T=T_S$.
+
+Suppose that $G$ is dense, and let $e=|E(W,Z)|$. If $r+t\ge 88$, Proposition~\ref{prop:dense-large} applies. Otherwise $(a,b,x,y)$ lies in the domain of Proposition~\ref{prop:dense-bounded}. If $e\notin I(a,b,x,y)$, Lemma~\ref{lem:interval} applies. Otherwise, since $a+b\ge 13$, we have $e\in\{0,wz\}$ and the pair $\bigl((a,b,x,y),e\bigr)$ is certified. By Lemma~\ref{lem:dense-canonical}, $G$ contains $\Phi^0$, and if $e=wz$ it contains $\Phi^1$; Lemmas~\ref{lem:dense-cover} and~\ref{lem:transfer} with $T=T_0+e$ complete the proof. \qed
+
+\appendix
+
+\section{Data availability}\label{app:data}
+
+The programs and certificates used in Section~\ref{sec:computations} are provided as accompanying supplementary material, together with a README file that describes how to run them and a file \texttt{MANIFEST.json} of SHA-256 hashes. The programs require Python 3.10 or later and its standard library only; no network access and no optimization software is used. The command
+\begin{center}
+\texttt{python -B verify.py}
+\end{center}
+performs all checks of Section~\ref{sec:checks} and ends by printing a summary with \texttt{"passed": true}. Since the checks are Python assertions, the program must not be run with the options \texttt{-O} or \texttt{-OO}; it refuses to run in that case. The files are:
+\par\begingroup\raggedright
+\begin{itemize}
+\item \texttt{packing\char95 bounds.py}: the quantities $C$, $J$, $T_S$, $T_0$, $S_0$ and the packing bounds of Lemmas~\ref{lem:pivot}, \ref{lem:sparse-packings} and~\ref{lem:dense-packings};
+\item \texttt{verify\char95 dense\char95 algebra.py}: the exact rational checks of Lemma~\ref{lem:quadratic};
+\item \texttt{verify.py}: the checks of Section~\ref{sec:checks};
+\item the $11$ certificates of Proposition~\ref{prop:small}: \texttt{small\char95 exception\char95 certificates.json};
+\item the $61$ certificates of Proposition~\ref{prop:sparse-bounded}: \texttt{sparse\char95 canonical\char95 certificates.json};
+\item the $30$ certificates of Proposition~\ref{prop:dense-bounded}: \texttt{dense\char95 canonical\char95 certificates.json};
+\item the $82$ exceptional sparse tuples: \texttt{sparse\char95 scalar\char95 failures.json};
+\item the $70$ exceptional dense tuples and their intervals: \texttt{dense\char95 scalar\char95 failures.json}.
+\end{itemize}
+\par\endgroup
+In the certificate files the vertex $\alpha_i$ is labeled $i-1$ and $\beta_j$ is labeled $a+j-1$. A profile is listed as the sequence $\lambda$, a packing as a list of vertex triples, and a cover as a list of vertex pairs.
+
+\section{Exceptional parameter tuples}\label{app:tables}
+
+Table~\ref{tab:small} lists the profiles of Proposition~\ref{prop:small} that need explicit certificates, with the sizes of the certified packing and cover. Tables~\ref{tab:sparse} and~\ref{tab:dense} list the certified tuples of Propositions~\ref{prop:sparse-bounded} and~\ref{prop:dense-bounded}, with the cover size $T$ (namely $T_S$, respectively $T_0+e$) and the size $|\mathcal P|$ of the certified packing. The triangles themselves are given in the certificate files.
+
+\begin{table}[H]
+\caption{Profiles of order at most $12$ with explicit packing and cover certificates.}\label{tab:small}
+\centering
+\vspace{6pt}
+\small
+\begin{tabular}{@{}rrlrr@{\hspace{16pt}}c@{\hspace{16pt}}rrlrr@{}}
+\toprule
+$a$ & $b$ & $\lambda$ & $|\mathcal P|$ & $|\mathcal C|$ && $a$ & $b$ & $\lambda$ & $|\mathcal P|$ & $|\mathcal C|$ \\
+\midrule
+$4$ & $5$ & $(4,1,1,1)$ & $6$ & $9$ && $5$ & $5$ & $(5,4,3,2,0)$ & $10$ & $13$ \\
+$4$ & $5$ & $(4,2,1,1)$ & $7$ & $9$ && $5$ & $5$ & $(5,4,3,1,1)$ & $10$ & $13$ \\
+$4$ & $5$ & $(4,3,1,1)$ & $7$ & $9$ && $5$ & $5$ & $(5,3,3,2,1)$ & $10$ & $13$ \\
+$4$ & $5$ & $(4,2,2,1)$ & $7$ & $9$ && $5$ & $5$ & $(4,4,3,2,1)$ & $10$ & $13$ \\
+$4$ & $5$ & $(4,3,2,1)$ & $8$ & $9$ && $5$ & $5$ & $(5,4,3,2,1)$ & $10$ & $13$ \\
+$4$ & $5$ & $(5,4,3,1)$ & $9$ & $11$ &&  &  &  &  &  \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{Certified sparse tuples of Proposition~\ref{prop:sparse-bounded}; $T=T_S$.}\label{tab:sparse}
+\centering
+\vspace{6pt}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}rrrrrr@{\hspace{10pt}}c@{\hspace{10pt}}rrrrrr@{\hspace{10pt}}c@{\hspace{10pt}}rrrrrr@{}}
+\toprule
+$a$ & $b$ & $x$ & $y$ & $T$ & $|\mathcal P|$ && $a$ & $b$ & $x$ & $y$ & $T$ & $|\mathcal P|$ && $a$ & $b$ & $x$ & $y$ & $T$ & $|\mathcal P|$ \\
+\midrule
+$3$ & $8$ & $0$ & $3$ & $19$ & $10$ && $5$ & $9$ & $2$ & $2$ & $32$ & $16$ && $7$ & $12$ & $2$ & $5$ & $61$ & $31$ \\
+$3$ & $8$ & $1$ & $2$ & $19$ & $10$ && $5$ & $9$ & $2$ & $3$ & $33$ & $17$ && $8$ & $11$ & $3$ & $4$ & $59$ & $30$ \\
+$5$ & $6$ & $0$ & $2$ & $16$ & $8$ && $5$ & $9$ & $2$ & $4$ & $34$ & $17$ && $9$ & $11$ & $1$ & $4$ & $63$ & $32$ \\
+$5$ & $6$ & $1$ & $1$ & $15$ & $8$ && $7$ & $7$ & $3$ & $3$ & $33$ & $17$ && $9$ & $11$ & $2$ & $4$ & $65$ & $33$ \\
+$5$ & $6$ & $1$ & $2$ & $17$ & $9$ && $5$ & $10$ & $1$ & $2$ & $33$ & $17$ && $9$ & $11$ & $3$ & $4$ & $67$ & $34$ \\
+$5$ & $6$ & $2$ & $0$ & $16$ & $8$ && $5$ & $10$ & $1$ & $3$ & $35$ & $18$ && $7$ & $14$ & $2$ & $5$ & $75$ & $38$ \\
+$5$ & $6$ & $2$ & $1$ & $17$ & $9$ && $7$ & $8$ & $2$ & $3$ & $35$ & $18$ && $10$ & $11$ & $3$ & $4$ & $71$ & $36$ \\
+$5$ & $6$ & $2$ & $2$ & $18$ & $9$ && $5$ & $11$ & $1$ & $4$ & $43$ & $22$ && $9$ & $13$ & $3$ & $4$ & $81$ & $41$ \\
+$5$ & $7$ & $1$ & $2$ & $21$ & $11$ && $7$ & $9$ & $2$ & $4$ & $43$ & $22$ && $9$ & $13$ & $4$ & $5$ & $85$ & $43$ \\
+$5$ & $7$ & $1$ & $3$ & $23$ & $12$ && $7$ & $9$ & $3$ & $3$ & $43$ & $22$ && $11$ & $11$ & $3$ & $3$ & $77$ & $39$ \\
+$5$ & $7$ & $2$ & $0$ & $21$ & $11$ && $7$ & $9$ & $3$ & $4$ & $44$ & $22$ && $11$ & $11$ & $4$ & $4$ & $82$ & $41$ \\
+$5$ & $7$ & $2$ & $1$ & $22$ & $11$ && $8$ & $9$ & $3$ & $2$ & $45$ & $23$ && $11$ & $11$ & $5$ & $5$ & $85$ & $43$ \\
+$5$ & $7$ & $2$ & $2$ & $23$ & $12$ && $7$ & $11$ & $2$ & $4$ & $54$ & $27$ && $11$ & $13$ & $4$ & $3$ & $95$ & $48$ \\
+$5$ & $7$ & $2$ & $3$ & $24$ & $12$ && $9$ & $9$ & $1$ & $4$ & $53$ & $27$ && $13$ & $13$ & $5$ & $6$ & $119$ & $60$ \\
+$5$ & $8$ & $0$ & $3$ & $25$ & $13$ && $9$ & $9$ & $2$ & $4$ & $54$ & $27$ && $13$ & $13$ & $6$ & $5$ & $119$ & $60$ \\
+$5$ & $8$ & $1$ & $2$ & $24$ & $12$ && $9$ & $9$ & $3$ & $3$ & $53$ & $27$ && $13$ & $13$ & $6$ & $6$ & $120$ & $60$ \\
+$5$ & $8$ & $2$ & $1$ & $25$ & $13$ && $9$ & $9$ & $3$ & $4$ & $55$ & $28$ && $11$ & $16$ & $4$ & $6$ & $125$ & $63$ \\
+$5$ & $8$ & $2$ & $3$ & $27$ & $14$ && $9$ & $9$ & $4$ & $1$ & $53$ & $27$ && $13$ & $17$ & $5$ & $6$ & $157$ & $79$ \\
+$6$ & $7$ & $2$ & $2$ & $25$ & $13$ && $9$ & $9$ & $4$ & $2$ & $54$ & $27$ && $17$ & $17$ & $5$ & $5$ & $193$ & $97$ \\
+$5$ & $9$ & $1$ & $4$ & $33$ & $17$ && $9$ & $9$ & $4$ & $3$ & $55$ & $28$ &&  &  &  &  &  &  \\
+$5$ & $9$ & $2$ & $1$ & $31$ & $16$ && $9$ & $9$ & $4$ & $4$ & $56$ & $28$ &&  &  &  &  &  &  \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{Certified dense pairs of Proposition~\ref{prop:dense-bounded}; $T=T_0+e$.}\label{tab:dense}
+\centering
+\vspace{6pt}
+\footnotesize
+\setlength{\tabcolsep}{3.1pt}
+\begin{tabular}{@{}rrrrrrr@{\hspace{8pt}}c@{\hspace{8pt}}rrrrrrr@{\hspace{8pt}}c@{\hspace{8pt}}rrrrrrr@{}}
+\toprule
+$a$ & $b$ & $x$ & $y$ & $e$ & $T$ & $|\mathcal P|$ && $a$ & $b$ & $x$ & $y$ & $e$ & $T$ & $|\mathcal P|$ && $a$ & $b$ & $x$ & $y$ & $e$ & $T$ & $|\mathcal P|$ \\
+\midrule
+$6$ & $7$ & $3$ & $4$ & $0$ & $27$ & $14$ && $7$ & $7$ & $5$ & $5$ & $1$ & $35$ & $18$ && $9$ & $9$ & $7$ & $7$ & $4$ & $61$ & $31$ \\
+$6$ & $7$ & $3$ & $5$ & $0$ & $27$ & $14$ && $6$ & $9$ & $3$ & $5$ & $0$ & $37$ & $19$ && $11$ & $11$ & $6$ & $6$ & $0$ & $86$ & $43$ \\
+$5$ & $9$ & $3$ & $5$ & $0$ & $35$ & $18$ && $6$ & $9$ & $3$ & $6$ & $0$ & $37$ & $19$ && $11$ & $11$ & $6$ & $7$ & $0$ & $86$ & $43$ \\
+$5$ & $9$ & $3$ & $6$ & $0$ & $35$ & $18$ && $6$ & $9$ & $3$ & $7$ & $0$ & $37$ & $19$ && $11$ & $11$ & $7$ & $6$ & $0$ & $86$ & $43$ \\
+$5$ & $9$ & $3$ & $7$ & $0$ & $35$ & $18$ && $6$ & $9$ & $4$ & $7$ & $2$ & $39$ & $20$ && $11$ & $11$ & $7$ & $7$ & $0$ & $86$ & $43$ \\
+$5$ & $9$ & $4$ & $7$ & $2$ & $37$ & $19$ && $7$ & $9$ & $4$ & $5$ & $0$ & $45$ & $23$ && $11$ & $11$ & $7$ & $7$ & $1$ & $87$ & $44$ \\
+$7$ & $7$ & $4$ & $4$ & $0$ & $34$ & $17$ && $7$ & $9$ & $4$ & $6$ & $0$ & $45$ & $23$ && $11$ & $13$ & $6$ & $7$ & $0$ & $103$ & $52$ \\
+$7$ & $7$ & $4$ & $5$ & $0$ & $34$ & $17$ && $7$ & $9$ & $4$ & $7$ & $0$ & $45$ & $23$ && $11$ & $13$ & $6$ & $8$ & $0$ & $103$ & $52$ \\
+$7$ & $7$ & $5$ & $4$ & $0$ & $34$ & $17$ && $7$ & $9$ & $5$ & $7$ & $2$ & $47$ & $24$ && $11$ & $13$ & $6$ & $9$ & $0$ & $103$ & $52$ \\
+$7$ & $7$ & $5$ & $5$ & $0$ & $34$ & $17$ && $9$ & $9$ & $5$ & $5$ & $0$ & $57$ & $29$ && $15$ & $15$ & $11$ & $11$ & $9$ & $171$ & $86$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section*{Use of AI-assisted tools}
+
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{99}
+
+\bibitem{ABT12}
+S.~Aparna Lakshmanan, Cs.~Bujt\'as, and Zs.~Tuza, \emph{Small edge sets meeting all triangles of a graph}, Graphs Combin. \textbf{28} (2012), no.~3, 381--392.
+
+\bibitem{BBG22}
+M.~Bonamy, \L.~Bo\.zyk, A.~Grzesik, M.~Hatzel, T.~Masa\v{r}\'{\i}k, J.~Novotn\'a, and K.~Okrasa, \emph{Tuza's conjecture for threshold graphs}, Discrete Math. Theor. Comput. Sci. \textbf{24} (2022), no.~1, Paper No.~24.
+
+\bibitem{BFG21}
+F.~Botler, C.~G.~Fernandes, and J.~Guti\'errez, \emph{On Tuza's conjecture for triangulations and graphs with small treewidth}, Discrete Math. \textbf{344} (2021), no.~4, 112281.
+
+\bibitem{BES18}
+A.~Boyac\i, T.~Ekim, and M.~Shalom, \emph{The maximum cardinality cut problem in co-bipartite chain graphs}, J. Comb. Optim. \textbf{35} (2018), no.~1, 250--265.
+
+\bibitem{BLS99}
+A.~Brandst\"adt, V.~B.~Le, and J.~P.~Spinrad, \emph{Graph classes: a survey}, SIAM, Philadelphia, 1999.
+
+\bibitem{CG23}
+L.~Chahua and J.~Guti\'errez, \emph{On Tuza's conjecture in co-chain graphs}, preprint (2023), arXiv:2211.07766v2.
+
+\bibitem{FS12}
+T.~Feder and C.~Subi, \emph{Packing edge-disjoint triangles in given graphs}, Electronic Colloquium on Computational Complexity, Report TR12-013 (2012).
+
+\bibitem{Hax99}
+P.~E.~Haxell, \emph{Packing and covering triangles in graphs}, Discrete Math. \textbf{195} (1999), no.~1--3, 251--254.
+
+\bibitem{HR01}
+P.~E.~Haxell and V.~R\"odl, \emph{Integer and fractional packings in dense graphs}, Combinatorica \textbf{21} (2001), no.~1, 13--38.
+
+\bibitem{HK07}
+P.~Heggernes and D.~Kratsch, \emph{Linear-time certifying recognition algorithms and forbidden induced subgraphs}, Nordic J. Comput. \textbf{14} (2007), no.~1--2, 87--108.
+
+\bibitem{Kri95}
+M.~Krivelevich, \emph{On a conjecture of Tuza about packing and covering of triangles}, Discrete Math. \textbf{142} (1995), no.~1--3, 281--286.
+
+\bibitem{Pul15}
+G.~J.~Puleo, \emph{Tuza's conjecture for graphs with maximum average degree less than $7$}, European J. Combin. \textbf{49} (2015), 134--152.
+
+\bibitem{Tuz84}
+Zs.~Tuza, \emph{Conjecture}, in: A.~Hajnal, L.~Lov\'asz, and V.~T.~S\'os (eds.), Finite and Infinite Sets (Eger, Hungary, 1981), Colloq. Math. Soc. J\'anos Bolyai, vol.~37, North-Holland, Amsterdam, 1984, p.~888.
+
+\bibitem{Tuz90}
+Zs.~Tuza, \emph{A conjecture on triangles of graphs}, Graphs Combin. \textbf{6} (1990), no.~4, 373--380.
+
+\end{thebibliography}
+
+\end{document}

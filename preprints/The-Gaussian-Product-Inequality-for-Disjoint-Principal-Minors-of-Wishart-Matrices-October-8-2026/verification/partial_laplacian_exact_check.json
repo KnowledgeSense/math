@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "matrix_identity_entries": 9,
+  "positive_leading_minors": 6,
+  "scope": "independent direct symbolic differentiation at a rational regularized 4-by-3 input; general proof is in the note"
+}

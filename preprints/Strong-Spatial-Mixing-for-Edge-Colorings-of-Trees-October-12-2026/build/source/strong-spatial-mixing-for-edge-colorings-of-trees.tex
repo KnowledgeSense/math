@@ -1,0 +1,717 @@
+\documentclass{amsart}
+
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[hidelinks,pdfusetitle=false]{hyperref}
+
+\hypersetup{
+  pdftitle={Strong spatial mixing for edge colorings of trees},
+  pdfauthor={Knowledge Sense},
+  pdfsubject={Strong spatial mixing for proper edge colorings of trees},
+  pdfkeywords={strong spatial mixing, edge coloring, tree recursion, matrix trickle-down, spectral independence, weighted injection}
+}
+
+\numberwithin{equation}{section}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\Diag}{\operatorname{Diag}}
+\newcommand{\dTV}{d_{\mathrm{TV}}}
+\newcommand{\dist}{\operatorname{dist}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\T}{\top}
+\newcommand{\one}{\mathbf{1}}
+
+\begin{document}
+
+\title[Strong spatial mixing for edge colorings of trees]{Strong spatial mixing for\\ edge colorings of trees}
+
+\author{Knowledge Sense}
+\address{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{12 October 2026}
+
+\subjclass[2020]{Primary 05C15; Secondary 60K35, 82B20, 05C05, 68W20}
+
+\keywords{Strong spatial mixing, edge coloring, tree recursion, matrix trickle-down theorem, spectral independence, weighted injection}
+
+\begin{abstract}
+We prove that for every $\varepsilon>0$ and every sufficiently large integer $\Delta$, the uniform distribution on proper $q$-edge-colorings of finite trees of maximum degree at most $\Delta$ exhibits strong spatial mixing with exponential decay whenever $q\ge(\frac{3+\sqrt5}{2}+\varepsilon)\Delta$. The decay concerns the total variation distance between single-edge marginals under two arbitrary feasible pinnings of a common set of edges, and the constants do not depend on the tree or on the pinnings. This improves the condition $q>(3+o(1))\Delta$ of Chen, Wang, Zhang and Zhang, and the constant $\frac{3+\sqrt5}{2}$ is the limit that they identified for their one-step Jacobian analysis. The new ingredient is a covariance bound for weighted injections with row surplus that retains the negative rank-one block of every color. It is proved with the matrix trickle-down theorem of Abdolazimi, Liu and Oveis Gharan, an exact posterior second-moment identity and an alternating-path coupling. The bound enters the Jacobian of the tree recursion through a scalar spectral estimate, and arbitrary pinnings are handled by a buffer of two exact recursion levels above the boundary.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $T$ be a finite tree and $q$ a positive integer. A proper $q$-edge-coloring of $T$ is a map $\sigma\colon E(T)\to[q]$ such that $\sigma(f)\ne\sigma(f')$ for distinct edges $f,f'$ with a common endpoint. Let $\mu_T$ be the uniform distribution on proper $q$-edge-colorings of $T$. For $\Lambda\subseteq E(T)$, a map $\tau\colon\Lambda\to[q]$ is a \emph{feasible pinning} if it is the restriction of a proper $q$-edge-coloring; then $\mu_T^\tau$ denotes $\mu_T$ conditioned to agree with $\tau$ on $\Lambda$, and $\mu_{T,e}^\tau$ denotes the marginal law of the color of an edge $e\notin\Lambda$. On a tree of maximum degree at most $\Delta$ with $q\ge2\Delta-1$, every proper partial edge coloring is feasible, since it can be extended greedily along a breadth-first order. Edge colorings of $T$ are vertex colorings of its line graph $L(T)$, and distances between edges are measured in $L(T)$.
+
+Strong spatial mixing requires that the effect of a disagreement of two boundary conditions on a marginal decay exponentially in the distance to the disagreement, uniformly over all boundary conditions, including those that pin edges close to the edge under observation.
+
+\begin{definition}\label{def:ssm}
+Let $\mathcal T$ be a class of finite trees, $q\ge1$, $C<\infty$ and $0<\kappa<1$. The uniform $q$-edge-colorings of the trees in $\mathcal T$ exhibit \emph{strong spatial mixing} with constant $C$ and rate $\kappa$ if the following holds for every $T\in\mathcal T$, every $\Lambda\subseteq E(T)$, all feasible pinnings $\tau,\tau'\colon\Lambda\to[q]$ and every $e\in E(T)\setminus\Lambda$. Put $\Lambda_{\ne}=\{f\in\Lambda:\tau(f)\ne\tau'(f)\}$ and $\ell=\dist_{L(T)}(e,\Lambda_{\ne})$, with $\ell=\infty$ if $\Lambda_{\ne}=\emptyset$. Then
+\[
+\dTV\bigl(\mu_{T,e}^{\tau},\mu_{T,e}^{\tau'}\bigr)\le C\kappa^{\ell},
+\]
+where $\kappa^\infty=0$.
+\end{definition}
+
+Chen, Wang, Zhang and Zhang \cite{CWZZ} proved strong spatial mixing on trees of maximum degree $\Delta$ when $q>(3+o(1))\Delta$ \cite[Theorem~22]{CWZZ}, as a consequence of a contraction estimate for the tree recursion together with spectral independence of a weighted edge coloring model. They also proved that weak spatial mixing on trees holds if and only if $q\ge2\Delta-1$, and conjectured strong spatial mixing for $q\ge2\Delta+\gamma$ with a constant $\gamma$. In \cite[Section~5.3 and Theorem~35]{CWZZ} they showed that the best condition obtainable from their analysis, which applies the potential $\varphi(x)=2\sqrt x$ and the Euclidean norm to one step of the recursion, is $q\approx\frac{3+\sqrt5}{2}\Delta\approx2.618\Delta$. We show that strong spatial mixing holds whenever $q$ exceeds this value by $\varepsilon\Delta$, for every fixed $\varepsilon>0$ and all sufficiently large $\Delta$.
+
+\begin{theorem}\label{thm:main}
+For every $\varepsilon>0$ there are an integer $\Delta_0(\varepsilon)$ and a number $\kappa(\varepsilon)\in(0,1)$ with the following property. Let $\Delta\ge\Delta_0(\varepsilon)$ and $q\ge(\frac{3+\sqrt5}{2}+\varepsilon)\Delta$ be integers. Then there is $C=C(\Delta,q,\varepsilon)<\infty$ such that the uniform $q$-edge-colorings of all finite trees of maximum degree at most $\Delta$ exhibit strong spatial mixing with constant $C$ and rate $\kappa(\varepsilon)$.
+\end{theorem}
+
+The number $\frac{3+\sqrt5}{2}$ is the square of the golden ratio; with $c_0=\frac{\sqrt5-1}{2}$ it equals $2+c_0$, and $c_0(1+c_0)=1$. This identity is the source of the threshold (see Proposition~\ref{prop:contraction} and Lemma~\ref{lem:parameters}). Theorem~\ref{thm:main} is asymptotic in $\Delta$; the value of $\Delta_0(\varepsilon)$ given in Lemma~\ref{lem:parameters} is a coarse sufficient bound. Letting $\varepsilon$ tend to zero slowly as $\Delta$ grows, one obtains strong spatial mixing for $q\ge(2+c_0+\varepsilon_\Delta)\Delta$ with some $\varepsilon_\Delta\to0$, at rates $\kappa(\varepsilon_\Delta)$ that may tend to one. The theorem does not cover all integers $q\ge(2+c_0)\Delta$. We prove no statement about general graphs or arbitrary color lists. Definition~7 of \cite{CWZZ} measures the distance between edges by paths that exclude the two terminal edges; on trees this distance is one less than the line-graph distance used here, which changes only the constant $C$.
+
+Several recent results concern Glauber-type dynamics rather than spatial mixing. Wang, Zhang and Zhang \cite{WZZ} proved optimal mixing of the Glauber dynamics for list colorings of line graphs with $(1+o(1))\Delta_L$ colors \cite[Theorem~24]{WZZ}, where $\Delta_L$ is the maximum degree of the line graph; for the line graph of a graph of maximum degree $\Delta$ one has $\Delta_L\le2\Delta-2$. On trees, Carlson, Chen, Feng and Vigoda \cite[Theorem~1]{CCFV} proved an optimal relaxation time for the Glauber dynamics when $q\ge\Delta+2$, and Wang, Yoshida and Zhang \cite[Theorem~1.8 and Corollary~1.10]{WYZ} proved rapid mixing of the Wang--Swendsen--Koteck\'y dynamics when $q\ge\max\{2,\Delta\}$; they record in \cite[Remark~1.11]{WYZ} that strong spatial mixing for edge colorings of trees was known for $q>3\Delta$. These are statements about global Markov chains on a fixed instance; their quantifiers differ from those of Definition~\ref{def:ssm}, which ranges over all boundary conditions.
+
+\subsection{Outline of the proof}
+
+\emph{The recursion.} We follow the top-down analysis of the tree recursion in \cite{CWZZ}, but with messages indexed by colors. Fix the pinning and the observed edge $e$, delete the pinned edges and orient the remaining component of $e$ away from $e$. For a vertex $v$ with $d_v$ remaining child edges and set $F_v$ of colors pinned at $v$, the \emph{availability} $A_v(c)$ is $0$ if $c\in F_v$, and otherwise the probability that no edge of the subtree $T_v$ below $v$ incident to $v$ has color $c$; here $T_v$ does not contain the parent edge of $v$ (Section~\ref{sec:tree}). The child edges at $v$ receive distinct colors, and their joint law is a weighted injection of the $d_v$ children into the colors, with weight $A_{u_i}(c)$ for child $u_i$ and color $c\notin F_v$ (Lemma~\ref{lem:tree}). Since $|F_v|+d_v\le\Delta-1$, every row of this weight matrix has mass at least $d_v+s$, where $s=q-2\Delta+2$ is the \emph{row surplus}.
+
+Let $\Sigma$ be the covariance matrix of the cell indicators $Y_{ic}=\one\{\text{child }i\text{ gets color }c\}$, let $p$ be its mean, and let $p_c$ be the restriction of $p$ to the cells of color $c$. In the coordinates $\xi\mapsto\xi/\sqrt{A(1-A)}$, which are the derivatives of the potential $2\arcsin\sqrt{A}$, the derivative of one recursion step is $-J$, where
+\[
+J=G\,H\,\Sigma\,R^{1/2},
+\]
+where $H$ sums the cells of each color, $R$ is diagonal with entries $(1-A_{u_i}(c))/A_{u_i}(c)$, and $G=\diag(A_v(1-A_v))^{-1/2}$. We need $d_v\|J\|^2<1$.
+
+\emph{The retained-column covariance bound.} Our main technical result (Theorem~\ref{thm:column} and Corollary~\ref{cor:column}) states that for weighted injections with row surplus $s\ge c\Delta$ and $d\le\Delta$ rows,
+\begin{equation}\label{eq:intro-column}
+\Sigma\preceq(1+b)\diag(p)+\diag(p)^2-\sum_c p_cp_c^\T,
+\end{equation}
+and hence
+\[
+\Sigma\preceq(1+\delta)B,\qquad B=\diag(p)-\sum_cp_cp_c^\T,
+\]
+with $b,\delta=O_c(\log\Delta/\Delta)$. The matrix $B$ keeps the blocks of $\Sigma$ on the cells of each color, which equal $\diag(p_c)-p_cp_c^\T$, and replaces the blocks between distinct colors by zero. The property of $B$ that we use is the exact identity $HBH^\T=\diag(r(1-r))$, where $r_c$ is the probability that color $c$ is used: the variance in the denominator of the arcsine metric is matched exactly. A diagonal bound $\Sigma\preceq(1+\eta)\diag(p)$ gives only $H\diag(p)H^\T=\diag(r)$, and in our formulation it loses the factor $1/(1-r_c)\approx(\Delta+s)/s$; the resulting condition is $s>\Delta$, that is, $q>(3+o(1))\Delta$.
+
+The proof of \eqref{eq:intro-column} applies the matrix trickle-down theorem of Abdolazimi, Liu and Oveis Gharan \cite{ALG} to the simplicial complex of the injection, with matrices that keep the negative same-color entries $-p_{ic}p_{jc}/k$; negative same-color matrices of this kind were used in \cite{WZZ,CWZZ}. In the recursive condition of the trickle-down theorem, an exact identity for the posterior second moments of the marginals (Lemma~\ref{lem:posterior}) cancels all same-color terms (Lemma~\ref{lem:gram}). Besides an explicit diagonal term, what remains is $\Diag(G_c)-G_c$ for a Gram matrix $G_c$ of cross-row covariances. The term $-G_c$ is negative semidefinite, and $\Diag(G_c)$ is bounded from above by an alternating-path coupling in the spirit of Chen and Gu \cite[Algorithm~1]{CG} (Lemmas~\ref{lem:coupling} and~\ref{lem:squared}). We use the matrix conclusion supplied by the inductive proof of \cite[Theorem~3.2]{ALG}, not only the eigenvalue bound.
+
+\emph{A scalar spectral transfer.} The Jacobian involves $\Sigma R\Sigma$, and the bound $\Sigma\preceq\gamma B$ does not imply $\Sigma R\Sigma\preceq\gamma^2BRB$ for non-commuting matrices (Remark~\ref{rem:counterexample}). Instead we bound $R^{1/2}\Sigma R^{1/2}$ by a multiple of the identity, using the bound $1-A_{u_i}(c)\le\Delta/(\Delta+s)$ available for messages generated by the recursion. The matrices $\Sigma^{1/2}R\Sigma^{1/2}$ and $R^{1/2}\Sigma R^{1/2}$ have the same nonzero spectrum, so $\Sigma R\Sigma\preceq\gamma\Sigma\preceq\gamma(1+\delta)B$ (Lemma~\ref{lem:transfer}). This yields $d_v\|J\|^2\le(1+\delta)^2\Delta^2/((\Delta+s)(s+1))$, which is less than one for $s\ge(c_0+\varepsilon)\Delta$ and large $\Delta$ (Proposition~\ref{prop:contraction}).
+
+\emph{The two-level buffer.} To compare two pinnings we interpolate linearly between the two messages at a cut placed just below the disagreement and propagate the interpolated messages upward by the exact recursion. The interpolated messages at the cut are not marginals of any coloring, and their coordinates may approach $0$ or $1$, where the arcsine metric is singular. After one exact level every message is bounded below on its support. After two exact levels every coordinate either is constant along the interpolation or lies in an interval $[a_0,1-b_0]$ with $a_0,b_0>0$ depending only on $\Delta$ and $q$ (Lemma~\ref{lem:buffer}). The speed at this level is therefore bounded uniformly (Lemma~\ref{lem:speed}), and the contraction applies at every higher level. With the line-graph distance $\ell$ to the disagreement this gives $\ell-3$ contracting steps.
+
+\subsection{Relation to other work}
+
+Oppenheim's trickle-down theorem \cite{Opp} bounds the local spectral expansion of a simplicial complex by a scalar induction over its links. The matrix version \cite{ALG} replaces the scalar bounds by matrices, and Abdolazimi and Oveis Gharan \cite{AO} gave an improved version for partite complexes. Wang, Zhang and Zhang \cite{WZZ} and Chen, Wang, Zhang and Zhang \cite{CWZZ} applied the matrix method to colorings of line graphs and to weighted edge colorings, with negative matrices supported on pairs of the same color; \cite[Proposition~49]{CWZZ} states the matrix form of the inductive conclusion that we use. Spectral independence was introduced by Anari, Liu and Oveis Gharan \cite{ALO}.
+
+Chen and Gu \cite{CG} proved spectral independence for Holant problems with log-concave signatures and positive empty signatures $f_v(0)>0$, using a recursive coupling \cite[Algorithm~1, Proposition~17 and Lemma~18]{CG}. In a weighted injection every row must be matched, so the row signatures vanish at $0$; \cite[Section~3.4]{CG} shows that bounded spectral independence fails in general for such signatures. Row surplus restores it, and we give the coupling and its surplus-dependent bound in Lemma~\ref{lem:coupling}. Chen, Chen and Zhang \cite[Theorem~4]{CCZ} proved degree-free spectral independence for log-concave Holant measures under positive empty signatures and bounded insertion odds, and \cite[Theorem~13]{CCZ} controls the coupling of degree vectors. Their diagonal covariance bounds do not give the retained negative blocks in \eqref{eq:intro-column}. Finally, the scalar local-to-global criteria of Chen and Liu \cite[Theorems~1.1 and~1.2]{CL} do not cover the present regime directly: for the injection of $d$ rows into a common palette of $d+s$ colors, every link of codimension two has second eigenvalue $1/(s+1)$, so the spectral influence matrix of \cite[Theorem~1.2]{CL} has largest eigenvalue $(d-1)/(s+1)$, which exceeds one when $s\approx c_0d$.
+
+For vertex colorings of trees, strong spatial mixing is known for $q\ge\Delta+3$ by Chen, Liu, Mani and Moitra \cite{CLMM}.
+
+\emph{Dependencies.} Besides elementary facts, the proof uses one result that we do not reprove: the matrix trickle-down theorem \cite[Theorem~3.2]{ALG}, in the inductive form of Theorem~\ref{thm:trickle}.
+
+\emph{Organization.} Section~\ref{sec:prelim} collects facts about weighted injections and the matrix trickle-down theorem. Section~\ref{sec:tree} describes the tree recursion. Section~\ref{sec:column} proves the retained-column covariance bound. Section~\ref{sec:contraction} proves the one-step contraction, and Section~\ref{sec:proof} completes the proof of Theorem~\ref{thm:main}. Section~\ref{sec:remarks} contains concluding remarks.
+
+\section{Preliminaries}\label{sec:prelim}
+
+\subsection{Notation}
+For symmetric matrices $M,M'$ we write $M\preceq M'$ if $M'-M$ is positive semidefinite. For a vector $x$, $\diag(x)$ is the diagonal matrix with diagonal $x$, and for a square matrix $M$, $\Diag(M)$ is the diagonal matrix with the diagonal of $M$. For a diagonal matrix $\Pi$ with nonnegative entries, $\Pi^{-1}$ denotes its Moore--Penrose inverse, that is, the inverse on the support of $\Pi$ and zero elsewhere. Matrices indexed by a subset of an index set are extended by zero. For probability vectors $\mu,\mu'$ on a finite set, $\dTV(\mu,\mu')=\frac12\|\mu-\mu'\|_1$. For probability measures on injections, $\mathcal W_1$ denotes the Wasserstein distance with respect to the Hamming distance between the sets of cells; it satisfies the triangle inequality and $\mathcal W_1(\sum_b\lambda_b\mu_b,\mu')\le\sum_b\lambda_b\mathcal W_1(\mu_b,\mu')$ for convex weights $\lambda_b$. We write $H_n=\sum_{j=1}^n1/j$, with $H_0=0$.
+
+\subsection{Weighted injections}
+Let $d\ge1$ and $q\ge1$ be integers and let $W\in[0,1]^{[d]\times[q]}$. Rows are indexed by $i\in[d]$ and colors (columns) by $c\in[q]$. An injection $\sigma\colon[d]\to[q]$ has weight $w_W(\sigma)=\prod_iW(i,\sigma(i))$, and we put $Z_W=\sum_\sigma w_W(\sigma)$. If $Z_W>0$, the \emph{weighted injection law} $\nu_W$ is the probability measure on injections proportional to $w_W$. The \emph{row mass} of row $i$ is $m_i=\sum_cW(i,c)$, and $W$ has \emph{row surplus} $s>0$ if $m_i\ge d+s$ for every $i$. Throughout, $t=s+1$.
+
+The \emph{cells} of $W$ are the pairs $(i,c)$ with $W(i,c)>0$, and $\cC=\cC(W)$ denotes the set of cells. For $(i,c)\in\cC$ let $Y_{ic}=\one\{\sigma(i)=c\}$ and $p_{ic}=\nu_W(Y_{ic}=1)$. For a color $c$ let $S_c=\sum_iY_{ic}$, $r_c=\E S_c$ and $a_c=1-r_c$, the probability that $c$ is unused. All vectors and matrices below are indexed by $\cC$. We write $\Sigma=\Sigma_W$ for the covariance matrix of $(Y_x)_{x\in\cC}$, $D_p=\diag(p)$, $D_p^2=\diag(p_x^2)_{x\in\cC}$, $p_c\in\R^{\cC}$ for the vector that agrees with $p$ on the cells of color $c$ and vanishes elsewhere, and
+\[
+B=B_W=D_p-\sum_cp_cp_c^\T .
+\]
+Thus $B$ is block diagonal with one block per color. Let $H\colon\R^{\cC}\to\R^{[q]}$ be the column-sum map, $(Hx)(c)=\sum_{i:(i,c)\in\cC}x(i,c)$. Since $(HBH^\T)(c,c')=\one\{c=c'\}(r_c-r_c^2)$,
+\begin{equation}\label{eq:HBH}
+HBH^\T=\diag\bigl(r_c(1-r_c)\bigr)_{c\in[q]}.
+\end{equation}
+Two facts about $\Sigma$ are used repeatedly. Distinct cells of one color are mutually exclusive, so the block of $\Sigma$ on the cells of color $c$ equals $\diag(p_c)-p_cp_c^\T$ there. Every row is matched exactly once, so $\sum_cY_{ic}=1$ and $\Sigma$ annihilates the indicator vector of every row; in particular $\Sigma\one=0$.
+
+For a positive partial injection $\rho$, that is, a set of cells with distinct rows and distinct colors, let $W^\rho$ be obtained from $W$ by deleting the rows and the colors of $\rho$. Conditioned on $\rho\subseteq\sigma$, the restriction of $\sigma$ to the remaining rows has law $\nu_{W^\rho}$. If $W$ has row surplus $s$, so does $W^\rho$: it has $d-|\rho|$ rows, and each remaining row loses at most $|\rho|$ from its mass.
+
+\begin{lemma}\label{lem:basic}
+Let $W\in[0,1]^{[d]\times[q]}$ have row surplus $s>0$.
+\begin{enumerate}
+\item[(i)] Every positive partial injection extends to an injection of positive weight, and $Z_W\ge t^d$.
+\item[(ii)] For every $(i,c)\in\cC$, $p_{ic}\le W(i,c)/t$. If $d\ge2$, the same bound holds for $\nu_W(Y_{ic}=1\mid Y_{jb}=1)$ whenever $(j,b)\in\cC$, $j\ne i$ and $b\ne c$.
+\item[(iii)] For every color $c$, $r_c\le d/(d+s)$, that is, $a_c\ge s/(d+s)$.
+\item[(iv)] For every $(i,c)\in\cC$, $p_{ic}\ge W(i,c)\,t/(q(d+s))$.
+\item[(v)] For every color $a$ and every $(i,c)\in[d]\times[q]$, the function $W\mapsto\nu_W(S_a=0)$ satisfies $|\partial\nu_W(S_a=0)/\partial W(i,c)|\le2q^{d-1}/t^d$ at $W$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) Let $\rho$ be a positive partial injection with $|\rho|=k'$. Each of the $d-k'$ remaining rows of $W^\rho$ has mass at least $d+s-k'>d-k'$, and since its entries are at most one, its support has more than $d-k'$ elements. Hall's condition therefore holds for the remaining rows, and $\rho$ extends. For the bound on $Z_W$, sum over the colors of the rows one row at a time: after the first $j-1$ rows have been assigned, row $j$ still has mass at least $m_j-(j-1)\ge s+1$ on the unused colors, so $Z_W\ge t^d$.
+
+(ii) Conditioned on the colors of all rows other than $i$, row $i$ takes color $c$ with probability $W(i,c)$ divided by the mass of row $i$ on the unused colors, which is at least $m_i-(d-1)\ge t$. Averaging gives the first claim. Conditioned on $Y_{jb}=1$, the other rows have law $\nu_{W'}$, where $W'$ is obtained by deleting row $j$ and color $b$; it has row surplus $s$, and the first claim for $W'$ gives the second.
+
+(iii) Let $\sigma$ use $c$, say $\sigma(j)=c$. For every color $b$ unused by $\sigma$, let $\sigma_b$ be obtained by recoloring row $j$ with $b$; then $w(\sigma_b)W(j,c)=w(\sigma)W(j,b)$. The mass of row $j$ on the colors unused by $\sigma$ is at least $m_j-(d-1)-1\ge s$. Summing over $\sigma$ and $b$,
+\begin{align*}
+s\sum_{\sigma:\,S_c(\sigma)=1}w(\sigma)&\le\sum_{\sigma:\,S_c(\sigma)=1}\ \sum_{b\text{ unused}}w(\sigma_b)W(j,c)\\
+&=\sum_{\sigma':\,S_c(\sigma')=0}w(\sigma')\sum_{j}W(j,c)\le d\sum_{\sigma':\,S_c(\sigma')=0}w(\sigma'),
+\end{align*}
+because $(\sigma,b)\mapsto(\sigma_b,j)$ is a bijection onto the pairs $(\sigma',j)$ with $\sigma'$ not using $c$; its inverse recolors row $j$ of $\sigma'$ with $c$. Hence $s\,r_c\le d\,a_c$.
+
+(iv) If $d=1$ the claim follows from $p_{1c}=W(1,c)/m_1$ and $m_1\le q$. Let $d\ge2$ and let $W_{-i}$ be $W$ with row $i$ deleted. It has $d-1$ rows of mass at least $d+s=(d-1)+t$, so by (iii) with surplus $t$, color $c$ is unused under $\nu_{W_{-i}}$ with probability at least $t/(d+s)$. Writing $Z_W$ as a sum over the injections $\sigma'$ of the other rows, $Z_W=\sum_{\sigma'}w_{W_{-i}}(\sigma')\sum_{b\text{ unused}}W(i,b)\le q\,Z_{W_{-i}}$, while the weight of $\{Y_{ic}=1\}$ equals $W(i,c)Z_{W_{-i}}\,\nu_{W_{-i}}(S_c=0)$. Dividing gives (iv).
+
+(v) Let $Z_a$ be the total weight of the injections that do not use $a$, so that $\nu_W(S_a=0)=Z_a/Z_W$. The derivatives of $Z_W$ and $Z_a$ with respect to $W(i,c)$ are sums of products of entries of $W$ over at most $q^{d-1}$ injections of the other rows, hence lie in $[0,q^{d-1}]$. Therefore $|\partial(Z_a/Z_W)|\le q^{d-1}/Z_W+(Z_a/Z_W)\,q^{d-1}/Z_W\le2q^{d-1}/t^d$ by (i).
+\end{proof}
+
+\begin{lemma}\label{lem:derivative}
+Let $Z_W>0$, let $f$ be a function of the injection and let $(i,c)\in\cC$. Then $\partial\E_{\nu_W}f/\partial W(i,c)=\Cov(f,Y_{ic})/W(i,c)$.
+\end{lemma}
+
+\begin{proof}
+Since $\partial w_W(\sigma)/\partial W(i,c)=w_W(\sigma)Y_{ic}(\sigma)/W(i,c)$, differentiating the quotient $\sum_\sigma f(\sigma)w_W(\sigma)/Z_W$ gives
+\[
+\frac{\E[fY_{ic}]-\E[f]\,\E[Y_{ic}]}{W(i,c)}.\qedhere
+\]
+\end{proof}
+
+\subsection{The injection complex and matrix trickle-down}
+Let $d\ge2$ and let $W$ have row surplus $s>0$. Let $X_W$ be the simplicial complex on the ground set $\cC$ whose faces are the positive partial injections, with facets weighted by $\nu_W$. By Lemma~\ref{lem:basic}(i), $X_W$ is pure and every face lies in a facet of positive weight. For a face $\rho$ put $k=k(\rho)=d-|\rho|$, the codimension of $\rho$ in the convention of \cite{ALG}. The link of $\rho$ is the complex $X_{W^\rho}$, and we write $p^\rho$ and $\Sigma^\rho$ for the marginal vector and covariance matrix of $\nu_{W^\rho}$, extended by zero to $\cC$. Following \cite{ALG}, for $k\ge2$ let
+\[
+\pi_\rho=p^\rho/k,\qquad\Pi_\rho=\diag(\pi_\rho),\qquad
+P_\rho(x,y)=\frac{\nu_{W^\rho}(Y_y=1\mid Y_x=1)}{k-1}\quad(x\ne y),
+\]
+with $P_\rho(x,x)=0$; $P_\rho$ is the local walk of $\rho$, defined on the cells of $W^\rho$. Then $(\Pi_\rho P_\rho)(x,y)=\nu_{W^\rho}(Y_x=Y_y=1)/(k(k-1))$ for $x\ne y$.
+
+\begin{lemma}\label{lem:connected}
+For every face $\rho$ with $k(\rho)\ge2$, the local walk $P_\rho$ is irreducible.
+\end{lemma}
+
+\begin{proof}
+Since $W^\rho$ has $k$ rows and row surplus $s$, it suffices to treat $\rho=\emptyset$ with $d=k\ge2$. By Lemma~\ref{lem:basic}(i), two cells are adjacent in the $1$-skeleton exactly when their rows and their colors are distinct. Every row has mass at least $k+s>k$, so it has at least $k+1\ge3$ cells. Two cells $(i,a),(i,c)$ in one row are joined through a cell $(j,b)$ with $j\ne i$ and $b\notin\{a,c\}$. Two cells $(i,a),(j,a)$ of one color are joined by the path $(i,a),(j,b),(i,c),(j,a)$, where $(i,c)$ is a cell with $c\ne a$ and $(j,b)$ is a cell with $b\notin\{a,c\}$.
+\end{proof}
+
+\begin{lemma}\label{lem:link-identities}
+Let $\rho$ be a face with $k=k(\rho)\ge2$.
+\begin{enumerate}
+\item[(i)] If $k\ge3$, then $\E_{x\sim\pi_\rho}\pi_{\rho\cup\{x\}}=\pi_\rho$, where $\pi_{\rho\cup\{x\}}$ is extended by zero.
+\item[(ii)] $\Sigma^\rho=D_{p^\rho}+k(k-1)\bigl[\Pi_\rho P_\rho-\tfrac{k}{k-1}\pi_\rho\pi_\rho^\T\bigr]$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) Write $\nu=\nu_{W^\rho}$. Given $Y_y=1$, exactly $k-1$ other cells are occupied, so $\sum_{x\ne y}\nu(Y_x=Y_y=1)=(k-1)p^\rho_y$. Since $\pi_{\rho\cup\{x\}}(y)=\nu(Y_y=1\mid Y_x=1)/(k-1)$, we get $\sum_x\frac{p^\rho_x}{k}\,\pi_{\rho\cup\{x\}}(y)=\frac{p^\rho_y}{k}$. (ii) Off the diagonal, the right side equals $\nu(Y_x=Y_y=1)-p^\rho_xp^\rho_y$; on the diagonal it equals $p^\rho_x-(p^\rho_x)^2$.
+\end{proof}
+
+The following statement is the matrix trickle-down theorem in the inductive form that we use. The bound in (a) is the one required when \cite[Theorem~3.2]{ALG} is applied inductively, as in the proof below; it also appears in \cite[Theorem~3.4]{ALG}.
+
+\begin{theorem}[{\cite[Theorem~3.2]{ALG}; see also \cite[Proposition~49]{CWZZ}}]\label{thm:trickle}
+Let $d\ge2$ and let $W\in[0,1]^{[d]\times[q]}$ have row surplus $s>0$. For every face $\rho$ of $X_W$ with $k=k(\rho)\ge2$ let $M_\rho$ be a symmetric matrix supported on the cells of $W^\rho$ such that
+\begin{enumerate}
+\item[(a)] $M_\rho\preceq\frac{k-1}{3k-1}\Pi_\rho$;
+\item[(b)] if $k=2$, then $\Pi_\rho P_\rho-2\pi_\rho\pi_\rho^\T\preceq M_\rho$;
+\item[(c)] if $k\ge3$, then $\E_{x\sim\pi_\rho}M_{\rho\cup\{x\}}\preceq M_\rho-\frac{k-1}{k-2}M_\rho\Pi_\rho^{-1}M_\rho$.
+\end{enumerate}
+Then $\Pi_\rho P_\rho-\frac{k}{k-1}\pi_\rho\pi_\rho^\T\preceq M_\rho$ for every face $\rho$ with $k(\rho)\ge2$.
+\end{theorem}
+
+\begin{proof}
+We argue by induction on $k$; for $k=2$ the claim is (b). Let $k\ge3$ and $\alpha=\frac{k-1}{k-2}$. For every cell $x$ of $W^\rho$, the face $\rho\cup\{x\}$ has codimension $k-1$, so by induction and (a),
+\[
+\Pi_{\rho\cup\{x\}}P_{\rho\cup\{x\}}-\alpha\,\pi_{\rho\cup\{x\}}\pi_{\rho\cup\{x\}}^\T\preceq M_{\rho\cup\{x\}}\preceq\frac{k-2}{3k-4}\Pi_{\rho\cup\{x\}}=\frac{1}{2\alpha+1}\Pi_{\rho\cup\{x\}}.
+\]
+Moreover $M_\rho\preceq\frac{k-1}{3k-1}\Pi_\rho\preceq\frac1{2\alpha}\Pi_\rho$, because $2(k-1)^2\le(k-2)(3k-1)$ for $k\ge3$, and (c) reads $\E_xM_{\rho\cup\{x\}}\preceq M_\rho-\alpha M_\rho\Pi_\rho^{-1}M_\rho$. The local walk $P_\rho$ is irreducible by Lemma~\ref{lem:connected}. Thus \cite[Theorem~3.2]{ALG}, applied to the link of $\rho$, gives
+\[
+\Pi_\rho P_\rho-\Bigl(2-\frac1\alpha\Bigr)\pi_\rho\pi_\rho^\T\preceq M_\rho,
+\]
+and $2-\frac1\alpha=\frac{k}{k-1}$.
+\end{proof}
+
+\section{The tree recursion}\label{sec:tree}
+
+In this section $\Delta\ge3$ and $q$ are integers, and
+\[
+s=q-2\Delta+2,\qquad t=s+1.
+\]
+For $F\subseteq[q]$, an integer $d\ge0$ and $A_1,\dots,A_d\in[0,1]^q$, we write $W_F(A_1,\dots,A_d)$ for the $d\times q$ matrix $W$ with entries
+\[
+W(i,c)=\one\{c\notin F\}\,A_i(c),
+\]
+and define $\Phi_F(A_1,\dots,A_d)\in[0,1]^q$ by
+\[
+\Phi_F(A_1,\dots,A_d)(c)=
+\begin{cases}0,&c\in F,\\ \nu_W(S_c=0),&c\notin F,\end{cases}
+\]
+whenever $Z_W>0$; for $d=0$ this is the indicator vector of $[q]\setminus F$. Put
+\[
+\cH=\Bigl\{A\in[0,1]^q:\sum_cA(c)\ge q-\Delta+1\Bigr\},\qquad
+a_0=\frac{s}{\Delta+s},
+\]
+and
+\[
+\cH^+=\bigl\{A\in\cH:A(c)\in\{0\}\cup[a_0,1]\text{ for all }c\bigr\}.
+\]
+
+\begin{lemma}\label{lem:domain}
+Let $s>0$, let $F\subseteq[q]$ and $d\ge0$ satisfy $|F|+d\le\Delta-1$, and let $A_1,\dots,A_d\in\cH$. Then $W=W_F(A_1,\dots,A_d)$ has row surplus $s$, and $A=\Phi_F(A_1,\dots,A_d)$ satisfies $\sum_cA(c)=q-|F|-d$ and $A(c)\ge s/(d+s)$ for $c\notin F$. In particular $A\in\cH^+$, and $A(c)>0$ if and only if $c\notin F$. Moreover, for $c\notin F$ one has $A(c)<1$ if and only if $W(i,c)>0$ for some $i$.
+\end{lemma}
+
+\begin{proof}
+Row $i$ of $W$ has mass at least $\sum_cA_i(c)-|F|\ge q-\Delta+1-|F|\ge d+s$, because $|F|+d\le\Delta-1$. The $d$ rows use distinct colors outside $F$, so
+\[
+\sum_{c\notin F}\nu_W(S_c=0)=q-|F|-d\ge q-\Delta+1 .
+\] The lower bound is Lemma~\ref{lem:basic}(iii), and $s/(d+s)\ge a_0$. If column $c$ contains a cell, that cell has positive probability by Lemma~\ref{lem:basic}(iv), so $A(c)<1$; otherwise $S_c=0$ almost surely.
+\end{proof}
+
+Now let $T$ be a finite tree of maximum degree at most $\Delta$, let $\Lambda\subseteq E(T)$, let $\tau\colon\Lambda\to[q]$ be a feasible pinning, and let $e=xy\in E(T)\setminus\Lambda$. Let $T_e$ be the connected component containing $e$ of the graph with vertex set $V(T)$ and edge set $E(T)\setminus\Lambda$, and orient $T_e$ away from $e$: the \emph{depth} of a vertex $v$ of $T_e$ is its distance in $T_e$ to $\{x,y\}$, and the children of $v$ are its neighbors in $T_e$ of larger depth. Let $d_v$ be the number of children of $v$ and $F_v=\{\tau(f):f\in\Lambda,\ v\in f\}$. For a vertex $v$ of $T_e$, let $T_v$ be the subtree of $T_e$ spanned by $v$ and its descendants, and let $\Omega_v$ be the set of maps $\sigma\colon E(T_v)\to[q]$ that are proper on $T_v$ and satisfy $\sigma(f)\notin F_w$ for every edge $f$ of $T_v$ and every endpoint $w$ of $f$. The \emph{availability} of $v$ is
+\[
+A_v^\tau(c)=\begin{cases}0,&c\in F_v,\\ |\Omega_v|^{-1}\,\bigl|\{\sigma\in\Omega_v:\text{no edge of }T_v\text{ at }v\text{ has color }c\}\bigr|,&c\notin F_v.\end{cases}
+\]
+For $x$ and $y$ the subtrees $T_x$ and $T_y$ are the two components of $T_e-e$.
+
+\begin{lemma}\label{lem:tree}
+In this situation, $\Omega_v\ne\emptyset$ and $|F_v|+d_v\le\Delta-1$ for every vertex $v$ of $T_e$. If $u_1,\dots,u_{d_v}$ are the children of $v$, then $A_v^\tau=\Phi_{F_v}(A_{u_1}^\tau,\dots,A_{u_{d_v}}^\tau)$. Moreover $A_v^\tau\in\cH$, and
+\[
+\mu_{T,e}^\tau(c)=\frac{A_x^\tau(c)A_y^\tau(c)}{\sum_{c'}A_x^\tau(c')A_y^\tau(c')}\qquad(c\in[q]).
+\]
+\end{lemma}
+
+\begin{proof}
+The edges at $v$ other than the parent edge (or $e$, for $v\in\{x,y\}$) are the $d_v$ child edges and the pinned edges, so $|F_v|+d_v\le\deg(v)-1\le\Delta-1$. Two edges of $E(T)\setminus\Lambda$ with a common endpoint lie in the same component, so a proper coloring extending $\tau$ is the same as a choice, for every component, of a coloring of its edges that is proper and avoids the pinned colors at all endpoints, and these choices are independent. Since $\tau$ is feasible, each of these sets of colorings is nonempty, and the restriction of $\mu_T^\tau$ to $E(T_e)$ is uniform on the corresponding set for $T_e$. Each $\Omega_v$ is nonempty, being a set of restrictions of such colorings.
+
+Let $\sigma\in\Omega_v$ assign the colors $c_1,\dots,c_{d_v}$ to the child edges $vu_1,\dots,vu_{d_v}$. These colors are distinct and lie outside $F_v$, and given them, the number of completions is $\prod_i|\Omega_{u_i}|A_{u_i}^\tau(c_i)$, because a coloring in $\Omega_{u_i}$ is compatible with the color $c_i$ of $vu_i$ exactly when no edge at $u_i$ in $T_{u_i}$ has color $c_i$ and $c_i\notin F_{u_i}$. Hence the colors of the child edges have law $\nu_W$ with $W=W_{F_v}(A_{u_1}^\tau,\dots,A_{u_{d_v}}^\tau)$, which is the recursion. The same factorization at $e$ gives the marginal formula, and $A_v^\tau\in\cH$ because $\sum_cA_v^\tau(c)=q-|F_v|-d_v$.
+\end{proof}
+
+\section{The retained-column covariance bound}\label{sec:column}
+
+Let $\Delta\ge3$ be an integer, $s>0$ a real number and $q$ a positive integer, and put
+\begin{equation}\label{eq:constants}
+\begin{gathered}
+t=s+1,\qquad V=\frac{q(\Delta+s)}{t^2},\qquad L=22+8V,\\
+h_k=1+H_{k-2},\qquad b_k=\frac{L(k-1)h_k}{t^2}\qquad(2\le k\le\Delta).
+\end{gathered}
+\end{equation}
+We assume
+\begin{equation}\label{eq:assumption}
+t\ge8h_\Delta,\qquad t^2\ge4L\Delta h_\Delta^2,\qquad b_\Delta+\frac1t\le\frac15 .
+\end{equation}
+
+\begin{theorem}\label{thm:column}
+Assume \eqref{eq:assumption}. Let $2\le d\le\Delta$ and let $W\in[0,1]^{[d]\times[q]}$ have row surplus $s$. Then
+\[
+\Sigma_W\preceq(1+b_d)D_p+D_p^2-\sum_cp_cp_c^\T .
+\]
+\end{theorem}
+
+\begin{corollary}\label{cor:column}
+Assume \eqref{eq:assumption}. Let $1\le d\le\Delta$ and let $W\in[0,1]^{[d]\times[q]}$ have row surplus $s$. Then $\Sigma_W\preceq(1+\delta)B_W$, where
+\[
+\delta=\Bigl(b_\Delta+\frac1t\Bigr)\frac{\Delta+s}{s}.
+\]
+\end{corollary}
+
+\begin{proof}
+For every color $c$ and every vector $x$ supported on the cells of color $c$, the Cauchy--Schwarz inequality gives $(p_c^\T x)^2\le r_c\,x^\T D_px$, so the block of $B$ for color $c$ dominates $(1-r_c)\diag(p_c)\succeq\frac{s}{d+s}\diag(p_c)$ by Lemma~\ref{lem:basic}(iii). Hence $D_p\preceq\frac{\Delta+s}{s}B$. If $d\ge2$, Theorem~\ref{thm:column}, $b_d\le b_\Delta$ and $D_p^2\preceq D_p/t$ (Lemma~\ref{lem:basic}(ii)) give $\Sigma\preceq B+(b_\Delta+1/t)D_p\preceq(1+\delta)B$. If $d=1$, then $\Sigma=D_p-pp^\T\preceq D_p$ and $B=D_p-D_p^2\succeq(1-\frac1t)D_p$, so $\Sigma\preceq\frac ts B\preceq(1+\delta)B$, since $\delta\ge\frac{\Delta+s}{st}\ge\frac1s$.
+\end{proof}
+
+The proof of Theorem~\ref{thm:column} occupies the rest of this section. Throughout, $W$ has $k\ge2$ rows and row surplus $s$, and $k\le\Delta$; the constants are those of \eqref{eq:constants}.
+
+\subsection{An alternating-path coupling}
+For a matrix $U$ and a color $b$, let $U^{-b}$ denote $U$ with column $b$ replaced by zero. Distances between injections are Hamming distances between their sets of cells.
+
+\begin{lemma}\label{lem:coupling}
+Let $n\ge0$ and let $U\in[0,1]^{[n]\times[q]}$ have row surplus $t$. For every color $b$ there is a coupling $(\sigma,\sigma')$ of $\nu_U$ and $\nu_{U^{-b}}$ with $\E|\sigma\,\triangle\,\sigma'|\le2n/t$.
+\end{lemma}
+
+\begin{proof}
+Note that $U^{-b}$ has row surplus $t-1=s>0$. We argue by induction on $n$; for $n=0$ there is nothing to prove. Sample $\sigma\sim\nu_U$. If $b$ is unused by $\sigma$, put $\sigma'=\sigma$; conditioned on this event, $\sigma$ has law $\nu_{U^{-b}}$. Otherwise let $j$ be the row with $\sigma(j)=b$. Conditioned on $\sigma(j)=b$, the restriction of $\sigma$ to the other rows has law $\nu_{U''}$, where $U''$ is $U^{-b}$ with row $j$ deleted. Sample $b'$ from the law of $\sigma'(j)$ under $\nu_{U^{-b}}$, independently of everything else, put $\sigma'(j)=b'$, and couple the other rows of $\sigma$ and $\sigma'$ by the induction hypothesis applied to $U''$ and the color $b'$; the second marginal is then the conditional law of $\nu_{U^{-b}}$ given $\sigma'(j)=b'$. The matrix $U''$ has $n-1$ rows of mass at least $n+t-1$, hence row surplus $t$. In both cases $\sigma'$ has law $\nu_{U^{-b}}$, and $\sigma$ has law $\nu_U$.
+
+In the second case $\sigma\triangle\sigma'$ contains the two cells $(j,b)$ and $(j,b')$ and, by induction, an expected number at most $2(n-1)/t$ of further cells. By Lemma~\ref{lem:basic}(iii) with surplus $t$, $b$ is used with probability at most $n/(n+t)$. Therefore
+\[
+\E|\sigma\triangle\sigma'|\le\frac{n}{n+t}\Bigl(2+\frac{2(n-1)}{t}\Bigr)=\frac{2n}{t}\cdot\frac{n+t-1}{n+t}\le\frac{2n}{t}.\qedhere
+\]
+\end{proof}
+
+The disagreement in this coupling travels along an alternating path: a color is removed, the row that used it is forced to choose again, and its new color is removed in the next step. The same mechanism appears in \cite[Algorithm~1 and Proposition~17]{CG} for Holant problems with positive empty signatures.
+
+\begin{lemma}\label{lem:influence}
+Let $(i,c)\in\cC$. Then
+\[
+\sum_{\substack{(j,b)\in\cC\\ j\ne i}}\bigl|\nu_W(Y_{jb}=1\mid Y_{ic}=1)-\nu_W(Y_{jb}=1\mid Y_{ic}=0)\bigr|\le\frac{4(k-1)}{t}.
+\]
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:basic}(ii), $p_{ic}\le1/t<1$, so both conditional laws are defined. Let $U$ be $W$ with row $i$ deleted; it has $k-1$ rows of mass at least $k+s=(k-1)+t$, so it has row surplus $t$. Conditioned on $Y_{ic}=1$, the other rows have law $\mu_1=\nu_{U^{-c}}$. Conditioned on $Y_{ic}=0$, they have law $\mu_0=\sum_{b\ne c}\lambda_b\,\nu_{U^{-b}}$, where $\lambda_b=\nu_W(Y_{ib}=1\mid Y_{ic}=0)$. By Lemma~\ref{lem:coupling}, $\mathcal W_1(\nu_{U^{-b}},\nu_U)\le2(k-1)/t$ for every color $b$, so
+\[
+\mathcal W_1(\mu_0,\mu_1)\le\sum_{b\ne c}\lambda_b\,\mathcal W_1(\nu_{U^{-b}},\nu_U)+\mathcal W_1(\nu_U,\nu_{U^{-c}})\le\frac{4(k-1)}{t}.
+\]
+For every coupling of $\mu_1$ and $\mu_0$, the left side of the lemma is at most the expected Hamming distance, and the lemma follows.
+\end{proof}
+
+\subsection{Squared cross-row covariances}
+Fix a color $c$. For rows $i,j$ such that $(i,c)$ and $(j,c)$ are cells, define
+\[
+G_c(i,j)=\sum_{\substack{(l,b)\in\cC,\ b\ne c\\ l\ne i,\ l\ne j}}\frac{\Sigma_{(i,c),(l,b)}\,\Sigma_{(j,c),(l,b)}}{p_{lb}} .
+\]
+Thus $G_c$ is the Gram matrix of the vectors $z^{(l,b)}$, $b\ne c$, with $z^{(l,b)}_i=\Sigma_{(i,c),(l,b)}/\sqrt{p_{lb}}$ for $i\ne l$ and $z^{(l,b)}_l=0$; in particular $G_c\succeq0$.
+
+\begin{lemma}\label{lem:squared}
+For every $(i,c)\in\cC$, $G_c(i,i)\le4V(k-1)\,p_{ic}/t^2$.
+\end{lemma}
+
+\begin{proof}
+Let $x=(j,b)\in\cC$ with $j\ne i$ and $b\ne c$. By Lemma~\ref{lem:basic}(ii), both $p_{ic}$ and $\nu(Y_{ic}=1\mid Y_x=1)$ lie in $[0,W(i,c)/t]$, so
+\[
+\frac{|\Sigma_{(i,c),x}|}{p_x}=\bigl|\nu(Y_{ic}=1\mid Y_x=1)-p_{ic}\bigr|\le\frac{W(i,c)}{t}\le\frac{q(k+s)}{t^2}\,p_{ic}\le V\,p_{ic},
+\]
+where the second inequality is Lemma~\ref{lem:basic}(iv). Since $\Sigma_{(i,c),x}=p_{ic}(1-p_{ic})\bigl(\nu(Y_x=1\mid Y_{ic}=1)-\nu(Y_x=1\mid Y_{ic}=0)\bigr)$, Lemma~\ref{lem:influence} gives $\sum_x|\Sigma_{(i,c),x}|\le4(k-1)p_{ic}/t$. Hence
+\[
+G_c(i,i)=\sum_x\frac{|\Sigma_{(i,c),x}|}{p_x}\,|\Sigma_{(i,c),x}|\le V\,p_{ic}\cdot\frac{4(k-1)p_{ic}}{t}\le\frac{4V(k-1)}{t^2}\,p_{ic},
+\]
+using $p_{ic}\le1/t$.
+\end{proof}
+
+\subsection{The posterior second-moment identity}
+For a cell $x=(j,b)$ let $p^x$ denote the marginal vector of the link $W^{\{x\}}$, extended by zero to $\cC$, and let $p^x_c$ be its restriction to the cells of color $c$. Let $e_{(j,c)}$ be the coordinate vector of the cell $(j,c)$, and let $\Sigma_{c,x}$ be the restriction to the cells of color $c$ of the column of $\Sigma$ indexed by $x$. Put
+\[
+Q_c=\sum_{x\in\cC}\frac{\Sigma_{c,x}\Sigma_{c,x}^\T}{p_x}.
+\]
+
+\begin{lemma}\label{lem:posterior}
+For every cell $x=(j,b)$ and every color $c$,
+\begin{equation}\label{eq:posterior-vector}
+p^x_c=p_c+\frac{\Sigma_{c,x}}{p_x}-\one\{b=c\}\,e_{(j,c)},
+\end{equation}
+and, with $x$ drawn with probability $p_x/k$,
+\begin{equation}\label{eq:posterior}
+\E_x\bigl[p^x_c(p^x_c)^\T\bigr]=p_cp_c^\T+\frac{Q_c-\diag(p_c)}{k}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For a cell $(i,c)$ with $i\ne j$, $\nu(Y_{ic}=1\mid Y_x=1)=p_{ic}+\Sigma_{(i,c),x}/p_x$, which is zero if $c=b$. For $i=j$ the right side of \eqref{eq:posterior-vector} vanishes: if $c\ne b$ then $\Sigma_{(j,c),x}=-p_{jc}p_{jb}$, and if $c=b$ then $\Sigma_{x,x}=p_x-p_x^2$. This proves \eqref{eq:posterior-vector}.
+
+Write $p^x_c=u_x-v_x$ with $u_x=p_c+\Sigma_{c,x}/p_x$ and $v_x=\one\{b=c\}e_{(j,c)}$. First, $\E_x\Sigma_{c,x}/p_x=\frac1k\sum_x\Sigma_{c,x}=0$ because $\Sigma\one=0$, so $\E_xu_xu_x^\T=p_cp_c^\T+Q_c/k$. Second, if $b=c$ then the computation above shows $u_x=e_{(j,c)}$, so $\E_xu_xv_x^\T=\E_xv_xv_x^\T=\sum_j\frac{p_{jc}}{k}e_{(j,c)}e_{(j,c)}^\T=\diag(p_c)/k$. Combining the three terms gives \eqref{eq:posterior}.
+\end{proof}
+
+\subsection{The Gram-matrix cancellation}
+For a face $\rho$ with $k(\rho)=k\ge2$ define
+\[
+N_\rho=\frac1k\sum_c\Bigl(\diag(p^\rho_c)^2-p^\rho_c(p^\rho_c)^\T\Bigr),
+\]
+where $p^\rho_c$ is the restriction of $p^\rho$ to the cells of color $c$. Thus $N_\rho$ is block diagonal over the colors, has zero diagonal, and its off-diagonal entries are $-p^\rho_{ic}p^\rho_{jc}/k$ within each color. Since $\diag(p_c)^2-p_cp_c^\T\preceq\diag(p_c)^2\preceq\diag(p_c)/t$,
+\begin{equation}\label{eq:N-upper}
+N_\rho\preceq\Pi_\rho/t .
+\end{equation}
+In the following lemma $N=N_\emptyset$, $\Pi=\Pi_\emptyset$, and $N^x=N_{\{x\}}$, extended by zero.
+
+\begin{lemma}\label{lem:gram}
+Let $k\ge3$. For every color $c$, the block of color $c$ satisfies
+\begin{multline*}
+(k-1)\,\E_{x\sim\pi}N^x_c-(k-2)N_c+N_c\Pi_c^{-1}N_c\\
+=\frac1k\Bigl(\diag\bigl(p_{ic}^2(r_c-p_{ic})\bigr)_i+\Diag(G_c)-G_c\Bigr).
+\end{multline*}
+All matrices involved are block diagonal over the colors.
+\end{lemma}
+
+\begin{proof}
+Let $F=\diag(p_c)^2-p_cp_c^\T$, so $N_c=F/k$ and $N_c\Pi_c^{-1}N_c=F\diag(p_c)^{-1}F/k$. By definition, $(k-1)N^x_c=\diag(p^x_c)^2-p^x_c(p^x_c)^\T$, and taking the diagonal of \eqref{eq:posterior} gives
+\[
+(k-1)\E_xN^x_c=\Diag\bigl(\E_xp^x_c(p^x_c)^\T\bigr)-\E_xp^x_c(p^x_c)^\T=F+\frac{\Diag(Q_c)-Q_c}{k}.
+\]
+Hence the left side of the lemma equals $\frac1k\bigl(2F+\Diag(Q_c)-Q_c+F\diag(p_c)^{-1}F\bigr)$. Write $p_i=p_{ic}$ and $r=r_c$. A direct computation gives
+\begin{align*}
+\bigl(F\diag(p_c)^{-1}F\bigr)_{ij}&=-p_i^2p_j-p_ip_j^2+rp_ip_j\qquad(i\ne j),\\
+\bigl(F\diag(p_c)^{-1}F\bigr)_{ii}&=p_i^2(r-p_i).
+\end{align*}
+Now split $Q_c$ according to the color of the cell $x$. The cells of color $c$ contribute $(\diag(p_c)-p_cp_c^\T)\diag(p_c)^{-1}(\diag(p_c)-p_cp_c^\T)=\diag(p_c)-(2-r)p_cp_c^\T$. For $i\ne j$, the cells $x=(l,b)$ with $b\ne c$ and $l=i$ contribute
+\[
+\sum_{b\ne c}\frac{(-p_ip_{ib})\Sigma_{(j,c),(i,b)}}{p_{ib}}=-p_i\sum_{b\ne c}\Sigma_{(j,c),(i,b)}=-p_i\,(-\Sigma_{(j,c),(i,c)})=-p_i^2p_j,
+\]
+because row $i$ is matched exactly once, so $\sum_b\Sigma_{(j,c),(i,b)}=0$. Symmetrically, the cells with $l=j$ contribute $-p_ip_j^2$, and the cells with $l\notin\{i,j\}$ contribute $G_c(i,j)$. Therefore, for $i\ne j$, the $(i,j)$ entry of $2F+\Diag(Q_c)-Q_c+F\diag(p_c)^{-1}F$ is
+\[
+-2p_ip_j+(2-r)p_ip_j+p_i^2p_j+p_ip_j^2-G_c(i,j)-p_i^2p_j-p_ip_j^2+rp_ip_j=-G_c(i,j).
+\]
+The diagonal of $2F$ and of $\Diag(Q_c)-Q_c$ vanishes, so the $(i,i)$ entry is $p_i^2(r-p_i)$. These are the entries of the right side.
+\end{proof}
+
+\begin{corollary}\label{cor:recursion}
+Let $\rho$ be a face with $k(\rho)=k\ge3$. Then
+\[
+(k-1)\,\E_{x\sim\pi_\rho}N_{\rho\cup\{x\}}-(k-2)N_\rho+N_\rho\Pi_\rho^{-1}N_\rho\preceq(1+4V)\frac{k-1}{t^2}\,\Pi_\rho .
+\]
+\end{corollary}
+
+\begin{proof}
+Apply Lemma~\ref{lem:gram} to $W^\rho$, which has $k$ rows and row surplus $s$. Since $G_c\succeq0$, the right side of Lemma~\ref{lem:gram} is at most $\frac1k\diag\bigl(p_{ic}^2(r_c-p_{ic})+G_c(i,i)\bigr)_i$. Here $r_c-p_{ic}=\sum_{j\ne i}p_{jc}\le(k-1)/t$ and $p_{ic}\le1/t$ by Lemma~\ref{lem:basic}(ii), and $G_c(i,i)\le4V(k-1)p_{ic}/t^2$ by Lemma~\ref{lem:squared}. Thus each diagonal entry is at most $(1+4V)(k-1)p_{ic}/(kt^2)$.
+\end{proof}
+
+\subsection{The base case}
+
+\begin{lemma}\label{lem:base}
+Let $k=2$. Then $\Pi P-2\pi\pi^\T\preceq N+\frac{10}{t^2}\Pi$.
+\end{lemma}
+
+\begin{proof}
+Let $x,y\in[0,1]^q$ be the two rows, $S_x=\sum_cx_c$, $S_y=\sum_cy_c$, $T_{xy}=\sum_cx_cy_c$ and $Z=S_xS_y-T_{xy}$; then $S_x,S_y\ge t+1$. The marginals are $p_{1c}=x_c(S_y-y_c)/Z$ and $p_{2c}=y_c(S_x-x_c)/Z$. Let $N^\circ$ be the matrix whose only nonzero entries are $-x_cy_c/(2Z)$ at the pairs of cells $(1,c),(2,c)$. Let $X,Y\in\R^{\cC}$ be the vectors with $X(1,c)=x_c$, $Y(2,c)=y_c$ and zero elsewhere. Since $(\Pi P)((1,a),(2,b))=x_ay_b\one\{a\ne b\}/(2Z)$, we have $\Pi P-N^\circ=(XY^\T+YX^\T)/(2Z)$.
+
+For $\lambda>0$, $XY^\T+YX^\T\preceq\frac12(\lambda X+\lambda^{-1}Y)(\lambda X+\lambda^{-1}Y)^\T$. With $\lambda^2=S_y/S_x$ and $Z\le S_xS_y$ this gives $\Pi P-N^\circ\preceq\frac14\alpha\alpha^\T$, where $\alpha=(S_yX+S_xY)/Z$. Let $\beta$ be the vector with entries $x_cy_c/Z$ at both cells $(1,c)$ and $(2,c)$. Then $p=\alpha-\beta$ and $2\pi\pi^\T=\frac12(\alpha-\beta)(\alpha-\beta)^\T$, so
+\[
+\Pi P-2\pi\pi^\T-N^\circ\preceq\tfrac14\alpha\alpha^\T-\tfrac12(\alpha-\beta)(\alpha-\beta)^\T=\tfrac12\beta\beta^\T-\bigl(\tfrac12\alpha-\beta\bigr)\bigl(\tfrac12\alpha-\beta\bigr)^\T\preceq\tfrac12\beta\beta^\T .
+\]
+Moreover, $S_y-y_c\ge t$, $S_x-x_c\ge t$ and $Z\ge S_x(S_y-1)\ge tT_{xy}$ give
+\[
+\beta^\T\Pi^{-1}\beta=\sum_c\Bigl(\frac{2x_cy_c^2}{Z(S_y-y_c)}+\frac{2x_c^2y_c}{Z(S_x-x_c)}\Bigr)\le\frac{4T_{xy}}{tZ}\le\frac{4}{t^2},
+\]
+so $\frac12\beta\beta^\T\preceq\frac2{t^2}\Pi$.
+
+It remains to compare $N^\circ$ with $N$, whose entries are $-p_{1c}p_{2c}/2$ at the same pairs. Put $R_c=(S_y-y_c)(S_x-x_c)/Z$, so that $p_{1c}p_{2c}=(x_cy_c/Z)R_c$. We have $R_c-1=(T_{xy}+x_cy_c-S_xy_c-S_yx_c)/Z$. Both $T_{xy}+x_cy_c$ and $S_xy_c+S_yx_c$ are at most $2S_xS_y/(t+1)$, and $Z\ge tS_xS_y/(t+1)$, so $|R_c-1|\le2/t$; also $R_c\ge(t/(t+1))^2$, whence $|1-R_c^{-1}|\le8/t$. The entry of $\Pi^{-1/2}(N^\circ-N)\Pi^{-1/2}$ at $(1,c),(2,c)$ equals $\sqrt{p_{1c}p_{2c}}\,(1-R_c^{-1})$, whose absolute value is at most $8/t^2$ because $p_{1c},p_{2c}\le1/t$. Each color contributes a $2\times2$ block with zero diagonal, so $N^\circ-N\preceq\frac8{t^2}\Pi$, and the lemma follows.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:column}}
+For every face $\rho$ of $X_W$ with $k=k(\rho)\ge2$ let
+\[
+M_\rho=\frac{N_\rho+b_k\Pi_\rho}{k-1}.
+\]
+We verify the hypotheses of Theorem~\ref{thm:trickle}. Every link $W^\rho$ has $k\le\Delta$ rows and row surplus $s$. The constants $V$ and $L$ in \eqref{eq:constants} depend only on $\Delta$, $s$ and $q$, so Lemmas~\ref{lem:squared} and~\ref{lem:base} and Corollary~\ref{cor:recursion} apply to every link with the same $V$ and $L$. Moreover $h_k\le h_\Delta$ and $b_k\le b_\Delta$.
+
+(a) By \eqref{eq:N-upper} and \eqref{eq:assumption}, $M_\rho\preceq\frac{1/t+b_\Delta}{k-1}\Pi_\rho\preceq\frac{1}{5(k-1)}\Pi_\rho\preceq\frac{k-1}{3k-1}\Pi_\rho$, since $5(k-1)^2\ge3k-1$ for $k\ge2$.
+
+(b) For $k=2$, Lemma~\ref{lem:base} applied to $W^\rho$ gives $\Pi_\rho P_\rho-2\pi_\rho\pi_\rho^\T\preceq N_\rho+\frac{10}{t^2}\Pi_\rho\preceq M_\rho$, because $b_2=L/t^2\ge22/t^2$.
+
+(c) Let $k\ge3$ and write $N=N_\rho$, $\Pi=\Pi_\rho$, $b=b_k$. By Lemma~\ref{lem:link-identities}(i), $\E_x\Pi_{\rho\cup\{x\}}=\Pi$. After multiplication by $(k-1)(k-2)$, condition (c) becomes
+\[
+(k-1)\E_xN_{\rho\cup\{x\}}+(k-1)b_{k-1}\Pi\preceq(k-2)(N+b\Pi)-(N+b\Pi)\Pi^{-1}(N+b\Pi).
+\]
+By \eqref{eq:N-upper}, $(N+b\Pi)\Pi^{-1}(N+b\Pi)=N\Pi^{-1}N+2bN+b^2\Pi\preceq N\Pi^{-1}N+(2b/t+b^2)\Pi$. By Corollary~\ref{cor:recursion} it therefore suffices that
+\[
+(1+4V)\frac{k-1}{t^2}+\frac{2b_k}{t}+b_k^2\le(k-2)b_k-(k-1)b_{k-1}.
+\]
+Since $h_k-h_{k-1}=1/(k-2)$, the right side equals $L(k-1)/t^2$. After division by $(k-1)/t^2$, the required inequality reads
+\[
+1+4V+\frac{2Lh_k}{t}+\frac{L^2(k-1)h_k^2}{t^2}\le L .
+\]
+By \eqref{eq:assumption}, $2Lh_k/t\le L/4$ and $L^2(k-1)h_k^2/t^2\le L^2\Delta h_\Delta^2/t^2\le L/4$, while $1+4V\le L/2$. This verifies (c).
+
+Theorem~\ref{thm:trickle} now gives $\Pi P-\frac{d}{d-1}\pi\pi^\T\preceq M_\emptyset$ for $\rho=\emptyset$, and Lemma~\ref{lem:link-identities}(ii) gives
+\[
+\Sigma_W\preceq D_p+d(d-1)M_\emptyset=D_p+dN_\emptyset+b_dD_p=(1+b_d)D_p+D_p^2-\sum_cp_cp_c^\T .\qed
+\]
+
+\section{One-step contraction}\label{sec:contraction}
+
+For $A\in[0,1]^q$ and $\xi\in\R^q$ with $\xi(c)=0$ whenever $A(c)\in\{0,1\}$, define the \emph{arcsine norm}
+\[
+\|\xi\|_A=\Bigl(\sum_{c:\,0<A(c)<1}\frac{\xi(c)^2}{A(c)(1-A(c))}\Bigr)^{1/2}.
+\]
+Since $\frac{d}{da}2\arcsin\sqrt a=(a(1-a))^{-1/2}$, this is the Euclidean norm of the tangent vector $\xi$ after the coordinatewise substitution $A(c)\mapsto2\arcsin\sqrt{A(c)}$.
+
+\begin{lemma}\label{lem:transfer}
+Let $\Sigma$ be positive semidefinite, let $R$ be diagonal with nonnegative entries, and let $\gamma\ge0$. If $R^{1/2}\Sigma R^{1/2}\preceq\gamma I$, then $\Sigma R\Sigma\preceq\gamma\Sigma$.
+\end{lemma}
+
+\begin{proof}
+Put $Y=\Sigma^{1/2}R^{1/2}$. Then $YY^\T=\Sigma^{1/2}R\Sigma^{1/2}$ and $Y^\T Y=R^{1/2}\Sigma R^{1/2}$ have the same nonzero eigenvalues. Hence $\Sigma^{1/2}R\Sigma^{1/2}\preceq\gamma I$, and conjugation by $\Sigma^{1/2}$ gives the claim.
+\end{proof}
+
+\begin{remark}\label{rem:counterexample}
+The stronger implication $\Sigma\preceq\gamma B\Rightarrow\Sigma R\Sigma\preceq\gamma^2BRB$ is false for non-commuting matrices. For instance, $\Sigma=\frac12\bigl(\begin{smallmatrix}1&1\\1&1\end{smallmatrix}\bigr)\preceq I$ and $R=\diag(1,\frac14)$ give $\Sigma R\Sigma=\frac5{16}\bigl(\begin{smallmatrix}1&1\\1&1\end{smallmatrix}\bigr)$, and $R-\Sigma R\Sigma$ has determinant $-\frac9{64}$. Lemma~\ref{lem:transfer} uses only the scalar bound on $R^{1/2}\Sigma R^{1/2}$, which we obtain from the diagonal majorant $D_p\succeq B$.
+\end{remark}
+
+\begin{proposition}\label{prop:contraction}
+Let $s=q-2\Delta+2>0$ and assume \eqref{eq:assumption}; let $\delta$ be as in Corollary~\ref{cor:column}. Let $F\subseteq[q]$ and $d\ge1$ satisfy $|F|+d\le\Delta-1$, let $A_1,\dots,A_d\in\cH^+$, and let $\xi_1,\dots,\xi_d\in\R^q$ satisfy $\xi_i(c)=0$ whenever $A_i(c)\in\{0,1\}$. Put $A=\Phi_F(A_1,\dots,A_d)$ and let $\dot A=\sum_iD_{A_i}\Phi_F(A_1,\dots,A_d)[\xi_i]$ be the derivative of $\Phi_F$ in the direction $(\xi_1,\dots,\xi_d)$. Then $\dot A(c)=0$ whenever $A(c)\in\{0,1\}$, and
+\[
+\|\dot A\|_A^2\le(1+\delta)^2\frac{d\,\Delta}{(\Delta+s)(s+1)}\max_i\|\xi_i\|_{A_i}^2 .
+\]
+\end{proposition}
+
+\begin{proof}
+Let $W=W_F(A_1,\dots,A_d)$, which has row surplus $s$ by Lemma~\ref{lem:domain}, and let $\cC$, $p$, $\Sigma$, $B$ and $H$ refer to $W$. For $a\notin F$, Lemma~\ref{lem:derivative} gives
+\[
+\dot A(a)=-\sum_{(i,c)\in\cC}\Cov(S_a,Y_{ic})\,\frac{\xi_i(c)}{A_i(c)},
+\]
+since $W(i,c)=A_i(c)$ on cells, and a coordinate $\xi_i(c)$ with $(i,c)\notin\cC$ has $c\in F$ or $A_i(c)=0$, so either it does not enter $W$ or it vanishes by assumption. If $a\in F$, then $A(a)=0$ identically. If $a\notin F$ and column $a$ has no cell, then $S_a=0$, so $\dot A(a)=0$, and $A(a)=1$. By Lemma~\ref{lem:domain} the remaining colors form the set $I=\{a:0<A(a)<1\}$.
+
+For $(i,c)\in\cC$ we have $A_i(c)>0$, hence $A_i(c)\ge a_0$ because $A_i\in\cH^+$. Define $x\in\R^{\cC}$ by $x(i,c)=\xi_i(c)/\sqrt{A_i(c)(1-A_i(c))}$ if $A_i(c)<1$ and $x(i,c)=0$ otherwise, and let $R=\diag\bigl((1-A_i(c))/A_i(c)\bigr)_{(i,c)\in\cC}$. Then $\xi_i(c)/A_i(c)=(R^{1/2}x)(i,c)$ on $\cC$, and $\|x\|_2^2\le\sum_i\|\xi_i\|_{A_i}^2\le d\max_i\|\xi_i\|^2_{A_i}$. With $G=\diag\bigl((A(a)(1-A(a)))^{-1/2}\bigr)_{a\in I}$ and $H$ restricted to the colors in $I$, the vector $y=(\dot A(a)/\sqrt{A(a)(1-A(a))})_{a\in I}$ equals $-Jx$ with $J=GH\Sigma R^{1/2}$, and $\|\dot A\|_A=\|y\|_2$.
+
+By Lemma~\ref{lem:basic}(ii), $p_{ic}\le A_i(c)/t$, so $p_{ic}R_{(i,c)}\le(1-A_i(c))/t\le(1-a_0)/t=\Delta/((\Delta+s)t)$. By Corollary~\ref{cor:column} and $B\preceq D_p$,
+\[
+R^{1/2}\Sigma R^{1/2}\preceq(1+\delta)R^{1/2}D_pR^{1/2}\preceq\gamma I,\qquad\gamma=\frac{(1+\delta)\Delta}{(\Delta+s)t}.
+\]
+Lemma~\ref{lem:transfer} and Corollary~\ref{cor:column} give $\Sigma R\Sigma\preceq\gamma\Sigma\preceq\gamma(1+\delta)B$. Since $A(a)=1-r_a$ for $a\in I$, \eqref{eq:HBH} gives $GHBH^\T G=I$ on $I$, and therefore
+\[
+JJ^\T=GH\Sigma R\Sigma H^\T G\preceq\gamma(1+\delta)\,GHBH^\T G=\gamma(1+\delta)I .
+\]
+Hence $\|y\|_2^2\le\gamma(1+\delta)\|x\|_2^2\le(1+\delta)^2\frac{\Delta}{(\Delta+s)(s+1)}\,d\max_i\|\xi_i\|_{A_i}^2$.
+\end{proof}
+
+In the proof, the bound $1-A_i(c)\le1-a_0$ uses that the child messages are generated by the recursion; for arbitrary vectors in $\cH$ the entries of $R$ need not be bounded, which is one reason for the buffer in Section~\ref{sec:proof}.
+
+\section{Proof of Theorem~\ref{thm:main}}\label{sec:proof}
+
+\subsection{Parameters}
+Let $c_0=\frac{\sqrt5-1}{2}$. For $\varepsilon>0$ put $c=c_0+\varepsilon$ and
+\[
+\bar V=\Bigl(1+\frac2c\Bigr)\Bigl(1+\frac1c\Bigr),\qquad\bar L=22+8\bar V,\qquad f=\frac1{c(1+c)},
+\]
+and
+\[
+\kappa=\sqrt{\frac{1+f}{2}},\qquad\zeta=\sqrt{\frac{1+f}{2f}}-1 .
+\]
+Since $c_0(1+c_0)=1$ and $c>c_0$, we have $f<1$, so $\kappa<1$ and $\zeta>0$. Let $\Delta_0(\varepsilon)$ be the smallest integer that is at least each of
+\[
+e^9,\quad\Bigl(\frac{16}{c}\Bigr)^{4/3},\quad\Bigl(\frac{16\bar L}{c^2}\Bigr)^{2},\quad\Bigl(\frac{20\bar L}{c^2}\Bigr)^{4/3},\quad\frac{10}{c},\quad\Bigl(\frac{4\bar L(1+1/c)}{c^2\zeta}\Bigr)^{4/3},\quad\frac{2(1+1/c)}{c\zeta}.
+\]
+
+\begin{lemma}\label{lem:parameters}
+Let $\varepsilon>0$. Let $\Delta\ge\Delta_0(\varepsilon)$ and $q\ge(2+c)\Delta$ be integers, and let $s=q-2\Delta+2$. Then $s\ge c\Delta$, condition \eqref{eq:assumption} holds, $\delta\le\zeta$, and
+\[
+(1+\delta)^2\frac{(\Delta-1)\Delta}{(\Delta+s)(s+1)}\le\kappa^2 .
+\]
+\end{lemma}
+
+\begin{proof}
+Clearly $s\ge c\Delta+2$. Since $q=s+2\Delta-2$, we have $q/t\le1+2\Delta/s\le1+2/c$ and $(\Delta+s)/t\le1+1/c$, so $V\le\bar V$ and $L\le\bar L$. For $\Delta\ge e^9$ we have $h_\Delta\le2+\log\Delta\le2\Delta^{1/4}$. The second entry in the definition of $\Delta_0$ gives $t\ge c\Delta\ge16\Delta^{1/4}\ge8h_\Delta$; the third gives $t^2\ge c^2\Delta^2\ge16\bar L\Delta^{3/2}\ge4L\Delta h_\Delta^2$. Further, $b_\Delta\le\bar L\Delta h_\Delta/t^2\le2\bar L/(c^2\Delta^{3/4})\le1/10$ by the fourth entry, and $1/t\le1/(c\Delta)\le1/10$ by the fifth; this is \eqref{eq:assumption}. Next,
+\[
+\delta\le\Bigl(1+\frac1c\Bigr)\Bigl(\frac{2\bar L}{c^2\Delta^{3/4}}+\frac1{c\Delta}\Bigr),
+\]
+and the last two entries make each summand at most $\zeta/2$. Finally
+\[
+\frac{(\Delta-1)\Delta}{(\Delta+s)(s+1)}\le\frac{\Delta^2}{(1+c)\Delta\cdot c\Delta}=f,
+\]
+and $(1+\zeta)^2f=(1+f)/2=\kappa^2$.
+\end{proof}
+
+From now on fix $\varepsilon>0$, integers $\Delta\ge\Delta_0(\varepsilon)$ and $q\ge(\frac{3+\sqrt5}{2}+\varepsilon)\Delta=(2+c)\Delta$, and let $s=q-2\Delta+2$, $t=s+1$ and $a_0=s/(\Delta+s)$ as before. By Lemma~\ref{lem:parameters} and Proposition~\ref{prop:contraction}, for $F$, $d$, $A_i$ and $\xi_i$ as in Proposition~\ref{prop:contraction},
+\begin{equation}\label{eq:contraction}
+\|\dot A\|_A\le\kappa\max_i\|\xi_i\|_{A_i},
+\end{equation}
+because $d\le\Delta-1$.
+
+\subsection{The buffer}
+Put
+\[
+b_0=\frac{s(s+1)}{q(\Delta+s)^2},\qquad K=2\Delta\Bigl(\frac{q}{t}\Bigr)^{\Delta},\qquad E_0=\frac{\sqrt q\,K^2}{\sqrt{a_0b_0}} .
+\]
+
+\begin{lemma}\label{lem:buffer}
+Let $F\subseteq[q]$ and $d\ge1$ with $|F|+d\le\Delta-1$. For $i\le d$ let $F_i\subseteq[q]$ and let $A_i\in[0,1]^q$ satisfy $A_i(c)=0$ for $c\in F_i$ and $A_i(c)\ge a_0$ for $c\notin F_i$, with $A_i\in\cH$. Let $A=\Phi_F(A_1,\dots,A_d)$ and $I=\{a\notin F:\ a\notin F_i\text{ for some }i\}$. Then $A(a)=0$ for $a\in F$, $A(a)=1$ for $a\notin F\cup I$, and $a_0\le A(a)\le1-b_0$ for $a\in I$.
+\end{lemma}
+
+\begin{proof}
+Let $W=W_F(A_1,\dots,A_d)$. A color $a\notin F$ has a cell $(i,a)$ exactly when $a\notin F_i$ for some $i$, that is, when $a\in I$, and then $W(i,a)=A_i(a)\ge a_0$. Lemma~\ref{lem:domain} gives the first two assertions and $A(a)\ge s/(d+s)\ge a_0$ for $a\in I$. For $a\in I$ with cell $(i,a)$, Lemma~\ref{lem:basic}(iv) gives $1-A(a)=r_a\ge p_{ia}\ge a_0t/(q(d+s))\ge b_0$.
+\end{proof}
+
+\begin{lemma}\label{lem:speed}
+Let $F\subseteq[q]$ and $d\ge1$ with $|F|+d\le\Delta-1$, and let $\theta\mapsto A_i(\theta)\in\cH$, $i\le d$, be differentiable. Then $\theta\mapsto\Phi_F(A_1(\theta),\dots,A_d(\theta))$ is differentiable and
+\[
+\Bigl\|\frac{d}{d\theta}\Phi_F(A_1(\theta),\dots,A_d(\theta))\Bigr\|_\infty\le K\max_i\|\dot A_i(\theta)\|_\infty .
+\]
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:domain} the matrix $W_F(A_1(\theta),\dots,A_d(\theta))$ has row surplus $s$, so $Z_W\ge t^d$ by Lemma~\ref{lem:basic}(i); hence $\Phi_F$ is a rational function with nonvanishing denominator near the path. By Lemma~\ref{lem:basic}(v), each coordinate of $\Phi_F$ has partial derivatives at most $2q^{d-1}/t^d$ in absolute value with respect to each of the $dq$ entries $A_i(c)$. Thus the speed of each coordinate is at most $2dq^d/t^d\cdot\max_i\|\dot A_i\|_\infty\le K\max_i\|\dot A_i\|_\infty$, as $d\le\Delta$ and $q\ge t$.
+\end{proof}
+
+\subsection{Completion of the proof}
+Let $T$ be a finite tree of maximum degree at most $\Delta$, let $\Lambda\subseteq E(T)$, let $\tau,\tau'\colon\Lambda\to[q]$ be feasible, let $e=xy\in E(T)\setminus\Lambda$, and let $\ell$ be as in Definition~\ref{def:ssm}. If $\Lambda_{\ne}=\emptyset$, then $\tau=\tau'$ and there is nothing to prove. If $\ell\le2$, the bound holds with any $C\ge\kappa^{-2}$, since $\dTV\le1$. Assume $3\le\ell<\infty$ and put $h=\ell-1\ge2$.
+
+Let $T_e$, depths, $d_v$, $F_v^\tau$ and $F_v^{\tau'}$ be as in Section~\ref{sec:tree}; the graph $T_e$ and the numbers $d_v$ depend only on $\Lambda$. If $f\in\Lambda$ is incident to a vertex $v$ of $T_e$ of depth $j$, then the path in $T$ from $e$ to $f$ consists of $e$, the $j$ edges of $T_e$ from $\{x,y\}$ to $v$, and $f$; hence $\dist_{L(T)}(e,f)=j+1$. Consequently $F_v^\tau=F_v^{\tau'}$ for every vertex of depth at most $h-1=\ell-2$, and we write $F_v$ for this common set.
+
+For $\theta\in[0,1]$ define vectors $A_v(\theta)$ for the vertices $v$ of $T_e$ of depth at most $h$ as follows. If $v$ has depth $h$, let $A_v(\theta)=(1-\theta)A_v^\tau+\theta A_v^{\tau'}$; this lies in $\cH$ because $\cH$ is convex. If $v$ has depth less than $h$ and children $u_1,\dots,u_{d_v}$, let $A_v(\theta)=\Phi_{F_v}(A_{u_1}(\theta),\dots,A_{u_{d_v}}(\theta))$. By Lemmas~\ref{lem:domain} and~\ref{lem:tree} this is well defined, $A_v(\theta)\in\cH$, and $A_v(0)=A_v^\tau$, $A_v(1)=A_v^{\tau'}$; the recursion at depth less than $h$ uses only the common sets $F_v$. Let
+\[
+\mu(\theta)(c)=\frac{A_x(\theta)(c)A_y(\theta)(c)}{Z(\theta)},\qquad Z(\theta)=\sum_{c'}A_x(\theta)(c')A_y(\theta)(c').
+\]
+By Lemma~\ref{lem:tree}, $\mu(0)=\mu_{T,e}^\tau$ and $\mu(1)=\mu_{T,e}^{\tau'}$.
+
+\emph{Levels one and two.} By Lemma~\ref{lem:domain}, every vertex $u$ of depth at most $h-1$ satisfies $A_u(\theta)(c)=0$ for $c\in F_u$ and $A_u(\theta)(c)\ge a_0$ for $c\notin F_u$, for all $\theta$. Let $v$ have depth at most $h-2$. If $d_v=0$, then $A_v(\theta)$ is constant. Otherwise its children have depth at most $h-1$. Put
+\[
+I_v=\{a\notin F_v:\ a\notin F_u\text{ for some child }u\text{ of }v\}.
+\]
+Lemma~\ref{lem:buffer} shows that the coordinates of $A_v(\theta)$ outside $I_v$ are constant in $\theta$, while $a_0\le A_v(\theta)(a)\le1-b_0$ for $a\in I_v$. The set $I_v$ depends only on pinned colors at depth at most $h-1$, so it does not depend on $\theta$. Thus, for every vertex $v$ of depth at most $h-2$, the derivative $\dot A_v(\theta)$ vanishes at the coordinates where $A_v(\theta)\in\{0,1\}$, and $\|\dot A_v(\theta)\|_{A_v(\theta)}$ is defined.
+
+At depth $h$ the speeds satisfy $\|\dot A_v\|_\infty=\|A_v^{\tau'}-A_v^\tau\|_\infty\le1$. By Lemma~\ref{lem:speed}, the speeds are at most $K$ at depth $h-1$ and at most $K^2$ at depth $h-2$; vertices without children have speed zero. For $v$ of depth $h-2$, since $A_v(a)(1-A_v(a))\ge a_0b_0$ on $I_v$,
+\[
+\|\dot A_v(\theta)\|_{A_v(\theta)}\le\frac{\sqrt q\,K^2}{\sqrt{a_0b_0}}=E_0 .
+\]
+
+\emph{Higher levels.} Let $v$ have depth $j\le h-3$ and $d_v\ge1$. Its children have depth $j+1\le h-2$, their vectors lie in $\cH^+$ by Lemma~\ref{lem:domain}, and their speeds vanish where these vectors take the values $0$ or $1$. Hence \eqref{eq:contraction} applies with $\xi_i=\dot A_{u_i}(\theta)$, and by induction on $h-2-j$,
+\[
+\|\dot A_v(\theta)\|_{A_v(\theta)}\le\kappa^{h-2-j}E_0 .
+\]
+In particular $\|\dot A_x(\theta)\|_{A_x(\theta)}$ and $\|\dot A_y(\theta)\|_{A_y(\theta)}$ are at most $\kappa^{h-2}E_0=\kappa^{\ell-3}E_0$.
+
+\emph{The observed edge.} Since $A(1-A)\le\frac14$, we have
+\[
+\|\dot A_x\|_1\le\sqrt q\,\|\dot A_x\|_2\le\frac{\sqrt q}{2}\|\dot A_x\|_{A_x},
+\]
+and similarly for $y$. Since $A_x(\theta),A_y(\theta)\in\cH$ and $uv\ge u+v-1$ for $u,v\in[0,1]$,
+\[
+Z(\theta)\ge\sum_c\bigl(A_x(\theta)(c)+A_y(\theta)(c)-1\bigr)\ge2(q-\Delta+1)-q=s .
+\]
+With $w_c=A_x(c)A_y(c)$ we have $\|\dot w\|_1\le\|\dot A_x\|_1+\|\dot A_y\|_1$, because all coordinates lie in $[0,1]$, and $\|\dot\mu\|_1\le\|\dot w\|_1/Z+|\dot Z|/Z\le2\|\dot w\|_1/Z$. Therefore
+\[
+\dTV\bigl(\mu_{T,e}^\tau,\mu_{T,e}^{\tau'}\bigr)\le\int_0^1\tfrac12\|\dot\mu(\theta)\|_1\,d\theta\le\frac{\sqrt q\,E_0}{s}\,\kappa^{\ell-3}.
+\]
+Thus Theorem~\ref{thm:main} holds with $\kappa=\kappa(\varepsilon)$ from Lemma~\ref{lem:parameters} and
+\[
+C=\max\Bigl\{\kappa^{-2},\ \frac{\sqrt q\,E_0}{s\,\kappa^{3}}\Bigr\}.\qed
+\]
+
+\section{Concluding remarks}\label{sec:remarks}
+\enlargethispage{-6\baselineskip}
+
+The threshold in Theorem~\ref{thm:main} comes from the one-step bound
+\[
+d\|J\|^2\lesssim\frac{\Delta^2}{(\Delta+s)s}
+\]
+of Proposition~\ref{prop:contraction}, and it coincides with the limit computed in \cite[Theorem~35]{CWZZ} for the analysis there. We do not know whether a one-step analysis with another potential or another norm, or a contraction over several levels, can improve on this constant. It remains open whether the margin $\varepsilon\Delta$ can be removed, that is, whether strong spatial mixing holds for all sufficiently large $\Delta$ and all integers $q\ge(2+c_0)\Delta$, with constants depending only on $\Delta$ and $q$. The conjecture of \cite{CWZZ} that strong spatial mixing holds for $q\ge2\Delta+\gamma$ also remains open.
+
+The large-$\Delta$ assumption enters only through the error terms $b_\Delta$ and $1/t$ in Theorem~\ref{thm:column}, which are $O_\varepsilon(\log\Delta/\Delta)$. For every admissible $q$ we have $\Delta/s\le1/c$ and $q/s\le1+2/c$, so the constants $\bar V$ and $\bar L$ of Lemma~\ref{lem:parameters} do not depend on $q$, and no upper bound on $q$ is needed. The proof uses that the underlying graph is a tree and that all edges have the full palette $[q]$, through Lemma~\ref{lem:tree} and the row surplus of Lemma~\ref{lem:domain}. We do not claim any strong spatial mixing statement for general graphs or for arbitrary color lists.
+
+\section*{Use of AI-assisted tools}
+
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{99}
+
+\bibitem{ALG}
+D. Abdolazimi, K. Liu, and S. Oveis Gharan, \emph{A matrix trickle-down theorem on simplicial complexes and applications to sampling colorings}, Proceedings of the 62nd Annual IEEE Symposium on Foundations of Computer Science (FOCS), IEEE, 2021, 161--172; arXiv:2106.03845v2.
+
+\bibitem{AO}
+D. Abdolazimi and S. Oveis Gharan, \emph{An improved trickle down theorem for partite complexes}, 38th Computational Complexity Conference (CCC 2023), Leibniz Int. Proc. Inform., Article 10, 2023, doi:10.4230/LIPIcs.CCC.2023.10.
+
+\bibitem{ALO}
+N. Anari, K. Liu, and S. Oveis Gharan, \emph{Spectral independence in high-dimensional expanders and applications to the hardcore model}, Proceedings of the 61st Annual IEEE Symposium on Foundations of Computer Science (FOCS), IEEE, 2020, 1319--1330; arXiv:2001.00303v3.
+
+\bibitem{CCFV}
+C. Carlson, X. Chen, W. Feng, and E. Vigoda, \emph{Optimal mixing for randomly sampling edge colorings on trees down to the max degree}, SIAM J. Discrete Math. \textbf{40} (2026), no.~3, 1395--1445, doi:10.1137/25M1768096; arXiv:2407.04576v1.
+
+\bibitem{CCZ}
+X. Chen, Z. Chen, and X. Zhang, \emph{Degree-free spectral independence for log-concave Holant measures}, preprint (2026), arXiv:2609.18835v1.
+
+\bibitem{CL}
+X. Chen and K. Liu, \emph{Spectral gap of down-up walks via trickle-down: a simplified and sharpened analysis}, preprint (2026), arXiv:2609.19514v1.
+
+\bibitem{CG}
+Z. Chen and Y. Gu, \emph{Fast sampling of $b$-matchings and $b$-edge covers}, preprint (2023), arXiv:2304.14289v2.
+
+\bibitem{CLMM}
+Z. Chen, K. Liu, N. Mani, and A. Moitra, \emph{Strong spatial mixing for colorings on trees and its algorithmic applications}, preprint (2023), arXiv:2304.01954.
+
+\bibitem{CWZZ}
+Z. Chen, Y. Wang, C. Zhang, and Z. Zhang, \emph{Decay of correlation for edge colorings when $q>3\Delta$}, 52nd International Colloquium on Automata, Languages, and Programming (ICALP 2025), Leibniz Int. Proc. Inform., Article 54, 2025, doi:10.4230/LIPIcs.ICALP.2025.54; arXiv:2502.06586v2. Numbers of results refer to the arXiv version; Theorems~22 and~35 there are Theorems~23 and~36 of the published version.
+
+\bibitem{Opp}
+I. Oppenheim, \emph{Local spectral expansion approach to high dimensional expanders part I: descent of spectral gaps}, Discrete Comput. Geom. \textbf{59} (2018), no.~2, 293--330.
+
+\bibitem{WYZ}
+C. Wang, Y. Yoshida, and Z. Zhang, \emph{Approximate colorwise tensorization of entropy and optimal mixing of the Wang--Swendsen--Koteck\'y dynamics}, preprint (2026), arXiv:2607.10119v1.
+
+\bibitem{WZZ}
+Y. Wang, C. Zhang, and Z. Zhang, \emph{Sampling proper colorings on line graphs using $(1+o(1))\Delta$ colors}, Proceedings of the 56th Annual ACM Symposium on Theory of Computing (STOC), 2024; arXiv:2307.08080v2.
+
+\end{thebibliography}
+
+\end{document}

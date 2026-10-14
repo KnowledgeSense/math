@@ -1,0 +1,53 @@
+{
+  "author": "Knowledge Sense",
+  "completed_at_utc": "2026-10-12T03:39:21.083417+00:00",
+  "elapsed_seconds": 5.280999999988126,
+  "checker_sha256": "dec5247c9ffd2e016eac96856c9fda9d96484925bf5aa985681d63dd774dc388",
+  "method": "exact Fraction Gauss-Jordan inverse and direct vector reconstruction; root occupation dynamic programming for the witness",
+  "cone": {
+    "generators": [
+      32,
+      331
+    ],
+    "operation_counts": {
+      "root0": 32,
+      "root1": 331,
+      "product00": 1024,
+      "product01": 10592,
+      "product11": 109561
+    },
+    "record_types": {
+      "1": 1754,
+      "2": 111695,
+      "0": 8073,
+      "3": 18
+    },
+    "operations": 121540,
+    "all_basis_count": 2037,
+    "used_basis_count": 1029,
+    "minimum_root_third_coordinate": 6,
+    "maximum_generator_bits": 87,
+    "maximum_operation_image_bits": 173,
+    "all_exact_checks_satisfied": true
+  },
+  "upper_witness": {
+    "sizes_Q0_to_Q3": [
+      6,
+      160,
+      3394,
+      71308
+    ],
+    "vertices": 71308,
+    "maximum_degree": 8,
+    "alpha": 48619,
+    "root_absent_alpha": 48619,
+    "root_present_alpha": 48618,
+    "Z_bits": 52620,
+    "S_bits": 52635,
+    "ratio": "0.4734029757422598059645129452759410516071352559572307969",
+    "gap_to_0.473403": "2.425774019403548705472405894839286474404276920306318908E-8",
+    "positive_integer_margin_bits": 52631,
+    "full_integers_match": true,
+    "strict_upper_inequality": true
+  }
+}

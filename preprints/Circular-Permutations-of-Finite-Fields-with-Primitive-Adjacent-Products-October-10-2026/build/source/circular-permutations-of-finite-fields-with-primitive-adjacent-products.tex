@@ -1,0 +1,460 @@
+\documentclass{amsart}
+
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[hyphens]{url}
+\usepackage[
+  pdftitle={Circular permutations of finite fields with primitive adjacent products},
+  pdfauthor={Knowledge Sense},
+  pdfsubject={Mathematics},
+  pdfkeywords={finite field, primitive element, circular permutation, Hamilton cycle, character sum, computer-assisted proof},
+  colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black
+]{hyperref}
+
+\hyphenation{manuscript}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+\numberwithin{table}{section}
+
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\abs}[1]{\lvert #1\rvert}
+\newcommand{\bigabs}[1]{\bigl\lvert #1\bigr\rvert}
+\newcommand{\Bigabs}[1]{\Bigl\lvert #1\Bigr\rvert}
+\newcommand{\prim}{\mathbf{1}_{\mathrm{prim}}}
+\DeclareMathOperator{\ord}{ord}
+
+\begin{document}
+
+\title[Circular permutations with primitive adjacent products]{Circular permutations of finite fields with primitive adjacent products}
+
+\author{Knowledge Sense}
+\address{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{10 October 2026}
+
+\subjclass[2020]{Primary 11T30; Secondary 05C45, 11T24, 68V05}
+\keywords{Finite field, primitive element, circular permutation, Hamilton cycle, character sum, computer-assisted proof}
+
+\begin{abstract}
+Let $q>7$ be a prime power and let $a\in\F_q$. Z.-W.~Sun conjectured that the nonzero elements of $\F_q$ admit a circular permutation $(x_1,\dots,x_{q-1})$ such that every element $a+x_ix_{i+1}$, with $x_q=x_1$, is primitive. Luo and She proved this for all $a$ when $q>18{,}888{,}871$, and for all $q$ when $a=0$. We show that the conjecture holds for all pairs $(q,a)$ except $(q,a)=(11,2)$, where it fails: in the associated graph two vertices of degree two have the same two neighbours. For the finite range we give two explicit families of Hamilton cycles. For odd $q$ a member of the first family exists as soon as $a+x$ is primitive for two nonsquares $x$ whose ratio generates the group of nonzero squares; for even $q$ a member of the second family exists as soon as $a+x$ is primitive for three consecutive powers $x$ of a primitive element. These constructions handle all but $31$ of the $659{,}460{,}173$ pairs with $a\neq0$ that are not covered by the criterion of Luo and She; thirty of the remaining pairs are settled by explicit circular permutations, and the last one is the exception.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $\F_q$ be the finite field with $q$ elements. An element of $\F_q$ is \emph{primitive} if it generates the cyclic group $\F_q^{*}$. In 2013 Sun posed a series of conjectures on permutations and circular permutations of finite fields subject to arithmetic conditions on adjacent elements \cite{Sun}. One of them is the following.
+
+\begin{conjecture}[Sun {\cite[Conjecture~3.8]{Sun}}]\label{conj:sun}
+Let $q>7$ be a prime power and let $a\in\F_q$. There is a circular permutation $(x_1,\dots,x_{q-1})$ of $\F_q^{*}$ such that the $q-1$ elements
+\[
+a+x_1x_2,\quad a+x_2x_3,\quad \dots,\quad a+x_{q-2}x_{q-1},\quad a+x_{q-1}x_1
+\]
+are all primitive.
+\end{conjecture}
+
+In \cite{Sun} the conjecture is dated 17 September 2013. The $q-1$ values $a+x_ix_{i+1}$ need not be distinct. Following Luo and She \cite{LS}, let $G_{q,a}$ be the simple graph with vertex set $\F_q^{*}$ in which distinct vertices $x$ and $y$ are adjacent if and only if $a+xy$ is primitive. Since $q-1\ge 7$, the circular permutations required in Conjecture~\ref{conj:sun} are exactly the Hamilton cycles of $G_{q,a}$.
+
+Luo and She \cite[Theorem~1.2]{LS} proved that $G_{q,a}$ is Hamiltonian for every prime power $q>18{,}888{,}871$ and every $a\in\F_q$, and for every $q>4$ when $a=0$. For $a\neq0$ they combine an estimate for the number of edges between two sets of vertices with the theorem of Chv\'atal and Erd\H{o}s \cite{CE}, and their numerical case analysis is modelled on that of Cohen, Oliveira e Silva and Trudgian \cite{COT}; for $a=0$ they give an explicit construction in the exponents of a primitive element. We complete the classification.
+
+\begin{theorem}\label{thm:main}
+Let $q>7$ be a prime power and let $a\in\F_q$. The graph $G_{q,a}$ is Hamiltonian if and only if $(q,a)\neq(11,2)$. Equivalently, there is a circular permutation of $\F_q^{*}$ in which $a$ plus the product of any two adjacent elements is primitive if and only if $(q,a)\neq(11,2)$.
+\end{theorem}
+
+\begin{corollary}\label{cor:sun}
+Conjecture~\ref{conj:sun} holds for every pair $(q,a)$ with $(q,a)\neq(11,2)$, and it fails for $(q,a)=(11,2)$.
+\end{corollary}
+
+The failure for $(11,2)$ has a short proof (Proposition~\ref{prop:exception}): the primitive roots modulo $11$ are $2,6,7,8$, and in $G_{11,2}$ the vertices $2$ and $9$ both have exactly the neighbours $3$ and $8$. For comparison, Sun's example for $q=11$ \cite[Remark~3.8]{Sun} is the circular permutation $(1,9,2,4,5,8,10,3,6,7)$, which uses $a=-1$.
+
+For $a\neq0$ the analytic criterion of Luo and She (Proposition~\ref{prop:criterion}) shows that $G_{q,a}$ is Hamiltonian whenever $\varphi(q-1)\ge 3\cdot 2^{\omega(q-1)}\sqrt q+2$. We prove by a short argument that every $q\ge 25{,}000{,}001$ satisfies this inequality (Proposition~\ref{prop:tail}); exactly $2{,}693$ prime powers $q$ with $8\le q\le 25{,}000{,}000$ fail it, the largest being $18{,}888{,}871$. For these orders we need the following explicit constructions.
+
+\begin{theorem}\label{thm:witness}
+Let $q>7$ be a prime power, let $g$ be a primitive element of $\F_q$ and let $a\in\F_q$.
+\begin{enumerate}
+\item If $q$ is odd and there are integers $j,k$ with $\gcd\bigl(j,\tfrac{q-1}{2}\bigr)=1$ such that $a+g^{2k+1}$ and $a+g^{2k+2j+1}$ are primitive, then $G_{q,a}$ is Hamiltonian.
+\item If $q$ is even and there is an integer $k$ such that $a+g^{k}$, $a+g^{k+1}$ and $a+g^{k+2}$ are primitive, then $G_{q,a}$ is Hamiltonian.
+\end{enumerate}
+\end{theorem}
+
+The Hamilton cycles behind Theorem~\ref{thm:witness} are given explicitly in Section~\ref{sec:witness}; along them the products of adjacent vertices take only two or three values. For these $2{,}693$ orders and $a\neq0$, a short search for $k$ (and, rarely, $j$) settles all but $31$ pairs $(q,a)$; thirty of them are settled by explicit circular permutations listed in Appendix~\ref{app:cycles}, and the remaining one is $(11,2)$.
+
+\subsection*{Contribution}
+The analytic criterion for $a\neq0$ and the construction for $a=0$ are due to Luo and She \cite{LS}; for even $q-1$ the construction appears earlier, in the language of unitary addition Cayley graphs, in \cite[Theorem~11(i)]{SGS}. For completeness we include short proofs of both; the reduction in Section~\ref{sec:tail} uses the criterion exactly in the form of Proposition~\ref{prop:criterion}. The new results of this paper are the exceptional pair, Theorem~\ref{thm:witness}, and the treatment of all pairs $(q,a)$ with $a\neq0$ and $q\le 18{,}888{,}871$ that are not covered by the criterion. To our knowledge, Theorem~\ref{thm:main} has not appeared in the literature.
+
+\subsection*{Dependencies}
+Besides elementary facts on finite fields and multiplicative characters, the proof uses the theorem of Chv\'atal and Erd\H{o}s and a finite computation, described in Section~\ref{sec:computation} and Appendix~\ref{app:data}. Reductions of this kind, in which a character-sum estimate leaves finitely many fields to be checked by computer, are standard for problems on primitive elements; see, for example, \cite{COT}, and \cite{WS} for another conjecture of Sun treated in this way.
+
+\subsection*{Organization}
+Section~\ref{sec:prelim} collects notation and the criterion of Luo and She. Section~\ref{sec:zero} treats $a=0$ and Section~\ref{sec:exception} the exceptional pair. Section~\ref{sec:witness} proves Theorem~\ref{thm:witness}. Section~\ref{sec:tail} reduces the problem to a finite range, Section~\ref{sec:computation} describes the computation, and Section~\ref{sec:proof} completes the proof. The appendices describe the data and list the explicit cycles.
+
+\section{Preliminaries}\label{sec:prelim}
+
+Throughout, $q>7$ is a prime power and $n=q-1$. For a positive integer $m$ we write $\omega(m)$ for the number of distinct prime divisors of $m$, $\varphi$ for Euler's function, $\mu$ for the M\"obius function,
+\[
+W(m)=2^{\omega(m)},\qquad \theta(m)=\frac{\varphi(m)}{m}.
+\]
+Thus $W(m)$ is the number of squarefree divisors of $m$. If $g$ is a primitive element of $\F_q$, then $g^{e}$ is primitive if and only if $\gcd(e,n)=1$, and $\F_q$ has exactly $\varphi(n)$ primitive elements. For a graph $G$ we write $\alpha(G)$ for its independence number and $\kappa(G)$ for its vertex connectivity, with $\kappa(K_N)=N-1$.
+
+\begin{lemma}\label{lem:iso}
+Let $\sigma\colon \F\to\F'$ be an isomorphism of finite fields with $q$ elements. Then $\sigma$ restricts to a graph isomorphism from $G_{\F,a}$ onto $G_{\F',\sigma(a)}$ for every $a\in\F$. In particular, it suffices to prove Theorem~\ref{thm:main} for one field of each order.
+\end{lemma}
+
+\begin{proof}
+A field isomorphism preserves sums, products and multiplicative orders, hence primitive elements and the adjacency relation.
+\end{proof}
+
+\begin{theorem}[Chv\'atal and Erd\H{o}s {\cite[Theorem~1]{CE}}]\label{thm:CE}
+Let $G$ be a graph with at least three vertices. If $\kappa(G)\ge\alpha(G)$, then $G$ is Hamiltonian.
+\end{theorem}
+
+We extend every multiplicative character $\chi$ of $\F_q$, including the principal character $\chi_0$, by $\chi(0)=0$. For $z\in\F_q$ the indicator function of the primitive elements is
+\begin{equation}\label{eq:indicator}
+\prim(z)=\theta(n)\sum_{d\mid n}\frac{\mu(d)}{\varphi(d)}\sum_{\ord\chi=d}\chi(z),
+\end{equation}
+where the inner sum runs over the $\varphi(d)$ characters of order $d$; see \cite[(1)]{LS} and \cite[Section~2]{COT}. Only squarefree $d$ contribute.
+
+For $a\in\F_q$ and $X,Y\subseteq\F_q^{*}$ put
+\[
+E(X,Y)=\#\{(x,y)\in X\times Y : a+xy \text{ is primitive}\}.
+\]
+If $X$ and $Y$ are disjoint, $E(X,Y)$ is the number of edges of $G_{q,a}$ between $X$ and $Y$.
+
+\begin{lemma}[Luo and She {\cite[Lemma~2.2]{LS}}]\label{lem:edges}
+Let $a\neq0$ and $X,Y\subseteq\F_q^{*}$. Then
+\[
+\bigabs{E(X,Y)-\theta(n)\abs X\abs Y}\le \theta(n)\,W(n)\sqrt{q\abs X\abs Y}.
+\]
+\end{lemma}
+
+\begin{proof}
+Let $\chi\neq\chi_0$. We first show that
+\begin{equation}\label{eq:moment}
+\sum_{x\in\F_q}\Bigabs{\sum_{y\in Y}\chi(a+xy)}^{2}=q\abs Y-\Bigabs{\sum_{y\in Y}\chi(y)}^{2}.
+\end{equation}
+Expanding the square, a diagonal pair $y=z$ contributes $\#\{x\in\F_q: a+xy\neq0\}=q-1$. Let $y\neq z$ be elements of $Y$. The fractional linear map $w(x)=(a+xy)/(a+xz)$ has determinant $a(y-z)\neq0$, so it maps $\F_q\setminus\{-a/z\}$ bijectively onto $\F_q\setminus\{y/z\}$. The term with $x=-a/z$ vanishes because $\overline\chi(0)=0$, and $\sum_{w\in\F_q}\chi(w)=0$. Hence
+\[
+\sum_{x\in\F_q}\chi(a+xy)\overline{\chi(a+xz)}=\sum_{w\neq y/z}\chi(w)=-\chi(y)\overline{\chi(z)},
+\]
+and summing over all pairs gives $(q-1)\abs Y-\abs{\sum_{y}\chi(y)}^2+\abs Y$, which is \eqref{eq:moment}. By the Cauchy--Schwarz inequality and \eqref{eq:moment},
+\[
+\Bigabs{\sum_{x\in X}\sum_{y\in Y}\chi(a+xy)}^{2}\le \abs X\sum_{x\in\F_q}\Bigabs{\sum_{y\in Y}\chi(a+xy)}^{2}\le q\abs X\abs Y.
+\]
+For the principal character, $\sum_{x\in X}\sum_{y\in Y}\chi_0(a+xy)=\abs X\abs Y-T_0$, where $T_0$ is the number of pairs $(x,y)\in X\times Y$ with $xy=-a$. Each $x$ occurs in at most one such pair and so does each $y$, hence $0\le T_0\le\min(\abs X,\abs Y)\le\sqrt{\abs X\abs Y}$. Summing \eqref{eq:indicator} over $X\times Y$ and using that there are $W(n)-1$ squarefree divisors $d>1$ of $n$, each with $\varphi(d)$ characters of order $d$, we obtain
+\begin{align*}
+\bigabs{E(X,Y)-\theta(n)\abs X\abs Y}&\le\theta(n)\Bigl(\sqrt{\abs X\abs Y}+(W(n)-1)\sqrt{q\abs X\abs Y}\Bigr)\\
+&\le\theta(n)W(n)\sqrt{q\abs X\abs Y}. \qedhere
+\end{align*}
+\end{proof}
+
+\begin{proposition}[Luo and She {\cite[Lemmas~3.1, 3.2 and~(4)]{LS}}]\label{prop:criterion}
+Let $a\neq0$ and $G=G_{q,a}$. Then $\alpha(G)\le 2W(n)\sqrt q+1$, and if $G$ is not complete, then $\kappa(G)\ge\varphi(n)-W(n)\sqrt q-1$. Consequently, if
+\begin{equation}\label{eq:criterion}
+\varphi(n)\ge 3W(n)\sqrt q+2,
+\end{equation}
+then $G_{q,a}$ is Hamiltonian.
+\end{proposition}
+
+\begin{proof}
+Let $I$ be an independent set with $s=\abs I\ge2$, and split it into disjoint sets $X$ and $Y$ of sizes $\lfloor s/2\rfloor$ and $\lceil s/2\rceil$. Then $E(X,Y)=0$, and Lemma~\ref{lem:edges} gives $\sqrt{\abs X\abs Y}\le W(n)\sqrt q$. Since $\abs X\abs Y=\lfloor s^2/4\rfloor\ge(s^2-1)/4$, we get $s\le\sqrt{4W(n)^2q+1}\le 2W(n)\sqrt q+1$.
+
+For a vertex $v$, the map $y\mapsto a+vy$ is a bijection from $\F_q^{*}$ onto $\F_q\setminus\{a\}$, which contains at least $\varphi(n)-1$ primitive elements; excluding $y=v$ removes at most one more. Hence every vertex has degree at least $\varphi(n)-2$. Suppose that $G$ is not complete, and let $S$ be a set of $\kappa(G)$ vertices such that $G-S$ is disconnected; $S=\emptyset$ if $G$ itself is disconnected. Let $A$ be a smallest component of $G-S$ and $B$ the union of the other components, so that $\abs A\le\abs B$ and $E(A,B)=0$. Lemma~\ref{lem:edges} gives $\abs A\le\sqrt{\abs A\abs B}\le W(n)\sqrt q$. A vertex of $A$ has all its neighbours in $(A\cup S)$ minus itself, so $\varphi(n)-2\le\abs A-1+\abs S$, that is, $\kappa(G)\ge\varphi(n)-W(n)\sqrt q-1$.
+
+If $G$ is complete it is Hamiltonian, since $q-1\ge3$. Otherwise \eqref{eq:criterion} gives $\kappa(G)\ge 2W(n)\sqrt q+1\ge\alpha(G)$, and Theorem~\ref{thm:CE} applies.
+\end{proof}
+
+\section{The zero offset}\label{sec:zero}
+
+The following construction is due to Luo and She \cite[Section~4]{LS}; for even $n$ it is the Hamilton cycle of \cite[Theorem~11(i)]{SGS}. We include the short verification.
+
+\begin{proposition}[Luo and She; Sinha, Garg and Singh for even $n$]\label{prop:zero}
+For every prime power $q>7$ the graph $G_{q,0}$ is Hamiltonian.
+\end{proposition}
+
+\begin{proof}
+Let $g$ be a primitive element. Writing vertices as $g^{e}$ with $e\in\mathbb Z/n\mathbb Z$, the product $g^{e}g^{e'}$ is primitive if and only if $e+e'$ is a unit modulo $n$. It suffices to give a cyclic ordering of $\mathbb Z/n\mathbb Z$ in which all cyclically adjacent sums are units.
+
+If $n$ is even, take $(0,\,n-1,\,2,\,n-3,\,\dots,\,n-2,\,1)$, the concatenation of the pairs $(2j,\,n-1-2j)$ for $0\le j\le n/2-1$. Adjacent sums are $n-1$ inside a pair, $n+1$ between consecutive pairs, and $1+0=1$ at the closing step; all of them are $\pm1$ modulo $n$.
+
+If $n$ is odd, then $q$ is even and $n=2h+1$ with $h\ge3$. Take
+\[
+(n-1,\;0,\;n-2,\;1,\;h)\quad\text{followed by the pairs}\quad (h-j,\;h+j),\qquad 1\le j\le h-2.
+\]
+The pairs contain $2,\dots,h-1$ and $h+1,\dots,n-3$, so this is a permutation of $\mathbb Z/n\mathbb Z$; for $n=7$ it is $(6,0,5,1,3,2,4)$. The adjacent sums are $n-1,\,n-2,\,n-1,\,h+1$ in the first block, $2h-1=n-2$ from $h$ to $h-1$ and between consecutive pairs, $2h=n-1$ inside a pair, and $(n-3)+(n-1)\equiv n-4$ at the closing step. Since $n$ is odd, $n-1$, $n-2$ and $n-4$ are units modulo $n$, and so is $h+1$, because $2(h+1)=n+1$.
+\end{proof}
+
+\begin{remark}\label{rem:sgs}
+The map $g^{e}\mapsto e$ identifies $G_{q,0}$ with the unitary addition Cayley graph of $\mathbb Z/n\mathbb Z$, in which distinct $e,e'$ are adjacent when $e+e'$ is a unit \cite{SGS}. The odd case of \cite[Theorem~11]{SGS} assumes $3\nmid n$, which fails for instance for $n=15$ and $n=63$; the construction above covers every odd $n\ge7$.
+\end{remark}
+
+\section{The exceptional pair}\label{sec:exception}
+
+\begin{proposition}\label{prop:exception}
+The graph $G_{11,2}$ is not Hamiltonian.
+\end{proposition}
+
+\begin{proof}
+The primitive elements of $\F_{11}$ are $2,6,7,8$. Since $xy\neq0$ for $x,y\in\F_{11}^{*}$, the vertices $x\neq y$ are adjacent if and only if $xy\in\{4,5,6\}$. Solving $2y\in\{4,5,6\}$ gives $y\in\{2,8,3\}$, and solving $9y\in\{4,5,6\}$ gives $y\in\{9,3,8\}$. Excluding loops, both $2$ and $9$ have exactly the neighbours $3$ and $8$. A Hamilton cycle must use both edges at every vertex of degree two, so it contains the cycle $2,3,9,8,2$. This cycle has four vertices, while $G_{11,2}$ has ten, a contradiction.
+\end{proof}
+
+\section{Two families of Hamilton cycles}\label{sec:witness}
+
+\begin{lemma}\label{lem:odd}
+Let $q$ be odd, $m=(q-1)/2$, let $h$ generate the subgroup of nonzero squares and let $x$ be a nonsquare. Put
+\[
+y_{2i}=h^{i},\qquad y_{2i+1}=xh^{-i}\qquad(0\le i\le m-1).
+\]
+Then $(y_0,y_1,\dots,y_{q-2})$ is a circular permutation of $\F_q^{*}$, and every product of two cyclically adjacent terms equals $x$ or $xh$. In particular, if $a+x$ and $a+xh$ are primitive, then $(y_0,\dots,y_{q-2})$ is a Hamilton cycle of $G_{q,a}$.
+\end{lemma}
+
+\begin{proof}
+The terms $y_{2i}$ run through the $m$ squares and the terms $y_{2i+1}$ through the coset $x\langle h\rangle$, which consists of the $m$ nonsquares. Furthermore $y_{2i}y_{2i+1}=x$, $y_{2i+1}y_{2i+2}=xh$ for $0\le i\le m-2$, and $y_{q-2}y_0=xh^{-(m-1)}=xh$ because $h^{m}=1$.
+\end{proof}
+
+\begin{lemma}\label{lem:even}
+Let $q$ be even, let $g$ be primitive and $x\in\F_q^{*}$, and let $r$ be the square root of $x$. If $a+x$ and $a+xg^2$ are primitive, then $G_{q,a}$ has a Hamilton path from $r$ to $gr$ along which every product of adjacent vertices equals $x$ or $xg^{2}$. If moreover $a+xg$ is primitive, then $G_{q,a}$ is Hamiltonian.
+\end{lemma}
+
+\begin{proof}
+Since squaring is a bijection of $\F_q$, the element $r$ is well defined. Consider the involutions $F(y)=x/y$ and $J(y)=xg^{2}/y$ of $\F_q^{*}$, and let $H$ be the graph on $\F_q^{*}$ with edges $\{y,F(y)\}$ for $F(y)\neq y$ and $\{y,J(y)\}$ for $J(y)\neq y$. Since $n$ is odd and $n>2$, we have $g^{2}\neq1$, so $F(y)\neq J(y)$ for all $y$. The unique fixed point of $F$ is $r$ and that of $J$ is $gr$, and $r\neq gr$. Hence $r$ and $gr$ have degree one in $H$ and every other vertex has degree two. The products along edges of $H$ are $x$ and $xg^2$, so under the hypothesis every edge of $H$ is an edge of $G_{q,a}$.
+
+Each component of $H$ is invariant under $F$ and $J$, hence under $JF$, which is multiplication by $g^{2}$. As $n$ is odd, $g^{2}$ generates $\F_q^{*}$, so $JF$ acts transitively on the vertices and $H$ is connected. A connected graph of maximum degree two with exactly two vertices of degree one is a path; thus $H$ is a Hamilton path from $r$ to $gr$. Finally $r\cdot gr=xg$. If $a+xg$ is also primitive, then $r$ and $gr$ are adjacent in $G_{q,a}$, and since $q-1\ge3$ they are not adjacent on the path, so adding this edge closes a Hamilton cycle.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:witness}]
+(1) Let $m=(q-1)/2$. The order of $g^{2j}$ is $2m/\gcd(2j,2m)=m/\gcd(j,m)=m$, so $h=g^{2j}$ generates the squares, and $x=g^{2k+1}$ is a nonsquare with $xh=g^{2k+2j+1}$. Apply Lemma~\ref{lem:odd}. (2) Apply Lemma~\ref{lem:even} with $x=g^{k}$.
+\end{proof}
+
+\section{Reduction to a finite range}\label{sec:tail}
+
+Luo and She showed that \eqref{eq:criterion} holds for every $q>18{,}888{,}871$ by a case analysis according to $\omega(q-1)$ \cite[Section~3]{LS}. To make the finite range independently checkable we use the following weaker statement, whose proof reduces to two explicit integer inequalities. Let $P_r$ denote the product of the first $r$ primes $p_1<p_2<\dots<p_r$.
+
+\begin{proposition}\label{prop:tail}
+Every prime power $q\ge 25{,}000{,}001$ satisfies \eqref{eq:criterion}.
+\end{proposition}
+
+\begin{proof}
+Let $n=q-1=\prod_{i=1}^{r}\ell_i^{a_i}$ with primes $\ell_1<\dots<\ell_r$, so that $\ell_i\ge p_i$. Since $t\mapsto(t-1)/\sqrt t$ is increasing for $t\ge1$,
+\begin{equation}\label{eq:primorial}
+\frac{\varphi(n)}{n}=\prod_{i=1}^{r}\Bigl(1-\frac1{\ell_i}\Bigr)\ge\frac{\varphi(P_r)}{P_r},\qquad
+\frac{\varphi(n)}{2^{r}\sqrt n}=\prod_{i=1}^{r}\ell_i^{(a_i-1)/2}\,\frac{\ell_i-1}{2\sqrt{\ell_i}}\ge\prod_{i=1}^{r}\frac{p_i-1}{2\sqrt{p_i}}.
+\end{equation}
+
+Suppose first that $r\le8$. Then $W(n)\le256$ and $\varphi(n)\ge cn$ with $c=\varphi(P_8)/P_8$, where $P_8=9{,}699{,}690$ and $\varphi(P_8)=1{,}658{,}880$. It suffices to show that $(cn-2)/\sqrt{n+1}\ge768$. The function $t\mapsto(ct-2)/\sqrt{t+1}$ is increasing for $t>0$, since its derivative is $(ct+2c+2)/(2(t+1)^{3/2})$. For $M=25{,}000{,}000\le n$ we have $\varphi(P_8)M-2P_8=41{,}471{,}980{,}600{,}620>0$ and
+\[
+(\varphi(P_8)M-2P_8)^{2}-9\cdot256^{2}(M+1)P_8^{2}=332{,}600{,}294{,}066{,}556{,}440{,}798{,}298{,}000>0,
+\]
+which is the required inequality at $t=M$ multiplied by $P_8$ and squared.
+
+Suppose now that $r\ge9$. Then $n\ge P_9=223{,}092{,}870$, $\varphi(P_9)=36{,}495{,}360$, and
+\[
+\varphi(P_9)^{2}-16\cdot512^{2}\,P_9=396{,}191{,}984{,}517{,}120>0,
+\]
+so the product in \eqref{eq:primorial} over $i\le9$ exceeds $4$. Each further factor exceeds $1$, because $(p-1)^2>4p$ for $p\ge29$. Hence $\varphi(n)>4W(n)\sqrt n$. Since $\sqrt{n+1}\le\frac54\sqrt n$ and $W(n)\sqrt n/4>2$,
+\[
+\varphi(n)>\tfrac{15}{4}W(n)\sqrt n+\tfrac14W(n)\sqrt n> 3W(n)\sqrt{n+1}+2.\qedhere
+\]
+\end{proof}
+
+For $8\le q\le 25{,}000{,}000$ we have $\varphi(q-1)\ge2$, so \eqref{eq:criterion} fails exactly when
+\begin{equation}\label{eq:exact}
+(\varphi(q-1)-2)^{2}<9\cdot 4^{\omega(q-1)}\,q .
+\end{equation}
+There are $1{,}566{,}722$ prime powers $q$ with $8\le q\le 25{,}000{,}000$, and exactly $2{,}693$ of them satisfy \eqref{eq:exact}: $2{,}617$ primes and $76$ proper prime powers. We call them the \emph{residual orders}. Their sum is $659{,}462{,}866$, and seven of them are powers of two, namely $2^{d}$ for $d\in\{3,4,5,6,8,10,12\}$. Two independently written sieves produce the same list; Table~\ref{tab:residual} shows its distribution.
+
+\begin{table}[ht]
+\caption{Residual orders $q\le 25{,}000{,}000$, that is, prime powers satisfying \eqref{eq:exact}, by the value of $\omega(q-1)$.}\label{tab:residual}
+\centering
+\begin{tabular}{@{}crr@{}}
+\toprule
+$\omega(q-1)$ & residual orders & largest residual order\\
+\midrule
+1 & 4 & 32\\
+2 & 66 & 1{,}297\\
+3 & 332 & 8{,}101\\
+4 & 821 & 44{,}101\\
+5 & 913 & 204{,}751\\
+6 & 453 & 960{,}961\\
+7 & 99 & 4{,}084{,}081\\
+8 & 5 & 18{,}888{,}871\\
+\midrule
+total & 2{,}693 & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The largest residual order is $18{,}888{,}871$, so the threshold in \cite[Theorem~1.2]{LS} is exactly the largest prime power that fails \eqref{eq:criterion}.
+
+\begin{corollary}\label{cor:finite}
+Let $q>7$ and $a\in\F_q$. If $G_{q,a}$ is not Hamiltonian, then $a\neq0$ and $q$ is a residual order.
+\end{corollary}
+
+\begin{proof}
+Combine Propositions~\ref{prop:zero}, \ref{prop:criterion} and~\ref{prop:tail}.
+\end{proof}
+
+\section{The finite computation}\label{sec:computation}
+
+\subsection{Field models}
+For each residual order $q=p^{d}$ we fix a monic polynomial $f\in\F_p[T]$ of degree $d$ (with $f=T$ when $d=1$) and an element $g$ of $R=\F_p[T]/(f)$. A residue class $\sum_{i<d}c_iT^{i}$ with $0\le c_i<p$ is encoded by the integer $\sum_{i<d}c_ip^{i}$, so that $R$ is identified with $\{0,\dots,q-1\}$; for $d=1$ this is the usual model $\mathbb Z/p\mathbb Z$. The polynomials for $q\in\{9,16,25\}$ are listed in Appendix~\ref{app:cycles}.
+
+\begin{lemma}\label{lem:model}
+If the powers $g^{e}$, $0\le e\le q-2$, are pairwise distinct and nonzero and $g^{q-1}=1$, then $R$ is a field, $f$ is irreducible, $g$ is primitive, and $g^{e}$ is primitive if and only if $\gcd(e,q-1)=1$.
+\end{lemma}
+
+\begin{proof}
+The $q-1$ powers exhaust $R\setminus\{0\}$, and $g$ is a unit since $g\cdot g^{q-2}=1$. Hence every nonzero element of $R$ is a unit, so $R$ is a field with $q$ elements and $f$ is irreducible. The group $R^{*}$ is cyclic of order $q-1$ generated by $g$.
+\end{proof}
+
+The checking program verifies that $p$ is prime and $q=p^{d}$, checks the hypothesis of Lemma~\ref{lem:model} by computing the whole orbit of $g$, and marks $g^{e}$ as primitive exactly when $\gcd(e,q-1)=1$. The element $g$ is the primitive element with the least encoding, which the program also checks.
+
+\subsection{Witness search}
+Fix a residual order $q$ and an offset $a\in\F_q^{*}$. If $q$ is odd, let $m=(q-1)/2$ and let $j_1<j_2<\dots$ be the smallest integers $j$ with $1\le j\le\min(m-1,64)$ and $\gcd(j,m)=1$, at most eight of them, so that $j_1=1$. In stage $s$ the program tests, for $k=0,1,\dots,L_s-1$ in increasing order, whether $a+g^{2k+1}$ and $a+g^{2k+2j_s+1}$ are both primitive; this is the condition of Theorem~\ref{thm:witness}(1). If $q$ is even, there is a single stage, which tests, for $k=0,1,\dots,L_1-1$, whether $a+g^{k}$, $a+g^{k+1}$ and $a+g^{k+2}$ are all primitive, the condition of Theorem~\ref{thm:witness}(2). The stage lengths $L_s$ are input values recorded in the certificate of each field; they satisfy $L_s\le\min(1024,m)$ for odd $q$ and $L_1\le\min(1024,q-1)$ for even $q$. Stages after the first are applied only to offsets not settled by an earlier stage.
+
+The certificate of a field records the model $(p,d,f,g)$, the stage lengths and the complete sorted list of offsets $a\in\F_q^{*}$ for which no stage succeeds. The program reruns the search with exactly these stage lengths for every $a\in\F_q^{*}$ and accepts the certificate only if the list of unsettled offsets agrees exactly with the recorded one. A successful test proves that $G_{q,a}$ is Hamiltonian by Theorem~\ref{thm:witness}. If no stage succeeds, nothing is concluded from the search; such a pair is treated separately, either by an explicit Hamilton cycle that is checked directly, as described below, or, for $(11,2)$, by Proposition~\ref{prop:exception}.
+
+\subsection{Results}
+Since the residual orders sum to $659{,}462{,}866$, there are $659{,}460{,}173$ pairs $(q,a)$ with $q$ a residual order and $a\neq0$. Table~\ref{tab:results} summarizes the outcome of the search with the recorded stage lengths. Additional stages were needed in $16$ fields, the largest being $q=211$; in total they required $1{,}302$ further tests and settled $71$ offsets. The $31$ offsets left by the search are listed in Table~\ref{tab:unsettled}. For thirty of them Appendix~\ref{app:cycles} gives an explicit circular permutation of $\F_q^{*}$; the remaining one is $(11,2)$. A second, independently written program checks these thirty cycles, using its own polynomial arithmetic and computing multiplicative orders directly: each cycle is a permutation of $\F_q^{*}$, and $a+xy$ is primitive for every pair of cyclically adjacent entries, including the closing pair. The same program checks the two neighbourhoods used in Proposition~\ref{prop:exception}.
+
+\begin{table}[ht]
+\caption{Pairs $(q,a)$ with $q$ a residual order and $a\neq0$.}\label{tab:results}
+\centering
+\begin{tabular}{@{}lr@{}}
+\toprule
+residual orders & $2{,}693$\\
+pairs $(q,a)$ with $a\in\F_q^{*}$ & $659{,}460{,}173$\\
+\quad settled by the first stage of the search & $659{,}460{,}071$\\
+\quad settled by additional stages & $71$\\
+\quad settled by an explicit cycle (Appendix~\ref{app:cycles}) & $30$\\
+\quad not Hamiltonian (Proposition~\ref{prop:exception}) & $1$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[ht]
+\caption{Offsets not settled by the witness search, in the encoding of Section~\ref{sec:computation}.}\label{tab:unsettled}
+\centering
+\begin{tabular}{@{}lll@{}}
+\toprule
+$q$ & model & offsets $a$\\
+\midrule
+$9$ & $\F_3[T]/(T^{2}+1)$ & $4,5,7,8$\\
+$11$ & $\mathbb Z/11\mathbb Z$ & $2,3,4,8$\\
+$13$ & $\mathbb Z/13\mathbb Z$ & $1,2,3,5,6,7,8,10,11,12$\\
+$16$ & $\F_2[T]/(T^{4}+T+1)$ & $7,9,11$\\
+$25$ & $\F_5[T]/(T^{2}+2)$ & $1,2,3,4,5,10,15,20$\\
+$31$ & $\mathbb Z/31\mathbb Z$ & $3$\\
+$43$ & $\mathbb Z/43\mathbb Z$ & $5$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{proposition}\label{prop:finite}
+Let $q$ be a residual order and $a\in\F_q^{*}$. Then $G_{q,a}$ is Hamiltonian unless $(q,a)=(11,2)$.
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:model} each model is a field of order $q$, and by Lemma~\ref{lem:iso} it suffices to treat these models. Offsets settled by the search are covered by Theorem~\ref{thm:witness}, and the thirty pairs of Table~\ref{tab:unsettled} other than $(11,2)$ by the cycles of Appendix~\ref{app:cycles}.
+\end{proof}
+
+\section{Proof of the main theorem}\label{sec:proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+By Proposition~\ref{prop:exception}, $G_{11,2}$ is not Hamiltonian. Conversely, let $(q,a)\neq(11,2)$. If $a=0$, Proposition~\ref{prop:zero} applies. If $a\neq0$ and $q$ is not a residual order, then $q$ satisfies \eqref{eq:criterion}: for $q\ge25{,}000{,}001$ by Proposition~\ref{prop:tail}, and for $q\le 25{,}000{,}000$ by the definition of residual orders. Proposition~\ref{prop:criterion} then applies. If $q$ is a residual order, Proposition~\ref{prop:finite} applies.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:sun}]
+The circular permutations in Conjecture~\ref{conj:sun} are the Hamilton cycles of $G_{q,a}$.
+\end{proof}
+
+\begin{remark}
+In Theorem~\ref{thm:witness}(1) only the residues of $j$ and $k$ modulo $m=(q-1)/2$ matter, and replacing $(j,k)$ by $(-j,k+j)$ interchanges $a+g^{2k+1}$ and $a+g^{2k+2j+1}$. Hence, when $k$ runs over all residues modulo $m$, the values $j$ and $-j$ give the same condition. For $q=13$ we have $m=6$, and every admissible $j$ is congruent to $\pm1$ modulo $6$, so only $j=1$ is relevant. As $k$ runs over all residues modulo $6$, the condition holds for only two of the twelve nonzero offsets; in particular, the second stage $j_2=5$ settles no further offset for $q=13$.
+\end{remark}
+
+\appendix
+
+\section{Data availability}\label{app:data}
+
+The list of residual orders, the field certificates, the thirty explicit cycles and the programs that check them are contained in the accompanying verification archive, together with a README file that describes how to reproduce the computations. The programs use only the Python standard library and a C++17 compiler. The list of residual orders records, for each residual order $q$, the characteristic, the degree, $\varphi(q-1)$, $\omega(q-1)$ and $W(q-1)$.
+
+\section{Explicit cycles}\label{app:cycles}
+
+For $q\in\{11,13,31,43\}$ we use $\mathbb Z/q\mathbb Z$, and for $q\in\{9,16,25\}$ the models
+\[
+\F_9=\F_3[T]/(T^{2}+1),\qquad \F_{16}=\F_2[T]/(T^{4}+T+1),\qquad \F_{25}=\F_5[T]/(T^{2}+2).
+\]
+An integer $x=\sum_ic_ip^{i}$ with $0\le c_i<p$ denotes the element $\sum_ic_iT^{i}$; for example, $7$ denotes $1+2T$ in $\F_9$ and $1+T+T^{2}$ in $\F_{16}$. In these models the primitive elements are $4,5,7,8$ in $\F_9$, $2,3,4,5,9,11,13,14$ in $\F_{16}$, and $6,9,12,13,17,18,21,24$ in $\F_{25}$. For each pair $(q,a)$ we list a circular permutation $(x_1,\dots,x_{q-1})$ of $\F_q^{*}$ such that $a+x_ix_{i+1}$ is primitive for all $i$, with $x_q=x_1$.
+
+\medskip
+{\small
+\setlength{\parindent}{0pt}
+\newcommand{\cyc}[3]{\par\hangindent=2em\hangafter=1 $(q,a)=(#1,#2)$:\enspace (#3)\par\smallskip}
+\cyc{9}{4}{1, 3, 7, 8, 2, 6, 5, 4}
+\cyc{9}{5}{1, 3, 4, 7, 2, 6, 8, 5}
+\cyc{9}{7}{1, 6, 4, 5, 2, 3, 8, 7}
+\cyc{9}{8}{1, 6, 7, 4, 2, 3, 5, 8}
+\cyc{11}{3}{1, 4, 9, 3, 7, 10, 6, 8, 2, 5}
+\cyc{11}{4}{1, 2, 7, 6, 4, 5, 3, 8, 10, 9}
+\cyc{11}{8}{1, 5, 4, 8, 2, 10, 6, 7, 3, 9}
+\cyc{13}{1}{1, 6, 3, 12, 7, 2, 5, 9, 4, 8, 11, 10}
+\cyc{13}{2}{1, 4, 11, 2, 9, 12, 8, 6, 3, 10, 7, 5}
+\cyc{13}{3}{1, 4, 2, 8, 7, 3, 10, 6, 5, 11, 9, 12}
+\cyc{13}{5}{1, 6, 9, 3, 2, 5, 8, 4, 7, 12, 11, 10}
+\cyc{13}{6}{1, 5, 8, 12, 4, 10, 7, 2, 11, 6, 3, 9}
+\cyc{13}{7}{1, 8, 7, 11, 9, 10, 3, 4, 2, 6, 5, 12}
+\cyc{13}{8}{1, 3, 4, 5, 11, 7, 6, 2, 8, 9, 10, 12}
+\cyc{13}{10}{1, 10, 7, 5, 2, 11, 4, 12, 8, 6, 3, 9}
+\cyc{13}{11}{1, 4, 2, 11, 9, 12, 5, 6, 10, 3, 7, 8}
+\cyc{13}{12}{1, 8, 9, 10, 2, 4, 3, 11, 5, 12, 6, 7}
+\cyc{16}{7}{1, 2, 5, 8, 13, 12, 14, 6, 3, 7, 9, 4, 11, 15, 10}
+\cyc{16}{9}{1, 2, 5, 6, 4, 9, 14, 7, 11, 12, 8, 3, 10, 15, 13}
+\cyc{16}{11}{1, 5, 3, 7, 2, 11, 13, 6, 8, 14, 10, 4, 9, 12, 15}
+\cyc{25}{1}{1, 11, 3, 16, 6, 10, 9, 14, 24, 15, 2, 19, 21, 17, 8, 12, 23, 5, 13, 22, 4, 7, 18, 20}
+\cyc{25}{2}{1, 7, 15, 24, 8, 21, 4, 6, 22, 9, 10, 23, 2, 12, 5, 16, 17, 19, 13, 3, 14, 18, 20, 11}
+\cyc{25}{3}{1, 6, 8, 21, 10, 7, 23, 24, 4, 9, 15, 22, 19, 2, 13, 20, 16, 12, 3, 11, 17, 5, 18, 14}
+\cyc{25}{4}{1, 7, 5, 18, 8, 17, 4, 12, 22, 13, 20, 23, 3, 6, 14, 15, 9, 16, 2, 24, 10, 21, 11, 19}
+\cyc{25}{5}{1, 4, 14, 3, 7, 8, 18, 9, 2, 19, 11, 16, 23, 22, 12, 21, 5, 10, 20, 15, 6, 17, 24, 13}
+\cyc{25}{10}{1, 8, 14, 3, 11, 23, 7, 2, 16, 4, 19, 22, 10, 6, 5, 21, 17, 15, 9, 13, 12, 18, 20, 24}
+\cyc{25}{15}{1, 9, 5, 11, 7, 19, 23, 2, 18, 15, 10, 17, 12, 13, 3, 16, 22, 8, 14, 4, 24, 21, 20, 6}
+\cyc{25}{20}{1, 4, 7, 17, 6, 11, 2, 8, 12, 5, 10, 14, 23, 3, 16, 19, 22, 20, 13, 21, 9, 15, 24, 18}
+\cyc{31}{3}{1, 9, 8, 14, 5, 10, 7, 2, 25, 19, 4, 20, 16, 18, 28, 24, 3, 15, 13, 11, 27, 12, 6, 29, 22, 26, 17, 23, 30, 21}
+\cyc{43}{5}{1, 14, 23, 5, 10, 20, 33, 38, 3, 24, 31, 6, 37, 12, 19, 40, 15, 41, 29, 21, 13, 11, 17, 32, 2, 25, 4, 16, 9, 36, 35, 26, 34, 8, 7, 39, 27, 18, 30, 22, 42, 28}
+}
+
+\section*{Use of AI-assisted tools}
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{9}
+
+\bibitem{CE}
+V.~Chv\'atal and P.~Erd\H{o}s, \emph{A note on Hamiltonian circuits}, Discrete Math. \textbf{2} (1972), 111--113, \href{https://doi.org/10.1016/0012-365X(72)90079-9}{doi:10.1016/0012-365X(72)90079-9}.
+
+\bibitem{COT}
+S.~D. Cohen, T.~Oliveira e Silva, and T.~Trudgian, \emph{On consecutive primitive elements in a finite field}, Bull. Lond. Math. Soc. \textbf{47} (2015), no.~3, 418--426, \href{https://doi.org/10.1112/blms/bdv018}{doi:10.1112/blms/bdv018}.
+
+\bibitem{LS}
+X.-Q. Luo and Y.-F. She, \emph{A conjecture on circular permutations over finite fields}, preprint (2026), \href{https://arxiv.org/abs/2610.06289v1}{arXiv:2610.06289v1}.
+
+\bibitem{SGS}
+D.~Sinha, P.~Garg, and A.~Singh, \emph{Some properties of unitary addition Cayley graphs}, Notes Number Theory Discrete Math. \textbf{17} (2011), no.~3, 49--59.
+
+\bibitem{Sun}
+Z.-W. Sun, \emph{Some new problems in additive combinatorics}, Nanjing Univ. J. Math. Biquarterly \textbf{36} (2019), no.~2, 134--155; \href{https://arxiv.org/abs/1309.1679v9}{arXiv:1309.1679v9}.
+
+\bibitem{WS}
+H.-L. Wu and Y.-F. She, \emph{Primitive elements and $k$-th powers in finite fields}, preprint (2021), \href{https://arxiv.org/abs/2104.12185v1}{arXiv:2104.12185v1}.
+
+\end{thebibliography}
+
+\end{document}

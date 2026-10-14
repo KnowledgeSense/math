@@ -1,0 +1,740 @@
+\documentclass[11pt]{amsart}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1.15in]{geometry}
+\usepackage[hidelinks,unicode]{hyperref}
+\hypersetup{
+  pdftitle={Schatten norm compression for 2 x N block matrices with diagonal blocks},
+  pdfauthor={Knowledge Sense}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\abs}{\operatorname{abs}}
+\newcommand{\Sym}{\mathrm{Sym}_2}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\Sp}{\mathbb{S}_+}
+\newcommand{\ip}[2]{\langle #1,#2\rangle}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bff}{\mathbf{f}}
+
+\begin{document}
+
+\title[Norm compression for diagonal blocks]{Schatten norm compression for $2\times N$ block matrices with diagonal blocks}
+
+\author{Knowledge Sense}
+\address{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{8 October 2026}
+
+\subjclass[2020]{Primary 15A60; Secondary 15A45, 47A30, 26B25}
+\keywords{Schatten norm, norm compression inequality, partitioned matrix, diagonal blocks, convexity, Hanner's inequality}
+
+\begin{abstract}
+Let $T$ be a $2\times N$ block matrix whose blocks are $d\times d$ diagonal matrices, and let $C_p(T)$ be the $2\times N$ matrix of the Schatten $p$-norms of its blocks. We prove that $\|T\|_p\ge\|C_p(T)\|_p$ for $1\le p\le 2$ and $\|T\|_p\le\|C_p(T)\|_p$ for $2\le p\le\infty$, for all $N$ and $d$. This establishes Audenaert's norm compression conjecture for diagonal blocks; the case $N=2$ is due to King and Nathanson, and the range $p\ge4$ follows from a theorem of Audenaert for arbitrary blocks. The main step is the convexity of $D\mapsto\|D^{\circ 1/p}\|_p^p$ on entrywise nonnegative $2\times N$ matrices for $1\le p\le 2$, which answers a question of Audenaert; the range $p\ge2$, including the corresponding concavity, then follows by duality. We prove the convexity by a second-order argument in which an optimization over decompositions of a fixed Gram matrix reduces the problem to at most three rays.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+For a block matrix $T=[T_{ij}]$ and a norm $\|\cdot\|$, the norm compression of $T$ is the scalar matrix $[\|T_{ij}\|]$. Norm compression inequalities compare the norm of $T$ with the norm of its compression. For the Schatten $p$-norms, $\|X\|_p=(\sum_i\sigma_i(X)^p)^{1/p}$ for $1\le p<\infty$ and $\|X\|_\infty=\sigma_1(X)$, where $\sigma_1(X)\ge\sigma_2(X)\ge\cdots$ are the singular values, Audenaert proposed the following inequality for matrices partitioned into two rows of blocks.
+
+\begin{conjecture}[Audenaert {\cite[Conjecture~1]{Aud08}}]\label{conj:A}
+Let $A_1,\dots,A_N,B_1,\dots,B_N\in M_d(\C)$, and put
+\[
+T=\begin{pmatrix}A_1&\cdots&A_N\\ B_1&\cdots&B_N\end{pmatrix},\qquad
+C_p(T)=\begin{pmatrix}\|A_1\|_p&\cdots&\|A_N\|_p\\ \|B_1\|_p&\cdots&\|B_N\|_p\end{pmatrix}.
+\]
+Then $\|T\|_p\ge\|C_p(T)\|_p$ for $1\le p\le2$, and $\|T\|_p\le\|C_p(T)\|_p$ for $2\le p\le\infty$.
+\end{conjecture}
+
+The conjecture also appears in the problem list \cite[Section~5, Conjecture~3]{AK17}. For $N=2$, $A_1=B_2=A$ and $A_2=B_1=B$, a unitary conjugation turns it into Hanner's inequality for Schatten classes \cite{Aud08}. That inequality was proved by Ball, Carlen and Lieb \cite{BCL94} for $1\le p\le 4/3$ and $p\ge 4$, and in full by Hein\"avaara \cite{Hei25}; see \cite[Theorem~1.3]{Zha26}. Conjecture~\ref{conj:A} itself is open. For $N=2$ it is known when $T$ is positive semidefinite \cite{Kin03} and when all four blocks are diagonal \cite[Theorem~1]{KN04}. For arbitrary $N$, Audenaert \cite[Section~4]{Aud08} settled four cases: $C_p(T)$ has rank one; all blocks have rank one; the blocks in each row are proportional; and $p\ge 4$. The analogue for $3\times 3$ partitions is false \cite[Section~5]{Aud08}. Zhang \cite[Corollary~1.16]{Zha26} proved the inequalities of Conjecture~\ref{conj:A} up to the factors $2^{1/p-1/2}$ for $1\le p\le2$ and $2^{1/2-1/p}$ for $p\ge2$. For other relations between a partitioned matrix and its blocks see, for instance, \cite{BK90,BL24}.
+
+In this paper we prove Conjecture~\ref{conj:A} for diagonal blocks, for all $N$ and $d$.
+
+\begin{theorem}\label{thm:main}
+Let $N,d\ge1$, let $A_1,\dots,A_N,B_1,\dots,B_N\in M_d(\C)$ be diagonal matrices, and let $T$ and $C_p(T)$ be as in Conjecture~\ref{conj:A}. Then
+\begin{align}
+\|T\|_p&\ge\|C_p(T)\|_p\qquad(1\le p\le2),\label{eq:lower}\\
+\|T\|_p&\le\|C_p(T)\|_p\qquad(2\le p\le\infty).\label{eq:upper}
+\end{align}
+\end{theorem}
+
+The diagonal entries may be arbitrary complex numbers, and zero entries and zero blocks are allowed. Both inequalities are sharp: equality holds for $A_j=B_j=I_d$; see the discussion after \cite[Conjecture~1.14]{Zha26}.
+
+\begin{remark}\label{rem:bases}
+Let $U_1,U_2,V_1,\dots,V_N\in M_d(\C)$ be unitary. Multiplying $T$ on the left by $U_1\oplus U_2$ and on the right by $V_1^*\oplus\cdots\oplus V_N^*$ changes neither $\|T\|_p$ nor $C_p(T)$. Hence Theorem~\ref{thm:main} holds whenever $A_j=U_1\Gamma_jV_j^*$ and $B_j=U_2\Gamma'_jV_j^*$ with diagonal $\Gamma_j,\Gamma'_j$; in particular, whenever all blocks are diagonal in one common orthonormal basis.
+\end{remark}
+
+For $N=2$, Theorem~\ref{thm:main} is \cite[Theorem~1]{KN04}. For $d=1$ the blocks are scalars, and Theorem~\ref{thm:main} reduces to Lemma~\ref{lem:phase} below, which covers $1\le p\le\infty$; it is also contained in the rank-one case of \cite[Section~4.2]{Aud08}. For $p=2$ both sides of \eqref{eq:lower} are equal, for $p=1$ inequality \eqref{eq:lower} follows from the convexity of the trace norm by Proposition~\ref{prop:equiv}, and for $p\ge4$ inequality \eqref{eq:upper} holds for arbitrary blocks by \cite[Section~4.4]{Aud08}. The new cases of Theorem~\ref{thm:main} are therefore $N\ge3$, $d\ge2$, and $1<p<2$ or $2<p<4$.
+
+\subsection*{Convexity of an entrywise power function}
+For a real matrix $D$ with nonnegative entries and $s>0$, let $D^{\circ s}$ denote the entrywise power. Let $\cA_N=[0,\infty)^{2\times N}$ be the cone of entrywise nonnegative real $2\times N$ matrices, and for $1\le p<\infty$ define
+\begin{equation}\label{eq:gp}
+g_p(D)=\|D^{\circ1/p}\|_p^p\qquad(D\in\cA_N).
+\end{equation}
+King and Nathanson \cite[Lemma~3]{KN04} proved that $g_p$ is subadditive on $\cA_2$ for $1\le p\le2$ and superadditive for $p\ge2$; since $g_p$ is positively homogeneous of degree one, this means that $g_p$ is convex, respectively concave, on $\cA_2$. As observed by Audenaert \cite[Section~5]{Aud08}, for diagonal blocks Conjecture~\ref{conj:A} is equivalent to the convexity of $g_p$ on $\cA_N$ for $1\le p\le2$ and to its concavity for $p\ge2$ (see Proposition~\ref{prop:equiv}), and he asked whether the lemma of King and Nathanson extends to $\cA_N$. Our second result answers this question.
+
+\begin{theorem}\label{thm:convex}
+Let $N\ge1$. The function $g_p$ is convex on $\cA_N$ for $1\le p\le2$ and concave on $\cA_N$ for $2\le p<\infty$.
+\end{theorem}
+
+For $N\le2$, Theorem~\ref{thm:convex} is \cite[Lemma~3]{KN04}, and the cases $p=1,2$ are elementary. For $p\ge4$ the concavity also follows from Audenaert's theorem \cite[Section~4.4]{Aud08} and Proposition~\ref{prop:equiv}(b). Thus the new cases of Theorem~\ref{thm:convex} are $N\ge3$ with $1<p<2$ (convexity) or $2<p<4$ (concavity).
+
+\subsection*{Outline of the proof}
+The central part is the convexity of $g_p$ for $1<p<2$. King and Nathanson \cite[Section~3]{KN04} and Audenaert \cite[Section~5]{Aud08} work with the first derivative of $t\mapsto g_p(D+tE)$; we work with the second derivative and verify that the Hessian of $g_p$ is positive semidefinite. Writing $X=D^{\circ1/p}$ and $M=XX^{T}$, the Hessian condition becomes a quadratic inequality (Proposition~\ref{prop:criterion}) in which the columns $\bx_j$ of $X$ enter through a sum $\sum_j\varphi(\bx_j)$ of a function homogeneous of degree two, while the other side depends only on the Gram matrix $M$. We maximize the left side over all decompositions of $M$ into rank-one matrices $\bx\bx^T$ with $\bx\ge0$, keeping $M$ fixed. A supporting quadratic form for this maximization, together with a count of the zeros of a nonnegative binary quartic, shows that the maximum is attained on at most two rays, or on the two coordinate axes and one interior ray (Proposition~\ref{prop:rays}). The case of two rays follows from the theorem of King and Nathanson. In the case of three rays the deficit is an explicit $2\times2$ quadratic form whose determinant is a quadratic polynomial in the slope of the interior ray, divided by a positive function; its leading coefficient is negative by a scalar inequality for the divided differences of $t\mapsto t^{\alpha}$ with $\alpha<-2$ (Lemma~\ref{lem:scalar}). The values at the endpoints and an argument based on the sign of the trace then complete the proof. To pass from the Hessian to convexity one has to deal with the arrays whose two rows are proportional; for $N\ge3$ these form a set of codimension at least two, which almost every segment avoids.
+
+The range $p\ge2$ requires no separate argument. Following the duality argument of \cite[Section~2.1]{Aud08}, inequality \eqref{eq:lower} at an exponent $r\in(1,2)$ implies \eqref{eq:upper} at the conjugate exponent, because the matrix norming $T$ again has diagonal blocks (Proposition~\ref{prop:duality}). This gives \eqref{eq:upper} for all $p>2$ and, by Proposition~\ref{prop:equiv}, the concavity in Theorem~\ref{thm:convex}.
+
+\subsection*{Dependencies}
+Besides standard facts from matrix analysis and convex analysis, the proof uses one result that we do not reprove: the convexity and concavity of $g_p$ on $\cA_2$ due to King and Nathanson \cite[Lemma~3]{KN04}, stated as Theorem~\ref{thm:KN} below. The theorem of Audenaert for $p\ge4$ is not used.
+
+\subsection*{Organization}
+Section~\ref{sec:prelim} contains the reduction of Theorem~\ref{thm:main} to Theorem~\ref{thm:convex}. Section~\ref{sec:duality} contains the duality argument. Sections~\ref{sec:criterion}--\ref{sec:three} prove that the Hessian of $g_p$ is positive semidefinite for $1<p<2$: Section~\ref{sec:criterion} derives the second-order criterion, Section~\ref{sec:rays} reduces it to at most three rays, Section~\ref{sec:two} treats two rays, and Section~\ref{sec:three} treats three rays. Section~\ref{sec:proofs} completes the proofs.
+
+\section{Preliminaries and reductions}\label{sec:prelim}
+
+Throughout, $\tr$ is the unnormalized trace, $X^T$ is the transpose and $X^*$ the conjugate transpose. Vectors are columns. For $W\in M_{2,N}(\C)$ we write $\abs(W)=(|w_{ij}|)$ for the matrix of moduli of the entries; this is not to be confused with $|W|=(W^*W)^{1/2}$. Let $\cD_{N,d}$ be the set of $2\times N$ block matrices $T$ as in Conjecture~\ref{conj:A} whose blocks are diagonal $d\times d$ matrices. Let $\cA_N^\circ=(0,\infty)^{2\times N}$ be the interior of $\cA_N$.
+
+\begin{lemma}\label{lem:directsum}
+Let $T\in\cD_{N,d}$, write $a_{jl}$ and $b_{jl}$ for the $l$-th diagonal entries of $A_j$ and $B_j$, and put
+\[
+W_l=\begin{pmatrix}a_{1l}&\cdots&a_{Nl}\\ b_{1l}&\cdots&b_{Nl}\end{pmatrix}\in M_{2,N}(\C)\qquad(1\le l\le d).
+\]
+There are permutation matrices $\Pi$ and $\Pi'$, depending only on $N$ and $d$, such that $\Pi T\Pi'=W_1\oplus\cdots\oplus W_d$. Consequently $\|T\|_p^p=\sum_l\|W_l\|_p^p$ for $1\le p<\infty$, $\|T\|_\infty=\max_l\|W_l\|_\infty$, and
+\begin{equation}\label{eq:Cpentries}
+\|A_j\|_p^p=\sum_{l=1}^d|a_{jl}|^p,\qquad \|B_j\|_p^p=\sum_{l=1}^d|b_{jl}|^p .
+\end{equation}
+Conversely, every $d$-tuple $(W_1,\dots,W_d)$ in $M_{2,N}(\C)$ arises in this way from a unique $T\in\cD_{N,d}$.
+\end{lemma}
+
+\begin{proof}
+Index the rows of $T$ by pairs $(i,l)$, where $i\in\{1,2\}$ is the block row and $l\in\{1,\dots,d\}$ the coordinate, and the columns by pairs $(j,l)$ with $j\in\{1,\dots,N\}$. The entry in row $(i,l)$ and column $(j,l')$ vanishes unless $l=l'$, and for $l=l'$ it is the $(i,j)$ entry of $W_l$. Ordering rows and columns lexicographically by $l$ first gives the direct sum. The remaining assertions are immediate.
+\end{proof}
+
+The following lemma is the $2\times N$ version of \cite[Lemma~4]{KN04}, with the same proof.
+
+\begin{lemma}\label{lem:phase}
+Let $W\in M_{2,N}(\C)$. Then $\|W\|_p\ge\|\abs(W)\|_p$ for $1\le p\le2$, and $\|W\|_p\le\|\abs(W)\|_p$ for $2\le p\le\infty$.
+\end{lemma}
+
+\begin{proof}
+Write $WW^*=\begin{pmatrix}\omega_1&\zeta\\ \bar\zeta&\omega_2\end{pmatrix}$. The Gram matrix of $\abs(W)$ has the same diagonal and off-diagonal entry $\zeta'=\sum_j|w_{1j}w_{2j}|\ge|\zeta|$. The eigenvalues of these two matrices are $\frac12(s\pm\delta)$ and $\frac12(s\pm\delta')$, where $s=\omega_1+\omega_2$, $\delta=((\omega_1-\omega_2)^2+4|\zeta|^2)^{1/2}$ and $\delta'$ is defined with $\zeta'$; thus $\delta\le\delta'\le s$. For a concave function $f$ on $[0,\infty)$, the function $\delta\mapsto f(\frac12(s+\delta))+f(\frac12(s-\delta))$ is nonincreasing on $[0,s]$, and it is nondecreasing if $f$ is convex. Apply this to $f(t)=t^{p/2}$, using $\|W\|_p^p=\tr (WW^*)^{p/2}$. For $p=\infty$, $\|W\|_\infty^2=\frac12(s+\delta)\le\frac12(s+\delta')=\|\abs(W)\|_\infty^2$.
+\end{proof}
+
+\begin{lemma}\label{lem:homog}
+For $1\le p<\infty$ the function $g_p$ is continuous on $\cA_N$ and satisfies $g_p(sD)=s\,g_p(D)$ for $s\ge0$. It is convex if and only if it is subadditive, and concave if and only if it is superadditive.
+\end{lemma}
+
+\begin{proof}
+Continuity is clear, and homogeneity follows from $(sD)^{\circ1/p}=s^{1/p}D^{\circ1/p}$. If $g_p$ is subadditive, then $g_p((1-\lambda)D+\lambda D')\le(1-\lambda)g_p(D)+\lambda g_p(D')$ by homogeneity; conversely, convexity gives $g_p(D+D')=2g_p(\frac12D+\frac12D')\le g_p(D)+g_p(D')$. The concave case is the same.
+\end{proof}
+
+\begin{proposition}\label{prop:equiv}
+Let $N\ge1$ and $1\le p<\infty$. In this proposition, \eqref{eq:lower} and \eqref{eq:upper} refer to this fixed exponent $p$.
+\begin{enumerate}
+\item[(a)] If $p\le2$ and $g_p$ is convex on $\cA_N$, then \eqref{eq:lower} holds for all $d$ and all $T\in\cD_{N,d}$. If $p\ge2$ and $g_p$ is concave on $\cA_N$, then \eqref{eq:upper} holds for all $d$ and all $T\in\cD_{N,d}$.
+\item[(b)] If \eqref{eq:lower} holds for all $T\in\cD_{N,2}$, then $g_p$ is convex on $\cA_N$. If \eqref{eq:upper} holds for all $T\in\cD_{N,2}$, then $g_p$ is concave on $\cA_N$.
+\end{enumerate}
+\end{proposition}
+
+The argument for (a) is that of \cite[Section~2.1]{KN04} and \cite[Section~5]{Aud08}.
+
+\begin{proof}
+(a) Let $p\le2$, let $T\in\cD_{N,d}$, and let $W_l$ be as in Lemma~\ref{lem:directsum}. Put $D_l=\abs(W_l)^{\circ p}\in\cA_N$, so that $\abs(W_l)=D_l^{\circ1/p}$. By \eqref{eq:Cpentries}, $C_p(T)=(\sum_lD_l)^{\circ1/p}$. Lemmas~\ref{lem:directsum}, \ref{lem:phase} and \ref{lem:homog} give
+\[
+\|T\|_p^p=\sum_l\|W_l\|_p^p\ge\sum_l\|\abs(W_l)\|_p^p=\sum_lg_p(D_l)\ge g_p\Bigl(\sum_lD_l\Bigr)=\|C_p(T)\|_p^p .
+\]
+For $p\ge2$ all inequalities are reversed.
+
+(b) Let $D,D'\in\cA_N$ and let $T\in\cD_{N,2}$ correspond, as in Lemma~\ref{lem:directsum}, to $W_1=D^{\circ1/p}$ and $W_2=D'^{\circ1/p}$. Then $\|T\|_p^p=g_p(D)+g_p(D')$, and by \eqref{eq:Cpentries} $C_p(T)=(D+D')^{\circ1/p}$, so that $\|C_p(T)\|_p^p=g_p(D+D')$. Thus \eqref{eq:lower} for $T$ is the subadditivity inequality $g_p(D+D')\le g_p(D)+g_p(D')$, and \eqref{eq:upper} is the reverse inequality. Lemma~\ref{lem:homog} completes the proof.
+\end{proof}
+
+The only nonstandard input of the proof is the following result.
+
+\begin{theorem}[King and Nathanson {\cite[Lemma~3]{KN04}}]\label{thm:KN}
+The function $g_p$ is subadditive, hence convex, on $\cA_2$ for $1\le p\le2$, and superadditive, hence concave, on $\cA_2$ for $p\ge2$.
+\end{theorem}
+
+The statement in \cite{KN04} concerns arbitrary $2\times2$ matrices with nonnegative entries; no positive semidefiniteness is assumed. Combined with Proposition~\ref{prop:equiv} and Lemma~\ref{lem:phase}, it gives Theorem~\ref{thm:main} for $N=2$, which is \cite[Theorem~1]{KN04}.
+
+\section{Duality}\label{sec:duality}
+
+The following argument is that of \cite[Section~2.1]{Aud08}, restricted to diagonal blocks. The point is that the matrix norming $T$ again lies in $\cD_{N,d}$.
+
+\begin{proposition}\label{prop:duality}
+Let $1<r<2$ and $q=r/(r-1)$. Fix $N$ and $d$, and suppose that $\|Y\|_r\ge\|C_r(Y)\|_r$ for every $Y\in\cD_{N,d}$. Then $\|T\|_q\le\|C_q(T)\|_q$ for every $T\in\cD_{N,d}$.
+\end{proposition}
+
+\begin{proof}
+Let $T\in\cD_{N,d}$ be nonzero and let $W_1,\dots,W_d$ be as in Lemma~\ref{lem:directsum}. Write a singular value decomposition $W_l=\sum_i\sigma_{l,i}u_{l,i}v_{l,i}^*$ and put
+\[
+S_l=\|T\|_q^{1-q}\sum_i\sigma_{l,i}^{\,q-1}u_{l,i}v_{l,i}^*\in M_{2,N}(\C).
+\]
+Let $Y\in\cD_{N,d}$ be the matrix corresponding to $(S_1,\dots,S_d)$ by Lemma~\ref{lem:directsum}. Since $(q-1)r=q$,
+\[
+\|Y\|_r^r=\sum_l\|S_l\|_r^r=\|T\|_q^{-q}\sum_{l,i}\sigma_{l,i}^q=1,\qquad
+\tr(TY^*)=\sum_l\tr(W_lS_l^*)=\|T\|_q^{1-q}\sum_{l,i}\sigma_{l,i}^q=\|T\|_q .
+\]
+Write $T_{ij}$ and $Y_{ij}$ for the blocks of $T$ and $Y$. By H\"older's inequality for Schatten norms \cite[Chapter~IV]{Bha97}, applied first to each block and then to the nonnegative $2\times N$ matrices $C_q(T)$ and $C_r(Y)$,
+\begin{align*}
+\|T\|_q&=\sum_{i,j}\tr(T_{ij}Y_{ij}^*)\le\sum_{i,j}|\tr(T_{ij}Y_{ij}^*)|\le\sum_{i,j}\|T_{ij}\|_q\|Y_{ij}\|_r\\
+&=\tr\bigl(C_q(T)C_r(Y)^T\bigr)\le\|C_q(T)\|_q\|C_r(Y)\|_r .
+\end{align*}
+By hypothesis $\|C_r(Y)\|_r\le\|Y\|_r=1$, which proves the claim.
+\end{proof}
+
+\begin{corollary}\label{cor:infty}
+If \eqref{eq:upper} holds for all finite $p>2$ and all $T\in\cD_{N,d}$, then it holds for $p=\infty$.
+\end{corollary}
+
+\begin{proof}
+Fix $T$. As $q\to\infty$ we have $\|T\|_q\to\|T\|_\infty$ and $C_q(T)\to C_\infty(T)$ entrywise. Moreover $\bigl|\|C_q(T)\|_q-\|C_\infty(T)\|_q\bigr|\le\|C_q(T)-C_\infty(T)\|_1\to0$ and $\|C_\infty(T)\|_q\to\|C_\infty(T)\|_\infty$.
+\end{proof}
+
+\section{A second-order criterion}\label{sec:criterion}
+
+In Sections~\ref{sec:criterion}--\ref{sec:three} we fix $1<p<2$ and put
+\begin{equation}\label{eq:params}
+k=p-2\in(-1,0),\qquad \beta=p-1=k+1\in(0,1),\qquad \gamma=\tfrac k2,\qquad \alpha=\tfrac2k<-2 .
+\end{equation}
+Thus $\alpha\gamma=1$. Let $\Sym$ be the space of real symmetric $2\times2$ matrices with the inner product $\ip ZW=\tr(ZW)$. Bold letters denote particular vectors in $\R^2$, such as the columns of a $2\times N$ matrix; the coordinates of a generic vector $x\in\R^2$ are written $x_1,x_2$.
+
+\subsection{Derivatives of matrix powers}
+For a positive definite $P\in\Sym$ and $s\in\R$ let $\cL^s_P\colon\Sym\to\Sym$ be the Fr\'echet derivative of $Q\mapsto Q^s$ at $P$. If $P=\sum_i\mu_i\bv_i\bv_i^T$ is a spectral decomposition, then by the Daleckii--Krein formula \cite[Section~V.3]{Bha97}
+\begin{equation}\label{eq:DK}
+\ip{\bv_i}{\cL^s_P(Z)\bv_j}=f^{[1]}(\mu_i,\mu_j)\,\ip{\bv_i}{Z\bv_j},\qquad f(t)=t^s,
+\end{equation}
+where $f^{[1]}(\mu,\mu')=(f(\mu)-f(\mu'))/(\mu-\mu')$ for $\mu\ne\mu'$ and $f^{[1]}(\mu,\mu)=f'(\mu)$. Hence $\cL^s_P$ is self-adjoint and $\ip Z{\cL^s_P(Z)}=\sum_{i,j}f^{[1]}(\mu_i,\mu_j)\ip{\bv_i}{Z\bv_j}^2$. If $s<0$, all divided differences of $t^s$ are negative, so $\cL^s_P$ is negative definite. Since $(Q^\gamma)^\alpha=Q$, the chain rule gives $\cL^\alpha_{P^\gamma}\cL^\gamma_P=\mathrm{id}$. Also $\cL^s_P(P)=sP^s$. For a $2\times2$ matrix with distinct eigenvalues $\mu_1,\mu_2$ the off-diagonal entry satisfies $f(P)_{12}=f^{[1]}(\mu_1,\mu_2)P_{12}$, because $f(P)=f(\mu_2)I+f^{[1]}(\mu_1,\mu_2)(P-\mu_2I)$.
+
+\begin{lemma}\label{lem:signs}
+Let $M\in\Sym$ be positive definite with $M_{12}>0$, and write
+\[
+H=M^\gamma=\begin{pmatrix}a&c\\ c&b\end{pmatrix},\qquad M=H^\alpha=\begin{pmatrix}A&C\\ C&B\end{pmatrix}.
+\]
+Then $a,b>0$, $c<0$, $ab>c^2$, $A,B,C>0$ and $AB>C^2$. Conversely, if $H$ is positive definite with $H_{12}<0$, then $M=H^\alpha$ is positive definite with $M_{12}>0$.
+\end{lemma}
+
+\begin{proof}
+Since $M_{12}\ne0$, the eigenvalues of $M$ are distinct, and $c=f^{[1]}(\mu_1,\mu_2)M_{12}<0$ for the decreasing function $f(t)=t^\gamma$. The converse is the same with $f(t)=t^\alpha$.
+\end{proof}
+
+From now on in this section, $M$ and $H$ are as in Lemma~\ref{lem:signs}. For $x=(x_1,x_2)^T\in(0,\infty)^2$ define
+\begin{equation}\label{eq:K}
+K_H(x)=\beta\diag\Bigl(\frac{(Hx)_1}{x_1},\frac{(Hx)_2}{x_2}\Bigr)-H=\begin{pmatrix}ka+\beta c\,x_2/x_1&-c\\ -c&kb+\beta c\,x_1/x_2\end{pmatrix}.
+\end{equation}
+
+\begin{lemma}\label{lem:K}
+For $x\in(0,\infty)^2$ and $s>0$ we have $K_H(sx)=K_H(x)$, $K_H(x)x=kHx$, and $K_H(x)$ is negative definite.
+\end{lemma}
+
+\begin{proof}
+The first two assertions follow from \eqref{eq:K} and $\beta-1=k$. The diagonal entries of $K_H(x)$ are negative, since $k<0$, $a,b>0$, $\beta>0$ and $c<0$. Using $\beta^2-1=k(k+2)$ we find
+\begin{equation}\label{eq:detK}
+\det K_H(x)=k\Bigl[kab+(k+2)c^2+\beta c\Bigl(\frac{ax_1}{x_2}+\frac{bx_2}{x_1}\Bigr)\Bigr].
+\end{equation}
+Put $\delta=-c>0$ and $\varrho=\sqrt{ab}>\delta$. Since $ax_1/x_2+bx_2/x_1\ge2\varrho$, the bracket is at most $k\varrho^2+(k+2)\delta^2-2\beta\delta\varrho=(\varrho-\delta)(k\varrho-(k+2)\delta)<0$. As $k<0$, $\det K_H(x)>0$.
+\end{proof}
+
+\subsection{The Hessian}
+Let $X\in(0,\infty)^{2\times N}$ with columns $\bx_1,\dots,\bx_N$, let $M=XX^T$ be positive definite, and let $D=X^{\circ p}\in\cA_N^\circ$. Note that $M_{12}>0$. For $E\in\R^{2\times N}$ define $Y\in\R^{2\times N}$ with columns $\by_j$ by $Y_{ij}=\frac1pX_{ij}^{1-p}E_{ij}$; every $Y$ arises from a unique $E$. Put $J(Y)=YX^T+XY^T\in\Sym$.
+
+\begin{lemma}\label{lem:hessian}
+With this notation,
+\begin{equation}\label{eq:hessian}
+\frac{d^2}{dt^2}\Big|_{t=0}g_p(D+tE)=\frac p2\ip{J(Y)}{\cL^\gamma_M(J(Y))}-p\sum_{j=1}^N\by_j^TK_H(\bx_j)\by_j .
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Let $X(t)=(D+tE)^{\circ1/p}$ and $M(t)=X(t)X(t)^T$. Then $X'(0)=Y$, and differentiating entrywise twice gives $X''(0)=-(p-1)Y^{\circ2}\circ X^{\circ-1}$. Since $g_p(D+tE)=\tr M(t)^{p/2}$ and the first derivative of $Q\mapsto\tr Q^{p/2}$ at $Q$ in direction $Z$ is $\frac p2\tr(Q^\gamma Z)$,
+\[
+\frac{d^2}{dt^2}\Big|_{t=0}\tr M(t)^{p/2}=\frac p2\Bigl(\ip{M'}{\cL^\gamma_M(M')}+\tr(HM'')\Bigr),
+\]
+with $M'=J(Y)$ and $M''=2YY^T+X''X^T+XX''^T$. Now $\tr(HYY^T)=\sum_j\by_j^TH\by_j$ and, writing $\bx_j''$ for the columns of $X''(0)$,
+\[
+\tr(HX''X^T)=\sum_j \bx_j^TH\bx_j''=-\beta\sum_j\sum_{i=1}^2\frac{(H\bx_j)_i}{X_{ij}}Y_{ij}^2 .
+\]
+Hence $\tr(HM'')=-2\sum_j\by_j^TK_H(\bx_j)\by_j$, and \eqref{eq:hessian} follows.
+\end{proof}
+
+For $Z\in\Sym$ and $x\in(0,\infty)^2$ define
+\begin{equation}\label{eq:phipsi}
+\varphi_{H,Z}(x)=(Zx)^T\bigl(-K_H(x)\bigr)^{-1}(Zx)\ge0,\qquad \Psi_H(Z)=-\tfrac12\ip Z{\cL^\alpha_H(Z)}.
+\end{equation}
+Since $\alpha<0$, $\Psi_H$ is a positive definite quadratic form on $\Sym$.
+
+\begin{proposition}\label{prop:criterion}
+In the situation of Lemma~\ref{lem:hessian}, the Hessian of $g_p$ at $D$ is positive semidefinite if and only if
+\begin{equation}\label{eq:criterion}
+\sum_{j=1}^N\varphi_{H,Z}(\bx_j)\le\Psi_H(Z)\qquad\text{for every }Z\in\Sym .
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Equip $\R^{2\times N}$ with the inner product $\tr(Y^TY')$. Let $\cK$ be the operator on $\R^{2\times N}$ acting on the $j$-th column by $-K_H(\bx_j)$; it is positive definite by Lemma~\ref{lem:K}. Let $\mathcal G=-\cL^\gamma_M$, which is positive definite on $\Sym$ with inverse $-\cL^\alpha_H$. The adjoint of $J\colon\R^{2\times N}\to\Sym$ is $J^*(Z)=2ZX$, since $\ip{J(Y)}Z=2\tr(ZXY^T)$. By \eqref{eq:hessian} the Hessian is positive semidefinite if and only if $\frac12J^*\mathcal GJ\le\cK$. With $B=2^{-1/2}\mathcal G^{1/2}J\cK^{-1/2}$ this reads $B^*B\le I$, which is equivalent to $BB^*\le I$, that is, to $\frac12J\cK^{-1}J^*\le\mathcal G^{-1}$. Evaluated at $Z\in\Sym$, the left side gives $\frac12\cdot4\sum_j(Z\bx_j)^T(-K_H(\bx_j))^{-1}(Z\bx_j)$ and the right side gives $-\ip Z{\cL^\alpha_H(Z)}$; dividing by two yields \eqref{eq:criterion}.
+\end{proof}
+
+\subsection{Rational form, boundary values and a gauge invariance}
+Define the quadratic form
+\begin{equation}\label{eq:Delta}
+\Delta_H(x)=k\bigl[\beta ac\,x_1^2+(kab+(k+2)c^2)x_1x_2+\beta bc\,x_2^2\bigr]
+\end{equation}
+and, with $y=Zx$, the quartic form
+\begin{equation}\label{eq:Upsilon}
+\Upsilon_{H,Z}(x)=(kb\,x_1x_2+\beta c\,x_1^2)y_1^2+2c\,x_1x_2\,y_1y_2+(ka\,x_1x_2+\beta c\,x_2^2)y_2^2 .
+\end{equation}
+
+\begin{lemma}\label{lem:rational}
+$\Delta_H(x)>0$ for every $x\in[0,\infty)^2\setminus\{0\}$, and $\varphi_{H,Z}(x)=-\Upsilon_{H,Z}(x)/\Delta_H(x)$ for $x\in(0,\infty)^2$. Consequently $\varphi_{H,Z}$ extends to a continuous function on $[0,\infty)^2$, homogeneous of degree two, with
+\begin{equation}\label{eq:axes}
+\varphi_{H,Z}(x_1,0)=-\frac{Z_{11}^2}{ka}\,x_1^2,\qquad \varphi_{H,Z}(0,x_2)=-\frac{Z_{22}^2}{kb}\,x_2^2 .
+\end{equation}
+Moreover, $(H,x)\mapsto\varphi_{H,Z}(x)$ is jointly continuous on the set of pairs with $H$ positive definite, $H_{12}<0$, and $x\in[0,\infty)^2$.
+\end{lemma}
+
+\begin{proof}
+By \eqref{eq:detK}, $x_1x_2\det K_H(x)=\Delta_H(x)$ for $x\in(0,\infty)^2$, which is positive by Lemma~\ref{lem:K}. On the axes, $\Delta_H(x_1,0)=k\beta ac\,x_1^2>0$ and $\Delta_H(0,x_2)=k\beta bc\,x_2^2>0$ for $x_1,x_2>0$, since $k<0$ and $c<0$. Multiplying the adjugate of $K_H(x)$ by $x_1x_2$ gives
+\[
+K_H(x)^{-1}=\frac1{\Delta_H(x)}\begin{pmatrix}kb\,x_1x_2+\beta c\,x_1^2&c\,x_1x_2\\ c\,x_1x_2&ka\,x_1x_2+\beta c\,x_2^2\end{pmatrix},
+\]
+whence the formula for $\varphi_{H,Z}$. The quotient $-\Upsilon_{H,Z}(x)/\Delta_H(x)$ is a rational function of $(a,b,c,x)$ whose denominator does not vanish for $x\ne0$; this gives the extension, \eqref{eq:axes}, and the joint continuity at points with $x\ne0$. For $x=0$ put $\varphi_{H,Z}(0)=0$. Let $\mathcal U$ be a compact neighborhood of $H$ in the open set of positive definite matrices with negative off-diagonal entry. By the continuity just proved, $c_{\mathcal U}=\sup\{\varphi_{H',Z}(y):H'\in\mathcal U,\ y\in[0,\infty)^2,\ |y|=1\}$ is finite, and homogeneity gives $0\le\varphi_{H',Z}(x)\le c_{\mathcal U}|x|^2$ for $H'\in\mathcal U$, which is the joint continuity at $(H,0)$.
+\end{proof}
+
+In view of Lemma~\ref{lem:rational}, we regard $\varphi_{H,Z}$ as a function on $[0,\infty)^2$. When $H$ is fixed we write $\varphi_Z$.
+
+\begin{lemma}\label{lem:gauge}
+Let $\bx_1,\dots,\bx_N\in(0,\infty)^2$ satisfy $\sum_j\bx_j\bx_j^T=M$, and put $\mathcal E(Z)=\Psi_H(Z)-\sum_j\varphi_{H,Z}(\bx_j)$. Then $\mathcal E(Z+tH)=\mathcal E(Z)$ for all $Z\in\Sym$ and $t\in\R$. Consequently \eqref{eq:criterion} holds for every $Z\in\Sym$ as soon as it holds for every diagonal $Z$.
+\end{lemma}
+
+\begin{proof}
+Let $\mathcal B$ be the symmetric bilinear form associated with the quadratic form $\mathcal E$. For every $x\in(0,\infty)^2$, Lemma~\ref{lem:K} gives $(-K_H(x))^{-1}Hx=-x/k$. Moreover $\cL^\alpha_H(H)=\alpha H^\alpha=\alpha M$. Hence
+\[
+\mathcal B(Z,H)=-\frac\alpha2\tr(ZM)+\frac1k\sum_j\bx_j^TZ\bx_j=\Bigl(-\frac\alpha2+\frac1k\Bigr)\tr(ZM)=0,
+\]
+because $\alpha k=2$. Thus $\mathcal E(Z+tH)=\mathcal E(Z)+2t\mathcal B(Z,H)+t^2\mathcal B(H,H)=\mathcal E(Z)$. Since $c\ne0$, every $Z\in\Sym$ is of the form $Z'+tH$ with $Z'$ diagonal.
+\end{proof}
+
+\section{Reduction to at most three rays}\label{sec:rays}
+
+In this section $M$ and $H$ are as in Lemma~\ref{lem:signs} and $Z\in\Sym$ is fixed; we write $\varphi=\varphi_{H,Z}$. Let $e_1,e_2$ be the standard basis vectors of $\R^2$, and let
+\[
+\Sp=\{x\in[0,\infty)^2:\ x_1^2+x_2^2=1\},\qquad \cC=\{G\in\Sym:\ G\ge0,\ G_{12}\ge0\}.
+\]
+For a finite positive Borel measure $\mu$ on $\Sp$ write $\mathrm{Gram}(\mu)=\int xx^T\,d\mu(x)$. A finite family of nonzero vectors $\bx_j\in[0,\infty)^2$ with $\sum_j\bx_j\bx_j^T=G$ corresponds to the measure $\sum_j|\bx_j|^2\delta_{\bx_j/|\bx_j|}$ with Gram matrix $G$, and $\sum_j\varphi(\bx_j)=\int\varphi\,d\mu$ by homogeneity. Conversely, a finitely supported measure gives such a family.
+
+\begin{lemma}\label{lem:cone}
+The set of Gram matrices of finite positive measures on $\Sp$ is $\cC$. Every $G\in\cC$ is the Gram matrix of a measure supported on at most two points of $\Sp$. Every positive definite $G$ with $G_{12}>0$ is an interior point of $\cC$ in $\Sym$.
+\end{lemma}
+
+\begin{proof}
+Gram matrices of measures on $\Sp$ are positive semidefinite with nonnegative off-diagonal entry. Conversely, let $G=\begin{pmatrix}g_1&g\\ g&g_2\end{pmatrix}\in\cC$. If $g_1>0$, then $G=\mathbf{w}\mathbf{w}^T+(g_2-g^2/g_1)e_2e_2^T$ with $\mathbf{w}=(\sqrt{g_1},g/\sqrt{g_1})^T\in[0,\infty)^2$ and $g_2-g^2/g_1\ge0$. If $g_1=0$, then $g=0$ and $G=g_2e_2e_2^T$. The last assertion holds because the inequalities $g_1>0$, $g_1g_2>g^2$ and $g>0$ are open conditions.
+\end{proof}
+
+For $G\in\cC$ define
+\[
+\Phi(G)=\sup\Bigl\{\int\varphi\,d\mu:\ \mu\text{ a finite positive measure on }\Sp,\ \mathrm{Gram}(\mu)=G\Bigr\}.
+\]
+
+\begin{proposition}\label{prop:rays}
+There is a finite positive measure $\mu^\star$ on $\Sp$ with $\mathrm{Gram}(\mu^\star)=M$ and $\int\varphi\,d\mu^\star=\Phi(M)$ whose support either consists of at most two points, or consists of exactly three points: $e_1$, $e_2$ and one point of the open quarter circle.
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1: attainment.} Every feasible $\mu$ for $G$ has total mass $\int|x|^2\,d\mu=\tr G$. Hence $\Phi(G)\le\tr G\cdot\max_{\Sp}\varphi<\infty$, and the feasible measures for $G$ form a weak-$*$ closed subset of the weak-$*$ compact set of positive measures on $\Sp$ of mass $\tr G$. Since $\varphi$ is continuous on $\Sp$ (Lemma~\ref{lem:rational}), the supremum $\Phi(G)$ is attained.
+
+\emph{Step 2: concavity.} Adding feasible measures and multiplying them by $s>0$ shows $\Phi(G+G')\ge\Phi(G)+\Phi(G')$ and $\Phi(sG)=s\Phi(G)$. Hence $\Phi$ is a finite concave function on the convex cone $\cC$.
+
+\emph{Step 3: a supporting quadratic form.} By Lemma~\ref{lem:cone}, $M$ lies in the interior $\cC^\circ$ of $\cC$. A finite concave function on the open convex set $\cC^\circ$ has a supergradient at each of its points \cite[Theorem~23.4]{Roc70}: there is $Q\in\Sym$ with
+\begin{equation}\label{eq:superg}
+\Phi(G)\le\Phi(M)+\tr\bigl(Q(G-M)\bigr)\qquad(G\in\cC^\circ).
+\end{equation}
+We extend \eqref{eq:superg} to all $G\in\cC$. For $0<t<1$ the matrix $G_t=(1-t)M+tG$ lies in $\cC^\circ$, and concavity together with \eqref{eq:superg} at $G_t$ gives
+\[
+(1-t)\Phi(M)+t\Phi(G)\le\Phi(G_t)\le\Phi(M)+t\tr\bigl(Q(G-M)\bigr).
+\]
+Subtracting $(1-t)\Phi(M)$ and dividing by $t$ yields \eqref{eq:superg} for $G$. Taking $G=sM$ with $s>0$ in \eqref{eq:superg} gives $(s-1)(\Phi(M)-\tr(QM))\le0$ for all $s>0$, so $\Phi(M)=\tr(QM)$ and therefore $\Phi(G)\le\tr(QG)$ for every $G\in\cC$. For $x\in\Sp$ the Dirac measure at $x$ is feasible for $xx^T$, so
+\begin{equation}\label{eq:majorant}
+\varphi(x)\le x^TQx\qquad(x\in\Sp),
+\end{equation}
+and by homogeneity for all $x\in[0,\infty)^2$.
+
+\emph{Step 4: contact set.} Let $\mu$ be any maximizer for $M$ (Step~1). Then $\int(x^TQx-\varphi(x))\,d\mu=\tr(QM)-\Phi(M)=0$, and the integrand is continuous and nonnegative. Hence the support of $\mu$ is contained in the zero set of $x\mapsto x^TQx-\varphi(x)$ on $\Sp$. By Lemma~\ref{lem:rational} this zero set is the zero set on $\Sp$ of the quartic form
+\[
+\rho(x)=(x^TQx)\,\Delta_H(x)+\Upsilon_{H,Z}(x),
+\]
+which is nonnegative on $[0,\infty)^2$.
+
+\emph{Step 5: counting zeros.} Suppose $\rho\not\equiv0$, and let $\pi(s)=\rho(1,s)$, a real polynomial of degree at most four. It is not identically zero, since $\rho(x)=x_1^4\pi(x_2/x_1)$ for $x_1\ne0$. Each zero of $\pi$ in $(0,\infty)$ has even multiplicity because $\pi\ge0$ there. The point $e_1$ is a zero of $\rho$ if and only if $\pi(0)=0$, and $e_2$ is a zero if and only if the coefficient of $s^4$ in $\pi$ vanishes, that is, $\deg\pi\le3$. Let $n$ be the number of zeros of $\pi$ in $(0,\infty)$ and $m\in\{0,1,2\}$ the number of axis points $e_1,e_2$ in the zero set. Counting multiplicities,
+\[
+2n+[\pi(0)=0]\le\deg\pi\le4-[\rho(e_2)=0],\qquad\text{hence}\qquad 2n+m\le4 .
+\]
+Thus the zero set of $\rho$ on $\Sp$ has at most two points, or $n=1$ and $m=2$. In both cases every maximizer has the required support.
+
+\emph{Step 6: the degenerate case.} If $\rho\equiv0$, then $\varphi(x)=x^TQx$ on $\Sp$, so every feasible $\mu$ for $M$ satisfies $\int\varphi\,d\mu=\tr(QM)=\Phi(M)$. The measure supported on at most two points given by Lemma~\ref{lem:cone} is then a maximizer.
+\end{proof}
+
+A measure supported on a single point has a Gram matrix of rank one. Since $M$ is positive definite, the first alternative in Proposition~\ref{prop:rays} means a decomposition $M=\by_1\by_1^T+\by_2\by_2^T$ with $\by_1,\by_2\in[0,\infty)^2$, and then $\Phi(M)=\varphi(\by_1)+\varphi(\by_2)$.
+
+\section{Two rays}\label{sec:two}
+
+\begin{lemma}\label{lem:two}
+Let $M$ and $H$ be as in Lemma~\ref{lem:signs}, and let $\by_1,\by_2\in[0,\infty)^2$ satisfy $\by_1\by_1^T+\by_2\by_2^T=M$. Then $\varphi_{H,Z}(\by_1)+\varphi_{H,Z}(\by_2)\le\Psi_H(Z)$ for every $Z\in\Sym$.
+\end{lemma}
+
+\begin{proof}
+Suppose first that $\by_1,\by_2\in(0,\infty)^2$. Let $X'=[\by_1\ \by_2]$ and $D'=X'^{\circ p}\in\cA_2^\circ$. Near $D'$ the function $g_p$ on $\cA_2$ is smooth, because $X'X'^T=M$ is positive definite; by Theorem~\ref{thm:KN} it is convex on the open set $\cA_2^\circ$. Hence its Hessian at $D'$ is positive semidefinite, and Proposition~\ref{prop:criterion} with $N=2$ gives the claim.
+
+In general choose $\by_i^{(n)}\in(0,\infty)^2$ with $\by_i^{(n)}\to\by_i$. Then $M^{(n)}=\sum_i\by_i^{(n)}\by_i^{(n)T}\to M$; for large $n$ the matrix $M^{(n)}$ is positive definite, and it has positive off-diagonal entry. By the first part, the claim holds for $\by_i^{(n)}$ and $H^{(n)}=(M^{(n)})^\gamma$. As $n\to\infty$, $H^{(n)}\to H$; since $Q\mapsto Q^\alpha$ is smooth on positive definite matrices, $\Psi_{H^{(n)}}(Z)\to\Psi_H(Z)$, and $\varphi_{H^{(n)},Z}(\by_i^{(n)})\to\varphi_{H,Z}(\by_i)$ by the joint continuity in Lemma~\ref{lem:rational}.
+\end{proof}
+
+\section{Three rays}\label{sec:three}
+
+Throughout this section $M=\begin{pmatrix}A&C\\ C&B\end{pmatrix}$ and $H=M^\gamma=\begin{pmatrix}a&c\\ c&b\end{pmatrix}$ are as in Lemma~\ref{lem:signs}, so $a,b,A,B,C>0$, $c<0$, $ab>c^2$ and $AB>C^2$. We consider diagonal matrices $Z=\diag(\xi,\eta)$. For $r>0$ put $\bff_r=(1,r)^T$.
+
+\subsection{The deficit matrix}
+
+\begin{lemma}\label{lem:threedec}
+For $r>0$ there are $\lambda_1,\lambda_2,\lambda_3\ge0$ with $M=\lambda_1e_1e_1^T+\lambda_2\bff_r\bff_r^T+\lambda_3e_2e_2^T$ if and only if $r_-\le r\le r_+$, where $r_-=C/A$ and $r_+=B/C$. In that case $\lambda_1=A-C/r$, $\lambda_2=C/r$ and $\lambda_3=B-Cr$. Moreover $0<r_-<r_+$.
+\end{lemma}
+
+\begin{proof}
+Comparing entries gives $A=\lambda_1+\lambda_2$, $C=\lambda_2r$ and $B=\lambda_2r^2+\lambda_3$. The inequality $r_-<r_+$ is $AB>C^2$.
+\end{proof}
+
+Define $q_{11},q_{12},q_{22}$ by
+\begin{equation}\label{eq:q}
+-\Psi_H(\diag(\xi,\eta))=q_{11}\xi^2+2q_{12}\xi\eta+q_{22}\eta^2,
+\end{equation}
+and put
+\begin{equation}\label{eq:uvw}
+u=q_{11}-\frac A{ka},\qquad v=q_{22}-\frac B{kb},\qquad w=q_{12},\qquad D(r)=\Delta_H(\bff_r).
+\end{equation}
+Thus $D(r)=k[\beta ac+(kab+(k+2)c^2)r+\beta bc\,r^2]>0$ for $r\ge0$ by Lemma~\ref{lem:rational}. For $r\in[r_-,r_+]$, with $\lambda_i$ as in Lemma~\ref{lem:threedec}, the deficit of \eqref{eq:criterion} for the decomposition of Lemma~\ref{lem:threedec} is the quadratic form
+\[
+-\Psi_H(Z)+\lambda_1\varphi_Z(e_1)+\lambda_2\varphi_Z(\bff_r)+\lambda_3\varphi_Z(e_2)=(\xi,\eta)\,R(r)\,(\xi,\eta)^T ,
+\]
+where $R(r)$ is a real symmetric $2\times2$ matrix. We must show $R(r)\le0$.
+
+\begin{lemma}\label{lem:Rformula}
+For $r\in[r_-,r_+]$,
+\begin{equation}\label{eq:UVW}
+R(r)=\begin{pmatrix}U&W\\ W&V\end{pmatrix},\qquad
+\begin{aligned}
+U&=u+\frac{Cc\,[(k+2)c+\beta br]}{aD(r)},\\
+V&=v+\frac{Cc\,[\beta ar+(k+2)cr^2]}{bD(r)},\\
+W&=w-\frac{Cc\,r}{D(r)},
+\end{aligned}
+\end{equation}
+and $\det R(r)=F(r)/D(r)$, where
+\begin{multline}\label{eq:F}
+F(r)=(uv-w^2)D(r)+Cc\Bigl[\frac ub\bigl(\beta ar+(k+2)cr^2\bigr)+\frac va\bigl((k+2)c+\beta br\bigr)+2wr\Bigr]\\
++\frac{(Cc)^2(k+2)}{abk}\,r .
+\end{multline}
+In particular $F$ is a polynomial of degree at most two, with coefficient of $r^2$
+\begin{equation}\label{eq:L}
+L=k\beta bc\,(uv-w^2)+\frac{(k+2)Cc^2}{b}\,u .
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+By \eqref{eq:axes}, $\varphi_Z(e_1)=-\xi^2/(ka)$ and $\varphi_Z(e_2)=-\eta^2/(kb)$, and by Lemma~\ref{lem:rational}
+\[
+\varphi_Z(\bff_r)=-\frac{(kbr+\beta c)\xi^2+2cr^2\xi\eta+r^3(ka+\beta cr)\eta^2}{D(r)} .
+\]
+Hence the coefficient of $\xi^2$ in the deficit is
+\[
+u+\frac C{kar}-\frac{C(kbr+\beta c)}{rD(r)}=u+\frac{C\,[D(r)-ka(kbr+\beta c)]}{kar\,D(r)},
+\]
+and $D(r)-ka(kbr+\beta c)=kr[(k+2)c^2+\beta bcr]$. This gives $U$. Similarly the coefficient of $\eta^2$ is $v+Cr[D(r)-kbr(ka+\beta cr)]/(kbD(r))$ with $D(r)-kbr(ka+\beta cr)=k[\beta ac+(k+2)c^2r]$, which gives $V$. The coefficient of $\xi\eta$ is $2w-2Ccr/D(r)=2W$, so the off-diagonal entry of $R(r)$ is $W$. Write $U=u+\nu_U/D$, $V=v+\nu_V/D$ and $W=w+\nu_W/D$. Then
+\[
+D^2\det R=(uv-w^2)D^2+(u\nu_V+v\nu_U-2w\nu_W)D+\nu_U\nu_V-\nu_W^2 .
+\]
+Using $\beta^2-1=k(k+2)$ one finds
+\[
+[(k+2)c+\beta br][\beta a+(k+2)cr]-abr=\frac{k+2}k\,D(r),
+\]
+so that $\nu_U\nu_V-\nu_W^2=(Cc)^2(k+2)rD(r)/(abk)$. Dividing by $D^2$ gives \eqref{eq:F}. The terms of degree two in \eqref{eq:F} are $(uv-w^2)k\beta bc\,r^2$ and $Cc\,u(k+2)c\,r^2/b$.
+\end{proof}
+
+\begin{lemma}\label{lem:endpoints}
+$R(r_-)\le0$ and $R(r_+)\le0$. In particular $F(r_-)\ge0$ and $F(r_+)\ge0$.
+\end{lemma}
+
+\begin{proof}
+For $r=r_-$ we have $\lambda_1=0$, so $M=\by_1\by_1^T+\by_2\by_2^T$ with $\by_1=\sqrt{\lambda_2}\,\bff_{r_-}$ and $\by_2=\sqrt{\lambda_3}\,e_2$, and Lemma~\ref{lem:two} gives $R(r_-)\le0$. The case $r_+$ is the same with $\lambda_3=0$. A negative semidefinite $2\times2$ matrix has nonnegative determinant, and $D>0$.
+\end{proof}
+
+\subsection{A scalar inequality}
+For $\alpha\in\R$ and $t>0$, $t\ne1$, put
+\[
+z_\alpha(t)=\frac{t^\alpha-1}{t-1},\qquad Q_\alpha(t,z)=tz^2-(2\alpha+1+t)z+\alpha(\alpha+2).
+\]
+
+\begin{lemma}\label{lem:scalar}
+Let $\alpha\le-2$. Then $Q_\alpha(t,z_\alpha(t))>0$ for every $t\in(0,1)\cup(1,\infty)$.
+\end{lemma}
+
+\begin{proof}
+Put $m=-\alpha\ge2$ and $y=-z_\alpha(t)$; then $y>0$, and
+\[
+Q_\alpha(t,-y)=V(t,y):=ty^2+(t+1-2m)y+m(m-2).
+\]
+With $t=e^{2s}$, $s\ne0$, we have $y=t^{-(m+1)/2}\sinh(ms)/\sinh(s)$. Since $\sinh$ is convex on $[0,\infty)$ and vanishes at $0$, $\sinh(ms)\ge m\sinh(s)$ for $s\ge0$, and the quotient is even in $s$. Hence
+\begin{equation}\label{eq:ylower}
+y\ge Y:=m\,t^{-(m+1)/2}.
+\end{equation}
+A direct substitution gives $V(t,Y)=m\,t^{-(m+1)/2}R_m(t)$ with
+\[
+R_m(t)=t+1-2m+m\,t^{-(m-1)/2}+(m-2)t^{(m+1)/2}.
+\]
+Here $R_m(1)=R_m'(1)=0$ and $R_m''(t)=\frac{m^2-1}4\bigl[m\,t^{-(m+3)/2}+(m-2)t^{(m-3)/2}\bigr]>0$, so $R_m(t)>0$ and hence $V(t,Y)>0$ for $t\ne1$. Since $V(t,\cdot)$ is a convex quadratic, it suffices to show that $V(t,\cdot)$ is nondecreasing on $[Y,\infty)$, or positive everywhere; then \eqref{eq:ylower} gives $V(t,y)\ge V(t,Y)>0$ in the first case.
+
+If $0<t<1$, then $\partial_yV(t,Y)=2m\,t^{-(m-1)/2}+t+1-2m>t+1>0$.
+
+If $t\ge2m-1$, all coefficients of $V(t,\cdot)$ are nonnegative and the leading one is positive, so $V(t,y)>0$ for $y>0$.
+
+Let $1<t<2m-1$. The discriminant $\kappa(t)=(t+1-2m)^2-4tm(m-2)$ of $V(t,\cdot)$ is a convex quadratic in $t$ with vertex at $2m^2-2m-1\ge2m-1$, so it is decreasing on $[1,2m-1]$; moreover $\kappa(1)=4$ and $\kappa(2m-1)=-4m(m-2)(2m-1)\le0$. Where $\kappa(t)<0$, $V(t,\cdot)$ is positive everywhere. Since $\kappa$ is decreasing, the set $I$ of $t\in(1,2m-1)$ with $\kappa(t)\ge0$ is an interval with left endpoint $1$. For $t\in I$ consider the vertex $y_v(t)=(2m-1-t)/(2t)$ of $V(t,\cdot)$. At $t=1$ we have $Y=m>m-1=y_v$. If $Y(t)=y_v(t)$ for some $t\in I$, then $V(t,Y)=-\kappa(t)/(4t)\le0$, which is impossible. By continuity $Y>y_v$ on $I$, so $V(t,\cdot)$ is increasing on $[Y,\infty)$ for $t\in I$.
+\end{proof}
+
+For $\alpha\le-2$ put
+\begin{equation}\label{eq:P0P1}
+P_1(t)=-(1-t)^2Q_\alpha\bigl(t,z_\alpha(t)\bigr)\quad(t>0,\ t\ne1),\qquad P_0(t)=t^{2\alpha+1}P_1(1/t)\quad(0<t<1).
+\end{equation}
+By Lemma~\ref{lem:scalar}, $P_1(t)<0$ for all $t\ne1$, and hence $P_0(t)<0$ for $0<t<1$.
+
+\subsection{The leading coefficient}
+
+\begin{lemma}\label{lem:L}
+The coefficient $L$ in \eqref{eq:L} is negative.
+\end{lemma}
+
+\begin{proof}
+\emph{Scaling.} Replacing $H$ by $sH$ with $s>0$ replaces $M$ by $s^\alpha M$ and leaves $r_\pm$ unchanged. Since $K_{sH}=sK_H$ and $\cL^\alpha_{sH}=s^{\alpha-1}\cL^\alpha_H$, the matrix $R(r)$ is multiplied by $s^{\alpha-1}$, and $D(r)$ is multiplied by $s^2$. Hence $F=D\det R$, and with it $L$, is multiplied by $s^{2\alpha}$. In particular the sign of $L$ does not depend on the normalization of $H$.
+
+\emph{Spectral coordinates.} Let $\tau\in(0,\infty)\setminus\{1\}$, $\theta\in(0,1)$ and $\epsilon=\operatorname{sign}(1-\tau)$, and put
+\[
+\bv=(\sqrt\theta,-\epsilon\sqrt{1-\theta})^T,\qquad \bv^\perp=(\epsilon\sqrt{1-\theta},\sqrt\theta)^T,\qquad H=\bv\bv^T+\tau\,\bv^\perp\bv^{\perp T}.
+\]
+Then
+\[
+a=\tau+(1-\tau)\theta,\quad b=1-(1-\tau)\theta,\quad c=-|1-\tau|\sqrt{\theta(1-\theta)}<0,
+\]
+so $H$ satisfies the hypotheses of this section by Lemma~\ref{lem:signs}, and $M=H^\alpha=\bv\bv^T+\tau^\alpha\bv^\perp\bv^{\perp T}$ has
+\[
+A=\tau^\alpha+(1-\tau^\alpha)\theta,\quad B=1-(1-\tau^\alpha)\theta,\quad C=-\epsilon(1-\tau^\alpha)\sqrt{\theta(1-\theta)} .
+\]
+Normalizing the larger eigenvalue to one, every $H$ of this section is a positive multiple of such a matrix with $\tau<1$; by the scaling property it suffices to prove $L<0$ in that case. We shall, however, use the formulas below for every $\tau\ne1$.
+
+Put $h=\tau^{\alpha-1}$ and $\sigma=z_\alpha(\tau)=(1-\tau^\alpha)/(1-\tau)$; note $\tau^\alpha=\tau h$ and $Cc=(1-\tau)^2\sigma\,\theta(1-\theta)$. The divided differences of $t^\alpha$ at the eigenvalues $1,\tau$ are $\alpha$, $\alpha h$ and $\sigma$. Since $\bv^TZ\bv=\theta\xi+(1-\theta)\eta$, $\bv^{\perp T}Z\bv^\perp=(1-\theta)\xi+\theta\eta$ and $(\bv^TZ\bv^\perp)^2=\theta(1-\theta)(\xi-\eta)^2$, formula \eqref{eq:DK} gives
+\[
+q_{11}=\tfrac12\bigl[\alpha\theta^2+\alpha h(1-\theta)^2+2\sigma\theta(1-\theta)\bigr],\quad
+q_{22}=\tfrac12\bigl[\alpha(1-\theta)^2+\alpha h\theta^2+2\sigma\theta(1-\theta)\bigr],
+\]
+\[
+q_{12}=\tfrac12\theta(1-\theta)\,\omega,\qquad \omega=\alpha(1+h)-2\sigma .
+\]
+
+\emph{The coefficients $u,v,w$.} Put
+\[
+E_0=2\tau\sigma-\alpha(1+(2\tau-1)h),\qquad E_1=2\sigma-\alpha(2-\tau+\tau h),\qquad E(\theta)=(1-\theta)E_0+\theta E_1 .
+\]
+Since $1/k=\alpha/2$, $a=\theta+\tau(1-\theta)$ and $A=\theta+\tau h(1-\theta)$, we have $2au=2aq_{11}-\alpha A$. The identities $\theta^2a-\theta=-\theta(1-\theta)(1+\theta-\tau\theta)$ and $(1-\theta)^2a-\tau(1-\theta)=\theta(1-\theta)(1-\theta-\tau(2-\theta))$ give
+\[
+2au=\theta(1-\theta)\bigl[2\sigma a-\alpha(1+\theta-\tau\theta)+\alpha h(1-\theta-\tau(2-\theta))\bigr].
+\]
+The bracket is affine in $\theta$, equal to $E_0$ at $\theta=0$ and to $E_1$ at $\theta=1$; hence it equals $E(\theta)$. Exchanging the two coordinates replaces $\theta$ by $1-\theta$, and $a,A,q_{11}$ by $b,B,q_{22}$. Therefore
+\begin{equation}\label{eq:uvwspec}
+u=\frac{\theta(1-\theta)}{2a}E(\theta),\qquad v=\frac{\theta(1-\theta)}{2b}E(1-\theta),\qquad w=\frac{\theta(1-\theta)}2\,\omega .
+\end{equation}
+
+\emph{An invariant.} Let $\delta=\tau-1$. Direct substitution, using $\delta\sigma=\tau^\alpha-1$ and $\tau^\alpha=\tau h$, gives
+\[
+E_1-E_0=\delta\omega,\qquad E_0-\tau E_1=\alpha\delta^2(h-1),\qquad \omega+E_1=-\alpha\delta(h-1),\qquad ab=\tau+\delta^2\theta(1-\theta).
+\]
+Since $E(\theta)=E_0+\theta\delta\omega$ and $E(1-\theta)=E_1-\theta\delta\omega$, we get $E(\theta)E(1-\theta)=E_0E_1+\theta(1-\theta)\delta^2\omega^2$, and therefore $E(\theta)E(1-\theta)-ab\,\omega^2=E_0E_1-\tau\omega^2$. Moreover
+\[
+E_0E_1-\tau\omega^2=E_1(E_0-\tau E_1)+\tau(E_1-\omega)(E_1+\omega)=\alpha\delta(h-1)\bigl(\tau\omega-E_1\bigr),
+\]
+and $\tau\omega-E_1=2\alpha(1+\tau^\alpha)-2(1+\tau)\sigma$, so that $\delta(\tau\omega-E_1)=2\varpi$ with $\varpi=\alpha(\tau-1)(\tau^\alpha+1)-(\tau+1)(\tau^\alpha-1)$. Thus
+\begin{equation}\label{eq:invariant}
+E(\theta)E(1-\theta)-ab\,\omega^2=2\alpha(h-1)\varpi .
+\end{equation}
+
+\emph{The coefficient $L$.} By \eqref{eq:uvwspec} and \eqref{eq:invariant}, $uv-w^2=\theta^2(1-\theta)^2\alpha(h-1)\varpi/(2ab)$. Writing \eqref{eq:L} as $L=c\,[k\beta b(uv-w^2)+(k+2)(Cc)u/b]$ and using $k\beta=2(\alpha+2)/\alpha^2$ and $k+2=2(\alpha+1)/\alpha$, we obtain
+\begin{equation}\label{eq:Lspec}
+L=\frac{c\,\theta^2(1-\theta)^2}{\alpha ab}\,\Lambda_\tau(\theta),\qquad \Lambda_\tau(\theta)=(\alpha+2)\,b\,(h-1)\varpi+(\alpha+1)(1-\tau)^2\sigma E(\theta).
+\end{equation}
+The function $\Lambda_\tau$ is affine in $\theta$, because $b$ and $E$ are.
+
+\emph{The value at $\theta=1$.} Express everything through $\sigma$: $\tau^\alpha=1-(1-\tau)\sigma$, $\tau(h-1)=(1-\tau)(1-\sigma)$, $\varpi=(1-\tau)[-2\alpha+(\alpha(1-\tau)+1+\tau)\sigma]$ and $E_1=2\sigma-\alpha(3-\tau)+\alpha(1-\tau)\sigma$. Since $b=\tau$ at $\theta=1$,
+\[
+\frac{\Lambda_\tau(1)}{(1-\tau)^2}=(\alpha+2)(1-\sigma)\bigl[-2\alpha+(\alpha(1-\tau)+1+\tau)\sigma\bigr]+(\alpha+1)\sigma\bigl[(2+\alpha(1-\tau))\sigma-\alpha(3-\tau)\bigr],
+\]
+and expanding in $\sigma$ the right side equals $-2\tau\sigma^2+2(2\alpha+1+\tau)\sigma-2\alpha(\alpha+2)=-2Q_\alpha(\tau,\sigma)$. Hence
+\begin{equation}\label{eq:Lambda1}
+\Lambda_\tau(1)=2P_1(\tau)\qquad(\tau>0,\ \tau\ne1).
+\end{equation}
+
+\emph{The value at $\theta=0$.} Let $\tau<1$, so that $\epsilon=1$, and let $H'=\tau^{-1}H=\tau^{-1}\bv\bv^T+\bv^\perp\bv^{\perp T}$. With $\tau'=1/\tau>1$, $\theta'=1-\theta$ and $\epsilon'=-1$ we have $(\sqrt{\theta'},-\epsilon'\sqrt{1-\theta'})^T=\bv^\perp$ and $(\epsilon'\sqrt{1-\theta'},\sqrt{\theta'})^T=-\bv$, so $H'$ is the matrix of the spectral coordinates with parameters $(\tau',\theta')$. Its entries are $a/\tau$, $b/\tau$ and $c/\tau$. Applying \eqref{eq:Lspec} to $H$ and to $H'$, and using that $L$ is multiplied by $\tau^{-2\alpha}$ when $H$ is replaced by $H'$, we get
+\[
+\tau^{-2\alpha}\,\frac{c\,\theta^2(1-\theta)^2}{\alpha ab}\,\Lambda_\tau(\theta)=\frac{(c/\tau)\,\theta^2(1-\theta)^2}{\alpha ab/\tau^2}\,\Lambda_{1/\tau}(1-\theta),
+\]
+that is, $\Lambda_\tau(\theta)=\tau^{2\alpha+1}\Lambda_{1/\tau}(1-\theta)$ for $\theta\in(0,1)$. Both sides are affine in $\theta$, so the identity also holds at $\theta=0$, and \eqref{eq:Lambda1} gives
+\[
+\Lambda_\tau(0)=\tau^{2\alpha+1}\Lambda_{1/\tau}(1)=2\tau^{2\alpha+1}P_1(1/\tau)=2P_0(\tau).
+\]
+
+\emph{Conclusion.} For $\tau\in(0,1)$ we obtain $\Lambda_\tau(\theta)=2[(1-\theta)P_0(\tau)+\theta P_1(\tau)]<0$ for $\theta\in[0,1]$. In \eqref{eq:Lspec}, $c/\alpha>0$ because both are negative, and $\theta^2(1-\theta)^2/(ab)>0$. Therefore $L<0$.
+\end{proof}
+
+\subsection{The sign of the deficit}
+
+\begin{lemma}\label{lem:nonzero}
+At least one of the matrices $R(r_-)$, $R(r_+)$ is nonzero.
+\end{lemma}
+
+\begin{proof}
+Suppose both vanish. Their off-diagonal entries vanish, and since $Cc\ne0$, \eqref{eq:UVW} gives $r_-/D(r_-)=r_+/D(r_+)$. Using the explicit form of $D$,
+\[
+r_-D(r_+)-r_+D(r_-)=k\beta c\,(r_+-r_-)(b\,r_-r_+-a),
+\]
+so $a=b\,r_-r_+=bB/A$, that is, $aA=bB$. Both sides of this identity are homogeneous of the same degree under $H\mapsto sH$, so we may use the spectral coordinates of the proof of Lemma~\ref{lem:L} with $\tau<1$, in which
+\[
+aA-bB=(2\theta-1)(1-\tau^{\alpha+1}).
+\]
+Since $\tau\in(0,1)$ and $\alpha+1<0$, we get $\theta=\frac12$, hence $a=b$ and $A=B$. Then $H$ commutes with the matrix exchanging the two coordinates, so $\Psi_H(\diag(\xi,\eta))=\Psi_H(\diag(\eta,\xi))$; thus $q_{11}=q_{22}$ and $u=v$. Then \eqref{eq:UVW} gives
+\[
+U(r)-V(r)=\frac{Cc^2(k+2)(1-r^2)}{aD(r)} .
+\]
+Since $A=B>C$, we have $0<r_-<1$, so $U(r_-)-V(r_-)>0$, contradicting $R(r_-)=0$.
+\end{proof}
+
+\begin{proposition}\label{prop:three}
+For every $r\in[r_-,r_+]$ the matrix $R(r)$ is negative semidefinite.
+\end{proposition}
+
+\begin{proof}
+At the endpoints this is Lemma~\ref{lem:endpoints}. By Lemmas~\ref{lem:endpoints} and \ref{lem:L}, $F$ is a strictly concave quadratic polynomial that is nonnegative at the two distinct points $r_\pm$, so $F>0$ on $(r_-,r_+)$, and $\det R(r)=F(r)/D(r)>0$ there. Hence on $(r_-,r_+)$ the two eigenvalues of $R(r)$ have the same sign and $\tr R(r)\ne0$. By Lemma~\ref{lem:nonzero} one endpoint matrix, say $R(r_0)$, is nonzero; being negative semidefinite, it has negative trace. By continuity $\tr R(r)<0$ near $r_0$, and since $\tr R$ does not vanish on the connected set $(r_-,r_+)$, $\tr R(r)<0$ throughout. Together with $\det R(r)>0$, this shows that $R(r)$ is negative definite on $(r_-,r_+)$.
+\end{proof}
+
+\section{Proofs of the main results}\label{sec:proofs}
+
+\begin{theorem}\label{thm:hessian}
+Let $1<p<2$, $N\ge2$, and let $D\in\cA_N^\circ$ have linearly independent rows. Then the Hessian of $g_p$ at $D$ is positive semidefinite.
+\end{theorem}
+
+\begin{proof}
+Let $X=D^{\circ1/p}$, with columns $\bx_j$. Its rows are linearly independent as well, since two positive rows are proportional exactly when their entrywise $p$-th powers are. Thus $M=XX^T$ is positive definite with $M_{12}>0$, and Lemma~\ref{lem:signs} applies to $H=M^\gamma$. By Proposition~\ref{prop:criterion} and Lemma~\ref{lem:gauge} it suffices to prove \eqref{eq:criterion} for diagonal $Z$. The columns of $X$ define a feasible measure with Gram matrix $M$, so $\sum_j\varphi_Z(\bx_j)\le\Phi(M)$. Let $\mu^\star$ be as in Proposition~\ref{prop:rays}. If its support has at most two points, then $\Phi(M)=\varphi_Z(\by_1)+\varphi_Z(\by_2)$ with $\by_1\by_1^T+\by_2\by_2^T=M$, and Lemma~\ref{lem:two} gives $\Phi(M)\le\Psi_H(Z)$. Otherwise $\mu^\star$ is supported on $e_1$, $e_2$ and a point proportional to $\bff_r$ with $r>0$; it corresponds to a decomposition as in Lemma~\ref{lem:threedec}, so $r\in[r_-,r_+]$, and $\Phi(M)-\Psi_H(Z)=(\xi,\eta)R(r)(\xi,\eta)^T\le0$ by Proposition~\ref{prop:three}.
+\end{proof}
+
+To pass from Theorem~\ref{thm:hessian} to convexity we must avoid the arrays with proportional rows. Let
+\[
+\mathcal S_N=\{D\in\cA_N^\circ:\ \text{the rows of }D\text{ are linearly dependent}\}=\{(x;\lambda x):\ x\in(0,\infty)^N,\ \lambda>0\},
+\]
+where $(x;\lambda x)$ denotes the array with rows $x$ and $\lambda x$.
+
+\begin{lemma}\label{lem:avoid}
+Let $N\ge3$ and $D_0\in\cA_N^\circ\setminus\mathcal S_N$. The set of $D_1\in\cA_N^\circ$ for which the segment $[D_0,D_1]$ meets $\mathcal S_N$ has Lebesgue measure zero in $\R^{2\times N}$.
+\end{lemma}
+
+\begin{proof}
+If $D_0+t(D_1-D_0)=(x;\lambda x)$ with $t\in(0,1]$, then $D_1=D_0+s((x;\lambda x)-D_0)$ with $s=1/t$. Hence the set in question is contained in the image of the smooth map
+\[
+\Gamma\colon(0,\infty)\times(0,\infty)^N\times(0,\infty)\to\R^{2\times N},\qquad (s,x,\lambda)\mapsto D_0+s\bigl((x;\lambda x)-D_0\bigr),
+\]
+whose domain is $(0,\infty)^{N+2}$. Since $N+2<2N$, this image has measure zero \cite[Chapter~6]{Lee13}. Directly: the domain is a countable union of compact boxes, on each of which $\Gamma$ is Lipschitz; covering a box by $O(\varepsilon^{-(N+2)})$ cubes of side $\varepsilon$ covers its image by as many balls of radius $O(\varepsilon)$, of total volume $O(\varepsilon^{N-2})\to0$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:convex}]
+For $p=1$, $g_1(D)=\|D\|_1$ is a norm and hence convex; for $p=2$, $g_2(D)=\sum_{i,j}D_{ij}$ is linear. For $N\le2$ the theorem is Theorem~\ref{thm:KN}; for $N=1$ apply it to the array with an added zero column.
+
+Let $1<p<2$ and $N\ge3$. Let $D_0\in\cA_N^\circ\setminus\mathcal S_N$, and let $D_1\in\cA_N^\circ$ be such that $[D_0,D_1]$ does not meet $\mathcal S_N$. Along the segment, $D(t)=D_0+t(D_1-D_0)$ has positive entries and linearly independent rows, so $M(t)=X(t)X(t)^T$ is positive definite and $t\mapsto g_p(D(t))=\tr M(t)^{p/2}$ is smooth on $[0,1]$. By Theorem~\ref{thm:hessian} its second derivative is nonnegative, so
+\begin{equation}\label{eq:convexseg}
+g_p\bigl((1-t)D_0+tD_1\bigr)\le(1-t)g_p(D_0)+tg_p(D_1)\qquad(0\le t\le1).
+\end{equation}
+The set $\cA_N^\circ\setminus\mathcal S_N$ is dense in $\cA_N^\circ$, and by Lemma~\ref{lem:avoid} the admissible $D_1$ are dense in $\cA_N^\circ$ for each such $D_0$. Hence the admissible pairs are dense in $\cA_N^\circ\times\cA_N^\circ$, and by continuity of $g_p$ (Lemma~\ref{lem:homog}) inequality \eqref{eq:convexseg} holds for all $D_0,D_1\in\cA_N^\circ$, and then for all $D_0,D_1\in\cA_N$. This proves convexity for $1\le p\le2$.
+
+Let $2<p<\infty$. By the first part, Proposition~\ref{prop:equiv}(a) and Proposition~\ref{prop:duality} with $r=p/(p-1)\in(1,2)$, inequality \eqref{eq:upper} holds for all $T\in\cD_{N,2}$. Proposition~\ref{prop:equiv}(b) shows that $g_p$ is concave on $\cA_N$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+For $1\le p\le2$, \eqref{eq:lower} follows from Theorem~\ref{thm:convex} and Proposition~\ref{prop:equiv}(a). For $2<p<\infty$, \eqref{eq:upper} follows from \eqref{eq:lower} at $r=p/(p-1)$ and Proposition~\ref{prop:duality}; alternatively, from the concavity in Theorem~\ref{thm:convex} and Proposition~\ref{prop:equiv}(a). For $p=2$ both sides equal the Frobenius norm of $T$, and the case $p=\infty$ follows from Corollary~\ref{cor:infty}.
+\end{proof}
+
+\begin{remark}
+Proposition~\ref{prop:duality} shows that, within the class $\cD_{N,d}$, inequality \eqref{eq:lower} at an exponent $r\in(1,2)$ implies \eqref{eq:upper} at $r/(r-1)$. The converse implication is not needed. As explained in \cite[Section~2.2]{Aud08}, the dual argument in that direction meets an obstruction coming from the signs of the optimal scalar coefficients; this is why the proof above is organized around the range $1\le p\le2$.
+\end{remark}
+
+\begin{remark}
+The argument of Sections~\ref{sec:criterion}--\ref{sec:three} uses two rows in an essential way: the contact set in Proposition~\ref{prop:rays} is controlled by the zeros of a binary quartic, and the three-ray case reduces to a $2\times2$ deficit matrix. For three block rows, the analogue of Theorem~\ref{thm:convex} fails already for $3\times3$ arrays: Audenaert \cite[Section~5]{Aud08} gives a counterexample for $p=3/2$. For arbitrary blocks, Conjecture~\ref{conj:A} remains open, to our knowledge, for $1<p<2$ and for $2<p<4$, even when $N=2$.
+\end{remark}
+
+\enlargethispage{5\baselineskip}
+
+\section*{Use of AI-assisted tools}
+
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{99}
+
+\bibitem{Aud08}
+K. M. R. Audenaert, \emph{On a norm compression inequality for $2\times N$ partitioned block matrices}, Linear Algebra Appl. \textbf{428} (2008), 781--795; arXiv:math/0702186v2. Section numbers refer to the arXiv version.
+
+\bibitem{AK17}
+K. M. R. Audenaert and F. Kittaneh, \emph{Problems and conjectures in matrix and operator inequalities}, in: \'Etudes op\'eratorielles, Banach Center Publ., vol.~112, Polish Acad. Sci. Inst. Math., Warsaw, 2017, 15--31.
+
+\bibitem{BCL94}
+K. Ball, E. A. Carlen, and E. H. Lieb, \emph{Sharp uniform convexity and smoothness inequalities for trace norms}, Invent. Math. \textbf{115} (1994), 463--482.
+
+\bibitem{Bha97}
+R. Bhatia, \emph{Matrix Analysis}, Graduate Texts in Mathematics, vol.~169, Springer, New York, 1997.
+
+\bibitem{BK90}
+R. Bhatia and F. Kittaneh, \emph{Norm inequalities for partitioned operators and an application}, Math. Ann. \textbf{287} (1990), 719--726.
+
+\bibitem{BL24}
+J.-C. Bourin and E.-Y. Lee, \emph{A Pythagorean theorem for partitioned matrices}, Proc. Amer. Math. Soc. \textbf{152} (2024), no.~10, 4075--4086, doi:10.1090/proc/15677.
+
+\bibitem{Hei25}
+O. Hein\"avaara, \emph{Tracial joint spectral measures}, Invent. Math. \textbf{239} (2025), no.~2, 505--526.
+
+\bibitem{Kin03}
+C. King, \emph{Inequalities for trace norms of $2\times2$ block matrices}, Comm. Math. Phys. \textbf{242} (2003), 531--545.
+
+\bibitem{KN04}
+C. King and M. Nathanson, \emph{New trace norm inequalities for $2\times2$ blocks of diagonal matrices}, Linear Algebra Appl. \textbf{389} (2004), 77--93; arXiv:math/0312194.
+
+\bibitem{Lee13}
+J. M. Lee, \emph{Introduction to Smooth Manifolds}, 2nd ed., Graduate Texts in Mathematics, vol.~218, Springer, New York, 2013.
+
+\bibitem{Roc70}
+R. T. Rockafellar, \emph{Convex Analysis}, Princeton University Press, Princeton, NJ, 1970.
+
+\bibitem{Zha26}
+T. Zhang, \emph{Clarkson--McCarthy type inequalities, part I: $\ell_p$--$\ell_p$ and $\ell_q$--$\ell_p$ Schatten $p$-estimates}, preprint (2026), arXiv:2410.21961v4.
+
+\end{thebibliography}
+
+\end{document}

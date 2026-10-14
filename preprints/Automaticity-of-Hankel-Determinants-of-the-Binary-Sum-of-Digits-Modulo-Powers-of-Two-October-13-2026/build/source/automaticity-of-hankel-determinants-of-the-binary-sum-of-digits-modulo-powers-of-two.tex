@@ -1,0 +1,524 @@
+\documentclass{amsart}
+
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage[hidelinks]{hyperref}
+
+\hypersetup{
+  pdftitle={Automaticity of Hankel determinants of the binary sum of digits modulo powers of two},
+  pdfauthor={Knowledge Sense},
+  pdfsubject={Hankel determinants, binary sum of digits, automatic sequences},
+  pdfkeywords={Hankel determinant, sum of digits, automatic sequence, 2-adic valuation}
+}
+
+\hyphenation{manuscript So-bo-lew-ski}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{question}{Question}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Zt}{\mathbb{Z}_{(2)}}
+\newcommand{\val}[1]{[#1]_2}
+\newcommand{\bin}{\operatorname{bin}}
+\newcommand{\out}{\operatorname{out}}
+\newcommand{\st}{\mathfrak{s}}
+
+\begin{document}
+
+\title[Binary digit-sum Hankel determinants modulo powers of two]{Automaticity of Hankel determinants of the binary sum of digits modulo powers of two}
+
+\author{Knowledge Sense}
+\address{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{13 October 2026}
+
+\subjclass[2020]{Primary 11B85; Secondary 11A63, 15B05, 68Q45}
+
+\keywords{Hankel determinant, binary sum of digits, automatic sequence, regular sequence}
+
+\begin{abstract}
+Let $s(j)$ be the number of ones in the binary expansion of $j$, and let $D(N)=\det[s(i+j)]_{0\le i,j<N}$. We prove that for every integer $K\ge1$ the sequence $(D(n+1)\bmod 2^K)_{n\ge0}$ is $2$-automatic. This answers a question of Sobolewski and Ulas. The proof starts from their recursion for Hankel determinants of weighted binary sums of digits. After a suitable normalization, the auxiliary bordered determinant in this recursion becomes an odd integer and the ratio of the two determinants has odd denominator, so the recursion can be reduced modulo $2^K$. The reflected indices produced by the recursion correspond to complemented suffixes of the binary expansion, and the reduced recursion is carried out by a deterministic finite automaton that reads the expansion from the least significant digit. We also observe that $(D(N))_{N\ge1}$ itself is not $2$-regular.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $s(j)$ denote the number of ones in the binary expansion of an integer $j\ge0$, so that $s(0)=0$, and put
+\[
+D(N)=\det\bigl[s(i+j)\bigr]_{0\le i,j<N}\qquad(N\ge1).
+\]
+The sequence $(D(N))_{N\ge1}$ is A056886 in the OEIS~\cite{OEIS} and begins
+\[
+0,\ -1,\ 2,\ 5,\ -8,\ 3,\ 8,\ 141,\ -204,\ 11,\ -4,\ -11,\ -30,\ 99,\ 1836,\ 164997,\ \dots
+\]
+Allouche and Shallit asked for a simple closed form for these determinants \cite[p.~208, Problem~4]{AS}. Hankel determinants of automatic sequences have been studied since the work of Allouche, Peyri\`ere, Wen and Wen on the Thue--Morse sequence \cite{APWW}, where the automaticity of related determinants reduced modulo $2$ was established. Later results of this kind include the work of Guo and Wen on difference sequences of the Thue--Morse sequence \cite{GW}, Han's Hankel determinant calculus \cite{Han}, and the theorem of Hu and Han that the reduced Hankel determinants modulo $2$ of a family of $\pm1$-valued automatic sequences are automatic \cite{HH}. Exact evaluations are rarer; see Fokkink, Kraaikamp and Shallit \cite{FKS} for the period-doubling sequence. Guo proved that the Hankel determinant sequence of the characteristic sequence of the powers of two is $2$-regular \cite[Theorem~3]{Guo}, and he determined explicit values of related determinants at special indices \cite[Theorem~4]{Guo}.
+
+Sobolewski and Ulas \cite{SU} embedded $s$ into the family of weighted binary sums of digits and obtained a recursion \cite[Theorem~4.2]{SU} that computes $D(N)$ for every $N$. Among many other results, they proved that $D(N)\equiv N+1\pmod 2$ \cite[Corollary~4.14]{SU}, and they asked the following question.
+
+\begin{question}[{\cite[Question~4.15]{SU}}]
+Let $k\ge1$. Is the sequence \mbox{$(D(n+1)\bmod 2^k)_{n\ge0}$} $2$-automatic?
+\end{question}
+
+They report that computations suggest an affirmative answer for $k=2$ and $k=3$, with automata of $12$ and $83$ states, respectively. Our main result answers this question in the affirmative for every $k$.
+
+\begin{theorem}\label{thm:main}
+For every integer $K\ge1$, the sequence $(D(n+1)\bmod 2^K)_{n\ge0}$ is $2$-automatic.
+\end{theorem}
+
+For $K=1$ the sequence is periodic by \cite[Corollary~4.14]{SU}, so the new content concerns $K\ge2$. The automaton we construct depends on $K$ and is explicit; the upper bound on its number of states that the construction provides is very large (Remark~\ref{rem:size}). The question of a simple closed form for $D(N)$ is not addressed here.
+
+Theorem~\ref{thm:main} cannot be deduced from $2$-regularity of $(D(N))_{N\ge1}$ itself. The residues of a $2$-regular integer sequence modulo a fixed integer form a $2$-automatic sequence \cite[Corollary~2.4]{AS92}, but $(D(N))_{N\ge1}$ grows exponentially along $N=2^m$ and is therefore not $2$-regular (Proposition~\ref{prop:notregular}).
+
+\emph{Outline of the proof.} For $2^L<N\le2^{L+1}$ the recursion of \cite{SU} expresses the determinant $D(N)$, together with an auxiliary bordered determinant, in terms of the corresponding pair at a smaller order $N'$; either $N'=2^{L+1}-N+1$ or $N'=N-2^L$. The price is a change of weights: at each stage all weights are $1$ except possibly the top weight, which has the form $2^{-r}$. Two points must be addressed. First, the recursion divides by $2^{-r}-2$ and contains powers of $2$, so it is not clear that it survives reduction modulo $2^K$. We show that after multiplying the bordered determinant by $2^{r e(N)}$, where $e(N)=2N-2^{L+1}-1$, it becomes an odd integer, while the ratio of the two determinants lies in the ring $\Zt$ of rationals with odd denominator (Proposition~\ref{prop:normalized}). Second, the reflection $N\mapsto 2^{L+1}-N+1$ is not a shift of binary digits. However, on $n=N-1$ it complements all binary digits, so the whole recursion amounts to reading the binary expansion of $n$ from the left while keeping one orientation bit (Lemma~\ref{lem:descent}). The data needed at each step depend on the remaining suffix only through its length, capped at $\max(K+1,3)$, and its value modulo $2^K$. Reading from the right, these data and the effect of the remaining part of the recursion can be maintained in a finite set of states (Section~\ref{sec:automaton}).
+
+\emph{Dependencies.} In the proof of Theorem~\ref{thm:main}, the only result that we use without proof is the recursion of Sobolewski and Ulas \cite[Theorem~4.2]{SU}, in the specialization \cite[Proposition~4.3]{SU} with $t=1$ (Proposition~\ref{prop:SU} below), and only for orders $N\ge5$. The determinants of orders at most four are evaluated directly (Lemma~\ref{lem:small}), and the case $K=1$ is covered by the same construction. We do not use the product formula \cite[Proposition~3.7]{SU} for the bordered determinants; the two facts we need about them, nonvanishing and the $2$-adic size of the normalization, are derived from the recursion itself. From the theory of automatic sequences we use only the definition, together with standard equivalences \cite{AS} when passing between conventions (Remark~\ref{rem:kernel}). Proposition~\ref{prop:notregular}, which is not used in the proof of Theorem~\ref{thm:main}, relies in addition on the evaluation of $D(2^m)$ in \cite[Proposition~4.5]{SU} and on the growth bound for regular sequences \cite[Theorem~2.10]{AS92}.
+
+\emph{Organization.} Section~\ref{sec:prelim} fixes notation. Section~\ref{sec:SU} recalls the recursion of Sobolewski and Ulas in the form needed here and treats small orders. The $2$-adic normalization is proved in Section~\ref{sec:normalization}. In Section~\ref{sec:descent} the recursion is unfolded along the binary expansion and reduced modulo $2^K$. Section~\ref{sec:automaton} constructs the automaton and proves Theorem~\ref{thm:main}. Section~\ref{sec:remarks} contains further remarks and describes accompanying finite computations.
+
+\section{Preliminaries}\label{sec:prelim}
+
+\subsection{Binary words}
+A word will mean a finite sequence of symbols from $\{0,1\}$, and $\varepsilon$ denotes the empty word. For a word $v=v_1\cdots v_\ell$ we write $|v|=\ell$ and $\val{v}=\sum_{i=1}^{\ell}v_i2^{\ell-i}$, with $\val{\varepsilon}=0$. The complement $\bar v$ is obtained by exchanging $0$ and $1$ in every position, so that
+\begin{equation}\label{eq:complement}
+\val{\bar v}=2^{|v|}-1-\val{v}.
+\end{equation}
+For $o\in\{0,1\}$ put $v^{(0)}=v$ and $v^{(1)}=\bar v$. For $a,b\in\{0,1\}$, $a\oplus b$ denotes addition modulo $2$. For $n\ge1$, $\bin(n)$ is the binary expansion of $n$ without leading zeros, so its first letter is $1$; we put $\bin(0)=\varepsilon$.
+
+\subsection{Residues modulo powers of two}
+Let $\Zt\subset\Q$ be the ring of rationals with odd denominator. For $K\ge1$ put $P=2^K$ and $A=\Z/P\Z$. Reduction modulo $P$ extends to a ring homomorphism $\Zt\to A$, and an element of $\Zt$ is a unit if and only if its numerator is odd; correspondingly, the units of $A$ are the residues of odd integers.
+
+\begin{lemma}\label{lem:units}
+If $u$ is an odd integer, then $u^{2^{K-1}}\equiv1\pmod{2^K}$. In particular $u^P\equiv1\pmod P$, so for $E\in A$ the residue $u^E\in A$, computed with any nonnegative representative of $E$, is well defined.
+\end{lemma}
+
+\begin{proof}
+For $K=1$ the claim is $u\equiv1\pmod 2$. If $u^{2^{K-1}}=1+2^Ka$ with $a\in\Z$, then $u^{2^K}=1+2^{K+1}a+2^{2K}a^2\equiv1\pmod{2^{K+1}}$.
+\end{proof}
+
+\subsection{Automatic sequences}
+A $2$-DFAO is a tuple $M=(S,\delta,s_0,\Delta,\tau)$ consisting of a finite set $S$ of states, a transition map $\delta\colon S\times\{0,1\}\to S$, an initial state $s_0\in S$, an output alphabet $\Delta$ and an output map $\tau\colon S\to\Delta$. We let $M$ read words from right to left: put $\hat\delta(s,\varepsilon)=s$ and $\hat\delta(s,vb)=\hat\delta(\delta(s,b),v)$ for a word $v$ and a letter $b$. A sequence $(a(n))_{n\ge0}$ with values in $\Delta$ is \emph{$2$-automatic} if there is a $2$-DFAO $M$ such that
+\[
+a(n)=\tau\bigl(\hat\delta(s_0,w)\bigr)\qquad\text{for all $n\ge0$ and all words $w$ with $\val{w}=n$.}
+\]
+Thus the automaton reads the least significant digit first, as in \cite{HH}, and is insensitive to leading zeros. This notion coincides with the one in which the most significant digit is read first, and with finiteness of the $2$-kernel $\{(a(2^in+j))_{n\ge0}:i\ge0,\ 0\le j<2^i\}$; see \cite[Section~5.2 and Theorem~6.6.2]{AS} and \cite[Proposition~V.3.3]{Eil}. For the automaton constructed below the finiteness of the $2$-kernel is also immediate (Remark~\ref{rem:kernel}).
+
+\section{The recursion of Sobolewski and Ulas}\label{sec:SU}
+
+For a sequence of weights $\mathbf w=(w_j)_{j\ge0}$ and an integer $n=\sum_j n_j2^j$ with $n_j\in\{0,1\}$, the weighted sum of digits is $s_{\mathbf w}(n)=\sum_j n_jw_j$, and $d_{\mathbf w}(m)=s_{\mathbf w}(m+1)-s_{\mathbf w}(m)$ \cite{SU}.
+
+For $N\ge2$ let $L=L(N)$ be the integer with $2^L<N\le2^{L+1}$, and put
+\[
+e(N)=2N-2^{L+1}-1.
+\]
+Then $e(N)$ is a positive odd integer. Given an indeterminate $x$, consider the weights $w_0=\dots=w_L=1$ and $w_{L+1}=x$. Only $s_{\mathbf w}(m)$ with $m\le 2N-2<2^{L+2}$ occur below, so the remaining weights play no role. Define
+\[
+h(N,x)=\det\bigl[s_{\mathbf w}(i+j)\bigr]_{0\le i,j<N},
+\qquad
+g(N,x)=\det\widetilde G(N,x),
+\]
+where $\widetilde G(N,x)$ is the $N\times N$ matrix whose entry in position $(i,j)$ is $d_{\mathbf w}(i+j)$ for $0\le j\le N-2$ and $1$ for $j=N-1$. Both are polynomials in $x$ with integer coefficients. In the notation of \cite[Section~4.1]{SU} we have $h(N,x)=h(N,1,x)$ and $g(N,x)=\tilde g(N,1,x)$; that is, $g$ is the bordered determinant $\widetilde{G}_{\mathbf w}(N)$ of \cite[Section~3]{SU}, obtained from the Hankel matrix of $d_{\mathbf w}$ by replacing its last column with a column of ones. For $x=1$ all relevant weights equal $1$, so
+\begin{equation}\label{eq:Dh}
+D(N)=h(N,1)\qquad(N\ge2).
+\end{equation}
+
+Throughout, $\eta_N=(-1)^N$. The following is the case $t=1$ of \cite[Proposition~4.3]{SU}, which in turn is the specialization of \cite[Theorem~4.2]{SU} to the weights $(1,t,\dots,t^k,x)$.
+
+\begin{proposition}[{Sobolewski--Ulas \cite[Proposition~4.3]{SU}}]\label{prop:SU}
+Let $N\ge5$ and $L=L(N)$. The following identities hold in $\Q(x)$.
+\begin{enumerate}
+\item[(a)] If $2^L<N\le3\cdot2^{L-1}$, put $N'=2^{L+1}-N+1$. Then
+\begin{align*}
+h(N,x)&=\eta_N(x-2)^{e(N)}\Bigl(-h(N',1)+\frac{\eta_N}{x-2}\,g(N',1)\Bigr),\\
+g(N,x)&=\eta_N(x-2)^{e(N)}\,g(N',1).
+\end{align*}
+\item[(b)] If $3\cdot2^{L-1}<N\le2^{L+1}$, put $N'=N-2^L$ and $b=2N-3\cdot2^L-1$. Then
+\begin{align*}
+h(N,x)&=2^{b}(x-2)^{2^L}\Bigl(h\bigl(N',\tfrac x2\bigr)+\frac{\eta_N}{x-2}\,g\bigl(N',\tfrac x2\bigr)\Bigr),\\
+g(N,x)&=2^{b}(x-2)^{2^L}\,g\bigl(N',\tfrac x2\bigr).
+\end{align*}
+\end{enumerate}
+In both cases $2^{L-1}<N'\le2^L$, so $L(N')=L-1$; in case \textup{(b)} moreover $e(N')=b$.
+\end{proposition}
+
+In case (a) the top weight of the smaller determinant is $w_L=1$, which is why $h$ and $g$ are evaluated at $1$ on the right-hand side; in case (b) it is $x/2$. The last assertions are elementary: $N\le3\cdot2^{L-1}$ gives $N'\ge2^{L-1}+1$, $N>2^L$ gives $N'\le 2^L$ in case (a), and $e(N')=2(N-2^L)-2^L-1=b$ in case (b). In the proof of \cite[Proposition~4.1]{SU}, on which \cite[Theorem~4.2]{SU} rests, the case distinction for the entries of the block $H_l$ should read $i+j<2^k$ instead of $i+j<2^m$; this does not affect any statement.
+
+\begin{lemma}\label{lem:small}
+We have
+\begin{align*}
+h(2,x)&=-1, & g(2,x)&=2-x,\\
+h(3,x)&=3-x, & g(3,x)&=2-x,\\
+h(4,x)&=(x-2)(3x-8), & g(4,x)&=(x-2)^2(x-4).
+\end{align*}
+\end{lemma}
+
+\begin{proof}
+For $N=2$ we have $L=0$, the values $s_{\mathbf w}(0),s_{\mathbf w}(1),s_{\mathbf w}(2)$ are $0,1,x$, and $d_{\mathbf w}(0)=1$, $d_{\mathbf w}(1)=x-1$; hence
+\[
+h(2,x)=\det\begin{bmatrix}0&1\\1&x\end{bmatrix}=-1,
+\qquad
+g(2,x)=\det\begin{bmatrix}1&1\\x-1&1\end{bmatrix}=2-x.
+\]
+For $N=3,4$ we have $L=1$, and the values $s_{\mathbf w}(0),\dots,s_{\mathbf w}(6)$ are $0,1,1,2,x$, $x+1$, $x+1$, so $d_{\mathbf w}(0),\dots,d_{\mathbf w}(5)$ are $1,0,1,x-2,1,0$. For $N=3$,
+\[
+h(3,x)=\det\begin{bmatrix}0&1&1\\1&1&2\\1&2&x\end{bmatrix}=3-x,
+\qquad
+g(3,x)=\det\begin{bmatrix}1&0&1\\0&1&1\\1&x-2&1\end{bmatrix}=2-x.
+\]
+For $N=4$ the two matrices are
+\[
+\begin{bmatrix}0&1&1&2\\1&1&2&x\\1&2&x&x+1\\2&x&x+1&x+1\end{bmatrix},
+\qquad
+\begin{bmatrix}1&0&1&1\\0&1&x-2&1\\1&x-2&1&1\\x-2&1&0&1\end{bmatrix}.
+\]
+In the first one, interchange the first two rows and clear the first column below the new pivot; expanding along the first column gives
+\[
+h(4,x)=-\det\begin{bmatrix}1&1&2\\1&x-2&1\\x-2&x-3&1-x\end{bmatrix}
+=-\det\begin{bmatrix}x-3&-1\\-1&5-3x\end{bmatrix}
+=3x^2-14x+16,
+\]
+which equals $(x-2)(3x-8)$. In the second one, subtract the first row from the third and $x-2$ times the first row from the fourth; expanding along the first column and then along the row $(x-2,0,0)$ gives
+\begin{align*}
+g(4,x)&=\det\begin{bmatrix}1&x-2&1\\x-2&0&0\\1&2-x&3-x\end{bmatrix}
+=-(x-2)\bigl((x-2)(3-x)-(2-x)\bigr)\\
+&=(x-2)^2(x-4).
+\qedhere
+\end{align*}
+\end{proof}
+
+The polynomials $h(4,1,y)=(y-2)(3y-8)$ and $\tilde g(4,1,y)=(y-2)^2(y-4)$ are also recorded in the proof of \cite[Proposition~4.5]{SU}.
+
+\begin{corollary}\label{cor:nonzero}
+For all $N\ge2$ and $r\ge0$ we have $g(N,2^{-r})\ne0$.
+\end{corollary}
+
+\begin{proof}
+By induction on $N$, simultaneously for all $r\ge0$. For $N\le4$ this follows from Lemma~\ref{lem:small}, since $0<2^{-r}\le1$. For $N\ge5$, Proposition~\ref{prop:SU} expresses $g(N,2^{-r})$ as a nonzero multiple of $g(N',1)$ or of $g(N',2^{-r-1})$, with $2\le N'<N$, because $2^{-r}-2\ne0$.
+\end{proof}
+
+\section{A \texorpdfstring{$2$}{2}-adic normalization}\label{sec:normalization}
+
+For $N\ge2$ and $r\ge0$ put $q=2^r$ and define
+\[
+Q(N,r)=q^{e(N)}\,g(N,q^{-1}),\qquad R(N,r)=\frac{h(N,q^{-1})}{g(N,q^{-1})}.
+\]
+By Corollary~\ref{cor:nonzero}, $R(N,r)$ is a well-defined rational number.
+
+\begin{proposition}\label{prop:normalized}
+Let $r\ge0$, $q=2^r$ and $u=1-2q$.
+\begin{enumerate}
+\item[(i)] For $N\in\{2,3,4\}$,
+\begin{equation}\label{eq:terminal}
+\begin{aligned}
+Q(2,r)&=2q-1, & R(2,r)&=\frac{q}{1-2q},\\
+Q(3,r)&=2q-1, & R(3,r)&=\frac{1-3q}{1-2q},\\
+Q(4,r)&=(1-2q)^2(1-4q), & R(4,r)&=\frac{q(3-8q)}{(1-2q)(1-4q)}.
+\end{aligned}
+\end{equation}
+\item[(ii)] Let $N\ge5$, $L=L(N)$ and $2^L<N\le3\cdot2^{L-1}$, and let $N'=2^{L+1}-N+1$. Then
+\begin{equation}\label{eq:lower}
+Q(N,r)=\eta_N\,u^{e(N)}\,Q(N',0),\qquad R(N,r)=-R(N',0)+\eta_N\frac{q}{u}.
+\end{equation}
+\item[(iii)] Let $N\ge5$, $L=L(N)$ and $3\cdot2^{L-1}<N\le2^{L+1}$, and let $N'=N-2^L$. Then
+\begin{equation}\label{eq:upper}
+Q(N,r)=u^{2^L}\,Q(N',r+1),\qquad R(N,r)=R(N',r+1)+\eta_N\frac{q}{u}.
+\end{equation}
+\item[(iv)] For all $N\ge2$ and $r\ge0$, $Q(N,r)$ is an odd integer and $R(N,r)\in\Zt$.
+\item[(v)] For all $N\ge2$, $D(N)=Q(N,0)\,R(N,0)$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Put $x=q^{-1}$, so that $q(x-2)=u$ and $(x-2)^{-1}=q/u$.
+
+(i) We have $e(2)=e(3)=1$ and $e(4)=3$. The formulas follow from Lemma~\ref{lem:small} by multiplying $g(N,x)$ by $q^{e(N)}$ and dividing $h(N,x)$ by $g(N,x)$; for instance
+\[
+q^3(x-2)^2(x-4)=(1-2q)^2(1-4q),\qquad
+\frac{3x-8}{(x-2)(x-4)}=\frac{q(3-8q)}{(1-2q)(1-4q)}.
+\]
+
+(ii) Multiplying the second identity of Proposition~\ref{prop:SU}(a) by $q^{e(N)}$ gives $Q(N,r)=\eta_N u^{e(N)}g(N',1)$, and $g(N',1)=Q(N',0)$. Dividing the first identity by the second gives $R(N,r)=-R(N',0)+\eta_N(x-2)^{-1}$.
+
+(iii) Here $e(N)=2^L+e(N')$ and $x/2=(2q)^{-1}$. Multiplying the second identity of Proposition~\ref{prop:SU}(b) by $q^{e(N)}=q^{2^L}q^{e(N')}$ and using $2^{e(N')}q^{e(N')}=(2q)^{e(N')}$ gives
+\[
+Q(N,r)=\bigl(q(x-2)\bigr)^{2^L}(2q)^{e(N')}g\bigl(N',(2q)^{-1}\bigr)=u^{2^L}Q(N',r+1).
+\]
+Dividing the first identity by the second gives the formula for $R(N,r)$.
+
+(iv) We argue by induction on $N$, simultaneously for all $r$. For $N\le4$ the integers $2q-1$ and $(1-2q)^2(1-4q)$ are odd and the denominators $1-2q$ and $(1-2q)(1-4q)$ in~\eqref{eq:terminal} are odd. For $N\ge5$, the smaller order $N'$ in \eqref{eq:lower} and \eqref{eq:upper} satisfies $2\le N'<N$, the factors $\pm u^{e(N)}$ and $u^{2^L}$ are odd integers, and $\eta_Nq/u\in\Zt$.
+
+(v) For $r=0$ we have $q=1$, hence $Q(N,0)=g(N,1)$, and $D(N)=h(N,1)=g(N,1)R(N,0)$ by~\eqref{eq:Dh}.
+\end{proof}
+
+\begin{remark}
+The normalizing factor $q^{e(N)}$ is the one suggested by \cite[Proposition~3.7]{SU}, according to which $g(N,x)$ is, up to sign, a product of $N-1$ factors of the form $w_l-2^{l-j}w_j$ with $0\le j<l\le L+1$, exactly $e(N)$ of which have $l=L+1$. Proposition~\ref{prop:normalized} obtains the consequences needed here directly from Proposition~\ref{prop:SU} and Lemma~\ref{lem:small}.
+\end{remark}
+
+\section{Unfolding the recursion along the binary expansion}\label{sec:descent}
+
+\begin{lemma}\label{lem:descent}
+Let $N\ge5$ and $w=w_1\cdots w_\ell=\bin(N-1)$. Then $\ell\ge3$ and $L(N)=\ell-1$, and $N$ satisfies $N\le3\cdot2^{L-1}$ if and only if $w_2=0$. Let $N'$ be as in Proposition~\ref{prop:SU}. If $w_2=0$, then $\bin(N'-1)=\bar w_2\cdots\bar w_\ell$. If $w_2=1$, then $\bin(N'-1)=w_2\cdots w_\ell$.
+\end{lemma}
+
+\begin{proof}
+The inequalities $2^L<N\le2^{L+1}$ mean $2^L\le N-1<2^{L+1}$, that is, $\ell=L+1$; and $N\ge5$ means $N-1\ge4$, that is, $\ell\ge3$. Next, $N\le3\cdot2^{L-1}$ holds if and only if $N-1<3\cdot2^{\ell-2}$, that is, if and only if $w_2=0$. If $w_2=0$, then by~\eqref{eq:complement}, $N'-1=2^{\ell}-1-(N-1)=\val{\bar w}$, and $\bar w=0\,\bar w_2\cdots\bar w_\ell$ with $\bar w_2=1$. If $w_2=1$, then $N'-1=(N-1)-2^{\ell-1}=\val{w_2\cdots w_\ell}$.
+\end{proof}
+
+Thus the reflection in Proposition~\ref{prop:SU}(a) complements the remaining digits, and both branches delete one digit. This leads to the following bookkeeping.
+
+\begin{definition}\label{def:descent}
+Let $n\ge1$ and $\bin(n)=b_1\cdots b_t$, and put $k=\max(1,t-1)$. Define $o_i\in\{0,1\}$ and $r_i\ge0$ for $1\le i\le k$ by $o_1=0$, $r_1=0$ and, for $1\le i<k$,
+\[
+\chi_i=b_{i+1}\oplus o_i,\qquad
+(o_{i+1},r_{i+1})=
+\begin{cases}
+(1-o_i,\,0)&\text{if }\chi_i=0,\\
+(o_i,\,r_i+1)&\text{if }\chi_i=1.
+\end{cases}
+\]
+Put $N_i=1+\val{(b_i\cdots b_t)^{(o_i)}}$ and $\ell_i=t-i+1$.
+\end{definition}
+
+\begin{lemma}\label{lem:stages}
+In Definition~\ref{def:descent}, for $1\le i\le k$ we have $b_i\oplus o_i=1$, so $(b_i\cdots b_t)^{(o_i)}=\bin(N_i-1)$ has length $\ell_i$. Moreover $N_1=n+1$ and $N_k\in\{2,3,4\}$. For $1\le i<k$ we have $N_i\ge5$; the order $N_i$ is in case \textup{(a)} of Proposition~\ref{prop:SU} if and only if $\chi_i=0$, and $N_{i+1}$ is the order $N_i'$ attached to $N_i$ there.
+\end{lemma}
+
+\begin{proof}
+We have $i<k$ if and only if $\ell_i\ge3$, while $\ell_k\le2$. The statements follow by induction on $i$ from Lemma~\ref{lem:descent}, applied to $w=(b_i\cdots b_t)^{(o_i)}$, whose second letter is $\chi_i$. In case (a), $\bin(N_i'-1)$ is the complement of $(b_{i+1}\cdots b_t)^{(o_i)}$, that is, $(b_{i+1}\cdots b_t)^{(1-o_i)}$; in case (b) it is $(b_{i+1}\cdots b_t)^{(o_i)}$. Finally, $\ell_k\le2$ and $b_k\oplus o_k=1$ give $N_k\in\{2,3,4\}$.
+\end{proof}
+
+\begin{proposition}\label{prop:unfold}
+In the setting of Definition~\ref{def:descent}, put $q_i=2^{r_i}$, $u_i=1-2q_i$ and, for $1\le i<k$,
+\[
+c_i=\eta_{N_i}\frac{q_i}{u_i},\qquad
+(a_i,f_i)=
+\begin{cases}
+\bigl(-1,\ \eta_{N_i}u_i^{e(N_i)}\bigr)&\text{if }\chi_i=0,\\
+\bigl(1,\ u_i^{2^{\ell_i-1}}\bigr)&\text{if }\chi_i=1.
+\end{cases}
+\]
+Define $\alpha_1=1$, $\beta_1=0$, $\gamma_1=1$ and $\alpha_{i+1}=\alpha_ia_i$, $\beta_{i+1}=\beta_i+\alpha_ic_i$, $\gamma_{i+1}=\gamma_if_i$ for $1\le i<k$. Then $\alpha_i,\beta_i,\gamma_i\in\Zt$ and
+\begin{equation}\label{eq:unfold}
+D(n+1)=\gamma_k\,Q(N_k,r_k)\bigl(\alpha_k R(N_k,r_k)+\beta_k\bigr).
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:stages} and Proposition~\ref{prop:normalized}(ii),(iii), and since $2^{L(N_i)}=2^{\ell_i-1}$, we have $Q(N_i,r_i)=f_iQ(N_{i+1},r_{i+1})$ and $R(N_i,r_i)=a_iR(N_{i+1},r_{i+1})+c_i$ for $1\le i<k$. By induction on $i$ it follows that $Q(n+1,0)=\gamma_iQ(N_i,r_i)$ and $R(n+1,0)=\alpha_iR(N_i,r_i)+\beta_i$ for $1\le i\le k$. Now apply Proposition~\ref{prop:normalized}(v) with $N=n+1$.
+\end{proof}
+
+We now reduce~\eqref{eq:unfold} modulo $P=2^K$. Fix $K\ge1$, let $A=\Z/P\Z$, and put
+\[
+C=\max(K+1,3).
+\]
+For $0\le\lambda\le C$ define $T(\lambda),T'(\lambda)\in A$ by $T(\lambda)=2^\lambda$ and $T'(\lambda)=2^{\lambda-1}$ for $\lambda<C$ (with $T'(0)=0$), and $T(C)=T'(C)=0$. For a word $v$ put
+\[
+\lambda(v)=\min(|v|,C),\qquad \nu(v)=\val{v}\bmod P,
+\]
+and for $o\in\{0,1\}$, $0\le\lambda\le C$ and $\nu\in A$ put $\mu(0,\lambda,\nu)=\nu$ and $\mu(1,\lambda,\nu)=T(\lambda)-1-\nu$.
+
+\begin{lemma}\label{lem:suffixdata}
+For every word $v$ and every letter $b$:
+\begin{enumerate}
+\item[(a)] $2^{|v|}\equiv T(\lambda(v))$, and if $|v|\ge1$ also $2^{|v|-1}\equiv T'(\lambda(v))\pmod P$;
+\item[(b)] $\val{v^{(o)}}\equiv\mu(o,\lambda(v),\nu(v))\pmod P$ for $o\in\{0,1\}$;
+\item[(c)] $\lambda(bv)=\min(\lambda(v)+1,C)$ and $\nu(bv)=b\,T(\lambda(v))+\nu(v)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+If $|v|<C$, then $\lambda(v)=|v|$ and (a) is the definition. If $|v|\ge C$, then $|v|-1\ge C-1\ge K$, so both powers of two vanish modulo $P$. Part (b) follows from (a) and~\eqref{eq:complement}, and (c) from (a) and $\val{bv}=b\,2^{|v|}+\val{v}$.
+\end{proof}
+
+Let $\Xi=\{0,1\}\times A^4$, whose elements $\xi=(o,\rho,\alpha,\beta,\gamma)$ record an orientation bit, the residue $\rho$ of the parameter $q$, and the three accumulators of Proposition~\ref{prop:unfold}. We write $o(\xi)=o$ and put $\xi_{\mathrm{init}}=(0,1,1,0,1)$.
+
+\begin{definition}\label{def:theta}
+Let $\xi=(o,\rho,\alpha,\beta,\gamma)\in\Xi$.
+\begin{enumerate}
+\item[(a)] For $\chi\in\{0,1\}$, $3\le\lambda\le C$ and $\nu\in A$ put $\mu=\mu(o,\lambda,\nu)$, $\eta=(-1)^{\mu+1}$ (well defined since $P$ is even), $u=1-2\rho$ (a unit of $A$) and $c=\eta\rho u^{-1}$, and define $\Theta(\xi;\chi,\lambda,\nu)\in\Xi$ by
+\[
+\Theta(\xi;\chi,\lambda,\nu)=
+\begin{cases}
+\bigl(1-o,\ 1,\ -\alpha,\ \beta+\alpha c,\ \gamma\,\eta\,u^{2\mu+1-T(\lambda)}\bigr)&\text{if }\chi=0,\\
+\bigl(o,\ 2\rho,\ \alpha,\ \beta+\alpha c,\ \gamma\,u^{T'(\lambda)}\bigr)&\text{if }\chi=1,
+\end{cases}
+\]
+where powers of $u$ with exponents in $A$ are understood as in Lemma~\ref{lem:units}.
+\item[(b)] For a word $v$ with $1\le|v|\le2$ let $M=\val{v^{(o)}}$. If $M=0$ put $\Omega(\xi,v)=0$. Otherwise put
+\[
+\Omega(\xi,v)=\gamma\,Q_{M+1}(\rho)\bigl(\alpha R_{M+1}(\rho)+\beta\bigr)\in A,
+\]
+where $Q_N(\rho)$ and $R_N(\rho)$, for $N\in\{2,3,4\}$, are the expressions in~\eqref{eq:terminal} with $q$ replaced by $\rho$, evaluated in $A$; their denominators $1-2\rho$ and $(1-2\rho)(1-4\rho)$ are units.
+\end{enumerate}
+\end{definition}
+
+\begin{proposition}\label{prop:reduced}
+Let $n\ge1$, use the notation of Definition~\ref{def:descent} and Proposition~\ref{prop:unfold}, and let $\xi_i\in\Xi$ be the reduction of $(o_i,q_i,\alpha_i,\beta_i,\gamma_i)$ modulo $P$. Then $\xi_1=\xi_{\mathrm{init}}$,
+\[
+\xi_{i+1}=\Theta\bigl(\xi_i;\ b_{i+1}\oplus o_i,\ \lambda(b_i\cdots b_t),\ \nu(b_i\cdots b_t)\bigr)\qquad(1\le i<k),
+\]
+and
+\[
+D(n+1)\equiv\Omega(\xi_k,\,b_k\cdots b_t)\pmod P.
+\]
+\end{proposition}
+
+\begin{proof}
+Let $1\le i<k$, and write $\lambda_i=\lambda(b_i\cdots b_t)$, $\nu_i=\nu(b_i\cdots b_t)$ and $\mu_i=\mu(o_i,\lambda_i,\nu_i)$. Since $\ell_i\ge3$ and $C\ge3$ we have $\lambda_i\ge3$. By Lemmas~\ref{lem:stages} and~\ref{lem:suffixdata}(b), $N_i-1\equiv\mu_i\pmod P$, so $\eta_{N_i}=(-1)^{\mu_i+1}$. Since $L(N_i)=\ell_i-1$,
+\[
+e(N_i)=2(N_i-1)+1-2^{\ell_i}\equiv2\mu_i+1-T(\lambda_i),\qquad 2^{\ell_i-1}\equiv T'(\lambda_i)\pmod P
+\]
+by Lemma~\ref{lem:suffixdata}(a). As $u_i$ is odd, Lemma~\ref{lem:units} shows that the residues of $u_i^{e(N_i)}$ and $u_i^{2^{\ell_i-1}}$ depend only on these exponents modulo $P$. Since reduction $\Zt\to A$ is a ring homomorphism, comparing the updates of $o_i$ and $r_i$ in Definition~\ref{def:descent} (so that $q_{i+1}$ is $1$ or $2q_i$) and the updates of $\alpha_i,\beta_i,\gamma_i$ in Proposition~\ref{prop:unfold} with Definition~\ref{def:theta}(a) gives the formula for $\xi_{i+1}$.
+
+At the final stage, $N_k=M+1$ with $M=\val{(b_k\cdots b_t)^{(o_k)}}\in\{1,2,3\}$ by Lemma~\ref{lem:stages}; note that $M$ is determined by the at most two digits $b_k\cdots b_t$ and by $o_k$, not merely by a residue. By Proposition~\ref{prop:normalized}(i), $Q(N_k,r_k)$ and $R(N_k,r_k)$ are rational functions of $q_k$ with odd denominators, whose reductions are $Q_{M+1}(\rho_k)$ and $R_{M+1}(\rho_k)$. Reducing~\eqref{eq:unfold} modulo $P$ completes the proof.
+\end{proof}
+
+The input to Proposition~\ref{prop:reduced} at stage $i$ consists of the state $\xi_i$, one further digit, and the pair $(\lambda,\nu)$ of the suffix $b_i\cdots b_t$, all of which range over finite sets. The suffix data are not available to an automaton that reads $\bin(n)$ from the left; this is why the automaton below reads from the right.
+
+\section{The automaton}\label{sec:automaton}
+
+We keep $K$, $P$, $A$, $C$, $\Xi$, $\Theta$ and $\Omega$ from Section~\ref{sec:descent}.
+
+\begin{definition}\label{def:phi}
+For a nonempty word $v$ define a map $\Phi_v\colon\Xi\to A$ by recursion on $|v|$. If $|v|\le2$, put $\Phi_v(\xi)=\Omega(\xi,v)$. If $|v|\ge3$, write $v=bv'$ with a letter $b$, let $v'_1$ be the first letter of $v'$, and put
+\[
+\Phi_v(\xi)=\Phi_{v'}\bigl(\Theta(\xi;\ v'_1\oplus o(\xi),\ \lambda(v),\ \nu(v))\bigr).
+\]
+We also define $\Phi_\varepsilon$ to be the zero map.
+\end{definition}
+
+\begin{lemma}\label{lem:phi}
+For every $n\ge1$, $\Phi_{\bin(n)}(\xi_{\mathrm{init}})\equiv D(n+1)\pmod P$.
+\end{lemma}
+
+\begin{proof}
+Let $\bin(n)=b_1\cdots b_t$ and let $\xi_1,\dots,\xi_k$ be as in Proposition~\ref{prop:reduced}. For $i<k$ the word $b_i\cdots b_t$ has length at least $3$, so Definition~\ref{def:phi} and Proposition~\ref{prop:reduced} give $\Phi_{b_i\cdots b_t}(\xi_i)=\Phi_{b_{i+1}\cdots b_t}(\xi_{i+1})$. Hence $\Phi_{\bin(n)}(\xi_{\mathrm{init}})=\Phi_{b_k\cdots b_t}(\xi_k)=\Omega(\xi_k,b_k\cdots b_t)$, which is congruent to $D(n+1)$ by Proposition~\ref{prop:reduced}.
+\end{proof}
+
+For a word $v$ containing the letter $1$, let $v^\circ$ be the word obtained by deleting the leading zeros of $v$, so that $v^\circ=\bin(\val{v})$. Let $\pi(v)$ be the prefix of $v$ of length $\min(|v|,2)$, and put
+\[
+\out(v)=
+\begin{cases}
+\Phi_{v^\circ}(\xi_{\mathrm{init}})&\text{if $v$ contains the letter $1$},\\
+0&\text{otherwise}.
+\end{cases}
+\]
+Finally, define
+\[
+\st(v)=\bigl(\lambda(v),\ \nu(v),\ \pi(v),\ \Phi_v,\ \out(v)\bigr).
+\]
+Then $\st(v)$ lies in the finite set
+\[
+\mathcal S=\{0,\dots,C\}\times A\times\{\text{words of length at most }2\}\times A^{\Xi}\times A.
+\]
+
+\begin{lemma}\label{lem:transition}
+There is a map $F\colon\{0,1\}\times\mathcal S\to\mathcal S$ such that $\st(bv)=F(b,\st(v))$ for every word $v$ and every letter $b$.
+\end{lemma}
+
+\begin{proof}
+We show that each component of $\st(bv)$ is determined by $b$ and $\st(v)$. For $\lambda(bv)$ and $\nu(bv)$ this is Lemma~\ref{lem:suffixdata}(c), and $\pi(bv)$ is the prefix of length $\min(|bv|,2)$ of $b\,\pi(v)$. Note that $|bv|\le2$ if and only if $\lambda(v)\le1$. If $\lambda(v)\le1$, then $bv=\pi(bv)$ and $\Phi_{bv}=\Omega(\cdot,\pi(bv))$. If $\lambda(v)\ge2$, then $|bv|\ge3$, the first letter of $v$ is the first letter of $\pi(v)$, and by Definition~\ref{def:phi}
+\[
+\Phi_{bv}(\xi)=\Phi_v\bigl(\Theta(\xi;\ \pi(v)_1\oplus o(\xi),\ \lambda(bv),\ \nu(bv))\bigr).
+\]
+Finally, $\out(bv)=\Phi_{bv}(\xi_{\mathrm{init}})$ if $b=1$, since then $(bv)^\circ=bv$; and $\out(bv)=\out(v)$ if $b=0$, since then $bv$ contains a $1$ exactly when $v$ does, and in that case $(bv)^\circ=v^\circ$. These formulas define $F(b,\sigma)$ for $\sigma$ in the set $S=\{\st(v):v\text{ a word}\}$ of states that occur; on the remaining elements of $\mathcal S$ we extend $F$ arbitrarily, for instance by $F(b,\sigma)=\sigma$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Fix $K\ge1$ and let $S=\{\st(v):v\text{ a word}\}\subseteq\mathcal S$, a finite set. By Lemma~\ref{lem:transition}, the map $\delta(\st(v),b)=\st(bv)$ is well defined on $S\times\{0,1\}$. Consider the $2$-DFAO $M=(S,\delta,\st(\varepsilon),A,\tau)$, where $\tau$ is the projection onto the last coordinate. By induction on $|w|$ we have $\hat\delta(\st(v),w)=\st(wv)$ for all words $v,w$: indeed $\hat\delta(\st(v),w'b)=\hat\delta(\st(bv),w')=\st(w'bv)$. In particular $\hat\delta(\st(\varepsilon),w)=\st(w)$.
+
+Let $n\ge0$ and let $w$ be a word with $\val{w}=n$. If $n\ge1$, then $w$ contains a $1$ and $w^\circ=\bin(n)$, so $\tau(\st(w))=\Phi_{\bin(n)}(\xi_{\mathrm{init}})\equiv D(n+1)\pmod P$ by Lemma~\ref{lem:phi}. If $n=0$, then $w$ contains no $1$ and $\tau(\st(w))=0=D(1)$. Hence $M$ generates $(D(n+1)\bmod 2^K)_{n\ge0}$.
+\end{proof}
+
+\begin{remark}\label{rem:kernel}
+Let $a(n)=D(n+1)\bmod 2^K$. For $i\ge0$ and $0\le j<2^i$ let $v_j$ be the word of length $i$ with $\val{v_j}=j$. Then $\val{\bin(n)v_j}=2^in+j$, hence
+\[
+a(2^in+j)=\tau\bigl(\hat\delta(\st(v_j),\bin(n))\bigr)\qquad(n\ge0),
+\]
+so the sequence $(a(2^in+j))_{n\ge0}$ depends on $(i,j)$ only through the state $\st(v_j)$. Thus the $2$-kernel of $(a(n))_{n\ge0}$ has at most $|S|$ elements. This gives Theorem~\ref{thm:main} directly in the formulation by finite $2$-kernels; the equivalence with automata reading the most significant digit first is \cite[Section~5.2]{AS}.
+\end{remark}
+
+\begin{remark}\label{rem:size}
+The construction bounds $|S|$ by $(C+1)\cdot P\cdot 7\cdot P^{2P^4}\cdot P$; this upper bound is very large already for $K=2$. We do not determine minimal automata. For comparison, the automata found experimentally in \cite{SU} for $K=2$ and $K=3$ have $12$ and $83$ states.
+\end{remark}
+
+\section{Further remarks}\label{sec:remarks}
+
+\subsection{The determinants are not \texorpdfstring{$2$}{2}-regular}
+
+\begin{proposition}\label{prop:notregular}
+For $m\ge2$ we have $|D(2^m)|\ge 3^{2^{m-2}}$. Consequently the sequence $(D(N))_{N\ge1}$ is not $2$-regular.
+\end{proposition}
+
+\begin{proof}
+By \cite[Proposition~4.5]{SU}, for $m\ge2$,
+\[
+D(2^m)=\Bigl(\sum_{j=1}^m\frac{2^{j-1}}{2^j-1}\Bigr)\prod_{j=1}^m(2^j-1)^{2^{m-j}}.
+\]
+All terms are positive, the sum is at least its first term $1$, and the product is at least its factor $3^{2^{m-2}}$ with $j=2$. A $2$-regular sequence of complex numbers is $O(N^c)$ for some constant $c$ \cite[Theorem~2.10]{AS92}, which is incompatible with $|D(N)|\ge3^{N/4}$ for $N=2^m$.
+\end{proof}
+
+Accordingly, the proof of Theorem~\ref{thm:main} propagates only residues, through the normalized pair $(Q,R)$ of Proposition~\ref{prop:normalized}, and never the integers $D(N)$ themselves.
+
+\subsection{Other moduli}
+The reduction in Section~\ref{sec:descent} rests on the fact that the denominators $1-2q$ and $1-4q$ in Proposition~\ref{prop:normalized}, for $q$ a power of two, are units modulo $2^K$. For a modulus with an odd prime factor $p$ this fails in general, since $1-2q\equiv0\pmod p$ when $2q\equiv1\pmod p$. The construction also reduces the exponents in~\eqref{eq:lower} and~\eqref{eq:upper} modulo $2^K$ itself (Lemma~\ref{lem:units}); modulo another integer $m$, exponents cannot in general be reduced modulo $m$. For instance, for $m=3$ and $q=1$ we have $u=-1\equiv2\pmod 3$, and the exponents $0$ and $3$ agree modulo $3$, whereas $2^0=1$ and $2^3\equiv2\pmod 3$. We do not address such moduli. By \cite[Corollary~4.16]{SU}, for every odd $m$ the set of $n$ with $m\mid D(n)$ has density $1$.
+
+\subsection{Finite computations}
+\begin{sloppypar}
+The supplementary file \texttt{verification.zip} accompanying this paper contains a Python script \texttt{verify\_r57.py}, which uses only the standard library, its output \texttt{verification\_results.json}, and a description \texttt{README-verification.txt}. These finite computations are not part of the proof of Theorem~\ref{thm:main}. The script computes $g(N,2^{-r})$ and $h(N,2^{-r})$ from their defining matrices by integer Bareiss elimination and finds that $Q(N,r)$ and $R(N,r)$ agree with the values given by~\eqref{eq:terminal}--\eqref{eq:upper}, and satisfy Proposition~\ref{prop:normalized}(iv), for $2\le N\le40$ and $0\le r\le8$. It finds that the iteration of~\eqref{eq:lower}--\eqref{eq:upper} modulo $2^K$ agrees with $D(N)\bmod 2^K$ for $2\le N\le40$ and $1\le K\le12$, and that the formula of Proposition~\ref{prop:reduced}, with the suffix data computed by Lemma~\ref{lem:suffixdata}(c), agrees with this iteration for $0\le n\le5000$ and $1\le K\le10$, as well as for selected inputs with up to $2048$ binary digits. The values $D(1),\dots,D(16)$ obtained agree with those listed in the introduction. The detailed record of the run is contained in \texttt{verification\_results.json}.
+\end{sloppypar}
+
+\section*{Use of AI-assisted tools}
+
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{11}
+
+\bibitem{APWW}
+J.-P. Allouche, J. Peyri\`ere, Z.-X. Wen, and Z.-Y. Wen, \emph{Hankel determinants of the Thue--Morse sequence}, Ann. Inst. Fourier (Grenoble) \textbf{48} (1998), no.~1, 1--27.
+
+\bibitem{AS92}
+J.-P. Allouche and J. Shallit, \emph{The ring of $k$-regular sequences}, Theoret. Comput. Sci. \textbf{98} (1992), no.~2, 163--197.
+
+\bibitem{AS}
+J.-P. Allouche and J. Shallit, \emph{Automatic sequences: theory, applications, generalizations}, Cambridge University Press, Cambridge, 2003.
+
+\bibitem{Eil}
+S. Eilenberg, \emph{Automata, languages, and machines. Vol.~A}, Pure and Applied Mathematics, vol.~59A, Academic Press, New York, 1974.
+
+\bibitem{FKS}
+R. J. Fokkink, C. Kraaikamp, and J. Shallit, \emph{Hankel matrices for the period-doubling sequence}, Indag. Math. (N.S.) \textbf{28} (2017), no.~1, 108--119.
+
+\bibitem{Guo}
+Y.-J. Guo, \emph{On the regularity of the Hankel determinant sequence of the characteristic sequence of powers of 2}, Adv. in Appl. Math. \textbf{104} (2019), 100--116.
+
+\bibitem{GW}
+Y.-J. Guo and Z.-X. Wen, \emph{Automaticity of the Hankel determinants of difference sequences of the Thue--Morse sequence}, Theoret. Comput. Sci. \textbf{552} (2014), 1--12.
+
+\bibitem{Han}
+G.-N. Han, \emph{Hankel determinant calculus for the Thue--Morse and related sequences}, J. Number Theory \textbf{147} (2015), 374--395.
+
+\bibitem{HH}
+Y. Hu and G.-N. Han, \emph{On the automaticity of the Hankel determinants of a family of automatic sequences}, Theoret. Comput. Sci. \textbf{795} (2019), 154--164.
+
+\bibitem{OEIS}
+OEIS Foundation Inc., \emph{The On-Line Encyclopedia of Integer Sequences}, sequence A056886, \url{https://oeis.org/A056886}.
+
+\bibitem{SU}
+B. Sobolewski and M. Ulas, \emph{Hankel determinants of weighted binary sums of digits}, preprint (2026), arXiv:2607.09376.
+
+\end{thebibliography}
+
+\end{document}

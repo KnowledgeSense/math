@@ -1,0 +1,45 @@
+import EdgeColoringMixing
+
+set_option autoImplicit false
+
+#print axioms EdgeColoringMixing.WeightedInjection.partition_pos
+#print axioms EdgeColoringMixing.WeightedInjection.covariance_posSemidef
+#print axioms EdgeColoringMixing.scalar_transfer
+#print axioms EdgeColoringMixing.same_pinning_bound
+#check EdgeColoringMixing.ReleaseMainTheorem
+#print axioms EdgeColoringMixing.WeightedInjection.posterior_second_moment
+#print axioms EdgeColoringMixing.WeightedInjection.recursive_gram_cancellation
+#print axioms EdgeColoringMixing.WeightedInjection.crossRowGram_posSemidef
+#print axioms EdgeColoringMixing.WeightedInjection.column_variance_identity
+#print axioms EdgeColoringMixing.WeightedInjection.partition_lower_bound
+#print axioms EdgeColoringMixing.WeightedInjection.marginal_le
+#print axioms EdgeColoringMixing.WeightedInjection.marginal_ge
+#print axioms EdgeColoringMixing.WeightedInjection.color_deletion_distance
+#print axioms EdgeColoringMixing.WeightedInjection.crossRow_covariance_bound
+#print axioms EdgeColoringMixing.WeightedInjection.crossRowGram_diagonal_bound_uniform
+#print axioms EdgeColoringMixing.WeightedInjection.recursionError_bound
+#print axioms EdgeColoringMixing.WeightedInjection.two_row_retained_covariance
+#print axioms EdgeColoringMixing.WeightedInjection.columnBlock_coercivity
+#print axioms EdgeColoringMixing.WeightedInjection.retained_covariance_to_columnBlock
+#print axioms EdgeColoringMixing.WeightedInjection.one_row_retained_covariance
+#print axioms EdgeColoringMixing.WeightedInjection.retainedCandidate_base
+#print axioms EdgeColoringMixing.WeightedInjection.retainedCandidate_spectral_cap
+#print axioms EdgeColoringMixing.WeightedInjection.posterior_first_moment
+#print axioms EdgeColoringMixing.WeightedInjection.retainedRecursionError_bound
+#print axioms EdgeColoringMixing.WeightedInjection.retainedCandidate_column_recursion
+#print axioms EdgeColoringMixing.MatrixTrickleDown.polynomial_order_inversion
+#print axioms EdgeColoringMixing.MatrixTrickleDown.WalkHierarchy.matrix_trickle_down
+#print axioms EdgeColoringMixing.WeightedInjection.injection_matrix_trickle_down_step
+#print axioms EdgeColoringMixing.WeightedInjection.deleted_covarianceTarget_transfer
+#print axioms EdgeColoringMixing.WeightedInjection.deleted_retainedCandidate_transfer
+#print axioms EdgeColoringMixing.WeightedInjection.retainedCandidate_column_bound
+#print axioms EdgeColoringMixing.WeightedInjection.retained_column_covariance
+#print axioms EdgeColoringMixing.WeightedInjection.column_covariance_bound
+#print axioms EdgeColoringMixing.release_parameter_choice
+#print axioms EdgeColoringMixing.rootMessageDecay_of_budget
+
+#print axioms EdgeColoringMixing.strongSpatialMixing_of_rootMessageDecay
+#print axioms EdgeColoringMixing.release_main_theorem
+
+universe u
+example : EdgeColoringMixing.ReleaseMainTheorem.{u} := EdgeColoringMixing.release_main_theorem

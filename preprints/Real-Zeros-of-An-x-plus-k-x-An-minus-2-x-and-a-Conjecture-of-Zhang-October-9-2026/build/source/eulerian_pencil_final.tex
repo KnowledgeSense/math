@@ -1,0 +1,656 @@
+\documentclass{amsart}
+\usepackage{amssymb}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+\DeclareMathOperator{\des}{des}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\HH}{\mathbb{H}}
+\newcommand{\fS}{\mathfrak{S}}
+\renewcommand{\Im}{\operatorname{Im}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cT}{\mathcal{T}}
+
+\hyphenation{manuscript}
+
+\begin{document}
+
+\title[Real zeros of $A_n(x)+kxA_{n-2}(x)$]{Real zeros of $A_n(x)+kxA_{n-2}(x)$ and a conjecture of Zhang}
+
+\author{Knowledge Sense}
+\address{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{9 October 2026}
+
+\subjclass[2020]{Primary 05A15, 26C10; Secondary 05A05, 30C15}
+
+\keywords{Eulerian polynomial, real-rootedness, interlacing, tangent number, stack sortable permutation}
+
+\begin{abstract}
+Let $A_n(x)$ be the Eulerian polynomial of the symmetric group $\fS_n$. We
+determine, for every $n\ge 3$, the set of real numbers $k$ for which
+$A_n(x)+kxA_{n-2}(x)$ has $n-1$ distinct real zeros: this happens exactly
+when $k<-n(n-1)$ or $k>-T_{m+1}/T_m$, where $m=\lfloor n/2\rfloor$ and the
+$T_m$ are the tangent numbers. This confirms a conjecture of Zhang. We also
+locate all zeros for every real $k$. At $k=-n(n-1)$ the number $1$ is a
+double zero, and at $k=-T_{m+1}/T_m$ the number $-1$ is a multiple zero. For
+$k$ strictly between these values exactly two zeros are nonreal, and they are
+complex conjugates of modulus one. The proof expresses $A_n$ through
+polynomials $F_n$ obtained from a constant by alternately applying two fixed
+first-order differential operators, and shows by elementary arguments that
+the zeros of $F_{n-2}$ and $F_n$ strictly interlace.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+For $n\ge 1$ let
+\[
+A_n(x)=\sum_{\pi\in\fS_n}x^{\des(\pi)},
+\]
+where $\des(\pi)$ is the number of descents of $\pi$, and put $A_0(x)=1$.
+Thus $A_1=1$, $A_2=1+x$, $A_3=1+4x+x^2$, and $\deg A_n=n-1$ for $n\ge 1$. For
+$n\ge 3$ and $k\in\RR$ we consider
+\begin{equation}\label{eq:K}
+K_{n,k}(x)=A_n(x)+kxA_{n-2}(x).
+\end{equation}
+
+Polynomials of this form arise from stack sorting. B\'ona \cite{Bona} conjectured
+that the descent polynomials of $t$-stack sortable permutations have only
+real zeros, and for $t=n-2$ the descent polynomial is $K_{n,-1}(x)$; see
+\cite[Section 1]{Zhang}. Br\"and\'en \cite[Theorem 5.2]{Branden} proved that $K_{n,k}$ has only real and simple zeros
+for all $n\ge 3$ and $k>-2$; in \cite{Branden} the Eulerian polynomials carry an extra
+factor $x$, which does not affect the statement. Zhang \cite{Zhang} gave another
+proof based on the $\mathbf{s}$-Eulerian polynomials of Savage and Visontai
+\cite{SavageVisontai}, and showed that $K_{n,k}$ has only real zeros for $n>3$ and $k\ge -n$
+\cite[Theorem 1.3]{Zhang}; the restriction $n>3$ is needed there, since
+$K_{3,-3}(x)=1+x+x^2$. Stanley suggested determining when $K_{n,k}$ has only
+real zeros \cite[Section 3]{Zhang}. Zhang first considered the case of
+distinct real zeros, determined the range of $k$ numerically for
+$3\le n\le 18$, and proposed the following conjecture.
+
+Let the tangent numbers $T_m$ be defined by
+\begin{equation}\label{eq:tangent}
+\tan t=\sum_{m\ge 1}T_m\frac{t^{2m-1}}{(2m-1)!},
+\end{equation}
+so that $T_1=1$, $T_2=2$, $T_3=16$, $T_4=272$, and $T_m$ is the number of
+alternating permutations of $\{1,\dots,2m-1\}$. This is the normalization
+used in \cite{Zhang}.
+
+\begin{conjecture}[{\cite[Conjecture 3.2]{Zhang}}]\label{conj:Zhang}
+For any $n\ge 3$, the polynomial $K_{n,k}(x)$ has only real and distinct
+zeros if and only if $k\in(-\infty,-n(n-1))\cup(-a(\lfloor n/2\rfloor),
++\infty)$, where $a(m)=T_{m+1}/T_m$.
+\end{conjecture}
+
+Since $K_{n,k}$ has degree $n-1$ for every $k$, having only real and
+distinct zeros means having $n-1$ distinct real zeros. Our main result
+confirms Conjecture~\ref{conj:Zhang}.
+
+\begin{theorem}\label{thm:main}
+Let $n\ge 3$, $m=\lfloor n/2\rfloor$ and $k\in\RR$. Then $A_n(x)+kxA_{n-2}(x)$
+has $n-1$ distinct real zeros if and only if
+\[
+k<-n(n-1)\qquad\text{or}\qquad k>-\frac{T_{m+1}}{T_m}.
+\]
+\end{theorem}
+
+Theorem~\ref{thm:main} is contained in the following description of all
+zeros.
+
+\begin{theorem}\label{thm:zeros}
+Let $n\ge 3$, $m=\lfloor n/2\rfloor$ and $\tau_n=T_{m+1}/T_m$. Then
+$\tau_n<n(n-1)$. For every $k\in\RR$ the polynomial $K_{n,k}$ has degree
+$n-1$ and satisfies $K_{n,k}(0)=1$, and the following hold.
+\begin{enumerate}
+\item[(a)] If $k>-\tau_n$, then all zeros of $K_{n,k}$ are negative and
+simple.
+\item[(b)] If $k=-\tau_n$, then $-1$ is a zero of multiplicity two if $n$ is
+odd and of multiplicity three if $n$ is even; all other zeros are negative
+and simple.
+\item[(c)] If $-n(n-1)<k<-\tau_n$, then $K_{n,k}$ has exactly two nonreal
+zeros; they are simple, complex conjugate and of modulus one. All other
+zeros are negative and simple.
+\item[(d)] If $k=-n(n-1)$, then $1$ is a zero of multiplicity two; all other
+zeros are negative and simple.
+\item[(e)] If $k<-n(n-1)$, then $K_{n,k}$ has exactly two positive zeros,
+both simple; all other zeros are negative and simple.
+\end{enumerate}
+In particular, $K_{n,k}$ has only real zeros if and only if
+$k\le -n(n-1)$ or $k\ge -\tau_n$.
+\end{theorem}
+
+The last assertion of Theorem~\ref{thm:zeros} answers the question of
+Stanley mentioned above. For $3\le n\le 18$ the numbers $-n(n-1)$ and $-\tau_n$ are the values
+$\omega_n$ and $\Omega_n$ tabulated in \cite[Section 3]{Zhang}; for instance
+$\tau_8=\tau_9=T_5/T_4=7936/272=496/17$. Zhang also observed that the
+products $\prod_{i=1}^{j}\Omega_{2i+1}$ are tangent numbers up to sign. This
+is explained by Theorem~\ref{thm:zeros}, since
+$\prod_{i=1}^{j}\tau_{2i+1}=\prod_{i=1}^{j}T_{i+1}/T_i=T_{j+1}$.
+
+\subsection*{Method}
+Since $A_n$ is palindromic, it can be written as
+\[
+A_n(x)=(x+1)^{e_n}x^{d_n}H_n(x+x^{-1})
+\]
+with a monic polynomial $H_n$ in the variable $w=x+x^{-1}$
+(Lemma~\ref{lem:Hn}). It is convenient to work
+with the variable $z=x/(x-1)^2$, which satisfies $z^{-1}=w-2$. In this
+variable the recurrence of the Eulerian polynomials becomes the alternating
+application of the two operators
+\[
+\cU f=f+zf',\qquad \cT f=(1+6z)f+z(1+4z)f'
+\]
+to a constant (Lemma~\ref{lem:Fn}). Neither operator depends on $n$, so
+$F_n$ and $F_{n-2}$ are mapped to $F_{n+1}$ and $F_{n-1}$ by the same
+operator. A logarithmic-derivative argument shows that $\cU$ and $\cT$
+preserve real-rootedness, and the Hermite--Kakeya--Obreschkoff theorem, in
+the special case proved in Section~\ref{sec:interlace}, then propagates
+strict interlacing from $(F_{n-2},F_n)$ to $(F_{n-1},F_{n+1})$
+(Proposition~\ref{prop:interlace}). Consequently the ratio $H_n/H_{n-2}$ is
+increasing to the right of the largest zero of $H_{n-2}$, and only one
+quadratic factor of $K_{n,k}$ can leave the negative real axis. The two
+thresholds are the negatives of the values of this ratio at $w=2$ and
+$w=-2$, that is, at $x=1$ and $x=-1$. They are computed from $A_n(1)=n!$
+and the exponential generating function of the Eulerian polynomials.
+Br\"and\'en's proof of \cite[Theorem 5.2]{Branden} likewise changes
+variables, by the substitution $x\mapsto x/(1+x)$, and uses a two-step
+recursion.
+
+\subsection*{Related results}
+Combinations of two consecutive Eulerian polynomials have been studied from
+the point of view of Hurwitz stability. Yang and Zhang
+\cite[Theorem 2.3]{YangZhang} showed that $(x+1)A_n(x)+kxA_{n-1}(x)$ has no
+zeros in the open right half-plane for $n\ge 2$ and $k\ge -n$; in
+\cite{YangZhang} the Eulerian polynomials are indexed differently. They also
+conjectured, in terms of the Euler zigzag numbers, the exact range of $k$
+for which this polynomial has no zeros in the closed right half-plane, and
+asked for a connection with Conjecture~\ref{conj:Zhang}
+\cite[Conjecture 3.2 and the remark following it]{YangZhang}. Ding and Zhu
+\cite[Proposition 2.17]{DingZhu} gave a criterion of this kind for
+polynomials satisfying a general recurrence. With $\beta=n$,
+$\gamma=\phi=1$, $\nu=-1$, $\rho=1$ and $\eta=k$ in their notation, it shows
+that $(x+1)A_{n+1}(x)+kxA_n(x)$ is Hurwitz stable, in their sense of having
+no zeros in the open right half-plane, for $n\ge 0$ and $k\ge -(n+1)$. The
+present paper treats the pencil~\eqref{eq:K}, which involves $A_n$ and
+$A_{n-2}$, and does not address the question of Yang and Zhang.
+
+\subsection*{Organization}
+Section~\ref{sec:F} introduces the polynomials $F_n$ and $H_n$. Section
+\ref{sec:interlace} proves the strict interlacing of $F_{n-2}$ and $F_n$.
+Section~\ref{sec:proof} evaluates the thresholds and proves
+Theorems~\ref{thm:main} and~\ref{thm:zeros}.
+
+\section{The polynomials $F_n$ and $H_n$}\label{sec:F}
+
+We use the classical recurrence
+\begin{equation}\label{eq:rec}
+A_{n+1}(x)=(1+nx)A_n(x)+x(1-x)A_n'(x)\qquad(n\ge 0)
+\end{equation}
+and the exponential generating function
+\begin{equation}\label{eq:egf}
+\sum_{n\ge 0}A_n(x)\frac{t^n}{n!}=\frac{x-1}{x-e^{(x-1)t}};
+\end{equation}
+see \cite{Comtet}. For completeness we note that, for the series
+$G=\sum_{n\ge 0}A_n(x)t^n/n!$, the recurrence \eqref{eq:rec} is equivalent to
+\[
+(1-xt)G_t=G+x(1-x)G_x,
+\]
+and together with $G(x,0)=1$ this equation determines the coefficients of
+$G$ recursively. A direct computation shows that the right-hand side of
+\eqref{eq:egf} satisfies the same equation and equals $1$ at $t=0$.
+
+For $n\ge 1$ put
+\[
+d_n=\Big\lfloor\frac{n-1}{2}\Big\rfloor,\qquad e_n=n-1-2d_n\in\{0,1\}.
+\]
+Thus $e_n=0$ for odd $n$ and $e_n=1$ for even $n$. For $f\in\RR[z]$ define
+\[
+\cU f=f+zf',\qquad \cT f=(1+6z)f+z(1+4z)f',
+\]
+and define polynomials $F_n\in\RR[z]$ by $F_1=1$ and
+\[
+F_{2m}=\cU F_{2m-1}\quad(m\ge 1),\qquad F_{2m+1}=\cT F_{2m}\quad(m\ge 1).
+\]
+For example $F_2=1$, $F_3=1+6z$, $F_4=1+12z$ and $F_5=1+30z+120z^2$.
+
+\begin{lemma}\label{lem:Fn}
+For every $n\ge 1$,
+\[
+A_n(x)=(x+1)^{e_n}(x-1)^{2d_n}F_n\!\left(\frac{x}{(x-1)^2}\right).
+\]
+\end{lemma}
+
+\begin{proof}
+The identity is between rational functions of $x$. Put
+$\varphi(x)=x/(x-1)^2$. Then
+\begin{equation}\label{eq:phi}
+\varphi'=-\frac{x+1}{(x-1)^3},\qquad
+1+4\varphi=\frac{(x+1)^2}{(x-1)^2},\qquad
+1+6\varphi=\frac{x^2+4x+1}{(x-1)^2}.
+\end{equation}
+We use induction on $n$; for $n=1$ both sides equal $1$. Assume the identity
+for $n$, and write $F$ and $F'$ for $F_n(\varphi)$ and $F_n'(\varphi)$.
+
+Let $n=2m+1$ with $m\ge 0$, so that $A_n=(x-1)^{2m}F$. By \eqref{eq:phi},
+\[
+x(1-x)A_n'=-2mx(x-1)^{2m}F+x(x+1)(x-1)^{2m-2}F',
+\]
+and \eqref{eq:rec} gives
+\begin{align*}
+A_{n+1}&=(x+1)(x-1)^{2m}F+x(x+1)(x-1)^{2m-2}F'\\
+&=(x+1)(x-1)^{2m}\bigl(F+\varphi F'\bigr).
+\end{align*}
+This is the claim for $n+1=2m+2$, since $F_{2m+2}=\cU F_{2m+1}$,
+$e_{2m+2}=1$ and $d_{2m+2}=m$.
+
+Let $n=2m$ with $m\ge 1$, so that $A_n=(x+1)(x-1)^{2m-2}F$. By
+\eqref{eq:phi},
+\begin{align*}
+x(1-x)A_n'&=-x(x-1)^{2m-1}F-(2m-2)x(x+1)(x-1)^{2m-2}F\\
+&\quad+x(x+1)^2(x-1)^{2m-4}F'.
+\end{align*}
+Adding $(1+2mx)A_n$, the coefficient of $(x-1)^{2m-2}F$ becomes
+\[
+(1+2mx)(x+1)-(2m-2)x(x+1)-x(x-1)=x^2+4x+1,
+\]
+and by \eqref{eq:phi},
+\[
+A_{n+1}=(x-1)^{2m}\bigl((1+6\varphi)F+\varphi(1+4\varphi)F'\bigr).
+\]
+This is the claim for $n+1=2m+1$, since $F_{2m+1}=\cT F_{2m}$,
+$e_{2m+1}=0$ and $d_{2m+1}=m$.
+\end{proof}
+
+A real polynomial is \emph{standard} if its leading coefficient is positive.
+We write $I$ for the open interval $(-1/4,0)$.
+
+\begin{lemma}\label{lem:roots}
+For every $n\ge 1$, $F_n$ is standard of degree $d_n$, $F_n(0)=1$, and $F_n$
+has $d_n$ simple zeros, all in $I$.
+\end{lemma}
+
+\begin{proof}
+Both operators fix the constant term, so $F_n(0)=1$. If $f$ has degree $d$
+and leading coefficient $a$, then $\cU f$ has degree $d$ and leading coefficient
+$(d+1)a$, and $\cT f$ has degree $d+1$ and leading coefficient $(4d+6)a$. This
+gives the degree and the sign of the leading coefficient by induction.
+
+It remains to show that $\cU$ and $\cT$ map a standard polynomial $f$ of degree
+$d$ with $d$ simple zeros in $I$ to a polynomial whose zeros are simple and
+lie in $I$. If $d=0$, then $\cU f$ is a positive constant and $\cT f=f\cdot(1+6z)$
+has the single zero $-1/6\in I$. Let $d\ge 1$ and let $r_1<\dots<r_d$ be the
+zeros of $f$. Since $f$ is standard, $f'(r_j)$ has the sign $(-1)^{d-j}$,
+$f(0)>0$, and $f(-1/4)$ has the sign $(-1)^d$. Since
+$r_j<0$ and $1+4r_j>0$, both
+\[
+\cU f(r_j)=r_jf'(r_j)\qquad\text{and}\qquad \cT f(r_j)=r_j(1+4r_j)f'(r_j)
+\]
+have the sign $(-1)^{d-j+1}$, while $\cU f(0)=\cT f(0)=f(0)>0$. Hence each of $\cU f$
+and $\cT f$ has a zero in each of the $d$ intervals $(r_j,r_{j+1})$ with
+$1\le j<d$ and $(r_d,0)$. This accounts for all zeros of $\cU f$. Moreover
+$\cT f(-1/4)=-f(-1/4)/2$ has the sign $(-1)^{d+1}$, whereas $\cT f(r_1)$ has the
+sign $(-1)^d$, so $\cT f$ has one more zero in $(-1/4,r_1)$. This accounts for
+all $d+1$ zeros of $\cT f$, and all of them lie in $I$.
+\end{proof}
+
+For $n\ge 1$ define
+\[
+H_n(w)=(w-2)^{d_n}F_n\!\left(\frac{1}{w-2}\right).
+\]
+
+\begin{lemma}\label{lem:Hn}
+For every $n\ge 1$, $H_n$ is a monic polynomial of degree $d_n$,
+\begin{equation}\label{eq:Hn}
+A_n(x)=(x+1)^{e_n}x^{d_n}H_n(x+x^{-1}),
+\end{equation}
+and the zeros of $H_n$ are the numbers $2+\rho^{-1}$, where $\rho$ runs over
+the zeros of $F_n$. In particular, $H_n$ has $d_n$ simple zeros, all less
+than $-2$.
+\end{lemma}
+
+\begin{proof}
+Write $d=d_n$ and $F_n(z)=\sum_{i=0}^{d}c_iz^i$. Then
+$H_n(w)=\sum_{i=0}^{d}c_i(w-2)^{d-i}$, which is monic of degree $d$ because
+$c_0=F_n(0)=1$. Since $1/\varphi(x)=x+x^{-1}-2$, we have
+$(x-1)^{2d}F_n(\varphi(x))=x^d\varphi(x)^{-d}F_n(\varphi(x))
+=x^dH_n(x+x^{-1})$, and \eqref{eq:Hn} follows from Lemma~\ref{lem:Fn}. As
+$H_n(2)=c_d\ne 0$, a number $w$ is a zero of $H_n$ if and only if $w\ne 2$
+and $(w-2)^{-1}$ is a zero of $F_n$. The map $\rho\mapsto 2+\rho^{-1}$ is
+injective and sends $I$ into $(-\infty,-2)$, so the last statement follows
+from Lemma~\ref{lem:roots}.
+\end{proof}
+
+\section{Strict interlacing}\label{sec:interlace}
+
+Let $f,g\in\RR[z]$ with $\deg f=d\ge 1$ and $\deg g=d-1$. We say that $g$
+\emph{strictly interlaces} $f$, and write $g\prec f$, if $f$ has $d$ simple
+real zeros $r_1<\dots<r_d$, $g$ has $d-1$ simple real zeros
+$s_1<\dots<s_{d-1}$, and
+\[
+r_1<s_1<r_2<s_2<\dots<s_{d-1}<r_d.
+\]
+For $d=1$ the condition only says that $g$ is a nonzero constant. The
+following two lemmas are special cases of the theorem of Hermite, Kakeya
+and Obreschkoff \cite{Obreschkoff}, \cite{Dedieu}, \cite[Theorem 2.4]{Branden}; we include
+proofs for completeness.
+
+\begin{lemma}\label{lem:pencil}
+Let $f$ and $g$ be standard with $g\prec f$, $\deg f=d\ge 1$, and let
+$s_1<\dots<s_{d-1}$ be the zeros of $g$. Then the following hold.
+\begin{enumerate}
+\item[(i)] There are $c>0$, $b\in\RR$ and $c_1,\dots,c_{d-1}>0$ with
+\[
+\frac{f(z)}{g(z)}=cz+b-\sum_{j=1}^{d-1}\frac{c_j}{z-s_j}.
+\]
+\item[(ii)] The Wronskian $W=f'g-fg'$ is positive on $\RR$.
+\item[(iii)] For every $t\in\RR$, the polynomial $f+tg$ has $d$ simple real
+zeros. In the $d$ open intervals into which $s_1,\dots,s_{d-1}$ divide
+$\RR$, it has exactly one zero each, and $f/g$ is strictly increasing on each
+of them.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) Since $\deg f=\deg g+1$ and the zeros of $g$ are simple, partial
+fractions give such an expansion with $c$ the ratio of the leading
+coefficients and with residue $-c_j=f(s_j)/g'(s_j)$ at $s_j$. The sign of
+$g'(s_j)$ is $(-1)^{d-1-j}$. Exactly $d-j$ zeros of $f$ exceed $s_j$, so the
+sign of $f(s_j)$ is $(-1)^{d-j}$. Hence $c_j>0$.
+
+(ii) Away from the zeros of $g$ we have
+\[
+W=g^2\Bigl(\frac fg\Bigr)'=g^2\Bigl(c+\sum_j\frac{c_j}{(z-s_j)^2}\Bigr)>0,
+\]
+and at $s_j$ we have $W(s_j)=-f(s_j)g'(s_j)=c_jg'(s_j)^2>0$.
+
+(iii) By (i), $f/g$ is strictly increasing on each of the $d$ intervals; on
+each of them it tends to $-\infty$ at the left end and to $+\infty$ at the
+right end. Hence $f/g=-t$ has exactly one solution in each interval. These
+are zeros of $f+tg$, and $f+tg$ does not vanish at $s_j$ because
+$f(s_j)\ne 0$. Since $\deg(f+tg)=d$, these are all its zeros.
+\end{proof}
+
+\begin{lemma}\label{lem:converse}
+Let $p$ and $q$ be standard, $\deg p=d\ge 1$ and $\deg q=d-1$. Assume that
+the zeros of $q$ are real and simple, that $p$ and $q$ have no common zero,
+and that $p+tq$ has only real zeros for every $t\in\RR$. Then $q\prec p$.
+\end{lemma}
+
+\begin{proof}
+If $d=1$ there is nothing to prove, so let $d\ge 2$ and let
+$s_1<\dots<s_{d-1}$ be the zeros of $q$. Let $\HH$ be the open upper
+half-plane. The function $\psi=p/q$ is holomorphic on $\HH$. It takes no real
+value there: if $\psi(z)=-t$ with $t\in\RR$ and $z\in\HH$, then $z$ would be a
+nonreal zero of $p+tq$. Since $\HH$ is connected, $\Im\psi$ has constant sign
+on $\HH$. As $y\to+\infty$ we have $\psi(iy)=c\,iy+O(1)$, where $c>0$ is the
+ratio of the leading coefficients, so $\Im\psi>0$ on $\HH$.
+
+Partial fractions give $\psi(z)=cz+b+\sum_j h_j/(z-s_j)$ with $b,h_j\in\RR$,
+and $h_j=p(s_j)/q'(s_j)\ne 0$ because $p$ and $q$ have no common zero. As
+$\varepsilon\to 0^+$,
+\[
+\Im\psi(s_j+i\varepsilon)=-\frac{h_j}{\varepsilon}+O(1),
+\]
+so $h_j<0$. Hence $\psi$ has the form in Lemma~\ref{lem:pencil}(i). The
+argument in the proof of Lemma~\ref{lem:pencil}(iii), with $t=0$, shows that $p$ has exactly one zero in
+each of the intervals $(-\infty,s_1)$, $(s_j,s_{j+1})$ and
+$(s_{d-1},\infty)$. These are $d$ simple real zeros, and $q\prec p$.
+\end{proof}
+
+\begin{lemma}\label{lem:preserve}
+If $f\in\RR[z]$ is nonzero and has only real zeros, then $\cU f$ and $\cT f$
+are nonzero and have only real zeros.
+\end{lemma}
+
+\begin{proof}
+Let $d=\deg f$ and let $a$ be the leading coefficient of $f$. The leading
+coefficients of $\cU f$ and $\cT f$ are $(d+1)a$ and $(4d+6)a$, as in the
+proof of Lemma~\ref{lem:roots}, so both are nonzero. Write
+$f=a\prod_j(z-r_j)$ with real $r_j$, repeated according to multiplicity.
+Let $z\notin\RR$. Then $z$, $1+4z$ and $f(z)$ are nonzero, and
+since $(1+6z)/(z(1+4z))=z^{-1}+\frac12(z+\frac14)^{-1}$,
+\begin{align*}
+\frac{\cU f(z)}{zf(z)}&=\frac1z+\sum_j\frac{1}{z-r_j},\\
+\frac{\cT f(z)}{z(1+4z)f(z)}&=\frac1z+\frac{1/2}{z+1/4}+\sum_j\frac{1}{z-r_j}.
+\end{align*}
+For real $r$ we have $\Im (z-r)^{-1}=-\Im z/|z-r|^2$, so the imaginary part
+of each right-hand side is $-\Im z$ times a positive number. Hence
+$\cU f(z)\ne 0$ and $\cT f(z)\ne 0$.
+\end{proof}
+
+\begin{proposition}\label{prop:interlace}
+For every $n\ge 3$ we have $F_{n-2}\prec F_n$ and $H_{n-2}\prec H_n$, and all
+zeros of $H_n$ and $H_{n-2}$ are less than $-2$.
+\end{proposition}
+
+\begin{proof}
+We prove $F_{n-2}\prec F_n$ by induction on $n$. For $n=3$ it holds because
+$F_1=1$ and $F_3=1+6z$. Let $n\ge 3$ and assume $F_{n-2}\prec F_n$. Put
+$L=\cU$ if $n$ is odd and $L=\cT$ if $n$ is even. By the definition of the $F_j$,
+\[
+F_{n+1}=LF_n\qquad\text{and}\qquad F_{n-1}=LF_{n-2}.
+\]
+We write $L=u+v\,\frac{d}{dz}$; thus
+\[
+(u,v)=(1,z)\ \text{if}\ L=\cU,\qquad (u,v)=\bigl(1+6z,\,z(1+4z)\bigr)\ \text{if}\ L=\cT.
+\]
+
+Both $F_n$ and $F_{n-2}$ are standard by Lemma~\ref{lem:roots}. By
+Lemma~\ref{lem:pencil}(iii), $F_n+tF_{n-2}$ is nonzero and has only real
+zeros for every $t\in\RR$, so by Lemma~\ref{lem:preserve} the same is true of
+$L(F_n+tF_{n-2})=F_{n+1}+tF_{n-1}$. By Lemma~\ref{lem:roots}, $F_{n+1}$ and
+$F_{n-1}$ are standard, $\deg F_{n+1}=d_{n+1}=d_{n-1}+1=\deg F_{n-1}+1$, and
+the zeros of $F_{n-1}$ are simple and lie in $I$.
+
+Suppose that $\zeta$ is a common zero of $F_{n+1}$ and $F_{n-1}$. Then
+$\zeta\in I$, so $v(\zeta)\ne 0$. For any $f$ and $g$,
+\[
+(Lf)g-(Lg)f=v\,(f'g-fg').
+\]
+Applied to $f=F_n$ and $g=F_{n-2}$ at $z=\zeta$, this gives
+$v(\zeta)W(\zeta)=0$, where $W=F_n'F_{n-2}-F_nF_{n-2}'$. This contradicts
+Lemma~\ref{lem:pencil}(ii). Hence $F_{n+1}$ and $F_{n-1}$ have no common zero,
+and Lemma~\ref{lem:converse} gives $F_{n-1}\prec F_{n+1}$.
+
+Now let $n\ge 3$ and $d=d_n$. By Lemma~\ref{lem:Hn}, the zeros of $H_n$ and
+$H_{n-2}$ are simple and less than $-2$, and they are the images of the
+zeros of $F_n$ and $F_{n-2}$ under the map $\rho\mapsto 2+\rho^{-1}$, which
+is strictly decreasing on $I$. If $d=1$, then $H_{n-2}=1$ and $H_n$ has a
+single simple real zero, so $H_{n-2}\prec H_n$. If $d\ge 2$, let
+$\rho_1<\dots<\rho_d$ be the zeros of $F_n$ and $\sigma_1<\dots<\sigma_{d-1}$
+those of $F_{n-2}$. Since $F_{n-2}\prec F_n$, their images satisfy
+\[
+2+\rho_d^{-1}<2+\sigma_{d-1}^{-1}<2+\rho_{d-1}^{-1}<\dots<2+\sigma_1^{-1}
+<2+\rho_1^{-1}<-2.
+\]
+Thus $H_{n-2}\prec H_n$.
+\end{proof}
+
+\section{Proof of the main theorems}\label{sec:proof}
+
+\begin{lemma}\label{lem:values}
+We have $H_n(2)=n!/2^{e_n}$ for $n\ge 1$. Moreover,
+$H_{2m+1}(-2)=T_{m+1}$ for $m\ge 0$, and $H_{2m}(-2)=T_{m+1}/2$ for
+$m\ge 1$.
+\end{lemma}
+
+\begin{proof}
+At $x=1$ we have $x+x^{-1}=2$, and $A_n(1)=n!$, so \eqref{eq:Hn} gives the
+first claim.
+
+At $x=-1$, \eqref{eq:egf} becomes
+\[
+\sum_{n\ge 0}A_n(-1)\frac{t^n}{n!}=\frac{2}{1+e^{-2t}}=1+\tanh t.
+\]
+Since $\tanh t=-i\tan(it)$, \eqref{eq:tangent} gives
+$\tanh t=\sum_{m\ge 0}(-1)^mT_{m+1}t^{2m+1}/(2m+1)!$. Hence
+$A_{2m}(-1)=0$ for $m\ge 1$ and $A_{2m+1}(-1)=(-1)^mT_{m+1}$ for $m\ge 0$.
+
+For $n=2m+1$, \eqref{eq:Hn} reads $A_{2m+1}(x)=x^mH_{2m+1}(x+x^{-1})$, and at
+$x=-1$ it gives $(-1)^mT_{m+1}=(-1)^mH_{2m+1}(-2)$.
+
+For $n=2m$ with $m\ge 1$, \eqref{eq:Hn} reads
+$A_{2m}(x)=(x+1)x^{m-1}H_{2m}(x+x^{-1})$. Differentiating at $x=-1$, where the
+factor $x+1$ vanishes, gives
+\[
+A_{2m}'(-1)=(-1)^{m-1}H_{2m}(-2).
+\]
+On the other hand, \eqref{eq:rec} at $x=-1$ with $n=2m$ gives
+\[
+A_{2m+1}(-1)=(1-2m)A_{2m}(-1)-2A_{2m}'(-1)=-2A_{2m}'(-1).
+\]
+Therefore
+$(-1)^mT_{m+1}=2(-1)^mH_{2m}(-2)$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:zeros}]
+Fix $n\ge 3$ and write $d=d_n\ge 1$, $e=e_n$ and $m=\lfloor n/2\rfloor$.
+Since $d_{n-2}=d-1$ and $e_{n-2}=e$, \eqref{eq:Hn} gives
+$xA_{n-2}(x)=(x+1)^ex^dH_{n-2}(x+x^{-1})$, and therefore
+\begin{equation}\label{eq:KQ}
+K_{n,k}(x)=(x+1)^ex^dQ_k(x+x^{-1}),\qquad Q_k=H_n+kH_{n-2}.
+\end{equation}
+The leading coefficient of $A_n$ is $1$ and $\deg xA_{n-2}=n-2$, so
+$K_{n,k}$ has degree $n-1$; also $K_{n,k}(0)=A_n(0)=1$.
+
+Let $R=H_n/H_{n-2}$. Since $H_{n-2}\prec H_n$ by
+Proposition~\ref{prop:interlace}, Lemma~\ref{lem:pencil}(iii) with $t=k$
+shows that the polynomial $Q_k$ is monic of degree $d$ and has $d$ simple real zeros
+$w_1<\dots<w_d$. If $d=1$, then $H_{n-2}=1$, $R=H_n$ is a monic linear
+polynomial, and we put $J=\RR$; the only zero of $Q_k$ is the solution $w_1$
+of $R(w)=-k$. If $d\ge 2$, let $s_{d-1}$ be the largest zero of $H_{n-2}$ and
+put $J=(s_{d-1},\infty)$. By Lemma~\ref{lem:pencil}(iii), the zeros
+$w_1,\dots,w_{d-1}$ are less than $s_{d-1}$, and $w_d$ is the unique solution
+of $R(w)=-k$ in $J$; moreover $s_{d-1}<-2$ by
+Proposition~\ref{prop:interlace}, so $w_1,\dots,w_{d-1}$ are less than $-2$.
+
+In both cases $R$ is continuous and strictly increasing on $J$ by
+Lemma~\ref{lem:pencil}(i), the interval $J$ contains $-2$ and $2$, and $w_d$
+is the unique point of $J$ with $R(w_d)=-k$. Consequently, for
+$a\in\{-2,2\}$,
+\begin{equation}\label{eq:compare}
+\begin{aligned}
+w_d<a&\iff k>-R(a),\\
+w_d=a&\iff k=-R(a),\\
+w_d>a&\iff k<-R(a).
+\end{aligned}
+\end{equation}
+By Lemma~\ref{lem:values}, and because $e_{n-2}=e_n$,
+\[
+R(2)=\frac{n!}{(n-2)!}=n(n-1).
+\]
+If $n=2m+1$, then $R(-2)=H_{2m+1}(-2)/H_{2m-1}(-2)=T_{m+1}/T_m$; if $n=2m$,
+then $R(-2)=(T_{m+1}/2)/(T_m/2)=T_{m+1}/T_m$. Thus $R(-2)=\tau_n$ for both
+parities, and $\tau_n=R(-2)<R(2)=n(n-1)$ because $R$ is increasing on $J$.
+
+Since $x^dQ_k(x+x^{-1})=\prod_{j=1}^{d}x\,(x+x^{-1}-w_j)$, equation
+\eqref{eq:KQ} becomes
+\begin{equation}\label{eq:factor}
+K_{n,k}(x)=(x+1)^e\prod_{j=1}^{d}q_{w_j}(x),\qquad q_w(x)=x^2-wx+1.
+\end{equation}
+The zeros of $q_w$ have product $1$ and sum $w$. Hence $q_w$ has two distinct
+negative zeros if $w<-2$, equals $(x+1)^2$ if $w=-2$, has two complex
+conjugate nonreal zeros of modulus one if $-2<w<2$, equals $(x-1)^2$ if
+$w=2$, and has two distinct positive zeros if $w>2$. A zero $x$ of $q_w$
+determines $w=x+x^{-1}$, so $q_w$ and $q_{w'}$ have no common zero when
+$w\ne w'$, and $-1$ is a zero of $q_w$ only for $w=-2$.
+
+Since $w_1,\dots,w_{d-1}$ are distinct and less than $-2$, the factors
+$q_{w_1},\dots,q_{w_{d-1}}$ contribute $2(d-1)$ distinct negative zeros,
+none equal to $-1$. If $e=1$, the factor $x+1$ contributes the zero $-1$.
+These zeros are simple zeros of $(x+1)^e\prod_{j<d}q_{w_j}$, and none of them
+is a zero of $q_{w_d}$ unless $w_d=-2$, in which case $q_{w_d}=(x+1)^2$.
+Therefore all zeros of $K_{n,k}$ outside those of $q_{w_d}$ are negative and
+simple, and \eqref{eq:compare} with $R(-2)=\tau_n$ and $R(2)=n(n-1)$ gives
+the five cases.
+
+If $k>-\tau_n$, then $w_d<-2$ and the zeros of $q_{w_d}$ are negative,
+simple and different from $-1$; this is (a). If $k=-\tau_n$, then $w_d=-2$,
+$q_{w_d}=(x+1)^2$, and $-1$ has multiplicity $2+e$; this is (b). If
+$-n(n-1)<k<-\tau_n$, then $-2<w_d<2$; this is (c). If $k=-n(n-1)$, then
+$w_d=2$ and $q_{w_d}=(x-1)^2$; this is (d). If $k<-n(n-1)$, then $w_d>2$ and
+$q_{w_d}$ has two distinct positive zeros; this is (e). The final statement
+follows from (a) to (e).
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+By Theorem~\ref{thm:zeros}, $K_{n,k}$ has $n-1$ distinct real zeros in cases
+(a) and (e), and it has a multiple or a nonreal zero in cases (b), (c) and
+(d).
+\end{proof}
+
+\begin{remark}
+The proof also shows how the zeros move with $k$. For $d\ge 2$ the numbers
+$w_1,\dots,w_{d-1}$ always lie below the largest zero of $H_{n-2}$, so only
+the two zeros of $q_{w_d}$ can leave the negative real axis. As $k$
+decreases from $+\infty$ to $-\infty$, the parameter $w_d$ increases from
+$s_{d-1}$ (from $-\infty$ if $d=1$) to $+\infty$. The two zeros of $q_{w_d}$
+move along the negative axis until they meet at $-1$, where $K_{n,k}$ then
+has a zero of multiplicity $2+e_n$. They then move along the unit circle
+until they meet at $1$, where $K_{n,k}$ has a double zero, and finally they
+separate along the positive axis.
+\end{remark}
+
+\section*{Use of AI-assisted tools}
+
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{9}
+
+\bibitem{Bona}
+M. B\'ona, \emph{Symmetry and unimodality in $t$-stack sortable
+permutations}, J. Combin. Theory Ser. A \textbf{98} (2002), no.~1, 201--209.
+
+\bibitem{Branden}
+P. Br\"and\'en, \emph{On linear transformations preserving the P\'olya
+frequency property}, Trans. Amer. Math. Soc. \textbf{358} (2006), no.~8,
+3697--3716. Cited from arXiv:math/0403364v2; theorem numbers refer to
+this version.
+
+\bibitem{Comtet}
+L. Comtet, \emph{Advanced combinatorics}, D. Reidel Publishing Co.,
+Dordrecht, 1974.
+
+\bibitem{Dedieu}
+J.-P. Dedieu, \emph{Obreschkoff's theorem revisited: what convex sets are
+contained in the set of hyperbolic polynomials?}, J. Pure Appl. Algebra
+\textbf{81} (1992), no.~3, 269--278.
+
+\bibitem{DingZhu}
+M.-J. Ding and B.-X. Zhu, \emph{Stability of combinatorial polynomials and
+its applications}, preprint (2021), arXiv:2106.12176v2.
+
+\bibitem{Obreschkoff}
+N. Obreschkoff, \emph{Verteilung und Berechnung der Nullstellen reeller
+Polynome}, VEB Deutscher Verlag der Wissenschaften, Berlin, 1963.
+
+\bibitem{SavageVisontai}
+C. D. Savage and M. Visontai, \emph{The $\mathbf{s}$-Eulerian polynomials
+have only real roots}, Trans. Amer. Math. Soc. \textbf{367} (2015), no.~2,
+1441--1466.
+
+\bibitem{YangZhang}
+A. L. B. Yang and P. B. Zhang, \emph{The real-rootedness of Eulerian
+polynomials via the Hermite--Biehler theorem}, preprint (2015),
+arXiv:1501.05824v2.
+
+\bibitem{Zhang}
+P. B. Zhang, \emph{On the real-rootedness of the descent polynomials of
+$(n-2)$-stack sortable permutations}, Electron. J. Combin. \textbf{22}
+(2015), no.~4, Paper 4.12.
+
+\end{thebibliography}
+
+\end{document}

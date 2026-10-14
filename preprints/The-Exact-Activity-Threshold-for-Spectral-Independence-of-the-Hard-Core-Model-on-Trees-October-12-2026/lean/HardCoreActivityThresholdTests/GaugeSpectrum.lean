@@ -1,0 +1,4 @@
+import HardCoreActivityThreshold.GaugeSpectrum
+
+#print axioms HardCoreActivityThreshold.signed_active_radius_bound
+#print axioms HardCoreActivityThreshold.hermitian_radius_quadratic_bound

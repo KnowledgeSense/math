@@ -1,0 +1,5 @@
+import HardCoreActivityThreshold.SymmetricSecondEigenvalue
+import HardCoreActivityThreshold.HardCoreSupport
+#print axioms HardCoreActivityThreshold.symmetric_second_eigenvalue_bound
+#print axioms HardCoreActivityThreshold.symmetric_second_eigenvalue_attained
+#print axioms HardCoreActivityThreshold.hardCore_support_card_ge_two

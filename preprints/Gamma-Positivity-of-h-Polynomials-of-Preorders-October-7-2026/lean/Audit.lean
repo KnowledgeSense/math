@@ -1,0 +1,13 @@
+import PreorderGamma
+
+#print axioms ResearchMain.PreorderGamma.preorder_gamma_full_main
+#print axioms ResearchMain.PreorderGamma.preorder_root_hStar_simplicial_realization
+#print axioms ResearchMain.PreorderGamma.root_hStar_support
+#print axioms ResearchMain.PreorderGamma.root_hStar_gamma_expansion
+#print axioms ResearchMain.PreorderGamma.root_lattice_count_binomial
+#print axioms ResearchMain.PreorderGamma.preorder_root_g_multicomplex
+#print axioms ResearchMain.PreorderGamma.MacaulayNumerical.preorder_g_macaulay_conditions
+#print axioms ResearchMain.PreorderGamma.MacaulayNumerical.preorder_g_strict_cascade_bound
+#print axioms ResearchMain.PreorderGamma.MacaulayNumerical.root_truncated_g_macaulay_inequality
+#print axioms ResearchMain.PreorderGamma.preorder_root_integer_decomposition
+#print axioms ResearchMain.PreorderGamma.preorder_root_orderDual_count

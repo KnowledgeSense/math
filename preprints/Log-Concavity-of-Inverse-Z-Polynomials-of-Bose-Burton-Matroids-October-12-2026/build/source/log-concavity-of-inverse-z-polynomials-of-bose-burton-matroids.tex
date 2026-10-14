@@ -1,0 +1,665 @@
+\documentclass{amsart}
+
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage[hyphens]{url}
+\usepackage[
+  pdftitle={Log-concavity of inverse Z-polynomials of Bose-Burton matroids},
+  pdfauthor={Knowledge Sense},
+  pdfsubject={Mathematics - Combinatorics},
+  pdfkeywords={inverse Z-polynomial, Bose-Burton geometry, projective geometry, log-concavity, Gaussian binomial coefficients},
+  colorlinks=true, linkcolor=black, citecolor=black, urlcolor=black
+]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\numberwithin{equation}{section}
+\emergencystretch=1em
+
+\newcommand{\qbinom}[3]{\genfrac{[}{]}{0pt}{}{#1}{#2}_{#3}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\PG}{\mathrm{PG}}
+\newcommand{\AG}{\mathrm{AG}}
+\newcommand{\rk}{\operatorname{rk}}
+\newcommand{\BB}{B_{r,s}(q)}
+\newcommand{\poch}[1]{(z;z)_{#1}}
+
+\begin{document}
+
+\title[Inverse $Z$-polynomials of Bose--Burton matroids]{Log-concavity of inverse $Z$-polynomials of Bose--Burton matroids}
+
+\author{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{12 October 2026}
+
+\subjclass[2020]{Primary 05B35; Secondary 05A20, 05A30, 51E20}
+
+\keywords{Inverse $Z$-polynomial, Bose--Burton geometry, projective geometry, affine geometry, log-concavity, Gaussian binomial coefficients}
+
+\begin{abstract}
+The inverse $Z$-polynomial $Y_M(t)$ of a matroid $M$, introduced by Ferroni, Matherne, Stevens and Vecchi and studied by Gao, Ruan and Xie, has nonnegative, symmetric and unimodal coefficients, and its coefficients are conjectured to be log-concave. We prove this conjecture, in strict form, for every Bose--Burton matroid $B_{r,s}(q)$, that is, for the restriction of the projective geometry $\PG(r-1,q)$ to the complement of a projective subspace of rank $s$, for every prime power $q$, every $r\ge 2$ and every $1\le s\le r-1$. The family contains the affine geometries $\AG(r-1,q)$. We deduce this from a stronger statement: after division by the coefficients of the inverse $Z$-polynomial of $\PG(r-1,q)$, the coefficient sequence of $Y_{B_{r,s}(q)}$ is positive and concave. The proof rests on an explicit expansion of the normalized coefficients as a positive combination of products of $q$-Pochhammer type; concavity is proved by comparing the weighted second differences of adjacent terms of this expansion at the boundaries of their supports.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $M$ be a loopless matroid on a ground set $E$, with lattice of flats $L(M)$. The Kazhdan--Lusztig polynomial $P_M(t)$ of Elias, Proudfoot and Wakefield~\cite{EPW} and the $Z$-polynomial $Z_M(t)$ of Proudfoot, Xu and Young~\cite{PXY} have inverse counterparts in the incidence algebra of $L(M)$: the inverse Kazhdan--Lusztig polynomial $Q_M(t)$ of Gao and Xie~\cite{GX}, and the inverse $Z$-polynomial $Y_M(t)$. The latter first appeared, with a different sign convention, in the work of Ferroni, Matherne, Stevens and Vecchi~\cite{FMSV}; its systematic study was begun by Gao, Ruan and Xie~\cite{GRX}, and a deletion formula for it was given by Braden, Ferroni, Matherne and Nepal~\cite{BFMN}. In the normalization of \cite[(2)--(3)]{GRX} and \cite[Theorem~2.2]{BFMN},
+\begin{equation}\label{eq:Ydef}
+  Y_M(t)=\sum_{F\in L(M)}(-1)^{\rk M-\rk F}\,\mu(M/F)\,t^{\rk M-\rk F}\,Q_{M|F}(t),
+\end{equation}
+where $\mu(M/F)$ is the M\"obius invariant of the contraction $M/F$.
+
+Gao, Ruan and Xie proved that $Y_M(t)$ has nonnegative coefficients \cite[Proposition~2.1]{GRX}, using the nonnegativity of inverse Kazhdan--Lusztig polynomials established by Braden, Huh, Matherne, Proudfoot and Wang~\cite{BHMPW}, and that $Y_M(t)$ is palindromic of degree $\rk M$ \cite[Lemma~2.2]{GRX}. They conjectured that its coefficients are unimodal \cite[Conjecture~1.4]{GRX} and, more strongly, that they form a log-concave sequence with no internal zeros \cite[Conjecture~1.5]{GRX}, and they proved both statements for sparse paving matroids \cite[Theorem~1.6]{GRX}. Unimodality has since been proved for all loopless matroids; see the manuscript~\cite{Re}. For $q$-niform matroids, Gao, Li and Xie proved strong log-concavity of the inverse $Z$-polynomial \cite[Corollary~3.9]{GLX}, and explicit formulas are known for further families, for instance fan matroids \cite[Theorem~1.3]{GLL}. Log-concavity in general remains open.
+
+In this paper we prove log-concavity for the Bose--Burton matroids, a family of representable matroids that are not paving as soon as the rank is at least $5$ (Remark~\ref{rem:scope}). Let $q$ be a prime power, let $r\ge 2$, let $V$ be an $r$-dimensional vector space over $\F_q$, and let $W\subseteq V$ be a subspace of dimension $s$ with $1\le s\le r-1$. We write $\PP(U)$ for the set of one-dimensional subspaces of a subspace $U\subseteq V$, and $B_{r,s}(q)$ for the simple matroid on $\PP(V)\setminus\PP(W)$ in which a set of points is independent if representative vectors are linearly independent. Thus $B_{r,s}(q)$ is the restriction of the projective geometry $\PG(r-1,q)$ to the complement of $\PP(W)$; up to isomorphism it depends only on $(r,s,q)$. These point sets are the extremal configurations in a theorem of Bose and Burton~\cite{BB}, and Cheng and Liu used them as the starting point of their construction of matroids with non-unimodal Kazhdan--Lusztig polynomials; they also computed $P$ and $Z$ for every $B_{r,s}(q)$ \cite[Remark~2.7]{CL}. The family contains the affine geometries $\AG(r-1,q)=B_{r,r-1}(q)$, the complements $B_{r,1}(q)$ of a single point, and, for $r=2$, the uniform matroids $U_{2,q}$.
+
+\begin{theorem}\label{thm:main}
+Let $q$ be a prime power and let $r$ and $s$ be integers with $r\ge 2$ and $1\le s\le r-1$. Write $Y_{B_{r,s}(q)}(t)=\sum_{k=0}^{r}y_kt^k$. Then $y_k>0$ and $y_k=y_{r-k}$ for $0\le k\le r$, and
+\[
+  y_k^2>y_{k-1}\,y_{k+1}\qquad(1\le k\le r-1).
+\]
+In particular $Y_{B_{r,s}(q)}(t)$ has degree $r$, and its coefficients form a strictly log-concave sequence with no internal zeros.
+\end{theorem}
+
+Nonnegativity and symmetry hold for all matroids by \cite[Proposition~2.1 and Lemma~2.2]{GRX}; we include positivity and symmetry in the statement because the proof gives them directly. The new assertion is the strict log-concavity. It follows from a stronger statement about normalized coefficients. By a result of Gao, Li and Xie \cite[Proposition~3.8]{GLX} (see Lemma~\ref{lem:PG} below), the coefficient of $t^k$ in the inverse $Z$-polynomial of $\PG(r-1,q)$ is
+\begin{equation}\label{eq:pi}
+  \pi_k=q^{\binom{k}{2}+\binom{r-k}{2}}\qbinom{r}{k}{q}\qquad(0\le k\le r),
+\end{equation}
+and this sequence is strictly log-concave. Put $z=q^{-1}$, $c=r-s$, and $\poch{m}=\prod_{i=1}^{m}(1-z^i)$, with $\poch{0}=1$. For integers $j\ge0$ and $1\le k\le r-1$ put
+\begin{equation}\label{eq:Rw}
+  R_j(k)=\prod_{i=1}^{j}\bigl(1-z^{k-i}\bigr)\bigl(1-z^{r-k-i}\bigr)
+\end{equation}
+and, for $0\le j\le s$,
+\begin{equation}\label{eq:w}
+  w_j=(1-z^c)\,z^{j(c+j+1)}\qbinom{s}{j}{z}\frac{\poch{r-j-1}}{\poch{r}\,\poch{j}}.
+\end{equation}
+Some factors of $R_j(k)$ have negative exponents when $j>\min(k,r-k)$; in that case the product also contains the factor $1-z^0=0$, so $R_j(k)=0$.
+
+\begin{theorem}\label{thm:F}
+Let $q$, $r$, $s$ and $y_k$ be as in Theorem~\ref{thm:main}, and put $F_k=y_k/\pi_k$ for $0\le k\le r$. Then the following hold.
+\begin{enumerate}
+\item[(i)] $F_0=F_r=\prod_{i=c}^{r-1}(1-z^i)$.
+\item[(ii)] For $1\le k\le r-1$,
+\[
+  F_k=\sum_{j=0}^{s}w_j\,R_j(k),
+\]
+where $w_j>0$ for $0\le j\le s$, and $R_j(k)>0$ if $j<\min(k,r-k)$ while $R_j(k)=0$ if $j\ge\min(k,r-k)$.
+\item[(iii)] The sequence $F_0,F_1,\dots,F_r$ is positive, symmetric and concave:
+\[
+  2F_k\ge F_{k-1}+F_{k+1}\qquad(1\le k\le r-1),
+\]
+with strict inequality for $k=1$ and $k=r-1$.
+\end{enumerate}
+\end{theorem}
+
+For the full projective geometry, which would correspond to $s=0$, the normalized sequence is identically one. Theorem~\ref{thm:F} thus says that removing the points of a subspace multiplies the inverse $Z$-coefficients of $\PG(r-1,q)$ by a concave profile. Concavity of $F$ is strictly stronger than log-concavity of $F$, and since $\pi$ is strictly log-concave, Theorem~\ref{thm:F} implies Theorem~\ref{thm:main} (Section~\ref{sec:proof}).
+
+The expansion in Theorem~\ref{thm:F}(ii) has positive coefficients, but this alone does not give concavity: each product $R_j$ is concave on the range where it is positive, which for $j\ge1$ is $\{j+1,\dots,r-j-1\}$. If $j\ge2$ and $r\ge2j+2$, then at the index $k=j$ just to the left of this support we have $R_j(j-1)=R_j(j)=0$, so the second difference $R_j(j+1)+R_j(j-1)-2R_j(j)=R_j(j+1)$ is positive, and by symmetry the same happens at the index $k=r-j$ just to the right of the support. Positive combinations of log-concave or piecewise concave sequences need not be log-concave, so these positive second differences must be compensated. The proof in Section~\ref{sec:concavity} compares the weighted second differences of adjacent products at the support boundary: at the index $k=j$, the positive second difference of $w_jR_j$ is outweighed by the negative second difference of $w_{j-1}R_{j-1}$, and the right boundary is handled by symmetry. This comparison uses $q\ge2$, through the inequality $z\le 1/2$.
+
+\begin{corollary}\label{cor:conj}
+Conjecture~1.5 of \cite{GRX} holds for every Bose--Burton matroid $B_{r,s}(q)$ with $r\ge 2$ and $1\le s\le r-1$.
+\end{corollary}
+
+\begin{remark}\label{rem:scope}
+Some small members of the family are sparse paving and are therefore covered by \cite[Theorem~1.6]{GRX}: for example $B_{2,1}(q)=U_{2,q}$ and $B_{3,2}(2)=\AG(2,2)=U_{3,4}$. For $r\ge 5$, however, $B_{r,s}(q)$ is not paving. Indeed, a $3$-dimensional subspace $U\not\subseteq W$ meets $W$ in dimension at most $2$, so the set $\PP(U)\setminus\PP(W)$ has at least $(q^2+q+1)-(q+1)=q^2\ge4$ elements and rank~$3$. Any four of these points are dependent, so $B_{r,s}(q)$ has a circuit with at most $4<r$ elements. Theorem~\ref{thm:main} does not follow from real-rootedness either: by Example~\ref{ex:rank2}, $Y_{B_{2,1}(3)}(t)=2+3t+2t^2$, which has no real roots.
+\end{remark}
+
+\subsection*{Inputs and organization}
+We use the following results from the literature: the characterization of $Y_M$ by inversion in the incidence algebra \cite[Section~2.2]{BFMN}; the formulas for $P$ and $Z$ of Bose--Burton matroids \cite[Remark~2.7]{CL}; and the formula for the inverse $Z$-polynomial of a projective geometry \cite[Proposition~3.8]{GLX}. Section~\ref{sec:prelim} recalls these results together with the description of the flats of $B_{r,s}(q)$. In Section~\ref{sec:kernel} we combine them into an explicit signed formula for $Y_{B_{r,s}(q)}$ (Proposition~\ref{prop:kernel}). Section~\ref{sec:expansion} converts this formula into the positive expansion of Theorem~\ref{thm:F}(i)--(ii), and Section~\ref{sec:concavity} proves the concavity in Theorem~\ref{thm:F}(iii). Section~\ref{sec:proof} completes the proof of Theorem~\ref{thm:main} and gives examples.
+
+\section{Preliminaries}\label{sec:prelim}
+
+\subsection{Gaussian binomial coefficients}
+For a real number $u$ and integers $n\ge0$ and $k$, the Gaussian binomial coefficient is
+\[
+  \qbinom{n}{k}{u}=\prod_{i=0}^{k-1}\frac{1-u^{n-i}}{1-u^{i+1}}\quad(0\le k\le n),\qquad
+  \qbinom{n}{k}{u}=0\quad(k<0\text{ or }k>n),
+\]
+interpreted as a polynomial in $u$. We never use a negative top parameter. Empty products are equal to $1$. We recall the following standard facts; see \cite[Chapter~3]{And}. First,
+\begin{equation}\label{eq:inv}
+  \qbinom{n}{k}{q}=q^{k(n-k)}\qbinom{n}{k}{q^{-1}}.
+\end{equation}
+Second, the Pascal recurrence
+\begin{equation}\label{eq:pascal}
+  \qbinom{n}{k}{u}=u^{k}\qbinom{n-1}{k}{u}+\qbinom{n-1}{k-1}{u}\qquad(n\ge1).
+\end{equation}
+Third, for integers $0\le a\le b\le n$,
+\begin{equation}\label{eq:flag}
+  \qbinom{n}{b}{u}\qbinom{b}{a}{u}=\qbinom{n}{a}{u}\qbinom{n-a}{b-a}{u},
+\end{equation}
+and both sides vanish if $b>n$. Fourth, the finite $q$-binomial theorem:
+\begin{equation}\label{eq:qbinthm}
+  \sum_{h=0}^{s}(-1)^h u^{\binom{h}{2}}\qbinom{s}{h}{u}x^h=\prod_{i=0}^{s-1}\bigl(1-xu^{i}\bigr).
+\end{equation}
+Finally, if $q$ is a prime power, then $\qbinom{n}{k}{q}$ is the number of $k$-dimensional subspaces of $\F_q^n$. For $0<u<1$ and $0\le k\le n$ we also write $\qbinom{n}{k}{u}=(u;u)_n/((u;u)_k(u;u)_{n-k})$.
+
+\subsection{Kazhdan--Lusztig invariants and incidence inversion}
+We follow \cite[Section~2.2]{BFMN}. To every loopless matroid $M$ are attached polynomials $P_M$, $Z_M$, $Q_M$ and $Y_M$ in $\mathbb{Z}[t]$, uniquely determined by the conditions of \cite[Theorems~2.1 and~2.2]{BFMN}: $P_M=Q_M=1$ if $\rk M=0$; $\deg P_M<\frac12\rk M$ and $\deg Q_M<\frac12\rk M$ if $\rk M>0$; and the polynomials
+\begin{equation}\label{eq:Zdef}
+  Z_M(t)=\sum_{F\in L(M)}t^{\rk F}P_{M/F}(t)
+\end{equation}
+and $Y_M(t)$, given by \eqref{eq:Ydef}, are palindromic. All four polynomials depend only on the lattice of flats $L(M)$, so they are unchanged under any isomorphism of lattices of flats.
+
+For an interval $[F,G]$ of $L(M)$ let $M_{[F,G]}=(M|G)/F$. In the incidence algebra of $L(M)$ over $\mathbb{Z}[t,t^{-1}]$, let $Z$ and $\widehat Y$ be the elements with $Z_{[F,G]}=Z_{M_{[F,G]}}$ and $\widehat Y_{[F,G]}=(-1)^{\rk M_{[F,G]}}Y_{M_{[F,G]}}$. Then $Z$ and $\widehat Y$ are mutually inverse \cite[Section~2.2]{BFMN}. Evaluating the identity $Z\widehat Y=1$ on the interval $[\varnothing,E]$, we obtain, for every loopless matroid $M$ of positive rank,
+\begin{equation}\label{eq:inversion}
+  \sum_{F\in L(M)}(-1)^{\rk M-\rk F}\,Z_{M|F}(t)\,Y_{M/F}(t)=0.
+\end{equation}
+This is the only property of $Y$ that we use; we do not need $Q$ or $\mu$ explicitly.
+
+\subsection{Projective geometries}
+For $m\ge1$ let $\PG(m-1,q)$ denote the simple matroid on $\PP(\F_q^m)$ given by linear independence, and let $\PG(-1,q)$ be the matroid of rank zero. The lattice of flats of $\PG(m-1,q)$ is the lattice of subspaces of $\F_q^m$. Put
+\[
+  G_m(t)=\sum_{i=0}^{m}\qbinom{m}{i}{q}t^i.
+\]
+
+\begin{lemma}\label{lem:PGPZ}
+For $m\ge0$ we have $P_{\PG(m-1,q)}=1$ and $Z_{\PG(m-1,q)}=G_m$.
+\end{lemma}
+
+\begin{proof}
+We use induction on $m$; the case $m=0$ is part of the definition. Let $m\ge1$. Every contraction of $\PG(m-1,q)$ by a nonempty flat of rank $d$ has the lattice of flats of $\PG(m-d-1,q)$, so by induction its Kazhdan--Lusztig polynomial is $1$. By \eqref{eq:Zdef}, $Z_{\PG(m-1,q)}=P_{\PG(m-1,q)}+G_m-1$. Since $G_m$ is palindromic of degree $m$, the polynomial $P_{\PG(m-1,q)}-1$ is palindromic of degree $m$ in the sense $t^mf(t^{-1})=f(t)$, and its degree is less than $m/2$. Hence it is zero.
+\end{proof}
+
+\begin{lemma}[{\cite[Proposition~3.8]{GLX}}]\label{lem:PG}
+For $m\ge0$,
+\[
+  J_m(t):=Y_{\PG(m-1,q)}(t)=\sum_{i=0}^{m}q^{\binom{i}{2}+\binom{m-i}{2}}\qbinom{m}{i}{q}t^i.
+\]
+Equivalently, by \eqref{eq:inv}, $J_m(t)=q^{\binom m2}\sum_{i=0}^{m}\qbinom{m}{i}{q^{-1}}t^i$.
+\end{lemma}
+
+\begin{proof}
+For $m\ge1$, the matroid $\PG(m-1,q)$ is the $q$-niform matroid $U_{m,m}(q)$ of \cite{GLX}, and \cite[Proposition~3.8]{GLX} with $n=k=m$ gives the coefficient of $t^i$ for $0\le i\le\lfloor m/2\rfloor$ and of $t^{m-i}$ for $0\le i\le\lfloor(m-1)/2\rfloor$; since $\qbinom{m}{i}{q}=\qbinom{m}{m-i}{q}$, the two halves combine to the displayed formula, the middle coefficient for even $m$ being counted once. For $m=0$ we have $Y=1=J_0$ by definition. The second formula follows from $i(m-i)+\binom i2+\binom{m-i}2=\binom m2$.
+\end{proof}
+
+\subsection{Bose--Burton matroids}
+Throughout, $q$ is a prime power, $V$ is a vector space of dimension $r$ over $\F_q$, $W\subseteq V$ is a subspace of dimension $s$, and $B=B_{r,s}(q)$ is the matroid described in the introduction, with ground set $E=\PP(V)\setminus\PP(W)$. Its rank function is $\rk(A)=\dim\langle A\rangle$, where $\langle A\rangle$ is the subspace spanned by the points of $A$. It is convenient to allow $s=0$ and to write $B_{d,0}(q)=\PG(d-1,q)$. For a subspace $U\subseteq V$ put $E_U=\PP(U)\setminus\PP(W)$.
+
+\begin{lemma}\label{lem:flats}
+Let $r\ge1$ and $0\le s\le r-1$.
+\begin{enumerate}
+\item[(a)] For every subspace $U\not\subseteq W$ we have $\langle E_U\rangle=U$. The map $U\mapsto E_U$ is an inclusion-preserving bijection from the set of subspaces $U\not\subseteq W$ onto the set of nonempty flats of $B$, and $\rk E_U=\dim U$. In particular $B$ is a simple matroid of rank $r$.
+\item[(b)] If $\dim U=d$ and $\dim(U\cap W)=a$, then $0\le a\le d-1$ and $B|E_U\cong B_{d,a}(q)$.
+\item[(c)] For a nonempty flat $E_U$ with $\dim U=d$, the lattice of flats of $B/E_U$ is isomorphic to the lattice of subspaces of $V/U$, that is, to the lattice of flats of $\PG(r-d-1,q)$. Consequently $Y_{B/E_U}=J_{r-d}$.
+\item[(d)] For integers $1\le d\le r$ and $0\le a\le d-1$, the number of subspaces $U\subseteq V$ with $\dim U=d$ and $\dim(U\cap W)=a$ is
+\begin{equation}\label{eq:N}
+  N(d,a)=q^{(s-a)(d-a)}\qbinom{s}{a}{q}\qbinom{r-s}{d-a}{q}.
+\end{equation}
+It is nonzero exactly when $\max(0,d-r+s)\le a\le\min(s,d-1)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) Let $U\not\subseteq W$ and choose $u\in U\setminus W$. Every vector of $U\setminus W$ represents a point of $E_U$. If $v\in U\cap W$, then $u$ and $u+v$ both lie in $U\setminus W$, so $v=(u+v)-u\in\langle E_U\rangle$. Hence $\langle E_U\rangle=U$. The closure of a set $A\subseteq E$ in $B$ is $\PP(\langle A\rangle)\cap E=E_{\langle A\rangle}$, so the flats of $B$ are the sets $E_U$; this set is empty if $U\subseteq W$, and if $U\not\subseteq W$ it determines $U=\langle E_U\rangle$. The remaining assertions follow, taking $U=V$ for the rank.
+
+(b) We have $a\le d-1$ because $U\not\subseteq W$, and $E_U=\PP(U)\setminus\PP(U\cap W)$ with the rank function of $U$.
+
+(c) The flats of $B/E_U$ are the sets $F\setminus E_U$ with $F\supseteq E_U$ a flat of $B$, and by (a) these correspond, preserving inclusion, to the subspaces $U'$ with $U\subseteq U'\subseteq V$; each such $U'$ satisfies $U'\not\subseteq W$. The interval $[U,V]$ of the subspace lattice is isomorphic to the subspace lattice of $V/U$. Since $Y$ depends only on the lattice of flats, Lemma~\ref{lem:PG} gives $Y_{B/E_U}=J_{r-d}$; for $d=r$ the contraction has rank zero and $Y=1=J_0$.
+
+(d) The subspace $A=U\cap W$ can be chosen in $\qbinom{s}{a}{q}$ ways. Given $A$, the image $(U+W)/W$ is a $(d-a)$-dimensional subspace of $V/W$, chosen in $\qbinom{r-s}{d-a}{q}$ ways. Given $A$ and this image, with preimage $X\subseteq V$ of dimension $s+d-a$, the subspace $U/A$ is a complement of $W/A$ in $X/A$; there are $q^{(s-a)(d-a)}$ such complements. The last assertion is clear.
+\end{proof}
+
+The next lemma is due to Cheng and Liu \cite[Remark~2.7]{CL}, who state it for all $0\le a<d$ (only their further simplification $P=G_a$, $Z=G_d$ requires $a<d/2$). We include the short argument, which uses only Lemmas~\ref{lem:PGPZ} and~\ref{lem:flats}.
+
+\begin{lemma}[{\cite[Remark~2.7]{CL}}]\label{lem:CL}
+Let $d\ge1$ and $0\le a\le d-1$. Then
+\[
+  P_{B_{d,a}(q)}(t)=\sum_{0\le i<d/2}\biggl(\qbinom{a}{i}{q}-\qbinom{a}{d-i}{q}\biggr)t^i,\qquad
+  Z_{B_{d,a}(q)}=P_{B_{d,a}(q)}+G_d-G_a .
+\]
+Consequently, for $0\le i\le d$,
+\begin{equation}\label{eq:Zcoef}
+  [t^i]\,Z_{B_{d,a}(q)}(t)=\qbinom{d}{i}{q}-\qbinom{a}{\max(i,d-i)}{q}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:flats}(c) and Lemma~\ref{lem:PGPZ}, every contraction of $B_{d,a}(q)$ by a nonempty flat has Kazhdan--Lusztig polynomial $1$. By Lemma~\ref{lem:flats}(a), the number of flats of rank $i\ge1$ is $\qbinom{d}{i}{q}-\qbinom{a}{i}{q}$. Hence \eqref{eq:Zdef} gives $Z_{B_{d,a}(q)}=P_{B_{d,a}(q)}+G_d-G_a$. Write $P_{B_{d,a}(q)}=\sum_i p_it^i$, with $p_i=0$ for $i\ge d/2$. For $i<d/2$, palindromicity of $Z_{B_{d,a}(q)}$ compares the coefficient $p_i+\qbinom{d}{i}{q}-\qbinom{a}{i}{q}$ of $t^i$ with the coefficient $\qbinom{d}{d-i}{q}-\qbinom{a}{d-i}{q}$ of $t^{d-i}$, and gives $p_i=\qbinom{a}{i}{q}-\qbinom{a}{d-i}{q}$. Formula \eqref{eq:Zcoef} follows by treating $i<d/2$ and $i\ge d/2$ separately.
+\end{proof}
+
+\section{A signed formula for the inverse \texorpdfstring{$Z$}{Z}-polynomial}\label{sec:kernel}
+
+In this section $r\ge2$ and $1\le s\le r-1$. For integers $1\le d\le r$ and $0\le i\le d$ we write
+\[
+  h(d,i)=\max(i,d-i),\qquad \ell(d,i)=\min(i,d-i).
+\]
+
+\begin{lemma}\label{lem:paircount}
+Let $1\le d\le r$, $0\le i\le d$ and $h=h(d,i)$. Then
+\[
+  \sum_{a}N(d,a)\,[t^i]Z_{B_{d,a}(q)}(t)=\qbinom{r}{d}{q}\qbinom{d}{i}{q}-\qbinom{s}{h}{q}\qbinom{r-h}{d-h}{q},
+\]
+where the sum is over $\max(0,d-r+s)\le a\le\min(s,d-1)$.
+\end{lemma}
+
+\begin{proof}
+For $0\le h'\le s$, counting pairs $(I,U)$ of subspaces with $I\subseteq W$, $\dim I=h'$, $I\subseteq U$, $\dim U=d$ and $U\not\subseteq W$ in two ways gives
+\[
+  \sum_aN(d,a)\qbinom{a}{h'}{q}=\qbinom{s}{h'}{q}\biggl(\qbinom{r-h'}{d-h'}{q}-\qbinom{s-h'}{d-h'}{q}\biggr);
+\]
+the second term removes the subspaces $U\subseteq W$. In particular $\sum_aN(d,a)=\qbinom{r}{d}{q}-\qbinom{s}{d}{q}$. If $h\le s$, then \eqref{eq:Zcoef} and these identities give
+\[
+  \sum_aN(d,a)[t^i]Z_{B_{d,a}(q)}
+  =\qbinom{d}{i}{q}\biggl(\qbinom{r}{d}{q}-\qbinom{s}{d}{q}\biggr)
+  -\qbinom{s}{h}{q}\qbinom{r-h}{d-h}{q}+\qbinom{s}{h}{q}\qbinom{s-h}{d-h}{q}.
+\]
+By \eqref{eq:flag} and $\qbinom{d}{h}{q}=\qbinom{d}{i}{q}$, the last term equals $\qbinom{s}{d}{q}\qbinom{d}{i}{q}$, which cancels. If $h>s$, then $\qbinom{a}{h}{q}=0$ for all $a\le s$, and also $\qbinom{s}{d}{q}=0$ because $d\ge h>s$; the claim holds with $\qbinom{s}{h}{q}=0$.
+\end{proof}
+
+For integers $0\le \ell\le h$ put $E_{h,\ell}(t)=t^\ell+t^h$ if $\ell<h$ and $E_{h,h}(t)=t^h$.
+
+\begin{proposition}\label{prop:kernel}
+For $r\ge2$ and $1\le s\le r-1$,
+\begin{multline}\label{eq:kernel}
+  Y_{B_{r,s}(q)}(t)=J_r(t)\\
+  +\sum_{h=1}^{s}\sum_{\ell=0}^{\min(h,r-h)}(-1)^{h+\ell}\qbinom{s}{h}{q}\qbinom{r-h}{\ell}{q}E_{h,\ell}(t)\,J_{r-h-\ell}(t).
+\end{multline}
+\end{proposition}
+
+\begin{proof}
+Apply \eqref{eq:inversion} to $M=B=B_{r,s}(q)$. The flat $\varnothing$ contributes $(-1)^rY_B$. By Lemma~\ref{lem:flats}, the remaining flats are the sets $E_U$, and a flat with $\dim U=d$, $\dim(U\cap W)=a$ contributes $(-1)^{r-d}Z_{B_{d,a}(q)}J_{r-d}$. Multiplying by $(-1)^r$ we obtain
+\begin{equation}\label{eq:YB}
+  Y_B=-\sum_{d=1}^{r}(-1)^d\sum_aN(d,a)\,Z_{B_{d,a}(q)}\,J_{r-d}.
+\end{equation}
+All flats are included, among them $E$ itself ($d=r$, $a=s$), whose contraction has rank zero. The same argument for $\PG(r-1,q)$, using Lemma~\ref{lem:PGPZ}, gives
+\[
+  J_r=-\sum_{d=1}^{r}(-1)^d\qbinom{r}{d}{q}G_d\,J_{r-d}.
+\]
+Subtracting and applying Lemma~\ref{lem:paircount} coefficientwise, we get
+\[
+  Y_B-J_r=\sum_{d=1}^{r}(-1)^d\sum_{i=0}^{d}\qbinom{s}{h(d,i)}{q}\qbinom{r-h(d,i)}{d-h(d,i)}{q}t^i J_{r-d}.
+\]
+The map $(d,i)\mapsto(h,\ell)=(h(d,i),\ell(d,i))$ sends the pairs with $1\le d\le r$, $0\le i\le d$ onto the pairs with $h\ge1$, $0\le\ell\le\min(h,r-h)$; it is two-to-one over pairs with $\ell<h$, the preimages having $i=\ell$ and $i=h$, and one-to-one over pairs with $\ell=h$. Since $d=h+\ell$, $d-h=\ell$ and $(-1)^d=(-1)^{h+\ell}$, and since terms with $h>s$ vanish, we obtain \eqref{eq:kernel}.
+\end{proof}
+
+\begin{example}\label{ex:s1}
+For $s=1$ only $h=1$ occurs, and \eqref{eq:kernel} reads
+\[
+  Y_{B_{r,1}(q)}=J_r-(1+t)J_{r-1}+\qbinom{r-1}{1}{q}t\,J_{r-2}\qquad(r\ge2).
+\]
+\end{example}
+
+\begin{example}\label{ex:rank2}
+For $r=2$ we have $J_2=q+(q+1)t+qt^2$, $J_1=1+t$ and $J_0=1$, so Example~\ref{ex:s1} gives
+\[
+  Y_{U_{2,q}}=Y_{B_{2,1}(q)}=(q-1)+qt+(q-1)t^2,
+\]
+in agreement with the formula for uniform matroids \cite[Theorem~1.1]{GRX}. For $q=2$ this is $(1+t)^2$, the inverse $Z$-polynomial of the Boolean matroid of rank two.
+\end{example}
+
+\section{The normalized coefficients}\label{sec:expansion}
+
+Throughout this section $r\ge2$, $1\le s\le r-1$, and
+\[
+  z=q^{-1}\in(0,\tfrac12],\qquad c=r-s\ge1,\qquad g_k=\qbinom{r}{k}{z}.
+\]
+Write $y_k=[t^k]Y_{B_{r,s}(q)}$ and $a_k=q^{-\binom r2}y_k$. By Lemma~\ref{lem:PG} and \eqref{eq:inv}, $\pi_k=q^{\binom r2}g_k$, so $a_k=g_kF_k$ with $F_k=y_k/\pi_k$ as in Theorem~\ref{thm:F}. Put $E_{0,0}=1$, so that the term $J_r$ in \eqref{eq:kernel} is the term $h=\ell=0$ of the double sum.
+
+\begin{lemma}\label{lem:zform}
+For $0\le k\le r$,
+\begin{multline*}
+  a_k=\sum_{h=0}^{s}\sum_{\ell=0}^{\min(h,r-h)}(-1)^{h+\ell}z^{hc+\binom h2+\binom\ell2}\qbinom{s}{h}{z}\qbinom{r-h}{\ell}{z}\\
+  \times\biggl(\qbinom{r-h-\ell}{k-\ell}{z}+[\ell<h]\qbinom{r-h-\ell}{k-h}{z}\biggr),
+\end{multline*}
+where $[\ell<h]$ is $1$ if $\ell<h$ and $0$ otherwise.
+\end{lemma}
+
+\begin{proof}
+By \eqref{eq:inv} and Lemma~\ref{lem:PG}, $J_m=q^{\binom m2}\sum_i\qbinom{m}{i}{z}t^i$, and
+\[
+  \qbinom{s}{h}{q}\qbinom{r-h}{\ell}{q}q^{\binom{r-h-\ell}{2}-\binom r2}
+  =z^{hc+\binom h2+\binom\ell2}\qbinom{s}{h}{z}\qbinom{r-h}{\ell}{z}.
+\]
+Indeed, the exponent of $q$ on the left, after applying \eqref{eq:inv}, is $h(s-h)+\ell(r-h-\ell)+\binom{r-h-\ell}2-\binom r2$; expanding $\binom r2=\binom{r-h-\ell}2+\binom h2+\binom\ell2+h\ell+(h+\ell)(r-h-\ell)$ shows that it equals $-hc-\binom h2-\binom\ell2$. The coefficient of $t^k$ in $E_{h,\ell}(t)\sum_i\qbinom{m}{i}{z}t^i$ with $m=r-h-\ell$ is the bracket in the statement.
+\end{proof}
+
+\begin{lemma}\label{lem:partial}
+Let $n\ge1$ and $0\le b\le n$. Then
+\[
+  \sum_{\ell=0}^{b}(-1)^\ell z^{\binom\ell2}\qbinom{n}{\ell}{z}=(-1)^bz^{\binom{b+1}2}\qbinom{n-1}{b}{z}.
+\]
+In particular the sum vanishes for $b=n$.
+\end{lemma}
+
+\begin{proof}
+Put $A_\ell=(-1)^\ell z^{\binom{\ell+1}2}\qbinom{n-1}{\ell}{z}$ for $\ell\ge-1$, so $A_{-1}=0$. By \eqref{eq:pascal},
+\[
+  (-1)^\ell z^{\binom\ell2}\qbinom{n}{\ell}{z}=(-1)^\ell z^{\binom{\ell+1}2}\qbinom{n-1}{\ell}{z}+(-1)^\ell z^{\binom\ell2}\qbinom{n-1}{\ell-1}{z}=A_\ell-A_{\ell-1}.
+\]
+The sum telescopes to $A_b$, and $A_n=0$.
+\end{proof}
+
+\begin{proposition}\label{prop:endpoint}
+$F_0=F_r=\prod_{i=c}^{r-1}(1-z^i)$.
+\end{proposition}
+
+\begin{proof}
+For $k=0$, the first term of the bracket in Lemma~\ref{lem:zform} is nonzero only if $\ell=0$, when it equals $1$, and the second term vanishes because it occurs only for $h\ge1$, where $k-h<0$. Hence, by \eqref{eq:qbinthm} with $x=z^c$,
+\[
+  F_0=a_0=\sum_{h=0}^{s}(-1)^hz^{\binom h2}\qbinom{s}{h}{z}z^{ch}=\prod_{i=0}^{s-1}(1-z^{c+i})=\prod_{i=c}^{r-1}(1-z^i).
+\]
+For each pair $(h,\ell)$, the polynomial $H(t)=E_{h,\ell}(t)J_{r-h-\ell}(t)$ satisfies $t^rH(t^{-1})=H(t)$, because $t^{h+\ell}E_{h,\ell}(t^{-1})=E_{h,\ell}(t)$ and $t^{m}J_m(t^{-1})=J_m(t)$. Thus the coefficients of $H$ are symmetric about $r/2$ (its degree is $r-\ell$, so its coefficients of $t^0,\dots,t^{\ell-1}$ vanish together with those of $t^{r-\ell+1},\dots,t^r$). Hence $y_k=y_{r-k}$ by \eqref{eq:kernel} (this is also \cite[Lemma~2.2]{GRX}). Since $g_k=g_{r-k}$, we get $F_r=F_0$.
+\end{proof}
+
+For $1\le k\le r-1$ and $h\ge0$ define
+\begin{align*}
+  T_h(k)&=z^{h(c+h)}\qbinom{s}{h}{z}\qbinom{r-h}{k}{z}\qbinom{k-1}{h}{z},\\
+  U_h(k)&=z^{h(c+h-1)}\qbinom{s}{h}{z}\qbinom{r-h}{k-h}{z}\qbinom{r-k-1}{h-1}{z},
+\end{align*}
+the latter for $h\ge1$. All top parameters are nonnegative for the indices used below.
+
+\begin{proposition}\label{prop:TU}
+For $1\le k\le r-1$,
+\[
+  a_k=\sum_{h=0}^{\min(s,k-1,r-k)}T_h(k)-\sum_{h=1}^{\min(s,k,r-k)}U_h(k).
+\]
+\end{proposition}
+
+\begin{proof}
+Split the bracket in Lemma~\ref{lem:zform} into its two terms.
+
+\emph{First terms.} By \eqref{eq:flag}, $\qbinom{r-h}{\ell}{z}\qbinom{r-h-\ell}{k-\ell}{z}=\qbinom{r-h}{k}{z}\qbinom{k}{\ell}{z}$. This vanishes unless $h\le r-k$, and then $\min(h,r-h)\ge\min(h,k)$, while $\qbinom{k}{\ell}{z}=0$ for $\ell>k$. So the contribution of $h$ is
+\[
+  (-1)^hz^{hc+\binom h2}\qbinom{s}{h}{z}\qbinom{r-h}{k}{z}\sum_{\ell=0}^{\min(h,k)}(-1)^\ell z^{\binom\ell2}\qbinom{k}{\ell}{z}.
+\]
+If $h\ge k$ the inner sum is complete and vanishes by Lemma~\ref{lem:partial}. If $h\le k-1$, Lemma~\ref{lem:partial} with $n=k$ and $b=h$ turns the contribution into $T_h(k)$, since $\binom h2+\binom{h+1}2=h^2$. Thus the first terms contribute $\sum_{h\le\min(s,k-1,r-k)}T_h(k)$.
+
+\emph{Second terms.} These occur only for $h\ge1$ and $\ell\le\min(h-1,r-h)$. By \eqref{eq:flag}, $\qbinom{r-h}{\ell}{z}\qbinom{r-h-\ell}{k-h}{z}=\qbinom{r-h}{k-h}{z}\qbinom{r-k}{\ell}{z}$. This vanishes unless $h\le k$, and then $r-h\ge r-k$, while $\qbinom{r-k}{\ell}{z}=0$ for $\ell>r-k$. So the contribution of $h$ is
+\[
+  (-1)^hz^{hc+\binom h2}\qbinom{s}{h}{z}\qbinom{r-h}{k-h}{z}\sum_{\ell=0}^{\min(h-1,r-k)}(-1)^\ell z^{\binom\ell2}\qbinom{r-k}{\ell}{z}.
+\]
+If $h-1\ge r-k$ the inner sum is complete and vanishes. If $h\le r-k$, Lemma~\ref{lem:partial} with $n=r-k$ and $b=h-1$ turns the contribution into $-U_h(k)$, since $2\binom h2=h(h-1)$.
+\end{proof}
+
+Note that $T_0(k)=g_k$. We now prove Theorem~\ref{thm:F}(ii). Recall $R_j(k)$ and $w_j$ from \eqref{eq:Rw} and \eqref{eq:w}, and for $1\le h\le s$ and $1\le k\le r-1$ put
+\[
+  D_h=z^{h(c+h-1)}\qbinom{s}{h}{z}\frac{\poch{r-h}}{\poch{r}\poch{h}},\qquad
+  N_h(k)=1-2z^h-z^r+z^h\bigl(z^k+z^{r-k}\bigr).
+\]
+
+\begin{theorem}\label{thm:expansion}
+For $1\le k\le r-1$,
+\begin{equation}\label{eq:expansion}
+  F_k=\sum_{j=0}^{s}w_j\,R_j(k).
+\end{equation}
+Moreover $w_j>0$ for $0\le j\le s$, $w_0=(1-z^c)/(1-z^r)$, and $R_j(k)>0$ if $j<\min(k,r-k)$, while $R_j(k)=0$ if $j\ge\min(k,r-k)$.
+\end{theorem}
+
+\begin{proof}
+\emph{Step 1.} We show that
+\begin{equation}\label{eq:FDN}
+  F_k=1-\sum_{h=1}^{s}D_h\,R_{h-1}(k)\,N_h(k).
+\end{equation}
+We write every Gaussian coefficient as a quotient of the symbols $\poch m$; in particular $g_k=\poch{r}/(\poch k\,\poch{r-k})$. A direct cancellation then gives, whenever the respective term occurs in Proposition~\ref{prop:TU},
+\begin{align*}
+  U_h(k)/g_k&=D_h\,R_{h-1}(k)\,(1-z^h)(1-z^k),\\
+  T_h(k)/g_k&=D_h\,R_{h-1}(k)\,z^h(1-z^{k-h})(1-z^{r-k}).
+\end{align*}
+For instance,
+\[
+  \frac{U_h(k)}{g_k}=z^{h(c+h-1)}\qbinom{s}{h}{z}\frac{\poch{r-h}}{\poch r\,\poch{h-1}}\cdot\frac{\poch k}{\poch{k-h}}\cdot\frac{\poch{r-k-1}}{\poch{r-k-h}},
+\]
+where $\poch{h-1}^{-1}=(1-z^h)\poch{h}^{-1}$ and the product of the last two quotients is $(1-z^k)R_{h-1}(k)$; the computation for $T_h(k)$ is the same. A short expansion shows
+\[
+  z^h(1-z^{k-h})(1-z^{r-k})-(1-z^h)(1-z^k)=-N_h(k).
+\]
+Now let $1\le h\le s$. If $h\le\min(k-1,r-k)$, both $T_h(k)$ and $U_h(k)$ occur, and $(U_h-T_h)/g_k=D_hR_{h-1}N_h$. If $h=k\le r-k$, only $U_h(k)$ occurs; the displayed formula for $T_h(k)/g_k$ vanishes because of the factor $1-z^{k-h}$, so again $U_h/g_k=D_hR_{h-1}N_h$. If $h>\min(k,r-k)$, neither term occurs, and $R_{h-1}(k)=0$ because it contains the factor $1-z^0$ (from $i=k$ or $i=r-k$, both at most $h-1$). Since $T_0(k)/g_k=1$, Proposition~\ref{prop:TU} gives \eqref{eq:FDN}.
+
+\emph{Step 2.} Since $R_h(k)=R_{h-1}(k)(1-z^{k-h})(1-z^{r-k-h})$, expanding the right-hand side shows
+\begin{equation}\label{eq:RN}
+  R_{h-1}(k)N_h(k)=(1-z^h)^2R_{h-1}(k)-z^{2h}R_h(k).
+\end{equation}
+Substituting \eqref{eq:RN} in \eqref{eq:FDN} and collecting the coefficient of each $R_j(k)$, we obtain
+\[
+  F_k=\bigl(1-D_1(1-z)^2\bigr)+\sum_{j=1}^{s-1}\bigl(D_jz^{2j}-D_{j+1}(1-z^{j+1})^2\bigr)R_j(k)+D_sz^{2s}R_s(k).
+\]
+For $1\le j\le s-1$,
+\[
+  \frac{D_{j+1}}{D_j}=\frac{z^{c+2j}(1-z^{s-j})}{(1-z^{j+1})^2(1-z^{r-j})},
+\]
+so, using $c+s=r$,
+\[
+  D_jz^{2j}-D_{j+1}(1-z^{j+1})^2=D_jz^{2j}\,\frac{1-z^{r-j}-z^c+z^{r-j}}{1-z^{r-j}}=D_jz^{2j}\frac{1-z^c}{1-z^{r-j}}.
+\]
+The same expression is valid for $j=s$, since then $(1-z^c)/(1-z^{r-j})=1$. Moreover $D_1(1-z)^2=z^c(1-z^s)/(1-z^r)$, so $1-D_1(1-z)^2=(1-z^c)/(1-z^r)$. Finally,
+\[
+  D_jz^{2j}\frac{1-z^c}{1-z^{r-j}}=(1-z^c)z^{j(c+j+1)}\qbinom{s}{j}{z}\frac{\poch{r-j-1}}{\poch r\poch j}=w_j,
+\]
+and $w_0=(1-z^c)/(1-z^r)$. This proves \eqref{eq:expansion}.
+
+\emph{Step 3.} Since $0<z<1$, $c\ge1$ and $r-j-1\ge c-1\ge0$ for $j\le s$, every factor of $w_j$ is positive. If $j<\min(k,r-k)$, all exponents $k-i$ and $r-k-i$ with $1\le i\le j$ are positive, so $R_j(k)>0$. If $j\ge\min(k,r-k)$, the product $R_j(k)$ contains the factor with $i=k$ or $i=r-k$, which is $1-z^0=0$.
+\end{proof}
+
+\begin{corollary}\label{cor:positive}
+The numbers $F_0,\dots,F_r$ are positive and $F_k=F_{r-k}$. Moreover $F_1=F_{r-1}=w_0=(1-z^c)/(1-z^r)$.
+\end{corollary}
+
+\begin{proof}
+Positivity follows from Proposition~\ref{prop:endpoint} and Theorem~\ref{thm:expansion}, since $w_0R_0(k)=w_0>0$. Symmetry is part of Proposition~\ref{prop:endpoint} for the endpoints and is evident from \eqref{eq:expansion} for $1\le k\le r-1$, because $R_j(k)=R_j(r-k)$. For $k\in\{1,r-1\}$ we have $\min(k,r-k)=1$, so only $j=0$ contributes.
+\end{proof}
+
+\section{Concavity of the normalized coefficients}\label{sec:concavity}
+
+We keep the notation of Section~\ref{sec:expansion}. Here the hypothesis that $q\ge2$ enters through $z\le\frac12$, that is, $z\le1-z$.
+
+\begin{lemma}\label{lem:f}
+Let $j\ge1$ and, for integers $k\ge j$, put $f_j(k)=\prod_{i=1}^{j}(1-z^{k-i})$. Then $f_j(j)=0$, and for $k\ge j$
+\begin{equation}\label{eq:fincr}
+  f_j(k+1)-f_j(k)=z^{k-j}(1-z^j)\prod_{i=1}^{j-1}(1-z^{k-i})>0.
+\end{equation}
+Moreover the increments are nonincreasing: $f_j(k+1)-f_j(k)\le f_j(k)-f_j(k-1)$ for $k\ge j+1$.
+\end{lemma}
+
+\begin{proof}
+We have
+\[
+  f_j(k+1)-f_j(k)=\prod_{i=1}^{j-1}(1-z^{k-i})\cdot\bigl((1-z^{k})-(1-z^{k-j})\bigr),
+\]
+which is \eqref{eq:fincr}; all factors are positive for $k\ge j$. For $k\ge j+1$, both $k$ and $k-1$ are at least $j$, and \eqref{eq:fincr} gives the ratio of consecutive increments
+\[
+  \frac{f_j(k+1)-f_j(k)}{f_j(k)-f_j(k-1)}=\frac{z(1-z^{k-1})}{1-z^{k-j}}\le\frac{z}{1-z}\le1,
+\]
+where we used $1-z^{k-1}\le1$ and $1-z^{k-j}\ge1-z$, as $k-j\ge1$.
+\end{proof}
+
+\begin{lemma}\label{lem:Rconcave}
+Let $j\ge1$ and let $k$ be an integer with $j+1\le k\le r-j-1$. Then
+\[
+  R_j(k+1)+R_j(k-1)-2R_j(k)\le0.
+\]
+\end{lemma}
+
+\begin{proof}
+We have $R_j(m)=f_j(m)f_j(r-m)$. Put $a=f_j(k)$, $b=f_j(r-k)$ and
+\begin{align*}
+  u&=f_j(k+1)-f_j(k), & v&=f_j(k)-f_j(k-1),\\
+  u'&=f_j(r-k+1)-f_j(r-k), & v'&=f_j(r-k)-f_j(r-k-1).
+\end{align*}
+Then $R_j(k)=ab$, $R_j(k+1)=(a+u)(b-v')$ and $R_j(k-1)=(a-v)(b+u')$. The hypotheses give $k-1\ge j$ and $r-k-1\ge j$, so Lemma~\ref{lem:f} applies at $k$ and at $r-k$, and $a,b\ge0$, $0\le u\le v$, $0\le u'\le v'$. Then
+\[
+  R_j(k+1)+R_j(k-1)-2R_j(k)=b(u-v)+a(u'-v')-uv'-vu'\le0.\qedhere
+\]
+\end{proof}
+
+\begin{remark}
+Lemma~\ref{lem:Rconcave} does not extend to $k=j$. Let $2\le j\le s$ and $r\ge2j+2$, so that the indices $j-1,j,j+1$ lie in $[1,r-1]$. Then $R_j(j-1)=R_j(j)=0<R_j(j+1)$, so the second difference of $R_j$ at $k=j$ is positive; since $R_j(k)=R_j(r-k)$, the same holds at the reflected index $k=r-j$. These are the only internal indices, with both neighbours internal, at which a term of \eqref{eq:expansion} has positive second difference: for $j+1\le k\le r-j-1$ Lemma~\ref{lem:Rconcave} applies, and for $k\le j-1$ or $k\ge r-j+1$ the product $R_j$ vanishes at $k-1$, $k$ and $k+1$. Proposition~\ref{prop:interior} compensates the term at $k=j$ by the term $j-1$, and the reflected index is handled by symmetry. For $j=1$ the index $k=1$ has the neighbour $0$, where \eqref{eq:expansion} is not used; the indices $1$ and $r-1$ are treated in Proposition~\ref{prop:boundary}.
+\end{remark}
+
+\begin{proposition}\label{prop:interior}
+For $2\le k\le r-2$,
+\[
+  2F_k\ge F_{k-1}+F_{k+1}.
+\]
+\end{proposition}
+
+\begin{proof}
+By Corollary~\ref{cor:positive}, $F_m=F_{r-m}$ for all $m$, so the inequality at $k$ is equivalent to the inequality at $r-k$. We may therefore assume $2\le k\le r/2$. All three indices $k-1,k,k+1$ lie in $[1,r-1]$, so \eqref{eq:expansion} applies to each of them, and
+\[
+  F_{k+1}+F_{k-1}-2F_k=\sum_{j=0}^{s}w_j\,\delta_j,\qquad \delta_j=R_j(k+1)+R_j(k-1)-2R_j(k).
+\]
+We have $\delta_0=0$. For $1\le j\le k-1$ we have $j+1\le k$ and $r-k\ge k\ge j+1$, so $\delta_j\le0$ by Lemma~\ref{lem:Rconcave}. For $j\ge k+1$, $R_j$ vanishes at $k-1$, $k$ and $k+1$ by Theorem~\ref{thm:expansion}, so $\delta_j=0$. It remains to consider $j=k$, which occurs only if $k\le s$. Since $R_k(k-1)=R_k(k)=0$, we have $\delta_k=R_k(k+1)$, which is positive if $r\ge 2k+2$ and zero otherwise. Thus, if $k>s$ or $r\le2k+1$, every $\delta_j$ is nonpositive and we are done. (This covers the central indices $r=2k$ and $r=2k+1$.)
+
+Assume now $k\le s$ and $r\ge2k+2$. It suffices to show $w_k\delta_k\le -w_{k-1}\delta_{k-1}$. Since $k-1\ge1$, we have $R_{k-1}(k-1)=0$ and $R_{k-1}(k)>0$, and a direct computation from the definition gives
+\begin{equation}\label{eq:ratio1}
+  \frac{R_{k-1}(k+1)}{R_{k-1}(k)}=\frac{(1-z^k)(1-z^{r-2k})}{(1-z)(1-z^{r-k-1})}\le\frac{1-z^k}{1-z},
+\end{equation}
+because $1\le r-2k\le r-k-1$. Hence
+\[
+  -\frac{\delta_{k-1}}{R_{k-1}(k)}=2-\frac{R_{k-1}(k+1)}{R_{k-1}(k)}\ge\frac{1-2z+z^k}{1-z}\ge\frac{z^k}{1-z}.
+\]
+On the other hand, from \eqref{eq:w},
+\[
+  \frac{w_k}{w_{k-1}}=\frac{z^{c+2k}(1-z^{s-k+1})}{(1-z^k)^2(1-z^{r-k})},
+\]
+and a direct computation gives
+\[
+  \frac{R_k(k+1)}{R_{k-1}(k)}=\frac{(1-z^k)(1-z^{r-2k-1})(1-z^{r-2k})}{1-z^{r-k-1}},
+\]
+so that
+\[
+  \frac{w_k\,\delta_k}{w_{k-1}R_{k-1}(k)}
+  =\frac{z^{c+2k}(1-z^{s-k+1})(1-z^{r-2k-1})(1-z^{r-2k})}{(1-z^k)(1-z^{r-k})(1-z^{r-k-1})}
+  \le\frac{z^{c+2k}}{(1-z)^3}.
+\]
+Here the three factors in the numerator lie in $(0,1)$ because $s-k+1\ge1$ and $r-2k-1\ge1$, and the three factors in the denominator are at least $1-z$ because their exponents are positive. Finally, $c\ge1$, $k\ge2$ and $z\le\frac12$ give $z^{c+k}\le z^3\le z^2\le(1-z)^2$, hence
+\[
+  \frac{z^{c+2k}}{(1-z)^3}\le\frac{z^k}{1-z}\le-\frac{\delta_{k-1}}{R_{k-1}(k)}.
+\]
+Multiplying by $w_{k-1}R_{k-1}(k)>0$ gives $w_k\delta_k\le-w_{k-1}\delta_{k-1}$, and therefore $\sum_jw_j\delta_j\le0$, as claimed.
+\end{proof}
+
+\begin{proposition}\label{prop:boundary}
+$2F_1>F_0+F_2$ and $2F_{r-1}>F_{r-2}+F_r$.
+\end{proposition}
+
+\begin{proof}
+By symmetry it suffices to prove the first inequality. By Proposition~\ref{prop:endpoint} and Corollary~\ref{cor:positive},
+\[
+  \frac{F_0}{F_1}=\prod_{i=c}^{r-1}(1-z^i)\cdot\frac{1-z^r}{1-z^c}=\prod_{i=c+1}^{r}(1-z^i),
+\]
+a product with at least one factor, since $c+1\le r$. Each factor lies in $(0,1)$, so retaining only the first factor gives
+\begin{equation}\label{eq:endreserve}
+  \frac{F_1-F_0}{F_1}\ge z^{c+1}>0.
+\end{equation}
+If $r=2$, then $F_2=F_0$ and the claim is $F_1>F_0$. If $r=3$, then $F_2=F_{r-1}=F_1$ and the claim is again $F_1>F_0$. Let $r\ge4$. Then $\min(2,r-2)=2$, so only $j=0,1$ contribute to $F_2$ in \eqref{eq:expansion}, and $R_1(2)=(1-z)(1-z^{r-3})$. Using $w_1/w_0=z^{c+2}(1-z^s)/((1-z)^2(1-z^{r-1}))$, we obtain
+\[
+  \frac{F_2-F_1}{F_1}=\frac{w_1R_1(2)}{w_0}=\frac{z^{c+2}(1-z^s)(1-z^{r-3})}{(1-z)(1-z^{r-1})}<\frac{z^{c+2}}{1-z}\le z^{c+1},
+\]
+where the strict inequality uses $1-z^s<1$ and $1-z^{r-3}<1-z^{r-1}$, and the last uses $z\le1-z$. Together with \eqref{eq:endreserve}, $F_2-F_1<F_1-F_0$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:F}]
+Part (i) is Proposition~\ref{prop:endpoint}, and part (ii) is Theorem~\ref{thm:expansion}. In part (iii), positivity and symmetry are Corollary~\ref{cor:positive}. Concavity at $k=1$ and $k=r-1$, with strict inequality, is Proposition~\ref{prop:boundary}, and concavity at $2\le k\le r-2$ is Proposition~\ref{prop:interior}.
+\end{proof}
+
+\section{Proof of the main theorem and examples}\label{sec:proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+By Theorem~\ref{thm:F}, $y_k=\pi_kF_k$ with $F_k>0$, $F_k=F_{r-k}$ and $\pi_k=\pi_{r-k}>0$. Hence $y_k>0$ and $y_k=y_{r-k}$. Concavity and positivity of $F$ give, for $1\le k\le r-1$,
+\[
+  F_k\ge\tfrac12(F_{k-1}+F_{k+1})\ge\sqrt{F_{k-1}F_{k+1}},
+\]
+so $F_k^2\ge F_{k-1}F_{k+1}$. On the other hand $\pi_k=q^{\binom r2}g_k$ with $g_k=\qbinom{r}{k}{z}$, and for $1\le k\le r$,
+\[
+  \frac{g_k}{g_{k-1}}=\frac{1-z^{r-k+1}}{1-z^k}
+\]
+is strictly decreasing in $k$, because its numerator decreases strictly and its positive denominator increases strictly. Hence $g_k^2>g_{k-1}g_{k+1}$, that is, $\pi_k^2>\pi_{k-1}\pi_{k+1}$, for $1\le k\le r-1$. Multiplying the two inequalities between positive numbers gives $y_k^2>y_{k-1}y_{k+1}$.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:conj}]
+By Theorem~\ref{thm:main} all coefficients $y_0,\dots,y_r$ are positive, so there are no internal zeros, and they are log-concave.
+\end{proof}
+
+\begin{example}
+Table~\ref{tab:examples} lists $Y_{B_{r,s}(q)}$ and the normalized sequence $F$ for $q\in\{2,3\}$ and $r\le4$. For $(r,s,q)=(3,2,2)$ the matroid is $\AG(2,2)=U_{3,4}$, and the row $3,8,8,3$ agrees with \cite[Theorem~1.1]{GRX}; for $(r,s,q)=(3,1,2)$ it is the Fano plane with one point removed, that is, the cycle matroid of $K_4$.
+\end{example}
+
+\begin{table}[ht]
+\centering
+\small
+\caption{The coefficients $y_k$ of $Y_{B_{r,s}(q)}$ and the values $F_k$.}\label{tab:examples}
+\renewcommand{\arraystretch}{1.05}
+\begin{tabular}{cccll}
+\toprule
+$q$ & $r$ & $s$ & $y_0,\dots,y_r$ & $F_0,\dots,F_r$\\
+\midrule
+2 & 2 & 1 & $1,2,1$ & $1/2,\ 2/3,\ 1/2$\\
+2 & 3 & 1 & $6,12,12,6$ & $3/4,\ 6/7,\ 6/7,\ 3/4$\\
+2 & 3 & 2 & $3,8,8,3$ & $3/8,\ 4/7,\ 4/7,\ 3/8$\\
+2 & 4 & 1 & $56,112,133,112,56$ & $7/8,\ 14/15,\ 19/20,\ 14/15,\ 7/8$\\
+2 & 4 & 2 & $42,96,118,96,42$ & $21/32,\ 4/5,\ 59/70,\ 4/5,\ 21/32$\\
+2 & 4 & 3 & $21,64,84,64,21$ & $21/64,\ 8/15,\ 3/5,\ 8/15,\ 21/64$\\
+\midrule
+3 & 2 & 1 & $2,3,2$ & $2/3,\ 3/4,\ 2/3$\\
+3 & 3 & 1 & $24,36,36,24$ & $8/9,\ 12/13,\ 12/13,\ 8/9$\\
+3 & 3 & 2 & $16,27,27,16$ & $16/27,\ 9/13,\ 9/13,\ 16/27$\\
+3 & 4 & 1 & $702,1053,1144,1053,702$ & $26/27,\ 39/40,\ 44/45,\ 39/40,\ 26/27$\\
+3 & 4 & 2 & $624,972,1065,972,624$ & $208/243,\ 9/10,\ 71/78,\ 9/10,\ 208/243$\\
+3 & 4 & 3 & $416,729,819,729,416$ & $416/729,\ 27/40,\ 7/10,\ 27/40,\ 416/729$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{remark}
+The proofs above are complete and do not depend on computation. As an independent check, we computed $Y_{B_{r,s}(q)}$ in exact integer arithmetic for $q\in\{2,3,4,5,7,8,9,11,16,25\}$, $2\le r\le22$ and $1\le s\le r-1$, that is, for $2310$ triples $(q,r,s)$. No subspaces are enumerated: the nonempty flats are grouped by their type $(d,a)=(\dim U,\dim(U\cap W))$, which occurs with the multiplicity $N(d,a)$ of \eqref{eq:N}; the restriction to a flat of type $(d,a)$ is $B_{d,a}(q)$, and the contraction by a nonempty flat is a projective geometry (Lemma~\ref{lem:flats}). With these data, $Y_{B_{r,s}(q)}$ is computed once from \eqref{eq:Ydef}, with the inverse Kazhdan--Lusztig polynomials obtained by inverting $P$ in the incidence algebra and with the M\"obius invariants computed recursively from the same types, and once from Proposition~\ref{prop:kernel}. The two results agree in all cases. Moreover the endpoint formula of Theorem~\ref{thm:F}(i) holds in all $2310$ cases (the program checks $F_0$ and the symmetry of the coefficients), the expansion of Theorem~\ref{thm:F}(ii) holds at all $33110$ internal indices, the inequalities of Theorems~\ref{thm:main} and~\ref{thm:F} hold, and the formula of Example~\ref{ex:s1} holds in all $210$ cases with ${s=1}$. The program \texttt{verify\_coefficients.py}, its output \texttt{exact\_audit\_results.json} and instructions for running them are provided as supplementary material.
+\end{remark}
+
+
+
+\section*{Use of AI-assisted tools}
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{99}
+
+\bibitem{And}
+G.~E. Andrews, \emph{The Theory of Partitions}, Encyclopedia of Mathematics and its Applications, vol.~2, Addison-Wesley, Reading, MA, 1976.
+
+\bibitem{BB}
+R.~C. Bose and R.~C. Burton, \emph{A characterization of flat spaces in a finite geometry and the uniqueness of the Hamming and the MacDonald codes}, J. Combinatorial Theory \textbf{1} (1966), 96--104.
+
+\bibitem{BFMN}
+T.~Braden, L.~Ferroni, J.~P. Matherne, and N.~Nepal, \emph{Inverse Kazhdan--Lusztig polynomials of matroids under deletion}, arXiv:2510.01086.
+
+\bibitem{BHMPW}
+T.~Braden, J.~Huh, J.~P. Matherne, N.~Proudfoot, and B.~Wang, \emph{Singular Hodge theory for combinatorial geometries}, arXiv:2010.06088.
+
+\bibitem{CL}
+R.~Cheng and S.~Liu, \emph{Kazhdan--Lusztig polynomials of matroids need not be unimodal}, arXiv:2607.24186.
+
+\bibitem{EPW}
+B.~Elias, N.~Proudfoot, and M.~Wakefield, \emph{The Kazhdan--Lusztig polynomial of a matroid}, Adv. Math. \textbf{299} (2016), 36--70.
+
+\bibitem{FMSV}
+L.~Ferroni, J.~P. Matherne, M.~Stevens, and L.~Vecchi, \emph{Hilbert--Poincar\'e series of matroid Chow rings and intersection cohomology}, arXiv:2212.03190.
+
+\bibitem{GLL}
+A.~L.~L. Gao, Y.-X. Li, and Y.~Li, \emph{Inverse Kazhdan--Lusztig polynomials of fan matroids}, arXiv:2603.25254.
+
+\bibitem{GLX}
+A.~L.~L. Gao, Y.~Li, and M.~H.~Y. Xie, \emph{Equivariant inverse $Z$-polynomials of matroids}, arXiv:2601.17314.
+
+\bibitem{GRX}
+A.~L.~L. Gao, X.~Ruan, and M.~H.~Y. Xie, \emph{The inverse $Z$-polynomial of a matroid}, arXiv:2507.01332.
+
+\bibitem{GX}
+A.~L.~L. Gao and M.~H.~Y. Xie, \emph{The inverse Kazhdan--Lusztig polynomial of a matroid}, J. Combin. Theory Ser. B \textbf{151} (2021), 375--392.
+
+\bibitem{PXY}
+N.~Proudfoot, Y.~Xu, and B.~Young, \emph{The $Z$-polynomial of a matroid}, Electron. J. Combin. \textbf{25} (2018), no.~1, Paper No.~1.26.
+
+\bibitem{Re}
+{\raggedright Rethlas, \emph{Unimodality of inverse $Z$-polynomials of matroids}, manuscript, 2026, \url{https://github.com/frenzymath/Rethlas_results/blob/895e3d12ba02224c9d8ba8d52882184c77afc8af/AlgComb/MatroidKazhdanLusztig/inverse_z_unimodal.pdf}.\par}
+
+\end{thebibliography}
+
+\end{document}

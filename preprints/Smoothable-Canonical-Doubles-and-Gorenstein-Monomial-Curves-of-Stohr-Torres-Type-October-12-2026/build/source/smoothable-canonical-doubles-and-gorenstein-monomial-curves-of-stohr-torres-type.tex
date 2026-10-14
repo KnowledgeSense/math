@@ -1,0 +1,704 @@
+\documentclass{amsart}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage[unicode,hidelinks]{hyperref}
+\hypersetup{
+  pdftitle={Smoothable canonical doubles and Gorenstein monomial curves of St\"ohr\textendash Torres type},
+  pdfauthor={Knowledge Sense},
+  pdfsubject={Deformations of curve singularities},
+  pdfkeywords={curve singularity, smoothability, monomial curve, Weierstrass semigroup, Gorenstein ring, numerical duplication, versal deformation}
+}
+
+\hyphenation{manuscript}
+\setlength{\emergencystretch}{2em}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem*{conjecture*}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Gm}{\mathbb{G}_m}
+\newcommand{\m}{\mathfrak{m}}
+\newcommand{\cc}{\mathfrak{c}}
+\newcommand{\pp}{\mathfrak{p}}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\Frac}{Frac}
+\DeclareMathOperator{\Fitt}{Fitt}
+\DeclareMathOperator{\coker}{coker}
+
+\begin{document}
+
+\title[Smoothable canonical doubles]{Smoothable canonical doubles and Gorenstein monomial curves of St\"ohr--Torres type}
+
+\author{Knowledge Sense}
+\address{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{12 October 2026}
+
+\subjclass[2020]{Primary 14B07; Secondary 14H20, 14H55, 20M14, 13H10}
+
+\keywords{curve singularity, smoothability, monomial curve, Weierstrass semigroup, Gorenstein ring, numerical duplication, versal deformation}
+
+\begin{abstract}
+Let $S$ be the non-Weierstrass semigroup $\langle 8,12,18,22,51,55\rangle$ of genus $34$ found by Komeda. For every integer $g\ge 208$ we prove that the monomial curve of $\Gamma_g=\langle 16,24,36,44,102,110,2g-131,2g-123,2g-9\rangle$ is smoothable. The semigroup $\Gamma_g$ is symmetric of genus $g$ and has embedding dimension $9$. It is the semigroup attached to $S$ by the construction of St\"ohr and Torres; hence, by their theorem, it is not a Weierstrass semigroup. This gives infinitely many counterexamples to a conjecture of Stevens that Gorenstein monomial curves of St\"ohr--Torres type are not smoothable. The local ring of such a curve is a canonical double $A\oplus I$ of the local ring $A$ of the monomial curve of $S$. Here $I$ is a canonical fractional ideal of $A$, and the multiplication is twisted by a power of $t$, the parameter of the normalization. We lift this multiplication explicitly over Stevens's one-parameter deformation of the base curve, whose general fibre has one node, and conclude by a versality argument. We also prove a general, non-effective result. If the local ring $A$ of an integral curve singularity is smoothable and $I$ is a canonical fractional ideal of $A$, then there is an integer $N\ge 1$ such that every reduced double $A\oplus I$ with multiplication twisted by an element of $\m^N(A:I^2)$ is smoothable.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+A numerical semigroup $H\subseteq\N$ is a \emph{Weierstrass semigroup} if there are a smooth projective curve $C$ over $\C$ and a point $P\in C$ such that $H$ is the semigroup of pole orders at $P$ of the regular functions on $C\setminus\{P\}$. By Pinkham's theorem \cite[Theorem~2.12]{Ste}, the moduli space of smooth pointed curves with Weierstrass semigroup $H$ is isomorphic to the quotient by $\Gm$ of the locus of smooth fibres in the negative-weight part of the versal deformation of the monomial curve $C_H=\Spec\C[H]$. Thus $H$ is a Weierstrass semigroup if and only if $C_H$ is negatively smoothable, and non-Weierstrass semigroups are natural candidates for non-smoothable curve singularities. Buchweitz's criterion shows that many monomial curves are not smoothable, and hence that their semigroups are not Weierstrass semigroups. It does not apply to Gorenstein curves, that is, to symmetric semigroups \cite[\S 4.1]{Ste}.
+
+Let $H$ be a semigroup of genus $g$ with exactly $\gamma$ even gaps, and let $m_1<m_2<\cdots$ be its nonzero elements. Torres proved that if $g\ge6\gamma+4$ and $H$ is a Weierstrass semigroup, then so is the semigroup $\{m_i/2:1\le i\le\gamma\}\cup\{2\gamma+i:i\in\N\}$ of genus $\gamma$ \cite[p.~48]{Tor}. St\"ohr observed that this yields symmetric non-Weierstrass semigroups \cite[Scholium~3.5 and its proof]{Tor}, and Torres describes the general construction in \cite[Remark~3.6]{Tor}: if $\tilde H$ is a non-Weierstrass semigroup of genus $\gamma$ and $g\ge 6\gamma+4$, then
+\begin{equation}\label{eq:ST}
+H=\{2n:n\in\tilde H\}\cup\{2g-1-2a:a\in\Z\setminus\tilde H\}
+\end{equation}
+is a symmetric semigroup of genus $g$ which is not a Weierstrass semigroup. Stevens calls these semigroups \emph{of St\"ohr--Torres type} \cite[\S 4.1]{Ste} and states the following conjecture.
+
+\begin{conjecture*}[{\cite[Conjecture~4.3]{Ste}}]
+The Gorenstein monomial curves of St\"ohr--Torres type are not smoothable.
+\end{conjecture*}
+
+The evidence in \cite{Ste} includes a deformation of the smallest example, of genus $100$, into a non-smoothable Gorenstein singularity \cite[Example~4.1 and Proposition~4.2]{Ste}. On the other hand, Stevens shows \cite[Example~2.13]{Ste} that the monomial curve of the semigroup
+\begin{equation}\label{eq:S}
+S=\langle 8,12,18,22,51,55\rangle,
+\end{equation}
+which is not a Weierstrass semigroup by Komeda \cite[Example~5.1]{Kom}, is smoothable although it is not negatively smoothable. Since $S$ has genus $34$, the construction \eqref{eq:ST} applies to $S$ for every $g\ge 6\cdot34+4=208$. Our main result is the following.
+
+\begin{theorem}\label{thm:main}
+Let $S$ be as in \eqref{eq:S}, let $g\ge 208$ be an integer, and put
+\[
+\Gamma_g=\langle 16,24,36,44,102,110,2g-131,2g-123,2g-9\rangle .
+\]
+Then $\Gamma_g=\{2n:n\in S\}\cup\{2g-1-2a:a\in\Z\setminus S\}$. The semigroup $\Gamma_g$ is symmetric of genus $g$, has embedding dimension $9$ and is not a Weierstrass semigroup. The local ring of the monomial curve $\Spec\C[\Gamma_g]$ at its singular point is smoothable.
+\end{theorem}
+
+Smoothability is understood in the sense of Definition~\ref{def:smoothing}; by Remark~\ref{rem:stevens-smoothable} it implies smoothability in the sense of \cite{Ste}.
+
+\begin{corollary}\label{cor:conj}
+For every $g\ge 208$ the monomial curve of $\Gamma_g$ is a smoothable Gorenstein monomial curve of St\"ohr--Torres type. In particular, \cite[Conjecture~4.3]{Ste} fails for infinitely many genera. By Pinkham's theorem these curves are smoothable but not negatively smoothable.
+\end{corollary}
+
+\subsection*{Canonical doubles}
+Let $(A,\m)$ be the local ring of a closed point on an integral algebraic curve over $\C$, with fraction field $\Frac A$. A \emph{canonical fractional ideal} is a finitely generated $A$-submodule $I\subseteq\Frac A$ isomorphic to the canonical module $\omega_A$. Put $J=(A:I^2)=\{x\in\Frac A: xI^2\subseteq A\}$. For $q\in J$ the \emph{canonical double} $D_q$ is the $A$-module $A\oplus I$ with the multiplication
+\begin{equation}\label{eq:Dq}
+(a,u)(b,v)=(ab+quv,\;av+bu).
+\end{equation}
+For $q=0$ this is Nagata's idealization. When $I$ is a proper ideal of $A$ and $q\in A$, the ring $D_q$ is the member $R(I)_{0,-q}$ of the family of quotients of the Rees algebra studied by Barucci, D'Anna and Strazzanti \cite{BDS}. This family contains the idealization and the amalgamated duplication \cite[Propositions~1.4 and~1.5]{BDS}. Since $A$ is a one-dimensional local domain, \cite[Corollary~3.3]{BDS} shows that such a ring is Gorenstein if and only if $I$ is canonical. For numerical semigroup rings and parameters of odd valuation, its value semigroup is the numerical duplication of D'Anna and Strazzanti \cite{DS}, see \cite[Theorems~3.4 and~3.6]{BDS}. D'Anna and Strazzanti already observed the relation between numerical duplication and Torres's construction \cite[Remark~2.3]{DS}. Their remark states the bound as a strict inequality; the bound in \cite[p.~48]{Tor} is $g\ge 6\gamma+4$.
+
+The local ring of $\Spec\C[\Gamma_g]$ at its singular point is a canonical double: $A$ is the local ring of $C_S$ at the origin, $I=(1,t^4,t^{61})A$ and $q=t^{2g-131}$ (Lemma~\ref{lem:double-semigroup}). Our second result is a general lifting theorem for canonical doubles.
+
+\begin{theorem}\label{thm:general}
+Let $(A,\m)$ be the local ring of a closed point on an integral algebraic curve over $\C$, let $I$ be a canonical fractional ideal and $J=(A:I^2)$. Assume that $A$ admits an algebraic smoothing. Then there is an integer $N\ge 1$ with the following property. For every $q\in\m^NJ$ with $q\ne 0$, the ring $D_q$ is a reduced Gorenstein local ring with maximal ideal $\m\oplus I$, and $D_q$ is smoothable. The integer $N$ depends on the chosen smoothing of $A$, but not on $q$.
+\end{theorem}
+
+The condition $q\neq0$ is equivalent to the reducedness of $D_q$ (Lemma~\ref{lem:doubles}).
+
+\subsection*{Strategy}
+A double cover is given by three data: the base $B$, the anti-invariant part $W$ of the involution, which here is a canonical module, and the multiplication $\phi\colon\Sym^2W\to B$. To deform the cover, one deforms all three. Battistella and Bozlee do this for reduced Gorenstein hyperelliptic covers $\psi\colon C\to P$ in the sense of \cite[Definition~4.1]{BB}, where $P$ is a rational, reduced, Cohen--Macaulay projective curve. In the proof of \cite[Corollary~4.4]{BB} the base, the anti-invariant part and the multiplication are deformed in turn, and the last step is unobstructed because $H^0(\omega_P)=0$. Here the base is a curve singularity with $\delta$-invariant $34$, and this vanishing is not available.
+
+Theorem~\ref{thm:general} uses instead a specialization map. Let $B$ be a smoothing of $A$ with relative canonical module $W$, and let $H=\Hom_B(\Sym^2_BW,B)$. Let $o$ be the singular point of the special fibre and $\theta$ an identification of the special fibre of $W$ at $o$ with $I$. Reduction modulo the parameter then gives a map $\rho_\theta\colon H_o\to J$. This map becomes surjective after localization at the generic point of the special fibre, so its cokernel has finite length (Proposition~\ref{prop:rho}). This gives the integer $N$, but no bound for it. Applied to the base $A$ of Theorem~\ref{thm:main}, whose smoothability is due to Stevens, it proves Theorem~\ref{thm:main} for all sufficiently large $g$ (Proposition~\ref{prop:large}).
+
+For the full range $g\ge 208$ we use Stevens's deformation $B$ of the base curve. It is contained in an explicit finite flat complete intersection $R'$. A perfect pairing, given by the coefficient of $\lambda pq$, identifies the relative canonical module $W$ of $B$ with a fractional ideal satisfying $R'\subseteq W\subseteq r^{-1}R'$, whose special fibre is $I$ itself (Lemma~\ref{lem:W}). Every element of $r^3R'$ defines a multiplication $\Sym^2W\to B$, and this gives an explicit lift of $t^b$ for every odd $b\ge 91$ (Lemma~\ref{lem:lift}). Since the general fibre of $B$ has a node, the deformation of the double obtained in this way has general fibre with at most ordinary nodes. Smoothability then follows from a versality statement for nodal degenerations (Proposition~\ref{prop:nodal}), which uses Artin's versality in \'etale neighbourhoods of the singular locus.
+
+\subsection*{Dependencies}
+We use the following results without proof: Komeda's theorem that $S$ is not a Weierstrass semigroup \cite[Example~5.1]{Kom}, as quoted in \cite[Example~2.13]{Ste}; the theorem of Torres and St\"ohr that \eqref{eq:ST} is not a Weierstrass semigroup \cite[p.~48, proof of Scholium~3.5 and Remark~3.6]{Tor}, in the form of \cite[\S 4.1]{Ste}; Stevens's computation that the nonzero fibres of his deformation of $C_S$ have a single ordinary node \cite[Example~2.13]{Ste}, for which we also give an independent verification (Lemma~\ref{lem:fibres}); the existence, openness and versality results of Elkik and Artin for deformations of isolated singularities \cite{Elk}, \cite[Corollary~3.2, Theorems~3.3 and~4.4, Example~4.5]{Art}; relative duality for Cohen--Macaulay families \cite[(A.7) and (A.8)]{dJvS}; and lemmas of the Stacks project on finite parts, on families of nodal curves and on versal formal deformations \cite{Sta}. The lifting of the multiplication of the double cover and its consequences for smoothability are, to our knowledge, new.
+
+\subsection*{Organization}
+Section~\ref{sec:versality} fixes the notion of smoothing and proves the versality statements. Section~\ref{sec:doubles} collects elementary facts on canonical doubles. Section~\ref{sec:general} proves Theorem~\ref{thm:general}. Section~\ref{sec:base} treats the semigroup $S$, its canonical ideal and the semigroups $\Gamma_g$. Section~\ref{sec:stevens} studies Stevens's deformation of the base curve and its relative canonical module, and Section~\ref{sec:proof} proves Theorem~\ref{thm:main}. Appendix~\ref{app:computations} describes the accompanying exact computations.
+
+\section{Smoothings and versality}\label{sec:versality}
+
+Unless stated otherwise, schemes are of finite type over $\C$ or are localizations of such schemes; henselizations and completions appear only in the versality arguments. A \emph{pointed curve germ} is a ring $R=\mathcal O_{T,0}$, where $T$ is a smooth connected curve over $\C$ and $0\in T(\C)$; it is a discrete valuation ring with residue field $\C$, and we write $s$ for a uniformizer and $K_R=\Frac R$. A \emph{relative curve} over a scheme $V$ is a flat morphism of finite presentation $Y\to V$ whose fibres have pure dimension one. Its nonsmooth locus $Z(Y/V)$ is the closed subset defined by the Fitting ideal $\Fitt_1(\Omega_{Y/V})$; its formation commutes with base change. If $Z(Y/V)$ is finite over $V$, the \emph{discriminant} $\Delta(Y/V)\subseteq V$ is the closed subscheme defined by $\Fitt_0$ of the pushforward of $\mathcal O_{Z(Y/V)}$. Its support is the image of $Z(Y/V)$, and its formation commutes with base change.
+
+A point $y$ of a relative curve $Y\to V$ is \emph{at-worst-nodal} if the geometric fibre through $y$ is smooth or has an ordinary double point at the points over $y$. By \cite[Lemma~53.20.5 (Tag~0DSC)]{Sta} the set of at-worst-nodal points is open in $Y$ and its formation commutes with base change; by \cite[Lemma~53.20.6 (Tag~0C5C)]{Sta} the property is preserved and reflected by \'etale morphisms over $V$.
+
+\begin{definition}\label{def:smoothing}
+Let $X_0$ be a reduced affine curve over $\C$ and $x\in X_0$ a closed point. An \emph{algebraic smoothing} of $\mathcal O_{X_0,x}$ consists of a pointed curve germ $R$, a relative curve $f\colon X\to\Spec R$, a closed point $x'$ of the closed fibre and an isomorphism $\mathcal O_{X_s,x'}\cong\mathcal O_{X_0,x}$ of $\C$-algebras, where $X_s$ denotes the closed fibre, such that the generic fibre $X_{K_R}$ is smooth over $K_R$. The local ring $\mathcal O_{X_0,x}$ is \emph{smoothable} if it admits an algebraic smoothing.
+\end{definition}
+
+Replacing $X$ by an open neighbourhood of $x'$ does not affect the definition. The closed fibre is required to contain a point whose local ring is $\mathcal O_{X_0,x}$ itself, not its henselization.
+
+\begin{remark}\label{rem:stevens-smoothable}
+An algebraic smoothing gives a smoothing in the sense of \cite{Ste}. Spread $f$ out over a smooth curve $T$ with a point $0$. The nonsmooth locus of $f$ is closed and does not meet the generic fibre, so after shrinking $T$ it lies in the closed fibre; near $x'$ it is the point $x'$. Hence the analytic germ of $X_0$ at $x$ has a one-parameter deformation whose fibres over $t\ne0$ are smooth near $x'$. Its classifying map to the base of the semiuniversal deformation is a curve germ not contained in the discriminant, so it lies on a smoothing component.
+\end{remark}
+
+\subsection{The groupoid of isolated singularities}
+Let $X_0$ be a reduced affine curve whose singular points are isolated. Following \cite[Example~4.5]{Art}, an object of the groupoid $F$ over a $\C$-algebra $\Lambda$ is an affine relative curve $Y\to\Spec\Lambda$ with $Z(Y/\Lambda)$ finite over $\Lambda$, regarded as a deformation of $X_0$ when $\Lambda$ is local with residue field $\C$ and the closed fibre is identified with $X_0$. In the groupoid $F'$ of \cite[Example~4.5]{Art} the objects are the same, and a morphism is given by an \'etale neighbourhood of the relative nonsmooth locus of the source which is also an \'etale neighbourhood of the relative nonsmooth locus of the target after base change. By Elkik \cite[\S\S 1--3]{Elk} and Artin \cite[Corollary~3.2 and Example~4.5]{Art}, $X_0$ has a deformation in $F$ over an algebraic local ring which is formally versal; by \cite[Theorem~4.4]{Art} formal versality is an open condition; and by \cite[Example~4.5 and Theorem~3.3]{Art} the deformation is versal for $F'$, that is, it has the lifting property \cite[(3.1)]{Art} for all surjections of algebraic henselian local rings. Since $F$ is limit preserving, the formally versal deformation is defined over an elementary \'etale neighbourhood of the base point, which we may shrink using \cite[Theorem~4.4]{Art}. We therefore have an affine scheme $V$ of finite type over $\C$, a point $v\in V(\C)$, and an affine relative curve $Y\to V$ with $Z(Y/V)$ finite over $V$ and closed fibre $Y_v=X_0$, which is formally versal at every point of $V$ and whose restriction to $\Spec\mathcal O^h_{V,v}$ is versal for $F'$. We call such a family an \emph{algebraic versal family} for $X_0$.
+
+\begin{lemma}\label{lem:arc}
+Let $V$ be a scheme of finite type over $\C$, $v\in V(\C)$, and $Y\to V$ an affine relative curve with $Z(Y/V)$ finite over $V$. Put $X_0=Y_v$ and $\Delta=\Delta(Y/V)$, and let $x\in X_0$ be a closed point. If some irreducible component of $V$ through $v$ is not contained in $\Delta$, then $\mathcal O_{X_0,x}$ admits an algebraic smoothing whose closed fibre is $X_0$.
+\end{lemma}
+
+\begin{proof}
+If $v\notin\Delta$, then $X_0$ is smooth and the constant family $X_0\times\Spec R$ over any pointed curve germ $R$ is an algebraic smoothing. Assume $v\in\Delta$, and let $V'$ be an irreducible component through $v$ with $V'\not\subseteq\Delta$. Then $d=\dim V'\ge1$. Choose an affine open neighbourhood $V''$ of $v$ in $V'$ and a finite surjective morphism $\pi\colon V''\to\A^d$. Since $\Delta\cap V''$ is a proper closed subset of the irreducible scheme $V''$, its image $\pi(\Delta\cap V'')$ is a proper closed subset of $\A^d$. Hence there is a line $\ell\subseteq\A^d$ through $\pi(v)$ with $\ell\not\subseteq\pi(\Delta\cap V'')$. The preimage $\pi^{-1}(\ell)$ is cut out in $V''$ by $d-1$ equations, so each of its irreducible components has dimension at least one; being finite over $\ell$, each component is a curve mapping onto $\ell$. Let $\Gamma$ be a component through $v$. Then $\Gamma\cap\Delta$ is contained in the finite set $\pi^{-1}(\ell\cap\pi(\Delta\cap V''))$, so the generic point $\xi$ of $\Gamma$ is not in $\Delta$.
+
+Let $\tilde\Gamma\to\Gamma$ be the normalization, choose a point $0\in\tilde\Gamma$ over $v$, and put $R=\mathcal O_{\tilde\Gamma,0}$, a pointed curve germ. The base change $X=Y\times_V\Spec R$ is an affine relative curve. Its closed fibre is $Y_v\otimes_{\C}\C=X_0$, and its generic fibre is obtained from $Y_\xi$ by a field extension; it is smooth because $\xi\notin\Delta$. Thus $X\to\Spec R$ is an algebraic smoothing of $\mathcal O_{X_0,x}$ with closed fibre $X_0$.
+\end{proof}
+
+\begin{remark}\label{rem:formal}
+Lemma~\ref{lem:arc} relates algebraic smoothability to the usual notion. Let $Y\to V$ be an algebraic versal family for $X_0$. Since $X_0$ is affine and its cotangent cohomology sheaves are supported at the singular points, the completion $\hat{\mathcal O}_{V,v}$ is the base of a formally versal deformation of the singularities of $X_0$. Suppose that some irreducible component of $\Spec\hat{\mathcal O}_{V,v}$ is not contained in $\Delta\times_V\Spec\hat{\mathcal O}_{V,v}$. If every irreducible component of $V$ through $v$ were contained in $\Delta$, the ideal of $\Delta$ in $\mathcal O_{V,v}$ would be nilpotent, hence also its extension to $\hat{\mathcal O}_{V,v}$, which is not the case. By Lemma~\ref{lem:arc}, every singular local ring of $X_0$ is then smoothable in the sense of Definition~\ref{def:smoothing}.
+\end{remark}
+
+The proof of the next proposition uses the versality for $F'$ only to compare a given nodal degeneration with the versal family.
+
+\begin{proposition}\label{prop:nodal}
+Let $X_0$ be a reduced affine curve over $\C$ whose only singular point is $x$. Let $R$ be a pointed curve germ and $X\to\Spec R$ an affine relative curve with closed fibre $X_0$ such that every point of the generic fibre is at-worst-nodal. Then $\mathcal O_{X_0,x}$ is smoothable.
+\end{proposition}
+
+\begin{proof}
+\emph{Step 1: the family as an object of $F$.} The nonsmooth locus $Z=Z(X/R)$ is separated and of finite type over $R$, and its closed fibre is $\{x\}$. By \cite[Lemma~37.41.4 (Tag~02LN)]{Sta} there are an elementary \'etale neighbourhood $R\to R_1$ and a decomposition $Z\otimes_RR_1=Z_{\mathrm{fin}}\sqcup Z'$ with $Z_{\mathrm{fin}}$ finite over $R_1$ and with empty closed fibre of $Z'$. The ring $R_1$ is again a pointed curve germ. The closed subsets $Z'$ and $X_0$ of the affine scheme $X\otimes_RR_1$ are disjoint, so there is a function $h$ with $h=1$ on $X_0$ and $h=0$ on $Z'$. The principal open set $X_1=D(h)$ is an affine relative curve over $R_1$ with closed fibre $X_0$. Since $h=1$ on the closed fibre and $\mathcal O(Z_{\mathrm{fin}})$ is a finite $R_1$-algebra, the restriction of $h$ to $Z_{\mathrm{fin}}$ is a unit by Nakayama's lemma. Hence $Z_{\mathrm{fin}}\subseteq X_1$, and the nonsmooth locus of $X_1$ is $Z_{\mathrm{fin}}$, which is finite over $R_1$. Its generic fibre is an open subscheme of the base change of the generic fibre of $X$, hence at-worst-nodal. We spread $R_1$ and $X_1$ out to a smooth affine connected curve $T_1$ with a point $0$ and an affine relative curve $X_1\to T_1$ with finite nonsmooth locus. By \cite[Lemma~53.20.5 (Tag~0DSC)]{Sta} the at-worst-nodal locus of $X_1$ is open and contains the generic fibre, so there is a finite set $F_1\subseteq T_1(\C)$ such that the fibre $X_{1,t}$ is at-worst-nodal for $t\notin F_1$.
+
+\emph{Step 2: classification by the versal family.} Let $Y\to V$ be an algebraic versal family for $X_0$. Apply the versality of $Y$ over $\mathcal O^h_{V,v}$ for $F'$ to the surjection $\mathcal O^h_{T_1,0}\to\C$, the object $X_1\otimes\mathcal O^h_{T_1,0}$ and the identification of both closed fibres with $X_0$. This gives a local homomorphism $\mathcal O^h_{V,v}\to\mathcal O^h_{T_1,0}$ and an isomorphism in $F'$ between $Y\otimes\mathcal O^h_{T_1,0}$ and $X_1\otimes\mathcal O^h_{T_1,0}$. All data are of finite presentation. Hence there are an \'etale neighbourhood $(T_2,0)\to(T_1,0)$ with $T_2$ a smooth affine connected curve, a morphism $j\colon T_2\to V$ with $j(0)=v$, and an affine scheme $X''$ over $T_2$ with \'etale morphisms
+\[
+e_1\colon X''\to Y\times_VT_2,\qquad e_2\colon X''\to X_1\times_{T_1}T_2
+\]
+over $T_2$, each of which maps the nonsmooth locus of $X''$ isomorphically onto the nonsmooth locus of its target.
+
+\emph{Step 3: general points.} Let $F_2\subseteq T_2(\C)$ be the finite set of points lying over $F_1$. For $t\in T_2(\C)\setminus F_2$ the fibre of $X_1\times_{T_1}T_2$ over $t$ is at-worst-nodal. The nonsmooth points of $Y_{j(t)}$ are the images under $e_1$ of the nonsmooth points of $X''_t$, and these correspond under $e_2$ to nonsmooth points of an at-worst-nodal curve. Since \'etale morphisms preserve completed local rings, every singular point of $Y_{j(t)}$ is an ordinary node, see also \cite[Lemma~53.20.6 (Tag~0C5C)]{Sta}.
+
+\emph{Step 4: local irreducibility at nodal points.} Let $w\in V(\C)$ be a point such that the singular points $p_1,\dots,p_m$ of $Y_w$ are ordinary nodes. We claim that $\mathcal O_{V,w}$ is a domain whose generic point is not in $\Delta=\Delta(Y/V)$. Since $Y_w$ is affine, coherent cohomology on it vanishes, and the cotangent cohomology sheaves $\mathcal T^1,\mathcal T^2$ are supported at the $p_i$. Hence the deformation functor of $Y_w$ is smooth over the product of the deformation functors of the complete local rings $\hat{\mathcal O}_{Y_w,p_i}$, with bijective map on tangent spaces. Each node has the semiuniversal deformation $xy=u_i$ over $\C[[u_i]]$, so $\C[[u_1,\dots,u_m]]$ is a hull \cite{Sch} for the deformations of $Y_w$. As $Y$ is formally versal at $w$, its formal base is a power series extension of this hull \cite[Section~90.14 (Tag~06T0), Lemma~90.14.5]{Sta}: there is a formally smooth local homomorphism $\C[[u_1,\dots,u_m]]\to\hat{\mathcal O}_{V,w}$, $u_i\mapsto\alpha_i$, together with isomorphisms
+\[
+\hat{\mathcal O}_{Y,p_i}\cong\hat{\mathcal O}_{V,w}[[x,y]]/(xy-\alpha_i)
+\]
+over $\hat{\mathcal O}_{V,w}$. Consequently $\hat{\mathcal O}_{V,w}$ is a formal power series ring over $\C$, in particular a domain, and $\alpha_1,\dots,\alpha_m$ are nonzero. It follows that $\mathcal O_{V,w}$ is a domain, so a unique irreducible component $V_w$ of $V$ passes through $w$. The finite $\mathcal O_{V,w}$-algebra $\mathcal O_{Z(Y/V)}\otimes\mathcal O_{V,w}$ becomes, after completion, the product of the algebras $\hat{\mathcal O}_{Y,p_i}/\Fitt_1(\Omega)=\hat{\mathcal O}_{V,w}[[x,y]]/(xy-\alpha_i,x,y)=\hat{\mathcal O}_{V,w}/(\alpha_i)$. Therefore the ideal of $\Delta$ generates the ideal $(\alpha_1\cdots\alpha_m)\ne0$ of $\hat{\mathcal O}_{V,w}$; it is not nilpotent, and $V_w\not\subseteq\Delta$. If $m=0$, then $w\notin\Delta$ and the same conclusion holds, since the hull is $\C$.
+
+\emph{Step 5: conclusion.} Let $V_{\mathrm{good}}$ be the union of the irreducible components of $V$ not contained in $\Delta$; it is closed. By Steps~3 and~4, $j(t)\in V_{\mathrm{good}}$ for all $t\in T_2(\C)\setminus F_2$, because $Y$ is formally versal at every point of $V$. The closed subset $j^{-1}(V_{\mathrm{good}})$ of the irreducible curve $T_2$ contains all but finitely many closed points, hence equals $T_2$. Thus $v=j(0)$ lies on an irreducible component of $V$ not contained in $\Delta$. Lemma~\ref{lem:arc}, applied to $Y\to V$, gives an algebraic smoothing of $\mathcal O_{X_0,x}$ whose closed fibre is $X_0$.
+\end{proof}
+
+\section{Canonical doubles}\label{sec:doubles}
+
+\begin{lemma}\label{lem:hom}
+Let $B$ be a domain with fraction field $L$ and $W\subseteq L$ a nonzero finitely generated $B$-submodule. Then every $\phi\in\Hom_B(\Sym^2_BW,B)$ is of the form $\phi(u,v)=xuv$ for a unique $x\in(B:W^2)=\{x\in L:xW^2\subseteq B\}$, and every such $x$ defines an element of $\Hom_B(\Sym^2_BW,B)$.
+\end{lemma}
+
+\begin{proof}
+After tensoring with $L$, $\phi$ becomes an $L$-linear map from $\Sym^2_L(W\otimes L)\cong L$ to $L$, given by $u\otimes v\mapsto xuv$ for a unique $x\in L$. The kernel of $\Sym^2_BW\to W^2$ is torsion and is killed by every homomorphism to the domain $B$, so $\phi(u,v)=xuv$; this lies in $B$ for all $u,v$ exactly when $xW^2\subseteq B$.
+\end{proof}
+
+In particular $\Hom_A(\Sym^2_AI,A)=J$ for a canonical fractional ideal $I$ of $A$.
+
+\begin{lemma}\label{lem:assoc}
+Let $B$ be a domain, $W$ a finitely generated torsion-free $B$-module of rank one and $\phi\in\Hom_B(\Sym^2_BW,B)$. Then $B\oplus W$ with the multiplication
+\begin{equation}\label{eq:mult}
+(a,u)(b,v)=(ab+\phi(u,v),\;av+bu)
+\end{equation}
+is a commutative and associative $B$-algebra with unit $(1,0)$, finite as a $B$-module. If $B$ and $W$ are flat over a ring $R$, so is $B\oplus W$.
+\end{lemma}
+
+\begin{proof}
+Commutativity and the unit are clear. Expanding $((a,u)(b,v))(c,w)$ and $(a,u)((b,v)(c,w))$, the components in $B$ agree by bilinearity, and the components in $W$ agree if and only if
+\[
+\phi(u,v)w=\phi(v,w)u\qquad(u,v,w\in W).
+\]
+Embed $W$ into $W\otimes_B\Frac B$, a one-dimensional vector space, and choose a basis $e$. Writing $u=\alpha e$, $v=\beta e$, $w=\gamma e$ and $\phi(e,e)=c$, both sides equal $c\alpha\beta\gamma e$. Since $W$ is torsion-free, the identity holds in $W$.
+\end{proof}
+
+\begin{lemma}\label{lem:doubles}
+Let $(A,\m)$ be the local ring of a closed point on an integral curve over $\C$, $I$ a canonical fractional ideal, $J=(A:I^2)$ and $q\in J$.
+\begin{enumerate}
+\item $D_q$ is a commutative ring, finite over $A$, and $D_q$ is reduced if and only if $q\ne0$.
+\item If $q\in\m J$, then $D_q$ is local with maximal ideal $\m\oplus I$ and residue field $\C$.
+\item If $q\in\m J$, then $D_q$ is a one-dimensional Gorenstein local ring.
+\item The involution $(a,u)\mapsto(a,-u)$ of $D_q$ has invariant ring $A$ and anti-invariant part $I$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) Lemma~\ref{lem:assoc} applies with $B=A$, $W=I$ and $\phi(u,v)=quv$. As an $A$-module $D_q$ is torsion-free, so it embeds into $D_q\otimes_A\Frac A$. Choosing $0\ne e\in I$, the latter ring is $\Frac A[y]/(y^2-qe^2)$ with $y=(0,e)$, which is a product of fields when $q\neq0$, since the characteristic is zero. If $q=0$, then $(0,e)^2=0$.
+
+(2) If $q\in\m J$, then $qI^2\subseteq\m$, so $\m\oplus I$ is an ideal of $D_q$ with quotient $A/\m=\C$. If $a\in A$ is a unit, then $(a,u)$ has the inverse $(a^2-qu^2)^{-1}(a,-u)$, because $qu^2\in\m$. Thus every element outside $\m\oplus I$ is a unit.
+
+(3) $D_q$ is finite over $A$ and, as an $A$-module, of depth one, because $I$ is a maximal Cohen--Macaulay module; hence $D_q$ is Cohen--Macaulay of dimension one, with canonical module $\Hom_A(D_q,\omega_A)\cong\Hom_A(D_q,I)$. Consider the $A$-bilinear pairing $D_q\times D_q\to I$ which sends $(d,d')$ to the second component of $dd'$, that is, $((a,u),(b,v))\mapsto av+bu$. The induced map $\Phi\colon D_q\to\Hom_A(D_q,I)$, $\Phi(d)(d')={}$second component of $dd'$, is $D_q$-linear by associativity and commutativity. On the summands, $\Hom_A(D_q,I)=\Hom_A(A,I)\oplus\Hom_A(I,I)=I\oplus A$, where $\Hom_A(I,I)=A$ because $I$ is a canonical module; and $\Phi(a,u)$ has components $u$ and $a$. Thus $\Phi$ is an isomorphism, $\omega_{D_q}\cong D_q$, and $D_q$ is Gorenstein.
+
+(4) is clear.
+\end{proof}
+
+\begin{remark}\label{rem:BDS}
+If $c\in A$ is a nonzerodivisor with $cI\subseteq\m$ and $q/c^2\in A$, the map $(a,u)\mapsto(a,cu)$ identifies $D_q$ with $A(cI)_{0,-q/c^2}=A_+/((cI)^2(t^2-q/c^2))$ in the notation of \cite[\S 1]{BDS}, where $A_+$ is the Rees algebra of $cI$. In that case (3) is \cite[Corollary~3.3]{BDS}. The direct argument above does not require such a $c$.
+\end{remark}
+
+\section{Lifting the multiplication}\label{sec:general}
+
+Throughout this section $(A,\m)$ and $I$ are as in Theorem~\ref{thm:general}, and $f\colon X\to\Spec R$ is an algebraic smoothing of $A$. Its closed fibre $X_s$ contains a closed point $o$ with $\mathcal O_{X_s,o}=A$.
+
+\subsection{A good affine representative}
+
+\begin{lemma}\label{lem:representative}
+After replacing $X$ by an affine open neighbourhood of $o$, we have $X=\Spec B$ with the following properties.
+\begin{enumerate}
+\item $B$ is a domain, flat over $R$, and $s$ is a nonzerodivisor on $B$.
+\item The closed fibre $X_s=\Spec B/sB$ is an integral curve whose only singular point is $o$.
+\item The generic fibre $X_{K_R}$ is smooth, and $f$ is smooth at every point of $X$ other than $o$.
+\item $B$ is Cohen--Macaulay of dimension two.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Let $B_o=\mathcal O_{X,o}$. Since $f$ is flat, $s$ is a nonzerodivisor on $B_o$, and $B_o/sB_o=A$ is a domain. For $0\ne x\in B_o$ the Krull intersection theorem gives a largest $n$ with $x\in s^nB_o$; write $x=s^nx_0$ with $x_0\notin sB_o$. If $x,y\ne0$ and $xy=0$, then $x_0y_0=0$, whose reduction modulo $s$ contradicts the fact that $A$ is a domain. Thus $B_o$ is a domain. Start with any affine neighbourhood of $o$. Only one minimal prime of its coordinate ring is contained in the prime of $o$, so removing the other irreducible components gives an irreducible neighbourhood; the nilradical is finitely generated and vanishes at $o$, so it vanishes after inverting one function not vanishing at $o$. This gives (1).
+
+Since $\mathcal O_{X_s,o}=A$ is a domain, only one irreducible component of $X_s$ passes through $o$, and its generic point has local ring $\Frac A$, a field. Hence the singular locus of $X_s$ meets this component in finitely many points; removing them, except $o$, and the other components of $X_s$ gives (2). The generic fibre is smooth by Definition~\ref{def:smoothing}, and remains so after restriction. At a point of $X_s$ other than $o$ the fibre is smooth and $f$ is flat, so $f$ is smooth there; this gives (3). Finally $R\to B_y$ is flat with Cohen--Macaulay base and Cohen--Macaulay fibre for every point $y$, because $X_s$ is a reduced curve and $X_{K_R}$ is smooth; hence $B$ is Cohen--Macaulay.
+\end{proof}
+
+\subsection{The relative canonical module}
+Choose a surjection $P=R[x_1,\dots,x_n]\to B$, put $c=n-1$, and define
+\begin{equation}\label{eq:W}
+W=\Ext^{c}_P(B,P),
+\end{equation}
+using the trivialization of the relative canonical module of $P$ by $dx_1\wedge\cdots\wedge dx_n$.
+
+\begin{lemma}\label{lem:relcan}
+\begin{enumerate}
+\item $W$ is a finitely generated $B$-module, flat over $R$, and $W/sW\cong\Ext^c_{P/sP}(B/sB,P/sP)$ is the canonical module of $B/sB$. In particular $W_o/sW_o\cong\omega_A\cong I$.
+\item For every point $y$ of $X$, $W_y$ is the canonical module of $B_y$; it is free of rank one at every point where $f$ is smooth.
+\item $W$ is torsion-free of rank one.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Let $y$ be a closed point of the closed fibre. The local ring $P_y$ is regular over $R$ in the sense of \cite[(A.5)]{dJvS}, and $B_y$ is Cohen--Macaulay over $R$ of codimension $c$, since it is $R$-flat and $B_y/sB_y$ is a one-dimensional Cohen--Macaulay quotient of the $n$-dimensional regular ring $P_y/sP_y$. By \cite[(A.7) and (A.8)]{dJvS}, $\Ext^k_{P_y}(B_y,P_y)=0$ for $k\ne c$, the dual module $W_y$ is $R$-flat, and its reduction modulo $s$ is $\Ext^c_{P_y/sP_y}(B_y/sB_y,P_y/sP_y)$, the canonical module of $B_y/sB_y$. These statements are compatible with localization, so they hold at every point of the closed fibre; at points of the generic fibre $s$ is invertible. This proves (1). Concretely, a free resolution of $B_y$ over $P_y$ of length $c$ reduces modulo $s$ to a resolution of $B_y/sB_y$, and the dual complexes are exact except in degree $c$.
+
+Since $P$ is regular and $B$ is Cohen--Macaulay of constant codimension $c$, $W_y=\Ext^c_{P_y}(B_y,P_y)$ is the canonical module of $B_y$ for every $y$. Where $f$ is smooth, $B_y$ is regular, hence Gorenstein, and $W_y$ is free of rank one. This is (2). A canonical module of a Cohen--Macaulay local domain is maximal Cohen--Macaulay, so its only associated prime is $(0)$; hence $W$ is torsion-free, and its rank is one since the canonical module of the field $\Frac B$ is one-dimensional. This is (3).
+\end{proof}
+
+\subsection{The specialization map}
+Put
+\[
+H=\Hom_B(\Sym^2_BW,B),
+\]
+a finitely generated $B$-module, and fix an isomorphism of $A$-modules $\theta\colon W_o/sW_o\to I$. For $\phi\in H_o$, the reduction $\bar\phi=\phi\otimes_BB/sB$ is a symmetric $A$-bilinear map $W_o/sW_o\times W_o/sW_o\to A$, by right exactness of $\Sym^2$: $\Sym^2_B(W)\otimes_BB/sB=\Sym^2_{B/sB}(W/sW)$. By Lemma~\ref{lem:hom} there is a unique $\rho_\theta(\phi)\in J$ with
+\begin{equation}\label{eq:rho}
+\bar\phi(\bar u,\bar v)=\rho_\theta(\phi)\,\theta(\bar u)\,\theta(\bar v)\qquad(u,v\in W_o).
+\end{equation}
+
+\begin{proposition}\label{prop:rho}
+The map $\rho_\theta\colon H_o\to J$ is $B_o$-linear, with $B_o$ acting on $J$ through $B_o\to A$, and its cokernel has finite length. Consequently there is an integer $N\ge1$ with
+\[
+\m^NJ\subseteq\rho_\theta(H_o).
+\]
+The integer $N$ depends only on the smoothing $f$, not on $\theta$.
+\end{proposition}
+
+\begin{proof}
+Linearity is clear, and $sH_o\subseteq\ker\rho_\theta$. Let $C$ be the cokernel, a finitely generated $A$-module. Let $\pp\subset B_o$ be the prime ideal of the generic point $\xi$ of $X_s$, the preimage of $(0)\subset A$. By Lemma~\ref{lem:representative}(3), $f$ is smooth at $\xi$, so $W_\pp$ is free of rank one with a generator $e$ by Lemma~\ref{lem:relcan}(2). Then $H_\pp$ is free of rank one, generated by the form $\phi_e$ with $\phi_e(e,e)=1$, and the reduction of $\phi_e$ generates $\Hom(\Sym^2(W_\pp/sW_\pp),B_\pp/sB_\pp)=J\otimes_A\Frac A$. Since $\Hom$ and $\Sym^2$ commute with localization for finitely presented modules, the localization of $\rho_\theta$ at $\pp$ is this reduction map. Hence $C\otimes_A\Frac A=0$. As $A$ is a one-dimensional local domain, $C$ has finite length, and $\m^NC=0$ for some $N\ge1$. Finally, any two isomorphisms $W_o/sW_o\to I$ differ by a unit $u\in A^\times$, because $\Hom_A(I,I)=A$. Replacing $\theta$ by $u\theta$ replaces $\rho_\theta$ by $u^{-2}\rho_\theta$, which has the same image. Hence $N$ does not depend on $\theta$.
+\end{proof}
+
+\begin{remark}\label{rem:normalization}
+A change of the fractional ideal within its isomorphism class, $I\mapsto xI$ with $x\in(\Frac A)^\times$, replaces $J$ by $x^{-2}J$ and $D_q$ by the isomorphic ring $D_{x^{-2}q}$. For explicit lifts, however, the identification of the special fibre with $I$ has to be fixed exactly. In Section~\ref{sec:stevens} the relative canonical module is normalized by the pairing given by the coefficient of $\lambda pq$, so that its special fibre is $I$ itself and a lift reduces to the prescribed $q$.
+\end{remark}
+
+\begin{remark}\label{rem:dJvS}
+The long exact sequence for $\Ext$ under specialization \cite[(A.3)]{dJvS} cannot be used to prove Proposition~\ref{prop:rho}, since it requires both modules to be flat over the base and $\Sym^2_BW$ need not be flat over $R$. The proof of Proposition~\ref{prop:rho} uses only that $H$ is finitely generated and that $W$ is invertible at the generic point of $X_s$. In particular, neither Theorem~\ref{thm:general} nor its proof requires $\Sym^2_BW$ to be flat over $R$.
+\end{remark}
+
+\subsection{Parameters and first jets}
+
+\begin{lemma}\label{lem:jets}
+Let $k$ be a field of characteristic zero, $X$ an affine curve over $k$ whose coordinate ring is generated by $x_1,\dots,x_n$, and $U\subseteq X$ an open subscheme which is smooth over $k$. Let $M$ be an $\mathcal O_X$-module which is invertible on $U$, let $h_1,\dots,h_m\in\Gamma(X,M)$ generate $M|_U$, and let $\phi_0\in\Gamma(X,M)$. For $\nu=m(n+1)$ parameters $a=(\tau_j,\tau_{ij})_{1\le i\le n,\,1\le j\le m}$ put
+\begin{equation}\label{eq:phia}
+\phi_a=\phi_0+\sum_{j}\tau_jh_j+\sum_{i,j}\tau_{ij}x_ih_j .
+\end{equation}
+There is a dense open subset $\Omega\subseteq\A^\nu_k$ such that for every field $k'\supseteq k$ and every $a\in\Omega(k')$, the section $\phi_a$ has no zero of multiplicity at least two at any geometric point of $U_{k'}$. In particular this holds for the generic point of $\A^\nu_k$.
+\end{lemma}
+
+\begin{proof}
+Let $P^1(M)$ be the bundle of first principal parts of $M|_U$, of rank two, and $j^1$ the first jet map; a section vanishes to order at least two at a geometric point $p$ if and only if its first jet vanishes at $p$. The map $\epsilon\colon\mathcal O_U^{\,\nu}\to P^1(M)$ sending the basis vectors to $j^1h_j$ and $j^1(x_ih_j)$ is surjective. Indeed, at a geometric point $p$ of $U$ some $h_j$ generates $M_p$, and since the $dx_i$ generate $\Omega_U$, some $x_i-x_i(p)$ is a uniformizer at $p$; then $h_j$ and $(x_i-x_i(p))h_j$, which lie in the span of $h_j$ and $x_ih_j$ over the residue field, generate $M\otimes\mathcal O/\m_p^2$. The incidence scheme
+\[
+\mathcal Z=\{(p,a)\in U\times\A^\nu: j^1\phi_0(p)+\epsilon(a)(p)=0\}
+\]
+is therefore an affine bundle of rank $\nu-2$ over $U$, and $\dim\mathcal Z=\nu-1$. The closure of its image in $\A^\nu_k$ has dimension at most $\nu-1$; let $\Omega$ be its complement. If $\phi_a$ had a double zero at a geometric point $p$ of $U_{k'}$ with $a\in\Omega(k')$, then $(p,a)$ would give a point of $\mathcal Z$ over a point of $\Omega$.
+\end{proof}
+
+\begin{lemma}\label{lem:localdouble}
+Let $C$ be a noetherian ring containing $\tfrac12$, $W$ an invertible $C$-module, $\phi\in\Hom_C(\Sym^2W,C)$, and $D=C\oplus W$ with the multiplication \eqref{eq:mult}. Near a point $p\in\Spec C$ choose a generator $e$ of $W$ and put $\varphi=\phi(e,e)$. Then $D\cong C[y]/(y^2-\varphi)$ near $p$, with $y=(0,e)$.
+\begin{enumerate}
+\item If $\varphi(p)\ne0$, then $D$ is \'etale over $C$ at every point over $p$.
+\item If $C$ is the coordinate ring of a smooth curve over a field of characteristic zero, $p$ is closed, and $\varphi\in\m_p\setminus\m_p^2$, then $D$ is regular at the unique point over $p$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+The first assertion is the definition of \eqref{eq:mult}. In (1), the derivative $2y$ of $y^2-\varphi$ is a unit because $y^2=\varphi$ is a unit. In (2), write $\varphi=u\pi$ with $\pi$ a uniformizer and $u$ a unit; then $\pi=u^{-1}y^2$, so the maximal ideal $(\pi,y)$ of the one-dimensional local ring of $D$ over $p$ is generated by $y$.
+\end{proof}
+
+\begin{lemma}\label{lem:arcs}
+Let $R$ be a pointed curve germ with uniformizer $s$ and $0\ne G\in R[a_1,\dots,a_\nu]$. There is $c\in\C^\nu$ such that $G(c_1s,\dots,c_\nu s)\ne0$ in $R$.
+\end{lemma}
+
+\begin{proof}
+The completion of $R$ is $\C[[s]]$, and $R[a]\subseteq\C[[s]][a]\subseteq\C[[s,a]]$. Let $G_d$ be the nonzero homogeneous part of lowest total degree of $G$ in $(s,a)$. Then $G(cs)=s^dG_d(1,c)+O(s^{d+1})$, and $G_d(1,a)$ is a nonzero polynomial because $G_d(s,a)=s^dG_d(1,a/s)$. Choose $c$ with $G_d(1,c)\ne0$.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:general}}
+Let $N$ be as in Proposition~\ref{prop:rho}, and let $0\ne q\in\m^NJ$. By Lemma~\ref{lem:doubles}, $D_q$ is reduced, local with maximal ideal $\m\oplus I$, and Gorenstein. Choose $\phi_0\in H_o$ with $\rho_\theta(\phi_0)=q$. Since $H$ is finitely presented, $\phi_0$ is defined on an affine neighbourhood of $o$; we replace $X$ by such a neighbourhood. The conclusions of Lemmas~\ref{lem:representative} and~\ref{lem:relcan} and the definitions of $W$, $H$ and $\theta$ are compatible with this restriction. Since $N$ was chosen before $q$, the choices made from now on may depend on $q$.
+
+Choose generators $h_1,\dots,h_m$ of the $B$-module $H$ and generators $x_1,\dots,x_n$ of the $R$-algebra $B$, introduce $\nu=m(n+1)$ parameters $a$, and define $\phi_a\in H\otimes_RR[a]$ by \eqref{eq:phia}. Since $B[a]=B\otimes_RR[a]$ is a domain and $W[a]$ is torsion-free of rank one over it, Lemma~\ref{lem:assoc} gives a commutative associative finite $B[a]$-algebra
+\[
+\mathcal D=B[a]\oplus W[a]
+\]
+with the multiplication \eqref{eq:mult} for $\phi_a$, flat and of finite type over $R[a]$. Its fibres are curves, finite of degree two over those of $B[a]$. The fibre of $\mathcal D$ over the point $(s,a)=(0,0)$ is $B/sB\oplus W/sW$ with the multiplication $\bar\phi_0$, and its localization over $o$ is $A\oplus W_o/sW_o$; by \eqref{eq:rho} and $\theta$ this is $D_q$. As $D_q$ is local, there is exactly one point $\tilde o$ of this fibre over $o$, and its local ring is $D_q$.
+
+Apply Lemma~\ref{lem:jets} to $k=K_R$, $X=U=X_{K_R}$, which is smooth by Lemma~\ref{lem:representative}, $M=H_{K_R}$, which is invertible and equal to $W_{K_R}^{\otimes-2}$ by Lemma~\ref{lem:relcan}, the generators $h_j$ and $x_i$, and $\phi_0$. At the generic point of $\A^\nu_{K_R}$, which is the generic point of $\Spec R[a]$, the section $\phi_a$ has only simple zeros on the geometric generic curve. By Lemma~\ref{lem:localdouble}, applied after base change to an algebraic closure, the generic fibre of $\mathcal D\to\Spec R[a]$ is smooth.
+
+The nonsmooth locus of $\mathcal D$ over $R[a]$ is closed, and its image in $\Spec R[a]$ is constructible and does not contain the generic point. Since $\Spec R[a]$ is irreducible, the closure of this image is a proper closed subset, and there is $0\ne G\in R[a]$ such that every fibre of $\mathcal D$ over $D(G)$ is smooth. By Lemma~\ref{lem:arcs} choose $c\in\C^\nu$ with $G(cs)\ne0$, and let $\sigma_c\colon R[a]\to R$ be the substitution $a_i\mapsto c_is$, which corresponds to the curve $a=cs$ through $(0,0)$. Then $\mathcal D_c=\mathcal D\otimes_{R[a],\sigma_c}R$ is a relative curve over $R$. The closed point of $\Spec R$ maps to $(s,a)=(0,0)$, so the closed fibre of $\mathcal D_c$ contains $\tilde o$ with local ring $D_q$. The generic point of $\Spec R$ maps into $D(G)$, so the generic fibre of $\mathcal D_c$ is smooth. Thus $\mathcal D_c$ is an algebraic smoothing of $D_q$. \qed
+
+\section{The base curve and the semigroups \texorpdfstring{$\Gamma_g$}{Gamma g}}\label{sec:base}
+
+From now on $S=\langle 8,12,18,22,51,55\rangle$, $A_0=\C[S]=\C[t^8,t^{12},t^{18},t^{22},t^{51},t^{55}]\subseteq\C[t]$, $\m_0$ is the ideal of the origin, $A=(A_0)_{\m_0}$ and $\m=\m_0A$. For a set $E\subseteq\Z$ we write $2\cdot E=\{2e:e\in E\}$. Residues modulo $8$ are denoted by $\varrho\in\{0,\dots,7\}$.
+
+\begin{lemma}\label{lem:apery}
+The Ap\'ery set of $S$ with respect to $8$ is
+\[
+w=(w_0,\dots,w_7)=(0,73,18,51,12,69,22,55),
+\]
+where $w_\varrho$ is the least element of $S$ congruent to $\varrho$ modulo $8$. Consequently $A_0=\bigoplus_\varrho\C[t^8]\,t^{w_\varrho}$, the Frobenius number of $S$ is $65$, the conductor is $66$, and the genus is $34$.
+\end{lemma}
+
+\begin{proof}
+Each $w_\varrho$ lies in $S$: the nonzero entries are generators, except $73=18+55$ and $69=18+51$. For every $\varrho$ and every generator $a$, the difference $w_\varrho+a-w_{(\varrho+a)\bmod 8}$ is a nonnegative multiple of $8$; this amounts to $48$ inequalities, which we checked directly (see also Appendix~\ref{app:computations}). Hence $\bigcup_\varrho(w_\varrho+8\N)$ contains $0$ and the generators and is closed under addition of generators, so it contains $S$; conversely it is contained in $S$. Thus it equals $S$, and $w$ is the Ap\'ery set. The Frobenius number is $\max w-8=65$, and the genus is $\sum_\varrho(w_\varrho-\varrho)/8=34$.
+\end{proof}
+
+\begin{table}[ht]
+\caption{Ap\'ery data for $S$ modulo $8$.}\label{tab:apery}
+\begin{tabular}{@{}lcccccccc@{}}
+\toprule
+$\varrho$ & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7\\
+\midrule
+$w_\varrho$ (minimum of $S$) & 0 & 73 & 18 & 51 & 12 & 69 & 22 & 55\\
+$k_\varrho$ (minimum of $K(S)$) & 0 & 73 & 18 & 51 & 4 & 61 & 22 & 55\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{The canonical ideal}
+Every element of $\C(t)$ can be written uniquely as $\sum_{\varrho}t^{e_\varrho}c_\varrho$ with $c_\varrho\in\C(t^8)$, for any choice of exponents $e_\varrho\equiv\varrho\pmod 8$. Let $\ell_0\colon\C(t)\to\C(t^8)$ be the $\C(t^8)$-linear map taking the coefficient $c_1$ of $t^{73}$, so that $\ell_0(t^m)=t^{m-73}$ if $m\equiv1\pmod 8$ and $\ell_0(t^m)=0$ otherwise. Put
+\[
+I_0=\{h\in\C(t):\ell_0(hA_0)\subseteq\C[t^8]\},\qquad K(S)=\{65-a:a\in\Z\setminus S\}.
+\]
+$K(S)$ is the standard canonical ideal of $S$ in the sense of \cite[\S 1]{DS}.
+
+\begin{lemma}\label{lem:canonical}
+\begin{enumerate}
+\item $I_0=\bigoplus_\varrho\C[t^8]\,t^{73-w_\varrho}$, and $I_0\cong\Hom_{\C[t^8]}(A_0,\C[t^8])$ is a canonical module of $A_0$.
+\item The monomials in $I_0$ are the $t^n$ with $n\in K(S)$, and the least element of $K(S)$ in the residue class $\varrho$ is the number $k_\varrho$ of Table~\ref{tab:apery}.
+\item $K(S)=S\cup(4+S)\cup(61+S)$ and $I_0=(1,t^4,t^{61})A_0$, minimally generated.
+\item With $I=I_0A$ we have $(A:I^2)=\m$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) The pairing $(h,h')\mapsto\ell_0(hh')$ on $\C(t)$ is perfect over $\C(t^8)$, and
+\[
+\ell_0\bigl(t^{w_\varrho}\,t^{73-w_{\varrho'}}\bigr)=\delta_{\varrho\varrho'},
+\]
+since $t^{73+w_\varrho-w_{\varrho'}}$ has residue $1+\varrho-\varrho'$. Hence the elements $t^{73-w_\varrho}$ form the dual basis to the basis $t^{w_\varrho}$ of $A_0$ over $\C[t^8]$, and $I_0$ is their $\C[t^8]$-span. Every $\C[t^8]$-linear map $A_0\to\C[t^8]$ is of the form $\ell_0(h\,\cdot)$ for a unique $h\in I_0$. Since $A_0$ is finite and free over the polynomial ring $\C[t^8]$, $\Hom_{\C[t^8]}(A_0,\C[t^8])$ is a canonical module of $A_0$.
+
+(2) For $n\equiv\varrho\pmod 8$, the integer $65-n$ has residue $1-\varrho$, so $n\in K(S)$ if and only if $65-n<w_{1-\varrho}$, that is, $n\ge73-w_{1-\varrho}$. The exponent $73-w_{1-\varrho}$ is the generator of $I_0$ in residue $\varrho$, and its values are the $k_\varrho$ of Table~\ref{tab:apery}.
+
+(3) The set $K(S)$ is a relative ideal of $S$ containing $0,4,61$, so $S\cup(4+S)\cup(61+S)\subseteq K(S)$. Both sets are unions of residue classes cut off below, and the least elements of the left side are at most $k_\varrho$: in residues $4$ and $5$ they are $4=4+0$ and $61=61+0$, and in the other residues they are $w_\varrho=k_\varrho$. Hence equality holds. The generators are minimal: $4\notin S$, $61\notin S$ and $61-4=57\notin S$ by Lemma~\ref{lem:apery}.
+
+(4) The ideal $I_0^2$ is generated by $t^e$ with $e\in\{0,4,8,61,65,122\}$. For every generator $a$ of $S$ we have $a+4\in\{12,16,22,26,55,59\}\subseteq S$, $a+8\in S$, and $a+61,a+65,a+122\ge69$, so $\m_0I_0^2\subseteq A_0$. On the other hand $1\notin(A_0:I_0^2)$ because $t^4\notin A_0$. Since $1\in I_0^2$, the colon $(A_0:I_0^2)$ is contained in $A_0$ and is a graded ideal; hence it equals $\m_0$. Localization gives $(A:I^2)=\m$.
+\end{proof}
+
+\subsection{The doubles of the base curve}
+For an odd integer $b$ put
+\[
+\Gamma_b'=2\cdot S\cup(b+2\cdot K(S)).
+\]
+
+\begin{lemma}\label{lem:double-semigroup}
+Let $b\ge67$ be odd. Then $\Gamma_b'$ is a numerical semigroup, and the map
+\[
+A_0\oplus I_0\longrightarrow\C[z],\qquad(a,u)\longmapsto a(z^2)+z^bu(z^2),
+\]
+is an isomorphism from $A_0\oplus I_0$, with the multiplication \eqref{eq:Dq} for $q=t^b$, onto $\C[\Gamma_b']$. It induces an isomorphism of $D_{t^b}$ with the local ring of $\Spec\C[\Gamma_b']$ at the origin. In particular $D_{t^b}$ is a domain.
+\end{lemma}
+
+\begin{proof}
+Since $K(S)+S\subseteq K(S)$ and every element of $b+K(S)+K(S)$ is at least $b\ge67>65$, the set $\Gamma'_b$ is closed under addition; it contains $0$, and it is cofinite because it contains $2\cdot S$ and the odd number $b$. The map is multiplicative because $(z^b)^2=z^{2b}$ is the image of $t^b$. It is injective because even and odd Laurent polynomials in $z$ are linearly independent, and its image is spanned by the monomials $z^\gamma$, $\gamma\in\Gamma'_b$. Finally $D_{t^b}=(A_0\oplus I_0)\otimes_{A_0}A$. The ring $\C[\Gamma'_b]$ is finite over $A_0$, and the origin is its only point over the origin of $C_S$, since a point with vanishing even coordinates has vanishing odd coordinates. Hence the localization is the local ring at the origin.
+\end{proof}
+
+\begin{proposition}\label{prop:semigroup}
+Let $g\ge99$ and $b=2g-131$.
+\begin{enumerate}
+\item $\Gamma'_b=\Gamma_g=\langle16,24,36,44,102,110,b,b+8,b+122\rangle$, and $\Gamma_g=2\cdot S\cup\{2g-1-2a:a\in\Z\setminus S\}$.
+\item The nine generators are minimal, so $\Gamma_g$ has embedding dimension $9$.
+\item $\Gamma_g$ is symmetric with Frobenius number $2g-1$ and genus $g$; its even gaps are the doubles of the $34$ gaps of $S$.
+\item If $g\ge208$, then $\Gamma_g$ is of St\"ohr--Torres type for $\tilde H=S$, and it is not a Weierstrass semigroup.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Here $b\ge67$ is odd, so Lemma~\ref{lem:double-semigroup} applies.
+
+(1) $2\cdot S$ is generated by twice the generators of $S$, and by Lemma~\ref{lem:canonical}(3), $b+2\cdot K(S)$ is the union of $b+2\cdot S$, $b+8+2\cdot S$ and $b+122+2\cdot S$. Moreover $b+2(65-a)=2g-1-2a$.
+
+(2) An even element of $\Gamma_g$ lies in $2\cdot S$, and odd elements are at least $b$. A decomposition of an even generator $2a\le110$ as a sum of two nonzero elements would use two even summands, contradicting the minimality of $a$ in $S$, or two odd summands, whose sum is at least $2b>110$. A decomposition of an odd generator $b+2k$, $k\in\{0,4,61\}$, as a sum of two nonzero elements has one even summand $2a$, $a\in S\setminus\{0\}$, and one odd summand $b+2k'$, $k'\in K(S)$; then $k=a+k'$, contradicting the minimality of $\{0,4,61\}$ as generators of the $S$-module $K(S)$.
+
+(3) Let $n\in\Z$. If $n=2m$ is even, then $n\in\Gamma_g$ if and only if $m\in S$, and the odd number $2g-1-n=2g-1-2m$ lies in $\Gamma_g$ if and only if $m\notin S$, by (1). If $n$ is odd, apply this to the even number $2g-1-n$. Hence exactly one of $n$ and $2g-1-n$ lies in $\Gamma_g$, so $\Gamma_g$ is symmetric with Frobenius number $2g-1$ and genus $g$. The statement on even gaps follows from (1).
+
+(4) The genus of $S$ is $\gamma=34$ by Lemma~\ref{lem:apery}, and $6\gamma+4=208$. By (1), $\Gamma_g$ is the semigroup \eqref{eq:ST} for $\tilde H=S$. The semigroup $S$ is not a Weierstrass semigroup by \cite[Example~5.1]{Kom}, see \cite[Example~2.13]{Ste}. Hence $\Gamma_g$ is not a Weierstrass semigroup for $g\ge6\gamma+4$ by \cite[p.~48, proof of Scholium~3.5 and Remark~3.6]{Tor}, as stated in \cite[\S 4.1]{Ste}.
+\end{proof}
+
+\begin{remark}\label{rem:duplication}
+For $g\ge165$ put $b'=b-132$, an odd element of $S$, and $E=66+K(S)$, a canonical ideal of $S$ contained in $S$. Then $\Gamma_g=2\cdot S\cup(2\cdot E+b')$ is the numerical duplication $S\bowtie^{b'}E$ of \cite[\S 2]{DS}. The symmetry, the Frobenius number $2f(E)+b'=2g-1$ and the genus in Proposition~\ref{prop:semigroup}(3) are also given by \cite[Proposition~2.1]{DS}. Correspondingly, $(a,u)\mapsto(a,t^{66}u)$ identifies $D_{t^b}$ with $A(t^{66}I)_{0,-t^{b'}}$ in the notation of \cite{BDS}; compare \cite[Theorem~3.4]{BDS}.
+\end{remark}
+
+\section{Stevens's deformation of the base curve}\label{sec:stevens}
+
+\subsection{\texorpdfstring{The algebras $R'$ and $B$}{The algebras R' and B}}
+Let $E=\C[s,r]$ and
+\[
+R'=E[\lambda,p,q]/\bigl(\lambda^2-r-s^4,\;p^2-s^9p-\lambda^3r^3,\;q^2-\lambda^3p^5-s^{47}r\bigr).
+\]
+Assign the weights $\deg s=2$, $\deg r=8$, $\deg\lambda=4$, $\deg p=18$, $\deg q=51$; the three relations are homogeneous of degrees $8$, $36$ and $102$.
+
+\begin{lemma}\label{lem:Rprime}
+\begin{enumerate}
+\item $R'$ is a free $E$-module with basis
+\begin{equation}\label{eq:N1}
+1,\ \lambda,\ p,\ \lambda p,\ q,\ \lambda q,\ pq,\ \lambda pq .
+\end{equation}
+\item The specialization $R'_0=R'/sR'$ is isomorphic to $\C[t^4,t^{18},t^{51}]$ via $r\mapsto t^8$, $\lambda\mapsto t^4$, $p\mapsto t^{18}$, $q\mapsto t^{51}$; the basis \eqref{eq:N1} maps to the monomials of exponents $0,4,18,22,51,55,69,73$, which have distinct residues modulo $8$.
+\item $R'$ is a domain.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) $R'$ is obtained from $E$ by adjoining successively $\lambda$, $p$ and $q$ by monic quadratic equations over the previously obtained ring.
+
+(2) The relations hold for the monomials: $t^8=t^8$, $t^{36}=t^{12+24}$ and $t^{102}=t^{12+90}$. The images of the basis \eqref{eq:N1} have distinct residues modulo $8$, so they are linearly independent over $\C(t^8)$, and the map is injective. Its image is $\C[t^4,t^{18},t^{51}]$.
+
+(3) $R'$ is positively graded, $s$ is a homogeneous nonzerodivisor of positive degree, and $R'/sR'$ is a domain by (2). For a nonzero homogeneous $x$ there is a largest $n$ with $x\in s^nR'$, since the degrees of nonzero homogeneous elements are nonnegative; write $x=s^nx_0$ with $x_0\notin sR'$. For nonzero homogeneous $x,y$ we get $xy=s^{n+n'}x_0y_0\ne0$, because $x_0y_0\notin sR'$. A graded ring in which products of nonzero homogeneous elements are nonzero is a domain.
+\end{proof}
+
+Let $\cc=(r,p,q)R'$. The relations show $R'/\cc=\C[s,\lambda]/(\lambda^2-s^4)$. Define $B$ as the preimage of the subring $\C[s]$ under $R'\to R'/\cc$, so that $B=\C[s]+\cc$.
+
+\begin{lemma}\label{lem:B}
+\begin{enumerate}
+\item $B$ is a free $E$-module with basis
+\begin{equation}\label{eq:N2}
+1,\ r\lambda,\ p,\ \lambda p,\ q,\ \lambda q,\ pq,\ \lambda pq,
+\end{equation}
+we have $rR'\subseteq B\subseteq R'$ and $R'/B\cong E/rE$, and $B$ is generated as a $\C[s]$-algebra by $r,r\lambda,p,\lambda p,q,\lambda q$.
+\item $B$ is a positively graded domain, flat over $\C[s]$, and $B/sB\to R'/sR'$ is injective with image $A_0=\C[S]$. In particular $B$ is a flat deformation of the monomial curve $C_S$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+An element $\sum e_ib_i$ of $R'$, written in the basis \eqref{eq:N1}, maps to $e_1(s,0)+e_2(s,0)\lambda$ in $R'/\cc$, where $e_1,e_2$ are the coefficients of $1$ and $\lambda$. It lies in $B$ if and only if $r$ divides $e_2$. This gives the basis \eqref{eq:N2}, the inclusions and $R'/B\cong E/rE$, which is free over $\C[s]$. The algebra generators produce $E$ and, by products, the basis \eqref{eq:N2}. Since $R'/B$ is $\C[s]$-flat, $B/sB\to R'/sR'$ is injective, and by Lemma~\ref{lem:Rprime}(2) its image is spanned over $\C[t^8]$ by the monomials of exponents $0,12,18,22,51,55,69,73$, which form the Ap\'ery set of Lemma~\ref{lem:apery}. Hence the image is $A_0$.
+\end{proof}
+
+\begin{lemma}\label{lem:comparison}
+The substitution
+\[
+\begin{gathered}
+x_8=r,\ x_{12}=\lambda r,\ x_{18}=p,\ x_{22}=\lambda p,\ x_{51}=q,\ x_{55}=\lambda q,\\
+s_8=s^4,\ s_{18}=s^9,\ s_{94}=s^{47},
+\end{gathered}
+\]
+with all other deformation parameters equal to zero, maps the equations of the deformation of $C_S$ in \cite[Example~2.13]{Ste} to zero in $B$, and it identifies the restriction of that deformation to the curve $(s_8,s_{18},s_{94})=(s^4,s^9,s^{47})$ with $\Spec B$.
+\end{lemma}
+
+\begin{proof}
+Since $\lambda^2=r+s^4=x_8+s_8$, the second row of Stevens's $2\times6$ matrix is $\lambda$ times the first, so all its $2\times2$ minors vanish. The first and third rolling equations become $-(p^2-s^9p-\lambda^3r^3)$ and $-(q^2-\lambda^3p^5-s^{47}r)$, and the second and fourth become their products with $\lambda$, after using $\lambda^4=(r+s^4)\lambda^2$. Thus there is a surjection from the coordinate ring $\mathcal O$ of the restricted deformation onto $B$; it is surjective because the $x_i$ generate $B$ by Lemma~\ref{lem:B}. Both rings are graded with $\deg x_i=i$ and $\deg s=2$. Let $\mathfrak k$ be the kernel. Since $B$ is flat over $\C[s]$, reduction modulo $s$ gives an exact sequence $0\to\mathfrak k/s\mathfrak k\to\mathcal O/s\mathcal O\to B/sB\to0$, and the last map is the identity of $\C[S]$, because Stevens's family is a deformation of $C_S$. Hence $\mathfrak k=s\mathfrak k$, and the graded Nakayama lemma gives $\mathfrak k=0$.
+\end{proof}
+
+\begin{lemma}\label{lem:fibres}
+Let $R'_1$ and $B_1$ be the fibres of $R'$ and $B$ over $s=1$.
+\begin{enumerate}
+\item After the base change $\C[s^{\pm1}]\to\C[\sigma^{\pm1}]$, $s=\sigma^2$, the family $\Spec B$ becomes isomorphic to $\Spec B_1\times\Spec\C[\sigma^{\pm1}]$. In particular every fibre over $s\ne0$ and the geometric generic fibre are isomorphic to $\Spec B_1$, after extension of scalars.
+\item $\Spec R'_1$ is a smooth affine curve, $\Spec B_1$ has exactly one singular point, and this point is an ordinary node.
+\end{enumerate}
+Consequently every point of the generic fibre of $\Spec B\to\Spec\C[s]$ is at-worst-nodal.
+\end{lemma}
+
+\begin{proof}
+(1) Over $\C[\sigma^{\pm1}]$ substitute $\lambda=\sigma^4L$, $p=\sigma^{18}P$, $q=\sigma^{51}Q$; then $r=\lambda^2-s^4=\sigma^8(L^2-1)$, and the relations become $\sigma^{36}G$ and $\sigma^{102}(Q^2-\Phi)$, where
+\[
+G=P^2-P-L^3(L^2-1)^3,\qquad \Phi=L^3P^5+L^2-1 .
+\]
+Thus $R'\otimes\C[\sigma^{\pm1}]\cong R'_1\otimes\C[\sigma^{\pm1}]$ with $R'_1=\C[L,P,Q]/(G,Q^2-\Phi)$. The ideal $\cc$ becomes $(L^2-1,P,Q)$, and $B=\C[s]+\cc$ corresponds to $B_1\otimes\C[\sigma^{\pm1}]$ with $B_1=\C+(L^2-1,P,Q)R'_1$.
+
+(2) By Lemma~\ref{lem:comparison} and \cite[Example~2.13]{Ste}, for $s\ne0$ the fibre has only one singularity, at the origin, and it is an ordinary double point. We also give a direct argument. The ideals $(G,\partial_LG,\partial_PG)$ and $(G,\Phi,\partial_LG\,\partial_P\Phi-\partial_PG\,\partial_L\Phi)$ of $\mathbb Q[L,P]$ are both the unit ideal; this is verified by an exact Gr\"obner basis computation (Appendix~\ref{app:computations}). The first says that the plane curve $G=0$ is smooth. The second says that $\Phi$ has only simple zeros on it. Hence the Jacobian matrix of $(G,Q^2-\Phi)$ has rank two at every point of $\Spec R'_1$: where $Q\ne0$ because of the first row, and where $Q=0$, hence $\Phi=0$, because of the minor $\partial_LG\,\partial_P\Phi-\partial_PG\,\partial_L\Phi$. So $\Spec R'_1$ is smooth. Next, $R'_1/(L^2-1,P,Q)=\C[L]/(L^2-1)\cong\C\times\C$, and $B_1$ is the preimage of the diagonal $\C$. Away from $V(\cc)$ the rings $B_1$ and $R'_1$ agree. At the image of the two points $L=\pm1$, $P=Q=0$, which are smooth points of $\Spec R'_1$ at which $\cc$ is the maximal ideal, the completion of $B_1$ is $\{(f,h)\in\C[[u]]\times\C[[v]]:f(0)=h(0)\}\cong\C[[u,v]]/(uv)$. This point is the origin in the coordinates $r,r\lambda,p,\lambda p,q,\lambda q$.
+\end{proof}
+
+\begin{corollary}\label{cor:base-smoothable}
+The local ring $A$ of $C_S$ at the origin is smoothable.
+\end{corollary}
+
+\begin{proof}
+The family $\Spec B\otimes\C[s]_{(s)}\to\Spec\C[s]_{(s)}$ is an affine relative curve with closed fibre $C_S$, whose only singular point is the origin, and with at-worst-nodal generic fibre by Lemma~\ref{lem:fibres}. Apply Proposition~\ref{prop:nodal}.
+\end{proof}
+
+This is the smoothability statement of \cite[Example~2.13]{Ste}, there deduced from the nodal fibre by openness of versality. Proposition~\ref{prop:nodal} gives it in the form of Definition~\ref{def:smoothing}, which is the hypothesis of Theorem~\ref{thm:general}. The family $B$ itself is not a smoothing, since its general fibre has a node.
+
+\subsection{The relative canonical module}
+Let $\ell\colon R'\to E$ be the $E$-linear map taking the coefficient of $\lambda pq$ in the basis \eqref{eq:N1}. For a monic quadratic extension $T\subseteq T[u]/(u^2-\alpha u-\beta)$, the coefficient of $u$ defines a pairing with matrix $\bigl(\begin{smallmatrix}0&1\\1&\alpha\end{smallmatrix}\bigr)$ in the basis $1,u$, of determinant $-1$. Composing the three resulting perfect pairings, $h\mapsto\ell(h\,\cdot)$ is an isomorphism $R'\to\Hom_E(R',E)$; in particular the pairing $(h,h')\mapsto\ell(hh')$ on $\Frac R'$ is perfect over $\Frac E$. Put
+\[
+W=\Hom_E(B,E)\cong\{h\in\Frac R':\ell(hB)\subseteq E\}.
+\]
+Since $B$ is finite and free over the polynomial ring $E$, $W$ is the relative canonical module of $B$ over $\C[s]$, up to the trivialization of the relative canonical module of $E$ by $dr$.
+
+\begin{lemma}\label{lem:W}
+\begin{enumerate}
+\item $R'\subseteq W\subseteq r^{-1}R'$, and $W$ is a torsion-free $B$-module of rank one, free over $E$ and flat over $\C[s]$.
+\item The reduction map $W/sW\to r^{-1}R'/sr^{-1}R'=r^{-1}R'_0\subseteq\C(t)$ is injective, and its image is exactly the canonical fractional ideal $I_0=(1,t^4,t^{61})A_0$ of Lemma~\ref{lem:canonical}.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) Since $R'/B$ is $E$-torsion and $E$ is a domain, restriction gives injections $\Hom_E(R',E)\subseteq\Hom_E(B,E)\subseteq\Hom_E(rR',E)$, which under $\ell$ read $R'\subseteq W\subseteq r^{-1}R'$. Explicitly, if $h\in W$, then $\ell(rhR')\subseteq\ell(hB)\subseteq E$, so $rh\in R'$ by perfectness. $W$ is free over $E$ because $B$ is, and torsion-free of rank one over the domain $B$ because it lies in $\Frac R'=\Frac B$.
+
+(2) Since $B$ is free over $E$,
+\[
+W/sW=\Hom_{E/sE}(B/sB,E/sE)=\Hom_{\C[t^8]}(A_0,\C[t^8]).
+\] Under the identification of Lemma~\ref{lem:Rprime}(2), the reduction of $\ell$ is the map $\ell_0$ of Section~\ref{sec:base}, because the basis element $\lambda pq$ corresponds to $t^{73}$ and the other basis elements to monomials of other residues. Hence the reduction of $h\in W$ is an element $\bar h\in r^{-1}R'_0$ with $\ell_0(\bar h\,\cdot)|_{A_0}$ equal to the reduction of the functional $\ell(h\,\cdot)|_B$. The composition of the reduction map with $\bar h\mapsto\ell_0(\bar h\,\cdot)|_{A_0}$ is the isomorphism $W/sW\cong\Hom_{\C[t^8]}(A_0,\C[t^8])$. The second map is injective on $\C(t)$, because $A_0$ spans $\C(t)$ over $\C(t^8)$ and the pairing is perfect, and by Lemma~\ref{lem:canonical}(1) it maps $I_0$, and only $I_0$, onto $\Hom_{\C[t^8]}(A_0,\C[t^8])$. Thus the reduction map is injective with image $I_0$.
+\end{proof}
+
+By Lemma~\ref{lem:W}(2), the special fibre of $W$ is $I_0$ itself, not merely a module isomorphic to it; in the notation of Section~\ref{sec:general} we may take $\theta$ to be the reduction map.
+
+\begin{remark}\label{rem:dualbasis}
+An $E$-basis of $W$ dual to \eqref{eq:N2} under $\ell$ is
+\[
+\lambda(p-s^9)q,\ \ (p-s^9)q/r,\ \ \lambda q,\ \ q,\ \ \lambda(p-s^9),\ \ p-s^9,\ \ \lambda,\ \ 1 .
+\]
+Their reductions are the monomials $t^{73},t^{61},t^{55},t^{51},t^{22},t^{18},t^4,1$, whose exponents are the numbers $k_\varrho$ of Table~\ref{tab:apery}. The duality, the inclusion $rW\subseteq R'$ on this basis, the closure of \eqref{eq:N2} under products and the inclusion $r^3W^2\subseteq B$ on basis elements were also checked by exact computation (Appendix~\ref{app:computations}).
+\end{remark}
+
+\subsection{Explicit lifts of the multiplication}
+Let $H=\Hom_B(\Sym^2_BW,B)$. By Lemma~\ref{lem:hom}, $H=(B:W^2)$, acting by multiplication.
+
+\begin{lemma}\label{lem:lift}
+\begin{enumerate}
+\item $r^3R'\subseteq H$.
+\item Let $b\ge91$ be odd, and put
+\[
+Q_b=\begin{cases} r^3\lambda^{(b-93)/4}pq,& b\equiv1\pmod4,\\ r^3\lambda^{(b-75)/4}q,& b\equiv3\pmod4.\end{cases}
+\]
+Then $Q_b\in H$, and for $u,v\in W$ the reduction of $Q_buv\in B$ modulo $s$ equals $t^b\,\bar u\,\bar v$, where $\bar u,\bar v\in I_0$ are the reductions of Lemma~\ref{lem:W}(2).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) By Lemma~\ref{lem:W}, $W^2\subseteq r^{-2}R'$, so $r^3R'W^2\subseteq rR'\subseteq B$.
+
+(2) The exponents are nonnegative integers for $b\ge91$. The reduction of $Q_b$ is $t^{24}t^{b-93+69}=t^b$ or $t^{24}t^{b-75+51}=t^b$. The reductions modulo $s$ of the free $E$-modules $r^{-k}R'$, $k=0,1,2$, are compatible with products, and they restrict to the reductions $B\to A_0$ and $W\to I_0$; this gives the formula, since $uv\in r^{-2}R'$ and $Q_buv\in rR'\subseteq B$.
+\end{proof}
+
+For $g=208$ the lift is $Q_{285}=r^3\lambda^{48}pq$. The element $Q_b$ is $r^3$ times a lift of $t^{b-24}$ to $R'$. Such a lift exists for every $b\ge90$, because the Ap\'ery set of $\langle4,18,51\rangle$ modulo $4$ is $(0,69,18,51)$ and its conductor is $66$. In contrast to Proposition~\ref{prop:rho}, this gives an explicit bound.
+
+\section{Proof of Theorem~\ref{thm:main}}\label{sec:proof}
+
+\subsection{Sufficiently large genus}
+
+\begin{proposition}\label{prop:large}
+Let $N$ be the integer of Theorem~\ref{thm:general} for $A$ and $I=(1,t^4,t^{61})A$, with respect to an algebraic smoothing of $A$ given by Corollary~\ref{cor:base-smoothable}. Then the local ring of $\Spec\C[\Gamma_g]$ at the origin is smoothable for every $g\ge\max(208,4N+99)$.
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:canonical}, $I$ is a canonical fractional ideal and $J=\m$. Let $b=2g-131$, so $b\ge8N+67$. Then $t^b=(t^8)^Nt^{b-8N}$ with $b-8N\ge66$, hence $t^{b-8N}\in\m$ and $t^b\in\m^{N+1}=\m^NJ$. By Theorem~\ref{thm:general}, $D_{t^b}$ is smoothable, and by Lemma~\ref{lem:double-semigroup} and Proposition~\ref{prop:semigroup}(1) it is the local ring of $\Spec\C[\Gamma_g]$ at the origin.
+\end{proof}
+
+Since $N$ is not computed, Proposition~\ref{prop:large} gives no explicit range of $g$; this is why we need Proposition~\ref{prop:explicit}.
+
+\subsection{\texorpdfstring{All genera $g\ge208$}{All genera g >= 208}}
+
+\begin{proposition}\label{prop:explicit}
+Let $b\ge91$ be odd. There are a pointed curve germ $R$ and an affine relative curve $\mathcal X\to\Spec R$ with closed fibre $\Spec\C[\Gamma'_b]$ such that every point of the generic fibre is at-worst-nodal.
+\end{proposition}
+
+\begin{proof}
+Let $H=\Hom_B(\Sym^2_BW,B)$, choose generators $h_1,\dots,h_m$ of the $B$-module $H$, and let $x_1,\dots,x_6$ be the generators $r,r\lambda,p,\lambda p,q,\lambda q$ of the $\C[s]$-algebra $B$. With $Q_b$ from Lemma~\ref{lem:lift}, define $\phi_a$ by \eqref{eq:phia} with $\phi_0=Q_b$ and $\nu=7m$ parameters $a$. By Lemma~\ref{lem:assoc}, applied to the domain $B[a]$ and the torsion-free rank one module $W[a]$, the algebra
+\[
+\mathcal D=B[a]\oplus W[a]
+\]
+with the multiplication \eqref{eq:mult} for $\phi_a$ is commutative, associative, finite over $B[a]$ and flat over $\C[s][a]$, because $B$ and $W$ are free over $E$. Its fibre over $(s,a)=(0,0)$ is $A_0\oplus I_0$ with multiplication $t^b\bar u\bar v$, by Lemmas~\ref{lem:B}, \ref{lem:W} and~\ref{lem:lift}; by Lemma~\ref{lem:double-semigroup} it is $\C[\Gamma'_b]$.
+
+Let $k=\C(s)$ and $X_1=\Spec(B\otimes k)$. By Lemma~\ref{lem:fibres}, $X_1$ is an affine curve whose only singular point is an ordinary node $n$, which is $k$-rational: it is the origin of the coordinates $x_1,\dots,x_6$. Hence $X_1$ is Gorenstein, $W\otimes k$, its canonical module, is invertible, and $H\otimes k=(W\otimes k)^{\otimes-2}$ is invertible and generated by the $h_j$. Apply Lemma~\ref{lem:jets} with $U=X_1\setminus\{n\}$ and $M=H\otimes k$; this gives a dense open $\Omega\subseteq\A^\nu_k$. The value $\phi_a(n)\in M\otimes\kappa(n)\cong k$ is an affine-linear function of $a$ whose coefficient of $\tau_j$ is $h_j(n)$, and some $h_j(n)\ne0$; let $\Pi$ be its zero set, a hyperplane. For the generic point $a$ of $\A^\nu_k$, which lies in $\Omega\setminus\Pi$, Lemma~\ref{lem:localdouble} shows that the double cover of $X_1\otimes k(a)$ defined by $\phi_a$ is smooth over $U$ and \'etale over a neighbourhood of $n$. An \'etale cover of a nodal curve is at-worst-nodal \cite[Lemma~53.20.6 (Tag~0C5C)]{Sta}. Thus every point of the generic fibre of $\mathcal D$ over $\Spec\C[s][a]$ is at-worst-nodal.
+
+By \cite[Lemma~53.20.5 (Tag~0DSC)]{Sta} the set of points of $\Spec\mathcal D$ which are not at-worst-nodal over $\C[s][a]$ is closed. Its image is constructible and misses the generic point of the irreducible scheme $\Spec\C[s][a]$, so it is contained in $V(G)$ for some $G\ne0$. Let $R=\C[s]_{(s)}$. By Lemma~\ref{lem:arcs} choose $c\in\C^\nu$ with $G(cs)\ne0$ in $R$, and put $\mathcal X=\Spec(\mathcal D\otimes_{\C[s][a]}R)$, the restriction to the curve $a=cs$. Its closed fibre is the fibre of $\mathcal D$ over $(0,0)$, namely $\Spec\C[\Gamma'_b]$, and its generic fibre lies over $D(G)$; since the at-worst-nodal locus commutes with base change, every point of the generic fibre of $\mathcal X$ is at-worst-nodal.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:main}}
+Let $g\ge208$ and $b=2g-131$, so $b\ge285$ is odd. Proposition~\ref{prop:semigroup} shows that $\Gamma_g=\Gamma'_b=2\cdot S\cup\{2g-1-2a:a\in\Z\setminus S\}$ is a symmetric numerical semigroup of genus $g$ and embedding dimension $9$ which is not a Weierstrass semigroup. The monomial curve $\Spec\C[\Gamma_g]$ is a reduced affine curve whose only singular point is the origin. By Proposition~\ref{prop:explicit} it is the closed fibre of an affine relative curve over a pointed curve germ whose generic fibre is at-worst-nodal, and by Proposition~\ref{prop:nodal} its local ring at the origin is smoothable. \qed
+
+\begin{proof}[Proof of Corollary~\ref{cor:conj}]
+By Proposition~\ref{prop:semigroup}(4) and Theorem~\ref{thm:main}, the monomial curve of $\Gamma_g$ is a smoothable Gorenstein monomial curve of St\"ohr--Torres type for every $g\ge208$. Since $\Gamma_g$ is not a Weierstrass semigroup, its monomial curve is not negatively smoothable by Pinkham's theorem \cite[Theorem~2.12]{Ste}.
+\end{proof}
+
+\begin{remark}\label{rem:range}
+The proof of smoothability uses only that $b=2g-131$ is odd and at least $91$, that is, $g\ge111$. Thus for $111\le g\le207$ the local ring of $\Spec\C[\Gamma_g]$ at the origin is also smoothable; in this range we make no statement on the Weierstrass property. Finally, the involution of Lemma~\ref{lem:doubles}(4) of $D_{t^b}$ corresponds to $z\mapsto-z$, and its invariant ring is the local ring $A$ of the base curve $C_S$.
+\end{remark}
+
+\appendix
+
+\section{Exact computations}\label{app:computations}
+
+The script \texttt{exact-calculations.py} and its output \texttt{exact-calculations.json} accompany this paper. The script requires Python~3.12 and SymPy~1.14.0, and all its computations are exact. It
+\begin{enumerate}
+\item computes the Ap\'ery sets of $S$, of $K(S)$ and of $\m_0=(A_0:I_0^2)$ modulo $8$, the minimal generators $\{0,4,61\}$ of $K(S)$, the Frobenius number $65$ and the genus $34$ (Lemmas~\ref{lem:apery} and~\ref{lem:canonical});
+\item for $111\le g\le 4303$ and for $g\in\{10^6,10^9,10^{18}\}$, compares the Ap\'ery set of $\Gamma_g$ modulo $16$ with the description $2\cdot S\cup(b+2\cdot K(S))$ and checks the Frobenius number $2g-1$ and the genus $g$; for $111\le g\le 4303$ it also checks the minimality of the nine generators (Proposition~\ref{prop:semigroup});
+\item verifies the dual basis of Remark~\ref{rem:dualbasis}, the inclusions $rW\subseteq R'$ and $r^3W^2\subseteq B$ on basis elements, and the closure of the basis \eqref{eq:N2} under products, using a lexicographic Gr\"obner basis of the relations of $R'$ over $\mathbb Q(s,r)$;
+\item computes reduced Gr\"obner bases of $(G,\partial_LG,\partial_PG)$ and of $(G,\Phi,\partial_LG\,\partial_P\Phi-\partial_PG\,\partial_L\Phi)$ in $\mathbb Q[L,P]$, both equal to $\{1\}$ (Lemma~\ref{lem:fibres});
+\item checks that the exponents of the lifts in Lemma~\ref{lem:lift} are nonnegative and that the lifts reduce to $t^b$.
+\end{enumerate}
+Only item (4) enters a proof, as an alternative to the computation in \cite[Example~2.13]{Ste}; the other items confirm statements proved in the text.
+
+\section*{Use of AI-assisted tools}
+
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{dJvS}
+
+\bibitem[Art]{Art}
+M.~Artin, \emph{Versal deformations and algebraic stacks}, Invent. Math. \textbf{27} (1974), 165--189.
+
+\bibitem[BB]{BB}
+L.~Battistella and S.~Bozlee, \emph{Hyperelliptic Gorenstein curves and logarithmic differentials}, Forum Math. Sigma \textbf{12} (2024), Paper No.~e127, 28~pp.
+
+\bibitem[BDS]{BDS}
+V.~Barucci, M.~D'Anna, and F.~Strazzanti, \emph{A family of quotients of the Rees algebra}, Comm. Algebra \textbf{43} (2015), 130--142.
+
+\bibitem[DS]{DS}
+M.~D'Anna and F.~Strazzanti, \emph{The numerical duplication of a numerical semigroup}, Semigroup Forum \textbf{87} (2013), 149--160.
+
+\bibitem[dJvS]{dJvS}
+T.~de~Jong and D.~van~Straten, \emph{Deformations of the normalization of hypersurfaces}, Math. Ann. \textbf{288} (1990), 527--547.
+
+\bibitem[Elk]{Elk}
+R.~Elkik, \emph{Alg\'ebrisation du module formel d'une singularit\'e isol\'ee}, Ast\'erisque \textbf{16} (1974), 133--144.
+
+\bibitem[Kom]{Kom}
+J.~Komeda, \emph{Double coverings of curves and non-Weierstrass semigroups}, Comm. Algebra \textbf{41} (2013), 312--324.
+
+\bibitem[Sch]{Sch}
+M.~Schlessinger, \emph{Functors of Artin rings}, Trans. Amer. Math. Soc. \textbf{130} (1968), 208--222.
+
+\bibitem[Sta]{Sta}
+The Stacks project authors, \emph{The Stacks project}, \url{https://stacks.math.columbia.edu}, accessed October 2026.
+
+\bibitem[Ste]{Ste}
+J.~Stevens, \emph{Non-smoothable curve singularities}, J. Singul. \textbf{29} (2026), 100--122; arXiv:2504.00854v2.
+
+\bibitem[Tor]{Tor}
+F.~Torres, \emph{Weierstrass points and double coverings of curves. With application: symmetric numerical semigroups which cannot be realized as Weierstrass semigroups}, Manuscripta Math. \textbf{83} (1994), 39--58.
+
+\end{thebibliography}
+
+\end{document}

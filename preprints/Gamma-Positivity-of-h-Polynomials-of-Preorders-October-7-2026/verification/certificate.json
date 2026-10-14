@@ -1,0 +1,75 @@
+{
+  "status": "PASS",
+  "seed": 10072026,
+  "exhaustive": [
+    {
+      "n": 0,
+      "preorders": 1,
+      "nontrivial_equivalence": 0,
+      "feasible_lattice_points": 1
+    },
+    {
+      "n": 1,
+      "preorders": 1,
+      "nontrivial_equivalence": 0,
+      "feasible_lattice_points": 2
+    },
+    {
+      "n": 2,
+      "preorders": 4,
+      "nontrivial_equivalence": 1,
+      "feasible_lattice_points": 20
+    },
+    {
+      "n": 3,
+      "preorders": 29,
+      "nontrivial_equivalence": 10,
+      "feasible_lattice_points": 376
+    },
+    {
+      "n": 4,
+      "preorders": 355,
+      "nontrivial_equivalence": 136,
+      "feasible_lattice_points": 12310
+    },
+    {
+      "n": 5,
+      "preorders": 6942,
+      "nontrivial_equivalence": 2711,
+      "feasible_lattice_points": 660864
+    }
+  ],
+  "bipartite_graphs": 689,
+  "random_preorders_n6_to_n8": 100,
+  "eight_element_example": {
+    "rows": [
+      49,
+      82,
+      148,
+      232,
+      16,
+      32,
+      64,
+      128
+    ],
+    "h": [
+      1,
+      17,
+      106,
+      303,
+      427,
+      303,
+      106,
+      17,
+      1
+    ],
+    "gamma": [
+      1,
+      9,
+      24,
+      16,
+      1
+    ]
+  },
+  "seconds": 2.141
+}

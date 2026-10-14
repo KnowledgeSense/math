@@ -1,0 +1,357 @@
+{
+  "checked_at_utc": "2026-10-12T17:14:29.953088+00:00",
+  "seed": 55,
+  "coefficient_vectors": 1111,
+  "total_indices_checked": 2446000,
+  "verdict": "all_assertions_passed",
+  "interpretation": "Exact-integer checks of the stated identities, inequalities and final bound for finitely many coefficient vectors and indices.",
+  "special_cases": [
+    {
+      "coefficients": [
+        1,
+        1
+      ],
+      "n_checked": 10000,
+      "kappa": 5,
+      "A1": 3,
+      "A1_bounded": true,
+      "discrepancy_min": -2,
+      "discrepancy_max": -1,
+      "first_outside_published_fixed_interval": null,
+      "A1741": 8703,
+      "first_terms": [
+        3,
+        9,
+        13,
+        18,
+        23,
+        29,
+        33,
+        39,
+        43,
+        49,
+        53,
+        58
+      ]
+    },
+    {
+      "coefficients": [
+        1,
+        2
+      ],
+      "n_checked": 10000,
+      "kappa": 7,
+      "A1": 5,
+      "A1_bounded": true,
+      "discrepancy_min": -3,
+      "discrepancy_max": -1,
+      "first_outside_published_fixed_interval": null,
+      "A1741": 12185,
+      "first_terms": [
+        5,
+        11,
+        20,
+        26,
+        34,
+        41,
+        47,
+        53,
+        61,
+        68,
+        74,
+        83
+      ]
+    },
+    {
+      "coefficients": [
+        2,
+        1
+      ],
+      "n_checked": 10000,
+      "kappa": 7,
+      "A1": 4,
+      "A1_bounded": true,
+      "discrepancy_min": -4,
+      "discrepancy_max": -1,
+      "first_outside_published_fixed_interval": null,
+      "A1741": 12184,
+      "first_terms": [
+        4,
+        11,
+        19,
+        25,
+        32,
+        40,
+        46,
+        52,
+        61,
+        67,
+        74,
+        82
+      ]
+    },
+    {
+      "coefficients": [
+        1,
+        3
+      ],
+      "n_checked": 10000,
+      "kappa": 9,
+      "A1": 7,
+      "A1_bounded": false,
+      "discrepancy_min": -5,
+      "discrepancy_max": 0,
+      "first_outside_published_fixed_interval": null,
+      "A1741": 15667,
+      "first_terms": [
+        7,
+        15,
+        23,
+        35,
+        43,
+        51,
+        62,
+        71,
+        79,
+        87,
+        99,
+        107
+      ]
+    },
+    {
+      "coefficients": [
+        1,
+        4
+      ],
+      "n_checked": 50000,
+      "kappa": 11,
+      "A1": 9,
+      "A1_bounded": false,
+      "discrepancy_min": -6,
+      "discrepancy_max": 1,
+      "first_outside_published_fixed_interval": 348,
+      "A1741": 19148,
+      "first_terms": [
+        9,
+        19,
+        29,
+        39,
+        54,
+        64,
+        74,
+        84,
+        98,
+        109,
+        119,
+        129
+      ]
+    },
+    {
+      "coefficients": [
+        1,
+        1000000
+      ],
+      "n_checked": 10000,
+      "kappa": 2000003,
+      "A1": 2000001,
+      "A1_bounded": false,
+      "discrepancy_min": -10001,
+      "discrepancy_max": -2,
+      "first_outside_published_fixed_interval": null,
+      "A1741": 3482003481,
+      "first_terms": [
+        2000001,
+        4000003,
+        6000005,
+        8000007,
+        10000009,
+        12000011,
+        14000013,
+        16000015,
+        18000017,
+        20000019,
+        22000021,
+        24000023
+      ]
+    },
+    {
+      "coefficients": [
+        1000000,
+        1
+      ],
+      "n_checked": 10000,
+      "kappa": 2000003,
+      "A1": 1000002,
+      "A1_bounded": true,
+      "discrepancy_min": -1010000,
+      "discrepancy_max": -1000001,
+      "first_outside_published_fixed_interval": null,
+      "A1741": 3481003482,
+      "first_terms": [
+        1000002,
+        3000004,
+        5000006,
+        7000008,
+        9000010,
+        11000012,
+        13000014,
+        15000016,
+        17000018,
+        19000020,
+        21000022,
+        23000024
+      ]
+    },
+    {
+      "coefficients": [
+        1,
+        1,
+        1000000
+      ],
+      "n_checked": 10000,
+      "kappa": 3000007,
+      "A1": 3000003,
+      "A1_bounded": false,
+      "discrepancy_min": -10003,
+      "discrepancy_max": -4,
+      "first_outside_published_fixed_interval": null,
+      "A1741": 5223010443,
+      "first_terms": [
+        3000003,
+        6000009,
+        9000015,
+        12000021,
+        15000027,
+        18000033,
+        21000039,
+        24000045,
+        27000051,
+        30000057,
+        33000063,
+        36000069
+      ]
+    },
+    {
+      "coefficients": [
+        1000000,
+        1,
+        1
+      ],
+      "n_checked": 10000,
+      "kappa": 3000007,
+      "A1": 1000005,
+      "A1_bounded": true,
+      "discrepancy_min": -2010001,
+      "discrepancy_max": -2000002,
+      "first_outside_published_fixed_interval": null,
+      "A1741": 5221010445,
+      "first_terms": [
+        1000005,
+        4000011,
+        7000017,
+        10000023,
+        13000029,
+        16000035,
+        19000041,
+        22000047,
+        25000053,
+        28000059,
+        31000065,
+        34000071
+      ]
+    },
+    {
+      "coefficients": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "n_checked": 10000,
+      "kappa": 401,
+      "A1": 210,
+      "A1_bounded": true,
+      "discrepancy_min": -200,
+      "discrepancy_max": -181,
+      "first_outside_published_fixed_interval": null,
+      "A1741": 697950,
+      "first_terms": [
+        210,
+        610,
+        1010,
+        1410,
+        1810,
+        2210,
+        2610,
+        3010,
+        3410,
+        3810,
+        4221,
+        4630
+      ]
+    },
+    {
+      "coefficients": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1000000
+      ],
+      "n_checked": 10000,
+      "kappa": 20000381,
+      "A1": 20000190,
+      "A1_bounded": false,
+      "discrepancy_min": -10190,
+      "discrepancy_max": -191,
+      "first_outside_published_fixed_interval": null,
+      "A1741": 34820661390,
+      "first_terms": [
+        20000190,
+        40000570,
+        60000950,
+        80001330,
+        100001710,
+        120002090,
+        140002470,
+        160002850,
+        180003230,
+        200003610,
+        220003990,
+        240004370
+      ]
+    }
+  ],
+  "theorem": "positive anti-recurrence discrepancy"
+}

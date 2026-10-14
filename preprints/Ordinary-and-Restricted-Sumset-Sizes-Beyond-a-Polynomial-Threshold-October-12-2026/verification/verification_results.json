@@ -1,0 +1,16 @@
+{
+  "status": "all assertions passed",
+  "counts": {
+    "restricted_G_fibers": 11,
+    "restricted_H_fibers": 12,
+    "restricted_positive_H_bounds": 12,
+    "ordinary_G_H_fibers": 12,
+    "ordinary_positive_H_identity": 12,
+    "digit_filling": 59,
+    "ordinary_singleton_filling": 337,
+    "restricted_dense_positions": 325,
+    "ordinary_dense_positions": 324,
+    "exact_threshold_h": 199
+  },
+  "scope": "Finite consistency checks; the all-h statement rests on the algebraic inequalities in the manuscript."
+}

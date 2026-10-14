@@ -1,0 +1,652 @@
+\documentclass[11pt]{amsart}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{enumitem}
+\usepackage[hidelinks,pdfauthor={Knowledge Sense},pdftitle={The formal Barker--Larman branch in dimension four has zero radius of convergence},pdfsubject={Divergence of a formal series for bodies with constant tangent sections},pdfkeywords={Barker--Larman problem, formal power series, zero radius of convergence, equidistribution of small points, Frobenius}]{hyperref}
+\usepackage{xurl}
+\usepackage[capitalize,nameinlink]{cleveref}
+\setlist{leftmargin=2em,itemsep=2pt,topsep=3pt}
+\numberwithin{equation}{section}
+\setlength{\emergencystretch}{3em}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\abs}[1]{\lvert #1\rvert}
+\newcommand{\norm}[1]{\lVert #1\rVert}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\vol}{\operatorname{vol}}
+\newcommand{\Obs}{\mathfrak{O}}
+\newcommand{\Wn}{W_{\mathrm n}}
+\newcommand{\lb}{\lambda_{\mathrm b}}
+\newcommand{\rb}{r_{\mathrm b}}
+\newcommand{\kk}{\Bbbk}
+\newcommand{\Lin}{\mathcal L}
+\newcommand{\sA}{\mathsf A}
+\newcommand{\sD}{\mathsf D}
+\newcommand{\ssf}{\mathsf s}
+\newcommand{\Id}{\mathrm{Id}}
+
+\title[Zero radius of convergence of the formal branch]{The formal Barker--Larman branch in dimension four has zero radius of convergence}
+\author{Knowledge Sense}
+\email{math@knowledgesense.jp}
+\date{12 October 2026}
+\subjclass[2020]{Primary 52A20; Secondary 11G50, 14G40, 37E10}
+\keywords{Barker--Larman problem, formal power series, zero radius of convergence, equidistribution of small points, Frobenius}
+
+\hyphenation{manuscript}
+\begin{document}
+
+\begin{abstract}
+For the Barker--Larman problem in dimension four, Haddad constructed a formal power series in $\lambda-4\sqrt3\,\pi$ whose coefficients are even $\pi$-periodic trigonometric polynomials and whose truncations solve the constant-section equation for bodies of revolution to any finite order, and he asked whether the series converges. We show that, in its natural normalization, the series has radius of convergence zero in the supremum norm and in every $C^j$, Sobolev, Fourier $\ell^1$ and analytic Wiener norm. Convergence would produce an analytic invariant graph of an area-preserving endpoint map along an explicit algebraic three-cycle. At cycles whose multiplier is a primitive $p$-th root of unity, $p$ prime, the Taylor coefficients of such a graph obey a recurrence with one scalar compatibility condition. We prove that this scalar is nonzero by a Frobenius telescoping identity and a $p$-adic valuation gap, and we use Yuan's equidistribution theorem for small points to place such cycles arbitrarily close to the axis in the complex embedding. The result concerns this specified series and gives no growth rate for its coefficients.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}\label{sec:intro}
+
+Let $K\subset\R^d$ be a convex body containing the unit ball $B^d$ in its interior. Barker and Larman \cite{BL} asked whether $K$ must be a ball if $\vol_{d-1}(K\cap H)$ is the same for every hyperplane $H$ tangent to $B^d$. In dimension four, for bodies of revolution with radial function $\sec\psi(t)$, Haddad \cite{Had} reduced this condition to a functional equation for the circle map $h(t)=t-\psi(t)$, and constructed, around the volume $\lb=4\sqrt3\,\pi$ of the ball of radius two, a formal solution
+\[
+h_\lambda(t)=t-\frac\pi3+\sum_{n\ge1}\frac{(\lambda-\lb)^n}{n!}\,\varphi_n(t)
+\]
+whose coefficients $\varphi_n$ are even $\pi$-periodic trigonometric polynomials and whose partial sums of order $N$ solve the equation up to an error $O(\abs{\lambda-\lb}^{N+1})$. Convergence of this series would give a negative answer to the problem in dimension four; the question is posed in \cite[Section 6.1]{Had}.
+
+Put $\alpha=\pi/3$ and $z=(\lambda-\lb)/(\sqrt3\,\pi)$. We write the normalized formal branch as
+\begin{equation}\label{eq:branch}
+\begin{gathered}
+h(z,t)=t-\alpha+\sqrt3\,r(z,t),\qquad r(z,t)=\sum_{n\ge1}R_n(t)z^n,\\
+R_1(t)=\tfrac1{48}+\tfrac1{12}\cos2t,
+\end{gathered}
+\end{equation}
+with each $R_n$ a real even $\pi$-periodic trigonometric polynomial; thus $R_n=(\sqrt3\pi)^n\varphi_n/(\sqrt3\,n!)$. The series is characterized in \cref{prop:recursion}. For a $\pi$-periodic function $f(t)=\sum_k\hat f_ke^{ikt}$ we use the norms
+\begin{gather*}
+\norm f_{\ell^1}=\sum_k\abs{\hat f_k},\qquad \norm f_\varrho=\sum_k\abs{\hat f_k}e^{\varrho\abs k}\quad(\varrho>0),\\
+\norm f_{H^s}=\Bigl(\sum_k(1+k^2)^s\abs{\hat f_k}^2\Bigr)^{1/2}\quad(s\in\R),
+\end{gather*}
+and the $C^j$ norms on $\R/\pi\Z$.
+
+\begin{theorem}\label{thm:main}
+The coefficients of the normalized formal branch \eqref{eq:branch} satisfy
+\[
+\limsup_{n\to\infty}\norm{R_n}_{C^0(\R/\pi\Z)}^{1/n}=\infty .
+\]
+The same holds with $C^0$ replaced by $C^j$ for any $j\ge0$, by $H^s$ for any $s\in\R$, by the Fourier $\ell^1$ norm, or by $\norm\cdot_\varrho$ for any $\varrho>0$. Thus the series $\sum_nR_nz^n$, and equivalently Haddad's series in $\lambda-\lb$, has radius of convergence zero in each of these norms.
+\end{theorem}
+
+The theorem concerns the specified formal series. It does not assert divergence at each individual angle $t$, and it gives no growth rate for the coefficients. It is also consistent with the existence of exact nonball solutions: in the companion paper \cite{KS} bodies of revolution in $\R^4$ with constant distance-one sections, tending to the ball of radius two, are constructed along a sequence of volumes tending to $\lb$ and on sets of volumes of positive measure. Those bodies are obtained from finite-order initializers by a Newton scheme and not by summing the series.
+
+\subsection*{Strategy}
+The section equation defines an endpoint map $F$ in the variables (amplitude $r$, angular variable $\epsilon=e^{-it}$, parameter $z$), which is area preserving for an explicit meromorphic two-form, and the formal branch is an $F$-invariant curve. A formal logarithm of $F^3$ and a Hamiltonian normalized by the ball branch give a regular formal hodograph $z=Z(r,q)$, $q=\epsilon^2$, which is identified with the inverse of the prescribed series (\cref{sec:hodograph}). If the series converged, this hodograph would be an analytic invariant graph near the axis $q=0$ (\cref{prop:cond}). The axis is an explicit algebraic three-cycle of the restriction of $F$ to $q=0$, with multiplier $K$ varying along an algebraic curve (\cref{sec:cycle}). When $K$ is a primitive $m$-th root of unity, $m$ odd, the Taylor coefficients of an analytic invariant graph at the three cycle points satisfy a recurrence with a single scalar compatibility condition at order $(m+1)/2$. For $m=p$ prime this scalar is shown to be nonzero by a Frobenius telescoping identity and a $p$-adic valuation computation (\cref{sec:padic}). Yuan's equidistribution theorem then moves cyclotomic points with nonzero obstruction arbitrarily close to the axis in the fixed complex embedding (\cref{sec:equid}), which contradicts analyticity (\cref{sec:end}).
+
+\subsection*{Results used without proof}
+We use Haddad's form of the constant-section condition for bodies of revolution in $\R^4$ \cite[equation (6) and Section 2]{Had}, which leads to the equation \eqref{eq:W} below; nothing else from \cite{Had} is used, and the normalized recursion is derived in \cref{sec:formal}. In \cref{sec:equid} we use Yuan's equidistribution theorem for small points \cite[Theorem 3.1]{Yuan}, together with the standard facts about the canonical adelic metric on $\mathcal O(1)$ for the squaring map of $\mathbb P^1$ and about heights of pulled-back metrized line bundles recalled there (see \cite[Sections 1.1 and 3.5]{Yuan}). Otherwise we use the formal and analytic implicit function theorems, Lagrange inversion, and elementary properties of power series over a finite extension of $\Q_p$.
+
+\subsection*{Organization}
+\Cref{sec:formal} sets up the normalized recursion and its Fourier support. \Cref{sec:hodograph} constructs the formal hodograph and proves the conditional analyticity statement. \Cref{sec:cycle} describes the algebraic three-cycle and the obstruction scalar, \cref{sec:padic} proves its nonvanishing at $p$-adic cyclotomic points, \cref{sec:equid} transfers this to the complex embedding, and \cref{sec:end} completes the proof.
+
+\section{The normalized formal section equation}\label{sec:formal}
+
+\subsection{The equation}
+Let $J=i\sqrt3$ and $\omega=e^{2\pi i/3}=(-1+J)/2$. For a body of revolution in $\R^4$ with radial function $\sec\psi(t)$, $\psi$ even, $\pi$-periodic and close to $\alpha$, put $h(t)=t-\psi(t)$ and $a(x)=\tan(h^{-1}(x)-x)$. By \cite[equation (6) and Section 2]{Had} (see also \cite[Proposition 3.1]{KS}) all sections by hyperplanes tangent to $B^4$ have volume $\lambda$ if and only if
+\begin{equation}\label{eq:W}
+\begin{aligned}
+W(h)(x):={}&\pi\sin x\bigl[a(x)^2-a(-x)^2\bigr]+\tfrac{2\pi}3\cos x\bigl[a(x)^3+a(-x)^3\bigr]\\
+={}&\lambda\cos x .
+\end{aligned}
+\end{equation}
+For a formal series $r(z,x)$ without constant term in $z$, whose coefficients are trigonometric polynomials, put $r_\alpha(z,x)=r(z,x+\alpha)$ and
+\[
+\delta(z,x)=\sum_{k\ge1}\frac{(-1)^k}{k!}\bigl(\sqrt3\,\partial_x\bigr)^{k-1}r_\alpha(z,x)^k,\qquad \tau(u)=\frac{\tan(\alpha+\sqrt3u)}{\sqrt3}.
+\]
+By the Lagrange inversion formula the formal inverse of $h=t-\alpha+\sqrt3r$ is $x+\alpha+\sqrt3\,\delta(z,x)$, so $a=\sqrt3\,\tau(\delta)$ and $W=\sqrt3\pi\,\Wn$, where
+\begin{equation}\label{eq:sec}
+\begin{aligned}
+\Wn(r)(x)={}&\sqrt3\sin x\bigl[\tau(\delta(z,x))^2-\tau(\delta(z,-x))^2\bigr]\\
+&+2\cos x\bigl[\tau(\delta(z,x))^3+\tau(\delta(z,-x))^3\bigr].
+\end{aligned}
+\end{equation}
+With $\lambda=\sqrt3\pi(4+z)$ the equation \eqref{eq:W} becomes
+\begin{equation}\label{eq:secnorm}
+\Wn(r)=(4+z)\cos x .
+\end{equation}
+The function $\tau$ is determined by $\tau'=1+3\tau^2$ and $\tau(0)=1$; hence all its Taylor coefficients are rational, and $\tau(u)=1+4u+12u^2+O(u^3)$. Every coefficient of a fixed power of $z$ in \eqref{eq:sec} involves finitely many operations on trigonometric polynomials. When $r$ is even and $\pi$-periodic in $x$, $\Wn(r)$ is even and contains only odd frequencies.
+
+\subsection{The linearized and the resonant operators}
+Let $\Lin$ be the first differential of $\Wn$ at $r=0$.
+
+\begin{lemma}[Linearization]\label{lem:lin}
+For $k\ge0$,
+\begin{equation}\label{eq:L}
+\begin{aligned}
+\Lin\cos(2kt)={}&\bigl(8\sqrt3\sin(2k\alpha)-24\cos(2k\alpha)\bigr)\cos((2k-1)x)\\
+&-\bigl(8\sqrt3\sin(2k\alpha)+24\cos(2k\alpha)\bigr)\cos((2k+1)x).
+\end{aligned}
+\end{equation}
+Consequently, for odd $m\ge1$ with $3\nmid m$, $\Lin\cos((m+1)t)=24\cos(mx)$ if $m\equiv1\pmod6$ and $\Lin\cos((m-1)t)=24\cos(mx)$ if $m\equiv5\pmod6$. The image of $\Lin$ on even $\pi$-periodic trigonometric polynomials is spanned by the $\cos(mx)$ with $m$ odd and $3\nmid m$, and its kernel consists of the functions $D_3(t)S(t)$ with
+\begin{equation}\label{eq:kernel}
+D_3(t)=\frac{\sin3t}{\sin t}=1+2\cos2t,\qquad S(t)=c_0+2\sum_{\ell\ge1}c_\ell\cos(6\ell t).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Write $\rho_\pm(x)=r(\alpha\pm x)$. To first order $\delta(z,x)=-\rho_+(x)$ and $\delta(z,-x)=-\rho_-(x)$, and $\tau^2=1+8u+O(u^2)$, $\tau^3=1+12u+O(u^2)$. Hence
+\[
+\Lin r=-8\sqrt3\sin x\,(\rho_+-\rho_-)-24\cos x\,(\rho_++\rho_-).
+\]
+For $r=\cos(2kt)$ one has $\rho_+-\rho_-=-2\sin(2k\alpha)\sin(2kx)$ and $\rho_++\rho_-=2\cos(2k\alpha)\cos(2kx)$, and the product formulas give \eqref{eq:L}. If $2k\equiv2\pmod6$ then $2k\alpha\equiv2\pi/3$ modulo $2\pi$ and the coefficients in \eqref{eq:L} are $24$ and $0$; if $2k\equiv4\pmod6$ they are $0$ and $24$; if $2k\equiv0\pmod 6$, $k\ge1$, both are $-24$, and $\Lin1=-48\cos x$. This gives the statement on the selected inputs and on the image. The functions $\cos(2kt)$ with $2k\not\equiv0\pmod6$, together with $D_3(t)\cos(6\ell t)$, $\ell\ge0$, form a basis of the even $\pi$-periodic trigonometric polynomials, and $\Lin(D_3\cos6\ell t)=0$ by the values just computed. Hence the kernel is as stated.
+\end{proof}
+
+Let $\Pi$ denote the projection onto the frequencies divisible by $3$.
+
+\begin{lemma}[Resonant projection]\label{lem:res}
+For every $S$ as in \eqref{eq:kernel},
+\begin{equation}\label{eq:res}
+\Pi\,\Wn''(0)[R_1,D_3S]=-2\,\bigl(\sin(3x)\,S(x)\bigr)'.
+\end{equation}
+The coefficient of $\cos(mx)$, $m=3(2\ell+1)$, on the right is $-2m(c_\ell-c_{\ell+1})$.
+\end{lemma}
+
+\begin{proof}
+To second order, $\delta(z,x)=-\rho_+(x)+\frac{\sqrt3}2(\rho_+^2)'(x)$ and $\delta(z,-x)=-\rho_-(x)-\frac{\sqrt3}2(\rho_-^2)'(x)$, where the prime denotes $d/dx$, and $\tau^2=1+8u+40u^2+O(u^3)$, $\tau^3=1+12u+84u^2+O(u^3)$. Collecting the quadratic terms of \eqref{eq:sec} and polarizing, one finds for $r_1,r_2$ even and $\pi$-periodic, with $\Pi_\pm(x)=2r_1(\alpha\pm x)r_2(\alpha\pm x)$,
+\begin{align*}
+\Wn''(0)[r_1,r_2]={}&12\sin x\,(\Pi_++\Pi_-)'+40\sqrt3\sin x\,(\Pi_+-\Pi_-)\\
+&+12\sqrt3\cos x\,(\Pi_+-\Pi_-)'+168\cos x\,(\Pi_++\Pi_-).
+\end{align*}
+Write $g(t)=2r_1(t)r_2(t)=\sum_{k\ge0}g_k\cos(2kt)$. As in the proof of \cref{lem:lin}, the contribution of $g_k\cos(2kt)$ has the coefficient
+\[
+(168-24k)\cos(2k\alpha)-(40+24k)\sqrt3\sin(2k\alpha)\quad\text{at }\cos((2k-1)x),
+\]
+and $(168+24k)\cos(2k\alpha)+(40-24k)\sqrt3\sin(2k\alpha)$ at $\cos((2k+1)x)$. The frequency $2k-1$ is divisible by $3$ when $k\equiv2\pmod3$, and then the first coefficient equals $24(2k-1)$; the frequency $2k+1$ is divisible by $3$ when $k\equiv1\pmod3$, and then the second coefficient equals $-24(2k+1)$. Hence
+\[
+\Pi\,\Wn''(0)[r_1,r_2]=24\sum_{m}m\bigl(g_{(m+1)/2}-g_{(m-1)/2}\bigr)\cos(mx),
+\]
+the sum running over the odd multiples $m$ of $3$. For $r_1=R_1$ and $r_2=D_3S$ we have $2R_1D_3=\frac1{24}(5+6\cos2t+4\cos4t)$; multiplying by $S$ gives, for $\ell\ge0$, $g_{3\ell+2}=\frac1{12}(2c_\ell+3c_{\ell+1})$ and $g_{3\ell+1}=\frac1{12}(3c_\ell+2c_{\ell+1})$. Therefore the coefficient at $m=3(2\ell+1)$ is $24m\cdot\frac1{12}(c_{\ell+1}-c_\ell)=-2m(c_\ell-c_{\ell+1})$. Finally $\sin(3x)S(x)=\sum_{\ell\ge0}(c_\ell-c_{\ell+1})\sin((6\ell+3)x)$, which gives the same coefficients on the right of \eqref{eq:res}.
+\end{proof}
+
+By \cref{lem:res}, a finite resonant forcing $\sum_mf_m\cos(mx)$ with $m$ running over the odd multiples of $3$ is cancelled by $\Pi\,\Wn''(0)[R_1,D_3S]$ for exactly one finite $S$, namely
+\begin{equation}\label{eq:cell}
+c_\ell=\sum_{j\ge\ell}\frac{f_{3(2j+1)}}{6(2j+1)} .
+\end{equation}
+
+\begin{proposition}[The normalized branch]\label{prop:recursion}
+There is exactly one formal series $r=\sum_{n\ge1}R_nz^n$, with $R_n$ real even $\pi$-periodic trigonometric polynomials and $R_1=\frac1{48}+\frac1{12}\cos2t$, which solves \eqref{eq:secnorm} to all orders. Its first coefficients are
+\begin{equation}\label{eq:R123}
+\begin{aligned}
+R_1&=\tfrac1{48}+\tfrac{1}{12}\cos2t,\qquad R_2=\tfrac3{256}-\tfrac{1}{144}\cos2t+\tfrac{1}{72}\cos4t,\\
+R_3&=-\tfrac{41}{20736}+\tfrac{35}{2592}\cos2t-\tfrac{49}{20736}\cos4t+\tfrac{49}{20736}\cos6t-\tfrac{67}{20736}\cos8t.
+\end{aligned}
+\end{equation}
+In the notation of \cite{Had}, $R_n=(\sqrt3\pi)^n\varphi_n/(\sqrt3\,n!)$.
+\end{proposition}
+
+\begin{proof}
+Since $\Wn(0)=4\cos x$, the equation at order one is $\Lin R_1=\cos x$, which holds because $R_1=-\frac1{48}+\frac1{24}D_3$ and $\Lin(-\frac1{48})=\cos x$. At order $n\ge2$ the equation reads $\Lin R_n=\Phi_n$, where $\Phi_n$ is a finite expression in $R_1,\dots,R_{n-1}$; for instance $\Phi_2=-\frac12\Wn''(0)[R_1,R_1]$. Since the image of $\Lin$ contains no frequency divisible by $3$, solvability requires $\Pi\Phi_n=0$. Write $R_n=R_n^{\mathrm p}+D_3S_n$, where $R_n^{\mathrm p}$ lies in the span of the selected inputs $\cos(2kt)$, $2k\not\equiv0\pmod6$, of \cref{lem:lin}; then $R_n^{\mathrm p}$ is uniquely determined by $\Phi_n$. The kernel part $D_3S_n$ does not affect order $n$ and enters $\Pi\Phi_{n+1}$ exactly through $\Pi\,\Wn''(0)[R_1,D_3S_n]$, because every other term of order $n+1$ containing $S_n$ has total order at least $n+2$, and $\Pi\Lin=0$. Hence $S_n$ is uniquely determined by $\Pi\Phi_{n+1}=0$ via \eqref{eq:cell}. At order two the condition $\Pi\Phi_2=0$ holds for the given $R_1$: by the proof of \cref{lem:res}, $\Pi\,\Wn''(0)[R_1,-\frac1{48}]=\frac14\cos3x$ and $\Pi\,\Wn''(0)[R_1,\frac1{24}D_3]=-\frac14\cos3x$, so $\Pi\frac12\Wn''(0)[R_1,R_1]=0$. (This is the choice of the bifurcating branch in \cite[Section 4.2]{Had}.) By induction all $R_n$ exist, are finite and are unique, and the recursion produces \eqref{eq:R123}. The relation with \cite{Had} follows from $\sqrt3R_nz^n=(\lambda-\lb)^n\varphi_n/n!$.
+\end{proof}
+
+\subsection{A linear bound on the Fourier degree}
+
+\begin{proposition}\label{prop:degree}
+For every $n$,
+\begin{equation}\label{eq:deg}
+\deg R_n\le\begin{cases}3n-2,&n\text{ even},\\3n-1,&n\text{ odd},\end{cases}
+\end{equation}
+where the degree is the largest ordinary $t$-frequency.
+\end{proposition}
+
+\begin{proof}
+Differentiation and fixed shifts do not enlarge the support. A homogeneous nonlinear term in $\Phi_n$ with $k\ge2$ factors $R_{n_1},\dots,R_{n_k}$, $n_1+\dots+n_k=n$, has frequency at most the sum of their degrees plus one, hence at most $3n-k+1\le3n-1$ by induction; the frequencies in $\Phi_n$ are odd. For even $n$ the largest possible odd frequency is $3n-1$, in the class $5$ modulo $6$, and its selected input is $3n-2$; for odd $n$ the largest possible odd frequency is $3n-2$, in the class $1$ modulo $6$, with selected input $3n-1$. So $R_n^{\mathrm p}$ obeys \eqref{eq:deg}. The resonant forcing at order $n+1$ has degree at most $3n+2$; its largest odd multiple of $3$ is at most $3n$ for odd $n$ and at most $3n-3$ for even $n$, so by \eqref{eq:cell} the kernel part $D_3S_n$ has degree at most that frequency minus one and preserves \eqref{eq:deg}. The induction starts with $\deg R_1=2$.
+\end{proof}
+
+Introduce the formal variables
+\begin{equation}\label{eq:graded}
+\epsilon=e^{-it},\qquad q=\epsilon^2,\qquad w=z\epsilon^{-3},\qquad U=r/\epsilon .
+\end{equation}
+
+\begin{lemma}[Graded form]\label{lem:graded}
+The series $U$ is a formal power series in $(w,\epsilon)$ with $\partial_wU(0,0)=1/24$, and it has a formal inverse $w=\mathcal W(U,\epsilon)\in\C[[U,\epsilon]]$. If $\limsup_n\norm{R_n}_{\ell^1}^{1/n}<\infty$, then $U$ converges on a bidisk about $(w,\epsilon)=(0,0)$, and $\mathcal W$ converges on a smaller bidisk.
+\end{lemma}
+
+\begin{proof}
+A monomial $z^ne^{ikt}/\epsilon$ equals $w^n\epsilon^{3n-k-1}$, and $3n-k-1\ge0$ by \eqref{eq:deg}. The coefficient of $w\epsilon^0$ comes from the coefficient $\frac1{24}$ of $e^{2it}$ in $R_1$. If $\norm{R_n}_{\ell^1}\le C\varrho^{-n}$, then for $\abs\epsilon\le1$ all monomials of $U$ have modulus at most $\abs w^n$ times the modulus of their coefficient, so $U$ converges for $\abs w<\varrho$, $\abs\epsilon<1$. The analytic inverse function theorem gives the last claim.
+\end{proof}
+
+\section{A regular formal hodograph}\label{sec:hodograph}
+
+\subsection{Coordinates and the endpoint map}\label{sec:endpoint}
+Let $\epsilon=e^{-it}$ and $q=\epsilon^2$, and put
+\[
+B(r)=\frac{\tan(\alpha-\sqrt3\,r)}{\sqrt3}.
+\]
+Define $r'$ near $0$ as a function of $(r,q,z)$ by
+\begin{equation}\label{eq:F1}
+2\bigl(B(r)^3+B(r')^3\bigr)-J\,\frac{1-\omega qe^{-2Jr}}{1+\omega qe^{-2Jr}}\bigl(B(r)^2-B(r')^2\bigr)=4+z,
+\end{equation}
+and set
+\begin{equation}\label{eq:F2}
+\epsilon'=\omega\,\epsilon\,e^{-J(r+r')},\qquad F(r,\epsilon,z)=(r',\epsilon',z).
+\end{equation}
+
+\begin{lemma}[Endpoint map]\label{lem:endpoint}
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item The derivative of the left side of \eqref{eq:F1} with respect to $r'$ at $r=q=z=0$ is $-24-8J\ne0$. Hence \eqref{eq:F1}--\eqref{eq:F2} define an analytic map $F$ near the origin, with $r'=0$ at $r=z=0$; its $r$-component is even in $\epsilon$ and its $\epsilon$-component is odd. Expanding in $(r,z)$ with $q$ regarded as an indeterminate, all coefficients of $F$ are rational functions of $q$.
+\item Let $r_*(z,t)$ be the formal branch of \cref{prop:recursion}. Then the formal curve $r=r_*(z,t)$ is invariant under $F$: there is a formal series $\tilde\sigma(z,t)=t-2\alpha+O(z)$ such that $F(r_*(z,t),e^{-it},z)=(r_*(z,\tilde\sigma),e^{-i\tilde\sigma},z)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) At $q=0$ the fraction in \eqref{eq:F1} equals $1$, $B(0)=1$ and $B'(0)=-4$, so the derivative is $6B^2B'+2JBB'=-24-8J$. The implicit function theorem gives $F$. Replacing $\epsilon$ by $-\epsilon$ leaves $q$ and hence $r'$ unchanged and changes the sign of $\epsilon'$. The rationality in $q$ follows from the implicit derivative formula.
+
+(b) Write $h(t)=t-\psi(t)$ with $\psi=\alpha-\sqrt3r_*$, so that $\tan\psi=\sqrt3B(r_*)$. For a point $x$, let $t=h^{-1}(x)$ and $\sigma=h^{-1}(-x)$; then $a(x)=\tan\psi(t)$ and $a(-x)=\tan\psi(\sigma)$. Dividing \eqref{eq:W} by $\frac{2\pi}3\cos x$ gives
+\[
+a(x)^3+a(-x)^3+\tfrac32\tan x\,\bigl(a(x)^2-a(-x)^2\bigr)=\frac{3\lambda}{2\pi}.
+\]
+With $a=\sqrt3B$, $\lambda=\sqrt3\pi(4+z)$ and $\sqrt3\tan x=-J(1-e^{-2ix})/(1+e^{-2ix})$, $e^{-2ix}=e^{-2it}e^{2i\psi(t)}=\omega qe^{-2Jr_*(t)}$, this is \eqref{eq:F1} with $r=r_*(t)$ and $r'=r_*(\sigma)$. Since $\psi$ is even, $\tilde\sigma=-\sigma$ satisfies $r_*(\tilde\sigma)=r_*(\sigma)$ and $\tilde\sigma=t-2\alpha+\sqrt3(r_*(t)+r_*(\tilde\sigma))$, because $h(t)=-h(\sigma)$. Hence $e^{-i\tilde\sigma}=\omega e^{-it}e^{-J(r_*(t)+r_*(\tilde\sigma))}$, which is \eqref{eq:F2}. All identities hold as formal series in $z$ with trigonometric coefficients, and the root selected in \eqref{eq:F1} is the one with $r'=0$ at $z=0$.
+\end{proof}
+
+\subsection{Area preservation}
+
+\begin{lemma}\label{lem:area}
+The map $F$ preserves the meromorphic two-form
+\begin{equation}\label{eq:Omega}
+\Omega=\rho(r,q)\,dr\wedge\frac{d\epsilon}{\epsilon^2},\qquad \rho(r,q)=-\frac{\sqrt3}2\,\frac{\sin\vartheta}{\cos^4\vartheta}\,(1-q),\qquad \vartheta=\alpha-\sqrt3\,r,
+\end{equation}
+at fixed $z$, and $\rho(0,0)=-12$.
+\end{lemma}
+
+\begin{proof}
+In the variables $u=\tan\vartheta$ and $x=t-\vartheta$, the relation \eqref{eq:F1} reads $u^3+u'^3+\frac32\tan x\,(u^2-u'^2)=3\lambda/(2\pi)$ and $x'=x-2\arctan u'$. At fixed $\lambda$, implicit differentiation gives $\partial u'/\partial u=-u(u+\tan x)/(u'(u'-\tan x))$, and since $dx'=dx-2(1+u'^2)^{-1}du'$, the Jacobian of $(u,x)\mapsto(u',x')$ is $\partial u'/\partial u$. With $\phi=\arctan u'$ one has $u'\cos x'+\sin x'=\sin(x-\phi)/\cos\phi=\sin x-u'\cos x$, and $\sin x-u'\cos x=-\cos x\,(u'-\tan x)$. Therefore
+\[
+u'(u'\cos x'+\sin x')\,du'\wedge dx'=u(u\cos x+\sin x)\,du\wedge dx .
+\]
+Now $du\wedge dx=du\wedge dt$, $du=-\sqrt3(1+u^2)\,dr$ and $u\cos(t-\vartheta)+\sin(t-\vartheta)=\sin t/\cos\vartheta$, so the preserved form is $-\sqrt3\sin\vartheta\cos^{-4}\vartheta\,\sin t\,dr\wedge dt$. Finally $dt=i\,d\epsilon/\epsilon$ and $\sin t=(1-q)/(2i\epsilon)$ give \eqref{eq:Omega}. At $r=q=0$, $\sin\alpha\cos^{-4}\alpha=8\sqrt3$.
+\end{proof}
+
+\subsection{The formal logarithm}
+Let $T=F^3$. In $\C[[r,\epsilon,z]]$ the linear part of $F$ is triangular with diagonal $(\omega,\omega,1)$, and the linear $z$-to-$r$ term of $T$ cancels in $1+\omega+\omega^2$; hence $T$ is tangent to the identity. The line $r=z=0$ is mapped by $F$ by $\epsilon\mapsto\omega\epsilon$. We also use the filtration of $\C(q)[[r,z]]$ (and of its $\epsilon$-multiples) by the total degree in $(r,z)$. For fixed $q$ the derivative of one step of $F$ in the $r$ direction at $r=z=0$ is $\sin t/\sin(t-2\alpha)$, which telescopes to $1$ over three steps. The ball branch
+\begin{equation}\label{eq:ball}
+\rb(z)=\frac{\alpha-\arctan\bigl(\sqrt3(1+z/4)^{1/3}\bigr)}{\sqrt3},\qquad \rb'(0)=-\tfrac1{48},
+\end{equation}
+is the radial function of the ball with tangent-section volume $\sqrt3\pi(4+z)$; it is independent of $t$ and $F$-invariant. Differentiating $T_r(\rb(z),q,z)=\rb(z)$ in $z$ shows that the linear $z$-term of $T_r-r$ vanishes. Thus $T_r-r\in(r,z)^2$ and $T_\epsilon-\epsilon\in\epsilon\,(r,z)$, and substitution by $T-\Id$ raises the $(r,z)$-degree by at least one (derivatives in $q$ do not lower it).
+
+\begin{lemma}[Formal logarithm]\label{lem:log}
+The series $V=\log T=\sum_{k\ge1}(-1)^{k+1}(T-\Id)^k/k$, acting by substitution, is a formal vector field, defined both in $\C[[r,\epsilon,z]]$ and in $\C(q)[[r,z]]$ with the same Taylor expansions at $q=0$. It satisfies
+\begin{gather*}
+V^z=0,\qquad V^r\ \text{even in }\epsilon,\qquad V^\epsilon=\epsilon\,\Upsilon(r,q,z),\\
+\mathrm{Lie}_V\Omega=0,\qquad F_*V=V.
+\end{gather*}
+\end{lemma}
+
+\begin{proof}
+On each finite filtered quotient define $T^s=\sum_k\binom sk(T-\Id)^k$, a finite sum. For integer $s$ it is the iterate, so $T^{s+s'}=T^sT^{s'}$ for integers, hence for all $s,s'$ by polynomial identity; differentiating at $s=0$ shows that $V$ is a derivation, i.e.\ a formal vector field. At each $(r,z)$-degree only finitely many terms contribute, with coefficients rational in $q$, so the two constructions agree. The ideal $(\epsilon)$ is preserved by $T$, hence $V^\epsilon$ is divisible by $\epsilon$; $V^z=0$ since $T$ preserves $z$; the parity follows from that of $F$. Since $T$ preserves $\Omega$ and the module of forms with a pole of order at most two along $\epsilon=0$, the same binomial argument gives $\mathrm{Lie}_V\Omega=0$. Finally $F$ commutes with $T$, hence with each $T^s$, and $F_*V=V$.
+\end{proof}
+
+\subsection{A Hamiltonian normalized by the ball}
+The one-form $\beta=i_V\Omega$ is closed at fixed $z$. On the ball branch $V^r=0$. We define the primitive by integrating in $r$:
+\begin{equation}\label{eq:Ham}
+H(r,\epsilon,z)=\frac{\mathcal M(r,q,z)}\epsilon,\qquad \mathcal M(r,q,z)=-\int_{\rb(z)}^r\rho(s,q)\,\Upsilon(s,q,z)\,ds ,
+\end{equation}
+the integral being formal and coefficientwise in $r$, in either coefficient ring.
+
+\begin{proposition}[Regular hodograph]\label{prop:hodograph}
+At fixed $z$, $dH=\beta$. Moreover $\mathcal M=(r-\rb(z))\,\Theta(r,q,z)$ with $\Theta\in\C[[r,q,z]]$, $\Theta(0,q,0)=0$ and $\partial_z\Theta(0,0,0)=3J/2$. Consequently there is a unique formal series
+\begin{equation}\label{eq:Z}
+Z(r,q)\in\C[[r,q]],\qquad Z(0,q)=0,\qquad \Theta(r,q,Z(r,q))=0 ,
+\end{equation}
+and the same series is obtained over $\C(q)$.
+\end{proposition}
+
+\begin{proof}
+Since $\beta=\rho\,(V^r\,d\epsilon/\epsilon^2-V^\epsilon\,dr/\epsilon^2)$, the $dr$-component of $dH$ equals that of $\beta$ by construction. Closedness of $\beta$ shows that the $d\epsilon$-components differ by a function of $\epsilon$ alone, which equals the $d\epsilon$-component of $\beta$ on the ball branch, where it vanishes because $V^r=0$ there. Hence $dH=\beta$, $\mathcal M$ is a regular formal power series without logarithmic terms, and $H$ is odd in $\epsilon$. The factorization holds because $\mathcal M$ vanishes at $r=\rb(z)$.
+
+On the ball branch, \eqref{eq:F2} gives $\epsilon\mapsto\omega e^{-2J\rb(z)}\epsilon$, so the three-step multiplier is $e^{-6J\rb(z)}$ and
+\begin{equation}\label{eq:Uball}
+\Upsilon(\rb(z),q,z)=-6J\rb(z)=\tfrac J8z+O(z^2).
+\end{equation}
+At $q=z=0$ the successive linear $r$-values in \eqref{eq:F2} are $r,\omega r,\omega^2r$, so the linear $r$-term of the logarithm of the three-step $\epsilon$-multiplier is $-2J(1+\omega+\omega^2)r=0$; thus $\partial_r\Upsilon(0)=0$ and $\partial_z\Upsilon(0)=J/8$. Since $\Theta=-\rho\Upsilon$ at $r=\rb$ and $\rho\Upsilon$ has vanishing $r$-derivative at the origin, $\partial_z\Theta(0)=-\rho(0,0)\partial_z\Upsilon(0)=3J/2$. On the line $r=z=0$, $T$ is the identity, so $\Upsilon(0,q,0)=0$ and $\Theta(0,q,0)=0$. The formal implicit function theorem gives \eqref{eq:Z}; over $\C(q)$ the coefficient of $z$ is the same nonzero constant, and uniqueness identifies the two expansions.
+\end{proof}
+
+\subsection{Identification with the prescribed branch}
+
+\begin{proposition}\label{prop:ident}
+The formal branch satisfies $Z\bigl(r_*(z,t),q\bigr)=z$, where $q=e^{-2it}$. In particular every coefficient of the inverse of $z\mapsto r_*(z,t)$ is a power series in $q$.
+\end{proposition}
+
+\begin{proof}
+The normalized solution $r_*$ lies in $z\,\C[q,q^{-1}][[z]]$ and is even in $\epsilon$. By \cref{lem:endpoint}(b) its graph is invariant under $T$, so its defining ideal is preserved by $T-\Id$ and by every term of $\log T$; thus $V$ is tangent to the curve and the pullback of $\beta=i_V\Omega$ to the curve at fixed $z$ vanishes. Hence $H(r_*,\epsilon,z)$ is independent of $\epsilon$; it is odd in $\epsilon$, so it vanishes. These substitutions are legitimate in the ring of formal $z$-series with Laurent polynomial coefficients in $\epsilon$, since each coefficient receives contributions from finitely many $(r,z)$-degrees. Thus $(r_*-\rb)\,\Theta(r_*,q,z)=0$. The first $z$-coefficients of $r_*$ and $\rb$ differ by $(1+q+q^{-1})/24$, because $R_1=\frac1{48}+\frac{q+q^{-1}}{24}$ and $\rb'(0)=-\frac1{48}$. The coefficient ring is an integral domain, so $\Theta(r_*,q,z)=0$, and uniqueness of the implicit graph over $\C(q)$ gives the claim.
+\end{proof}
+
+\subsection{Support of the hodograph}
+In the graded chart \eqref{eq:graded}, \cref{prop:ident} identifies $\mathcal W(U,\epsilon)=\epsilon^{-3}Z(\epsilon U,\epsilon^2)$, and the right side has no negative powers of $\epsilon$: the linear coefficient of $Z$ in $r$ is $1/R_1=48q/(2q^2+q+2)$, the quadratic one is $-R_2/R_1^3=O(q)$, and $Z(0,q)=0$; so $Z$ contains no monomial $r^kq^\ell$ of weighted degree $k+2\ell<3$.
+
+\begin{lemma}[Support]\label{lem:support}
+If $\mathcal W=\sum_{m\ge0}\epsilon^m\mathcal W_m(U)$, then $\mathcal W_m$ is a polynomial of degree at most $m+3$, and every monomial $U^k$ in $\mathcal W_m$ satisfies $k+m$ odd.
+\end{lemma}
+
+\begin{proof}
+A monomial $r^kq^\ell$ becomes $U^k\epsilon^{k+2\ell-3}$; so $m=k+2\ell-3$, $k\le m+3$, and $k+m=2k+2\ell-3$ is odd.
+\end{proof}
+
+\subsection{Invariance and the leading weighted part}
+
+\begin{lemma}\label{lem:lead}
+The graph $z=Z(r,q)$ is invariant under $F$ as a formal surface, and
+\begin{equation}\label{eq:Zlead}
+Z(r,q)=24\,rq+536\,r^3+\text{\rm terms of weighted degree}\ge4,
+\end{equation}
+with weights $1$ for $r$ and $2$ for $q$; equivalently $\mathcal W(U,0)=24U+536U^3$.
+\end{lemma}
+
+\begin{proof}
+By \cref{lem:log}, $F_*V=V$; since $F$ preserves $\Omega$, $d(F^*H-H)=0$ at fixed $z$. The difference is odd in $\epsilon$ and independent of $\epsilon$, hence zero. The factor $r-\rb$ is mapped to a unit multiple of itself, because $F$ preserves the ball branch and its derivative in the $r$ direction there is nonzero. Cancelling this factor in $F^*\mathcal M=\mathcal M$ shows that $F^*\Theta$ is a unit multiple of $\Theta$, so the zero set $z=Z(r,q)$ is $F$-invariant.
+
+Write the $R_n$ as Laurent polynomials in $q$. Formal inversion gives $[r]Z=1/R_1$, $[r^2]Z=-R_2/R_1^3$ and $[r^3]Z=2R_2^2/R_1^5-R_3/R_1^4$. As $q\to0$, \eqref{eq:R123} gives $R_1=\frac1{24q}+O(1)$, $R_2=\frac1{144q^2}+O(q^{-1})$ and $R_3=-\frac{67}{41472q^4}+O(q^{-3})$. Hence the linear and quadratic coefficients are $24q+O(q^2)$ and $O(q)$, and the cubic one has constant term $67\cdot24^4/41472=536$. Since $Z$ has no $r$-independent term, \eqref{eq:Zlead} follows.
+\end{proof}
+
+\subsection{The conditional analytic implication}
+
+\begin{proposition}\label{prop:cond}
+If $\limsup_n\norm{R_n}_{\ell^1}^{1/n}<\infty$, then the series $Z(r,q)$ converges in a neighbourhood of $(0,0)$, and $z=Z(r,q)$ is an analytic $F$-invariant graph at the axis $q=0$.
+\end{proposition}
+
+\begin{proof}
+By \cref{lem:graded}, $\mathcal W$ is analytic on a bidisk $\abs U<\varrho_U$, $\abs\epsilon<\varrho_\epsilon$, so its coefficients $t_{m,k}$ of $\epsilon^mU^k$ satisfy $\abs{t_{m,k}}\le C_*\varrho_\epsilon^{-m}\varrho_U^{-k}$ after a slight reduction of the radii. By \cref{lem:support},
+\[
+Z(r,q)=\sum_{m,k}t_{m,k}\,r^kq^{(m+3-k)/2},
+\]
+where $j=m+3-k$ is even and nonnegative. Writing $\abs{t_{m,k}}\abs r^k\abs q^{j/2}\le C_*\varrho_\epsilon^3\,(\abs r/(\varrho_\epsilon\varrho_U))^k(\abs q^{1/2}/\varrho_\epsilon)^j$, the series converges for $\abs r<\varrho_\epsilon\varrho_U$ and $\abs q<\varrho_\epsilon^2$. The $F$-invariance of \cref{lem:lead} is an identity of formal series between convergent series, hence an analytic identity.
+\end{proof}
+
+The formal logarithm, Hamiltonian and graph of this section were constructed without any convergence assumption; \cref{prop:cond} is the only place where convergence of the series enters.
+
+\section{The algebraic three-cycle and the graph obstruction}\label{sec:cycle}
+
+\subsection{Coordinates and the selected local map}
+Keep $J=i\sqrt3$ and $\omega=(-1+J)/2$, let $\vartheta=\alpha-\sqrt3\,r$, $B=\tan(\vartheta)/\sqrt3$ and $x=t-\vartheta$, and put
+\begin{gather*}
+\ssf=e^{-2ix}=\epsilon^2E(B),\qquad E(B)=\frac{1+JB}{1-JB},\\
+P(B)=2B^3-JB^2,\qquad Q(B)=2B^3+JB^2,
+\end{gather*}
+and $\sD=4+z$. The change $(r,q)\mapsto(B,\ssf)$ is analytic and invertible near $(0,0)\mapsto(1,0)$, since $E(1)=\omega$. In these coordinates \eqref{eq:F1}--\eqref{eq:F2} become
+\begin{equation}\label{eq:sel}
+P(B)+Q(B')-\sD+\ssf\,\bigl[Q(B)+P(B')-\sD\bigr]=0,\qquad \ssf'=\ssf\,E(B')^2 .
+\end{equation}
+The derivative of the left side with respect to $B'$ at $B=B'=1$, $\ssf=0$, is $Q'(1)=6+2J\ne0$; throughout, $B'$ denotes the analytic root near $1$ selected by \eqref{eq:sel}. We also use the identities
+\begin{equation}\label{eq:PQE}
+P'(B)=-E(B)\,Q'(B),\qquad \frac{3B-J}{3B+J}=-E(B).
+\end{equation}
+If $Z$ converges, the graph $z=Z(r,q)$ becomes an analytic invariant graph $z=\widetilde Z(B,\ssf)=Z(r(B),\ssf/E(B))$ near $(1,0)$.
+
+The coefficient field is fixed without any convergence hypothesis. Put $\kk=\Q(J)$. In exponential Fourier form, $\sqrt3\sin x=-\frac J2(e^{ix}-e^{-ix})$, the shifts by $\alpha$ multiply $e^{ikx}$ by powers of $e^{i\alpha}=(1+J)/2$, and $\sqrt3\,\partial_x$ multiplies $e^{ikx}$ by $Jk$; hence $R_n\in\kk[q,q^{-1}]$. Formal reversion puts each $r$-coefficient of $Z$ in $\kk(q)$, and by \cref{prop:hodograph} $Z\in\kk[[r,q]]$. The local inverse $r(B)$ has rational Taylor coefficients, since $r(1)=0$ and $dr/dB=-1/(1+3B^2)$, and $E\in\kk(B)$; hence $\widetilde Z\in\kk[[B-1,\ssf]]$.
+
+\subsection{The exact nonball three-cycle}
+Let $\sA=a^3$ and consider the equations for unknowns $\eta,\xi$
+\begin{equation}\label{eq:amp}
+v=1+\sA\eta,\qquad v\eta+(v-\tfrac12)\xi^2+\xi=0,\qquad v(v+1)\xi+v+\tfrac12+\sA\xi^2=0 .
+\end{equation}
+At $\sA=0$ they have the solution $\eta=15/32$, $\xi=-3/4$, and the Jacobian with respect to $(\eta,\xi)$ there is $\begin{psmallmatrix}1&1/4\\0&2\end{psmallmatrix}$. Hence \eqref{eq:amp} determines analytic functions $\eta(\sA)$, $\xi(\sA)$ near $\sA=0$ with these values. Define
+\begin{equation}\label{eq:cycle}
+\begin{gathered}
+\beta_j=v+\omega^ja+\omega^{-j}a^2\xi\quad(j=0,1,2),\\
+\sD(a)=4\bigl[v^3+6v\sA\xi+\sA+\sA^2\xi^3\bigr].
+\end{gathered}
+\end{equation}
+
+\begin{lemma}[Three-cycle]\label{lem:cycle}
+With $\mathsf g_1=v(v-1)+(v-\frac12)\sA\xi^2+\sA\xi$ and $\mathsf g_2=v(v+1)\xi+v+\frac12+\sA\xi^2$ one has, for $j=0,1,2$ and indices modulo $3$, the polynomial identity
+\[
+P(\beta_j)+Q(\beta_{j+1})-\sD(a)=-6\omega^{j+2}a\,\mathsf g_1-6\omega^{1-j}a^2\mathsf g_2 .
+\]
+Consequently, for every small $a\ne0$, $(\beta_0,\beta_1,\beta_2)$ is a three-cycle $\beta_j\mapsto\beta_{j+1}$ of the selected map \eqref{eq:sel} on $\ssf=0$ at $z(a)=\sD(a)-4$, and
+\begin{equation}\label{eq:lead}
+\beta_0=1+a-\tfrac34a^2+O(a^3),\qquad z(a)=-\tfrac{67}8a^3+O(a^6).
+\end{equation}
+Replacing $a$ by $\omega a$ permutes the $\beta_j$ cyclically and leaves $z$ unchanged.
+\end{lemma}
+
+\begin{proof}
+The identity is checked by expanding both sides in the characters $\omega^{\pm j}$; the nonconstant characters of the left side are $-6\omega^{j+2}a\,\mathsf g_1$ and $-6\omega^{1-j}a^2\mathsf g_2$, and its constant character vanishes by the definition of $\sD(a)$. Since $\mathsf g_1=\sA$ times the second equation of \eqref{eq:amp} (because $v-1=\sA\eta$) and $\mathsf g_2$ is the third, the right side vanishes. All $\beta_j$ tend to $1$ as $a\to0$, and the selected branch of \eqref{eq:sel} is unique near $1$, so $\beta_{j+1}$ is the selected image of $\beta_j$. The expansions follow from $\eta(0)=15/32$, $\xi(0)=-3/4$.
+\end{proof}
+
+Let $f_z$ denote the selected map on $\ssf=0$, i.e.\ $P(B)+Q(f_z(B))=4+z$, and $T_z=f_z^3$. The ball fixed point is $b(z)=(1+z/4)^{1/3}$.
+
+\begin{lemma}[The axis]\label{lem:axis}
+There is a unique analytic function $z_{\mathrm{ax}}(B)$ near $B=1$ such that the fixed points of $T$ near $(1,0)$ off the ball are exactly the points $z=z_{\mathrm{ax}}(B)$. It satisfies $z_{\mathrm{ax}}(\beta_j(a))=z(a)$, and the formal axis $\widetilde Z(B,0)$ of the hodograph equals $z_{\mathrm{ax}}(B)$ as a formal series. In particular $\widetilde Z(B,0)=-\frac{67}8(B-1)^3+O((B-1)^4)$.
+\end{lemma}
+
+\begin{proof}
+The quotient $G(B,z)=[T_z(B)-B]/[B-b(z)]$ is analytic near $(1,0)$. Since $f_0'(1)=\omega$ and $f_0$ commutes with $T_0$, if $T_0(B)-B=c(B-1)^k+\cdots$ with $c\ne0$ and $k\ge2$, then $\omega c=c\omega^k$, so $k\equiv1\pmod3$ and $k\ge4$; hence $\partial_BG(1,0)=0$. By \eqref{eq:PQE}, $f_z'(b(z))=E(b(z))$, so $G(b(z),z)=E(b(z))^3-1$; as $E(1)=\omega$, $(\log E)'(1)=J/2$ and $b'(0)=1/12$, this equals $Jz/8+O(z^2)$, and $\partial_zG(1,0)=J/8\ne0$. The implicit function theorem gives $z_{\mathrm{ax}}$. The cycle points are fixed by $T$ and lie off the ball for $a\ne0$, so $z(a)=z_{\mathrm{ax}}(\beta_j(a))$.
+
+By \cref{lem:lead} the formal axis $\zeta(B)=\widetilde Z(B,0)$ is invariant under $(B,z)\mapsto(f_z(B),z)$, hence under $T$, and by \eqref{eq:Zlead}, $B-1=-4r+O(r^2)$ and $q=\ssf/E(B)$, $\zeta(B)=-\frac{67}8(B-1)^3+O((B-1)^4)$. If $T(B,\zeta(B))-B=c(B-1)^k+\cdots$ with $c\ne0$, then $\zeta(T(B,\zeta(B)))-\zeta(B)=-\frac{201}8c(B-1)^{k+2}+\cdots\ne0$, a contradiction; so $T(B,\zeta(B))=B$. Since $B-b(\zeta(B))\ne0$ as a formal series and $\kk[[B-1]]$ is an integral domain, $G(B,\zeta(B))=0$, and uniqueness in the formal implicit function theorem gives $\zeta=z_{\mathrm{ax}}$.
+\end{proof}
+
+\subsection{The multiplier}
+Define $K=E(\beta_0)E(\beta_1)E(\beta_2)$. By \eqref{eq:PQE},
+\begin{equation}\label{eq:mult}
+f_z'(\beta_j)=-\frac{P'(\beta_j)}{Q'(\beta_{j+1})}=-\frac{\beta_j(3\beta_j-J)}{\beta_{j+1}(3\beta_{j+1}+J)},\qquad (f_z^3)'(\beta_j)=K .
+\end{equation}
+By \eqref{eq:sel} the three-step multiplier of $\ssf$ along the cycle is $K^2$, and in the original chart the three-step multiplier of $\epsilon$ is $K$.
+
+\begin{lemma}[Multiplier]\label{lem:mult}
+With $d_0=1-9v^2+9\sA\xi$ and $d_1=3(v-v^3-\sA-\sA^2\xi^3+3v\sA\xi)$ one has $K=(d_0+Jd_1)/(d_0-Jd_1)$, and
+\begin{equation}\label{eq:K}
+K=1+\kappa a^3+O(a^6),\qquad \kappa=\frac{201J}{64}.
+\end{equation}
+For real $\sA$, $K$ has modulus one and its phase has nonzero derivative at $\sA=0$. Hence for every large odd $m$ there is a unique small $\sA_m>0$ with $K=e^{2\pi i/m}$, and
+\begin{equation}\label{eq:Am}
+\sA_m=\frac{128\pi}{201\sqrt3\,m}+O(m^{-2}),\qquad z(a_m)=-\frac{16\pi}{3\sqrt3\,m}+O(m^{-2}),
+\end{equation}
+where $a_m=\sA_m^{1/3}>0$.
+\end{lemma}
+
+\begin{proof}
+Expanding the product of the three M\"obius factors and using the symmetric functions of $\beta_0,\beta_1,\beta_2$, which are polynomials in $v,\sA,\xi$, gives the formula for $K$. At $\sA=0$, $d_0=-8$ and $d_1=0$, and differentiating \eqref{eq:amp} gives $\partial_\sA d_1(0)=-201/16$; this yields \eqref{eq:K}. For real $\sA$ the numbers $d_0,d_1$ are real, so $\abs K=1$, and the phase of $K$ is $\frac{201\sqrt3}{64}\sA+O(\sA^2)$. The asymptotics \eqref{eq:Am} follow from \eqref{eq:lead}.
+\end{proof}
+
+\subsection{Graph jets}
+Let $a\ne0$ be small and $z=z(a)$. Suppose that a graph $z=\widetilde Z(B,\ssf)$, analytic near $(1,0)$ and invariant under \eqref{eq:sel}, has axis $z_{\mathrm{ax}}$. Since $z_{\mathrm{ax}}'(\beta_j)\ne0$ for small $a\ne0$ by \eqref{eq:lead}, the implicit function theorem gives at the fixed value $z(a)$ three germs
+\[
+B_j(\ssf)=\beta_j+\sum_{n\ge1}b_{j,n}\ssf^n
+\]
+of the level set near $(\beta_j,0)$. Invariance means that \eqref{eq:sel} holds with $B=B_j(\ssf)$ and $B'=B_{j+1}(y)$, where $y=\ssf E(B_{j+1}(y))^2$. This is an identity of local analytic germs; it does not presuppose any normal form for the map on the graph.
+
+For a series $\gamma(u)$ and a scalar function $\mathsf F$ put $\Lambda_0(\mathsf F,\gamma)=\mathsf F(\gamma(0))$ and
+\[
+\Lambda_n(\mathsf F,\gamma)=\frac1n[u^{n-1}]\,\mathsf F'(\gamma(u))\,\gamma'(u)\,E(\gamma(u))^{2n}\qquad(n\ge1).
+\]
+By Lagrange inversion applied to $y=\ssf E(\gamma(y))^2$, $\Lambda_n(\mathsf F,\gamma)=[\ssf^n]\mathsf F(\gamma(y(\ssf)))$.
+
+\begin{lemma}[Jet recurrence]\label{lem:jets}
+For $n\ge1$ and $j=0,1,2$,
+\begin{equation}\label{eq:jet}
+\begin{gathered}
+A_jb_{j,n}+C_{j,n}b_{j+1,n}=\mathfrak r_{j,n},\\
+A_j=P'(\beta_j),\qquad C_{j,n}=Q'(\beta_{j+1})E(\beta_{j+1})^{2n},
+\end{gathered}
+\end{equation}
+where $\mathfrak r_{j,n}$ is minus the value of
+\[
+[\ssf^n]P(B_j)+\Lambda_n(Q,B_{j+1})+[\ssf^{n-1}]Q(B_j)+\Lambda_{n-1}(P,B_{j+1})-\sD\,\mathbf 1_{n=1}
+\]
+with $b_{0,n},b_{1,n},b_{2,n}$ replaced by $0$; it depends only on the jets of order less than $n$. For example $\mathfrak r_{j,1}=-2J(\beta_j^2-\beta_{j+1}^2)$. The $3\times3$ matrix $M_n$ of \eqref{eq:jet} satisfies
+\begin{equation}\label{eq:det}
+\det M_n=\prod_jQ'(\beta_j)\,\bigl[K^{2n}-K\bigr].
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Taking the coefficient of $\ssf^n$ in \eqref{eq:sel} gives the displayed expression, which is affine in the jets of order $n$, with the coefficients $A_j$ and $C_{j,n}$ (the latter from the term $i\,b_{j+1,i}u^{i-1}$, $i=n$, of $\gamma'$ in $\Lambda_n$). For $n=1$ the lower-order part is $Q(\beta_j)+P(\beta_{j+1})-\sD=-[P(\beta_j)-Q(\beta_j)]+[P(\beta_{j+1})-Q(\beta_{j+1})]$ by the cycle equation, which gives $\mathfrak r_{j,1}$. The matrix is cyclic, so $\det M_n=\prod_jA_j+\prod_jC_{j,n}$, and $\prod_jP'(\beta_j)=-K\prod_jQ'(\beta_j)$ by \eqref{eq:PQE}.
+\end{proof}
+
+\subsection{The obstruction scalar}
+Put $\mathsf d_{j,n}=P'(\beta_j)b_{j,n}$ and $k=2n-1$. By \eqref{eq:PQE}, $C_{j,n}=-P'(\beta_{j+1})E(\beta_{j+1})^{k}$, so \eqref{eq:jet} becomes the transport system
+\begin{equation}\label{eq:transport}
+\mathsf d_{j,n}-E(\beta_{j+1})^k\,\mathsf d_{j+1,n}=\mathfrak r_{j,n},\qquad (1-K^k)\,\mathsf d_{0,n}=\Obs_n,
+\end{equation}
+where
+\begin{equation}\label{eq:obs}
+\Obs_n=\mathfrak r_{0,n}+E(\beta_1)^k\mathfrak r_{1,n}+\bigl(E(\beta_1)E(\beta_2)\bigr)^k\mathfrak r_{2,n}.
+\end{equation}
+
+\begin{lemma}[Obstruction]\label{lem:obs}
+Let $m$ be odd, $K$ a primitive $m$-th root of unity and $N=(m+1)/2$. Then the jets of order $n<N$ are uniquely determined by \eqref{eq:jet}, and the system \eqref{eq:jet} of order $N$ is solvable if and only if $\Obs_N=0$.
+\end{lemma}
+
+\begin{proof}
+For $n<N$, $1\le2n-1<m$, so $K^{2n-1}\ne1$ and $M_n$ is invertible by \eqref{eq:det}. For $n=N$, $K^{2N-1}=1$, and the transport system is solvable if and only if the combination \eqref{eq:obs} of the right sides vanishes; the corresponding left-null vector of $M_N$ is $(1,E(\beta_1)^m,(E(\beta_1)E(\beta_2))^m)$.
+\end{proof}
+
+The scalar $\Obs_N$ depends on the normalization of the left-null vector and of the coordinates, but its vanishing does not.
+
+\section{Prime-adic nonvanishing}\label{sec:padic}
+
+\subsection{The curve and the good primes}\label{sec:curve}
+The point $o=(a,\eta,\xi)=(0,\frac{15}{32},-\frac34)$ of the affine curve defined by \eqref{eq:amp} with $\sA=a^3$ is smooth, by the Jacobian computed above. Hence exactly one irreducible component passes through $o$; it is defined over $\Q$ and geometrically irreducible, since it contains the smooth rational point $o$. Let $\mathcal C$ be its smooth projective model. The functions $\beta_j$, $E(\beta_j)$, $K$, and all quantities of \cref{sec:cycle} computed from them by the finite recurrence, are rational functions on $\mathcal C$ defined over $\kk$. The function $K$ extends to a finite morphism $K\colon\mathcal C\to\mathbb P^1$, nonconstant by \eqref{eq:K}; let $\nu\ge1$ be its degree.
+
+Let $p\ge5$ be a prime with $p\ne67$, and let $\mathcal O$ be the ring of integers of an unramified extension of $\Q_p$ containing $J$. The equations \eqref{eq:amp} have $p$-integral coefficients, the base point is $p$-integral and the Jacobian determinant $2$ is a unit, so $\eta,\xi\in\mathcal O[[\sA]]$. Hence $\beta_j\in\mathcal O[[a]]$; $E(\beta_j)$ are units of $\mathcal O[[a]]$ since $E(1)=\omega$ and $1-J$ has norm $4$; $P'(\beta_j)$ and $Q'(\beta_j)$ are units since $P'(1)=6-2J$ and $Q'(1)=6+2J$ have norm $48$; and $\kappa=201J/64$ is a unit because $201=3\cdot67$. All these series converge for $\abs a_p<1$.
+
+\subsection{Laurent orders from the formal hodograph}
+The formal hodograph exists without any convergence assumption. By \cref{lem:lead} and $B-1=-4r+O(r^2)$, $q=\ssf/E(B)$, its weighted leading part in the coordinates $(B,\ssf)$ is
+\[
+\widetilde Z(B,\ssf)=-\tfrac{67}8(B-1)^3-\tfrac6\omega(B-1)\ssf+\text{terms of weighted degree}\ge4 .
+\]
+Substitute $\ssf=a^2\theta$, $B=1+a\,\mathsf h(a,\theta)$ and $z=z(a)$. Dividing the equation $\widetilde Z=z(a)$ by $a^3$ gives a formal implicit equation whose reduction at $a=0$ is
+\begin{equation}\label{eq:leadeq}
+\mathsf f(\theta)^3+c_*\,\theta\,\mathsf f(\theta)=1,\qquad \mathsf f(0)=1,\qquad c_*=\frac{48}{67\omega}.
+\end{equation}
+Its derivative in $\mathsf f$ at $(1,0)$ is $3$, so the formal implicit function theorem gives $\mathsf h\in\kk[[a,\theta]]$ with $\mathsf h(0,\theta)=\mathsf f(\theta)$.
+
+\begin{lemma}[Laurent order]\label{lem:laurent}
+For generic small $a$ the jets of the formal hodograph at the cycle points are the unique solutions of \eqref{eq:jet}, and as functions of $a$
+\begin{equation}\label{eq:laurentorder}
+b_{j,n}\in a^{1-2n}\,\kk[[a]],\qquad a^{2n-1}b_{0,n}\big|_{a=0}=\mathsf f_n:=[\theta^n]\mathsf f(\theta).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+By \cref{lem:lead} the formal graph is invariant, so its level-set jets at $z(a)$ satisfy \eqref{eq:jet}; for generic $a$, $K^{2n-1}\ne1$ for all $n$ and the solution is unique. Expanding $B=1+a\,\mathsf h(a,\ssf/a^2)$ in powers of $\ssf$ gives $b_{0,n}=a^{1-2n}[\theta^n]\mathsf h(a,\theta)$. The same argument at $\beta_j(a)=\beta_0(\omega^ja)$ gives the other jets.
+\end{proof}
+
+\subsection{Integral lower jets}
+Let $p$ be as above and $N=(p+1)/2$. We regard \eqref{eq:transport} as identities between Laurent series in $a$, valid for generic $a$.
+
+\begin{lemma}\label{lem:integral}
+For $1\le n<N$, $a^{2n-1}b_{j,n}\in\mathcal O[[a]]$, and for every $1\le n\le N$,
+\begin{equation}\label{eq:tilde}
+\widetilde\Obs_n:=a^{2n-4}\,\Obs_n\in\mathcal O[[a]].
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+We argue by induction on $n$. In the source of order $n$ the jets of order $n$ are set to zero, so each term of $[\ssf^n]P(B_j)$ and of $\Lambda_n(Q,B_{j+1})$ contains at least two jet factors of positive order, with total order $n$; by the induction hypothesis its Laurent order is at least $2-2n$. The terms of order $n-1$ have Laurent order at least $3-2n$ when $n\ge2$, and at $n=1$ the source is an integral power series. The Lagrange factors $1/n$ are units because $n\le N<p$. Hence $\mathfrak r_{j,n}$ and $\Obs_n$ lie in $a^{2-2n}\mathcal O[[a]]$. On the other hand, by \eqref{eq:transport}, \eqref{eq:K} and \eqref{eq:laurentorder}, $\Obs_n=(1-K^{2n-1})P'(\beta_0)b_{0,n}\in a^{4-2n}\kk[[a]]$. Thus the coefficients of $a^{2-2n}$ and $a^{3-2n}$ in $\Obs_n$ vanish, which proves \eqref{eq:tilde}. For $n<N$, $2n-1$ is a positive integer smaller than $p$, so $(1-K^{2n-1})/a^3$ is a power series with unit constant term $-(2n-1)\kappa$. Dividing $\Obs_n$ by it and by the unit $P'(\beta_0)$ shows $a^{2n-1}b_{0,n}\in\mathcal O[[a]]$, and cyclic permutation gives the other two jets.
+\end{proof}
+
+\subsection{Frobenius telescoping}
+In this subsection we reduce modulo $p$, i.e.\ we work in the field of Laurent series over the residue field of $\mathcal O$; by \cref{lem:integral} the lower jets and $\widetilde\Obs_N$ have reductions. Let $\gamma(u)=\beta+\sum_{1\le n<N}b_nu^n$ be one of the germs, with the jet of order $N$ set to zero as in the definition of the source.
+
+\begin{lemma}\label{lem:frob}
+With $L_j=[u^N]P(\gamma_j)+[u^{N-1}]Q(\gamma_j)$,
+\begin{equation}\label{eq:tele}
+\Obs_N\equiv-(1-K^p)\,L_0\pmod p,\qquad \ord_a\bigl(\widetilde\Obs_N\bmod p\bigr)\ge3p-2 .
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Since $2N=p+1$ and $E(\gamma)^p\equiv E(\beta)^p\pmod{(p,u^p)}$, and $N<p$, the relation $P'=-EQ'$ gives
+\begin{gather*}
+\Lambda_N(Q,\gamma)\equiv-E(\beta)^p\,[u^N]P(\gamma)\pmod p,\\
+\Lambda_{N-1}(P,\gamma)\equiv-E(\beta)^p\,[u^{N-1}]Q(\gamma)\pmod p;
+\end{gather*}
+for the second use $2(N-1)=p-1$ and $P'/E=-Q'$; the divisions by $N$ and $N-1$ are legitimate. Hence $\mathfrak r_{j,N}\equiv-L_j+E(\beta_{j+1})^pL_{j+1}$, and summing with the weights of \eqref{eq:obs}, $k=p$, the sum telescopes to $-(1-K^p)L_0$. Each term of $L_0$ has at least two jet factors or one jet of order $N-1$, so $\ord_aL_0\ge2-2N=1-p$. In characteristic $p$, $1-K^p=(1-K)^p$ has order $3p$, since $\kappa$ is a unit. Therefore $\ord_a\widetilde\Obs_N\ge(p-3)+3p+(1-p)=3p-2$.
+\end{proof}
+
+\subsection{The leading coefficient}
+Lagrange inversion of \eqref{eq:leadeq} gives
+\begin{equation}\label{eq:fn}
+\mathsf f_n=\frac{(-c_*)^n}{3^nn!}\prod_{j=0}^{n-2}(n-2-3j).
+\end{equation}
+
+\begin{lemma}\label{lem:unit}
+$\widetilde\Obs_N(0)=-p\,\kappa\,P'(1)\,\mathsf f_N=p\,u_p$ with $u_p\in\mathcal O^\times$. Consequently
+\begin{equation}\label{eq:decomp}
+\widetilde\Obs_N(a)=p\,u_p+p\,a\,\mathfrak h_p(a)+a^{3p-2}\,\mathfrak g_p(a),\qquad \mathfrak h_p,\mathfrak g_p\in\mathcal O[[a]].
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For $n=N=(p+1)/2$ the factors in \eqref{eq:fn} lie between $3-p$ and $(p-3)/2$, so their absolute values are smaller than $p$. None vanishes: $n-2-3j=0$ would give $N\equiv2\pmod3$, hence $p\equiv3\pmod6$, which is impossible for a prime $p\ge5$. Also $N!$ and $3^N$ are $p$-adic units, and $c_*$ is a unit for $p\ne2,3,67$. Thus $\mathsf f_N\in\mathcal O^\times$. In characteristic zero $1-K^p=-p\kappa a^3+O(a^6)$, so by \eqref{eq:transport} and \eqref{eq:laurentorder}, $\Obs_N=-p\kappa P'(1)\mathsf f_Na^{4-2N}(1+O(a))$, which gives the value of $\widetilde\Obs_N(0)$. By \cref{lem:integral} and \cref{lem:frob} every coefficient of $a^i$, $1\le i<3p-2$, in $\widetilde\Obs_N$ is divisible by $p$, which gives \eqref{eq:decomp}.
+\end{proof}
+
+\subsection{Nonvanishing at cyclotomic points}
+
+\begin{proposition}\label{prop:padic}
+Let $\zeta_p$ be a primitive $p$-th root of unity in $\C_p$. There is an algebraic point $x_p\in\mathcal C(\overline\kk)$ on the local branch through $o$, with $K(x_p)=\zeta_p$, at which all lower jets of order $n<N$ are defined and
+\begin{equation}\label{eq:val}
+v_p\bigl(\widetilde\Obs_N(x_p)\bigr)=1,\qquad v_p\bigl(\Obs_N(x_p)\bigr)=\frac{2p}{3(p-1)},
+\end{equation}
+where $v_p(p)=1$. In particular $\Obs_N(x_p)\ne0$, and $\Obs_N(y)\ne0$ for every conjugate $y$ of $x_p$ over $\kk$.
+\end{proposition}
+
+\begin{proof}
+Since $K$ is an integral function of $\sA=a^3$ near $0$ with unit derivative $\kappa$, its inverse $\sA=\sA(K-1)$ is integral. Evaluating at $K=\zeta_p$ gives $\sA$ in the maximal ideal with $v_p(\sA)=v_p(\zeta_p-1)=1/(p-1)$, and a cube root gives a point $x_p$ on the branch through $o$ with $v_p(a(x_p))=1/(3(p-1))$. It is algebraic because it lies in the finite fiber $K^{-1}(\zeta_p)$. In \eqref{eq:decomp} the first term has valuation $1$, the second has valuation larger than $1$, and the third has valuation at least $(3p-2)/(3p-3)>1$; this gives \eqref{eq:val}. The denominators $1-K^{2n-1}$, $n<N$, do not vanish at $x_p$, because $1\le2n-1<p$. The function $\Obs_N$ is a rational function on $\mathcal C$ defined over $\kk$, regular at $x_p$, and its value there is a nonzero algebraic number; its value at a conjugate $y=\sigma(x_p)$, $\sigma\in\mathrm{Gal}(\overline\kk/\kk)$, is $\sigma(\Obs_N(x_p))\ne0$, and the denominators remain nonzero at $y$.
+\end{proof}
+
+A complex point near $o$ obtained by choosing roots in the complex embedding need not correspond to the $p$-adic branch used here; for example the principal complex square root of $e^{2\pi i/p}$ reduces to $-1$, whereas the $p$-adic square root near $1$ is the other root. The next section produces conjugates of $x_p$ near $o$ in the complex embedding.
+
+\section{Equidistribution of small points}\label{sec:equid}
+
+We fix the complex embedding of $\kk$ with $J=i\sqrt3$. On $\mathbb P^1$ over $\kk$ consider the squaring map $\phi([X:Y])=[X^2:Y^2]$ and the canonical adelic metric on $\mathcal O(1)$, given at every place $v$ by $\norm{s([X:Y])}_v=\abs{s(X,Y)}_v/\max(\abs X_v,\abs Y_v)$ for linear forms $s$. Its height is the canonical height of $\phi$, which is the Weil height and vanishes exactly at $0$, $\infty$ and the roots of unity. The metric is semipositive: at the archimedean place it is the uniform limit of the smooth semipositive metrics with denominator $(\abs X^{2M}+\abs Y^{2M})^{1/(2M)}$, and at the finite places it is induced by the standard model. It satisfies $\phi^*\overline{\mathcal O(1)}=\overline{\mathcal O(1)}^{\otimes2}$ isometrically; if $I$ denotes the arithmetic self-intersection of $\overline{\mathcal O(1)}$, the projection formula gives $\widehat c_1(\phi^*\overline{\mathcal O(1)})^2=2I$, while the isometry gives $4I$, so $I=0$. See \cite[Sections 1.1 and 3.5]{Yuan} for this canonical metric.
+
+Let $\overline{\mathcal L}=K^*\overline{\mathcal O(1)}$ on $\mathcal C$. Its degree is $\nu>0$, so $\mathcal L$ is ample; the pulled-back metric is semipositive; $\widehat c_1(\overline{\mathcal L})^2=\nu I=0$, so the height of $\mathcal C$ in the normalization $h_{\overline{\mathcal L}}(\mathcal C)=\widehat c_1(\overline{\mathcal L})^2/(2\deg\mathcal L)$ of \cite{Yuan} vanishes; and $h_{\overline{\mathcal L}}(x)=h(K(x))$ for algebraic points $x$. At the complex place the curvature measure of $\overline{\mathcal O(1)}$ is the normalized Haar measure on $\abs t=1$, so the measure in \cite[Theorem 3.1]{Yuan} is
+\[
+\mu_\infty=\frac1\nu\,K^*\bigl(\text{normalized Haar measure on }\abs t=1\bigr).
+\]
+
+\begin{proposition}[Accumulation]\label{prop:accum}
+There are primes $p_j\to\infty$, conjugates $y_j$ of the points $x_{p_j}$ of \cref{prop:padic} over $\kk$, and real numbers $a_j>0$, $a_j\to0$, such that $y_j$ is the point of the local branch through $o$ with parameter $a=a_j$ in the complex embedding, $K(y_j)$ is a primitive $p_j$-th root of unity, and $\Obs_{N_j}(y_j)\ne0$, $N_j=(p_j+1)/2$.
+\end{proposition}
+
+\begin{proof}
+The points $x_p$ are algebraic over $\kk$, pairwise distinct because their $K$-values have different prime orders, and of height zero. A sequence of distinct points on the irreducible curve $\mathcal C$ is generic, since every proper closed subset is finite. By \cite[Theorem 3.1]{Yuan}, whose hypotheses were verified above, the Galois orbits of the $x_p$ over $\kk$ are equidistributed with respect to $\mu_\infty$ at the complex place.
+
+Near $o$, $K=1+\kappa a^3+O(a^6)$ in the local coordinate $a$. By \cref{lem:mult}, $\abs K=1$ for real $\sA$ and the phase of $K$ has nonzero derivative in $\sA$ at $0$, so near $\sA=0$ the preimage of the unit circle is exactly the real $\sA$-axis. Consequently, in a small open sector $\Sigma$ of the $a$-plane around the positive real axis, $K^{-1}(\{\abs t=1\})\cap\Sigma$ is a segment of the positive real axis, and its $\mu_\infty$-mass is positive, equal to the length of its image arc divided by $2\pi\nu$. A nonnegative continuous function supported in such a sector, positive on that segment, has positive $\mu_\infty$-integral, so weak convergence gives, for all large $p$, a conjugate of $x_p$ in its support. Shrinking the sectors and passing to a diagonal subsequence gives $y_j\to o$ with $a(y_j)$ positive real, since the conjugates have $\abs{K}=1$. Each $K(y_j)$ is a conjugate of $\zeta_{p_j}$, hence a primitive $p_j$-th root of unity, and $\Obs_{N_j}(y_j)\ne0$ by \cref{prop:padic}. Near $o$ the rational functions of \cref{sec:cycle} on $\mathcal C$ agree with the local formulas of \cref{sec:cycle} in the parameter $a$, so the cycle at $y_j$ is the cycle of \cref{lem:cycle} with $a=a_j$.
+\end{proof}
+
+Writing $K(y_j)=e^{2\pi il_j/p_j}$ we have $l_j/p_j\to0$; it is not needed that $l_j=1$, since the first resonant order is $N_j=(p_j+1)/2$ for every primitive $p_j$-th root.
+
+\section{Proof of the main theorem}\label{sec:end}
+
+\begin{proof}[Proof of \cref{thm:main}]
+Suppose first that $\limsup_n\norm{R_n}_{\ell^1}^{1/n}<\infty$. By \cref{prop:cond} and the coordinate change of \cref{sec:cycle}, there is an analytic graph $z=\widetilde Z(B,\ssf)$ near $(1,0)$, invariant under the selected map \eqref{eq:sel}, whose axis is $z_{\mathrm{ax}}$ by \cref{lem:axis}. Let $p_j$, $y_j$ and $a_j$ be as in \cref{prop:accum}. For large $j$ the three cycle points $(\beta_i(a_j),0)$ lie in the domain of the graph, and $z_{\mathrm{ax}}'(\beta_i(a_j))\ne0$ because $z'(a)=-\frac{201}8a^2+O(a^5)$ and $\beta_i'(a)=\omega^i+O(a)$. The implicit function theorem gives the three germs $B_i(\ssf)$ of the level set $\{\widetilde Z=z(a_j)\}$, and invariance of the graph under \eqref{eq:sel} shows that their Taylor coefficients satisfy \eqref{eq:jet}. Since $K(y_j)$ is a primitive $p_j$-th root of unity, \cref{lem:obs} gives $\Obs_{N_j}(y_j)=0$, which contradicts \cref{prop:accum}. Hence $\limsup_n\norm{R_n}_{\ell^1}^{1/n}=\infty$.
+
+By \eqref{eq:deg} the coefficient $R_n$ has at most $6n+1$ Fourier modes, all with $\abs k\le3n$. Each Fourier coefficient is bounded by $\norm{R_n}_{C^0}$, so $\norm{R_n}_{\ell^1}\le(6n+1)\norm{R_n}_{C^0}$; moreover $\norm{R_n}_{C^0}\le\norm{R_n}_{C^j}$, $\norm{R_n}_{\ell^1}\le\norm{R_n}_\varrho$, and by the Cauchy--Schwarz inequality
+\[
+\norm{R_n}_{\ell^1}\le(6n+1)^{1/2}(1+9n^2)^{\max(0,-s)/2}\,\norm{R_n}_{H^s}.
+\]
+Since these factors grow at most polynomially in $n$, the $n$-th root $\limsup$ is infinite in each of the norms of the theorem. Finally $R_n$ and $\varphi_n/n!$ differ by the factor $(\sqrt3\pi)^n/\sqrt3$, which does not change the conclusion for the series in $\lambda-\lb$.
+\end{proof}
+
+\section*{Use of AI-assisted tools}
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{9}
+
+\bibitem{BL} J. A. Barker and D. G. Larman, \emph{Determination of convex bodies by certain sets of sectional volumes}, Discrete Math. \textbf{241} (2001), 79--96.
+
+\bibitem{Had} J. Haddad, \emph{An approximate counterexample to the Barker--Larman problem in dimension 4}, preprint (2026), arXiv:2609.10257v2.
+
+\bibitem{KS} Knowledge Sense, \emph{Exact counterexamples to the Barker--Larman problem in every dimension at least four}, companion manuscript (2026).
+
+\bibitem{Yuan} X. Yuan, \emph{Big line bundles over arithmetic varieties}, Invent. Math. \textbf{173} (2008), 603--649. Theorem and section numbers refer to arXiv:math/0612424v2.
+
+\end{thebibliography}
+
+\end{document}

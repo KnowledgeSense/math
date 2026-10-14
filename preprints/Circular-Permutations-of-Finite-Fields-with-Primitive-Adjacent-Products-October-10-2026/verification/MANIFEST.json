@@ -1,0 +1,46 @@
+{
+  "files": {
+    "certificate_inputs.json": {
+      "bytes": 970381,
+      "sha256": "f0bbc8b3f9d8da33f812e015d9037eb95cf9d1b9890fb49328439b7c96b0b309"
+    },
+    "expected_reports.json": {
+      "bytes": 1031060,
+      "sha256": "ca9ce525f7bfc7b6b89a7b72327a898a91e010065c2e9a22ac855e85dd79bd50"
+    },
+    "README.md": {
+      "bytes": 2491,
+      "sha256": "13746feb52108f85b83be08e44280b067d8649073095af2f59f1e63d15d4d803"
+    },
+    "run_review.py": {
+      "bytes": 4807,
+      "sha256": "6cb27579eb4e38b796078c7c3a37e2d8ceeea301be2d50b6404295d76480e644"
+    },
+    "source/audit_residual_orders.cpp": {
+      "bytes": 2096,
+      "sha256": "0e021c9f0b43c884f934793309ff1dc335f5d08b090cc9c5006020ac2731c2ef"
+    },
+    "source/extra_limits.hpp": {
+      "bytes": 1756,
+      "sha256": "e87059433d63b1f7c274b6d7faccce50ec96854e1b38f5cf7938f00476b1ef29"
+    },
+    "source/independent_order_audit.cpp": {
+      "bytes": 1106,
+      "sha256": "26fb8b3b7b9e1df0436c7b6576d96b4467162e1e6e1b4517f73fb105544b9eda"
+    },
+    "source/strict_io.py": {
+      "bytes": 7069,
+      "sha256": "64326f65a6cf718b77c738edc88bf3189cbff9e2b8428b5bf7e238d862c15370"
+    },
+    "source/verify_fallback.py": {
+      "bytes": 1997,
+      "sha256": "1a3b7ab7560b21d9e0c1480c716b21aad70f9217e6604f5d3d9c6d96af2ea860"
+    },
+    "source/verify_field.cpp": {
+      "bytes": 7365,
+      "sha256": "02c1e7b330f69cff319fa34dbe75526ca678361b8b59deb6451e7111dbbff481"
+    }
+  },
+  "input_files": 8083,
+  "source_verifier_sha256": "02c1e7b330f69cff319fa34dbe75526ca678361b8b59deb6451e7111dbbff481"
+}

@@ -1,0 +1,25 @@
+{
+  "status": "all assertions passed",
+  "exhaustive_profiles": 574,
+  "total_profiles": 604,
+  "full_gap_profiles": 3,
+  "generic_fringe_sets": 502,
+  "generic_degree_cases": 4016,
+  "extreme_local_comparisons": 560,
+  "example_beta": [
+    1,
+    0,
+    1,
+    0,
+    0,
+    1,
+    -5,
+    -11,
+    -17,
+    -23
+  ],
+  "elapsed_seconds": 0.6177841000026092,
+  "completed_utc": "2026-10-12T03:33:10.165626+00:00",
+  "code_sha256": "a394232125cc2ac736fef600d4b3e63f7b2f67a406ff42e3b1163da82da071f7",
+  "records_sha256": "701b0135c62aa5f3e8df02d65a5be4d7f7d9318cd8ffca48839a60df103b1572"
+}

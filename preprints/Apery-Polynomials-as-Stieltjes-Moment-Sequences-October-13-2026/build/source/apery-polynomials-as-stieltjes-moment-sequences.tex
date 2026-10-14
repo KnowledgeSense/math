@@ -1,0 +1,1099 @@
+\documentclass[11pt]{amsart}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage[expansion=false]{microtype}
+\usepackage[shortlabels]{enumitem}
+\usepackage{xcolor}
+\usepackage[
+  pdftitle={Ap\'ery polynomials as Stieltjes moment sequences},
+  pdfauthor={Knowledge Sense},
+  pdfsubject={Mathematics},
+  pdfkeywords={Apery polynomials, Stieltjes moment problem, Stieltjes transform, complete elliptic integral, lattice Green function},
+  colorlinks=true, linkcolor=blue!50!black, citecolor=blue!50!black, urlcolor=blue!50!black
+]{hyperref}
+
+\hyphenation{manuscript}
+\emergencystretch=2em
+
+\numberwithin{equation}{section}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Pim}{\Pi_{-}}
+\newcommand{\Pip}{\Pi_{+}}
+\newcommand{\dd}{\,\mathrm{d}}
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\im}{Im}
+\newcommand{\Kc}{\mathbf{K}}
+
+\begin{document}
+
+\title[Ap\'ery polynomials as Stieltjes moment sequences]{Ap\'ery polynomials as Stieltjes moment sequences}
+
+\author{Knowledge Sense}
+\address{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{13 October 2026}
+
+\subjclass[2020]{Primary 44A60; Secondary 05A10, 11B65, 30E05, 33E05}
+
+\keywords{Ap\'ery polynomials, Stieltjes moment sequence, Stieltjes transform, analytic continuation, complete elliptic integral}
+
+\begin{abstract}
+For real $x$ let $A_n(x)=\sum_{j=0}^{n}\binom{n}{j}^2\binom{n+j}{j}^2x^j$ be the
+Ap\'ery polynomials. Sokal conjectured that $(A_n(x))_{n\ge0}$ is a Stieltjes
+moment sequence for every $x\ge1$; the case $x=1$, concerning the Ap\'ery
+numbers, was proved by Edgar. We prove the conjecture. For every real $x\ge1$
+there is a probability measure $\mu_x$ on $[0,c_x]$, where
+$c_x=\bigl(1+2\sqrt{x}+2\sqrt{x+\sqrt{x}}\bigr)^2$, such that
+$A_n(x)=\int t^n\dd\mu_x(t)$ for all $n\ge0$. The measure is absolutely
+continuous, and its density is given explicitly by one-dimensional integrals
+of complete elliptic integrals; it is strictly positive on $(0,c_x)$ and has
+at most a squared logarithmic singularity at the origin. The proof writes the
+generating function of $x^{-n}A_n(x)$ as an average of a resolvent over a
+three-dimensional torus, continues the resulting Stieltjes transform through a
+Joukowski-type change of variables, and identifies the boundary values on the
+second sheet by means of the logarithmic monodromy of the complete elliptic
+integral.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+A sequence $(a_n)_{n\ge0}$ of real numbers is a \emph{Stieltjes moment
+sequence} if there is a positive Borel measure $\mu$ on $[0,\infty)$ such that
+$a_n=\int t^n\dd\mu(t)$ for all $n\ge0$; equivalently, the Hankel matrix
+$(a_{i+j})_{i,j\ge0}$ is totally positive \cite{WZ}. Many sequences
+arising in enumerative combinatorics are Stieltjes moment sequences; see \cite{So20,WZ}
+and the references there.
+
+The Ap\'ery numbers $A_n=\sum_{k=0}^{n}\binom{n}{k}^2\binom{n+k}{k}^2$ appear in
+Ap\'ery's proof of the irrationality of $\zeta(3)$ \cite{Ap}. Sokal conjectured
+that they form a Stieltjes moment sequence, and Edgar \cite{Ed} proved this,
+with a representing density expressed through Heun functions. The
+\emph{Ap\'ery polynomials}
+\begin{equation}\label{eq:apery}
+A_n(x)=\sum_{j=0}^{n}\binom{n}{j}^2\binom{n+j}{j}^2x^j\qquad(n\ge0)
+\end{equation}
+satisfy $A_n(1)=A_n$. Sokal \cite[Introduction, (1.2)]{So20} recorded as open
+the more general conjecture that $(A_n(x))_{n\ge0}$ is a Stieltjes moment
+sequence for every $x\ge1$, and the conjecture is restated as Conjecture~1 in
+\cite[slide~29]{So25}. Our main result settles it.
+
+\begin{theorem}\label{thm:main}
+Let $x\ge1$ be real and put
+\begin{equation}\label{eq:cx}
+c_x=\Bigl(1+2\sqrt{x}+2\sqrt{x+\sqrt{x}}\Bigr)^2 .
+\end{equation}
+There is a unique positive Borel measure $\mu_x$ on $\R$ such that
+\[
+A_n(x)=\int t^n\dd\mu_x(t)\qquad\text{for all } n\ge0 .
+\]
+It is a probability measure, it is absolutely continuous with respect to
+Lebesgue measure, and its support is $[0,c_x]$. Its density $\varphi_x$,
+given explicitly in \eqref{eq:density} below, is strictly positive on
+$(0,c_x)$ and satisfies $\varphi_x(t)=O(\log^2t)$ as $t\to0^+$. In particular,
+$(A_n(x))_{n\ge0}$ is a Stieltjes moment sequence.
+\end{theorem}
+
+\subsection*{The density}
+We use the complete elliptic integral of the first kind in the
+\emph{parameter} convention,
+\begin{equation}\label{eq:K}
+\Kc(m)=\int_0^{\pi/2}\frac{\dd\theta}{\sqrt{1-m\sin^2\theta}}\qquad(m<1),
+\end{equation}
+so that $\Kc(m)$ is $K(\sqrt m)$ in the modulus notation of \cite{DLMF}. Let
+$x\ge1$ and put $b=2x^{-1/2}\in(0,2]$ and $B=4+b$. Define
+\begin{equation}\label{eq:f}
+f(c)=\frac{1}{2\pi^2}\,\Kc\Bigl(1-\frac{c^2}{16}\Bigr)\quad(0<|c|<4),\qquad
+f(c)=0\quad(|c|>4),
+\end{equation}
+and, for real $w$,
+\begin{equation}\label{eq:h}
+h(w)=\frac1\pi\int_{-b}^{b}\frac{f(w-u)}{\sqrt{b^2-u^2}}\dd u .
+\end{equation}
+For real $w>b$ define further
+\begin{align}
+T(w)&=\frac{1}{2\pi^3}\int_{-b}^{b}\Kc\Bigl(1-\frac{(w-u)^2}{16}\Bigr)
+\frac{\dd u}{\sqrt{b^2-u^2}},\label{eq:T}\\
+J(w)&=\frac{1}{\pi^3}\int_{b}^{w}\kappa\Bigl(\frac{(w-u)^2}{16}\Bigr)
+\frac{\dd u}{\sqrt{u^2-b^2}},\label{eq:J}
+\end{align}
+where
+\begin{equation}\label{eq:kappa}
+\kappa(m)=\Kc(m)\quad(0\le m<1),\qquad
+\kappa(m)=m^{-1/2}\,\Kc(1/m)\quad(m>1).
+\end{equation}
+Finally let $r_x(t)=x^{-1/2}\bigl(\sqrt t+1/\sqrt t\bigr)$ and
+\begin{equation}\label{eq:density}
+\varphi_x(t)=
+\begin{cases}
+\dfrac{h(r_x(t))}{\sqrt{xt}}, & 1\le t<c_x,\\[2ex]
+\dfrac{2T(r_x(t))-h(r_x(t))+2J(r_x(t))}{\sqrt{xt}}, & 0<t<1,
+\end{cases}
+\end{equation}
+and $\varphi_x(t)=0$ for $t\notin(0,c_x)$. The values of $f$ at the finitely
+many excluded points are irrelevant. All integrals converge absolutely: the
+only singularities are inverse square roots at the endpoints and logarithmic
+singularities of $\Kc$ at the parameter value $1$. The function $r_x$
+decreases from $+\infty$ to $b$ on $(0,1]$ and increases from $b$ to $B$ on
+$[1,c_x]$; at $t=1$ both lines of \eqref{eq:density} equal $h(b)/\sqrt x$.
+
+The positivity of $\varphi_x$ is elementary. Since $f>0$ on $(-4,4)$, we
+have $h>0$ on $(-B,B)$. For $w>b$ the integrand of $T(w)$ is positive on all
+of $(-b,b)$, whereas $h(w)$ retains it only where $w-u<4$; thus $0\le h\le
+T$, and $\kappa>0$ gives $J\ge0$. Hence $\varphi_x(t)\ge
+T(r_x(t))/\sqrt{xt}>0$ for $0<t<1$. What has to be proved is that the
+measure $\varphi_x(t)\dd t$ has the moments $A_n(x)$, with exactly the
+combination $2T-h+2J$ on $(0,1)$.
+
+\subsection*{Relation to earlier work}
+For $x=1$ Theorem~\ref{thm:main} is Edgar's theorem \cite[Theorem~1]{Ed},
+and $c_1=17+12\sqrt2$ is the endpoint found there \cite[Notation~3]{Ed}; by
+uniqueness, $\mu_1$ is Edgar's measure. The present paper extends the
+existence of a representing measure to every $x>1$ and gives the explicit
+density \eqref{eq:density}; the argument treats all $x\ge1$ in the same way.
+
+The proof starts from the polynomials $D_n(\alpha)=\alpha^nA_n(1/\alpha)$.
+By Straub's theorem on multivariate Ap\'ery numbers \cite[Theorem~3.1]{St},
+applied with the partition $\lambda=(2,2)$, $D_n(\alpha)$ is the diagonal
+coefficient of $u^nv^nw^nz^n$ in
+\[
+\frac{1}{(1-u-v)(1-w-z)-\alpha uvwz}.
+\]
+An average of this rational function over a torus leads to the spectral
+representation of Proposition~\ref{prop:spectral} (Remark~\ref{rem:torus}).
+
+Neuschel \cite[Theorem~4.1]{Ne} determined the asymptotic behaviour of the
+Ap\'ery polynomials in $\C\setminus(-\infty,0]$; in particular
+$A_n(x)^{1/n}\to c_x$ for $x>0$. For a positive measure with compact support
+the $n$th roots of the moments converge to the largest point of the support,
+so once a representing measure is known to exist, the right endpoint $c_x$ of
+its support is already determined by \cite{Ne}.
+
+Two related questions are not addressed here. Sokal also conjectures that
+$(A_n(x))_{n\ge0}$ is not a Stieltjes moment sequence for $0<x<1$
+\cite[slide~29]{So25}; in our proof the hypothesis $x\ge1$ is essential for
+the holomorphic continuation of the spectral density across the central
+interval (Remark~\ref{rem:xge1}). His Conjecture~2 in \cite[slide~29]{So25}
+asserts that $(A_n(1+y))_{n\ge0}$ is coefficientwise Hankel-totally positive
+in $y$, that is, that the minors of its Hankel matrix are polynomials in $y$
+with nonnegative coefficients. This would imply that $(A_n(x))_{n\ge0}$ is a
+Stieltjes moment sequence for every $x\ge1$, but it is a different,
+coefficientwise statement, and it remains open.
+
+\subsection*{Strategy}
+Write $\alpha=1/x\in(0,1]$, so that $b=2\sqrt\alpha$, and let $D_n(\alpha)=\alpha^nA_n(1/\alpha)$.
+\begin{enumerate}[(i)]
+\item \emph{A spectral representation.} Let $L=4\cos\theta_1\cos\theta_2+b\cos\theta_3$ with independent
+uniform angles. Then
+\[
+\textstyle\sum_n D_n(\alpha)\tau^{2n}=\E\bigl[(1-\tau L+\alpha\tau^2)^{-1}\bigr]
+\]
+(Proposition~\ref{prop:spectral}), and $L$ has the density $h$.
+\item \emph{A folded Stieltjes transform.} With $s=\tau^{-2}$ this becomes
+\[
+\textstyle\sum_n D_n(\alpha)s^{-n-1}=g(r)/\sqrt s,
+\]
+where $g$ is the Cauchy transform of
+$h$ and $r=\sqrt s+\alpha/\sqrt s$. The map $s\mapsto r$ is two-to-one: it
+sends the upper half-disc $\{|s|<\alpha,\ \im s>0\}$ into the lower half-plane
+and the semicircle $|s|=\alpha$ to the interval $(0,b)$. Continuing the
+transform into the half-disc therefore requires continuing $g$ across $(0,b)$,
+that is, a holomorphic continuation of $h$ from $(-b,b)$.
+\item \emph{The continuation.} In Section~\ref{sec:continuation} we construct
+this continuation $H$ explicitly in the lower half-plane. On the central
+interval $(-b,b)$ the condition $b\le2$ keeps all differences of points of
+$(-b,b)$ inside $(-4,4)$, and the jump of $\Kc$ across its branch cut, with
+its exact sign, shows that $H$ is real there. To the right of $b$ the
+boundary values of $H$ have real part $T+J$.
+\item \emph{Reconstruction.} In Section~\ref{sec:proof} the Stieltjes transform
+is shown to be holomorphic on $\C\setminus[0,S]$, with growth bounds at the
+origin that exclude atoms, and Cauchy's integral formula recovers the measure
+from the jump across the cut.
+\end{enumerate}
+
+\subsection*{Dependencies and organization}
+Besides elementary complex analysis, the proof uses only classical facts on
+the complete elliptic integral and the hypergeometric equation, which we
+collect in Section~\ref{sec:elliptic} with references to \cite{DLMF}. The
+results of \cite{Ed,Ne,St} and of \cite{DJ01,DJ06} recalled in this paper
+are not used in the proofs: Proposition~\ref{prop:spectral} is verified
+directly from the coefficients, and the endpoint $c_x$ is obtained from the
+construction. Section~\ref{sec:spectral} proves the spectral
+representation and the regularity of $h$. Section~\ref{sec:continuation}
+constructs the continuation $H$ and proves the bounds needed later.
+Section~\ref{sec:proof} studies the Stieltjes transform and proves
+Theorem~\ref{thm:main}. Section~\ref{sec:remarks} contains further remarks.
+
+\section{The complete elliptic integral}\label{sec:elliptic}
+
+For $m\in\C\setminus[1,\infty)$ and $\theta\in[0,\pi/2]$ the number
+$1-m\sin^2\theta$ does not lie in $(-\infty,0]$. With the principal square
+root, \eqref{eq:K} therefore defines a holomorphic function on
+$\C\setminus[1,\infty)$, which is positive on $(-\infty,1)$. Expanding the
+integrand gives $\Kc(m)=\frac\pi2\sum_{j\ge0}\bigl(\frac{(1/2)_j}{j!}\bigr)^2m^j$
+for $|m|<1$, so $\frac2\pi\Kc$ is the Gauss function
+${}_2F_1(\frac12,\frac12;1;m)$ and $\Kc$ satisfies the hypergeometric equation
+\begin{equation}\label{eq:hyp}
+m(1-m)y''+(1-2m)y'-\tfrac14y=0
+\end{equation}
+\cite[Section~15.10]{DLMF}. Its singular points $0$, $1$, $\infty$ are regular, with
+exponents $\{0,0\}$, $\{0,0\}$ and $\{\frac12,\frac12\}$ respectively. In
+particular $\Kc$ continues analytically across $(1,\infty)$ from either side,
+so the boundary values $\Kc(m\pm i0)=\lim_{\varepsilon\downarrow0}\Kc(m\pm i\varepsilon)$
+exist and are continuous for $m>1$.
+
+\begin{lemma}[Logarithmic expansion]\label{lem:log}
+There is a power series $E(\varepsilon)=\sum_{j\ge0}e_j\varepsilon^j$ with real
+coefficients, convergent for $|\varepsilon|<1$, such that
+\begin{equation}\label{eq:logexp}
+\Kc(m)=\frac1\pi\,\Kc(1-m)\log\frac{1}{1-m}+E(1-m)
+\end{equation}
+for $|1-m|<1$, $m\notin[1,\infty)$, with the principal logarithm.
+\end{lemma}
+
+\begin{proof}
+In the modulus notation, \cite[19.12.1]{DLMF} states that
+\[
+K(k)=\sum_{j\ge0}\Bigl(\frac{(1/2)_j}{j!}\Bigr)^2k'^{2j}\Bigl(\log\frac1{k'}+d(j)\Bigr)
+\]
+for $0<k<1$, with $k'=\sqrt{1-k^2}$ and explicit real numbers $d(j)$, the
+series converging for $|k'|<1$. Put $m=k^2$, so that $k'^2=1-m$ and
+$\log(1/k')=\frac12\log\frac1{1-m}$. Since
+$\sum_j\bigl(\frac{(1/2)_j}{j!}\bigr)^2(1-m)^j=\frac2\pi\Kc(1-m)$, this is
+\eqref{eq:logexp} for $0<m<1$, with
+$e_j=\bigl(\frac{(1/2)_j}{j!}\bigr)^2d(j)$. Both sides are holomorphic on
+$\{|1-m|<1\}\setminus[1,2)$, so the identity persists there.
+\end{proof}
+
+\begin{lemma}[Real part on the cut]\label{lem:cut}
+For $m>1$,
+\[
+\re\Kc(m+i0)=\re\Kc(m-i0)=m^{-1/2}\,\Kc(1/m)>0 .
+\]
+\end{lemma}
+
+\begin{proof}
+Let $\theta_0=\arcsin(m^{-1/2})$. As $\varepsilon\downarrow0$, the
+integrand $(1-(m\pm i\varepsilon)\sin^2\theta)^{-1/2}$ converges to the positive number
+$(1-m\sin^2\theta)^{-1/2}$ for $\theta<\theta_0$, and to a purely imaginary
+number for $\theta>\theta_0$. Since
+$|1-(m\pm i\varepsilon)\sin^2\theta|\ge|1-m\sin^2\theta|$, the integrands are
+dominated by the integrable function $|1-m\sin^2\theta|^{-1/2}$. Hence, with
+the substitution $\sin\theta=m^{-1/2}\sin\phi$,
+\[
+\re\Kc(m\pm i0)=\int_0^{\theta_0}\frac{\dd\theta}{\sqrt{1-m\sin^2\theta}}
+=\frac{1}{\sqrt m}\int_0^{\pi/2}\frac{\dd\phi}{\sqrt{1-m^{-1}\sin^2\phi}} .
+\qedhere
+\]
+\end{proof}
+
+The full boundary values are $\Kc(m\pm i0)=m^{-1/2}\bigl(\Kc(1/m)\pm
+i\,\Kc(1-1/m)\bigr)$, a form of the reciprocal-modulus transformation
+\cite[19.7.3]{DLMF}; only the real part will be needed.
+
+\begin{lemma}[Bounds]\label{lem:bounds}
+There is an absolute constant $C$ such that, for $m\in\C\setminus[1,\infty)$
+and also for the boundary values $\Kc(m\pm i0)$ with $m>1$,
+\[
+|\Kc(m)|\le
+\begin{cases}
+C\bigl(1+\bigl|\log|1-m|\bigr|\bigr), & |m|\le4,\\[0.5ex]
+C\,(1+\log|m|)\,|m|^{-1/2}, & |m|\ge4.
+\end{cases}
+\]
+\end{lemma}
+
+\begin{proof}
+For $|1-m|\le\frac12$ the first bound follows from \eqref{eq:logexp}, since
+$\Kc(1-m)$ and $E(1-m)$ are bounded there and
+$|\log\frac1{1-m}|\le|\log|1-m||+\pi$. On the remaining part of
+$\{|m|\le4\}$, $\Kc$ is continuous up to both sides of the cut, hence bounded.
+At $\infty$ the exponents of \eqref{eq:hyp} are $\frac12,\frac12$, and the
+nearest other singular point is $1$. Thus on $\{|m|>2\}\setminus[2,\infty)$
+every solution of \eqref{eq:hyp} is a linear combination of
+$(-m)^{-1/2}\Phi_1(1/m)$ and
+$(-m)^{-1/2}\bigl(\Phi_1(1/m)\log(-m)+\Phi_2(1/m)\bigr)$, where $\Phi_1,\Phi_2$
+are holomorphic in $|\zeta|<1$ and the powers and the logarithm are principal.
+Applied to $\Kc$, this gives the second bound, including the boundary values on
+both sides of $[2,\infty)$.
+\end{proof}
+
+We next continue $m\mapsto\Kc(m)$ along $m=1-z^2/16$. Let
+$\Pim=\{z:\im z<0\}$ and $\Pip=\{z:\im z>0\}$. For $\re z>0$ and $\im z<0$ we
+have $z^2\notin(-\infty,0]$, hence $1-z^2/16\notin[1,\infty)$.
+
+\begin{lemma}[The continued kernel]\label{lem:P}
+There is a unique holomorphic function $P$ on $\Pim$ such that
+$P(z)=\frac{1}{2\pi^2}\Kc(1-z^2/16)$ when $\re z>0$. It has the following
+properties.
+\begin{enumerate}[(a)]
+\item $P$ extends continuously to $\overline{\Pim}\setminus\{0,-4\}$, and for
+$c>0$ its boundary value is $P(c)=\frac1{2\pi^2}\Kc(1-c^2/16)>0$.
+\item For $0<c<4$,
+\begin{equation}\label{eq:jump}
+P(-c-i0)=f(c)+\frac{i}{\pi^2}\,\Kc\Bigl(\frac{c^2}{16}\Bigr).
+\end{equation}
+\item There is a constant $C$ such that for $z\in\overline{\Pim}\setminus\{0,-4\}$
+\[
+|P(z)|\le
+\begin{cases}
+C\bigl(1+\bigl|\log|z|\bigr|+\bigl|\log|z+4|\bigr|\bigr), & |z|\le8,\\[0.5ex]
+C\,(1+\log|z|)\,|z|^{-1}, & |z|\ge8.
+\end{cases}
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Substituting $m=1-z^2/16$ into \eqref{eq:hyp} gives a linear differential
+equation of second order in $z$ whose coefficients are holomorphic outside
+$\{0,4,-4\}$. The function $z\mapsto\Kc(1-z^2/16)$ solves it on
+$\{\re z>0,\ \im z<0\}$. Since $\Pim$ is simply connected and contains no
+singular point, this solution continues uniquely to a holomorphic function on
+$\Pim$, and it continues analytically across every real point other than $0$
+and $\pm4$. Near $z=4$ the continuation is the principal function
+$\Kc(1-z^2/16)$, which is holomorphic at $m=0$. This gives the continuity in
+(a). For $c>0$ we have $1-c^2/16<1$, where $\Kc$ is holomorphic and positive.
+
+For (b), let $z\in\Pim$, $|z|<4$ and $\re z>0$. Then $1-m=z^2/16$, and
+$\log\frac1{1-m}=2\log\frac4z$ with principal logarithms, because
+$\arg z\in(-\pi/2,0)$. Lemma~\ref{lem:log} gives
+\begin{equation}\label{eq:Plocal}
+2\pi^2P(z)=\frac2\pi\,\Kc\Bigl(\frac{z^2}{16}\Bigr)\log\frac4z+E\Bigl(\frac{z^2}{16}\Bigr).
+\end{equation}
+With the principal branch of $\log z$, the right-hand side is holomorphic on
+the whole half-disc $\Pim\cap\{|z|<4\}$, so \eqref{eq:Plocal} holds there. As
+$z\to c\in(0,4)$, \eqref{eq:Plocal} reads
+$\Kc(1-c^2/16)=\frac2\pi\Kc(c^2/16)\log\frac4c+E(c^2/16)$. As $z\to-c$ from
+$\Pim$, we have $\log z\to\log c-i\pi$, so $\log\frac4z\to\log\frac4c+i\pi$,
+while $\Kc(z^2/16)\to\Kc(c^2/16)$ and $E(z^2/16)\to E(c^2/16)$. Subtracting the
+two limits gives
+$2\pi^2P(-c-i0)=\Kc(1-c^2/16)+2i\,\Kc(c^2/16)$, which is \eqref{eq:jump}.
+
+For (c), \eqref{eq:Plocal} gives the bound near $z=0$. Near $z=-4$ we have
+$m\to0$, a regular singular point with exponents $\{0,0\}$, so every
+solution is $O(1+|\log|m||)$ there, and $|m|\asymp|z+4|$. Elsewhere on
+$\overline{\Pim}\cap\{|z|\le8\}$, $P$ is continuous. For $|z|\ge8$ we have
+$|m|\ge3$. The set $\overline{\Pim}\cap\{|z|\ge8\}$ is simply connected, and on
+it $P$ is a fixed linear combination of the two solutions at $\infty$ used in
+the proof of Lemma~\ref{lem:bounds}, with $(-m)^{-1/2}$ and $\log(-m)$
+continued along this set. Since $\arg(-m)=\arg(z^2/16-1)$ varies in a bounded
+interval there, we obtain $|P(z)|\le C(1+\log|m|)|m|^{-1/2}\le
+C'(1+\log|z|)/|z|$.
+\end{proof}
+
+\section{The spectral representation}\label{sec:spectral}
+
+Throughout this section $0<\alpha\le1$, $b=2\sqrt\alpha$ and $B=4+b$. Let
+\begin{equation}\label{eq:D}
+D_n(\alpha)=\alpha^nA_n(1/\alpha)=\sum_{k=0}^{n}\alpha^k\biggl(\frac{(2n-k)!}{k!\,(n-k)!^2}\biggr)^2 .
+\end{equation}
+The second expression follows from \eqref{eq:apery} with $k=n-j$, since
+$\binom nj\binom{n+j}{j}=\frac{(n+j)!}{j!^2(n-j)!}$. Let
+$\theta_1,\theta_2,\theta_3$ be independent random variables, uniformly
+distributed on $[0,2\pi]$, and let $\E$ denote expectation. Put
+\[
+Y=4\cos\theta_1\cos\theta_2,\qquad L=Y+b\cos\theta_3 .
+\]
+
+\begin{proposition}\label{prop:spectral}
+For complex $\tau$ with $|\tau|<1/(2B)$,
+\begin{equation}\label{eq:spectral}
+\sum_{n\ge0}D_n(\alpha)\,\tau^{2n}=\E\Bigl[\frac{1}{1-\tau L+\alpha\tau^2}\Bigr].
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Put $\beta=\sqrt\alpha\,\tau$. Then
+$1-\tau L+\alpha\tau^2=(1-\beta e^{i\theta_3})(1-\beta e^{-i\theta_3})-\tau Y$,
+and
+\[
+\frac{1}{1-\tau L+\alpha\tau^2}
+=\sum_{j\ge0}(\tau Y)^j\sum_{k,l\ge0}\binom{j+k}{j}\binom{j+l}{j}\beta^{k+l}e^{i(k-l)\theta_3}.
+\]
+Here $|\tau|<1/8$ and $|\beta|<1/8$, and $|Y|\le4$, so the triple series is
+dominated by $\sum_j(4|\tau|)^j(1-|\beta|)^{-2j-2}<\infty$, uniformly in the
+angles. Taking expectations termwise, $\E[e^{i(k-l)\theta_3}]=\delta_{kl}$,
+and $\E[Y^j]=\E[(2\cos\theta_1)^j]^2$ equals $\binom{2i}{i}^2$ if $j=2i$ and
+vanishes for odd $j$. Hence
+\[
+\E\Bigl[\frac{1}{1-\tau L+\alpha\tau^2}\Bigr]
+=\sum_{i,k\ge0}\binom{2i}{i}^2\binom{2i+k}{k}^2\alpha^k\tau^{2i+2k}.
+\]
+The coefficient of $\tau^{2n}$ is
+\[
+\sum_{k=0}^n\alpha^k\binom{2n-2k}{n-k}^2\binom{2n-k}{k}^2
+=\sum_{k=0}^n\alpha^k\biggl(\frac{(2n-k)!}{k!\,(n-k)!^2}\biggr)^2,
+\]
+which is $D_n(\alpha)$ by \eqref{eq:D}.
+\end{proof}
+
+\begin{remark}\label{rem:torus}
+Proposition~\ref{prop:spectral} is a torus average of Straub's rational
+function \cite[Theorem~3.1]{St}. Substituting $u=\varrho e^{i\theta_1}$,
+$v=\varrho e^{-i\theta_1}$, $w=\sigma e^{i\theta_2}$, $z=\sigma e^{-i\theta_2}$
+in $1/\bigl((1-u-v)(1-w-z)-\alpha uvwz\bigr)$ and averaging over
+$\theta_1,\theta_2$ keeps exactly the monomials with equal exponents within
+each pair, and the diagonal in $(\varrho,\sigma)$ of the result is again an
+angular average.
+\end{remark}
+
+\begin{lemma}\label{lem:f}
+The random variable $Y$ has the density $f$ of \eqref{eq:f}. In particular,
+$f$ is even, $f>0$ on $(-4,4)$ and $\int f=1$.
+\end{lemma}
+
+\begin{proof}
+The variables $\cos\theta_i$ are independent with the arcsine density
+$\pi^{-1}(1-y^2)^{-1/2}$ on $(-1,1)$. For $0<a<1$ the density of
+$\cos\theta_1\cos\theta_2$ at $\pm a$ is
+\[
+2\int_a^1\frac1r\cdot\frac{1}{\pi\sqrt{1-r^2}}\cdot\frac{1}{\pi\sqrt{1-a^2/r^2}}\dd r
+=\frac{2}{\pi^2}\int_a^1\frac{\dd r}{\sqrt{(1-r^2)(r^2-a^2)}} .
+\]
+The substitution $r^2=1-(1-a^2)\sin^2\phi$ gives
+$\dd r/\sqrt{(1-r^2)(r^2-a^2)}=-\dd\phi/r$, so the last integral equals
+$\Kc(1-a^2)$. Since $Y=4\cos\theta_1\cos\theta_2$, its density at $c$ is
+$\frac14\cdot\frac2{\pi^2}\Kc(1-c^2/16)=f(c)$ for $0<|c|<4$.
+\end{proof}
+
+Let $\omega_b(u)=\pi^{-1}(b^2-u^2)^{-1/2}$ for $|u|<b$ and $\omega_b(u)=0$
+otherwise; it is the density of $b\cos\theta_3$. Thus $L$ has the density
+$h=f*\omega_b$, which is \eqref{eq:h}. Let
+\begin{equation}\label{eq:g}
+g(w)=\int_{-B}^{B}\frac{h(v)}{w-v}\dd v\qquad(w\in\C\setminus[-B,B])
+\end{equation}
+be its Cauchy transform.
+
+\begin{lemma}\label{lem:h}
+The density $h$ and its Cauchy transform $g$ have the following properties.
+\begin{enumerate}[(a)]
+\item $h$ is even and nonnegative, vanishes outside $(-B,B)$, is positive on
+$(-B,B)$, and $\int h=1$.
+\item The function $h$ is H\"older continuous on $\R$ with exponent $1/8$; in
+particular $h(\pm B)=0$.
+\item $g$ is holomorphic on $\C\setminus[-B,B]$, bounded there, and
+$|g(w)|\le2/|w|$ for $|w|\ge2B$. For real $\xi$ the limits
+$g(\xi\pm i0)=\lim g(w)$, as $w\to \xi$ within $\Pip$ or $\Pim$ respectively,
+exist, depend continuously on $\xi$,
+and satisfy
+\begin{equation}\label{eq:plemelj}
+\re g(\xi+i0)=\re g(\xi-i0),\qquad \im g(\xi\pm i0)=\mp\pi h(\xi).
+\end{equation}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) All statements except positivity follow from Lemma~\ref{lem:f}. If
+$|w|<B$, the set of $u\in(-b,b)$ with $|w-u|<4$ is a nonempty open interval,
+on which $f(w-u)\omega_b(u)>0$.
+
+(b) The function $f$ is bounded by $C(1+|\log|c||)$, satisfies
+$|f'(c)|\le C(1+|c|^{-1})$ on $(-4,4)\setminus\{0\}$, by Lemma~\ref{lem:log},
+and has jumps at $\pm4$. Let $0<|\delta|\le1$. On the set of points within
+$2|\delta|$ of $\{0,\pm4\}$, $|f(c+\delta)-f(c)|\le
+C(1+|\log|c||+|\log|c+\delta||)$, which contributes
+$O(|\delta|(1+|\log|\delta||)^4)$ to $\|f(\cdot+\delta)-f\|_4^4$. On the
+complement in $[-5,5]$, the mean value theorem gives
+$|f(c+\delta)-f(c)|\le C|\delta|(1+|c|^{-1})$, which contributes
+$O(|\delta|^4\cdot|\delta|^{-3})=O(|\delta|)$. Thus
+$\|f(\cdot+\delta)-f\|_4\le C|\delta|^{1/4}(1+|\log|\delta||)$. Since
+$\omega_b\in L^{4/3}$, H\"older's inequality yields
+$|h(w+\delta)-h(w)|\le\|f(\cdot+\delta)-f\|_4\|\omega_b\|_{4/3}\le
+C'|\delta|^{1/8}$.
+
+(c) Holomorphy and the bound for $|w|\ge2B$ are clear. Let $w=\xi+iy$ with
+$0<|y|\le1$, and split
+\[
+g(w)=\int_{|v-\xi |<1}\frac{h(v)-h(\xi)}{w-v}\dd v+h(\xi)\int_{-1}^{1}\frac{\dd s}{s+iy}
++\int_{|v-\xi |\ge1}\frac{h(v)}{w-v}\dd v .
+\]
+By (b) the first integrand is bounded by $C|v-\xi |^{-7/8}$ and converges
+pointwise as $y\to0$. The middle integral equals $-2i\arctan(1/y)$, which
+tends to $\mp i\pi$ as $y\to0^\pm$. The last integral is bounded by $1$, and $|g(w)|\le1$ when $|\im w|\ge1$.
+Dominated convergence, which is uniform for $\xi$ in compact sets, gives the
+boundedness of $g$, the existence and
+continuity of the limits, and \eqref{eq:plemelj}, because the limits of the
+first and the last term are real.
+\end{proof}
+
+\section{Continuation of the spectral density}\label{sec:continuation}
+
+From now on $0<\alpha\le1$, so that $0<b\le2$. For $u\in\C\setminus\bigl((-\infty,-b]\cup[b,\infty)\bigr)$ let
+\[
+S_b(u)=\sqrt{b-u}\,\sqrt{b+u}
+\]
+with principal square roots. This is the holomorphic function that equals
+$\sqrt{b^2-u^2}>0$ on $(-b,b)$; thus $\omega_b(u)=1/(\pi S_b(u))$ there. For
+$w\in\Pim$ let $[w,b]$ denote the oriented segment from $w$ to $b$, and define
+\begin{align}
+T_-(w)&=\int_{-b}^{b}P(w-u)\,\omega_b(u)\dd u,\label{eq:Tminus}\\
+C_-(w)&=\frac1\pi\int_{[w,b]}\Kc\Bigl(\frac{(w-u)^2}{16}\Bigr)\frac{\dd u}{S_b(u)},\label{eq:Cminus}\\
+H(w)&=T_-(w)-\frac{i}{\pi^2}\,C_-(w).\label{eq:H}
+\end{align}
+
+\begin{lemma}\label{lem:holo}
+The functions $T_-$, $C_-$ and $H$ are holomorphic on $\Pim$. For $w\in\Pim$,
+\begin{equation}\label{eq:Cparam}
+C_-(w)=\frac{\sqrt{b-w}}{\pi}\int_0^1\Kc\Bigl(\frac{(b-w)^2v^2}{16}\Bigr)
+\frac{\dd v}{\sqrt{1-v}\,\sqrt{b+w+(b-w)v}} .
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For real $u$ we have $w-u\in\Pim$, and on compact subsets of $\Pim$ the
+integrand of \eqref{eq:Tminus} is holomorphic in $w$ and bounded by a constant
+times $\omega_b(u)$, by Lemma~\ref{lem:P}(c). Hence $T_-$ is holomorphic.
+
+Parametrize $[w,b]$ by $u=w+(b-w)v$, $0\le v\le1$. Then $b-u=(b-w)(1-v)$, and
+$b-w\in\Pip$, so $\sqrt{b-u}=\sqrt{b-w}\sqrt{1-v}$. Moreover
+$\im(b+u)=(1-v)\im w<0$ for $v<1$, while $b+u=2b$ for $v=1$; hence the path
+avoids the cuts of $S_b$. Since $w-u=-(b-w)v$ is not real for $0<v\le1$, its
+square does not lie in $[0,\infty)$, so the argument of $\Kc$ stays in
+$\C\setminus[1,\infty)$. This gives \eqref{eq:Cparam}. On compact subsets of
+$\Pim$ the integrand of \eqref{eq:Cparam} is holomorphic in $w$ and bounded by
+a constant times $(1-v)^{-1/2}$, so $C_-$ is holomorphic.
+\end{proof}
+
+\begin{proposition}[The central interval]\label{prop:central}
+$H$ extends continuously to $\Pim\cup(-b,b)$, with $H(\xi)=h(\xi)$ for
+$-b<\xi<b$. Consequently $h$ is real-analytic on $(-b,b)$, $H$ extends to a
+holomorphic function on $\Pim\cup(-b,b)\cup\Pip$, again denoted $H$, and
+\begin{equation}\label{eq:Hsym}
+H(w)=\overline{H(-\overline w)}\qquad(w\in\Pim).
+\end{equation}
+In particular $H(-iy)$ is real for every $y>0$.
+\end{proposition}
+
+\begin{proof}
+Fix $\xi\in(-b,b)$. For $u\in(-b,b)$ the difference $\xi-u$ lies in
+$(\xi-b,\xi+b)$, and since $b\le2$,
+\begin{equation}\label{eq:inside}
+-4\le-2b<\xi-b<\xi+b<2b\le4 .
+\end{equation}
+Let $w\to \xi$ within $\Pim$. By Lemma~\ref{lem:P}(a),(b), for $u\ne \xi$,
+\[
+P(w-u)\longrightarrow
+\begin{cases}
+f(\xi-u), & u<\xi,\\
+f(u-\xi)+\dfrac{i}{\pi^2}\Kc\Bigl(\dfrac{(u-\xi)^2}{16}\Bigr), & u>\xi,
+\end{cases}
+\]
+where we used that $f$ is even and that $u-\xi\in(0,4)$ for $u>\xi$, by
+\eqref{eq:inside}. By Lemma~\ref{lem:P}(c), and because $w-u$ stays away from
+$-4$, we have $|P(w-u)|\le C(1+|\log|\re w-u||)$. These bounds, multiplied by
+$\omega_b$, are uniformly integrable as $\re w$ varies near $\xi$: the
+logarithms are bounded in $L^4$ and $\omega_b\in L^{4/3}$. Vitali's theorem
+gives
+\[
+T_-(w)\longrightarrow h(\xi)+\frac{i}{\pi^2}\int_\xi ^b\Kc\Bigl(\frac{(u-\xi)^2}{16}\Bigr)\omega_b(u)\dd u .
+\]
+In \eqref{eq:Cparam}, as $w\to \xi$, we have $b-w\to b-\xi\in(0,4)$ and
+$b+w+(b-w)v\to b+\xi+(b-\xi)v>0$, and the arguments of $\Kc$ converge to
+$(b-\xi)^2v^2/16\in[0,1)$, uniformly in $v$. By dominated convergence and the
+substitution $u=\xi+(b-\xi)v$,
+\[
+C_-(w)\longrightarrow\int_\xi ^b\Kc\Bigl(\frac{(u-\xi)^2}{16}\Bigr)\omega_b(u)\dd u .
+\]
+Hence $H(w)\to h(\xi)$. The convergence is locally uniform in $\xi$, and $h$ is
+continuous, so $H$ is continuous on $\Pim\cup(-b,b)$ and real on $(-b,b)$.
+The Schwarz reflection principle provides the holomorphic extension, and $h$
+is real-analytic on $(-b,b)$ as the restriction of $H$.
+
+The function $w\mapsto\overline{H(-\overline w)}$ is holomorphic on $\Pim$
+and has the boundary values $h(-\xi)=h(\xi)$ on $(-b,b)$, by
+Lemma~\ref{lem:h}(a). Its difference with $H$ is holomorphic on $\Pim$ with
+boundary values $0$ on $(-b,b)$. By reflection, it extends holomorphically
+across $(-b,b)$ and vanishes there, hence vanishes identically. This proves
+\eqref{eq:Hsym}; for $w=-iy$ we have $-\overline w=w$.
+\end{proof}
+
+\begin{remark}\label{rem:xge1}
+The inequality $b\le2$, that is $\alpha\le1$ or $x\ge1$, is essential for
+Proposition~\ref{prop:central}. By \eqref{eq:inside}, every difference
+$\xi-u$ with $\xi,u\in(-b,b)$ lies in $(-4,4)$, so that $f(\xi-u)$ is given
+by the single analytic expression \eqref{eq:f}, and the
+continuation $P$ of Lemma~\ref{lem:P} applies throughout. If $b>2$, the
+differences $\xi-u$ with $\xi,u$ in the central interval can cross $\pm4$,
+where $f$ jumps to $0$, and the argument breaks down. The same assumption is
+also used in Propositions~\ref{prop:beyond} and~\ref{prop:bounds}, in the
+identity $T(b)=h(b)$ and in the lower bounds $|w-u+4|\ge2$ and
+$\re(1+dv/4)\ge\frac12$, and, for convenience, in
+Proposition~\ref{prop:spectral}. We make no assertion for $x<1$.
+\end{remark}
+
+To the right of $b$ we use boundary values from below. Let
+\[
+Q=\{w\in\C:\ \re w\ge0,\ \im w\le0\}.
+\]
+For $\xi>b$ we write $H(\xi-i0)=\lim H(w)$ as $w\to \xi$ within $\Pim$, and for
+$m\ge0$ we write $\Kc(m-i0)$ for the boundary value from below when $m>1$ and
+for $\Kc(m)$ when $m<1$.
+
+\begin{proposition}[Beyond the central interval]\label{prop:beyond}
+$H$ extends continuously to $Q$. For $\xi\ge b$,
+\begin{equation}\label{eq:Hbeyond}
+H(\xi-i0)=T(\xi)+\frac1{\pi^3}\int_b^\xi\Kc\Bigl(\frac{(\xi-u)^2}{16}-i0\Bigr)\frac{\dd u}{\sqrt{u^2-b^2}},
+\end{equation}
+with $T$ as in \eqref{eq:T}. Consequently $\re H(\xi-i0)=T(\xi)+J(\xi)$ with $J$ as
+in \eqref{eq:J}, and for $\xi>b$
+\begin{equation}\label{eq:positive}
+\begin{gathered}
+0\le h(\xi)\le T(\xi),\\
+2\re H(\xi-i0)-h(\xi)=2T(\xi)-h(\xi)+2J(\xi)\ge T(\xi)>0 .
+\end{gathered}
+\end{equation}
+Moreover $H(b-i0)=T(b)=h(b)$.
+\end{proposition}
+
+\begin{proof}
+On $Q\cap\{\re w<b\}$ near the real axis, continuity follows from
+Proposition~\ref{prop:central}. Let $\xi\ge b$ and $w\to \xi$ within $\Pim$. For
+$u\in(-b,b)$ we have $\xi-u>0$, so by Lemma~\ref{lem:P}(a)
+$P(w-u)\to\frac1{2\pi^2}\Kc(1-(\xi-u)^2/16)$. The same uniform integrability
+as before gives $T_-(w)\to T(\xi)$.
+
+Consider first the endpoint $\xi=b$. For $u\in(-b,b)$ we have
+$0<b-u<2b\le4$, so $f(b-u)=\frac1{2\pi^2}\Kc(1-(b-u)^2/16)$ and hence
+$T(b)=h(b)$. Let $w\in\Pim$ with $|w-b|\le\min(b/2,2)$. In
+\eqref{eq:Cparam} the arguments of $\Kc$ satisfy
+$|(b-w)^2v^2/16|\le\frac14$, where $\Kc$ is bounded, and
+$|b+w+(b-w)v-2b|=|w-b|(1-v)\le b/2$, so that $|b+w+(b-w)v|\ge b$.
+Since $\int_0^1(1-v)^{-1/2}\dd v=2$, we obtain
+$|C_-(w)|\le C|b-w|^{1/2}$, and the same bound holds for the boundary values
+on $(b,b+\min(b/2,2)]$. Hence $C_-(w)\to0$ and $H(w)\to T(b)=h(b)$ as $w\to b$
+within $Q$. No sign of $\im(b-w)^2$ is used here; indeed this sign is not
+constant near $b$, since $w=b-\varepsilon-i\varepsilon$ gives
+$(b-w)^2=2i\varepsilon^2$.
+
+Now let $\xi>b$. In \eqref{eq:Cparam}, $b-w$ tends to the negative number
+$b-\xi$ from $\Pip$,
+so $\sqrt{b-w}\to i\sqrt{\xi-b}$. Also $b+w+(b-w)v\to2b+(\xi-b)(1-v)>0$. Finally
+$\im(b-w)^2=2\re(b-w)\im(b-w)<0$ near $\xi$, so the arguments of $\Kc$ approach
+$(\xi-b)^2v^2/16$ from the lower half-plane. By Lemma~\ref{lem:bounds} the
+integrands are bounded by a constant times
+$(1+|\log|1-\lambda v||)(1-v)^{-1/2}$ with $\lambda=|b-w|/4$, and this family
+is uniformly integrable for $\lambda$ in compact sets.
+Hence
+\[
+C_-(w)\longrightarrow\frac{i\sqrt{\xi-b}}{\pi}\int_0^1\Kc\Bigl(\frac{(\xi-b)^2v^2}{16}-i0\Bigr)
+\frac{\dd v}{\sqrt{1-v}\sqrt{2b+(\xi-b)(1-v)}} ,
+\]
+and the substitution $u=b+(\xi-b)(1-v)$ turns the right-hand side into
+\[
+\frac{i}{\pi}\int_b^\xi\Kc\Bigl(\frac{(\xi-u)^2}{16}-i0\Bigr)\frac{\dd u}{\sqrt{u^2-b^2}} .
+\]
+Multiplying by $-i/\pi^2$ gives \eqref{eq:Hbeyond}. The convergence is
+locally uniform in $\xi>b$; together with the endpoint case and
+Proposition~\ref{prop:central}, this proves continuity on $Q$.
+
+By Lemma~\ref{lem:cut}, $\re\Kc(m-i0)=\kappa(m)$ for $m\ge0$, $m\ne1$; hence
+$\re H(\xi-i0)=T(\xi)+J(\xi)$, and $J\ge0$ because $\kappa>0$. For $\xi>b$ and
+$u\in(-b,b)$ we have $\xi-u>0$, and $f(\xi-u)=\frac1{2\pi^2}\Kc(1-(\xi-u)^2/16)$ if
+$\xi-u<4$, while $f(\xi-u)=0$ otherwise. Since $\Kc$ is positive on $(-\infty,1)$,
+this gives $0\le h(\xi)\le T(\xi)$, and \eqref{eq:positive} follows, with
+$T(\xi)>0$. For $\xi=b$ the integral in \eqref{eq:Hbeyond} is empty, and
+\eqref{eq:Hbeyond} reduces to $H(b-i0)=T(b)=h(b)$, proved above.
+\end{proof}
+
+\begin{proposition}[Bounds]\label{prop:bounds}
+For every $R>0$, $H$ is bounded on $Q\cap\{|w|\le R\}$. There are constants
+$C$ and $R_0$, depending on $\alpha$, such that
+\begin{equation}\label{eq:Hbound}
+|H(w)|\le C\,\frac{\log^2|w|}{|w|}\qquad(w\in Q,\ |w|\ge R_0).
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+By continuity it suffices to consider $w\in Q\cap\Pim$. For $u\in(-b,b)$ we
+have $\re(w-u)>-b\ge-2$, hence $|w-u+4|\ge2$. If $|w|\le R$,
+Lemma~\ref{lem:P}(c) gives $|P(w-u)|\le C_R(1+|\log|\re w-u||)$, and
+$\sup_{t\in\R}\int(1+|\log|t-u||)\omega_b(u)\dd u<\infty$; so $T_-$ is
+bounded. If $|w|\ge16$, then $|w-u|\ge|w|/2\ge8$ and
+$|P(w-u)|\le C\log|w|/|w|$, so $T_-(w)=O(\log|w|/|w|)$.
+
+For $C_-$ write $d=w-b$ and $D=|d|$, so that $\re d\ge-b$. For $0\le v\le1$
+the number $\zeta=d(1-v)$ satisfies $\re(2b+\zeta)\ge b$ and
+$|2b+\zeta|\ge|\zeta|-2b$; distinguishing $|\zeta|\le3b$ and $|\zeta|>3b$ one
+obtains $|2b+\zeta|\ge c_b(1+|\zeta|)$ with $c_b=b/(1+3b)$. Moreover the
+argument $m=d^2v^2/16$ of $\Kc$ in \eqref{eq:Cparam} satisfies
+$1-m=(1-dv/4)(1+dv/4)$ with $\re(1+dv/4)\ge1-b/4\ge\frac12$ and
+$|1-dv/4|\ge|1-Dv/4|$. Therefore \eqref{eq:Cparam} gives
+\begin{equation}\label{eq:Cest}
+|C_-(w)|\le\frac{1}{\pi\sqrt{c_b}}\int_0^1|\Kc(m)|\,
+\frac{\sqrt D\,\dd v}{\sqrt{1-v}\,\sqrt{1+D(1-v)}} .
+\end{equation}
+
+If $D\le R$, Lemma~\ref{lem:bounds} and the lower bound for $|1-m|$ give
+$|\Kc(m)|\le C_R(1+|\log|1-Dv/4||)$, and
+$\sup_{0\le\lambda\le R}\int_0^1(1+|\log|1-\lambda v||)(1-v)^{-1/2}\dd v<\infty$
+by H\"older's inequality. Hence $C_-$ is bounded on bounded parts of $Q$.
+
+Let $D\ge16$ and split $[0,1]$ into $I_1=[0,8/D]$, $I_2=[8/D,1-1/D]$ and
+$I_3=[1-1/D,1]$.
+\begin{itemize}
+\item On $I_1$ we have $1-v\ge\frac12$, so the weight in \eqref{eq:Cest} is at
+most $2$, and $|m|\le4$, so $|\Kc(m)|\le C(1+|\log|1-Dv/4||)$. The
+contribution is at most
+$C\int_0^{8/D}(1+|\log|1-Dv/4||)\dd v=O(1/D)$. A possible crossing of
+$Dv=4$ contributes only an integrable logarithm.
+\item On $I_2$ we have $|m|^{1/2}=Dv/4\ge2$, so
+$|\Kc(m)|\le C\log D/(Dv)$, and the weight is at most $(1-v)^{-1}$. The
+contribution is at most
+$C\frac{\log D}{D}\int_{8/D}^{1-1/D}\frac{\dd v}{v(1-v)}=O\bigl(\frac{\log^2D}{D}\bigr)$.
+\item On $I_3$ we have $|m|\ge D^2/64\ge4$, so $|\Kc(m)|\le C\log D/D$, and
+the weight is at most $\sqrt D(1-v)^{-1/2}$, whose integral over $I_3$ equals
+$2$. The contribution is $O(\log D/D)$.
+\end{itemize}
+Since $D\ge|w|-b$, we obtain $C_-(w)=O(\log^2|w|/|w|)$, and \eqref{eq:Hbound}
+follows from \eqref{eq:H}.
+\end{proof}
+
+\section{The Stieltjes transform and the proof of Theorem~\ref{thm:main}}\label{sec:proof}
+
+Let $0<\alpha\le1$, and let $S>\alpha$ be determined by
+$\sqrt S+\alpha/\sqrt S=B$, that is,
+\begin{equation}\label{eq:S}
+S=\biggl(\frac{B+\sqrt{B^2-4\alpha}}{2}\biggr)^2 .
+\end{equation}
+For $s\in\C\setminus(-\infty,0]$ let $q=q(s)=\sqrt s$ be the principal square
+root, and put
+\[
+r=r(s)=q+\frac{\alpha}{q} .
+\]
+
+\begin{lemma}\label{lem:geometry}
+The map $s\mapsto r(s)$ has the following properties.
+\begin{enumerate}[(a)]
+\item Let $s\in\Pip$. Then $\re r>0$ and
+$\operatorname{sign}\im r=\operatorname{sign}(|s|-\alpha)$. If $|s|=\alpha$,
+then $r\in(0,b)$. If $|s|<\alpha$, then $r$ lies in the interior of $Q$.
+\item $r$ maps $(0,\alpha]$ decreasingly onto $[b,\infty)$, $[\alpha,S]$
+increasingly onto $[b,B]$, and $(S,\infty)$ onto $(B,\infty)$.
+\item As $s\to-a$ from $\Pip$, with $a>0$, we have $q\to i\sqrt a$ and
+$r\to i(\sqrt a-\alpha/\sqrt a)$.
+\item If $s\in\Pip$ and $|s|\le\alpha/4$, then $|r|\ge3\alpha/(4|q|)$ and
+$|r|\,|q|\ge3\alpha/4$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For $s\in\Pip$ the root $q$ lies in the open first quadrant, and
+$\re r=\re q\,(1+\alpha/|q|^2)>0$, $\im r=\im q\,(1-\alpha/|q|^2)$. If
+$|q|=\sqrt\alpha$, then $q=\sqrt\alpha e^{i\phi}$ with $0<\phi<\pi/2$ and
+$r=2\sqrt\alpha\cos\phi\in(0,b)$. Parts (b) and (c) are elementary. For (d),
+$|q|^2\le\alpha/4$ gives $|q|\le\alpha/(4|q|)$, so
+$|r|\ge\alpha/|q|-|q|\ge3\alpha/(4|q|)$; and $|r||q|=|s+\alpha|\ge3\alpha/4$.
+\end{proof}
+
+Define $\widehat G$ on $\Pip\cup\Pim$ by
+\[
+\widehat G(w)=g(w)\quad(w\in\Pip),\qquad
+\widehat G(w)=g(w)-2\pi i\,H(w)\quad(w\in\Pim).
+\]
+
+\begin{lemma}\label{lem:Ghat}
+$\widehat G$ extends holomorphically across $(-b,b)$, and continuously to the
+point $b$ from both $\Pip$ and $Q$.
+\end{lemma}
+
+\begin{proof}
+For $\xi\in(-b,b)$, Lemma~\ref{lem:h}(c) and Proposition~\ref{prop:central} give
+the limits $g(\xi+i0)$ from above and $g(\xi-i0)-2\pi ih(\xi)$ from below. By
+\eqref{eq:plemelj} these coincide, and they depend continuously on $\xi$.
+Hence $\widehat G$ is continuous across $(-b,b)$, and holomorphic there by
+Morera's theorem. At $b$, the limit from $\Pip$ is $g(b+i0)$ and the limit
+from $Q$ is $g(b-i0)-2\pi iH(b-i0)=g(b-i0)-2\pi ih(b)$, by
+Proposition~\ref{prop:beyond}; again these coincide.
+\end{proof}
+
+For $s\in\Pip$ put
+\begin{equation}\label{eq:M}
+M(s)=\frac{\widehat G(r(s))}{q(s)}=
+\begin{cases}
+g(r)/q, & |s|>\alpha,\\
+\bigl(g(r)-2\pi i H(r)\bigr)/q, & |s|<\alpha .
+\end{cases}
+\end{equation}
+By Lemmas~\ref{lem:geometry}(a) and~\ref{lem:Ghat}, $M$ is holomorphic on
+$\Pip$; across the semicircle $|s|=\alpha$ the two lines of \eqref{eq:M}
+are continuations of each other.
+
+\begin{lemma}\label{lem:germ}
+The series $M_\infty(s)=\sum_{n\ge0}D_n(\alpha)s^{-n-1}$ converges for
+$|s|>4B^2$, and $M=M_\infty$ on $\Pip\cap\{|s|>4B^2\}$.
+\end{lemma}
+
+\begin{proof}
+Let $|s|>4B^2$ and $\tau=1/q$, so that $|\tau|<1/(2B)$; then
+Proposition~\ref{prop:spectral} gives the convergence. For $v\in[-B,B]$,
+\[
+\frac{1}{1-\tau v+\alpha\tau^2}=\frac{q^2}{q^2-vq+\alpha}=\frac{q}{r-v} .
+\]
+Integrating against $h$ and using \eqref{eq:spectral}, we get
+$\sum_nD_n(\alpha)s^{-n}=q\,g(r)$. Dividing by $s=q^2$, and noting
+$|s|>\alpha$, gives the claim.
+\end{proof}
+
+Define $\rho_\alpha$ on $(0,S)$ by
+\begin{equation}\label{eq:rho}
+\rho_\alpha(t)=
+\begin{cases}
+\dfrac{h(r(t))}{\sqrt t}, & \alpha\le t<S,\\[2ex]
+\dfrac{2T(r(t))-h(r(t))+2J(r(t))}{\sqrt t}, & 0<t<\alpha .
+\end{cases}
+\end{equation}
+
+\begin{proposition}\label{prop:M}
+$M$ extends to a holomorphic function on $\C\setminus[0,S]$ with
+$M(\overline s)=\overline{M(s)}$ and $M=M_\infty$ for $|s|>4B^2$. Moreover:
+\begin{enumerate}[(a)]
+\item every $s_0\in(0,S]$ has a neighbourhood $N$ such that $M$ is bounded on
+$N\setminus[0,S]$, and there is $C$ with $|M(s)|\le C(1+\log^2|s|)$ for
+$0<|s|\le\alpha/4$, $s\notin[0,S]$;
+\item $M(s)=1/s+O(|s|^{-2})$ as $s\to\infty$;
+\item for $t\in(0,S)$ the limits $M(t\pm i0)$ exist, are continuous in $t$,
+satisfy $M(t-i0)=\overline{M(t+i0)}$, and
+$-\frac1\pi\im M(t+i0)=\rho_\alpha(t)$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+We first show that $M$ extends continuously from $\Pip$ to
+$(-\infty,0)\cup(S,\infty)$ with real values. For $t>S$, $r(t)\in(B,\infty)$
+by Lemma~\ref{lem:geometry}(b), where $g$ is holomorphic and real; so
+$M(t)=g(r(t))/\sqrt t$ is real. Let $s\to-a$ with $a>0$, and put
+$y=\sqrt a-\alpha/\sqrt a$. By Lemma~\ref{lem:geometry}(c),
+$M(s)\to\widehat G(iy)/(i\sqrt a)$, where $\widehat G$ is continuous at $iy$
+(for $y=0$ by Lemma~\ref{lem:Ghat}). If $y\ne0$, the evenness of $h$ gives
+\[
+g(iy)=\int\frac{h(v)(-iy-v)}{y^2+v^2}\dd v=-iy\int\frac{h(v)}{y^2+v^2}\dd v\in i\R .
+\]
+If $y>0$, then $\widehat G(iy)=g(iy)\in i\R$. If $y<0$, then
+$\widehat G(iy)=g(iy)-2\pi iH(iy)\in i\R$, because $H(iy)$ is real by
+Proposition~\ref{prop:central}. If $y=0$, $\widehat G(0)\in i\R$ by
+continuity. In all cases $M(-a)$ is real. By the Schwarz reflection principle,
+$M$ extends holomorphically to $\C\setminus[0,S]$ with
+$M(\overline s)=\overline{M(s)}$. Lemma~\ref{lem:germ}, the reality of the
+coefficients $D_n(\alpha)$ and continuity give $M=M_\infty$ for $|s|>4B^2$,
+and (b) follows because $D_0(\alpha)=1$.
+
+(a) Let $s_0\in(0,S]$ and let $s\in\Pip$ be close to $s_0$. Then $|q|$ is
+bounded below. If $|s|\ge\alpha$, then $|\widehat G(r)|$ is bounded by
+Lemmas~\ref{lem:h}(c) and~\ref{lem:Ghat}. If $|s|<\alpha$, then $r\in Q$ is
+bounded, and $|\widehat G(r)|\le|g(r)|+2\pi|H(r)|$ is bounded by
+Lemma~\ref{lem:h}(c) and Proposition~\ref{prop:bounds}. By reflection the same
+holds in $\Pim$. Near $0$, let $s\in\Pip$ with $|s|\le\alpha/4$ and so small
+that $|r|\ge\max(2B,R_0)$, which is possible by Lemma~\ref{lem:geometry}(d).
+Then $|g(r)|\le2/|r|$ and $|H(r)|\le C\log^2|r|/|r|$. By
+Lemma~\ref{lem:geometry}(d), $|r||q|\ge3\alpha/4$, and
+$|r|\le|q|+\alpha/|q|\le2\alpha/|q|$, so $\log|r|\le C(1+|\log|s||)$. Hence
+\[
+|M(s)|\le\frac{2+2\pi C\log^2|r|}{|r|\,|q|}\le C'(1+\log^2|s|) .
+\]
+On the remaining compact part of $\{|s|\le\alpha/4\}$ the bound follows from
+the first assertion of (a), and the case $\im s<0$ follows by reflection.
+
+(c) Let $t\in(0,S)$ and $s\to t$ from $\Pip$; then $q\to\sqrt t$. If
+$t>\alpha$, then by Lemma~\ref{lem:geometry}(a),(b) the point $r(s)$ tends to
+$r(t)\in(b,B)$ from $\Pip$, so $M(t+i0)=g(r(t)+i0)/\sqrt t$, and
+\eqref{eq:plemelj} gives $-\frac1\pi\im M(t+i0)=h(r(t))/\sqrt t$. If
+$t<\alpha$, then $r(s)$ tends to $r(t)\in(b,\infty)$ within $Q$. Since $H$
+is continuous on $Q$ (Proposition~\ref{prop:beyond}),
+\[
+M(t+i0)=\frac{g(r(t)-i0)-2\pi i\,H(r(t)-i0)}{\sqrt t} .
+\]
+By \eqref{eq:plemelj}, $\im g(r-i0)=\pi h(r)$, and
+$\im(-2\pi iH)=-2\pi\re H$. Therefore
+\[
+-\frac1\pi\im M(t+i0)=\frac{2\re H(r(t)-i0)-h(r(t))}{\sqrt t},
+\]
+which equals the second line of \eqref{eq:rho} by
+Proposition~\ref{prop:beyond}. If $t=\alpha$, then $r(s)\to b$, and
+Lemma~\ref{lem:Ghat} gives $M(\alpha+i0)=g(b+i0)/\sqrt\alpha$. Both lines of
+\eqref{eq:rho} tend to $h(b)/\sqrt\alpha$ as $t\to\alpha$, since $T(b)=h(b)$
+and $J(b)=0$. Continuity in $t$ follows from the continuity of $g(\cdot\pm
+i0)$, of $H$ on $Q$, and of $\widehat G$. The relation
+$M(t-i0)=\overline{M(t+i0)}$ is a consequence of $M(\overline
+s)=\overline{M(s)}$.
+\end{proof}
+
+\begin{theorem}\label{thm:alpha}
+Let $0<\alpha\le1$. The function $\rho_\alpha$ of \eqref{eq:rho} is strictly
+positive on $(0,S)$, satisfies $\rho_\alpha(t)=O(1+\log^2t)$ as $t\to0^+$, and
+is integrable on $(0,S)$. Moreover
+\begin{equation}\label{eq:cauchy}
+M(s)=\int_0^S\frac{\rho_\alpha(t)}{s-t}\dd t\qquad(s\in\C\setminus[0,S]).
+\end{equation}
+Consequently $\int_0^S\rho_\alpha(t)\dd t=1$ and
+\begin{equation}\label{eq:momentsD}
+D_n(\alpha)=\int_0^St^n\rho_\alpha(t)\dd t\qquad\text{for all } n\ge0 .
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+For $\alpha\le t<S$ we have $r(t)\in[b,B)$, where $h>0$ by
+Lemma~\ref{lem:h}(a). For $0<t<\alpha$, \eqref{eq:positive} gives
+$\rho_\alpha(t)\ge T(r(t))/\sqrt t>0$. Since
+$\rho_\alpha(t)=-\frac1\pi\im M(t+i0)$, Proposition~\ref{prop:M}(a) gives
+$|\rho_\alpha(t)|\le C(1+\log^2t)$ near $0$, and local boundedness on
+$[\varepsilon,S)$; hence $\rho_\alpha$ is integrable.
+
+Fix $s_0\in\C\setminus[0,S]$. For $0<\varepsilon<\min(\alpha/4,1)$ let
+$U_\varepsilon=\{z:\operatorname{dist}(z,[0,S])<\varepsilon\}$, and let
+$R>|s_0|+S+1$. Cauchy's integral formula on
+$\{|z|<R\}\setminus\overline{U_\varepsilon}$, for $\varepsilon$ small, gives
+\[
+M(s_0)=\frac1{2\pi i}\oint_{|z|=R}\frac{M(z)}{z-s_0}\dd z
+-\frac1{2\pi i}\oint_{\partial U_\varepsilon}\frac{M(z)}{z-s_0}\dd z ,
+\]
+both contours being oriented counterclockwise. The first integral is
+$O(1/R)$ by Proposition~\ref{prop:M}(b) and tends to $0$ as $R\to\infty$. The
+boundary $\partial U_\varepsilon$ consists of the segments $[0,S]\pm
+i\varepsilon$ and of two semicircles of radius $\varepsilon$ centred at $0$
+and $S$. By Proposition~\ref{prop:M}(a), the integral over the semicircle at
+$S$ is $O(\varepsilon)$, and the integral over the semicircle at $0$ is
+$O(\varepsilon\log^2\varepsilon)$; both tend to $0$. On the segments, the
+integrands converge pointwise for $t\in(0,S)$ to $M(t\pm i0)/(t-s_0)$, by
+Proposition~\ref{prop:M}(c), and they are dominated by $C(1+\log^2t)$, by
+Proposition~\ref{prop:M}(a). In the counterclockwise orientation the lower
+segment is traversed from $0$ to $S$ and the upper one from $S$ to $0$. By
+dominated convergence,
+\[
+-\frac1{2\pi i}\oint_{\partial U_\varepsilon}\frac{M(z)}{z-s_0}\dd z
+\longrightarrow-\frac1{2\pi i}\int_0^S\frac{M(t-i0)-M(t+i0)}{t-s_0}\dd t .
+\]
+By Proposition~\ref{prop:M}(c),
+$M(t-i0)-M(t+i0)=-2i\im M(t+i0)=2\pi i\rho_\alpha(t)$, and the right-hand
+side equals $\int_0^S\rho_\alpha(t)(s_0-t)^{-1}\dd t$. This proves
+\eqref{eq:cauchy}. In particular, no atom, pole or additional holomorphic
+term is present.
+
+Multiplying \eqref{eq:cauchy} by $s$ and letting $s\to+\infty$, dominated
+convergence and Proposition~\ref{prop:M}(b) give $\int_0^S\rho_\alpha=1$. For
+$|s|>S$ we may expand $(s-t)^{-1}=\sum_{n\ge0}t^ns^{-n-1}$ uniformly in
+$t\in[0,S]$, so $M(s)=\sum_{n\ge0}s^{-n-1}\int_0^St^n\rho_\alpha(t)\dd t$.
+Comparing with $M=M_\infty$ for $|s|>4B^2$ and using the uniqueness of
+Laurent coefficients gives \eqref{eq:momentsD}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Let $x\ge1$ and $\alpha=1/x\in(0,1]$. Then $b=2\sqrt\alpha=2x^{-1/2}$, in
+accordance with the definitions of the introduction. By \eqref{eq:S},
+\[
+\sqrt{S/\alpha}=\frac{B}{2\sqrt\alpha}+\sqrt{\frac{B^2}{4\alpha}-1}
+=(1+2\sqrt x)+\sqrt{(1+2\sqrt x)^2-1}
+\]
+and the right-hand side equals $1+2\sqrt x+2\sqrt{x+\sqrt x}$,
+so $S/\alpha=c_x$. Let $\mu_x$ be the image of $\rho_\alpha(t)\dd t$ under
+$t\mapsto t/\alpha$. Its density is $\alpha\rho_\alpha(\alpha t)$ on
+$(0,c_x)$. Since $r(\alpha t)=\sqrt{\alpha t}+\sqrt{\alpha/t}=r_x(t)$ and
+$\alpha/\sqrt{\alpha t}=1/\sqrt{xt}$, and since $\alpha t<\alpha$ exactly when
+$t<1$, this density is the function $\varphi_x$ of \eqref{eq:density}. By
+\eqref{eq:D} and Theorem~\ref{thm:alpha},
+\[
+A_n(x)=x^nD_n(1/x)=\alpha^{-n}\int_0^St^n\rho_\alpha(t)\dd t
+=\int_0^{c_x}t^n\varphi_x(t)\dd t
+\]
+for all $n\ge0$. By Theorem~\ref{thm:alpha}, $\mu_x$ is a probability
+measure, $\varphi_x$ is strictly positive on $(0,c_x)$, so that the support of
+$\mu_x$ is $[0,c_x]$, and $\varphi_x(t)=O(\log^2t)$ as $t\to0^+$.
+
+For uniqueness, let $\nu$ be a positive Borel measure on $\R$ with
+$\int t^n\dd\nu=A_n(x)$ for all $n$. For $\lambda>c_x$ we get
+$\nu(\{|t|\ge\lambda\})\le\lambda^{-2n}A_{2n}(x)\le(c_x/\lambda)^{2n}\to0$,
+so $\nu$ is supported in $[-c_x,c_x]$. There, polynomials are dense in the
+continuous functions, and $\nu$ and $\mu_x$ agree on polynomials; hence
+$\nu=\mu_x$.
+\end{proof}
+
+\section{Further remarks}\label{sec:remarks}
+
+\begin{remark}[Consequences]
+For each fixed real $x\ge1$, the Hankel matrix $(A_{i+j}(x))_{i,j\ge0}$ is
+totally positive \cite{WZ}, and, by the theorem of Wang and Zhu that
+Stieltjes moment sequences are infinitely log-convex \cite{WZ}, the sequence
+$(A_n(x))_{n\ge0}$ is infinitely log-convex. The coefficientwise statement
+of \cite[Conjecture~2]{So25} does not follow.
+\end{remark}
+
+\begin{remark}[Lattice Green functions]
+Since $4\cos\theta_1\cos\theta_2=2\cos(\theta_1+\theta_2)+2\cos(\theta_1-\theta_2)$
+and $(\theta_1,\theta_2)\mapsto(\theta_1+\theta_2,\theta_1-\theta_2)$ preserves
+Haar measure on the torus, for fixed real $x\ge1$ the variable $L$ has the law of
+$2(\cos\eta_1+\cos\eta_2+\sqrt\alpha\cos\eta_3)$ with independent uniform
+$\eta_i$. Thus $g(w)=\E[(w-L)^{-1}]$ is, up to normalization, the Green
+function at the origin of the anisotropic simple cubic lattice with
+anisotropy parameter $\sqrt\alpha=x^{-1/2}$, studied by Delves and Joyce
+\cite{DJ01,DJ06}. In this language $f$ is the density of states of the square
+lattice.
+\end{remark}
+
+\section*{Use of AI-assisted tools}
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{10}
+
+\bibitem{Ap}
+R.~Ap\'ery, \emph{Irrationalit\'e de $\zeta(2)$ et $\zeta(3)$},
+Ast\'erisque \textbf{61} (1979), 11--13.
+
+\bibitem{DJ01}
+R.~T. Delves and G.~S. Joyce, \emph{On the Green function for the anisotropic
+simple cubic lattice}, Ann. Physics \textbf{291} (2001), 71--133.
+
+\bibitem{DJ06}
+R.~T. Delves and G.~S. Joyce, \emph{Exact product form for the anisotropic
+simple cubic lattice Green function}, J. Phys. A \textbf{39} (2006), no.~16,
+4119--4145.
+
+\bibitem{DLMF}
+NIST Digital Library of Mathematical Functions, F.~W.~J. Olver et al.\
+(eds.), \url{https://dlmf.nist.gov/}, accessed October 2026.
+
+\bibitem{Ed}
+G.~A. Edgar, \emph{The Ap\'ery numbers as a Stieltjes moment sequence},
+preprint (2020), arXiv:2005.10733v2.
+
+\bibitem{Ne}
+T.~Neuschel, \emph{Ap\'ery polynomials and the multivariate saddle point
+method}, preprint (2013), arXiv:1307.0341.
+
+\bibitem{So20}
+A.~D. Sokal, \emph{The Euler and Springer numbers as moment sequences},
+Expo. Math. \textbf{38} (2020), 1--26.
+
+\bibitem{So25}
+A.~D. Sokal, \emph{Stieltjes moment sequences and coefficientwise
+Hankel-total positivity in enumerative combinatorics}, lecture slides,
+conference in honour of the 80th birthday of Tony Guttmann, 1 July 2025,
+\url{https://clisby.net/guttmann2025/talks/Alan_Sokal.pdf}.
+
+\bibitem{St}
+A.~Straub, \emph{Multivariate Ap\'ery numbers and supercongruences of
+rational functions}, Algebra Number Theory \textbf{8} (2014), no.~8,
+1985--2007.
+
+\bibitem{WZ}
+Y.~Wang and B.-X. Zhu, \emph{Log-convex and Stieltjes moment sequences},
+Adv. in Appl. Math. \textbf{81} (2016), 115--127.
+
+\end{thebibliography}
+
+\end{document}

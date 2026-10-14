@@ -1,0 +1,37 @@
+{
+  "cyclic_interval_exact_vectors": 12896,
+  "table_precision_digits": 2000,
+  "table": [
+    {
+      "epsilon": "1e-20",
+      "n3_ratio": "3.11104843735495031631734242934623798800599348",
+      "n6_ratio": "3.11104843735495031631734242934623798800599348",
+      "paper_rounded_value": "3.11105"
+    },
+    {
+      "epsilon": "1e-40",
+      "n3_ratio": "312.484388634121808718932643990376421620861491",
+      "n6_ratio": "312.484388634121808718932643990376421620861491",
+      "paper_rounded_value": "312.484"
+    },
+    {
+      "epsilon": "1e-80",
+      "n3_ratio": "3124999.98437500132847854674820066501236826233",
+      "n6_ratio": "3124999.98437500132847854674820066501236826233",
+      "paper_rounded_value": "3.12500e+6"
+    },
+    {
+      "epsilon": "1e-160",
+      "n3_ratio": "312499999999999.984375000000000013281250353553",
+      "n6_ratio": "312499999999999.984375000000000013281250353553",
+      "paper_rounded_value": "3.12500e+14"
+    }
+  ],
+  "leading_spectral_exponent": "4/5",
+  "next_spectral_exponent": "1",
+  "leading_term_unique": true,
+  "leading_numerator_coefficient": "1/16",
+  "leading_denominator_coefficient": "2",
+  "asymptotic_ratio_coefficient": "1/32",
+  "asymptotic_ratio_power": "-1/10"
+}

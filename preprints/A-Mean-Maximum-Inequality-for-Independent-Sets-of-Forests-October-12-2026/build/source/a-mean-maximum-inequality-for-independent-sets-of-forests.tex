@@ -1,0 +1,456 @@
+\documentclass{amsart}
+\usepackage{amssymb}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage[hidelinks,
+  pdftitle={A mean\textendash maximum inequality for independent sets of forests},
+  pdfauthor={Knowledge Sense},
+  pdfsubject={Mean size of independent sets of forests and the peak of the independence sequence},
+  pdfkeywords={independent sets, independence polynomial, trees and forests, hard-core model, independence sequence, computer-assisted proof}]{hyperref}
+
+\numberwithin{equation}{section}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\DeclareMathOperator{\Var}{Var}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\vc}{\mathbf{v}}
+\newcommand{\hash}[1]{\texttt{\footnotesize #1}}
+
+\begin{document}
+
+\title{A mean--maximum inequality for independent sets of forests}
+
+\author{Knowledge Sense}
+\email{math@knowledgesense.jp}
+\date{12 October 2026}
+
+\subjclass[2020]{Primary 05C69; Secondary 05A20, 05C05, 05C31, 60F05}
+\keywords{Independent sets, independence polynomial, trees and forests, hard-core model, independence sequence, computer-assisted proof.}
+
+\begin{abstract}
+For a finite graph $G$ let $\mu(G)$ be the mean size of a uniformly random independent set of $G$ and $\alpha(G)$ the independence number. We prove that $\mu(F)\ge\frac{47}{100}\,\alpha(F)$ for every finite forest $F$, with no restriction on the order or on the degrees. The proof is a computer-assisted invariant-cone argument. Its finite part consists of $121540$ exact cone-membership certificates, one for each image of a cone generator under the addition of a root and for each product of two generators; these are supplied together with a checker that uses only the Python standard library. A tree with $71308$ vertices shows that the constant cannot be raised to $0.473403$. As a consequence, the minimum of $k/\alpha(F)$, taken over all forests $F$ with $n$ vertices and all weak local peaks $k$ of the independence sequence of $F$, converges as $n\to\infty$ to $\beta=\inf_T\mu(T)/\alpha(T)$, the infimum being over nonempty trees; the same holds with trees in place of forests, with the same limit, and $0.47\le\beta<0.473403$. This determines the left end of the peak interval of Fang, Lu, Nevo, Yao and Zheng up to a window of width less than $0.003403$.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+For a finite simple graph $G$ let
+\[
+I_G(z)=\sum_{J}z^{|J|}=\sum_{k\ge 0}i_k(G)\,z^k
+\]
+be its independence polynomial, where $J$ runs over the independent sets of $G$, and let $\alpha(G)$ be the maximum size of an independent set. We write
+\[
+\mu(G)=\frac{I_G'(1)}{I_G(1)}=\frac{1}{I_G(1)}\sum_J|J|
+\]
+for the mean size of an independent set chosen uniformly at random; this is the expected size in the hard-core model at fugacity one. Clearly $0\le\mu(G)\le\alpha(G)$, and both $\mu$ and $\alpha$ are additive over connected components. Our first result is a lower bound for $\mu$ in terms of $\alpha$ that holds for all forests at once.
+
+\begin{theorem}\label{thm:main}
+Every finite forest $F$ satisfies
+\[
+\mu(F)\ \ge\ \frac{47}{100}\,\alpha(F).
+\]
+\end{theorem}
+
+There is no hypothesis on the maximum degree and none on the number of vertices; the empty forest is included. By additivity, Theorem~\ref{thm:main} is equivalent to the corresponding statement for trees (Lemma~\ref{lem:additive}), so that
+\[
+\beta\;:=\;\inf\Bigl\{\frac{\mu(T)}{\alpha(T)}:\ T\text{ a nonempty finite tree}\Bigr\}\ \ge\ \frac{47}{100}.
+\]
+
+The constant $\beta$ is also the limiting value of the smallest normalized peak position of large forests, as we now explain. Alavi, Malde, Schwenk and Erd\H{o}s~\cite{AMSE} asked whether $(i_k(F))_k$ is unimodal for every forest $F$, and Fang, Lu, Nevo, Yao and Zheng~\cite{FLNYZ} proved this for all sufficiently large forests. Call an index $k$ with $0\le k\le\alpha(F)$ a \emph{weak local peak} of $F$ if $i_{k-1}(F)\le i_k(F)\ge i_{k+1}(F)$, with the convention $i_{-1}=i_{\alpha+1}=0$; for large forests the convention is immaterial (Lemma~\ref{lem:peakmax}). For $n\ge1$ put
+\[
+m_{\mathrm{forest}}(n)=\min\Bigl\{\frac{k}{\alpha(F)}\Bigr\},\qquad m_{\mathrm{tree}}(n)=\min\Bigl\{\frac{k}{\alpha(T)}\Bigr\},
+\]
+the minima being taken over all weak local peaks $k$ of all forests $F$, respectively all trees $T$, with $n$ vertices. In Section~9 of~\cite{FLNYZ} the number $a_p$ is defined by
+\[
+a_p=\lim_{n\to\infty}m_{\mathrm{forest}}(n);
+\]
+it is noted there that Proposition~8.2 of~\cite{FLNYZ} gives $a_p\ge 1/4$, and it is asked what the value of $a_p$ is and whether the analogue of $a_p$ for trees has the same value. In this paper we take this analogue to be
+\[
+a_p^{\mathrm{tree}}=\lim_{n\to\infty}m_{\mathrm{tree}}(n).
+\]
+Our second result shows that both limits exist, so that $a_p$ and $a_p^{\mathrm{tree}}$ are well defined, and determines them in terms of~$\beta$.
+
+\begin{theorem}\label{thm:peaks}
+The limits $\lim_{n\to\infty}m_{\mathrm{forest}}(n)$ and $\lim_{n\to\infty}m_{\mathrm{tree}}(n)$ exist, and both are equal to $\beta$. Moreover
+\[
+0.47\ \le\ \beta\ <\ 0.473403 .
+\]
+In particular $a_p=a_p^{\mathrm{tree}}=\beta$.
+\end{theorem}
+
+Together with $b_p=2/3$ from~\cite{FLNYZ}, the peaks of all sufficiently large forests therefore lie, up to $o(\alpha)$, in the interval $[\beta\alpha,\tfrac23\alpha]$, and the left end $\beta$ is now confined to a window of width less than $0.003403$. Its exact value remains open.
+
+\medskip
+\noindent\emph{Earlier bounds.} For trees, Andriantiana, Razanajatovo Misanantenaina and Wagner~\cite[Lemma~4.2 and Theorem~4.4]{AMW} proved $\mu(T)\ge\frac{5-\sqrt5}{10}\,|T|$, the path being extremal at fixed order; since $\alpha\le|T|$ this gives only $\mu/\alpha\ge0.2763$. The argument of~\cite[(7.2)]{FLNYZ} gives $\log I_F(1)\le 3\log2\cdot\mu(F)$ for every forest, and $I_F(1)\ge2^{\alpha(F)}$, so that $\mu(F)\ge\alpha(F)/3$.
+
+\medskip
+\noindent\emph{Method.} A rooted tree is built from rooted forests by two operations, disjoint union and the addition of a new root. To a rooted forest $H$ we attach four numbers: the values $P_H(1)$ and $Q_H(1)$, where $P_H$ is the product of the independence polynomials of the trees of $H$ and $Q_H$ is the product of the independence polynomials of these trees with their roots deleted, and the derivatives $P_H'(1)$ and $Q_H'(1)$, each decreased by $c\,\alpha(H)$ times the corresponding value, where $c=47/100$. For a single tree $T$ the third number is nonnegative exactly when $\mu(T)\ge c\,\alpha(T)$. These numbers form a vector in $\R^4$ on which disjoint union acts by a bilinear product $\star$ and root addition by a linear map $\Lambda_f$ that depends on one bit $f$, the \emph{flag}, which records whether some root lies in every maximum independent set of its tree. Suppose that $\C_0,\C_1\subset\R^4$ are convex cones such that $\C_0$ contains the vector of the empty forest, $v\star w\in\C_{\max\{f,g\}}$ for $v\in\C_f$ and $w\in\C_g$, and $\Lambda_f(v)\in\C_{1-f}$ with nonnegative third coordinate for $v\in\C_f$. Then the inequality $\mu(T)\ge c\,\alpha(T)$ holds for all trees (Proposition~\ref{prop:cones}). For finitely generated cones these conditions reduce to finitely many statements about generators, which can be checked by exact linear algebra over $\mathbb Q$. The cones used here have $32$ and $331$ integer generators. The certificate consists of $121540$ membership records, one for the image of each generator under root addition and one for each product of two generators, together with $363$ sign conditions (Section~\ref{sec:cert}); its validity is checked by a short Python program supplied with the paper. No bound on the degrees enters, because an arbitrary number of children is produced by repeated binary products.
+
+Theorem~\ref{thm:peaks} follows from Theorem~\ref{thm:main}, from an explicit tree whose ratio $\mu/\alpha$ is below $0.473403$ (Section~\ref{sec:witness}), and from a local limit theorem for the size of a uniform independent set of a forest, which we derive from estimates of~\cite{FLNYZ} (Section~\ref{sec:peaks}); a hub construction then transfers the ratio of a single tree to trees of every large order (Section~\ref{sec:proof}).
+
+\medskip
+\noindent\emph{Dependencies.} Theorem~\ref{thm:main} rests on the recursion for rooted trees (Lemma~\ref{lem:recursion}), the invariant-cone criterion (Proposition~\ref{prop:cones} and Remark~\ref{rem:finite}), and the exact verification of the cone certificate by the supplied program. The bound $\beta<0.473403$ rests on the counting recursion of Lemma~\ref{lem:counting} and on the exact evaluation of that recursion for one tree, again by the supplied program. The remaining statements of Theorem~\ref{thm:peaks} use the following results of~\cite{FLNYZ}, which we do not reprove: Proposition~5.1 and Lemma~6.1 (the central limit theorem and the characteristic function bound, at fugacity one), Theorem~1.2 (logarithmic concavity in a central range), and the two coefficient-ratio inequalities displayed in the proof of Proposition~8.2.
+
+\medskip
+\noindent\emph{Organization.} Section~\ref{sec:prelim} fixes notation. Section~\ref{sec:cones} derives the root recursion and the invariant-cone criterion. Section~\ref{sec:cert} describes the certificate and proves Theorem~\ref{thm:main}. Section~\ref{sec:witness} constructs the tree showing $\beta<0.473403$. Section~\ref{sec:peaks} proves the local limit theorem and locates the peaks, and Section~\ref{sec:proof} proves Theorem~\ref{thm:peaks}. Section~\ref{sec:remarks} contains remarks, and the appendices describe the supplied files.
+
+\section{Preliminaries}\label{sec:prelim}
+
+All graphs are finite and simple. The empty graph has no vertices; for it $I=1$, $\alpha=0$ and $\mu=0$. We write $|G|$ for the number of vertices of $G$, and $G-v$ for the graph obtained by deleting the vertex~$v$.
+
+\begin{lemma}\label{lem:additive}
+Let $G$ be the disjoint union of graphs $G_1,\dots,G_m$. Then $I_G=\prod_iI_{G_i}$, $\alpha(G)=\sum_i\alpha(G_i)$ and $\mu(G)=\sum_i\mu(G_i)$. Consequently, if $F$ is a nonempty forest with tree components $T_1,\dots,T_m$, then
+\[
+\frac{\mu(F)}{\alpha(F)}=\sum_{i=1}^m\frac{\alpha(T_i)}{\alpha(F)}\cdot\frac{\mu(T_i)}{\alpha(T_i)}\ \ge\ \beta .
+\]
+Moreover $\alpha(F)\ge|F|/2$ for every forest $F$.
+\end{lemma}
+
+\begin{proof}
+An independent set of $G$ is a union of independent sets of the $G_i$, which gives the product formula; taking logarithmic derivatives at $z=1$ gives additivity of $\mu$, and additivity of $\alpha$ is clear. Each tree component is nonempty, so $\alpha(T_i)\ge1$, which gives the displayed identity and the inequality. A forest is bipartite, and the larger color class is an independent set with at least $|F|/2$ vertices.
+\end{proof}
+
+In particular the infimum of $\mu/\alpha$ over all nonempty forests equals $\beta$, and Theorem~\ref{thm:main} for trees implies it for forests. Note that $\beta\le\mu(K_1)/\alpha(K_1)=1/2$.
+
+\section{The root recursion and invariant cones}\label{sec:cones}
+
+Throughout this section $c=47/100$. A \emph{rooted forest} is a finite, possibly empty, sequence $H=((T_1,v_1),\dots,(T_d,v_d))$ of vertex-disjoint trees $T_i$ with chosen roots $v_i$. Put $\alpha(H)=\sum_i\alpha(T_i)$ and
+\[
+P_H(z)=\prod_{i=1}^dI_{T_i}(z),\qquad Q_H(z)=\prod_{i=1}^dI_{T_i-v_i}(z),
+\]
+empty products being $1$. For a rooted tree $(T,v)$ let $b(T,v)=\alpha(T)-\alpha(T-v)\in\{0,1\}$; it equals $1$ exactly when $v$ lies in every maximum independent set of $T$. The \emph{flag} of $H$ is $f(H)=\max_ib(T_i,v_i)\in\{0,1\}$, with $f(\emptyset)=0$. The \emph{vector} of $H$ is
+\begin{equation}\label{eq:vector}
+\vc(H)=(p,q,x,y),\qquad
+\begin{aligned}
+p&=P_H(1), & x&=P_H'(1)-c\,\alpha(H)\,p,\\
+q&=Q_H(1), & y&=Q_H'(1)-c\,\alpha(H)\,q .
+\end{aligned}
+\end{equation}
+If $H=((T,v))$ consists of a single tree, then $p=I_T(1)>0$ and $x=I_T'(1)-c\,\alpha(T)I_T(1)$, so
+\begin{equation}\label{eq:thirdcoord}
+x\ge0\iff\mu(T)\ge c\,\alpha(T).
+\end{equation}
+Define a bilinear map $\star$ on $\R^4$ and, for $f\in\{0,1\}$ and $b=1-f$, a linear map $\Lambda_f$ by
+\begin{align}
+(p,q,x,y)\star(p',q',x',y')&=(pp',\ qq',\ xp'+px',\ yq'+qy'),\label{eq:product}\\
+\Lambda_f(p,q,x,y)&=\bigl(p+q,\ p,\ x+y+(1-cb)q-cb\,p,\ x-cb\,p\bigr).\label{eq:plant}
+\end{align}
+The map $\star$ is commutative with unit $e=(1,1,0,0)=\vc(\emptyset)$. For integer calculations we use $100\,\Lambda_f$, whose entries are $100(p+q)$, $100p$, $100x+100y+(100-47b)q-47bp$ and $100x-47bp$.
+
+\begin{lemma}\label{lem:recursion}
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=*]
+\item If $H$ and $H'$ are rooted forests, then $\vc(H\sqcup H')=\vc(H)\star\vc(H')$ and $f(H\sqcup H')=\max\{f(H),f(H')\}$.
+\item Let $H$ be a rooted forest and let $\mathrm{pl}(H)$ be the tree obtained by adding a new vertex $r$ adjacent to all roots of $H$, rooted at $r$. Then $b(\mathrm{pl}(H),r)=1-f(H)$, and the vector of the one-tree forest $((\mathrm{pl}(H),r))$ is $\Lambda_{f(H)}(\vc(H))$.
+\end{enumerate}
+Every rooted tree with root $r$ is $\mathrm{pl}(H)$ for the rooted forest $H$ formed by the subtrees hanging from~$r$.
+\end{lemma}
+
+\begin{proof}
+(a) The polynomials and $\alpha$ are multiplicative, respectively additive. Write $\vc(H)=(p,q,x,y)$, $\vc(H')=(p',q',x',y')$, $\alpha=\alpha(H)$, $\alpha'=\alpha(H')$. By the product rule,
+\[
+(P_HP_{H'})'(1)-c(\alpha+\alpha')pp'=(x+c\alpha p)p'+p(x'+c\alpha'p')-c(\alpha+\alpha')pp'=xp'+px',
+\]
+and likewise for the fourth coordinate. The statement on flags is the definition.
+
+(b) An independent set of $\mathrm{pl}(H)$ either avoids $r$, and is then an independent set of $\bigsqcup_iT_i$, or contains $r$ and then avoids all $v_i$. Hence
+\[
+I_{\mathrm{pl}(H)}(z)=P_H(z)+zQ_H(z),\qquad I_{\mathrm{pl}(H)-r}(z)=P_H(z).
+\]
+Consequently $\alpha(\mathrm{pl}(H)-r)=\alpha(H)$ and $\alpha(\mathrm{pl}(H))=\max\{\alpha(H),\,1+\sum_i\alpha(T_i-v_i)\}$. If $f(H)=0$ then $\sum_i\alpha(T_i-v_i)=\alpha(H)$, and the maximum is $\alpha(H)+1$; if $f(H)=1$ the second term is at most $\alpha(H)$. Thus $\alpha(\mathrm{pl}(H))=\alpha(H)+b$ with $b=1-f(H)$, which gives the first claim. For the vector, with $(p,q,x,y)=\vc(H)$ and $\alpha=\alpha(H)$, the new first and second coordinates are $I_{\mathrm{pl}(H)}(1)=p+q$ and $I_{\mathrm{pl}(H)-r}(1)=p$, and the new third coordinate is
+\[
+P_H'(1)+q+Q_H'(1)-c(\alpha+b)(p+q)=x+y+(1-cb)q-cb\,p,
+\]
+because $P_H'(1)=x+c\alpha p$ and $Q_H'(1)=y+c\alpha q$. The new fourth coordinate is $P_H'(1)-c(\alpha+b)p=x-cb\,p$.
+\end{proof}
+
+\begin{proposition}[Invariant cones]\label{prop:cones}
+Let $\C_0,\C_1\subset\R^4$ be convex cones, that is, sets closed under addition and under multiplication by nonnegative reals, such that
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=*]
+\item $e\in\C_0$;
+\item $v\star w\in\C_{\max\{f,g\}}$ whenever $v\in\C_f$ and $w\in\C_g$, for $f,g\in\{0,1\}$;
+\item $\Lambda_f(v)\in\C_{1-f}$ for every $v\in\C_f$;
+\item the third coordinate of $\Lambda_f(v)$ is nonnegative for every $v\in\C_f$.
+\end{enumerate}
+Then $\vc(H)\in\C_{f(H)}$ for every rooted forest $H$, and $\mu(T)\ge c\,\alpha(T)$ for every finite tree $T$.
+\end{proposition}
+
+\begin{proof}
+We prove $\vc(H)\in\C_{f(H)}$ by induction on $|H|=\sum_i|T_i|$. For $H=\emptyset$ this is (i). Let $H$ be nonempty and write $H=H'\sqcup((T,v))$. Let $H''$ be the forest of subtrees hanging from $v$, so that $(T,v)=\mathrm{pl}(H'')$ and $|H''|<|H|$, $|H'|<|H|$. By induction $\vc(H'')\in\C_{f(H'')}$, and by Lemma~\ref{lem:recursion}(b) and (iii) the vector of $((T,v))$ lies in $\C_{1-f(H'')}$, which is $\C_{b(T,v)}$, the cone indexed by the flag of $((T,v))$. By induction $\vc(H')\in\C_{f(H')}$, and Lemma~\ref{lem:recursion}(a) together with (ii) gives $\vc(H)\in\C_{f(H)}$. Finally, by Lemma~\ref{lem:recursion}(b) the third coordinate of the vector of $((T,v))$ is the third coordinate of $\Lambda_{f(H'')}(\vc(H''))$, which is nonnegative by (iv); now apply~\eqref{eq:thirdcoord}.
+\end{proof}
+
+\begin{remark}\label{rem:finite}
+Suppose $\C_f$ is the cone generated by a finite set $G_f\subset\R^4$. Since $\star$ is bilinear and symmetric and $\Lambda_f$ is linear, it suffices to verify (ii) for pairs of generators with $(f,g)\in\{(0,0),(0,1),(1,1)\}$, (iii) and (iv) for single generators, and (i) for $e$. The generators need not be vectors of actual forests; only the containments matter. This is essential: finitely many realized vectors cannot control arbitrary products of branches whose ratios $q/p$ tend to zero. Note also that no bound on the number of children occurs: if a vertex has $d\ge0$ children, the rooted forest of the subtrees hanging from it has vector $e\star\vc_1\star\dots\star\vc_d$, where $\vc_1,\dots,\vc_d$ are the vectors of the child trees; this is obtained from $e$ by $d$ applications of $\star$, and equals $e$ when $d=0$.
+\end{remark}
+
+\section{The certificate}\label{sec:cert}
+
+\begin{theorem}\label{thm:cones}
+There are cones $\C_0=\operatorname{cone}(G_0)$ and $\C_1=\operatorname{cone}(G_1)$ with $|G_0|=32$ and $|G_1|=331$, generated by primitive integer vectors whose coordinates have at most $87$ bits, that satisfy \textup{(i)--(iv)} of Proposition~\textup{\ref{prop:cones}} for $c=47/100$. Consequently Theorem~\textup{\ref{thm:main}} holds.
+\end{theorem}
+
+The generators are listed in the file \texttt{cone\_certificate.json} described in Appendix~\ref{app:data}. Both lists contain the two recession rays $(0,0,1,0)$ and $(0,0,0,1)$, and $G_0$ contains $e=(1,1,0,0)$, which settles~(i). By Remark~\ref{rem:finite}, what remains is to show that
+\begin{itemize}[leftmargin=*]
+\item for each of the $32+331=363$ generators $g\in G_f$, the integer vector $100\Lambda_f(g)$ has nonnegative third coordinate and lies in $\C_{1-f}$;
+\item for each of the $32^2+32\cdot331+331^2=121177$ ordered pairs $(g,g')$ with $g\in G_f$, $g'\in G_{f'}$ and $f\le f'$, the product $g\star g'$ lies in $\C_{f'}$.
+\end{itemize}
+For $(f,f')=(0,0)$ and $(1,1)$ all ordered pairs are included, although by commutativity of $\star$ unordered pairs would suffice; pairs with $(f,f')=(1,0)$ are covered by symmetry. Multiplication by $100$ changes neither the sign of a coordinate nor membership in a cone. The two items contain $363$ root memberships and $121177$ product memberships, that is, $121540$ membership statements in all; the $363$ sign conditions of the first item are not counted among these. Each membership statement comes with a record that exhibits an explicit nonnegative combination of generators of the target cone, of one of four kinds; here $m=(p,q,x,y)\in\mathbb Z^4$ is the vector to be placed in the cone $\C$.
+\begin{enumerate}[label=\textup{(M\arabic*)},start=0,leftmargin=*]
+\item \emph{Generator multiple.} $m=\lambda g$ for a generator $g$ of $\C$ and some $\lambda>0$. Since $g$ is primitive, $\lambda=\gcd(p,q,x,y)$.
+\item \emph{Generator plus recession rays.} For a generator $g=(p_g,q_g,x_g,y_g)$ of $\C$ with $p_g>0$: $p>0$, $q\,p_g=q_g\,p$, $x\,p_g\ge x_g\,p$ and $y\,p_g\ge y_g\,p$. Then $m=\frac{p}{p_g}g+s\,(0,0,1,0)+t\,(0,0,0,1)$ with $s,t\ge0$.
+\item \emph{Four-generator basis.} Four linearly independent generators $g_1,\dots,g_4$ of $\C$, forming the columns of an integer matrix $A$ with $A^{-1}m\ge0$ coordinatewise; then $m=\sum_j(A^{-1}m)_jg_j$.
+\item \emph{Zero.} $m=0$.
+\end{enumerate}
+The numbers of records of each kind are as follows.
+\begin{center}
+\begin{tabular}{lr}
+\hline
+kind & number of records\\\hline
+(M0) generator multiple & $8073$\\
+(M1) generator plus recession rays & $1754$\\
+(M2) four-generator basis & $111695$\\
+(M3) zero & $18$\\\hline
+total & $121540$\\\hline
+\end{tabular}
+\end{center}
+The certificate supplies $2037$ candidate bases, $1029$ of which are used.
+
+\begin{proof}[Proof of Theorem~\textup{\ref{thm:cones}}]
+A valid record of kind (M0)--(M3) expresses $m$ as a nonnegative combination of generators of the target cone, so $m$ lies in that cone. For (M0) and (M1) validity consists of the stated equalities and inequalities; for (M2) it means that $A$ is invertible over $\mathbb Q$ and that the vector $A^{-1}m$ has nonnegative entries; for (M3) it means $m=0$. All $121540$ records are valid, the generators are primitive integer vectors, the two recession rays lie in both lists and $e$ lies in $G_0$, and the third coordinate of each of the $363$ vectors $100\Lambda_f(g)$ is positive, the smallest value being $6$. These finitely many statements were verified in exact integer and rational arithmetic by the program \texttt{verify.py} of Appendix~\ref{app:data}; for (M2) the program computes $A^{-1}$ by Gauss--Jordan elimination, confirms $A^{-1}A=\mathrm{Id}$, and reconstructs $m$ from the coefficients. By Remark~\ref{rem:finite}, conditions (i)--(iv) hold, and Proposition~\ref{prop:cones} gives $\mu(T)\ge\frac{47}{100}\alpha(T)$ for all trees. Theorem~\ref{thm:main} follows by Lemma~\ref{lem:additive}.
+\end{proof}
+
+\begin{remark}\label{rem:example}
+The smallest case is $H=\emptyset$: the one-vertex tree has vector $\Lambda_0(e)=(2,1,1-2c,-c)$, and $100\Lambda_0(e)=(200,100,6,-47)$. Its third coordinate $6=100(1-2c)$ is the minimum mentioned above, and it records $\mu(K_1)=\frac12\ge c$.
+\end{remark}
+
+\begin{remark}
+The cones were found with the help of numerical convex-hull computations and a triangulation used to select candidate decompositions. None of this enters the proof: each record specifies an exact decomposition, so the argument does not depend on the accuracy or completeness of the numerical search.
+\end{remark}
+
+\section{A tree with small ratio}\label{sec:witness}
+
+For rooted trees $T_1,\dots,T_d$ let $R(T_1,\dots,T_d)$ be the rooted tree consisting of a new root joined to the roots of vertex-disjoint copies of $T_1,\dots,T_d$; repeated arguments denote disjoint copies. Put $L=R()$ (a single vertex) and
+\begin{equation}\label{eq:witness}
+\begin{gathered}
+F(Q)=R\bigl(L,\,R(Q)\bigr),\quad U(Q)=R(Q),\quad V(Q)=R\bigl(U(Q),U(Q),U(Q)\bigr),\\
+M(Q)=R\bigl(L,\,R(\underbrace{V(Q),\dots,V(Q)}_{7\text{ copies}})\bigr),\\
+Q_0=F\bigl(R(L,L)\bigr),\quad Q_{j+1}=F\bigl(M(Q_j)\bigr),\quad T^*=Q_3 .
+\end{gathered}
+\end{equation}
+
+\begin{lemma}\label{lem:witnessshape}
+We have $|Q_0|=6$ and $|Q_{j+1}|=21|Q_j|+34$, so that
+\[
+(|Q_0|,|Q_1|,|Q_2|,|Q_3|)=(6,\,160,\,3394,\,71308).
+\]
+The maximum degree of $T^*$ is $8$, attained at the root of each subtree $R(V,\dots,V)$.
+\end{lemma}
+
+\begin{proof}
+$|R(L,L)|=3$ and $|F(Q)|=|Q|+3$, so $|Q_0|=6$. Further $|U(Q)|=|Q|+1$, $|V(Q)|=3|Q|+4$, $|R(V,\dots,V)|=7(3|Q|+4)+1$ and $|M(Q)|=21|Q|+31$, so $|F(M(Q))|=21|Q|+34$. The root of $R(V,\dots,V)$ has seven children and one parent. All other vertices have degree at most $4$.
+\end{proof}
+
+To compute $I_{T^*}(1)$ and $I_{T^*}'(1)$ exactly without forming the polynomial $I_{T^*}(z)$, which has degree $48619$ and $48620$ positive coefficients, we use counting data. For a rooted tree $(T,v)$ let $A_0,A_1$ be the numbers of independent sets not containing, respectively containing, $v$; $S_0,S_1$ the sums of the sizes of these sets; $a_0,a_1$ their maximum sizes; and $n=|T|$.
+
+\begin{lemma}\label{lem:counting}
+For the one-vertex tree the data are $(A_0,A_1,S_0,S_1,a_0,a_1,n)=(1,1,0,1,0,1,1)$. Let $(T,v)$ and $(T',v')$ be vertex-disjoint rooted trees with data $(A_0,A_1,S_0,S_1,a_0,a_1,n)$ and $(A_0',A_1',S_0',S_1',a_0',a_1',n')$, and let $T''$ be the tree obtained from $T\cup T'$ by adding the edge $vv'$, rooted at~$v$. The data of $(T'',v)$, in terms of those of $(T,v)$ and $(T',v')$, are
+\begin{equation}\label{eq:counting}
+\begin{gathered}
+A_0\leftarrow A_0(A_0'+A_1'),\qquad A_1\leftarrow A_1A_0',\\
+S_0\leftarrow S_0(A_0'+A_1')+A_0(S_0'+S_1'),\qquad S_1\leftarrow S_1A_0'+A_1S_0',\\
+a_0\leftarrow a_0+\max\{a_0',a_1'\},\qquad a_1\leftarrow a_1+a_0',\qquad n\leftarrow n+n'.
+\end{gathered}
+\end{equation}
+Finally $I_T(1)=A_0+A_1$, $I_T'(1)=S_0+S_1$ and $\alpha(T)=\max\{a_0,a_1\}$.
+\end{lemma}
+
+\begin{proof}
+An independent set of $T''$ avoiding $v$ is the union of an independent set of $T$ avoiding $v$ and an arbitrary independent set of $T'$, which gives $A_0$, $S_0$ and $a_0$. An independent set of $T''$ containing $v$ is the union of an independent set of $T$ containing $v$ and an independent set of $T'$ avoiding $v'$; this gives $A_1$, $S_1$ and $a_1$. The last statements are the definitions.
+\end{proof}
+
+Starting with a single vertex as the root and applying~\eqref{eq:counting} once for each child, with $(T',v')$ the child subtree, computes the data of $R(T_1,\dots,T_d)$ from those of $T_1,\dots,T_d$, and hence those of $T^*$ from~\eqref{eq:witness}.
+
+\begin{proposition}\label{prop:witness}
+The tree $T^*$ has $71308$ vertices, maximum degree $8$ and $\alpha(T^*)=48619$. Its integers $Z=I_{T^*}(1)$ and $S=I_{T^*}'(1)$ have $15841$ and $15845$ decimal digits, respectively, and satisfy
+\[
+10^6\,S\ <\ 473403\;\alpha(T^*)\,Z .
+\]
+Consequently
+\[
+\beta\ \le\ \frac{\mu(T^*)}{\alpha(T^*)}\ <\ 0.473403 .
+\]
+Numerically, $\mu(T^*)/\alpha(T^*)=0.4734029757422598\dots$
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:counting}, $Z$, $S$ and $\alpha(T^*)$ are obtained by evaluating~\eqref{eq:counting} along the construction~\eqref{eq:witness}, and for the root of $T^*$ one finds $(a_0,a_1)=(48619,48618)$, so $\alpha(T^*)=48619$. This evaluation was carried out in exact integer arithmetic by the program \texttt{verify.py}, which also confirms the number of vertices and the maximum degree; the resulting integers $Z$ and $S$ coincide with the decimal strings stored in the file \texttt{upper\_witness\_certificate.json} (Appendix~\ref{app:data}), and the strict inequality between them is checked in integer arithmetic. The decimal value is for orientation only and is not used in the proof.
+\end{proof}
+
+\section{Peaks and a local limit theorem}\label{sec:peaks}
+
+Let $F$ be a nonempty forest with $n$ vertices, let $N=|J|$ for a uniformly random independent set $J$ of $F$, and write $\mu=\E N$, $\sigma^2=\Var N$, $p_j=\Pr(N=j)=i_j(F)/I_F(1)$. We use the following results of~\cite{FLNYZ}, specialized to fugacity $\lambda=1$, which lies in the interval $[1/4,12]$ considered there.
+
+\begin{enumerate}[label=\textup{(F\arabic*)},leftmargin=*]
+\item \cite[Proposition~5.1]{FLNYZ}. There are constants $0<c_0<C_0<\infty$ with $c_0n\le\sigma^2\le C_0n$ for every nonempty forest on $n$ vertices, and
+\[
+\sup_{F}\ \sup_{x\in\R}\ \Bigl|\Pr\Bigl(\frac{N-\mu}{\sigma}\le x\Bigr)-\Phi(x)\Bigr|\xrightarrow[n\to\infty]{}0,
+\]
+where the first supremum is over all forests on $n$ vertices and $\Phi$ is the standard normal distribution function.
+\item \cite[Lemma~6.1]{FLNYZ}. There is $c_1>0$ such that $|\E e^{itN}|\le\exp\{-c_1n\sin^2(t/2)\}$ for every forest on $n$ vertices and every $t\in\R$.
+\item \cite[Theorem~1.2]{FLNYZ}. There is $n_0$ such that every forest $F$ on $n\ge n_0$ vertices satisfies $i_k(F)^2>i_{k-1}(F)i_{k+1}(F)$ for all integers $k$ with $n/5\le k\le17\alpha(F)/25$.
+\item \cite[proof of Proposition~8.2]{FLNYZ}. For every nonempty forest $F$ on $n$ vertices and $0\le k\le\alpha(F)$, with $\rho_k=i_{k+1}(F)/i_k(F)$,
+\begin{equation}\label{eq:ratios}
+\frac{n-3k}{k+1}\ \le\ \rho_k\ \le\ \frac{2(\alpha(F)-k)}{k+1}.
+\end{equation}
+\end{enumerate}
+Inequality~\eqref{eq:ratios} is obtained from the identity $(k+1)\,i_{k+1}=\sum_{|J|=k}e(J)$, where $e(J)$ is the number of vertices outside $J$ with no neighbor in $J$. The lower bound uses $e(J)\ge n-k-\sum_{v\in J}d(v)$ and the fact, proved there, that a uniformly chosen independent set of size $k$ of a forest has $\E\sum_{v\in J}d(v)\le2k$. The upper bound uses that the subgraph induced on the vertices counted by $e(J)$ is bipartite with independence number at most $\alpha-k$, hence has at most $2(\alpha-k)$ vertices.
+
+\begin{proposition}[Uniform local limit theorem]\label{prop:llt}
+Let $\varphi(x)=(2\pi)^{-1/2}e^{-x^2/2}$. Then
+\[
+\eta_n:=\sup_{F}\ \sup_{j\in\mathbb Z}\Bigl|\sigma\,p_j-\varphi\Bigl(\frac{j-\mu}{\sigma}\Bigr)\Bigr|\xrightarrow[n\to\infty]{}0,
+\]
+where the first supremum is over all forests on $n$ vertices.
+\end{proposition}
+
+\begin{proof}
+Let $\chi_F(t)=\E\,e^{it(N-\mu)/\sigma}$. We first show that $\chi_F(t)\to e^{-t^2/2}$ uniformly over $|t|\le T$ and over all forests on $n$ vertices, as $n\to\infty$, for every fixed $T$. Each $\chi_F$ is $1$-Lipschitz, since $|e^{iu}-1|\le|u|$ and $\E|N-\mu|/\sigma\le1$. If the claim failed, there would be $\eps>0$, forests $F_m$ on $n_m\to\infty$ vertices and $t_m\in[-T,T]$, which after passing to a subsequence converge to some $t_*$, with $|\chi_{F_m}(t_m)-e^{-t_m^2/2}|\ge\eps$. By (F1), $(N-\mu)/\sigma$ converges in distribution to the standard normal law along $F_m$, so $\chi_{F_m}(t_*)\to e^{-t_*^2/2}$ by L\'evy's continuity theorem. Using the Lipschitz bound,
+\[
+|\chi_{F_m}(t_m)-e^{-t_m^2/2}|\le|t_m-t_*|+|\chi_{F_m}(t_*)-e^{-t_*^2/2}|+|e^{-t_*^2/2}-e^{-t_m^2/2}|\to0,
+\]
+a contradiction.
+
+Next, for $|t|\le\pi\sigma$ put $s=t/\sigma\in[-\pi,\pi]$. By (F2) and $\sin u\ge2u/\pi$ on $[0,\pi/2]$, we have $\sin^2(s/2)\ge s^2/\pi^2$, so by (F1)
+\[
+|\chi_F(t)|\le\exp\Bigl\{-\frac{c_1n}{\pi^2\sigma^2}t^2\Bigr\}\le e^{-c_2t^2},\qquad c_2=\frac{c_1}{\pi^2C_0}.
+\]
+By Fourier inversion on the lattice $\mathbb Z$ and the substitution $s=t/\sigma$,
+\[
+\sigma p_j=\frac{1}{2\pi}\int_{-\pi\sigma}^{\pi\sigma}\chi_F(t)\,e^{-it(j-\mu)/\sigma}\,dt,\qquad
+\varphi\Bigl(\frac{j-\mu}{\sigma}\Bigr)=\frac1{2\pi}\int_{\R}e^{-t^2/2}e^{-it(j-\mu)/\sigma}\,dt .
+\]
+Hence for every $T>0$, uniformly in $j$ and $F$,
+\[
+\Bigl|\sigma p_j-\varphi\Bigl(\frac{j-\mu}{\sigma}\Bigr)\Bigr|\le\frac1{2\pi}\Bigl\{2T\sup_{|t|\le T}\bigl|\chi_F(t)-e^{-t^2/2}\bigr|+\int_{|t|>T}\bigl(e^{-c_2t^2}+e^{-t^2/2}\bigr)\,dt\Bigr\}.
+\]
+Here we used that $\pi\sigma\ge\pi\sqrt{c_0n}\ge T$ for large $n$, so that the Gaussian integral over $|t|>\pi\sigma$ is absorbed into the tail integral. Choosing $T$ large and then $n$ large proves the proposition.
+\end{proof}
+
+\begin{lemma}\label{lem:peakmax}
+Let $n\ge\max\{5,n_0\}$ and let $F$ be a forest on $n$ vertices. Then every weak local peak $k$ of $F$ satisfies $1\le k\le\alpha(F)-1$ and $i_k(F)=\max_ji_j(F)$.
+\end{lemma}
+
+\begin{proof}
+Write $\alpha=\alpha(F)$, so that $\alpha\ge\lceil n/2\rceil\ge3$ by Lemma~\ref{lem:additive}. A weak local peak $k$ satisfies $\rho_{k-1}\ge1\ge\rho_k$, where $\rho_{-1}$ is undefined and $\rho_\alpha=0$. The index $k=0$ is not a peak, since $i_1=n>1=i_0$. If $k\ge1$, then~\eqref{eq:ratios} gives $1\le\rho_{k-1}\le2(\alpha-k+1)/k$, that is $k\le(2\alpha+2)/3<\alpha$ for $\alpha\ge3$. So $1\le k\le\alpha-1$, and $\rho_k\le1$ together with~\eqref{eq:ratios} gives $(n-3k)/(k+1)\le1$, that is $k\ge(n-1)/4$.
+
+By (F3), $\rho_{j-1}>\rho_j$ for every integer $j\in[n/5,17\alpha/25]$. We note that $(n-1)/4+1\ge n/5$ and $(2\alpha-1)/3\le17\alpha/25$.
+
+\emph{Before the peak.} Let $0\le m\le k-1$. If $m<(n-1)/4$, then $\rho_m>1$ by~\eqref{eq:ratios}. Otherwise $(n-1)/4\le m\le k-2$ (the case $m=k-1$ being $\rho_{k-1}\ge1$), and the indices $j=m+1,\dots,k-1$ satisfy $j\ge n/5$ and $j\le k-1\le(2\alpha-1)/3\le17\alpha/25$; hence $\rho_m>\rho_{m+1}>\dots>\rho_{k-1}\ge1$. Thus $i_0\le i_1\le\dots\le i_k$.
+
+\emph{After the peak.} Let $k\le m\le\alpha-1$. If $m>(2\alpha-1)/3$, then $\rho_m<1$ by~\eqref{eq:ratios}. Otherwise the indices $j=k+1,\dots,m$ satisfy $j\ge(n-1)/4+1\ge n/5$ and $j\le(2\alpha-1)/3\le17\alpha/25$, so $\rho_m<\rho_{m-1}<\dots<\rho_k\le1$ (for $m=k$ this is the assumption on the peak). Thus $i_k\ge i_{k+1}\ge\dots\ge i_\alpha$.
+\end{proof}
+
+\begin{corollary}\label{cor:peaks}
+There is a sequence $\eps_n\to0$ such that for every forest $F$ on $n\ge\max\{5,n_0\}$ vertices and every weak local peak $k$ of $F$,
+\[
+|k-\mu(F)|\le\eps_n\,\sigma(F)\le\eps_n\sqrt{C_0n}\qquad\text{and hence}\qquad\Bigl|\frac{k}{\alpha(F)}-\frac{\mu(F)}{\alpha(F)}\Bigr|\le\frac{2\sqrt{C_0}\,\eps_n}{\sqrt n}.
+\]
+\end{corollary}
+
+\begin{proof}
+Let $\eps_n$ be the supremum of $|k-\mu(F)|/\sigma(F)$ over all forests $F$ on $n$ vertices and all weak local peaks $k$ of $F$; it is finite, since $|k-\mu|\le n$ and $\sigma\ge\sqrt{c_0n}$. We show $\eps_n\to0$. Let $F$ and $k$ be as in the statement. By Lemma~\ref{lem:peakmax}, $p_k=\max_jp_j$. Let $j_0$ be an integer nearest to $\mu$, so $|j_0-\mu|\le\frac12$. By Proposition~\ref{prop:llt} and $\sigma\ge\sqrt{c_0n}$,
+\[
+\varphi\Bigl(\frac{k-\mu}{\sigma}\Bigr)\ge\sigma p_k-\eta_n\ge\sigma p_{j_0}-\eta_n\ge\varphi\Bigl(\frac{1}{2\sqrt{c_0n}}\Bigr)-2\eta_n=:\varphi(0)-\theta_n,
+\]
+with $\theta_n\to0$ independent of $F$. Since $\varphi$ is even, continuous and strictly decreasing on $[0,\infty)$, this forces $|k-\mu|/\sigma\le\varphi^{-1}(\varphi(0)-\theta_n)$, where $\varphi^{-1}$ is the inverse of $\varphi$ on $[0,\infty)$, as soon as $\theta_n<\varphi(0)$. The bound does not depend on $F$ or $k$ and tends to $0$, so $\eps_n\to0$. The last assertion follows from $\sigma\le\sqrt{C_0n}$ and $\alpha(F)\ge n/2$.
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm:peaks}}\label{sec:proof}
+
+Since trees are forests, $m_{\mathrm{forest}}(n)\le m_{\mathrm{tree}}(n)$. Every forest has at least one weak local peak (an index of a largest coefficient), so both quantities are well defined.
+
+\emph{Lower bound.} Let $n\ge\max\{5,n_0\}$, let $F$ be a forest on $n$ vertices and $k$ a weak local peak. By Corollary~\ref{cor:peaks} and Lemma~\ref{lem:additive},
+\[
+\frac{k}{\alpha(F)}\ \ge\ \frac{\mu(F)}{\alpha(F)}-\frac{2\sqrt{C_0}\,\eps_n}{\sqrt n}\ \ge\ \beta-\frac{2\sqrt{C_0}\,\eps_n}{\sqrt n}.
+\]
+Hence $m_{\mathrm{forest}}(n)\ge\beta-o(1)$.
+
+\emph{Upper bound by hub trees.} Let $T$ be a nonempty tree with $s$ vertices, rooted at $v$. For $k\ge1$ and $0\le r<s$ let $H_{k,r}$ be the tree obtained from $k$ disjoint copies of $T$ and $r$ further vertices by adding a hub vertex $h$ joined to the root of each copy and to each of the $r$ extra vertices. It has $ks+1+r$ vertices; every $n\ge s+1$ is of this form for a unique $(k,r)$, and $k=\lfloor(n-1)/s\rfloor\to\infty$. Distinguishing whether $h$ is absent or present,
+\[
+I_H(z)=(1+z)^rI_T(z)^k+z\,I_{T-v}(z)^k,\qquad H=H_{k,r}.
+\]
+Put $q=I_{T-v}(1)/I_T(1)$; then $0<q<1$, because the independent sets of $T$ containing $v$ are counted by $I_T(1)-I_{T-v}(1)>0$. The two summands at $z=1$ are $A=2^rI_T(1)^k$ and $B=q^kI_T(1)^k$, so $B/(A+B)\le q^k$. Their logarithmic derivatives at $1$ are $\mu_{\mathrm{abs}}=r/2+k\mu(T)$ and $\mu_{\mathrm{pres}}=1+k\mu(T-v)$, and $\mu(H)=\mu_{\mathrm{abs}}+\frac{B}{A+B}(\mu_{\mathrm{pres}}-\mu_{\mathrm{abs}})$. Since $0\le\mu(G)\le|G|$ for all $G$, we have $|\mu_{\mathrm{pres}}-\mu_{\mathrm{abs}}|\le1+(k+1)s$, so
+\[
+\mu(H)=k\,\mu(T)+\frac r2+O\bigl((k+1)s\,q^k\bigr)=k\,\mu(T)+O(s)\qquad(k\to\infty).
+\]
+Moreover $\alpha(H)=\max\{k\alpha(T)+r,\ 1+k\alpha(T-v)\}\in[k\alpha(T),\,k\alpha(T)+s]$. Therefore $\mu(H_{k,r})/\alpha(H_{k,r})\to\mu(T)/\alpha(T)$ as $n\to\infty$, for the unique $(k,r)$ attached to $n$. By Corollary~\ref{cor:peaks} the ratio $k'/\alpha$ of any weak local peak $k'$ of this hub tree differs from $\mu(H)/\alpha(H)$ by $o(1)$, so
+\[
+\limsup_{n\to\infty}m_{\mathrm{tree}}(n)\ \le\ \frac{\mu(T)}{\alpha(T)}.
+\]
+Taking the infimum over $T$ gives $\limsup_nm_{\mathrm{tree}}(n)\le\beta$.
+
+\emph{Conclusion.} We have shown
+\[
+\beta-o(1)\ \le\ m_{\mathrm{forest}}(n)\ \le\ m_{\mathrm{tree}}(n)\ \le\ \beta+o(1),
+\]
+so both limits exist and equal $\beta$. By Theorem~\ref{thm:main} applied to trees, $\beta\ge0.47$, and by Proposition~\ref{prop:witness}, $\beta<0.473403$. \qed
+
+\section{Remarks}\label{sec:remarks}
+
+\begin{remark}
+Theorem~\ref{thm:main} and Proposition~\ref{prop:witness} bound $\beta$ from both sides by finite exact computations: $\beta$ lies in the interval $[0.47,\mu(T^*)/\alpha(T^*)]$, whose width is less than $0.003403$. By Proposition~\ref{prop:witness}, no pair of cones satisfying (i)--(iv), with $c\ge0.473403$ in place of $47/100$ in~\eqref{eq:vector} and~\eqref{eq:plant}, can exist, since the proof of Proposition~\ref{prop:cones} applies verbatim to any $c$ and would then contradict $\beta<0.473403$. The tree $T^*$ has the recursive shape~\eqref{eq:witness}; we do not know whether $\beta$ is attained by a finite tree, nor what the exact value of $\beta$ is.
+\end{remark}
+
+\begin{remark}
+The proof that both limits in Theorem~\ref{thm:peaks} equal $\beta$ uses, besides Corollary~\ref{cor:peaks} and the hub trees, only the inequality $\mu(F)\ge\beta\,\alpha(F)$ for every forest $F$, which follows from the definition of $\beta$ and Lemma~\ref{lem:additive}. Theorem~\ref{thm:main} enters only through the numerical lower bound $\beta\ge0.47$, and Proposition~\ref{prop:witness} only through the numerical upper bound $\beta<0.473403$, which comes from a single tree. Any improvement of either bound on $\beta$ immediately narrows the window for $a_p$ and $a_p^{\mathrm{tree}}$.
+\end{remark}
+
+\appendix
+
+\section{Supplied files and their verification}\label{app:data}
+
+The following files accompany the paper. The program and the certificates are the exact data used in Sections~\ref{sec:cert} and~\ref{sec:witness}.
+
+\begin{itemize}[leftmargin=*]
+\item \texttt{cone\_certificate.json}: generators, bases and the $121540$ records of Section~\ref{sec:cert}; SHA-256\\ \hash{9fe1b777cfb6ba95a4fffdbb55bdaea356103b076f9db4d1b647e8224bdb4f3a}.
+\item \texttt{upper\_witness\_certificate.json}: the construction~\eqref{eq:witness} and the exact integers $Z$, $S$ of Proposition~\ref{prop:witness}; SHA-256\\ \hash{a569d412c59356d4923ad4e78653ea04b6bc30f3f1e5d775dccc6a28afb5f89c}.
+\item \texttt{verify.py}: the checker, which uses only the Python standard library and exact integer and rational arithmetic. It checks the digests of the two certificates, which are embedded in it, before using them; its own SHA-256 is\\ \hash{dec5247c9ffd2e016eac96856c9fda9d96484925bf5aa985681d63dd774dc388}.
+\item \texttt{verification\_results.json}: the output of a successful run.
+\item \texttt{README.md}: instructions for reproducing the computations.
+\end{itemize}
+
+With all files extracted to one directory and Python $3.11$ or later, the command
+\begin{center}\texttt{python -X utf8 verify.py . verification\_results.json}\end{center}
+prints and writes a summary. It reports $32$ and $331$ generators; $1024$, $10592$ and $109561$ product records for the ordered index pairs $00$, $01$, $11$, and $32$ and $331$ root records, that is, $121540$ membership records in total, of the kinds counted in Section~\ref{sec:cert}; $2037$ supplied bases checked and $1029$ used; a largest generator coordinate of $87$ bits and a largest operation image of $173$ bits; minimum third coordinate $6$ among the scaled root images; and for the witness $71308$ vertices, maximum degree $8$, $\alpha=48619$, $Z$ and $S$ of $52620$ and $52635$ bits matching the stored integers, and the strict inequality $10^6S<473403\,\alpha Z$ with the ratio $0.47340297574225980596\ldots$.
+
+\section{Format of the certificates}\label{app:format}
+
+The file \texttt{cone\_certificate.json} contains the keys \texttt{description}, \texttt{c} (the pair $[47,100]$), \texttt{generators}, \texttt{empty\_generator}, \texttt{bases} and \texttt{operations}. The entry \texttt{generators["$f$"]} is the list $G_f$ of integer vectors $(p,q,x,y)$, and \texttt{empty\_generator} is the index of $e=(1,1,0,0)$ in $G_0$. The entry \texttt{bases["$f$"]} lists quadruples of indices into $G_f$. Under \texttt{operations}, \texttt{roots["$f$"]} contains one record for each generator $g_i\in G_f$, certifying $100\Lambda_f(g_i)\in\C_{1-f}$. The entry \texttt{products["$fg$"]}, for $fg\in\{00,01,11\}$, contains one record for each pair $(g_i,g'_j)\in G_f\times G_g$, in the order $i\cdot|G_g|+j$, certifying $g_i\star g'_j\in\C_{\max\{f,g\}}$; for $fg=00$ and $11$ these are ordered pairs, and the index pair $10$ is not listed, since $\star$ is commutative. A record is $[0,\ell]$, $[1,\ell]$ or $[2,\ell]$, where $\ell$ is an index into the generator list or into the list of bases of the target cone, or the record $[3]$; the four kinds are those of Section~\ref{sec:cert}.
+
+The file \texttt{upper\_witness\_certificate.json} contains the keys \texttt{construction}, \texttt{vertices}, \texttt{maximum\_degree}, \texttt{alpha}, \texttt{root\_absent\_alpha}, \texttt{root\_present\_alpha}, \texttt{Z} and \texttt{total\_cardinality}; the last two are the integers $Z=I_{T^*}(1)$ and $S=I'_{T^*}(1)$ in decimal notation.
+
+\section*{Use of AI-assisted tools}
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{9}
+
+\bibitem{AMSE} Y.~Alavi, P.~J.~Malde, A.~J.~Schwenk, and P.~Erd\H{o}s, \emph{The vertex independence sequence of a graph is not constrained}, Congr.\ Numer.\ \textbf{58} (1987), 15--23.
+
+\bibitem{AMW} E.~O.~D.~Andriantiana, V.~Razanajatovo Misanantenaina, and S.~Wagner, \emph{The average size of independent sets of graphs}, Eur.\ J.\ Math.\ \textbf{6} (2020), no.~2, 561--576, \href{https://doi.org/10.1007/s40879-019-00333-8}{\nolinkurl{doi:10.1007/s40879-019-00333-8}}.
+
+\bibitem{FLNYZ} E.~X.~Fang, J.~Lu, E.~Nevo, Y.~Yao, and H.~Zheng, \emph{Unimodality of independence polynomials for sufficiently large forests}, preprint (2026), arXiv:2609.20961.
+
+\end{thebibliography}
+
+\end{document}

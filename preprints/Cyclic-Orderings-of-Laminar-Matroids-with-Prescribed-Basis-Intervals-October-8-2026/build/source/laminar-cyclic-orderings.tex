@@ -1,0 +1,304 @@
+\documentclass[11pt]{amsart}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage[margin=1.15in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Cyclic orderings of laminar matroids with prescribed basis intervals},pdfauthor={Knowledge Sense}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\numberwithin{equation}{section}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\pos}{\operatorname{pos}}
+
+\begin{document}
+
+\title[Cyclic orderings of laminar matroids]{Cyclic orderings of laminar matroids\\ with prescribed basis intervals}
+\author{Knowledge Sense}
+\address{Knowledge Sense}
+\email{math@knowledgesense.jp}
+\date{8 October 2026}
+\subjclass[2020]{Primary 05B35; Secondary 05A05}
+\keywords{Matroid, laminar matroid, cyclic ordering, basis partition, Gabow's conjecture, strongly base orderable matroid}
+
+\begin{abstract}
+Let $M$ be a laminar matroid of rank $r$ whose ground set is partitioned into bases $B_1,\dots,B_k$. We show that the elements of each $B_i$ can be ordered so that, in the cyclic sequence obtained by listing $B_1,\dots,B_k$ in this order, every $r$ cyclically consecutive elements form a basis of $M$. Since the indexing of the bases is arbitrary, the blocks may appear in any prescribed cyclic order. This answers, for laminar matroids, a question of Wiedemann. It also proves, for this class, a conjecture of B\'erczi, J\'anosik and M\'atrav\"olgyi that each block can be made an interval, together with the prescribed block order that they obtained for split matroids. The proof is an induction over the tree of a laminar presentation, in which the orders obtained for the children of a node are merged by a persistence rule. The construction is explicit and can be carried out in polynomial time.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $M$ be a matroid of rank $r$ on a finite set $E$. A \emph{cyclic ordering} of $M$ is a cyclic sequence containing every element of $E$ exactly once, in which every $r$ cyclically consecutive elements form a basis. If such an ordering exists and $r$ divides $|E|$, then cutting the cycle into consecutive pieces of length $r$ partitions $E$ into bases. The matroid $M$ is \emph{uniformly dense} if $r\cdot|X|\le|E|\cdot r(X)$ for every $X\subseteq E$. Every matroid with a cyclic ordering is uniformly dense, and Kajitani, Ueno and Miyano \cite{KUM} conjectured the converse; van den Heuvel and Thomass\'e \cite{HT} proved it when $|E|$ and $r$ are coprime. For a partition $E=B_1\cup B_2$ into two bases, Gabow \cite{Gabow} conjectured that there is a cyclic ordering in which $B_1$ and $B_2$ are intervals; see \cite[Conjecture~1]{BJM}.
+
+The case of many bases goes back to a manuscript of Wiedemann \cite{Wiedemann}. There he shows that for any bases $B_1,\dots,B_\ell$ of a matroid and any order of $B_1$, the remaining bases can be ordered so that every $r$ consecutive elements of the \emph{linear} concatenation $B_1B_2\cdots B_\ell$ form a basis \cite[Section~2]{Wiedemann}. Only the passage from $B_\ell$ back to $B_1$ is missing, and Wiedemann writes that it may be possible to produce a cyclic ordering from \emph{any} cyclic ordering of a partition into bases. He also proves that a prescribed partition $B_1=X_1\cup Y_1$ extends to partitions $B_i=X_i\cup Y_i$ such that every $Y_i\cup X_{i+1}$ is a basis, cyclically \cite[Section~3]{Wiedemann}; this concerns one cut of each block rather than all cuts simultaneously. B\'erczi, J\'anosik and M\'atrav\"olgyi \cite[Conjecture~3]{BJM} conjectured that for every partition $E=B_1\cup\dots\cup B_k$ into bases there is a cyclic ordering in which each $B_i$ is an interval. They proved this for split matroids, and their proof keeps the blocks in the order $B_1,\dots,B_k$ \cite[Theorem~4 and Remark~5]{BJM}. Our main result proves this conjecture for laminar matroids, with the blocks in any prescribed cyclic order, as in Wiedemann's question.
+
+\begin{theorem}\label{thm:main}
+Let $M$ be a laminar matroid of rank $r$ on a finite set $E$, and let $B_1,\dots,B_k$, $k\ge 1$, be bases of $M$ that partition $E$. Then each $B_i$ has a linear order such that, in the cyclic sequence obtained by concatenating $B_1,B_2,\dots,B_k$ in this order, every $r$ cyclically consecutive elements form a basis of $M$.
+\end{theorem}
+
+Since the indexing of the bases is arbitrary, the blocks can be made to appear in any prescribed cyclic order. Only the orders inside the blocks are chosen. There is no restriction on $r$, on $k$, or on the shape of a laminar presentation of $M$. In particular, every laminar matroid whose ground set is a disjoint union of bases has a cyclic ordering, and laminar matroids satisfy \cite[Conjecture~3]{BJM}.
+
+\subsection*{Known cases}
+For $k\le 2$, Theorem~\ref{thm:main} follows from strong base orderability (Section~\ref{subsec:two}): laminar matroids are gammoids \cite{Finkelstein}, see \cite[Section~1]{FO}, and gammoids are strongly base orderable, see \cite[Section~1]{BSY}. For transversal matroids, a short matching argument gives the analogue of Theorem~\ref{thm:main} for all $k$ (Section~\ref{subsec:transversal}). Neither argument covers laminar matroids with $k\ge3$. The rank-three laminar matroid with twelve elements obtained as the case $k=4$ of a construction of B\'erczi, Schwarcz and Yamaguchi \cite[proof of Theorem~1.10]{BSY} is neither transversal nor split, as we show in Proposition~\ref{prop:example}; so Theorem~\ref{thm:main} is not contained in the transversal case or in the split case of \cite{BJM}. We are not aware of a previous proof of Theorem~\ref{thm:main} for laminar matroids with $k\ge 3$.
+
+\subsection*{Idea of the proof}
+A laminar matroid is described by a tree of capacity constraints (Section~\ref{sec:prelim}). We order the elements within each block by induction over this tree, from the leaves to the root; the order of the blocks themselves stays as prescribed. Restricted to a child of a node, the blocks are independent sets of different sizes rather than bases, so the induction is carried out for a stronger statement about arbitrary disjoint independent sets (Proposition~\ref{prop:windows}). At a node, the orders already obtained for the children are merged: we label the $j$-th element of a child $u$ in every block by $(u,j)$, so that the same label occurs in many blocks, and in each block we sort the labels by the number of following blocks in which they persist. The key property (Lemma~\ref{lem:monotone}) is that a label occurring in two consecutive blocks never occupies an earlier position in the second block. This monotonicity reduces every set of consecutive elements of the merged sequence to such sets for the children.
+
+\subsection*{Organization}
+Section~\ref{sec:prelim} introduces capacity trees and the windows of a cyclic list of rows. Section~\ref{sec:persistence} proves the two lemmas on the persistence order. Section~\ref{sec:proof} proves the main proposition and Theorem~\ref{thm:main}. Section~\ref{sec:known} discusses the known cases, the separating example, and further remarks.
+
+\section{Capacity trees and windows}\label{sec:prelim}
+
+Our matroid terminology follows Oxley \cite{Oxley}. Let $\cA$ be a laminar family of subsets of a finite set $E$, that is, any two members of $\cA$ are disjoint or one contains the other, and let $c\colon\cA\to\Z_{\ge0}$. The sets $I\subseteq E$ with $|I\cap A|\le c(A)$ for all $A\in\cA$ are the independent sets of a matroid $M(E,\cA,c)$, and a matroid is \emph{laminar} if it is isomorphic to such a matroid \cite[Section~1]{FO}. It is convenient to organize the constraints as a tree.
+
+\begin{definition}\label{def:tree}
+A \emph{capacity tree} on a finite set $E$ is a finite rooted tree in which every node $v$ carries a set $E_v\subseteq E$ and an integer $c_v\ge 0$, such that $E_v=E$ for the root $v$ and, for every node $v$ that is not a leaf, the sets $E_u$ of the children $u$ of $v$ partition $E_v$. Distinct nodes may carry the same set. For each node $v$ we define a family $\I_v$ of subsets of $E_v$ recursively: if $v$ is a leaf, then $X\subseteq E_v$ belongs to $\I_v$ if $|X|\le c_v$; otherwise $X\subseteq E_v$ belongs to $\I_v$ if $|X|\le c_v$ and $X\cap E_u\in\I_u$ for every child $u$ of $v$.
+\end{definition}
+
+By induction from the leaves, a set $X\subseteq E_v$ belongs to $\I_v$ if and only if
+\begin{equation}\label{eq:unwind}
+|X\cap E_w|\le c_w \quad\text{for every node $w$ of the subtree rooted at $v$.}
+\end{equation}
+The sets $E_w$ of this subtree form a laminar family. If a set occurs for several nodes, only the smallest of their capacities matters in \eqref{eq:unwind}. Hence $\I_v$ is the family of independent sets of the laminar matroid on $E_v$ defined by these sets, each with this smallest capacity. We denote this matroid by $N_v$ and call the members of $\I_v$ independent in $N_v$. Every independent set of $N_v$ has at most $c_v$ elements. Note that $N_v$ need not be the restriction to $E_v$ of the matroid $N_{\mathrm{root}}$, because an ancestor of $v$ may impose a stronger bound. For instance, if the root has capacity $1$ and ground set $\{a,b,d\}$ and has the children $\{a,b\}$ of capacity $2$ and $\{d\}$ of capacity $1$, then $N_{\{a,b\}}$ is free, whereas $a$ and $b$ are parallel in $N_{\mathrm{root}}$. The induction below takes place in the matroids $N_v$.
+
+\begin{lemma}\label{lem:tree}
+Let $M$ be a laminar matroid of rank $r$ on $E$. Then there is a capacity tree on $E$ whose root has capacity $r$ and satisfies $N_{\mathrm{root}}=M$.
+\end{lemma}
+
+\begin{proof}
+We may assume $M=M(E,\cA,c)$ with nonnegative integer capacities \cite[Section~2]{FO} and $\emptyset\notin\cA$. Put $\cA'=\cA\cup\{E\}$, let $c'(E)=r$, and let $c'=c$ on $\cA'\setminus\{E\}$. Every independent set of $M$ has at most $r$ elements, and if $E\in\cA$ then $r\le c(E)$ because a basis satisfies the constraint for $E$. Hence $c'$ defines the same independent sets as $c$. The family $\cA'$ is laminar, so for $A\in\cA'\setminus\{E\}$ the members of $\cA'$ properly containing $A$ form a chain; its smallest member is the parent of $A$. This makes $\cA'$ a rooted tree with root $E$. Finally, for every $A\in\cA'$ that has children and for which $R_A=A\setminus\bigcup\{\text{children of }A\}$ is nonempty, we add a leaf with ground set $R_A$ and capacity $|R_A|$. The result is a capacity tree. The added leaves impose no condition, so by \eqref{eq:unwind} the independent sets of $N_{\mathrm{root}}$ are those of $M(E,\cA',c')$, which are the independent sets of $M$.
+\end{proof}
+
+This tree reflects the description of laminar matroids as the matroids built from the empty matroid by adding coloops, truncating and taking direct sums \cite[Theorem~1.5]{FO}.
+
+We now fix notation for cyclic lists of linearly ordered sets. For a linear order $L$ of a finite set $I$ and an integer $t\ge0$, let $L^{\le t}$ be the set of the first $\min(t,|I|)$ elements of $L$, and let $L^{>t}=I\setminus L^{\le t}$. The \emph{position} of $x\in I$ in $L$ is $s$ if $x$ is the $s$-th element of $L$; thus $x\in L^{\le t}$ if and only if its position is at most $t$.
+
+\begin{definition}\label{def:windows}
+Let $c\ge0$ and $k\ge1$, and let $L_i$ be a linear order of a finite set $I_i$ with $|I_i|\le c$, for $i\in\Z_k$. For $i\in\Z_k$ and $0\le t\le c$ the \emph{window} is
+\[
+W_{i,t}=L_i^{>t}\cup L_{i+1}^{\le t}.
+\]
+\end{definition}
+
+We call the linear orders $L_i$ the \emph{rows}; they are indexed cyclically by $\Z_k$.
+
+\begin{lemma}\label{lem:windows}
+In the situation of Definition~\ref{def:windows}, $|W_{i,t}|\le c$. If $c>0$ and $|I_i|=c$ for every $i$, then the sets of $c$ cyclically consecutive entries of the cyclic sequence $L_1L_2\cdots L_k$ are exactly the sets $W_{i,t}$ with $i\in\Z_k$ and $0\le t\le c-1$.
+\end{lemma}
+
+\begin{proof}
+If $t\le|I_i|$, then $|W_{i,t}|\le(|I_i|-t)+t\le c$; otherwise $L_i^{>t}=\emptyset$ and $|W_{i,t}|\le|I_{i+1}|\le c$. If all rows have length $c$, the $c$ consecutive entries starting at the $(t+1)$-st entry of $L_i$, where $0\le t\le c-1$, are the last $c-t$ entries of $L_i$ followed by the first $t$ entries of $L_{i+1}$. This also holds for $k=1$, where $L_{i+1}=L_i$.
+\end{proof}
+
+
+\section{The persistence order}\label{sec:persistence}
+
+Let $k\ge1$, let $\Lambda$ be a finite set of labels, and let $A_i\subseteq\Lambda$ for $i\in\Z_k$; we think of $A_i$ as the set of labels active in row $i$. For $\lambda\in A_i$ define the \emph{persistence}
+\[
+h_i(\lambda)=
+\begin{cases}
+\infty & \text{if $\lambda\in A_j$ for all $j\in\Z_k$},\\
+\max\{s\ge0:\ \lambda\in A_{i+1}\cap A_{i+2}\cap\dots\cap A_{i+s}\} & \text{otherwise}.
+\end{cases}
+\]
+For $s=0$ the condition in the second case is empty. In the second case $0\le h_i(\lambda)\le k-2$, since $\lambda\in A_i$ and some row does not contain $\lambda$. Fix a total order $\prec$ on $\Lambda$. The \emph{persistence order} of $A_i$ lists its elements by decreasing $h_i$, with ties broken by $\prec$: thus $\lambda$ precedes $\mu$ if $h_i(\lambda)>h_i(\mu)$, or $h_i(\lambda)=h_i(\mu)$ and $\lambda\prec\mu$. Let $\pos_i(\lambda)$ denote the position of $\lambda$ in the persistence order of $A_i$.
+
+\begin{lemma}\label{lem:monotone}
+If $\lambda\in A_i\cap A_{i+1}$, then $\pos_i(\lambda)\le\pos_{i+1}(\lambda)$.
+\end{lemma}
+
+\begin{proof}
+For $\mu\in A_i\cap A_{i+1}$ we have $h_{i+1}(\mu)=\infty$ if $h_i(\mu)=\infty$, and $h_{i+1}(\mu)=h_i(\mu)-1$ otherwise. Indeed, in the second case $s=h_i(\mu)$ satisfies $1\le s\le k-2$, the label $\mu$ lies in $A_{i+1},\dots,A_{i+s}$ and not in $A_{i+s+1}$, and these rows are distinct; hence $h_{i+1}(\mu)=s-1$.
+
+Let $\mu$ precede $\lambda$ in the persistence order of $A_i$. Since $\lambda\in A_{i+1}$, we have $h_i(\lambda)\ge1$, whereas every $\mu\in A_i\setminus A_{i+1}$ has $h_i(\mu)=0$ and therefore follows $\lambda$. Hence $\mu\in A_{i+1}$. By the first paragraph, passing from $h_i$ to $h_{i+1}$ lowers all finite values among $\lambda,\mu$ by one and keeps the value $\infty$; this preserves strict inequalities and equalities between $h(\mu)$ and $h(\lambda)$. Since the tie-breaking order is the same in both rows, $\mu$ precedes $\lambda$ in the persistence order of $A_{i+1}$ as well. Thus every predecessor of $\lambda$ in row $i$ is a predecessor of $\lambda$ in row $i+1$, which proves the lemma.
+\end{proof}
+
+The proof uses neither equal sizes of the sets $A_i$ nor any condition on labels entering at row $i+1$; such labels can only add predecessors.
+
+\begin{lemma}\label{lem:nested}
+Let $\lambda_1\prec\lambda_2\prec\dots\prec\lambda_m$ be labels such that, for every $i\in\Z_k$ and $1\le j<m$, $\lambda_{j+1}\in A_i$ implies $\lambda_j\in A_i$. Then in the persistence order of every $A_i$, the labels $\lambda_j$ lying in $A_i$ appear in increasing order of $j$.
+\end{lemma}
+
+\begin{proof}
+Let $j<j'$ with $\lambda_j,\lambda_{j'}\in A_i$. Every row containing $\lambda_{j'}$ contains $\lambda_j$, so $h_i(\lambda_j)\ge h_i(\lambda_{j'})$. Ties are broken by $\prec$, and $\lambda_j\prec\lambda_{j'}$.
+\end{proof}
+
+\section{Proof of the main theorem}\label{sec:proof}
+
+\begin{proposition}\label{prop:windows}
+Let $v$ be a node of a capacity tree, let $k\ge1$, and let $I_1,\dots,I_k$ be pairwise disjoint independent sets of $N_v$. Then there are linear orders $L_i$ of $I_i$ such that, with $c=c_v$, every window $W_{i,t}$, $i\in\Z_k$, $0\le t\le c$, is independent in $N_v$.
+\end{proposition}
+
+Every member of $\I_v$ has at most $c_v$ elements, so the windows are defined.
+
+\begin{proof}
+We use induction on the height of $v$ in the tree. If $v$ is a leaf, take any orders. Every window has at most $c$ elements by Lemma~\ref{lem:windows}, hence is independent in $N_v$.
+
+Let $v$ be an internal node, and suppose that the proposition holds for every child of $v$. For a child $u$ of $v$ and $i\in\Z_k$ put $I_i^u=I_i\cap E_u$. By Definition~\ref{def:tree}, $I_i^u$ is independent in $N_u$, and these sets are pairwise disjoint for fixed $u$. By the induction hypothesis there are linear orders $L_i^u$ of $I_i^u$ whose windows
+\[
+W_{i,s}^u=(L_i^u)^{>s}\cup(L_{i+1}^u)^{\le s},\qquad 0\le s\le c_u,
+\]
+are independent in $N_u$. Let $m_{i,u}=|I_i^u|$; note that $m_{i,u}\le c_u$. Write $x_{i,u,1},\dots,x_{i,u,m_{i,u}}$ for the elements of $I_i^u$ in the order $L_i^u$.
+
+\emph{The merged order.} Let $\Lambda$ be the set of pairs $(u,j)$ with $u$ a child of $v$ and $j\ge1$ an integer with $j\le m_{i,u}$ for some $i$. Let
+\[
+A_i=\{(u,j)\in\Lambda: j\le m_{i,u}\}\qquad(i\in\Z_k).
+\]
+Since the sets $E_u$ partition $E_v$, the map $(u,j)\mapsto x_{i,u,j}$ is a bijection from $A_i$ onto $I_i$. Fix an order of the children of $v$ and let $\prec$ be the induced lexicographic order on $\Lambda$, so that $(u,j)\prec(u,j')$ whenever $j<j'$. Let $L_i$ be the persistence order of $A_i$ with every label $(u,j)$ replaced by $x_{i,u,j}$.
+
+\emph{Step 1: the merge preserves the orders of the children.} For each child $u$, the labels $(u,1)\prec(u,2)\prec\cdots$ satisfy the hypothesis of Lemma~\ref{lem:nested}, because $(u,j+1)\in A_i$ means $j+1\le m_{i,u}$. Hence the restriction of $L_i$ to $E_u$ is $L_i^u$.
+
+\emph{Step 2: reduction of a window to the children.} Fix $i\in\Z_k$ and $0\le t\le c$, and fix a child $u$. Let $m=m_{i,u}$, let $a$ be the number of elements of $E_u$ in $L_i^{\le t}$, and let $b$ be the number of elements of $E_u$ in $L_{i+1}^{\le t}$. Since $L_i^{\le t}$ is an initial segment of $L_i$, Step~1 shows that $L_i^{\le t}\cap E_u=(L_i^u)^{\le a}$, and similarly for row $i+1$. Therefore
+\begin{equation}\label{eq:restriction}
+W_{i,t}\cap E_u=(L_i^u)^{>a}\cup(L_{i+1}^u)^{\le b}.
+\end{equation}
+We claim that
+\begin{equation}\label{eq:ab}
+a\ge\min(b,m).
+\end{equation}
+This is clear if $b=0$ or $m=0$. Suppose $1\le b\le m$. The label $\lambda=(u,b)$ lies in $A_i$, since $b\le m$, and in $A_{i+1}$, since $b\le m_{i+1,u}$. The element $x_{i+1,u,b}$ of row $i+1$ carrying this label lies in $L_{i+1}^{\le t}$, so $\pos_{i+1}(\lambda)\le t$. By Lemma~\ref{lem:monotone}, $\pos_i(\lambda)\le t$, that is, $x_{i,u,b}\in L_i^{\le t}$. Hence $(L_i^u)^{\le a}$ contains $x_{i,u,b}$, and $a\ge b$. Suppose finally $b>m\ge1$. Then $\lambda=(u,m)$ lies in $A_i\cap A_{i+1}$, and $x_{i+1,u,m}$ precedes $x_{i+1,u,b}$ in $L_{i+1}$ by Step~1; hence it lies in $L_{i+1}^{\le t}$, and $\pos_{i+1}(\lambda)\le t$. As before $x_{i,u,m}\in L_i^{\le t}$, so $a\ge m$. This proves \eqref{eq:ab}.
+
+If $a=m$, then $(L_i^u)^{>a}=\emptyset$, and \eqref{eq:restriction} is a subset of $I_{i+1}^u$, which is independent in $N_u$. If $a<m$, then \eqref{eq:ab} gives $b\le a$, and $a<m\le c_u$. Hence $W_{i,a}^u$ is one of the windows provided by the induction hypothesis, and $(L_{i+1}^u)^{\le b}\subseteq(L_{i+1}^u)^{\le a}$ shows that
+\[
+W_{i,t}\cap E_u\subseteq(L_i^u)^{>a}\cup(L_{i+1}^u)^{\le a}=W_{i,a}^u .
+\]
+So $W_{i,t}\cap E_u$ is independent in $N_u$ in both cases.
+
+\emph{Step 3: conclusion.} By Step~2, $W_{i,t}\cap E_u$ is independent in $N_u$ for every child $u$, and $|W_{i,t}|\le c$ by Lemma~\ref{lem:windows}. By Definition~\ref{def:tree}, $W_{i,t}$ is independent in $N_v$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+If $r=0$, then $E=\emptyset$ and there is nothing to prove, so let $r>0$. Take a capacity tree for $M$ as in Lemma~\ref{lem:tree}, so that the root has capacity $r$ and $N_{\mathrm{root}}=M$. The bases $B_1,\dots,B_k$ are pairwise disjoint independent sets of $N_{\mathrm{root}}$, and Proposition~\ref{prop:windows} gives linear orders $L_i$ of $B_i$ whose windows $W_{i,t}$, $0\le t\le r$, are independent in $M$. Since $|B_i|=r$ for all $i$, Lemma~\ref{lem:windows} shows that every set of $r$ cyclically consecutive entries of $L_1L_2\cdots L_k$ is one of these windows. Its entries are $r$ distinct elements, because the $B_i$ are disjoint, so it is an independent set of size $r$, that is, a basis.
+\end{proof}
+
+The proof does not use that the bases cover $E$. We record this for later use.
+
+\begin{corollary}\label{cor:disjoint}
+Let $M$ be a laminar matroid of rank $r$ and let $B_1,\dots,B_k$ be pairwise disjoint bases of $M$. Then there are linear orders of the $B_i$ such that every $r$ cyclically consecutive entries of the concatenation $B_1B_2\cdots B_k$ form a basis.
+\end{corollary}
+
+\begin{remark}\label{rem:algorithm}
+The proof is constructive. Given a laminar presentation $(E,\cA,c)$ and the bases, the capacity tree of Lemma~\ref{lem:tree} is obtained directly from the inclusion relation on $\cA$. The orders are then computed from the leaves to the root: at an internal node one computes the persistence of each label, which depends only on the lengths $m_{i,u}$ of the rows of the children, and sorts each row. Thus the orders are obtained in time polynomial in $|E|$, $|\cA|$ and $k$, and the order of the blocks is never changed.
+\end{remark}
+
+\section{Relation to known results}\label{sec:known}
+
+\subsection{Two bases}\label{subsec:two}
+A matroid is \emph{strongly base orderable} if for any two bases $A$ and $B$ there is a bijection $\varphi\colon A\to B$ such that $(A\setminus X)\cup\varphi(X)$ is a basis for every $X\subseteq A$. Applying this to $A\setminus X$ shows that $(B\setminus\varphi(X))\cup X$ is a basis as well. If $A$ and $B$ are disjoint, order $A$ as $a_1,\dots,a_r$ and $B$ as $\varphi(a_1),\dots,\varphi(a_r)$. With $X=\{a_1,\dots,a_t\}$, the windows of Definition~\ref{def:windows} are $W_{1,t}=(A\setminus X)\cup\varphi(X)$ and $W_{2,t}=(B\setminus\varphi(X))\cup X$, so every window is a basis; compare \cite[Section~1]{BJM}. As laminar matroids are strongly base orderable, Theorem~\ref{thm:main} for $k\le 2$ is not new. For $k\ge3$ one may choose such bijections between consecutive blocks, but the resulting orders need not agree after a full turn around the cycle.
+
+\subsection{Transversal matroids}\label{subsec:transversal}
+Let $M$ be a transversal matroid of rank $r$. Then $M$ has a presentation by $r$ sets $A_1,\dots,A_r$, see \cite[Section~1.6]{Oxley} and \cite[Section~3.1]{BSY}, and every basis is a transversal of $(A_1,\dots,A_r)$. Given disjoint bases $B_1,\dots,B_k$, choose for each $i$ a bijection $\sigma_i\colon B_i\to\{1,\dots,r\}$ with $x\in A_{\sigma_i(x)}$, and list $B_i$ in the order $\sigma_i^{-1}(1),\dots,\sigma_i^{-1}(r)$. Every set of $r$ cyclically consecutive entries then consists of elements assigned to the slots $t+1,\dots,r$ in one block and $1,\dots,t$ in the next, hence is a transversal. This elementary argument proves the analogue of Theorem~\ref{thm:main} for transversal matroids and any $k$. It does not apply to laminar matroids, which need not be transversal (Proposition~\ref{prop:example}).
+
+\subsection{A separating example}\label{subsec:example}
+Let $P_1,P_2,P_3,P_4$ be pairwise disjoint sets of size three, let $E=P_1\cup\dots\cup P_4$, and let $M$ be the matroid on $E$ whose independent sets are the sets $X$ with $|X\cap P_j|\le1$ for all $j$ and $|X|\le3$. This is the case $k=4$ of the matroid used by B\'erczi, Schwarcz and Yamaguchi to show that their bound for gammoids is tight \cite[proof of Theorem~1.10]{BSY}. Write $P_j=\{p_{j,1},p_{j,2},p_{j,3}\}$ and, for $i\in\{1,2,3,4\}$, let
+\[
+B_i=\{p_{j,s}:\ j\ne i,\ s\equiv i-j\pmod 4,\ 1\le s\le3\}.
+\]
+Then $B_i$ contains one element of each $P_j$ with $j\ne i$, and $p_{j,s}$ lies only in $B_{j+s}$, indices modulo $4$. So $B_1,\dots,B_4$ are bases partitioning $E$.
+
+We recall the definition of split matroids from \cite[Section~2]{BJM}. Let $S$ be a finite set, let $H_1,\dots,H_q\subseteq S$, and let $r,r_1,\dots,r_q$ be nonnegative integers with $|S|\ge r$,
+\begin{equation}\label{eq:H}
+|H_i\cap H_j|\le r_i+r_j-r\quad(i\ne j),\qquad |S\setminus H_i|+r_i\ge r\quad(1\le i\le q).
+\end{equation}
+The \emph{elementary split matroid} defined by these data has as bases the $r$-element sets $X\subseteq S$ with $|X\cap H_i|\le r_i$ for all $i$. A \emph{split matroid} is the direct sum of an elementary split matroid and uniform matroids.
+
+\begin{lemma}\label{lem:split}
+A set $X\subseteq S$ is independent in the elementary split matroid defined above if and only if $|X|\le r$ and $|X\cap H_i|\le r_i$ for all $i$.
+\end{lemma}
+
+\begin{proof}
+Subsets of bases satisfy both conditions. Conversely, let $X$ satisfy them and $|X|<r$. If $X$ were tight for two distinct indices, that is, $|X\cap H_i|=r_i$ and $|X\cap H_j|=r_j$, then by \eqref{eq:H}
+\[
+|X|\ge|X\cap(H_i\cup H_j)|\ge r_i+r_j-|H_i\cap H_j|\ge r,
+\]
+a contradiction. If $X$ is tight for no index, adding any element of $S\setminus X$, which is nonempty since $|S|\ge r>|X|$, preserves all constraints. If $X$ is tight for exactly one index $i$, then some element of $S\setminus H_i$ lies outside $X$, since otherwise $|X|\ge|S\setminus H_i|+r_i\ge r$; adding it preserves all constraints. Repeating this, we extend $X$ to a basis.
+\end{proof}
+
+\begin{proposition}\label{prop:example}
+The matroid $M$ is a connected laminar matroid of rank three. It is the cycle matroid of the graph obtained from a cycle of length four by replacing every edge with three parallel edges. It is neither transversal nor split.
+\end{proposition}
+
+\begin{proof}
+$M=M(E,\{P_1,\dots,P_4,E\},c)$ with $c(P_j)=1$ and $c(E)=3$, and it has rank three. Mapping the elements of $P_j$ to the three parallel copies of the $j$-th edge of the $4$-cycle identifies the forests of the graph with the independent sets of $M$. Two elements of the same class form a circuit, and elements of distinct classes $P_i,P_j$ lie in the circuit consisting of one element from each class. So any two elements lie in a common circuit, and $M$ is connected.
+
+Suppose that $M$ is transversal, presented by a bipartite graph between $E$ and a set $T$, where $X\subseteq E$ is independent if and only if it can be matched into $T$. Every element has a nonempty neighbourhood $\Gamma(x)$, since $M$ has no loops. If $x,y$ are parallel, then $\{x,y\}$ cannot be matched, so $|\Gamma(x)\cup\Gamma(y)|\le1$ and $\Gamma(x)=\Gamma(y)$ is a single vertex. Hence all elements of $P_j$ have the same neighbourhood $\{\tau_j\}$. If $\tau_i=\tau_j$ for some $i\ne j$, then a pair consisting of an element of $P_i$ and one of $P_j$ could not be matched, although it is independent. So $\tau_1,\dots,\tau_4$ are distinct, and one element from each class can be matched into $T$. This independent set has four elements, contradicting $r(M)=3$.
+
+Suppose that $M$ is split. Since $M$ is connected and not uniform, it is an elementary split matroid; see also \cite[Lemma~6]{BJM}. Let it be defined by data as in \eqref{eq:H} with $r=3$. Take two elements $x,y\in P_1$. By Lemma~\ref{lem:split}, the dependent set $\{x,y\}$ violates a constraint, so there is an index $i$ with $|\{x,y\}\cap H_i|>r_i$. If $r_i=0$, an element of $\{x,y\}\cap H_i$ would be a loop; hence $r_i=1$ and $x,y\in H_i$. Similarly there is an index $j$ with $r_j=1$ and $H_j$ containing two elements $x',y'\in P_2$. If $i=j$, then the independent set $\{x,x'\}$ would violate $|\{x,x'\}\cap H_i|\le1$; so $i\ne j$. Now \eqref{eq:H} gives $|H_i\cap H_j|\le1+1-3<0$, which is impossible.
+\end{proof}
+
+\begin{example}\label{ex:output}
+For the partition $B_1,\dots,B_4$ above, the capacity tree of Lemma~\ref{lem:tree} has the root $E$ of capacity three and the leaves $P_1,\dots,P_4$ of capacity one. The label of the unique element of $B_i\cap P_j$ is $(P_j,1)$, active in the three rows $i\ne j$, and its persistence in row $i$ is the residue of $j-i-1$ modulo $4$. Hence the persistence order lists $B_i\cap P_{i-1},B_i\cap P_{i-2},B_i\cap P_{i-3}$, indices modulo $4$, and the construction yields the cyclic sequence whose classes are
+\[
+4,3,2\ \mid\ 1,4,3\ \mid\ 2,1,4\ \mid\ 3,2,1,
+\]
+where the bars separate $B_1,\dots,B_4$. Every three cyclically consecutive entries lie in distinct classes, and so form a basis.
+\end{example}
+
+A cyclic ordering of $E$ alone is easy to obtain for this matroid, for instance as in Example~\ref{ex:output}. It also follows from a theorem of Liang, Locke and Trice \cite[Theorem~3.2(i)]{LLT} on graphs, applied with $i=3$: the graph of Proposition~\ref{prop:example} has twelve edges, at most three parallel edges between two vertices, and its simplification is a cycle of length four. The point of Theorem~\ref{thm:main} is that an arbitrary given partition into bases and an arbitrary order of its blocks are kept. Proposition~\ref{prop:example} shows that, already in rank three, laminar matroids lie outside the scope of both the transversal argument of Section~\ref{subsec:transversal} and the theorem of \cite{BJM} for split matroids.
+
+\subsection{Further remarks}
+When $|E|=kr$ with $r>1$, the integers $|E|$ and $r$ are not coprime. In this case the theorem of van den Heuvel and Thomass\'e \cite{HT}, in the form \cite[Theorem~14]{BJM}, provides a partition of $E$ into sets of size $\gcd(|E|,r)=r$, that is, a partition into bases, and gives no information on the order inside the blocks. Fletcher \cite[Theorem~1.2 and Corollary~1.3]{Fletcher} studies cyclic orderings of uniformly dense matroids of rank three in which no basis partition is prescribed; the difference from the prescribed setting is noted in \cite[Remark~2.5]{Fletcher}.
+
+\begin{remark}\label{rem:exchange}
+Following \cite[Section~4.2]{BJM}, a \emph{cyclic exchange} in a sequence of bases replaces bases $B_{i_1},\dots,B_{i_q}$ with distinct indices by $B_{i_j}-e_j+e_{j+1}$, where $e_j\in B_{i_j}$, the indices $j$ are taken modulo $q$, and all new sets are bases. Let $k\ge2$, let $B_1,\dots,B_k$ be pairwise disjoint bases of a laminar matroid of rank $r$, ordered as in Corollary~\ref{cor:disjoint}, and let $e_i(s)$ be the $s$-th element of $B_i$. For $0\le t\le r$ the windows $W_{1,t},\dots,W_{k,t}$ are bases, and
+\[
+W_{i,t+1}=W_{i,t}-e_i(t+1)+e_{i+1}(t+1)\qquad(0\le t<r).
+\]
+Hence the sequence $(B_1,\dots,B_k)=(W_{1,0},\dots,W_{k,0})$ is transformed into $(B_2,\dots,B_k,B_1)=(W_{1,r},\dots,W_{k,r})$ by $r$ cyclic exchanges. This number is optimal, as noted at the end of \cite[Section~4.2]{BJM}: a cyclic exchange changes each basis of the sequence by at most one element, whereas the first basis has to be changed from $B_1$ into the disjoint set $B_2$ of size $r$. We do not consider the general question of White \cite{White} on transforming one sequence of bases into a compatible one.
+\end{remark}
+
+\section*{Use of AI-assisted tools}
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{99}
+
+\bibitem{BJM}
+K.~B\'erczi, \'A.~J\'anosik, and B.~M\'atrav\"olgyi, \emph{Cyclic ordering of split matroids}, Electron. J. Combin. \textbf{33} (2026), no.~1, Paper No.~P1.20.
+
+\bibitem{BSY}
+K.~B\'erczi, T.~Schwarcz, and Y.~Yamaguchi, \emph{List coloring of two matroids through reduction to partition matroids}, SIAM J. Discrete Math. \textbf{35} (2021), no.~3, 2192--2209.
+
+\bibitem{FO}
+T.~Fife and J.~Oxley, \emph{Laminar matroids}, European J. Combin. \textbf{62} (2017), 206--216.
+
+\bibitem{Finkelstein}
+L.~Finkelstein, \emph{Two algorithms for the matroid secretary problem}, Master's thesis, Technion, Israel Institute of Technology, Haifa, 2011.
+
+\bibitem{Fletcher}
+A.~Fletcher, \emph{Cyclic basis orderings of uniformly dense rank-three matroids}, version-2 draft dated 10 September 2026, deposited on Zenodo, \href{https://doi.org/10.5281/zenodo.22698709}{doi:10.5281/zenodo.22698709}.
+
+\bibitem{Gabow}
+H.~Gabow, \emph{Decomposing symmetric exchanges in matroid bases}, Math. Programming \textbf{10} (1976), no.~1, 271--276.
+
+\bibitem{HT}
+J.~van den Heuvel and S.~Thomass\'e, \emph{Cyclic orderings and cyclic arboricity of matroids}, J. Combin. Theory Ser. B \textbf{102} (2012), no.~3, 638--646.
+
+\bibitem{KUM}
+Y.~Kajitani, S.~Ueno, and H.~Miyano, \emph{Ordering of the elements of a matroid such that its consecutive $w$ elements are independent}, Discrete Math. \textbf{72} (1988), no.~1--3, 187--194.
+
+\bibitem{LLT}
+Y.~Liang, S.~Locke, and A.~Trice, \emph{Cyclic ordering of edges without long acyclic subsequences}, Congr. Numer. \textbf{235} (2025), 41--46.
+
+\bibitem{Oxley}
+J.~Oxley, \emph{Matroid theory}, second ed., Oxford Graduate Texts in Mathematics, vol.~21, Oxford University Press, Oxford, 2011.
+
+\bibitem{White}
+N.~L.~White, \emph{A unique exchange property for bases}, Linear Algebra Appl. \textbf{31} (1980), 81--91.
+
+\bibitem{Wiedemann}
+D.~Wiedemann, \emph{Cyclic base orders of matroids}, manuscript dated 9 May 2006, typewritten version of a handwritten note of August 1984, archived at \url{https://web.archive.org/web/20121004065333id_/http://www.plumbyte.com:80/cyclic_base_orders_1984.pdf}.
+
+\end{thebibliography}
+
+\end{document}

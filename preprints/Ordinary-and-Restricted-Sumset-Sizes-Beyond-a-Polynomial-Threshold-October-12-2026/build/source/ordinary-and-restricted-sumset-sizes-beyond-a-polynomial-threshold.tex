@@ -1,0 +1,869 @@
+\documentclass[11pt]{amsart}
+\usepackage{amssymb,mathtools}
+\usepackage[margin=1.15in]{geometry}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+  pdftitle={Ordinary and restricted sumset sizes beyond a polynomial threshold},
+  pdfauthor={Knowledge Sense},
+  pdfsubject={Additive combinatorics},
+  pdfkeywords={Sumset, restricted sumset, sizes of sumsets, additive basis, Freiman isomorphism}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathcal{R}}
+\newcommand{\Rr}{\mathcal{R}^{\wedge}}
+\newcommand{\res}[2]{#1^{\wedge}#2}
+\newcommand{\Fr}{F^{\wedge}}
+\newcommand{\coef}[1]{[z^{#1}]}
+\newcommand{\cle}{\preceq}
+\DeclareMathOperator{\diam}{diam}
+
+\title[Ordinary and restricted sumset sizes]{Ordinary and restricted sumset sizes beyond a polynomial threshold}
+\author{Knowledge Sense}
+\address{Knowledge Sense}
+\email{math@knowledgesense.jp}
+\date{12 October 2026}
+\subjclass[2020]{Primary 11B13; Secondary 11B30, 11B75}
+\keywords{Sumset, restricted sumset, sizes of sumsets, additive basis, Freiman isomorphism}
+
+\begin{document}
+
+\begin{abstract}
+For a finite set $A$ of integers and $h\ge 1$, let $hA$ be the set of sums of $h$ elements of $A$ and $\res{h}{A}$ the set of sums of $h$ pairwise distinct elements of $A$. We prove that for all integers $h\ge 2$ and $k\ge (2h)^{80}$ the cardinalities $|\res hA|$ of $k$-element sets $A\subset\Z$ are exactly the integers in $[h(k-h)+1,\binom kh]$, and that the cardinalities $|hA|$ are exactly the integers in $[hk-h+1,\binom{h+k-1}{h}]$ outside the triangular set of exceptions found by Rajagopal. Every attainable cardinality is attained by a set contained in $[0,k^{C_h}]$, with an explicit exponent $C_h$. For ordinary sums Rajagopal proved this classification for all $k$ above a threshold of size at most $2^{20h^2}$, and asked for a bound exponential or polynomial in $h$ on the least such threshold. For $h\ge 4$, where the classification was previously known only beyond his threshold, the threshold obtained here is polynomial in $h$. For restricted sums with $h\ge 3$ the result determines the range of possible cardinalities for all large $k$. The constructions follow Rajagopal's combination of dense and sparse components. The new ingredients are relation blocks for distinct summands, exact formulas with nonnegative coefficients for the change produced by each parameter step, which give estimates with constants independent of $h$, and a positional filling lemma for the small cardinalities.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+For a finite subset $A$ of an abelian group and an integer $q\ge 1$ write
+\[
+qA=\{a_1+\dots+a_q: a_i\in A\},\qquad \res qA=\Bigl\{\sum_{a\in S}a: S\subseteq A,\ |S|=q\Bigr\},
+\]
+and put $0A=\res 0A=\{0\}$. Throughout, $[u,v]$ denotes the set of integers $n$ with $u\le n\le v$; it is empty if $u>v$. Following Nathanson~\cite{Nat25}, define for positive integers $h,k$
+\[
+\R(h,k)=\{|hA|: A\subset\Z,\ |A|=k\},\qquad \Rr(h,k)=\{|\res hA|: A\subset\Z,\ |A|=k\}.
+\]
+Nathanson posed the problem of determining these sets \cite[Problem~1]{Nat25}. For $k\ge h$ one has
+\begin{equation}\label{eq:trivial}
+\R(h,k)\subseteq\Bigl[hk-h+1,\binom{h+k-1}{h}\Bigr],\qquad \Rr(h,k)\subseteq\Bigl[h(k-h)+1,\binom kh\Bigr],
+\end{equation}
+and all four endpoints are attained: the lower ones by arithmetic progressions and the upper ones by sets all of whose $h$-fold sums are distinct \cite[Theorem~2]{Nat25}.
+
+For $h=2$ both ranges are full intervals. For ordinary sums this was remarked by Erd\H{o}s and Szemer\'edi~\cite{ES83}, and Nathanson proved both statements in \cite[Theorems~5 and~6]{Nat25}. For $h\ge 3$ and $k\ge 3$ the set $\R(h,k)$ is not an interval \cite[Theorem~7]{Nat25}. Put
+\[
+M_{h,k}=hk-h+1,\qquad \Delta_{h,k}=\bigcup_{\ell=0}^{\min(h,k)-3}\bigl[M_{h,k}+\ell h+1,\ M_{h,k}+\ell h+(h-2-\ell)\bigr].
+\]
+Rajagopal~\cite{Raj26} proved that $\R(h,k)\cap\Delta_{h,k}=\emptyset$ for all $h,k$ \cite[Theorem~1.3]{Raj26}, extending results of Tang and Xing~\cite{TX21} and of Schinina~\cite{Sch26}, and that
+\begin{equation}\label{eq:rajagopal}
+\R(h,k)=\Bigl[M_{h,k},\binom{h+k-1}{h}\Bigr]\setminus\Delta_{h,k}\qquad (k>k_h)
+\end{equation}
+for some $k_h$ \cite[Theorem~1.4]{Raj26}, where $k_h\le 2^{20h^2}$ \cite[Remark~1.5]{Raj26}. He also proved \eqref{eq:rajagopal} for $h=3$ and all $k>2$ \cite[Theorem~1.7]{Raj26}, conjectured that $k>h$ suffices in general \cite[Conjecture~1.6]{Raj26}, and asked for bounds exponential or polynomial in $h$ on the least integer $k'_h$ such that \eqref{eq:rajagopal} holds for every $k>k'_h$ \cite[Section~5.1]{Raj26}. He also asked for the analogous results for restricted sums \cite[Section~5.3]{Raj26}. For restricted sums, inverse theorems describing the sets $A$ for which $|\res hA|$ is close to its minimum $h(k-h)+1$ were proved by Mohan and Pandey~\cite{MP24} for $h\in\{2,3,4\}$, and by Manna, Mohan and Pandey~\cite{MMP25} for every $h\ge 3$ when $|\res hA|$ exceeds the minimum by one, two or three and $k$ is larger than a linear function of $h$. These results concern the structure of $A$ rather than the set $\Rr(h,k)$.
+
+A related question concerns the size of witnesses. Nathanson asked for an integer $N(h,k)$ such that every element of $\R(h,k)$ is attained by a subset of $[0,N(h,k)]$, and for the analogous integer for restricted sums \cite[Problems~2 and~3]{Nat25}. He proved $N(h,k)<4(8h)^{k-1}$ for $h,k\ge 3$ \cite[Theorem~8]{Nat26}. A public draft~\cite{PC} showed that for every $h$ there is a constant $C_h$, not made explicit, such that $N(h,k)\le k^{C_h}$ for all $k\ge 2$; the proof gives polynomial witnesses for large $k$, by replacing the sparse geometric progressions in Rajagopal's construction with lattice gadgets of polynomial size, and absorbs the remaining values of $k$ into $C_h$. A different statement, the explicit bound $N(h,k)\le k^{10h^3}$ for sufficiently large $k$, is described in \cite{GR26} and \cite[Remark~1.8]{Raj26}. A second public draft~\cite{QC} realizes both twofold ranges with witnesses of size $O(k^2)$. Both drafts were made public in \cite{GR26}; see \cite[Remark~1.8]{Raj26} for their origin.
+
+\subsection{Results}
+Define, for $h\ge 2$,
+\[
+L_0=4h^2,\quad D_0=L_0+2h+2,\quad \sigma_h=4h(2h+2)^{L_0}+2h+1,\quad \pi_h=D_0\,\sigma_h\,(h\sigma_h+1)^{D_0-1},
+\]
+\[
+E_h=L_0D_0+\lceil\log_2\pi_h\rceil,\qquad F_h=(h^2+2)(h^2+2h+2).
+\]
+
+\begin{theorem}\label{thm:restricted}
+Let $h\ge 2$ and $k\ge(2h)^{80}$ be integers. Then
+\[
+\Rr(h,k)=\Bigl[h(k-h)+1,\binom kh\Bigr].
+\]
+Moreover, every $t$ in this interval equals $|\res hA|$ for some $k$-element set $A\subseteq[0,k^{E_h}]$.
+\end{theorem}
+
+\begin{theorem}\label{thm:ordinary}
+Let $h\ge 2$ and $k\ge(2h)^{80}$ be integers. Then
+\[
+\R(h,k)=\Bigl[M_{h,k},\binom{h+k-1}{h}\Bigr]\setminus\Delta_{h,k}.
+\]
+Moreover, every $t$ in this set equals $|hA|$ for some $k$-element set $A\subseteq[0,k^{F_h}]$.
+\end{theorem}
+
+The inclusions ``$\subseteq$'' in both theorems are known: they are \eqref{eq:trivial} and Rajagopal's exclusion of $\Delta_{h,k}$. The content of the theorems is the realization of every remaining value, uniformly for $k\ge(2h)^{80}$, together with the bounds on the witnesses.
+
+For ordinary sums with $h\in\{2,3\}$ the description of $\R(h,k)$ is known for all $k>2$, so Theorem~\ref{thm:ordinary} is new only through its threshold, for $h\ge 4$, where it gives $k'_h\le(2h)^{80}-1$, a bound polynomial in $h$ of the kind asked for in \cite[Section~5.1]{Raj26}; previously one had $k'_h\le k_h\le 2^{20h^2}$. This is far from the conjectured bound $k'_h\le h$. Concerning the size of witnesses, Theorem~\ref{thm:ordinary} gives $N(h,k)\le k^{F_h}$ for $k\ge(2h)^{80}$; since $F_h$ grows like $h^4$, this is not an improvement on the exponent $10h^3$ mentioned above, and its interest lies in the explicit range of validity. For restricted sums the case $h=2$ is known \cite[Theorem~6]{Nat25}, \cite{QC}, and to our knowledge Theorem~\ref{thm:restricted} is new for every $h\ge 3$. The theorems say nothing about $k<(2h)^{80}$; the exponent $80$ and the exponents $E_h=O(h^4\log h)$ and $F_h=O(h^4)$ have not been optimized.
+
+\subsection{Method}
+We follow the strategy of \cite[Section~4]{Raj26}. Small cardinalities are produced by sets $\{0\}\cup(i+B)$, where $B$ is a set whose $h$-fold sumset is an interval. Large cardinalities are produced by combining a dense set $Y$, an arithmetic progression with one extra point, with a sparse set $C$ built from blocks that create a prescribed number of coincidences among sums. The parameters of the blocks range over a box, and an elementary interval lemma \cite[Lemma~4.5]{Raj26} shows that the attained cardinalities fill an interval, provided that every one-step change of a coordinate is dominated by the full variation of the preceding coordinate. For ordinary sums we use the polynomial-size carry blocks of \cite{PC}.
+
+Three ingredients are new. First, for restricted sums we introduce blocks built from one linear relation, or from a family of relations sharing one atom, and compute their restricted sumset series exactly (Section~\ref{sec:restricted-blocks}). Second, for both kinds of sums we compute the change caused by each parameter step as an explicit series with nonnegative coefficients (Lemmas~\ref{lem:rdiff} and~\ref{lem:odiff}). This gives lower and upper bounds for every step that hold uniformly over the whole box, with absolute constants, instead of asymptotic estimates with constants depending on $h$. Third, a positional filling lemma (Lemma~\ref{lem:digit}) produces sets with $hB=[0,hd]$ for all $d$ up to $(8h)^{-h}|B|^h$; the corresponding statement in \cite[Lemma~4.4]{Raj26} allows $d$ up to about $4^{-h^2/2}|B|^h$, which is one source of the factor $2^{O(h^2)}$ in the earlier threshold. Positional numeration is a classical tool for additive bases; see for instance \cite{Tri08}. The number of components of our sets is bounded in terms of $h$, so a moment map followed by a radix map embeds them into $\Z$ with polynomial size, as in \cite{PC} and \cite[Lemma~4.6]{Raj26}.
+
+\subsection*{Dependencies}
+Apart from \eqref{eq:trivial}, the proof of Theorem~\ref{thm:restricted} is self-contained. Theorem~\ref{thm:ordinary} uses the exclusion of $\Delta_{h,k}$ from \cite[Theorem~1.3]{Raj26}, which rests on a theorem of Lev~\cite{Lev96}; for the reader's convenience we reproduce the short argument in Section~\ref{sec:exclusion}. No computation is used in the proofs. Finite consistency checks are described in Section~\ref{sec:checks}.
+
+\subsection*{Organization}
+Section~\ref{sec:prelim} contains generating functions, tagged unions, the interval lemma and the embedding lemmas. Section~\ref{sec:digit} proves the filling lemma. Sections~\ref{sec:restricted} and~\ref{sec:ordinary} prove Theorems~\ref{thm:restricted} and~\ref{thm:ordinary}. Section~\ref{sec:remarks} contains remarks and Section~\ref{sec:checks} the finite checks.
+
+\section{Preliminaries}\label{sec:prelim}
+
+\subsection{Series}
+Throughout, $h\ge 2$ is fixed and all power series are considered modulo $z^{h+1}$. For a power series $P$ we write $\coef qP$ for its coefficient of $z^q$, and $P\cle Q$ means $\coef qP\le\coef qQ$ for $0\le q\le h$. For a finite subset $A$ of a torsion-free abelian group put
+\[
+F_A(z)=\sum_{q=0}^h|qA|\,z^q,\qquad \Fr_A(z)=\sum_{q=0}^h|\res qA|\,z^q.
+\]
+If $|A|=n$, then $|\res qA|\le\binom nq$ and $|qA|\le\binom{n+q-1}{q}$, so
+\begin{equation}\label{eq:multiset-bound}
+\Fr_A\cle(1+z)^n,\qquad F_A\cle(1-z)^{-n},
+\end{equation}
+and both series have constant term $1$. If $P,Q,Q'$ have nonnegative coefficients, $Q'$ has constant term $1$ and $P\cle Q$, then $P\cle QQ'$; we use this repeatedly in the form ``a factor with nonnegative coefficients and constant term $1$ may be dropped in a lower bound''.
+
+\subsection{Freiman isomorphisms and integer models}
+Let $X,X'$ be finite subsets of abelian groups. A bijection $\phi\colon X\to X'$ is a \emph{Freiman isomorphism of order $h$} if for every $q\le h$ and all $x_1,\dots,x_q,y_1,\dots,y_q\in X$,
+\[
+x_1+\dots+x_q=y_1+\dots+y_q\iff \phi(x_1)+\dots+\phi(x_q)=\phi(y_1)+\dots+\phi(y_q).
+\]
+Then $x_1+\dots+x_q\mapsto\phi(x_1)+\dots+\phi(x_q)$ is a well defined bijection from $qX$ onto $qX'$, and, since $\phi$ maps $q$-subsets onto $q$-subsets, also from $\res qX$ onto $\res qX'$. Hence $F_{X'}=F_X$ and $\Fr_{X'}=\Fr_X$.
+
+\begin{lemma}[Radix map]\label{lem:radix}
+Let $D\ge 1$, $M\ge 0$ and $Q$ be integers with $Q>hM$, and let $X\subseteq[0,M]^D$. Then the map
+\[
+\psi(x_1,\dots,x_D)=\sum_{i=1}^Dx_iQ^{i-1}
+\]
+restricts to a Freiman isomorphism of order $h$ from $X$ onto a subset of $[0,DMQ^{D-1}]$.
+\end{lemma}
+
+\begin{proof}
+A sum of $q\le h$ elements of $X$ has all coordinates in $[0,hM]\subseteq[0,Q-1]$, and $\psi$ is injective on $[0,Q-1]^D$ by uniqueness of base-$Q$ expansions. Since $\psi$ is additive, it preserves equalities of sums as well. The bound on $\psi(X)$ is immediate.
+\end{proof}
+
+For $L\ge 1$ let $\mu_L\colon\Z^n\to\Z^{L+1}$ be the linear map sending the $t$-th standard basis vector to $(1,t,t^2,\dots,t^L)$.
+
+\begin{lemma}[Moment map]\label{lem:moment}
+The map $\mu_L$ has the following two properties.
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item If $x\in\Z^n$ has at most $L+1$ nonzero coordinates and $\mu_L(x)=0$, then $x=0$.
+\item If $x,y\in\N_0^n$ satisfy $\sum_tx_t\le L$, $\sum_ty_t\le L$ and $\mu_L(x)=\mu_L(y)$, then $x=y$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) The columns $(1,t,\dots,t^L)$ indexed by distinct $t$ are linearly independent as long as there are at most $L+1$ of them, by the Vandermonde determinant. (b) The first coordinate gives $\sum x_t=\sum y_t=:s\le L$. Let $X$ and $Y$ be the multisets in which $t$ occurs $x_t$ and $y_t$ times. The remaining coordinates show that $X$ and $Y$ have the same power sums of degrees $1,\dots,L\ge s$. By Newton's identities their elementary symmetric functions of degrees $1,\dots,s$ agree, so $\prod_{t\in X}(T-t)=\prod_{t\in Y}(T-t)$ and $X=Y$.
+\end{proof}
+
+\subsection{Tagged unions}
+Let $X_1,\dots,X_s$ be finite subsets of $\Z^n$ such that $X_j$ is supported on a set $I_j$ of coordinates, where $I_1,\dots,I_s$ are pairwise disjoint. Some $X_j$ may be empty. The \emph{tagged union} of $X_1,\dots,X_s$ is
+\[
+X_1\sqcup\dots\sqcup X_s=\bigcup_{j=1}^s\{(x,e_j):x\in X_j\}\subset\Z^n\times\Z^s,
+\]
+where $e_1,\dots,e_s$ is the standard basis of $\Z^s$. A tagged union is the variant with many summands of the disjoint union of \cite[Definition~4.7]{Raj26}.
+
+\begin{lemma}\label{lem:product}
+For a tagged union $X=X_1\sqcup\dots\sqcup X_s$ we have $|X|=\sum_j|X_j|$ and
+\[
+F_X=\prod_{j=1}^sF_{X_j},\qquad \Fr_X=\prod_{j=1}^s\Fr_{X_j}.
+\]
+\end{lemma}
+
+\begin{proof}
+A multiset of $q$ elements of $X$ consists of $q_j$ elements of the $j$-th part, and the last $s$ coordinates of its sum are $(q_1,\dots,q_s)$. If two such sums agree, the numbers $q_j$ agree, and the first $n$ coordinates give $\sum_j\sigma_j=\sum_j\sigma'_j$, where $\sigma_j,\sigma'_j$ are the sums of the elements taken from $X_j$. Since $\sigma_j-\sigma'_j$ is supported on $I_j$ and these sets are disjoint, $\sigma_j=\sigma'_j$ for every $j$. Hence the distinct elements of $qX$ correspond bijectively to tuples $(\tau_1,\dots,\tau_s)$ with $\tau_j\in q_jX_j$ and $\sum q_j=q$, so $|qX|=\sum_{q_1+\dots+q_s=q}\prod_j|q_jX_j|$. The same argument with subsets gives the statement for restricted sums.
+\end{proof}
+
+\subsection{An interval lemma}
+The following lemma is \cite[Lemma~4.5]{Raj26}, stated for boxes whose coordinates start at $0$.
+
+\begin{lemma}\label{lem:interval}
+Let $n_1,\dots,n_d\ge 1$, and let $f\colon[0,n_1]\times\dots\times[0,n_d]\to\Z$ be nonincreasing in each coordinate. For $1\le i\le d$ let $\delta_i$ be the largest value of $f(x)-f(x+e_i)$ over all $x$ with $x_i<n_i$, and let $\Delta_i$ be the smallest value of $f(x)-f(x+n_ie_i)$ over all $x$ with $x_i=0$. If $\delta_1\le 1$ and $\delta_i\le\Delta_{i-1}$ for $2\le i\le d$, then the image of $f$ is an interval of integers.
+\end{lemma}
+
+\begin{proof}
+We show by induction on $i$ that, for every fixed $y=(x_{i+1},\dots,x_d)$, the set $J_i(y)$ of values of $f$ with the last $d-i$ coordinates equal to $y$ is an interval. For $i=1$ this holds because consecutive values differ by at most $\delta_1\le 1$. Let $i\ge 2$, and for $a\in[0,n_i]$ let $I_a=J_{i-1}(a,y)$, an interval by induction. Its maximum is $p_a=f(0,\dots,0,a,y)$, and $p_{a+1}\le p_a$. Moreover
+\[
+\min I_a\le f(0,\dots,0,n_{i-1},a,y)\le p_a-\Delta_{i-1}\le p_a-\delta_i\le p_{a+1}.
+\]
+Thus $p_{a+1}\in I_a$, so $I_a\cup I_{a+1}$ is an interval, and inductively so is $I_0\cup\dots\cup I_{n_i}=J_i(y)$.
+\end{proof}
+
+A coordinate that takes a single value can be deleted before applying the lemma.
+
+\section{A positional filling lemma}\label{sec:digit}
+
+A set $B\subseteq[0,d]$ with $hB=[0,hd]$ is called $(h,d)$-filling in \cite[Definition~4.3]{Raj26}.
+
+\begin{lemma}\label{lem:digit}
+Let $h\ge 2$ and $n\ge 8h$ be integers, and let $D$ be an integer with $n-1\le D\le(n/(8h))^h$. There is an $n$-element set $B\subseteq[0,D]$ with $hB=[0,hD]$ and $[0,\lfloor n/2\rfloor-1]\subseteq B$.
+\end{lemma}
+
+\begin{proof}
+Put $g=\lfloor n/(4h)\rfloor$. Since $n\ge 8h$ we have $g\ge n/(4h)-1\ge n/(8h)$ and $g\ge 2$; hence $D\le g^h$. Let $r$ be the least positive integer with $D\le g^r$. Then $r\le h$, and $r\ge 2$ because $D\ge n-1>n/(4h)\ge g$. Put $\lambda=g^{r-1}$, so that $\lambda<D\le g\lambda$. Define
+\[
+L_i=\{jg^i:0\le j\le g-1\}\quad(0\le i\le r-2),\qquad G=\{j\lambda:0\le j\le\lfloor D/\lambda\rfloor\}\cup\{D\},
+\]
+\[
+B'=G\cup\bigcup_{i=0}^{r-2}\bigl(L_i\cup(D-L_i)\bigr).
+\]
+All elements of $L_i$ are at most $(g-1)g^{r-2}<\lambda<D$, so $B'\subseteq[0,D]$. Also $|G|\le D/\lambda+2\le g+2$, hence
+\[
+|B'|\le 2(r-1)g+g+2\le(2h-1)\frac{n}{4h}+2=\frac n2-\frac{n}{4h}+2\le\frac n2.
+\]
+
+We claim that $rB'=[0,rD]$. Fix $j\in[0,r-1]$. Choose one element of $D-L_i$ for each $i<j$ and one element of $L_i$ for each $i$ with $j\le i\le r-2$. The sum of these $r-1$ elements is $jD-X+Y$, where $X=\sum_{i<j}x_ig^i$ and $Y=\sum_{i=j}^{r-2}y_ig^i$ with digits $x_i,y_i\in[0,g-1]$. Here $X$ runs through $[0,g^j-1]$ and $Y$ through the multiples of $g^j$ in $[0,\lambda-g^j]$. For each $Y$ the values $Y-X$ fill $[Y-g^j+1,Y]$, and consecutive values of $Y$ differ by $g^j$, so these $r-1$ sums fill $jD+[1-g^j,\lambda-g^j]$; this includes the extreme cases $j=0$ and $j=r-1$, in which one of the two digit sums is empty. This is an interval of $\lambda$ consecutive integers. The consecutive elements of $G$ differ by at most $\lambda$, and $G$ has least element $0$ and largest element $D$. Adding one element of $G$ therefore gives
+\[
+I_j=\bigl[jD-g^j+1,\ (j+1)D+\lambda-g^j\bigr]\subseteq rB'.
+\]
+Now $I_0$ begins at $0$, $I_{r-1}$ ends at $rD$, and for $0\le j\le r-2$ the interval $I_{j+1}$ begins at most one place after the end of $I_j$, since $(j+1)D-g^{j+1}+1\le(j+1)D+\lambda-g^j+1$, and ends after it, since $D>\lambda\ge g^{j+1}$. Hence $[0,rD]\subseteq rB'$, and equality holds because $B'\subseteq[0,D]$.
+
+Since $0,D\in B'$, the set $(h-r)B'$ contains $\{0,D,2D,\dots,(h-r)D\}$, so $hB'\supseteq\bigcup_{t=0}^{h-r}(tD+[0,rD])=[0,hD]$, and again equality holds. Finally let $B$ be obtained from $B'$ by adding the $n-|B'|$ smallest elements of $[0,D]\setminus B'$; this is possible because $D+1\ge n$. Then $B\subseteq[0,D]$ and $hB=[0,hD]$. The number $N=n-|B'|$ of added elements satisfies $N\ge\lceil n/2\rceil$. If $0\le y\le N-1$ and $y\notin B'$, then at most $y+1\le N$ elements of $[0,D]\setminus B'$ are at most $y$, so $y$ was added. Hence $[0,\lceil n/2\rceil-1]\subseteq B$.
+\end{proof}
+
+\begin{remark}
+Lemma~\ref{lem:digit} plays the role of \cite[Lemma~4.4]{Raj26}. There the filling sets are built inductively on $h$, and the admissible range is $d\le|B|^h/4^{(h^2+h)/2}$. The base-$g$ construction above handles all digit positions at once. It is close in spirit to the use of positional bases for the postage stamp problem \cite{Tri08}.
+\end{remark}
+
+\section{Restricted sums}\label{sec:restricted}
+
+Throughout this section $h\ge 2$. An \emph{atom} is a standard basis vector of some $\Z^n$; whenever a construction calls for atoms, they are taken distinct from all atoms used before.
+
+\subsection{Relation blocks}\label{sec:restricted-blocks}
+
+\begin{definition}
+Let $m\ge 2$.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item A \emph{linear block of order $m$} is a set $\{\alpha_1,\dots,\alpha_m,\beta_1,\dots,\beta_m\}$, where the $2m-1$ points $\alpha_1,\dots,\alpha_m$ and $\beta_1,\dots,\beta_{m-1}$ are atoms and $\beta_m=\sum_{i=1}^m\alpha_i-\sum_{j=1}^{m-1}\beta_j$. For $r\ge 0$ let $G^\wedge_{m,r}$ be the union of $r$ linear blocks of order $m$ built on pairwise disjoint sets of atoms.
+\item For $u\ge 1$ let $\omega$ and $\beta_{i,j}$ $(1\le i\le u,\ 1\le j\le m-1)$ be atoms, put $\alpha_i=\sum_{j=1}^{m-1}\beta_{i,j}-\omega$, and let $H^\wedge_{m,u}=\{\beta_{i,j}\}\cup\{\alpha_1,\dots,\alpha_u\}$. We call $\{\beta_{i,1},\dots,\beta_{i,m-1},\alpha_i\}$ the $i$-th row of $H^\wedge_{m,u}$.
+\end{enumerate}
+\end{definition}
+
+The $2m$ points of a linear block are distinct, since $\beta_m$ has $2m-1\ge 3$ nonzero coordinates; thus $|G^\wedge_{m,r}|=2mr$. The points of $H^\wedge_{m,u}$ are distinct, since $\alpha_i$ is the only point with a nonzero $\omega$-coordinate in the $i$-th row; thus $|H^\wedge_{m,u}|=mu$. The $m$ points of $H^\wedge_{m,1}$ are linearly independent. Every point of these sets has $\ell^1$-norm at most $2m-1$.
+
+\begin{lemma}\label{lem:rG}
+For $m\ge 2$ and $r\ge 0$,
+\[
+\Fr_{G^\wedge_{m,r}}(z)=\bigl((1+z)^{2m}-z^m\bigr)^r .
+\]
+\end{lemma}
+
+\begin{proof}
+Consider first one linear block $\Gamma$, and let $S,S'\subseteq\Gamma$ have equal sums. Put $\xi=\mathbf 1_S-\mathbf 1_{S'}\in\{-1,0,1\}^\Gamma$, so that $\sum_{p\in\Gamma}\xi_pp=0$. Writing this in terms of atoms, the coefficient of $\alpha_i$ is $\xi_{\alpha_i}+\xi_{\beta_m}$ and the coefficient of $\beta_j$ $(j<m)$ is $\xi_{\beta_j}-\xi_{\beta_m}$. Hence $\xi_{\beta_j}=\epsilon$ and $\xi_{\alpha_i}=-\epsilon$ for all $i,j$, where $\epsilon=\xi_{\beta_m}$. If $\epsilon=0$ then $S=S'$. If $\epsilon=\pm1$ then $\{S,S'\}=\{\{\alpha_1,\dots,\alpha_m\},\{\beta_1,\dots,\beta_m\}\}$, and conversely these two sets have equal sums. Consequently two subsets of $\Gamma$ with equal sums have equal cardinalities, and $\Fr_\Gamma=(1+z)^{2m}-z^m$.
+
+For $G^\wedge_{m,r}$, write $S_\tau$ for the part of $S$ in the $\tau$-th block. The blocks are supported on disjoint sets of atoms, so $\sum S=\sum S'$ if and only if $\sum S_\tau=\sum S'_\tau$ for every $\tau$, and then $|S_\tau|=|S'_\tau|$. Hence the distinct sums of $q$-subsets correspond to tuples of distinct sums of $q_\tau$-subsets of the blocks with $\sum q_\tau=q$, which gives the product formula.
+\end{proof}
+
+For $m\ge 2$ and $j\ge 0$ define the polynomials
+\[
+\varphi_m(z)=(1+z)^m-z-z^{m-1},\qquad T_{m,j}(z)=\sum_{\ell=0}^jz^{j+\ell(m-2)}.
+\]
+The polynomial $\varphi_m$ has nonnegative coefficients and constant term $1$, and $T_{2,j}=(j+1)z^j$.
+
+\begin{lemma}\label{lem:rH}
+For $m\ge 2$ and $u\ge 1$,
+\[
+\Fr_{H^\wedge_{m,u}}(z)=\sum_{j=0}^u\binom uj\varphi_m(z)^{u-j}\,T_{m,j}(z).
+\]
+In particular $\Fr_{H^\wedge_{m,1}}=(1+z)^m$.
+\end{lemma}
+
+\begin{proof}
+Let $S\subseteq H^\wedge_{m,u}$, and for the $i$-th row let $y_i=1$ if $\alpha_i\in S$ and $y_i=0$ otherwise, and $x_{i,j}=1$ if $\beta_{i,j}\in S$ and $x_{i,j}=0$ otherwise. The sum of $S$ has $\beta_{i,j}$-coordinate $w_{i,j}=x_{i,j}+y_i$ and $\omega$-coordinate $-\sum_iy_i$. From the vector $w_i=(w_{i,1},\dots,w_{i,m-1})$ one reads off the part of $S$ in the $i$-th row unless $w_i$ is the all-ones vector: if some $w_{i,j}=2$ then $y_i=1$, and if some $w_{i,j}=0$ then $y_i=0$. If $w_i$ is the all-ones vector, the part of $S$ in the row is either $P_i=\{\alpha_i\}$ or $Q_i=\{\beta_{i,1},\dots,\beta_{i,m-1}\}$. Let $J$ be the set of these ambiguous rows. The $\omega$-coordinate determines $\sum_iy_i$, hence the number $p$ of rows in $J$ in which $S$ contains $P_i$; the positions of these rows inside $J$ do not affect the sum. Conversely, two subsets with the same unambiguous rows, the same set $J$ and the same number $p$ have the same sum. Therefore distinct sums correspond bijectively to the following data: a set $J$ of rows, a subset of each row outside $J$ different from $P_i$ and $Q_i$, and an integer $p\in[0,|J|]$. If $|J|=j$ and $j-p=\ell$, the corresponding subsets have cardinality equal to the total size of their parts in the rows outside $J$ plus $p+(m-1)(j-p)=j+\ell(m-2)$. Since the subsets of one row other than $P_i,Q_i$ are counted by $\varphi_m$, the formula follows. For $u=1$ it gives $\varphi_m+z+z^{m-1}=(1+z)^m$.
+\end{proof}
+
+We also put $G^\wedge_{m,0}=H^\wedge_{m,0}=\emptyset$, whose series is $1$; the formulas of Lemmas~\ref{lem:rG} and~\ref{lem:rH} remain valid for $r=0$ and $u=0$.
+
+\begin{lemma}\label{lem:rdiff}
+Let $m\ge 2$, $r\ge 0$ and $u\ge 1$. Write $\Gamma_r=\Fr_{G^\wedge_{m,r}}$ and $\Theta_u=\Fr_{H^\wedge_{m,u}}$. Then
+\begin{align}
+(1+z)^{2m}\Gamma_r-\Gamma_{r+1}&=z^m\Gamma_r,\label{eq:rGdiff}\\
+(1+z)^m\Theta_u-\Theta_{u+1}&=\sum_{j=1}^u\binom uj\varphi_m^{u-j}\,z^{m+j-1}\sum_{\ell=0}^{j-1}z^{\ell(m-2)},\label{eq:rHdiff}
+\end{align}
+and
+\begin{equation}\label{eq:rHbounds}
+u\,z^m\varphi_m^{u-1}\cle(1+z)^m\Theta_u-\Theta_{u+1}\cle u\,z^m(1+z)^{m(u-1)}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Identity \eqref{eq:rGdiff} is immediate from Lemma~\ref{lem:rG}. For \eqref{eq:rHdiff}, Pascal's rule $\binom{u+1}{j}=\binom uj+\binom u{j-1}$ gives $\Theta_{u+1}=\sum_j\binom uj\varphi_m^{u-j}\bigl(\varphi_mT_{m,j}+T_{m,j+1}\bigr)$. Since $(1+z)^m=\varphi_m+z+z^{m-1}$,
+\[
+(1+z)^m\Theta_u-\Theta_{u+1}=\sum_{j=0}^u\binom uj\varphi_m^{u-j}\bigl((z+z^{m-1})T_{m,j}-T_{m,j+1}\bigr).
+\]
+Here $zT_{m,j}$ consists of the terms of $T_{m,j+1}$ with $\ell\le j$, and $z^{m-1}T_{m,j}=\sum_{\ell=1}^{j+1}z^{j+1+\ell(m-2)}$. Hence
+\[
+(z+z^{m-1})T_{m,j}-T_{m,j+1}=\sum_{\ell=1}^jz^{j+1+\ell(m-2)}=z^{m+j-1}\sum_{\ell=0}^{j-1}z^{\ell(m-2)},
+\]
+which vanishes for $j=0$. This proves \eqref{eq:rHdiff}.
+
+All summands in \eqref{eq:rHdiff} have nonnegative coefficients, and the summand $j=1$ equals $uz^m\varphi_m^{u-1}$; this gives the lower bound. For the upper bound note that
+\[
+z^{j-1}\sum_{\ell=0}^{j-1}z^{\ell(m-2)}\cle\sum_{\ell=0}^{j-1}\binom{j-1}{\ell}z^{j-1+\ell(m-2)}=(z+z^{m-1})^{j-1}
+\]
+and $\binom uj\le u\binom{u-1}{j-1}$. Therefore the right side of \eqref{eq:rHdiff} is at most
+\[
+u\,z^m\sum_{j=1}^u\binom{u-1}{j-1}\varphi_m^{u-j}(z+z^{m-1})^{j-1}=u\,z^m(1+z)^{m(u-1)}.\qedhere
+\]
+\end{proof}
+
+\subsection{Dense sets}
+For integers $b\ge 2$ and $x\in[b-1,h(b-2)+1]$ put
+\[
+Y_{x,b}=[0,b-2]\cup\{x\}.
+\]
+Then $|Y_{x,b}|=b$, and $Y_{b-1,b}=[0,b-1]$. We use the elementary fact that for $0\le q\le n$
+\begin{equation}\label{eq:interval-restricted}
+\res q[0,n-1]=\Bigl[\binom q2,\ q(n-1)-\binom q2\Bigr],
+\end{equation}
+while $\res q[0,n-1]=\emptyset$ for $q>n$. Indeed, the bounds are clear, and every $q$-subset other than the top one contains some $y$ with $y+1\le n-1$ and $y+1$ not in the subset; replacing $y$ by $y+1$ raises the sum by one. Likewise, a sum of $q$ distinct integers in $[0,d]$ lies in $[\binom q2,qd-\binom q2]$.
+
+\begin{lemma}\label{lem:rdense}
+Let $b\ge 2$ and put $\gamma_q(x)=|\res qY_{x,b}|$.
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $\gamma_0(x)=1$ and $\gamma_1(x)=b$. If $b-1<x\le h(b-2)+1$ and $2\le q\le h$, then $0\le\gamma_q(x)-\gamma_q(x-1)\le 1$.
+\item $\gamma_q(x)\le 2hb$ for $1\le q\le h$.
+\item $\Fr_{Y_{h(b-2)+1,b}}=(1+z)\Fr_{[0,b-2]}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Let $P=[0,b-2]$. Since $x\notin P$,
+\[
+\res qY_{x,b}=\res qP\cup\bigl(x+\res{(q-1)}P\bigr).
+\]
+By \eqref{eq:interval-restricted} both parts are intervals, $I_1=[\binom q2,q(b-2)-\binom q2]$ and $I_2=x+[\binom{q-1}2,(q-1)(b-2)-\binom{q-1}2]$, each possibly empty. If $I_1\neq\emptyset$ then $q\le b-1\le x$, and
+\[
+\max I_2-\max I_1=x-(b-2)+(q-1)>0,\qquad \min I_2-\min I_1=x-(q-1)>0.
+\]
+Hence $|\res qY_{x,b}|=|I_1|+|I_2|-\max(0,\max I_1-\min I_2+1)$, and decreasing $x$ by one moves $I_2$ one step to the left, which increases the last term by $0$ or $1$ and leaves $|I_1|,|I_2|$ unchanged. If $I_1=\emptyset$, the cardinality is $|I_2|$ and does not depend on $x$. This proves (a); the values for $q\le 1$ are clear. For (b), $|I_1|\le q(b-2)+1\le hb$ and $|I_2|\le hb$. For (c), at $x=h(b-2)+1$ and $q\le h$ we have $\min I_2-\max I_1\ge h(b-2)+1-q(b-2)+\binom{q-1}2+\binom q2>0$, so the union is disjoint and $\gamma_q=|\res qP|+|\res{(q-1)}P|$.
+\end{proof}
+
+\subsection{Small cardinalities}
+
+Put $\ell_h=2h-1$ and $\varepsilon_h=\ell_h/(64\ell_hh)^h$, and write $\eta_h=\binom h2$.
+
+\begin{lemma}\label{lem:rfill}
+Let $s\ge 64\ell_hh$ and $d$ be integers with $s-1\le d\le\varepsilon_hs^h$. There is an $s$-element set $B\subseteq[0,d]$ with $d\in B$, $[0,\lfloor s/2\rfloor-1]\subseteq B$ and
+\[
+\res hB=[\eta_h,\ hd-\eta_h].
+\]
+\end{lemma}
+
+\begin{proof}
+Write $\ell=\ell_h$ and put $n=\lfloor s/(4\ell)\rfloor$ and $D=\lfloor(d-\ell+1)/\ell\rfloor$. Since $s\ge 64\ell h$ we have $n\ge s/(4\ell)-1\ge s/(8\ell)\ge 8h$. Next, $D\ge(d-2\ell+2)/\ell\ge(s-2\ell+1)/\ell\ge s/(4\ell)-1\ge n-1$, and
+\[
+D\le\frac d\ell\le\frac{s^h}{(64\ell h)^h}\le\Bigl(\frac{n}{8h}\Bigr)^h .
+\]
+Lemma~\ref{lem:digit} provides an $n$-element set $A_0\subseteq[0,D]$ with $hA_0=[0,hD]$. Put
+\[
+A_1=\{\ell a+\rho: a\in A_0,\ 0\le\rho\le\ell-1\},\qquad d'=\ell D+\ell-1,
+\]
+so that $A_1\subseteq[0,d']$ and $|A_1|=\ell n$. Moreover $d-\ell+1\le d'\le d$.
+
+We claim $\res hA_1=[\eta_h,hd'-\eta_h]$. Let $t\in[0,hD]$ and write $t=a_1+\dots+a_h$ with $a_i\in A_0$, repetitions allowed. For any distinct $\rho_1,\dots,\rho_h\in[0,\ell-1]$ (possible since $\ell\ge h$), the integers $\ell a_i+\rho_i$ are distinct elements of $A_1$, because they lie in distinct residue classes modulo $\ell$. Their sum is $\ell t+\sum\rho_i$, and by \eqref{eq:interval-restricted} the sums $\sum\rho_i$ fill $[\eta_h,h(\ell-1)-\eta_h]$, an interval of $h(h-1)+1\ge\ell$ integers. As $t$ runs through $[0,hD]$ in steps of $1$, these translates by $\ell t$ fill $[\eta_h,h\ell D+h(\ell-1)-\eta_h]=[\eta_h,hd'-\eta_h]$. The reverse inclusion holds because $A_1\subseteq[0,d']$.
+
+Let $J=[d'-\ell,d]$. Then $d'-\ell\ge d-2\ell+1\ge 0$ and $|J|\le 2\ell$, and by \eqref{eq:interval-restricted} $\res hJ=[h(d'-\ell)+\eta_h,hd-\eta_h]$. Since $2\eta_h=h(h-1)\le h\ell+1$, this interval meets or abuts $[\eta_h,hd'-\eta_h]$. Put $B'=A_1\cup J$. Then $\res hB'\supseteq[\eta_h,hd-\eta_h]$, with equality since $B'\subseteq[0,d]$, and $|B'|\le\ell n+2\ell\le s/4+2\ell\le s/2$. Finally add to $B'$ the $s-|B'|$ smallest elements of $[0,d]\setminus B'$, which is possible since $d+1\ge s$. The resulting set $B$ has the required properties: $\res hB=[\eta_h,hd-\eta_h]$ because $B'\subseteq B\subseteq[0,d]$, $d\in J\subseteq B$, and $[0,\lfloor s/2\rfloor-1]\subseteq B$ by the argument at the end of the proof of Lemma~\ref{lem:digit}.
+\end{proof}
+
+\begin{proposition}\label{prop:rsmall}
+Let $k\ge 64\ell_hh+1$, and suppose that $d_{\max}=\lfloor\varepsilon_h(k-1)^h\rfloor\ge k-2$. Then
+\[
+\Bigl[h(k-h)+1,\ hd_{\max}+h-(h-1)^2+1\Bigr]\subseteq\Rr(h,k),
+\]
+and every element of this interval is $|\res hA|$ for some $k$-element set $A\subseteq[0,h+d_{\max}]$.
+\end{proposition}
+
+\begin{proof}
+Let $s=k-1$, let $d\in[k-2,d_{\max}]$, and let $B$ be the set of Lemma~\ref{lem:rfill}. Since $s\ge 2h+4$, we have $[0,h]\subseteq B$. For $1\le i\le h$ let $A=\{0\}\cup(i+B)$, a $k$-element subset of $[0,h+d]$. Then
+\[
+\res hA=\bigl(hi+\res hB\bigr)\cup\bigl((h-1)i+\res{(h-1)}B\bigr).
+\]
+The first part is $[hi+\eta_h,\ h(i+d)-\eta_h]$. Put $\eta'_h=\binom{h-1}2$. The second part is contained in $[(h-1)i+\eta'_h,(h-1)(i+d)-\eta'_h]$, and it contains $(h-1)i+\res{(h-1)}{[0,h]}=[(h-1)i+\eta'_h,\ (h-1)i+h(h-1)-\eta'_h]$. Since $\eta_h+\eta'_h=(h-1)^2$, the right end of this interval is at least $hi+\eta_h-1$ exactly when $i\le h$. Also $(h-1)(i+d)-\eta'_h\le h(i+d)-\eta_h$ because $i+d\ge h-1$, and $(h-1)i+\eta'_h\le hi+\eta_h$. Therefore
+\[
+\res hA=\bigl[(h-1)i+\eta'_h,\ h(i+d)-\eta_h\bigr],\qquad |\res hA|=hd+i-(h-1)^2+1.
+\]
+For fixed $d$ the $h$ choices of $i$ give $h$ consecutive integers, and passing from $d$ to $d+1$ continues the sequence. The least value, at $d=k-2$ and $i=1$, is $h(k-2)+2-(h-1)^2=h(k-h)+1$, and the largest is $hd_{\max}+h-(h-1)^2+1$.
+\end{proof}
+
+\subsection{Large cardinalities}\label{sec:rlarge}
+
+Put
+\[
+\kappa=\lfloor k^{7/10}\rfloor,\qquad c_0=c_0(h)=(32h^3)^{10},
+\]
+and assume $\kappa\ge c_0$. For $b\in[2,k-\kappa]$ let $c=k-b$, so that $c\ge\kappa\ge c_0$, and put
+\[
+R=\lfloor c^{9/10}\rfloor,\qquad S=\lfloor c^{4/5}\rfloor.
+\]
+A \emph{parameter} is a vector $\rho=(r_2,\dots,r_h,u_2,\dots,u_h)$ with $0\le r_m\le R$ and $1\le u_m\le S$. Let $\nu(\rho)=\sum_{m=2}^h(2mr_m+mu_m)$ and $f(\rho)=c-\nu(\rho)$. Since $\sum_{m=2}^h3m\le 3h^2$, we have $\nu(\rho)\le 3h^2c^{9/10}$, and $c^{1/10}\ge 32h^3$ gives
+\begin{equation}\label{eq:rnonfree}
+3h^2c^{9/10}\le\frac{c}{8h},
+\end{equation}
+so $f(\rho)>0$. We use the consequences $c\ge 8h^2$, $c^{1/10}\ge 32h^3\ge 8$, $c^{4/5}\ge 4$ and $c^{6/35}\ge(32h^3)^{12/7}\ge 128$ of $c\ge c_0$ without further comment. We call an integer $x$ \emph{admissible} if $x\in[b-1,h(b-2)+1]$. For admissible $x$ define the tagged union
+\[
+A_b(\rho,x)=G^\wedge_{2,r_2}\sqcup\dots\sqcup G^\wedge_{h,r_h}\sqcup H^\wedge_{2,u_2}\sqcup\dots\sqcup H^\wedge_{h,u_h}\sqcup U_{f(\rho)}\sqcup Y_{x,b},
+\]
+where all sparse components lie in a common $\Z^n$ on pairwise disjoint sets of atoms, $U_f$ is a set of $f$ atoms, and $Y_{x,b}$ occupies one further coordinate. It has $2h$ components and $k=c+b$ points. Let $C(\rho)$ be the tagged union of the $2h-1$ sparse components. By Lemmas~\ref{lem:product}, \ref{lem:rG} and~\ref{lem:rH},
+\[
+\Fr_{C(\rho)}=(1+z)^{f(\rho)}\prod_{m=2}^h\Fr_{G^\wedge_{m,r_m}}\Fr_{H^\wedge_{m,u_m}},\qquad
+V_b(\rho,x):=|\res hA_b(\rho,x)|=\sum_{e=0}^h\gamma_e(x)\,\coef{h-e}\Fr_{C(\rho)},
+\]
+with $\gamma_e(x)=|\res eY_{x,b}|$ as in Lemma~\ref{lem:rdense}. Write $\beta_i=\binom ci$ for $i\ge 0$ and $\beta_i=0$ for $i<0$.
+
+\begin{lemma}\label{lem:rsteps}
+Let $2\le\mu\le h$.
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item If $r_\mu<R$, then replacing $r_\mu$ by $r_\mu+1$ changes $\Fr_{C(\rho)}$ into $\Fr_{C(\rho)}-z^\mu\Pi$, where $\coef0\Pi=1$ and $\tfrac12\beta_d\le\coef d\Pi\le\beta_d$ for $0\le d\le h-\mu$.
+\item If $u_\mu<S$, then replacing $u_\mu$ by $u_\mu+1$ changes $\Fr_{C(\rho)}$ into $\Fr_{C(\rho)}-z^\mu\Pi$, where $\tfrac12u_\mu\beta_d\le\coef d\Pi\le u_\mu\beta_d$ for $0\le d\le h-\mu$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Let $f=f(\rho)$, and let $\Omega$ be the product of the series of the sparse components other than the free one and the one being changed. Then $\Omega$ has nonnegative coefficients and constant term $1$, and by \eqref{eq:multiset-bound} $\Omega\cle(1+z)^{N}$, where $N$ is the total size of those components. Let $\Gamma_r$ and $\Theta_u$ be as in Lemma~\ref{lem:rdiff} with $m=\mu$, and put $n=f-2\mu$. The parameter after the step lies in the box, so its free size is at least $c-3h^2c^{9/10}$; hence $n\ge c-3h^2c^{9/10}-h$, and by \eqref{eq:rnonfree} and $c\ge 8h^2$,
+\begin{equation}\label{eq:cn}
+c-n\le\frac{c}{8h}+h\le\frac{c}{4h}.
+\end{equation}
+
+(a) The free size decreases by $2\mu$. By \eqref{eq:rGdiff} the decrease of $\Fr_{C(\rho)}$ is
+\[
+\bigl((1+z)^{2\mu}\Gamma_{r}-\Gamma_{r+1}\bigr)(1+z)^{f-2\mu}\Omega=z^\mu\Gamma_r(1+z)^{n}\Omega,
+\]
+with $r=r_\mu$. Thus $\Pi=\Gamma_r(1+z)^n\Omega$ has constant term $1$ and satisfies $(1+z)^n\cle\Pi\cle(1+z)^{2\mu r+n+N}=(1+z)^{c-2\mu}$, because $c=f+2\mu r+N$.
+
+(b) The free size decreases by $\mu$. The decrease of $\Fr_{C(\rho)}$ is $\bigl((1+z)^\mu\Theta_u-\Theta_{u+1}\bigr)(1+z)^{f-\mu}\Omega$ with $u=u_\mu$, so by \eqref{eq:rHbounds} it equals $z^\mu\Pi$ with
+\[
+u\,\varphi_\mu^{u-1}(1+z)^{f-\mu}\Omega\cle\Pi\cle u(1+z)^{\mu(u-1)+f-\mu+N}=u(1+z)^{c-2\mu},
+\]
+where now $c=f+\mu u+N$; in particular $u(1+z)^n\cle\Pi$.
+
+In both cases it remains to compare $\binom nd$ and $\binom{c-2\mu}{d}$ with $\beta_d$. Clearly $\binom{c-2\mu}d\le\beta_d$. For $d\le h$, using $c-j\ge c/2$ for $j<h$ and \eqref{eq:cn},
+\[
+\frac{\binom nd}{\binom cd}=\prod_{j=0}^{d-1}\Bigl(1-\frac{c-n}{c-j}\Bigr)\ge\Bigl(1-\frac1{2h}\Bigr)^d\ge 1-\frac d{2h}\ge\frac12.\qedhere
+\]
+\end{proof}
+
+For $2\le\mu\le h$ define the weights
+\[
+w_\mu=\beta_{h-\mu}+b\,\beta_{h-\mu-1},
+\]
+so that $w_h=1$ and $w_{h-1}=c+b=k$.
+
+\begin{lemma}\label{lem:rweights}
+For every parameter $\rho$ and every admissible $x$:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item a step $r_\mu\mapsto r_\mu+1$ decreases $V_b$ by an amount in $[\tfrac12w_\mu,2w_\mu]$, and by exactly $1$ if $\mu=h$;
+\item a step $u_\mu\mapsto u_\mu+1$ decreases $V_b$ by an amount in $[\tfrac12u_\mu w_\mu,2u_\mu w_\mu]$;
+\item if $b\ge 3$ and $x>b-1$, the step $x\mapsto x-1$ decreases $V_b$ by an amount in $[0,2\beta_{h-2}]$;
+\item $w_\mu\le 4c^{10/7}w_{\mu+1}$ for $2\le\mu\le h-1$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For $1\le i\le h$ we have $\beta_{i-1}/\beta_i=i/(c-i+1)\le 2h/c$, since $c\ge 2h$. Hence, for $c\ge 4h$ and $1\le D\le h$,
+\begin{equation}\label{eq:rtail}
+\sum_{e=2}^{D}\beta_{D-e}\le\beta_{D-1}\sum_{t\ge1}\Bigl(\frac{2h}c\Bigr)^t\le\frac{4h}c\,\beta_{D-1}.
+\end{equation}
+
+(a), (b). Let $D=h-\mu$. By Lemma~\ref{lem:rsteps} the step decreases $\coef{\mu+d}\Fr_{C(\rho)}$ by some $\delta_d$ with $\frac12\lambda\beta_d\le\delta_d\le\lambda\beta_d$, where $\lambda=1$ in (a) and $\lambda=u_\mu$ in (b), and leaves lower coefficients unchanged. The decrease of $V_b$ is $\sum_{e=0}^{D}\gamma_e\delta_{D-e}$. The terms $e=0,1$ have $\gamma_0=1$ and $\gamma_1=b$, which gives the lower bound $\frac12\lambda w_\mu$. By Lemma~\ref{lem:rdense}(b) and \eqref{eq:rtail}, the terms $e\ge 2$ contribute at most $\lambda\cdot 2hb\cdot\frac{4h}{c}\beta_{D-1}\le\lambda b\beta_{D-1}$, since $c\ge 8h^2$; this gives the upper bound $2\lambda w_\mu$. If $\mu=h$, only $e=0$ occurs and $\delta_0=\coef0\Pi=1$.
+
+(c) Only $\gamma_e$ with $e\ge 2$ change, each by $0$ or $1$ in the same direction (Lemma~\ref{lem:rdense}(a)), and $\coef{h-e}\Fr_{C(\rho)}\le\beta_{h-e}$ by \eqref{eq:multiset-bound}. Hence the decrease lies in $[0,\sum_{e=2}^h\beta_{h-e}]$, and $\sum_{e=2}^h\beta_{h-e}\le\beta_{h-2}\sum_{t\ge0}(2h/c)^t\le 2\beta_{h-2}$.
+
+(d) If $\mu=h-1$, then $w_\mu/w_{\mu+1}=k$. Since $c\ge\kappa\ge k^{7/10}/2$ we have $k\le(2c)^{10/7}\le 4c^{10/7}$. If $\mu\le h-2$, put $D=h-\mu\ge 2$; then $\beta_D\le c\beta_{D-1}$ and $\beta_{D-1}\le c\beta_{D-2}$, so $w_\mu\le c\,w_{\mu+1}$.
+\end{proof}
+
+\begin{lemma}\label{lem:rbox}
+For each $b\in[2,k-\kappa]$ the set $\mathcal V_b$ of values $V_b(\rho,x)$, over all parameters $\rho$ and all $x\in[b-1,h(b-2)+1]$, is an interval of integers.
+\end{lemma}
+
+\begin{proof}
+We apply Lemma~\ref{lem:interval} to the coordinates
+\[
+r_h,\ u_h-1,\ r_{h-1},\ u_{h-1}-1,\ \dots,\ r_2,\ u_2-1,\ h(b-2)+1-x,
+\]
+omitting the last one when $b=2$. By Lemma~\ref{lem:rweights}, $V_b$ is nonincreasing in each coordinate and the first coordinate has steps equal to $1$. By Lemma~\ref{lem:rweights}(a), the full range of $r_\mu$ decreases $V_b$ by at least $\frac12Rw_\mu\ge\frac14c^{9/10}w_\mu$, uniformly in the other coordinates. By (b), the full range of $u_\mu$ decreases it by at least $\frac12w_\mu\sum_{u=1}^{S-1}u=\frac14S(S-1)w_\mu\ge\frac1{16}c^{8/5}w_\mu$, since $S\ge c^{4/5}/2$ and $S-1\ge c^{4/5}/2$. We check that each one-step change is at most the full range of the preceding coordinate.
+\begin{itemize}[leftmargin=2em]
+\item $u_\mu$ after $r_\mu$: a step is at most $2(S-1)w_\mu\le 2c^{4/5}w_\mu\le\frac14c^{9/10}w_\mu$, because $c^{1/10}\ge 8$.
+\item $r_\mu$ after $u_{\mu+1}$ $(\mu\le h-1)$: a step is at most $2w_\mu\le 8c^{10/7}w_{\mu+1}\le\frac1{16}c^{8/5}w_{\mu+1}$, because $c^{6/35}\ge 128$.
+\item $x$ after $u_2$: a step is at most $2\beta_{h-2}\le 2w_2\le\frac1{16}c^{8/5}w_2$.
+\end{itemize}
+Lemma~\ref{lem:interval} now gives the claim.
+\end{proof}
+
+\begin{proposition}\label{prop:rlarge}
+Assume $\kappa\ge c_0$. Then $\Rr(h,k)$ contains the interval
+\[
+\Bigl[3hk^{1+7(h-1)/10},\ \binom kh\Bigr].
+\]
+Every element of it equals $V_b(\rho,x)$ for some $b\in[2,k-\kappa]$, some parameter $\rho$ and some admissible $x$.
+\end{proposition}
+
+\begin{proof}
+Let $\rho_0$ be the parameter with all $r_m=0$ and all $u_m=1$. Then $G^\wedge_{m,0}=\emptyset$, and $H^\wedge_{m,1}$ is linearly independent with $\Fr_{H^\wedge_{m,1}}=(1+z)^m$ by Lemma~\ref{lem:rH}; hence $\Fr_{C(\rho_0)}=(1+z)^c$. For $3\le b\le k-\kappa$, Lemma~\ref{lem:rdense}(c) gives
+\[
+V_b(\rho_0,h(b-2)+1)=\coef h(1+z)^{c+1}\Fr_{[0,b-2]}=V_{b-1}(\rho_0,b-2),
+\]
+since the box for $b-1$ has sparse size $c+1$ and $Y_{b-2,b-1}=[0,b-2]$. Thus $\mathcal V_b\cap\mathcal V_{b-1}\neq\emptyset$, and by Lemma~\ref{lem:rbox} the union $\mathcal V$ of all $\mathcal V_b$ is an interval. For $b=2$ we get $V_2(\rho_0,1)=\coef h(1+z)^{k-2}(1+z)^2=\binom kh$. For $b=k-\kappa$ we have $c=\kappa$, and by Lemma~\ref{lem:rdense}(b)
+\[
+V_b(\rho_0,x)\le c^h+bc^{h-1}+2hb\sum_{e=0}^{h-2}c^e\le c^h+(2h+1)bc^{h-1}\le 3hk^{1+7(h-1)/10},
+\]
+using $\binom ci\le c^i$, $\sum_{i=0}^{h-2}c^i\le 2c^{h-2}\le c^{h-1}$, $c\le k^{7/10}$ and $b\le k$. Since every element of $\mathcal V$ belongs to $\Rr(h,k)$ and is at most $\binom kh$, the interval $\mathcal V$ contains the stated interval.
+\end{proof}
+
+\subsection{Integer models}
+
+\begin{lemma}\label{lem:rmodel}
+Let $k\ge 2$, $n\le k$ and $s\le 2h$, and let $A\subset\Z^n\times\Z\times\Z^s$ be a $k$-element set each of whose points $(y,w,\tau)$ satisfies $\|y\|_1\le 2h-1$, $w\in[0,hk]$ and $\tau\in\{0,1\}^s$. Then there is a Freiman isomorphism of order $h$ from $A$ onto a subset of $[0,k^{E_h}]$.
+\end{lemma}
+
+\begin{proof}
+Adding zero coordinates we may assume $s=2h$. Let $\Phi=\mu_{L_0}\times\mathrm{id}\times\mathrm{id}$, a linear map into $\Z^{D_0}$. If two sums of $q\le h$ points of $A$ have equal images, their $\Z\times\Z^s$ parts agree and their $\Z^n$ parts differ by a vector of $\ell^1$-norm at most $2h(2h-1)<L_0$, which has fewer than $L_0+1$ nonzero coordinates; by Lemma~\ref{lem:moment}(a) the sums agree. Hence $\Phi$ is a Freiman isomorphism of order $h$ on $A$. Every coordinate of $\Phi(A)$ has absolute value at most $\max\{(2h-1)n^{L_0},hk\}\le a_hk^{L_0}$, where $a_h=(\sigma_h-1)/2=2h(2h+2)^{L_0}+h$. Translating by the vector with all coordinates $a_hk^{L_0}$, which is a Freiman isomorphism of every order, we obtain a subset of $[0,M_0]^{D_0}$ with $M_0=\sigma_hk^{L_0}$. With $Q=hM_0+1\le(h\sigma_h+1)k^{L_0}$, Lemma~\ref{lem:radix} maps it into
+\[
+[0,D_0M_0Q^{D_0-1}]\subseteq[0,\pi_hk^{L_0D_0}]\subseteq[0,k^{E_h}],
+\]
+because $\pi_h\le 2^{\lceil\log_2\pi_h\rceil}\le k^{\lceil\log_2\pi_h\rceil}$.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:restricted}}
+
+Let $h\ge 2$ and $k\ge(2h)^{80}$. By \eqref{eq:trivial} it suffices to realize every element of $[h(k-h)+1,\binom kh]$ by a $k$-element subset of $[0,k^{E_h}]$.
+
+\emph{Hypotheses of Proposition~\ref{prop:rlarge}.} We have $\kappa\ge k^{7/10}-1\ge k^{7/10}/2\ge(2h)^{56}/2=2^{55}h^{56}\ge 2^{50}h^{30}=c_0$.
+
+\emph{Hypotheses of Proposition~\ref{prop:rsmall}.} Since $64\ell_hh\le 128h^2\le(2h)^7$, we have $\varepsilon_h\ge(64\ell_hh)^{-h}\ge(2h)^{-7h}$ and $k-1\ge k/2\ge(2h)^{79}\ge 64\ell_hh$. Moreover $\varepsilon_h(k-1)^{h-1}\ge(2h)^{72h-79}\ge 2$, so $d_{\max}\ge 2(k-1)\ge k-2$.
+
+\emph{Overlap.} Since $(k-1)^h\ge k^h(1-h/k)\ge k^h/2$, the right end of the interval in Proposition~\ref{prop:rsmall} is at least
+\[
+h\bigl(\varepsilon_h(k-1)^h-1\bigr)+h-(h-1)^2+1\ge\tfrac12h\varepsilon_hk^h-h^2 .
+\]
+This is at least $3hk^{1+7(h-1)/10}$ provided $3hk^{1+7(h-1)/10}\le\frac14h\varepsilon_hk^h$ and $h^2\le\frac14h\varepsilon_hk^h$. The second inequality is clear. The first is equivalent to $k^{3(h-1)/10}\ge 12/\varepsilon_h$, and indeed $k^{3(h-1)/10}\ge(2h)^{24(h-1)}$ while $12/\varepsilon_h\le 12(2h)^{7h}\le(2h)^{7h+4}$, and $24(h-1)\ge 7h+4$ for $h\ge 2$.
+
+Propositions~\ref{prop:rsmall} and~\ref{prop:rlarge} therefore realize every element of $[h(k-h)+1,\binom kh]$. The witnesses of Proposition~\ref{prop:rsmall} lie in $[0,h+d_{\max}]\subseteq[0,k^h]\subseteq[0,k^{E_h}]$, since $\varepsilon_h<1$. The witnesses $A_b(\rho,x)$ of Proposition~\ref{prop:rlarge} use at most $c\le k$ atoms: a linear block uses $2m-1$ atoms for $2m$ points, $H^\wedge_{m,u}$ uses $(m-1)u+1\le mu$ atoms, and $U_f$ uses $f$. Every sparse point has $\ell^1$-norm at most $2h-1$, the dense coordinate lies in $[0,h(b-2)+1]\subseteq[0,hk]$, and there are $2h$ tags. Lemma~\ref{lem:rmodel} gives a $k$-element subset of $[0,k^{E_h}]$ with the same restricted $h$-fold sumset size. \qed
+
+\section{Ordinary sums}\label{sec:ordinary}
+
+\subsection{The excluded values}\label{sec:exclusion}
+We recall the theorem of Lev on which Rajagopal's exclusion of $\Delta_{h,k}$ rests.
+
+\begin{theorem}[{Lev \cite[Theorem~1]{Lev96}}]\label{thm:lev}
+Let $A\subseteq[0,d]$ be a set of $n\ge 2$ integers with $0,d\in A$ and $\gcd(A)=1$. Then for every $j\ge 2$
+\[
+|jA|\ge|(j-1)A|+\min\{d,\ j(n-2)+1\}.
+\]
+\end{theorem}
+
+\begin{proposition}[{Rajagopal \cite[Theorem~1.3]{Raj26}}]\label{prop:exclusion}
+For all positive integers $h,k$ we have $\R(h,k)\cap\Delta_{h,k}=\emptyset$.
+\end{proposition}
+
+\begin{proof}
+If $\min(h,k)\le 2$ then $\Delta_{h,k}=\emptyset$, so let $h,k\ge 3$. Let $A\subset\Z$ with $|A|=k$. Subtracting $\min A$ and dividing by the greatest common divisor of the elements does not change $|hA|$, so we may assume $A\subseteq[0,d]$, $0,d\in A$ and $\gcd(A)=1$; then $d\ge k-1$.
+
+Suppose first $d\le 2k-3$. For $j\ge 2$ we have $j(k-2)+1\ge 2k-3\ge d$, so Theorem~\ref{thm:lev} applied for $j=2,\dots,h$ gives $|hA|\ge k+(h-1)d$. Let $0\le\ell\le\min(h,k)-3$ and assume $|hA|\ge M_{h,k}+\ell h+1=h(k-1+\ell)+2$. Since $hA\subseteq[0,hd]$, this forces $hd+1\ge h(k-1+\ell)+2$, that is $d\ge k+\ell$. Therefore
+\[
+|hA|\ge k+(h-1)(k+\ell)=M_{h,k}+\ell h+(h-1-\ell),
+\]
+which exceeds the largest element $M_{h,k}+\ell h+(h-2-\ell)$ of the $\ell$-th interval of $\Delta_{h,k}$. Hence $|hA|$ lies in none of these intervals.
+
+Suppose next $d\ge 2k-3$. For $j\ge 2$ both $d$ and $j(k-2)+1$ are at least $2k-3$, so $|hA|\ge k+(h-1)(2k-3)=2hk-3h-k+3$. Every element of $\Delta_{h,k}$ is at most $M_{h,k}+\ell(h-1)+h-2$ with $\ell\le k-3$, hence at most $2hk-3h-k+2$.
+\end{proof}
+
+\begin{remark}
+The argument above is the proof of \cite[Theorem~1.3]{Raj26}. In the printed version of Case~1 of that proof the two occurrences of $k-\ell$ should read $k+\ell$; with this correction the argument is as above.
+\end{remark}
+
+\subsection{Carry blocks}
+The following sets are the polynomial-size replacements, introduced in \cite[Section~3]{PC}, for the geometric progressions $S_{m,\ell}$ and $T_{m,\ell}$ of \cite[Definitions~4.14 and~4.16]{Raj26}. For $3\le m\le h$ and $r\ge 0$, and for $2\le m\le h-1$ and $u\ge 1$, let $\alpha_1,\alpha_2,\dots$ be atoms and put
+\[
+G_{m,r}=\{0\}\cup\{\alpha_i,\ m\alpha_i: 1\le i\le r\},\qquad H_{m,u}=\{\alpha_i,\ m\alpha_i: 1\le i\le u\}.
+\]
+Thus $|G_{m,r}|=2r+1$ and $|H_{m,u}|=2u$; the set $G_{m,0}=\{0\}$ is a single point and $H_{m,1}=\{\alpha_1,m\alpha_1\}$ consists of two distinct points. For $m\ge 2$ write $J_m(z)=1+z+\dots+z^{m-1}$.
+
+For a finite set $X$ we write $\widetilde F_X(z)=\sum_{q\ge0}|qX|\,z^q$ for the untruncated series, so that $F_X\equiv\widetilde F_X\pmod{z^{h+1}}$.
+
+\begin{lemma}[{\cite[Lemmas~3.3 and~3.4]{PC}}]\label{lem:oGH}
+In the ring of formal power series,
+\[
+\widetilde F_{G_{m,r}}=\frac{(1-z^m)^r}{(1-z)^{2r+1}},\qquad \widetilde F_{H_{m,u}}=\frac{(1-z^m)^u-z^{m-1}(1-z)^u}{(1-z)^{2u}(1-z^{m-1})}.
+\]
+Consequently $F_{G_{m,r}}$ and $F_{H_{m,u}}$ are congruent to these series modulo $z^{h+1}$. In particular $F_{G_{m,0}}=(1-z)^{-1}$ and $F_{H_{m,1}}=(1-z)^{-2}$.
+\end{lemma}
+
+\begin{proof}
+The argument does not use $q\le h$. A sum of elements of $G_{m,r}$ or $H_{m,u}$ is a vector $\xi\in\N_0^r$ (or $\N_0^u$) of atom coefficients. Write $\xi_i=md_i+e_i$ with $0\le e_i<m$, and $D=\sum d_i$, $E=\sum e_i$. A representation of $\xi_i$ using $a$ copies of $\alpha_i$ and $b'$ copies of $m\alpha_i$ has $b'\le d_i$ and length $\xi_i-(m-1)b'$. For $G_{m,r}$ the least length of a representation of $\xi$ is $D+E$, and the point $0$ pads it to every larger length, so
+\[
+\widetilde F_{G_{m,r}}=\frac1{1-z}\sum_\xi z^{D+E}=\frac1{1-z}\Bigl(\frac{1-z^m}{1-z}\cdot\frac1{1-z}\Bigr)^r.
+\]
+For $H_{m,u}$ the total number of copies of the points $m\alpha_i$ can be any integer in $[0,D]$, so $\xi$ occurs exactly in the lengths $D+E+(m-1)t$, $0\le t\le D$. Hence
+\[
+\widetilde F_{H_{m,u}}=\sum_\xi z^{D+E}\,\frac{1-z^{(m-1)(D+1)}}{1-z^{m-1}}=\frac{1}{1-z^{m-1}}\Bigl(\Bigl(\frac{1-z^m}{(1-z)^2}\Bigr)^u-z^{m-1}\Bigl(\frac{1}{1-z}\Bigr)^u\Bigr),
+\]
+where we used $\sum_\xi z^{mD+E}=(1-z)^{-u}$. This is the stated formula. For $u=1$ the numerator equals $1-z^{m-1}$, which gives $(1-z)^{-2}$.
+\end{proof}
+
+\begin{lemma}\label{lem:odiff}
+Let $m\ge 2$, $r\ge 0$ and $u\ge 1$, and let $\Gamma_r$ and $\Theta_u$ denote the right-hand sides of the two formulas in Lemma~\ref{lem:oGH}. Then
+\begin{align}
+(1-z)^{-2}\Gamma_r-\Gamma_{r+1}&=z^m(1-z)^{-2}\Gamma_r,\label{eq:oGdiff}\\
+(1-z)^{-2}\Theta_u-\Theta_{u+1}&=z^{m+1}(1-z)^{-u-3}\sum_{j=0}^{u-1}J_m^j,\label{eq:oHdiff}
+\end{align}
+and
+\begin{equation}\label{eq:oHbounds}
+u\,z^{m+1}\cle(1-z)^{-2}\Theta_u-\Theta_{u+1}\cle u\,z^{m+1}(1-z)^{-2u-2}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Identity \eqref{eq:oGdiff} is immediate from Lemma~\ref{lem:oGH}. For \eqref{eq:oHdiff}, both terms on the left have denominator $(1-z)^{2u+2}(1-z^{m-1})$, and the difference of numerators is
+\[
+z^m\bigl((1-z^m)^u-(1-z)^u\bigr)=z^m(1-z)^u(J_m^u-1)=z^m(1-z)^u\cdot\frac{z(1-z^{m-1})}{1-z}\sum_{j=0}^{u-1}J_m^j,
+\]
+because $1-z^m=(1-z)J_m$ and $J_m-1=z(1-z^{m-1})/(1-z)$. Dividing gives \eqref{eq:oHdiff}. Every $J_m^j$ has nonnegative coefficients and constant term $1$, and $J_m^j\cle(1-z)^{-j}\cle(1-z)^{-(u-1)}$ for $j\le u-1$. Hence $u\cle\sum_{j<u}J_m^j\cle u(1-z)^{-(u-1)}$, which gives \eqref{eq:oHbounds}.
+\end{proof}
+
+\subsection{Dense sets}
+For $b\ge 3$ put $L=b-2\ge 1$, and for $x\in[L+1,hL+1]$ let $Y_{x,b}=[0,L]\cup\{x\}$ as in Section~\ref{sec:restricted}. These are the sets $B_{j,b}$ of \cite[Definition~4.12]{Raj26}, with $x=h(b-2)+2-j$.
+
+\begin{lemma}\label{lem:odense}
+For $1\le q\le h$,
+\[
+|qY_{x,b}|=1+\sum_{i=1}^q\min\{x,\ iL+1\}.
+\]
+Consequently, with $\gamma_q(x)=|qY_{x,b}|$:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $\gamma_0=1$, $\gamma_1=b$, and $0\le\gamma_q(x)-\gamma_q(x-1)\le q$ for $L+1<x\le hL+1$;
+\item $\gamma_q(x)\le h^2b$ for $1\le q\le h$;
+\item $F_{Y_{hL+1,b}}=(1-z)^{-1}F_{[0,b-2]}$, and $F_{Y_{h+1,3}}=(1-z)^{-3}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+We have $qY_{x,b}=\bigcup_{t=0}^qI_t$ with $I_t=[tx,\ tx+(q-t)L]$. Since $x>L$, both endpoints of $I_t$ increase with $t$. Hence every element of $I_t$ smaller than $\max I_{t-1}$ lies in $I_{t-1}$, and $I_t$ contributes $\min\{\max I_t-\max I_{t-1},|I_t|\}=\min\{x-L,(q-t)L+1\}$ new elements. Therefore
+\[
+|qY_{x,b}|=qL+1+\sum_{t=1}^q\min\{x-L,(q-t)L+1\}=1+\sum_{i=1}^q\min\{x,iL+1\},
+\]
+where $i=q-t+1$. Each summand decreases by $0$ or $1$ when $x$ decreases by $1$, which gives (a); $\gamma_1=1+\min\{x,L+1\}=b$. For (b), $\gamma_q\le 1+q(hL+1)\le h^2b$. For (c), if $x=hL+1$ then $\min\{x,iL+1\}=iL+1=|i[0,L]|$ for $i\le q\le h$, so $\gamma_q=\sum_{i=0}^q|i[0,L]|$. For $b=3$ we have $F_{[0,1]}=(1-z)^{-2}$.
+\end{proof}
+
+\subsection{Small cardinalities}
+The following is Rajagopal's construction \cite[proof of Proposition~4.1]{Raj26}, combined with Lemma~\ref{lem:digit}.
+
+\begin{proposition}\label{prop:osmall}
+Let $h\ge 2$ and $k\ge h$, and suppose that $k-1\ge 8h$, $\lfloor(k-1)/2\rfloor\ge h^2+1$ and
+\[
+D_{\max}=\bigl\lfloor(8h)^{-h}(k-1)^h\bigr\rfloor\ge k+h-3.
+\]
+Then $[M_{h,k},\ hD_{\max}+1]\setminus\Delta_{h,k}\subseteq\R(h,k)$, and every element of this set equals $|hA|$ for some $k$-element set $A\subseteq[0,h+D_{\max}]$.
+\end{proposition}
+
+\begin{proof}
+Let $d\in[k-2,D_{\max}]$. Lemma~\ref{lem:digit}, applied with $n=k-1$ and $D=d$, gives a $(k-1)$-element set $B\subseteq[0,d]$ with $hB=[0,hd]$ and $[0,h^2]\subseteq B$. For $1\le i\le h$ let $A=\{0\}\cup(i+B)$. A sum of $h$ elements of $A$ with exactly $j$ summands from $i+B$ lies in $ji+jB\subseteq[ji,j(i+d)]$, so $hA\subseteq\{0\}\cup[i,h(i+d)]$. Conversely $hA$ contains $0$, the interval $i+[0,(h-1)i]\subseteq i+B$, and $hi+hB=[hi,h(i+d)]$. Hence
+\[
+hA=\{0\}\cup[i,h(i+d)],\qquad |hA|=h(i+d)-i+2.
+\]
+Write $i+d=k+\ell$. Then $|hA|=M_{h,k}+h\ell+(h+1-i)$. For $-1\le\ell\le D_{\max}-k$ the admissible $i$ are exactly $1\le i\le\min\{h,\ell+2\}$, since then $d=k+\ell-i$ lies in $[k-2,D_{\max}]$. These produce the values
+\[
+M_{h,k}+h\ell+\bigl[\max\{1,h-\ell-1\},\ h\bigr].
+\]
+For $\ell=-1$ this is $\{M_{h,k}\}$; for $0\le\ell\le h-3$ it is the $\ell$-th block of $h$ consecutive integers above $M_{h,k}$ with the $\ell$-th interval of $\Delta_{h,k}$ removed; and for $\ell\ge h-2$ it is the full block. Since $D_{\max}-k\ge h-3$, the union over $\ell$ is $[M_{h,k},M_{h,k}+h(D_{\max}-k+1)]\setminus\Delta_{h,k}$, and $M_{h,k}+h(D_{\max}-k+1)=hD_{\max}+1$.
+\end{proof}
+
+\subsection{Large cardinalities}\label{sec:olarge}
+Let $h\ge 3$, define $\kappa$ and $c_0$ as in Section~\ref{sec:rlarge}, and assume $\kappa\ge c_0$. For $b\in[3,k-\kappa]$ let $c=k-b$, $R=\lfloor c^{9/10}\rfloor$ and $S=\lfloor c^{4/5}\rfloor$. A parameter is now a vector $\rho=(r_3,\dots,r_h,u_2,\dots,u_{h-1})$ with $0\le r_m\le R$ and $1\le u_m\le S$. Put
+\[
+\nu(\rho)=\sum_{m=3}^h(2r_m+1)+\sum_{m=2}^{h-1}2u_m\le(h-2)(2R+1+2S)\le 5hc^{9/10},\qquad f(\rho)=c-\nu(\rho).
+\]
+Since $c^{1/10}\ge 20h^2$, we have $5hc^{9/10}\le c/(4h)$, so $f(\rho)\ge 3c/4$. As before, $x$ is called admissible if $x\in[b-1,h(b-2)+1]$. For admissible $x$ let
+\[
+A_b(\rho,x)=G_{3,r_3}\sqcup\dots\sqcup G_{h,r_h}\sqcup H_{2,u_2}\sqcup\dots\sqcup H_{h-1,u_{h-1}}\sqcup U_{f(\rho)}\sqcup Y_{x,b},
+\]
+with the sparse components on pairwise disjoint sets of atoms and $Y_{x,b}$ on its own coordinate. It has $2h-2$ components and $k$ points. Let $C(\rho)$ be the tagged union of the sparse components, so that
+\[
+F_{C(\rho)}=(1-z)^{-f(\rho)}\prod_{m=3}^hF_{G_{m,r_m}}\prod_{m=2}^{h-1}F_{H_{m,u_m}},\qquad V_b(\rho,x):=|hA_b(\rho,x)|=\sum_{e=0}^h\gamma_e(x)\coef{h-e}F_{C(\rho)}.
+\]
+Now write $\beta_i=\binom{c+i-1}{i}$ for $i\ge0$ and $\beta_i=0$ for $i<0$. A step in $r_\mu$ $(3\le\mu\le h)$ has \emph{leading degree} $\mu$, and a step in $u_\mu$ $(2\le\mu\le h-1)$ has leading degree $\mu+1$.
+
+\begin{lemma}\label{lem:osteps}
+Consider a step of leading degree $j$ that stays in the box. It changes $F_{C(\rho)}$ into $F_{C(\rho)}-z^j\Pi$, where $\frac34\lambda\beta_d\le\coef d\Pi\le\lambda\beta_d$ for $0\le d\le h-j$, with $\lambda=1$ for a step in $r_\mu$ and $\lambda=u_\mu$ for a step in $u_\mu$. For a step in $r_\mu$ moreover $\coef0\Pi=1$.
+\end{lemma}
+
+\begin{proof}
+In both cases the free size decreases from $f=f(\rho)$ to $n=f-2$, and $n\ge c-5hc^{9/10}\ge c-c/(4h)$. Let $\Omega$ be the product of the series of the sparse components other than the free one and the one being changed, and $N$ their total size; then $\Omega$ has constant term $1$ and $\Omega\cle(1-z)^{-N}$.
+
+For a step $r\mapsto r+1$ in $G_{\mu,r}$, \eqref{eq:oGdiff} shows that the decrease is $z^\mu\Pi$ with $\Pi=\Gamma_r(1-z)^{-f}\Omega$. Thus $\coef0\Pi=1$, $(1-z)^{-n}\cle\Pi$, and $\Pi\cle(1-z)^{-(2r+1)-f-N}=(1-z)^{-c}$. For a step $u\mapsto u+1$ in $H_{\mu,u}$, \eqref{eq:oHdiff} and \eqref{eq:oHbounds} show that the decrease is $z^{\mu+1}\Pi$ with
+\[
+u(1-z)^{-n}\cle\Pi\cle u(1-z)^{-(2u+2)-n-N}=u(1-z)^{-c}.
+\]
+Finally $\coef d(1-z)^{-c}=\beta_d$, and for $d\le h$
+\[
+\frac{\binom{n+d-1}{d}}{\beta_d}=\prod_{a=0}^{d-1}\frac{n+a}{c+a}\ge\Bigl(\frac nc\Bigr)^d\ge\Bigl(1-\frac1{4h}\Bigr)^d\ge\frac34.\qedhere
+\]
+\end{proof}
+
+For $3\le j\le h$ put $w_j=\beta_{h-j}+b\beta_{h-j-1}$; thus $w_h=1$ and $w_{h-1}=c+b=k$.
+
+\begin{lemma}\label{lem:oweights}
+For every parameter $\rho$ and every admissible $x$:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item a step of leading degree $j$ with factor $\lambda$ as in Lemma~\ref{lem:osteps} decreases $V_b$ by an amount in $[\frac12\lambda w_j,2\lambda w_j]$, and the step in $r_h$ decreases it by exactly $1$;
+\item if $x>b-1$, the step $x\mapsto x-1$ decreases $V_b$ by an amount in $[0,2h\beta_{h-2}]$;
+\item $w_{j-1}\le 4c^{10/7}w_j$ for $4\le j\le h$, and $\beta_{h-2}\le 2c\,\beta_{h-3}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For $1\le i\le h$ we have $\beta_{i-1}/\beta_i=i/(c+i-1)\le h/c$, hence for $1\le D\le h$
+\begin{equation}\label{eq:otail}
+\sum_{e=2}^D\beta_{D-e}\le\frac{2h}{c}\beta_{D-1}.
+\end{equation}
+(a) Let $D=h-j$. The decrease of $V_b$ is $\sum_{e=0}^D\gamma_e\delta_{D-e}$, where $\delta_d=\coef d\Pi$. The terms $e=0,1$ give at least $\frac34\lambda w_j$ and at most $\lambda w_j$. By Lemma~\ref{lem:odense}(b) and \eqref{eq:otail} the terms $e\ge2$ give at most $\lambda h^2b\cdot\frac{2h}c\beta_{D-1}\le\lambda b\beta_{D-1}$, since $c\ge 2h^3$. For the step in $r_h$ only $e=0$ occurs and $\delta_0=1$.
+
+(b) By Lemma~\ref{lem:odense}(a) only $\gamma_e$ with $e\ge 2$ change, each by at most $h$, and $\coef{h-e}F_{C(\rho)}\le\beta_{h-e}$. The decrease is therefore at most $h\sum_{e=2}^h\beta_{h-e}\le h\beta_{h-2}(1+2h/c)\le 2h\beta_{h-2}$.
+
+(c) For $j=h$ we have $w_{h-1}/w_h=k\le(2c)^{10/7}\le 4c^{10/7}$, since $c\ge\kappa\ge k^{7/10}/2$. For $j\le h-1$ let $D=h-j\ge1$; then $\beta_{D+1}\le(c+h)\beta_D\le 2c\beta_D$ and likewise $\beta_D\le 2c\beta_{D-1}$, so $w_{j-1}\le 2cw_j$. Finally $\beta_{h-2}/\beta_{h-3}=(c+h-3)/(h-2)\le 2c$.
+\end{proof}
+
+\begin{lemma}\label{lem:obox}
+For each $b\in[3,k-\kappa]$ the set $\mathcal V_b$ of values $V_b(\rho,x)$ is an interval of integers.
+\end{lemma}
+
+\begin{proof}
+We apply Lemma~\ref{lem:interval} to the coordinates
+\[
+r_h,\ u_{h-1}-1,\ r_{h-1},\ u_{h-2}-1,\ \dots,\ r_3,\ u_2-1,\ h(b-2)+1-x .
+\]
+Thus the coordinates come in pairs of equal leading degree $j=h,h-1,\dots,3$, followed by the dense coordinate. By Lemma~\ref{lem:oweights}, $V_b$ is nonincreasing in each coordinate, and the first coordinate has unit steps. The full range of $r_\mu$ decreases $V_b$ by at least $\frac12Rw_\mu\ge\frac14c^{9/10}w_\mu$, and the full range of $u_\mu$ by at least $\frac12w_{\mu+1}\sum_{u=1}^{S-1}u\ge\frac1{16}c^{8/5}w_{\mu+1}$, uniformly in the other coordinates.
+\begin{itemize}[leftmargin=2em]
+\item $u_{j-1}$ after $r_j$: a step is at most $2(S-1)w_j\le 2c^{4/5}w_j\le\frac14c^{9/10}w_j$.
+\item $r_{j-1}$ after $u_{j-1}$ $(4\le j\le h)$: a step is at most $2w_{j-1}\le 8c^{10/7}w_j\le\frac1{16}c^{8/5}w_j$.
+\item $x$ after $u_2$: a step is at most $2h\beta_{h-2}\le 4hc\beta_{h-3}\le 4hc\,w_3\le\frac1{16}c^{8/5}w_3$, because $c^{3/5}\ge 64h$.
+\end{itemize}
+Here we used $c^{1/10}\ge 8$, $c^{6/35}\ge128$ and $c^{3/5}\ge(32h^3)^6\ge 64h$. Lemma~\ref{lem:interval} gives the claim.
+\end{proof}
+
+\begin{proposition}\label{prop:olarge}
+Let $h\ge 3$ and assume $\kappa\ge c_0$. Then $\R(h,k)$ contains the interval
+\[
+\Bigl[6hk^{1+7(h-1)/10},\ \binom{h+k-1}{h}\Bigr],
+\]
+and every element of it equals $V_b(\rho,x)$ for some $b\in[3,k-\kappa]$, some parameter $\rho$ and some admissible $x$.
+\end{proposition}
+
+\begin{proof}
+Let $\rho_0$ have all $r_m=0$ and all $u_m=1$. By Lemma~\ref{lem:oGH}, $F_{C(\rho_0)}=(1-z)^{-c}$. For $4\le b\le k-\kappa$, Lemma~\ref{lem:odense}(c) gives
+\[
+V_b(\rho_0,h(b-2)+1)=\coef h(1-z)^{-(c+1)}F_{[0,b-2]}=V_{b-1}(\rho_0,b-2),
+\]
+since $Y_{b-2,b-1}=[0,b-2]$ and the box for $b-1$ has sparse size $c+1$. By Lemma~\ref{lem:obox} the union $\mathcal V$ of all $\mathcal V_b$ is an interval. For $b=3$ we get $V_3(\rho_0,h+1)=\coef h(1-z)^{-(k-3)}(1-z)^{-3}=\binom{h+k-1}{h}$. For $b=k-\kappa$, so that $c=\kappa$, take $x=b-1$, so that $Y_{x,b}=[0,b-1]$ and $\gamma_e=e(b-1)+1\le hb$ for $e\ge 1$. Since $c\ge h^2$,
+\[
+\beta_i=\frac{c^i}{i!}\prod_{a=0}^{i-1}\Bigl(1+\frac ac\Bigr)\le c^ie^{h^2/(2c)}\le 2c^i\qquad(0\le i\le h),
+\]
+and therefore
+\[
+V_b(\rho_0,b-1)\le 2c^h+hb\sum_{i=0}^{h-1}2c^i\le 2c^h+4hbc^{h-1}\le 6hk^{1+7(h-1)/10}.
+\]
+The interval $\mathcal V$ is contained in $\R(h,k)$ and its largest element is $\binom{h+k-1}h$, so it contains the stated interval.
+\end{proof}
+
+\subsection{Integer models}
+
+\begin{lemma}\label{lem:omodel}
+Let $k\ge h^2+2h+2$, $n\le k$ and $s\le 2h$, and let $A\subset\N_0^n\times\Z\times\Z^s$ be a $k$-element set each of whose points $(y,w,\tau)$ satisfies $\|y\|_1\le h$, $w\in[0,hk]$ and $\tau\in\{0,1\}^s$. Then there is a Freiman isomorphism of order $h$ from $A$ onto a subset of $[0,k^{F_h}]$.
+\end{lemma}
+
+\begin{proof}
+Let $\Phi=\mu_{h^2}\times\mathrm{id}\times\mathrm{id}$, with values in $\Z^{\mathcal D}$, $\mathcal D=h^2+2+s\le h^2+2h+2$. The $\N_0^n$-parts of two sums of $q\le h$ points of $A$ have nonnegative coordinates with total at most $h^2$, so by Lemma~\ref{lem:moment}(b) the map $\Phi$ is injective on such sums; it is therefore a Freiman isomorphism of order $h$ on $A$. All coordinates of $\Phi(A)$ lie in $[0,M_0]$ with $M_0=hk^{h^2}$. Let $Q=hM_0+1$. Since $k\ge h^2+2h+2\ge 2h$, we have $k^2\ge 2h^2$, hence $Q\le 2h^2k^{h^2}\le k^{h^2+2}$; moreover $M_0\le k^{h^2+1}$ and $\mathcal D\le k$. By Lemma~\ref{lem:radix} we obtain a subset of
+\[
+[0,\mathcal DM_0Q^{\mathcal D-1}]\subseteq[0,k^{1+(h^2+1)+(h^2+2)(\mathcal D-1)}]=[0,k^{(h^2+2)\mathcal D}]\subseteq[0,k^{F_h}].\qedhere
+\]
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:ordinary}}
+Let $h\ge 2$ and $k\ge(2h)^{80}$. By \eqref{eq:trivial} and Proposition~\ref{prop:exclusion} it suffices to realize every element of $[M_{h,k},\binom{h+k-1}h]\setminus\Delta_{h,k}$ by a $k$-element subset of $[0,k^{F_h}]$.
+
+\emph{The case $h=2$.} Here $\Delta_{2,k}=\emptyset$ and the realization is known \cite{ES83}, \cite[Theorem~5]{Nat25}, with witnesses of size $O(k^2)$ in \cite{QC}. For completeness we give the standard argument in the present framework. Write $K_m=\binom{m+1}2$ and $\delta_m=\binom{m-1}2=K_m-(2m-1)$. Let $t\in[2k-1,K_k]$ and $D'=K_k-t\in[0,\delta_k]$, and let $m$ be the least positive integer with $D'\le\delta_m$. If $D'=0$, then $m=1$ and we put $B=\{0\}$. Otherwise $m\ge 3$, the integer $s'=\delta_m-D'$ satisfies $0\le s'\le\delta_m-\delta_{m-1}-1=m-3$, and we put $B=[0,m-2]\cup\{m-1+s'\}$. Then $2B=[0,2m-4]\cup[m-1+s',2m-3+s']\cup\{2m-2+2s'\}$, and since $m-1+s'\le 2m-4$ this gives $|2B|=2m-1+s'=K_m-D'$. In both cases let $A=B\sqcup U_{k-m}$, with $B$ on its own coordinate. By Lemma~\ref{lem:product},
+\[
+|2A|=|2B|+m(k-m)+K_{k-m}=K_k-D'=t.
+\]
+Lemma~\ref{lem:omodel} gives a $k$-element subset of $[0,k^{F_2}]$ with the same value.
+
+\emph{The case $h\ge 3$.} As in the proof of Theorem~\ref{thm:restricted}, $\kappa\ge c_0$, so Proposition~\ref{prop:olarge} applies. For Proposition~\ref{prop:osmall}, we have $k-1\ge(2h)^{79}$, which gives $k-1\ge 8h$ and $\lfloor(k-1)/2\rfloor\ge h^2+1$. Since $8h\le(2h)^3$, the number $\varepsilon'_h=(8h)^{-h}$ satisfies $\varepsilon'_h\ge(2h)^{-3h}$, and $\varepsilon'_h(k-1)^{h-1}\ge(2h)^{76h-79}\ge 2$. Hence $D_{\max}\ge 2(k-1)\ge k+h-3$. The right end of the interval in Proposition~\ref{prop:osmall} satisfies
+\[
+hD_{\max}+1\ge h\varepsilon'_h(k-1)^h-h\ge\tfrac12h\varepsilon'_hk^h-h,
+\]
+and this is at least $6hk^{1+7(h-1)/10}$ as soon as $k^{3(h-1)/10}\ge 24/\varepsilon'_h$ and $\varepsilon'_hk^h\ge 4$. The second condition is clear, and the first holds because $k^{3(h-1)/10}\ge(2h)^{24(h-1)}$, $24/\varepsilon'_h\le(2h)^{3h+5}$ and $24(h-1)\ge 3h+5$.
+
+Propositions~\ref{prop:osmall} and~\ref{prop:olarge} therefore realize every element of $[M_{h,k},\binom{h+k-1}h]\setminus\Delta_{h,k}$. The witnesses of Proposition~\ref{prop:osmall} lie in $[0,h+D_{\max}]\subseteq[0,k^h]$. The sets $A_b(\rho,x)$ use at most $c\le k$ atoms, each sparse point is $0$, an atom, or $m$ times an atom with $m\le h$, the dense coordinate lies in $[0,hk]$, and there are $2h-2$ tags. Lemma~\ref{lem:omodel} completes the proof. \qed
+
+\section{Remarks}\label{sec:remarks}
+
+\begin{enumerate}[label=\textup{(\arabic*)},leftmargin=2em]
+\item The witnesses depend on $h$, $k$, the target value and the type of sum. We do not address the joint behaviour of $|hA|$ and $|\res hA|$ for a single set $A$ \cite[Problem~18]{Nat25}, nor the sequences $(|A|,|2A|,\dots,|hA|)$.
+\item For large values the argument establishes existence through Lemma~\ref{lem:interval}; it does not give an efficient procedure that finds the parameters $(b,\rho,x)$ for a prescribed value.
+\item The threshold $(2h)^{80}$ is what the uniform estimates of Sections~\ref{sec:restricted} and~\ref{sec:ordinary} give with the exponents $9/10$, $4/5$ and $7/10$ of \cite[Section~4.3]{Raj26}, and with the filling constants of Lemmas~\ref{lem:digit} and~\ref{lem:rfill}. We have not attempted to reach the range $k>h$ conjectured in \cite[Conjecture~1.6]{Raj26}, or a restricted analogue; the regime in which $h$ is comparable with $k$ is not covered by the present method.
+\item The restricted theorem is stated for $k\ge(2h)^{80}$ only. For $k$ close to $h$ the restricted range has the symmetry $\Rr(h,k)=\Rr(k-h,k)$ \cite[Equation~(1)]{Nat25}, and we have not studied it.
+\end{enumerate}
+
+\section{Finite consistency checks}\label{sec:checks}
+
+The proofs above do not depend on computation. As a consistency check, the following statements were verified in exact integer and rational arithmetic. The Python script that performs these checks, together with a README file describing how to run it, is provided as supplementary material.
+\begin{enumerate}[label=\textup{(\arabic*)},leftmargin=2em]
+\item The series of Lemmas~\ref{lem:rG} and~\ref{lem:rH} agree through degree $8$ with the restricted sumset sizes of $G^\wedge_{m,r}$ and $H^\wedge_{m,u}$, computed by enumeration, for $2\le m\le 5$, $0\le r\le 2$ with $2mr\le 16$, and $1\le u\le 3$. For the same $m$ and $u$ the bounds \eqref{eq:rHbounds} hold through degree $8$.
+\item The series of Lemma~\ref{lem:oGH} agree through degree $8$ with the ordinary sumset sizes of $G_{m,r}$ and $H_{m,u}$, computed by enumeration, for $2\le m\le 5$ and $r=u\in\{1,2,3\}$, where $G_{2,r}$ is defined by the same formula as for $m\ge 3$. In the same range, identity \eqref{eq:oHdiff} and the upper bound in \eqref{eq:oHbounds} hold through degree $8$.
+\item Let $2\le h\le 8$ and $n\in\{8h,16h,32h,64h,128h\}$, put $D_1=\min\{\lfloor(n/(8h))^h\rfloor,2000\}$, and suppose $D_1\ge n-1$. For $D\in\{n-1,\lfloor(n-1+D_1)/2\rfloor,D_1\}$ the set $B$ constructed in the proof of Lemma~\ref{lem:digit} satisfies $hB=[0,hD]$ and $[0,\lfloor n/2\rfloor-1]\subseteq B$, and for $1\le i\le h$ the set $A=\{0\}\cup(i+B)$ satisfies $hA=\{0\}\cup[i,h(i+D)]$, as in the proof of Proposition~\ref{prop:osmall}.
+\item Lemma~\ref{lem:rdense}(a) holds for $2\le b\le 11$, and the formula of Lemma~\ref{lem:odense} holds for $3\le b\le 11$, in both cases with $h=8$, $q\le 8$ and every admissible $x$.
+\item For $2\le h\le 200$ and $k=(2h)^{80}$, with $c=\kappa$: the inequality $\kappa\ge c_0$; the estimate \eqref{eq:cn}; and, in a form at least as strong as needed, the inequalities in the proofs of Theorems~\ref{thm:restricted} and~\ref{thm:ordinary} that give $d_{\max}\ge k-2$, $D_{\max}\ge k+h-3$ and the overlap of the small and large ranges.
+\end{enumerate}
+
+\section*{Use of AI-assisted tools}
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{99}
+
+\bibitem{ES83}
+P.~Erd\H{o}s and E.~Szemer\'edi, \emph{On sums and products of integers}, in: Studies in Pure Mathematics, Birkh\"auser, Basel, 1983, 213--218.
+
+\bibitem{GR26}
+T.~Gowers and I.~Rajagopal, \emph{A recent experience with ChatGPT 5.5 Pro}, Gowers's Weblog, 8 May 2026, \url{https://gowers.wordpress.com/2026/05/08/a-recent-experience-with-chatgpt-5-5-pro/}.
+
+\bibitem{Lev96}
+V.~F.~Lev, \emph{Structure theorem for multiple addition and the Frobenius problem}, J. Number Theory \textbf{58} (1996), no.~1, 79--88.
+
+\bibitem{MMP25}
+D.~Manna, Mohan, and R.~K.~Pandey, \emph{Extended inverse results for restricted $h$-fold sumset in integers}, preprint (2025), arXiv:2505.07415v1.
+
+\bibitem{MP24}
+Mohan and R.~K.~Pandey, \emph{Extended inverse theorems for restricted sumset in integers}, Bull. Korean Math. Soc. \textbf{61} (2024), no.~5, 1339--1367.
+
+\bibitem{Nat25}
+M.~B.~Nathanson, \emph{Problems in additive number theory, VI: Sizes of sumsets}, Acta Math. Hungar. \textbf{176} (2025), 498--521; arXiv:2411.02365v5. Theorem and problem numbers refer to the arXiv version.
+
+\bibitem{Nat26}
+M.~B.~Nathanson, \emph{Compression and complexity for sumset sizes in additive number theory}, J. Number Theory \textbf{281} (2026), 321--343; arXiv:2505.20998v2.
+
+\bibitem{PC}
+\emph{Polynomial compression for fixed-fold sumset sizes}, public draft dated 29 April 2026, made available in \cite{GR26}.
+
+\bibitem{QC}
+\emph{Quadratic compression for possible ordinary and restricted sumset cardinalities}, public draft, made available in \cite{GR26}.
+
+\bibitem{Raj26}
+I.~Rajagopal, \emph{Possible sizes of sumsets}, Discrete Anal. \textbf{2026}:2, 24 pp.; arXiv:2510.23022v3.
+
+\bibitem{Sch26}
+V.~Schinina, \emph{On the sumset of sets of size $k$}, Integers \textbf{26} (2026), Paper No.~A31, 11 pp.
+
+\bibitem{TX21}
+M.~Tang and Y.~Xing, \emph{Some inverse results of sumsets}, Bull. Korean Math. Soc. \textbf{58} (2021), no.~2, 305--313.
+
+\bibitem{Tri08}
+A.~Tripathi, \emph{The postage stamp problem and arithmetic in base $r$}, Czechoslovak Math. J. \textbf{58} (2008), no.~4, 1097--1100.
+
+\end{thebibliography}
+
+\end{document}

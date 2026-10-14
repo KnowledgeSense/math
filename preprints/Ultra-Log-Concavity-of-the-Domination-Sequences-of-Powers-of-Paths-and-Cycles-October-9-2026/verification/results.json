@@ -1,0 +1,92 @@
+{
+  "graph_range": "0 <= n <= 16; 1 <= ell <= n+2; paths and cycles",
+  "graph_cases": 340,
+  "generalized_range": "1 <= v <= 10; 1 <= q <= 8; q <= m <= 12",
+  "generalized_cases": 680,
+  "restricted_composition_range": "1 <= n <= 50; 2 <= t <= 9",
+  "restricted_composition_cases": 400,
+  "checks": {
+    "direct_graph_vs_formula": 340,
+    "no_internal_zero": 1020,
+    "cycle_integrality": 1768,
+    "graph_ulc": 3200,
+    "generalized_family_vs_formula": 680,
+    "generalized_family_ulc": 3060,
+    "composition_bijection": 400,
+    "composition_ordinary_lc": 400,
+    "composition_normalized_lc": 9408
+  },
+  "assertions": 20276,
+  "examples": [
+    {
+      "n": 0,
+      "ell": 1,
+      "cycle": false,
+      "counts": [
+        1
+      ]
+    },
+    {
+      "n": 2,
+      "ell": 1,
+      "cycle": true,
+      "counts": [
+        0,
+        2,
+        1
+      ]
+    },
+    {
+      "n": 5,
+      "ell": 1,
+      "cycle": false,
+      "counts": [
+        0,
+        0,
+        3,
+        8,
+        5,
+        1
+      ]
+    },
+    {
+      "n": 8,
+      "ell": 1,
+      "cycle": true,
+      "counts": [
+        0,
+        0,
+        0,
+        8,
+        38,
+        48,
+        28,
+        8,
+        1
+      ]
+    },
+    {
+      "n": 12,
+      "ell": 2,
+      "cycle": false,
+      "counts": [
+        0,
+        0,
+        0,
+        18,
+        159,
+        462,
+        722,
+        714,
+        477,
+        218,
+        66,
+        12,
+        1
+      ]
+    }
+  ],
+  "seconds": 1.0148865999653935,
+  "verdict": "PASS",
+  "scope": "Finite diagnostics for counting identities, supports and coefficient inequalities."
+}

@@ -1,0 +1,12 @@
+import GenericValueSemigroups
+
+#print axioms GenericValueSemigroups.release_generic_value_theorem
+#print axioms GenericValueSemigroups.release_algebraically_independent_values
+#print axioms GenericValueSemigroups.greedy_numerical_semigroup
+#print axioms GenericValueSemigroups.genus_conductor_formula
+#print axioms GenericValueSemigroups.genus_and_minimal_generators
+#print axioms GenericValueSemigroups.generic_analytic_values_eq
+#print axioms GenericValueSemigroups.normalized_generic_tail_independent
+#print axioms GenericValueSemigroups.greedy_genus_asymptotic
+#print axioms GenericValueSemigroups.arithmetic_progression_genus_bounds
+#print axioms GenericValueSemigroups.even_arithmetic_progression_genus_bigO

@@ -1,0 +1,58 @@
+{
+  "exact_checks": {
+    "rational_vectors": 4178,
+    "AHO_splits": 2851,
+    "cuts": 4178,
+    "cyclic_rotations": 17072
+  },
+  "plevnik_slice_vectors": 3160,
+  "furuichi_cut_capacity": "13/15",
+  "numerical_examples": [
+    {
+      "p": [
+        "3/5",
+        "1/5",
+        "1/5"
+      ],
+      "q": [
+        "1/5",
+        "3/5",
+        "1/5"
+      ],
+      "dimension": 3,
+      "target": 10,
+      "cut_capacity": "4/5",
+      "theta": "4/5",
+      "edges": 0,
+      "h": "9/20",
+      "delta": "1/10",
+      "epsilon": "2.287342797542470303509691489356623630829e-61",
+      "eta": "8.196848941635535601734589993772752315229e-577",
+      "ratio": "36217.35322114129861702135380505685722214",
+      "proved_lower_bound": "11.78950808789922480634306957525676225197"
+    },
+    {
+      "p": [
+        "4/5",
+        "1/5"
+      ],
+      "q": [
+        "1/5",
+        "4/5"
+      ],
+      "dimension": 5,
+      "target": 100,
+      "cut_capacity": "9/10",
+      "theta": "2/5",
+      "edges": 1,
+      "h": "9/20",
+      "delta": "1/20",
+      "epsilon": "3.195822099333102931622500408412063324236e-118",
+      "eta": "6.216338543265851846663540512170644028482e-1117",
+      "ratio": "132493.8991401773885578348429620447238647",
+      "proved_lower_bound": "104.5617573079791279391266076153358659707"
+    }
+  ],
+  "numerical_precision_digits": 800,
+  "scope": "Finite illustrations of the analytic proof. No finite computation supplies the arbitrary-length theorem."
+}

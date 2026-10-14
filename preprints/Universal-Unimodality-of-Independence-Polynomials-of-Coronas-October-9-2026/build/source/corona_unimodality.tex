@@ -1,0 +1,373 @@
+\documentclass[11pt]{amsart}
+
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+\hyphenation{manuscript}
+\setlength{\emergencystretch}{1em}
+
+\newcommand{\cor}{\circ}
+\newcommand{\coef}[2]{[x^{#1}]\,#2}
+\newcommand{\Gam}{G_{a,m}}
+\DeclareMathOperator{\M}{M}
+\DeclareMathOperator{\Var}{Var}
+
+\begin{document}
+
+\title{Universal unimodality of independence polynomials of coronas}
+
+\author{Knowledge Sense}
+\address{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{9 October 2026}
+
+\subjclass[2020]{Primary 05C31; Secondary 05C69, 05C76, 05A20}
+
+\keywords{Independence polynomial, corona of graphs, unimodality, log-concavity, clique corona graph}
+
+\begin{abstract}
+The corona $G\cor H$ of two graphs is obtained from $G$ by attaching a copy of $H$ to each vertex $v$ of $G$ and joining $v$ to every vertex of its copy. Levit and Mandrescu proved that if $H$ is a complete graph with one edge removed, then the independence polynomial of $G\cor H$ is unimodal for every graph $G$. We show that these are the only such graphs $H$. For every other fixed $H$ we exhibit connected cographs $G$, namely joins of an edgeless graph with a perfect matching, for which the independence polynomial of $G\cor H$ is not unimodal. In particular, for every ${p\ge 1}$ there is a connected graph $G$ such that the independence polynomial of $G\cor K_p$ is not unimodal. For these base graphs the independence polynomial of $G\cor H$ is a sum of two products minus a third product whose coefficient sum is exponentially smaller. The sizes of the two sides of the join are chosen so that the two products have comparable coefficient sums, while the means of their normalized coefficient sequences differ by an amount growing linearly with the size of the base graph and their standard deviations grow only like its square root. A rescaled form of the same argument shows that no graph $H$ makes the independence polynomial of $G\cor H$ log-concave for every $G$.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+All graphs in this paper are finite and simple, and we admit the graph with no vertices. For a graph $F$ let $i_k(F)$ be the number of independent sets of $F$ with $k$ vertices, and let
+\[
+I(F;x)=\sum_{k\ge 0} i_k(F)\,x^k
+\]
+be its independence polynomial, introduced by Gutman and Harary \cite{GH83}. A sequence $a_0,a_1,\dots,a_n$ of real numbers is \emph{unimodal} if $a_0\le\dots\le a_t\ge a_{t+1}\ge\dots\ge a_n$ for some $t$, and \emph{log-concave} if $a_k^2\ge a_{k-1}a_{k+1}$ for $0<k<n$; a polynomial has either property if its coefficient sequence has it. Independence polynomials need not be unimodal: Alavi, Malde, Schwenk and Erd\H{o}s \cite{AMSE87} showed that the coefficients $i_1,\dots,i_{\alpha}$, where $\alpha$ is the independence number, can be ordered by size in any prescribed way. On the other hand, Chudnovsky and Seymour \cite{CS07} proved that all roots of $I(G;x)$ are real when $G$ is clawfree; in that case $I(G;x)$ is log-concave and hence unimodal.
+
+Given graphs $G$ and $H$, the \emph{corona} $G\cor H$ \cite{FH70} consists of $G$ together with one copy $H_v$ of $H$ for every vertex $v$ of $G$, where $v$ is joined to every vertex of $H_v$. The graph $H$ is called the attachment. Gutman's corona identity (Lemma~\ref{lem:corona} below) expresses $I(G\cor H;x)$ in terms of $I(G;x)$ and $I(H;x)$. Levit and Mandrescu \cite{LM13} proved that $I(G\cor H;x)$ is symmetric for every $G$ when $H\cong K_r-e$ is a complete graph on $r\ge 2$ vertices with one edge removed, and conjectured that no other attachment has this property \cite[Conjecture~3.1]{LM13}; they later confirmed the conjecture \cite[Theorem~4.5]{LM16}. They also proved that for $H\cong K_r-e$ the polynomial $I(G\cor H;x)$ is unimodal for every $G$ \cite[Theorem~2.9]{LM13}, \cite[Theorem~4.3]{LM16}. These results extend the case $H=2K_1=K_2-e$, in which symmetry was proved by Stevanovi\'c and unimodality by Mandrescu; see \cite{LM13}. Our main result shows that the graphs $K_r-e$ are also the only attachments with the unimodality property.
+
+\begin{theorem}\label{thm:main}
+Let $H$ be a finite simple graph. The following are equivalent.
+\begin{enumerate}
+\item[(i)] $I(G\cor H;x)$ is unimodal for every finite simple graph $G$.
+\item[(ii)] $I(G\cor H;x)$ is unimodal for every connected finite simple graph $G$.
+\item[(iii)] $H\cong K_r-e$ for some $r\ge 2$.
+\end{enumerate}
+Moreover, suppose that $H$ is not as in (iii), let $q$ be the number of independent sets of $H$, including the empty set, and put
+\[
+\rho_H=\frac{\log(1+2/q)}{\log(1+1/q)}\in(1,2).
+\]
+Then $I\bigl((E_{\lfloor\rho_H m\rfloor}\vee mK_2)\cor H;x\bigr)$ is not unimodal for all sufficiently large integers $m$.
+\end{theorem}
+
+Here $E_a$ is the edgeless graph on $a$ vertices, $mK_2$ is a perfect matching on $2m$ vertices, and $\vee$ denotes the join. The graphs $E_a\vee mK_2$ with $a,m\ge 1$ are connected cographs, that is, connected graphs without induced paths on four vertices. The graph $H$ may have no vertices; then $G\cor H=G$, and Theorem~\ref{thm:main} recovers the existence of connected graphs with nonunimodal independence polynomials. The implication from (iii) to (i) is the theorem of Levit and Mandrescu quoted above; the new content is the implication from (ii) to (iii).
+
+The same method excludes log-concavity for all attachments, including $K_r-e$.
+
+\begin{theorem}\label{thm:logconcave}
+For every finite simple graph $H$ there is a connected cograph $G$ such that $I(G\cor H;x)$ is not log-concave. One may take $G=E_a\vee mK_2$ for suitable $a,m\ge 1$.
+\end{theorem}
+
+For $H\cong K_r-e$ the polynomial $I(G\cor H;x)$ is therefore always symmetric and unimodal, but not always log-concave.
+
+\subsection*{Clique coronas}
+Coronas $G\cor K_p$ with a complete attachment are called clique corona graphs; their independence polynomials have been studied by Hoang, Levit, Mandrescu and Pham \cite{HLMP-Wp,HLMP-clique}, who have also studied coronas with the attachment $K_p\cup K_q$ \cite{HLMP-two}. For $p=1$, Levit and Mandrescu conjectured that $I(G\cor K_1;x)$ is unimodal for every graph $G$ \cite{LM03}; see also \cite[Section~4]{HLMP-clique}. Hoang, Levit, Mandrescu and Pham conjectured that $I(G\cor K_p;x)$ is unimodal for every graph $G$ and every $p\ge 1$ \cite[Conjecture~6.1]{HLMP-clique}, and proved it under hypotheses relating $p$ to $G$, for instance when $(p+1)(p+2)\ge n(G)+1$ \cite[Theorem~4.6]{HLMP-clique}. In \cite[Corollary~3.10]{HLMP-Wp} they showed that $I(G\cor K_p;x)$ is log-concave when $p\ge n(G)^2/(4(n(G)+1))$. Theorem~\ref{thm:main} has the following consequence.
+
+\begin{corollary}\label{cor:clique}
+The following hold.
+\begin{enumerate}
+\item[(a)] For every integer $p\ge 1$ there is a connected cograph $G$ such that $I(G\cor K_p;x)$ is not unimodal.
+\item[(b)] Let $p,q\ge 1$. Then $I(G\cor(K_p\cup K_q);x)$ is unimodal for every graph $G$ if and only if $p=q=1$.
+\end{enumerate}
+\end{corollary}
+
+Thus \cite[Conjecture~6.1]{HLMP-clique} fails for every value of $p$. For $p=1$ a counterexample had already been reported publicly by Lucas~B.~\cite{LucasB}: the base graph is $E_{588}\vee(39K_{11}\cup 85K_{12})$, the corona with $K_1$ has $4074$ vertices, and the coefficient of $x^{1095}$ in its independence polynomial is strictly smaller than the coefficients of $x^{1094}$ and $x^{1096}$. We have recomputed these three coefficients independently in exact arithmetic and confirmed this comparison. Theorem~\ref{thm:main} shows that the failure is not specific to $K_1$; Section~\ref{sec:clique} compares our results with those in which $p$ is large relative to $G$.
+
+\subsection*{Method}
+Let $h=I(H;x)$, $q=h(1)$ and $\mu=h'(1)/q$. For $G=E_a\vee mK_2$ the corona identity writes $I(G\cor H;x)$ as $A+B-C$, where $A$, $B$ and $C=h^{a+2m}$ are products of $a+2m$ factors taken from $h$, $h+x$ and $h+2x$. We call the coefficient sum of such a product its total mass and view its normalized coefficient sequence as the distribution of a sum of independent random variables. The choice $a=\lfloor\rho_H m\rfloor$ makes the total masses of $A$ and $B$ agree up to a factor between $1/2$ and $1$, while the total mass of $C$ is smaller than that of $B$ by the factor $(1+2/q)^{-m}$. The means of $A$ and $B$ differ by $(1-\mu)\delta m$ up to a bounded error caused by the floor, where $\delta>0$ depends only on $q$, and their standard deviations are $O(\sqrt m)$. Hence, if $\mu\ne 1$, Chebyshev's inequality produces two peaks with a valley between them for large $m$. A short computation shows that $\mu=1$ exactly when $H\cong K_r-e$. For Theorem~\ref{thm:logconcave} we apply the same estimate to the rescaled polynomial $h(\lambda x)/\lambda$ with $\lambda=1/(|V(H)|+1)$, whose mean is smaller than $1$.
+
+To our knowledge, the following results have not appeared in the literature: the implication from (ii) to (iii) in Theorem~\ref{thm:main}, Theorem~\ref{thm:logconcave}, part~(a) of Corollary~\ref{cor:clique} for $p\ge 2$, and the \emph{only if} direction of part~(b). The proofs are self-contained.
+
+\subsection*{Organization}
+Section~\ref{sec:prelim} collects the corona identity and elementary facts on coefficient distributions. Section~\ref{sec:valley} proves the main estimate, Proposition~\ref{prop:valley}. Section~\ref{sec:main} proves Theorem~\ref{thm:main}, Section~\ref{sec:lc} proves Theorem~\ref{thm:logconcave}, and Section~\ref{sec:clique} discusses clique coronas.
+
+\section{Preliminaries}\label{sec:prelim}
+
+For a polynomial $f$ we write $\coef{k}{f}$ for the coefficient of $x^k$ in $f$, with $\coef{k}{f}=0$ for $k<0$. If $\alpha=\alpha(F)$ is the independence number of a graph $F$, then $i_k(F)>0$ for $0\le k\le\alpha$ and $i_k(F)=0$ for $k>\alpha$, because every subset of an independent set is independent. A log-concave sequence of positive numbers is unimodal, since the ratios $a_{k+1}/a_k$ are nonincreasing. If $(a_k)$ is log-concave and $\lambda>0$, then $(\lambda^ka_k)$ is log-concave, because $(\lambda^ka_k)^2-\lambda^{k-1}a_{k-1}\lambda^{k+1}a_{k+1}=\lambda^{2k}(a_k^2-a_{k-1}a_{k+1})$.
+
+\begin{lemma}[Gutman \cite{Gut92}]\label{lem:corona}
+Let $G$ be a graph with $N$ vertices, let $H$ be a graph and put $h=I(H;x)$. Then
+\begin{equation}\label{eq:corona}
+I(G\cor H;x)=\sum_{j\ge 0} i_j(G)\,x^j\,h^{N-j}=h^N\,I\bigl(G;x/h\bigr).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Every independent set of $G\cor H$ meets $V(G)$ in an independent set $S$ of $G$. For $v\in S$ it contains no vertex of $H_v$; for $v\notin S$ it meets $H_v$ in an arbitrary independent set of $H_v$. Hence the independent sets with trace $S$ contribute $x^{|S|}h^{N-|S|}$. The second expression in \eqref{eq:corona} is an identity of rational functions.
+\end{proof}
+
+The \emph{join} $G_1\vee G_2$ of disjoint graphs is obtained from $G_1\cup G_2$ by adding all edges between $V(G_1)$ and $V(G_2)$. An independent set of $G_1\vee G_2$ lies in one of the two sides, so
+\begin{equation}\label{eq:join}
+I(G_1\vee G_2;x)=I(G_1;x)+I(G_2;x)-1 .
+\end{equation}
+For integers $a,m\ge 0$ we put $\Gam=E_a\vee mK_2$. It has $N=a+2m$ vertices, it is connected when $a,m\ge 1$, and by \eqref{eq:join}
+\[
+I(\Gam;x)=(1+x)^a+(1+2x)^m-1 .
+\]
+For every polynomial $h\ne 0$ we define
+\begin{equation}\label{eq:Fm}
+\begin{aligned}
+F_{a,m}[h]&=h^{a+2m}\,I\bigl(\Gam;x/h\bigr)=A+B-C,\qquad\text{where}\\
+A&=h^{2m}(h+x)^{a},\quad B=h^{a+m}(h+2x)^{m},\quad C=h^{a+2m}.
+\end{aligned}
+\end{equation}
+Here $h+x$ denotes the polynomial $h(x)+x$. By Lemma~\ref{lem:corona}, $F_{a,m}[I(H;x)]=I(\Gam\cor H;x)$ for every graph $H$.
+
+\begin{lemma}\label{lem:derivative}
+For every graph $H$,
+\[
+\frac{d}{dx}I(H;x)=\sum_{v\in V(H)} I\bigl(H-N[v];x\bigr),
+\]
+where $N[v]$ is the closed neighbourhood of $v$.
+\end{lemma}
+
+\begin{proof}
+Both sides equal $\sum_S |S|\,x^{|S|-1}$, summed over the independent sets $S$ of $H$: an independent set containing $v$ is $\{v\}\cup T$ for a unique independent set $T$ of $H-N[v]$.
+\end{proof}
+
+\subsection*{Coefficient distributions}
+Let $f\ne 0$ be a polynomial with nonnegative real coefficients. We call $f(1)$ its \emph{total mass}. Its \emph{coefficient distribution} is the probability distribution on $\mathbb{Z}_{\ge 0}$ assigning mass $\coef{k}{f}/f(1)$ to $k$. We write $\M(f)=f'(1)/f(1)$ for its mean and $\Var(f)$ for its variance. If $f$ and $g$ are two such polynomials, the coefficient distribution of $fg$ is the distribution of $X+Y$, where $X$ and $Y$ are independent with the coefficient distributions of $f$ and $g$. Consequently
+\begin{equation}\label{eq:additive}
+\M(fg)=\M(f)+\M(g),\qquad \Var(fg)=\Var(f)+\Var(g).
+\end{equation}
+If $\deg f\le D$, then $\Var(f)\le D^2/4$, since for a random variable $X$ with values in $[0,D]$ we have $\Var(X)\le\mathbb{E}\bigl[(X-D/2)^2\bigr]\le D^2/4$. Finally, Chebyshev's inequality states that, for every $s>0$,
+\begin{equation}\label{eq:chebyshev}
+\sum_{k\,:\,|k-\M(f)|\ge s}\coef{k}{f}\le\frac{\Var(f)}{s^2}\,f(1).
+\end{equation}
+
+\section{The valley estimate}\label{sec:valley}
+
+Throughout this section, $h$ is a polynomial with nonnegative real coefficients such that
+\[
+q=h(1)\ge 1,\qquad \mu=\M(h)=\frac{h'(1)}{q}\ne 1 .
+\]
+We put
+\[
+u=1+\frac1q,\quad v=1+\frac2q,\quad \rho=\frac{\log v}{\log u},\quad a_m=\lfloor\rho m\rfloor,\quad F_m=F_{a_m,m}[h]
+\]
+for integers $m\ge 1$, and $D=\max\{\deg h,1\}$.
+
+\begin{lemma}\label{lem:rho}
+We have $1<\rho<2$ and
+\[
+\delta=\frac{\rho}{q+1}-\frac{2}{q+2}>0 .
+\]
+\end{lemma}
+
+\begin{proof}
+The first assertion follows from $u<v<u^2$. The function
+\[
+\Phi(t)=\frac{(1+t)\log(1+t)}{t}
+\]
+is strictly increasing on $(0,\infty)$, since its derivative ${\Phi'(t)=(t-\log(1+t))/t^2}$ is positive. Hence
+\[
+\frac{q+2}{2}\log v=\Phi(2/q)>\Phi(1/q)=(q+1)\log u ,
+\]
+that is, $\rho>2(q+1)/(q+2)$, which is equivalent to $\delta>0$.
+\end{proof}
+
+\begin{proposition}\label{prop:valley}
+There is $m_0$ such that for every integer $m\ge m_0$ there are indices $j<k<l$ with
+\[
+\coef{j}{F_m}>\coef{k}{F_m}<\coef{l}{F_m}.
+\]
+In particular, $F_m$ is not unimodal for $m\ge m_0$.
+\end{proposition}
+
+\begin{proof}
+Let $m\ge 1$, write $a=a_m$ and $N=a+2m$, and let $A,B,C$ be as in \eqref{eq:Fm}. Since $1<\rho<2$, we have $m\le a<2m$ and $N<4m$. We proceed in four steps.
+
+\emph{Masses.} By definition, $a$ is the unique integer with $u^a\le v^m<u^{a+1}$. Put $W_A=A(1)=q^Nu^a$ and $W_B=B(1)=q^Nv^m$. Since $u\le 2$,
+\begin{equation}\label{eq:masses}
+\tfrac12 W_B\le u^{-1}W_B<W_A\le W_B,\qquad C(1)=q^N=v^{-m}W_B .
+\end{equation}
+
+\emph{Means.} For $t\ge 0$ we have $\M(h+tx)=(q\mu+t)/(q+t)=\mu+t(1-\mu)/(q+t)$. By \eqref{eq:additive},
+\[
+\M(A)=N\mu+\frac{(1-\mu)\,a}{q+1},\qquad \M(B)=N\mu+\frac{2(1-\mu)\,m}{q+2},
+\]
+and therefore $\M(A)-\M(B)=(1-\mu)\bigl(a/(q+1)-2m/(q+2)\bigr)$. Since $\rho m-1<a\le\rho m$, Lemma~\ref{lem:rho} gives
+\[
+|\M(A)-\M(B)|\ge|1-\mu|\Bigl(\delta m-\frac{1}{q+1}\Bigr)\ge cm
+\qquad\text{if } m\ge\frac{2}{(q+1)\delta},
+\]
+where $c=|1-\mu|\delta/2>0$.
+
+\emph{Variances.} The polynomials $h$, $h+x$ and $h+2x$ have degree at most $D$. By \eqref{eq:additive}, both $A$ and $B$ have variance at most $ND^2/4<D^2m$.
+
+\emph{The valley.} The constants $c$, $D$, $q$ and $v>1$ depend only on $h$. Hence there is $m_0$ such that every $m\ge m_0$ satisfies
+\begin{equation}\label{eq:conditions}
+\begin{gathered}
+m\ge\frac{2}{(q+1)\delta},\qquad cm\ge 3,\qquad 2D\sqrt m+1<\frac{cm}{2},\\
+v^{-m}\le\frac{1}{32D\sqrt m},\qquad \frac{18D^2}{c^2m}<\frac{1}{32D\sqrt m}.
+\end{gathered}
+\end{equation}
+Fix such an $m$, and let $\sigma\le\tau$ be the two numbers $\M(A)$ and $\M(B)$ in increasing order; thus $\tau-\sigma\ge cm$. Let $k$ be an integer nearest to $(\sigma+\tau)/2$. Then
+\[
+k-\sigma\ge\frac{\tau-\sigma}{2}-\frac12\ge\frac{cm}{2}-\frac12\ge\frac{cm}{3},
+\]
+and similarly $\tau-k\ge cm/3$. By \eqref{eq:chebyshev} with $s=cm/3$, applied to $A$ and to $B$, and by \eqref{eq:masses},
+\begin{equation}\label{eq:upper}
+\coef{k}{F_m}\le\coef{k}{A}+\coef{k}{B}<\frac{9D^2}{c^2m}\,(W_A+W_B)\le\frac{18D^2}{c^2m}\,W_B .
+\end{equation}
+
+Now let $f\in\{A,B\}$, and let $J_f$ denote the set of all integers $i$ such that ${|i-\M(f)|<2D\sqrt m}$. By \eqref{eq:chebyshev} with $s=2D\sqrt m$, the coefficients of $f$ with indices in $J_f$ sum to more than $\frac34f(1)$. As $J_f$ has at most $4D\sqrt m+1\le 6D\sqrt m$ elements, there is $i_f\in J_f$ with
+\[
+\coef{i_f}{f}\ge\frac{3f(1)}{4\cdot 6D\sqrt m}=\frac{f(1)}{8D\sqrt m}\ge\frac{W_B}{16D\sqrt m},
+\]
+where the last inequality uses \eqref{eq:masses}. The other product in $\{A,B\}$ has nonnegative coefficients, and $\coef{i_f}{C}\le C(1)$, so \eqref{eq:masses} and \eqref{eq:conditions} give
+\begin{equation}\label{eq:lower}
+\coef{i_f}{F_m}\ge\coef{i_f}{f}-C(1)\ge\frac{W_B}{16D\sqrt m}-v^{-m}W_B\ge\frac{W_B}{32D\sqrt m}.
+\end{equation}
+
+Let $j=i_f$ for the product $f$ with mean $\sigma$, and $l=i_f$ for the product with mean $\tau$. By \eqref{eq:conditions},
+\[
+j<\sigma+2D\sqrt m<\sigma+\frac{cm}{2}-1<k,\qquad l>\tau-2D\sqrt m>\tau-\frac{cm}{2}+1>k,
+\]
+because $k\ge\sigma+cm/2-1/2$ and $k\le\tau-cm/2+1/2$. Finally, \eqref{eq:upper}, \eqref{eq:lower} and the last condition in \eqref{eq:conditions} give $\coef{j}{F_m}>\coef{k}{F_m}$ and $\coef{l}{F_m}>\coef{k}{F_m}$. A unimodal sequence cannot have an entry strictly smaller than an entry on each side of it, so $F_m$ is not unimodal.
+\end{proof}
+
+\begin{remark}\label{rem:effective}
+The threshold $m_0$ can be made explicit. For $t>0$ we have ${\Phi'(t)\ge 1/(2(1+t))}$, because $t-\log(1+t)-t^2/(2(1+t))$ vanishes at $t=0$ and has derivative $t^2/(2(1+t)^2)\ge 0$. On $[1/q,2/q]$ this lower bound is at least $q/(2(q+2))$, so $\Phi(2/q)-\Phi(1/q)\ge 1/(2(q+2))$. Since $\Phi(1/q)=(q+1)\log u$ and $\Phi(2/q)=(q+2)(\log v)/2$, we have
+\[
+\delta=\frac{2\bigl(\Phi(2/q)-\Phi(1/q)\bigr)}{(q+1)(q+2)\log u},
+\]
+and $\log u\le 1/q$ yields $\delta\ge\delta_0=q/((q+1)(q+2)^2)$. Bernoulli's inequality gives $v^{-m}<q/(2m)$. Put $c_0=|1-\mu|\delta_0/2$. Then all conditions \eqref{eq:conditions} hold for every integer
+\[
+m>\max\Bigl\{\frac{2}{(q+1)\delta_0},\ \frac{4}{c_0},\ \frac{64D^2}{c_0^2},\ \Bigl(\frac{576D^3}{c_0^2}\Bigr)^2,\ 256D^2q^2\Bigr\}.
+\]
+This bound is far from optimal, and we make no claim about the smallest values of $m$ for which $F_m$ fails to be unimodal.
+\end{remark}
+
+\section{Proof of Theorem~\ref{thm:main}}\label{sec:main}
+
+\begin{lemma}\label{lem:mean}
+Let $H$ be a graph and $h=I(H;x)$. Then
+\[
+h'(1)-h(1)=-1+\sum_{j\ge 2}(j-1)\,i_j(H).
+\]
+Consequently $h'(1)=h(1)$ if and only if $H\cong K_r-e$ for some $r\ge 2$.
+\end{lemma}
+
+\begin{proof}
+The identity follows from $h'(1)-h(1)=\sum_j(j-1)\,i_j(H)$ and $i_0(H)=1$. The numbers $(j-1)\,i_j(H)$ with $j\ge 2$ are nonnegative integers, so their sum equals $1$ if and only if $i_2(H)=1$ and $i_j(H)=0$ for $j\ge 3$. Since every independent set with three or more vertices contains at least three pairs of nonadjacent vertices, this happens if and only if $H$ has exactly one pair of nonadjacent vertices, that is, $H\cong K_r-e$ with $r=|V(H)|\ge 2$.
+\end{proof}
+
+For $H\cong K_r-e$ we have $I(H;x)=1+rx+x^2$, and the coefficient distribution has mean $1$. In the proof of Proposition~\ref{prop:valley}, this is exactly the case in which adding $x$ or $2x$ to $h$ does not move the mean.
+
+The positive direction is due to Levit and Mandrescu \cite[Theorem~2.9]{LM13}, \cite[Theorem~4.3]{LM16}. For completeness we include a short argument. We say that a finitely supported sequence $(a_k)_{k\in\mathbb{Z}}$ of nonnegative numbers is \emph{symmetric unimodal about} $\gamma\in\frac12\mathbb{Z}$ if $a_{2\gamma-k}=a_k$ for all $k$ and $a_k\le a_{k+1}$ whenever $k+1\le\gamma$. Such a sequence is a nonnegative combination of indicator sequences of integer intervals symmetric about $\gamma$. The convolution of the indicator sequences of two integer intervals is symmetric unimodal about the sum of their centres, so the convolution of two sequences that are symmetric unimodal about $\gamma_1$ and $\gamma_2$ is symmetric unimodal about $\gamma_1+\gamma_2$; this is well known, see \cite{And76}.
+
+\begin{proposition}[Levit and Mandrescu \cite{LM13,LM16}]\label{prop:positive}
+If $H\cong K_r-e$ with $r\ge 2$, then $I(G\cor H;x)$ is symmetric and unimodal for every graph $G$.
+\end{proposition}
+
+\begin{proof}
+Let $G$ have $N$ vertices. By Lemma~\ref{lem:corona},
+\[
+I(G\cor H;x)=\sum_{j\ge 0} i_j(G)\,x^j(1+rx+x^2)^{N-j}.
+\]
+The coefficient sequence of $1+rx+x^2$ is symmetric unimodal about $1$. Hence, by the preceding discussion, the coefficient sequence of $x^j(1+rx+x^2)^{N-j}$ is symmetric unimodal about $j+(N-j)=N$. A nonnegative combination of sequences that are symmetric unimodal about the same point is again symmetric unimodal about that point.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+The implication (i)$\Rightarrow$(ii) is trivial, and (iii)$\Rightarrow$(i) is Proposition~\ref{prop:positive}. Suppose that $H$ is not isomorphic to any $K_r-e$ with $r\ge 2$, and let $h=I(H;x)$. Then $h$ has nonnegative integer coefficients, $q=h(1)\ge 1$ is the number of independent sets of $H$, and $\M(h)\ne 1$ by Lemma~\ref{lem:mean}. The number $\rho$ of Section~\ref{sec:valley} is $\rho_H$. For $m\ge 1$ the graph $G_{a_m,m}=E_{\lfloor\rho_H m\rfloor}\vee mK_2$ is connected, since $a_m\ge m\ge 1$, and $I(G_{a_m,m}\cor H;x)=F_m$ by Lemma~\ref{lem:corona} and \eqref{eq:Fm}. By Proposition~\ref{prop:valley}, $F_m$ is not unimodal for all sufficiently large $m$. This proves the final assertion of the theorem and the implication (ii)$\Rightarrow$(iii).
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm:logconcave}}\label{sec:lc}
+
+\begin{proof}[Proof of Theorem~\ref{thm:logconcave}]
+Let $H$ have $r\ge 0$ vertices and let $h=I(H;x)$. Put $\lambda=1/(r+1)$ and
+\[
+\tilde h(x)=\frac{h(\lambda x)}{\lambda}=\sum_{j\ge 0} i_j(H)\,\lambda^{j-1}x^j .
+\]
+The polynomial $\tilde h$ has nonnegative rational coefficients and $\tilde h(1)=h(\lambda)/\lambda\ge 1/\lambda\ge 1$. By Lemma~\ref{lem:derivative}, each summand $I(H-N[v];x)$ of $h'(x)$ has coefficients bounded by those of $h$, because every independent set of $H-N[v]$ is an independent set of $H$. Hence $h'(\lambda)\le r\,h(\lambda)$, and
+\[
+\M(\tilde h)=\frac{\tilde h'(1)}{\tilde h(1)}=\frac{\lambda\,h'(\lambda)}{h(\lambda)}\le r\lambda=\frac{r}{r+1}<1 .
+\]
+Thus $\tilde h$ satisfies the hypotheses of Section~\ref{sec:valley}. Let $a_m$ and $F_m=F_{a_m,m}[\tilde h]$ be defined from $\tilde h$ as there. By Proposition~\ref{prop:valley} we may fix $m\ge 1$ such that $F_m$ is not unimodal. Let $G=G_{a_m,m}$, which is a connected cograph with $N=a_m+2m$ vertices, and write $I(G\cor H;x)=\sum_k t_kx^k$. Since $h(\lambda x)=\lambda\tilde h(x)$, Lemma~\ref{lem:corona} and \eqref{eq:Fm} give
+\[
+\begin{aligned}
+\sum_k t_k\lambda^kx^k=I(G\cor H;\lambda x)&=h(\lambda x)^N\,I\Bigl(G;\frac{\lambda x}{h(\lambda x)}\Bigr)\\
+&=\lambda^N\,\tilde h(x)^N\,I\Bigl(G;\frac{x}{\tilde h(x)}\Bigr)=\lambda^NF_m .
+\end{aligned}
+\]
+Hence the sequence $(t_k\lambda^k)_k$ is not unimodal. If $(t_k)$ were log-concave, then $(t_k\lambda^k)$ would be log-concave by Section~\ref{sec:prelim}; as $t_k>0$ for $0\le k\le\alpha(G\cor H)$ and $t_k=0$ otherwise, it would be unimodal, a contradiction. Therefore $I(G\cor H;x)$ is not log-concave.
+\end{proof}
+
+\section{Clique coronas}\label{sec:clique}
+
+\begin{proof}[Proof of Corollary~\ref{cor:clique}]
+Since $K_p$ has no pair of nonadjacent vertices, it is not isomorphic to any $K_r-e$, and (a) follows from Theorem~\ref{thm:main}. The graph $K_p\cup K_q$ has exactly $pq$ pairs of nonadjacent vertices, so it is isomorphic to some $K_r-e$ if and only if $p=q=1$, in which case it is $K_2-e$. Thus (b) also follows from Theorem~\ref{thm:main}.
+\end{proof}
+
+In Theorem~\ref{thm:main} and Corollary~\ref{cor:clique} the attachment is fixed before the base graph is chosen. Results that assume $p$ to be large relative to $G$, such as \cite[Corollary~3.10]{HLMP-Wp} and \cite[Theorem~4.6]{HLMP-clique}, concern the opposite order of quantifiers and are consistent with ours. Corollary~\ref{cor:clique}(a) shows that, for each fixed $p$, a hypothesis relating $p$ to $G$ cannot be omitted from \cite[Theorem~4.6]{HLMP-clique}; in particular, by that theorem, our counterexamples for $K_p$ necessarily satisfy $n(G)+1>(p+1)(p+2)$. Similarly, Theorem~\ref{thm:logconcave} with $H=K_p$ shows that the dependence of $p$ on $n(G)$ in \cite[Corollary~3.10]{HLMP-Wp} cannot be removed.
+
+The proof of Theorem~\ref{thm:main} gives existence for all sufficiently large $m$, with an explicit but very large threshold (Remark~\ref{rem:effective}). The example of Lucas~B.~\cite{LucasB} for $K_1$, with $4074$ vertices, is much smaller than what our estimate provides. It has the same overall shape as ours: its base graph is the join of an edgeless graph with a disjoint union of complete graphs. Joins have been used before to produce nonunimodal independence polynomials of well-covered graphs \cite{LM06}.
+
+\section*{Use of AI-assisted tools}
+
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{99}
+
+\bibitem{AMSE87}
+Y.~Alavi, P.~J. Malde, A.~J. Schwenk, and P.~Erd\H{o}s, \emph{The vertex independence sequence of a graph is not constrained}, Congr. Numer. \textbf{58} (1987), 15--23.
+
+\bibitem{And76}
+G.~E. Andrews, \emph{The Theory of Partitions}, Addison-Wesley, Reading, MA, 1976.
+
+\bibitem{CS07}
+M.~Chudnovsky and P.~Seymour, \emph{The roots of the independence polynomial of a clawfree graph}, J. Combin. Theory Ser. B \textbf{97} (2007), 350--357, doi:10.1016/j.jctb.2006.06.001.
+
+\bibitem{FH70}
+R.~Frucht and F.~Harary, \emph{On the corona of two graphs}, Aequationes Math. \textbf{4} (1970), 322--325.
+
+\bibitem{Gut92}
+I.~Gutman, \emph{Independent vertex sets in some compound graphs}, Publ. Inst. Math. (Beograd) (N.S.) \textbf{52} (1992), 5--9.
+
+\bibitem{GH83}
+I.~Gutman and F.~Harary, \emph{Generalizations of the matching polynomial}, Utilitas Math. \textbf{24} (1983), 97--106.
+
+\bibitem{HLMP-Wp}
+D.~T. Hoang, V.~E. Levit, E.~Mandrescu, and M.~H. Pham, \emph{Log-concavity of the independence polynomials of $\mathbf{W}_p$ graphs}, Discrete Math. \textbf{349} (2026), no.~8, Paper No. 115109, doi:10.1016/j.disc.2026.115109; arXiv:2409.00827v2. Statement numbers refer to the arXiv version.
+
+\bibitem{HLMP-clique}
+D.~T. Hoang, V.~E. Levit, E.~Mandrescu, and M.~H. Pham, \emph{Unimodality of the independence polynomial of clique corona graphs}, Ars Math. Contemp., accepted manuscript (2026), doi:10.26493/1855-3974.3383.3c7.
+
+\bibitem{HLMP-two}
+D.~T. Hoang, V.~E. Levit, E.~Mandrescu, and M.~H. Pham, \emph{Unimodality of the independence polynomial of $G\circ(K_p\cup K_q)$}, Vietnam J. Math. \textbf{54} (2026), 595--609, doi:10.1007/s10013-024-00723-w.
+
+\bibitem{LM03}
+V.~E. Levit and E.~Mandrescu, \emph{A family of well-covered graphs with unimodal independence polynomials}, Congr. Numer. \textbf{165} (2003), 195--207; arXiv:math/0307012.
+
+\bibitem{LM06}
+V.~E. Levit and E.~Mandrescu, \emph{Independence polynomials of well-covered graphs: generic counterexamples for the unimodality conjecture}, European J. Combin. \textbf{27} (2006), 931--939; arXiv:math/0309151.
+
+\bibitem{LM13}
+V.~E. Levit and E.~Mandrescu, \emph{On $f$-symmetries of the independence polynomial}, preprint (2013), arXiv:1303.2564v1.
+
+\bibitem{LM16}
+V.~E. Levit and E.~Mandrescu, \emph{On the independence polynomial of the corona of graphs}, Discrete Appl. Math. \textbf{203} (2016), 85--93, doi:10.1016/j.dam.2015.09.021.
+
+\bibitem{LucasB}
+{\sloppy Lucas~B., public post reporting a counterexample to the Levit--Mandrescu conjecture for $G\cor K_1$, LinkedIn, \url{https://www.linkedin.com/posts/tesuji_levit-mandrescu-counterexample-activity-7487528446403768320-b1pc}, accessed 9 October 2026.\par}
+
+\end{thebibliography}
+
+\end{document}

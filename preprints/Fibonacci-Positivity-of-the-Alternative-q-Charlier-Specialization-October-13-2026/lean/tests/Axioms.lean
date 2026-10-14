@@ -1,0 +1,36 @@
+import AlternativeQCharlier
+
+#print axioms AlternativeQCharlier.tridiagonal_diag
+#print axioms AlternativeQCharlier.tridiagonal_tail
+#print axioms AlternativeQCharlier.tridiagonal_first_row_far
+#print axioms AlternativeQCharlier.tridiagonal_det_recurrence
+#print axioms AlternativeQCharlier.A_eq_continuant
+#print axioms AlternativeQCharlier.B_zero
+#print axioms AlternativeQCharlier.B_succ
+#print axioms AlternativeQCharlier.scaleProduct_pos
+#print axioms AlternativeQCharlier.continuant_rescaling
+#print axioms AlternativeQCharlier.A_rescaling
+#print axioms AlternativeQCharlier.B_rescaling
+#print axioms AlternativeQCharlier.tail_bounds
+#print axioms AlternativeQCharlier.normalized_continuant
+#print axioms AlternativeQCharlier.normalized_A
+#print axioms AlternativeQCharlier.finite_B_margin
+#print axioms AlternativeQCharlier.normalized_B_succ
+#print axioms AlternativeQCharlier.normalized_B_pos
+#print axioms AlternativeQCharlier.parameter_pos
+#print axioms AlternativeQCharlier.c_pos
+#print axioms AlternativeQCharlier.t_pos
+#print axioms AlternativeQCharlier.t_nonneg
+#print axioms AlternativeQCharlier.qpow_le_one
+#print axioms AlternativeQCharlier.t_le
+#print axioms AlternativeQCharlier.x_eq_rescaling
+#print axioms AlternativeQCharlier.y_eq_rescaling
+#print axioms AlternativeQCharlier.t_ratio_identity
+#print axioms AlternativeQCharlier.t_ratio_le
+#print axioms AlternativeQCharlier.A_pos
+#print axioms AlternativeQCharlier.B_pos
+#print axioms AlternativeQCharlier.cloneSchur_pos
+#print axioms AlternativeQCharlier.all_finite_words_pos
+#print axioms AlternativeQCharlier.Word.toList_addOne
+#print axioms AlternativeQCharlier.Word.toList_fromList
+#print axioms AlternativeQCharlier.Word.toList_surjective

@@ -1,0 +1,371 @@
+\documentclass[11pt]{amsart}
+
+\usepackage[margin=1.15in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage[hidelinks]{hyperref}
+
+\hypersetup{
+  pdftitle={Fibonacci positivity of the alternative q-Charlier specialization},
+  pdfauthor={Knowledge Sense},
+  pdfsubject={Clone Schur functions and the Young--Fibonacci lattice},
+  pdfkeywords={clone Schur functions, Young--Fibonacci lattice, Fibonacci positivity, tridiagonal determinants, alternative q-Charlier polynomials}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+\newcommand{\YF}{\mathbb{YF}}
+
+\begin{document}
+
+\title[The alternative $q$-Charlier specialization]{Fibonacci positivity of the alternative $q$-Charlier specialization}
+
+\author{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{13 October 2026}
+
+\subjclass[2020]{Primary 05E05; Secondary 15B48, 33D45, 05E10}
+
+\keywords{Clone Schur function, Young--Fibonacci lattice, Fibonacci positivity, tridiagonal determinant, alternative $q$-Charlier polynomials}
+
+\begin{abstract}
+Petrov and Scott conjectured that the alternative $q$-Charlier specialization of Okada's biserial clone Schur functions is Fibonacci positive for some values of its two parameters $\rho$ and $q$. We prove that this holds for all $0<\rho\le 1/4$ and $0<q\le 1/5$. More precisely, for every parameter pair in this range, every Fibonacci word $w$ and every integer $s\ge0$, the clone Schur function of $w$ evaluated at the specialization shifted by $s$ is strictly positive. The proof uses the reduction of Petrov and Scott to a single sequence $(t_k)$. The new input consists of two estimates on $t_k$ and on $t_{k+1}/t_k$, uniform in $k$ and in the parameters, which give the positivity of the tridiagonal determinants occurring in the recursive definition of the clone Schur functions.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+A \emph{Fibonacci word} is a finite word $w=w_1\cdots w_r$ with letters $w_i\in\{1,2\}$; its \emph{weight} is $|w|=w_1+\cdots+w_r$, and the empty word $\varnothing$ has weight zero. Fibonacci words form the Young--Fibonacci lattice $\YF$, a $1$-differential poset introduced by Fomin~\cite{Fom88} and Stanley~\cite{Sta88}. Okada~\cite{Oka94} attached to $\YF$ a family of noncommutative clone Schur functions. Their evaluations $s_w(x\mid y)$ at two sequences $x=(x_k)_{k\ge1}$ and $y=(y_k)_{k\ge1}$, the biserial clone Schur functions, satisfy a clone Pieri rule, so that, when all $x_k$ are nonzero, $w\mapsto s_w(x\mid y)/(x_1\cdots x_{|w|})$ is a harmonic function on~$\YF$ \cite[Proposition~2.6]{PS26}.
+
+Petrov and Scott~\cite{PS26} call $(x,y)$ \emph{Fibonacci positive} if $s_w(x\mid y)>0$ for every Fibonacci word~$w$; such specializations give coherent families of probability measures on Fibonacci words. They characterize Fibonacci positive specializations \cite[Theorem~4.12]{PS26}, relate them to Stieltjes moment sequences and to orthogonal polynomials from the $q$-Askey scheme, and give a number of examples. For real parameters $\rho$ and $q$, consider the \emph{alternative $q$-Charlier specialization}
+\begin{equation}\label{eq:spec}
+x_k=\frac{q^{k-1}\bigl(1+\rho q^{k-2}+\rho q^{k-1}-\rho q^{2k-2}\bigr)}{(1+\rho q^{2k-3})(1+\rho q^{2k-1})},
+\qquad
+y_k=\frac{\rho\, q^{3k-2}(1-q^k)(1+\rho q^{k-1})}{(1+\rho q^{2k})(1+\rho q^{2k-1})^2(1+\rho q^{2k-2})},
+\end{equation}
+for $k\ge1$. When $\rho>0$ and $q>0$, every denominator in \eqref{eq:spec} is positive, including the factor $1+\rho q^{-1}$ that occurs at $k=1$.
+
+\begin{conjecture}[{\cite[Conjecture~6.3]{PS26}}]\label{conj:PS}
+There exist values of $\rho$ and $q$ for which the specialization \eqref{eq:spec} is Fibonacci positive.
+\end{conjecture}
+
+For a sequence $a=(a_k)_{k\ge1}$ and an integer $s\ge0$ we write $a+s$ for the shifted sequence $(a_{k+s})_{k\ge1}$. Our main result is the following.
+
+\begin{theorem}\label{thm:main}
+Let $0<\rho\le 1/4$ and $0<q\le 1/5$, and let $(x,y)$ be given by \eqref{eq:spec}. Then
+\[
+s_w(x+s\mid y+s)>0
+\]
+for every Fibonacci word $w$ and every integer $s\ge0$. In particular, $(x,y)$ is Fibonacci positive, and Conjecture~\ref{conj:PS} holds.
+\end{theorem}
+
+We do not determine the largest set of parameters for which \eqref{eq:spec} is Fibonacci positive; Remark~\ref{rem:range} records the conditions on $(\rho,q)$ used in the argument.
+
+\subsection*{What is new}
+The framework is that of Petrov and Scott. Following \cite[Section~4.1]{PS26}, one writes the specialization \eqref{eq:spec} as
+\[
+x_k=c_k(1+t_{k-1}),\qquad y_k=c_kc_{k+1}t_k\qquad(k\ge1),\qquad t_0=0,
+\]
+with positive sequences $c$ and $t$; these sequences are recorded in \cite[Conjecture~6.3]{PS26} and recalled in~\eqref{eq:ct}. The rescaling identity \cite[(2.13)]{PS26} reduces positivity to the normalized pair $u_k=1+t_{k-1}$, $v_k=t_k$, and the expansions of the normalized tridiagonal determinants used in the proof of \cite[Proposition~4.7]{PS26} express the relevant determinants $A_\ell$ and $B_\ell$ in terms of~$t$.
+
+The contribution of this paper is a pair of estimates for this particular sequence~$t$: on the stated parameter range,
+\[
+t_k\le \tfrac{5}{16}\qquad\text{and}\qquad \frac{t_{k+1}}{t_k}\le\tfrac38\qquad(k\ge1),
+\]
+uniformly in $k$, $\rho$ and $q$ (Lemma~\ref{lem:estimates}). These give, for the normalized determinants $B_\ell$, the uniform relative bound
+\[
+B_\ell(u+m\mid v+m)\ge \tfrac{25}{88}\,t_{m+1}\qquad(\ell,m\ge0)
+\]
+(Proposition~\ref{prop:main-bound}), from which Theorem~\ref{thm:main} follows by induction on the number of letters~$2$. To keep the argument self-contained and to treat all shifts at once, we derive the finite determinant identities directly from the definitions; the proof of Theorem~\ref{thm:main} does not invoke the characterization theorem \cite[Theorem~4.12]{PS26}. In the terminology of \cite[Definition~4.6]{PS26}, the estimates show that $t$ is of convergent type (Remark~\ref{rem:convergent}).
+
+\subsection*{Organization}
+Section~\ref{sec:prelim} recalls the clone Schur functions, the rescaling identity and the expansions of normalized determinants. Section~\ref{sec:spec} verifies the factorization of \eqref{eq:spec}. Section~\ref{sec:estimates} proves the uniform estimates, and Section~\ref{sec:proof} proves Theorem~\ref{thm:main}. Section~\ref{sec:remarks} relates the result to the general theory of~\cite{PS26} and to the alternative $q$-Charlier polynomials studied by Atakishiyev and Klimyk~\cite{AK03}.
+
+\section{Clone Schur functions}\label{sec:prelim}
+
+Let $a=(a_k)_{k\ge1}$ and $b=(b_k)_{k\ge1}$ be real sequences. For $\ell\ge1$ let $A_\ell(a\mid b)$ be the determinant of the $\ell\times\ell$ tridiagonal matrix with diagonal $a_1,\dots,a_\ell$, superdiagonal $b_1,\dots,b_{\ell-1}$ and all subdiagonal entries equal to~$1$, and put $A_0(a\mid b)=1$. For $\ell\ge0$ let $B_\ell(a\mid b)$ be the determinant of the $(\ell+1)\times(\ell+1)$ matrix
+\[
+\begin{pmatrix}
+b_1 & a_1b_2 & 0 & \cdots & 0\\
+1 & a_3 & b_3 & \ddots & \vdots\\
+0 & 1 & a_4 & \ddots & 0\\
+\vdots & \ddots & \ddots & \ddots & b_{\ell+1}\\
+0 & \cdots & 0 & 1 & a_{\ell+2}
+\end{pmatrix},
+\]
+so that $B_0(a\mid b)=b_1$. Thus $B_\ell$ has diagonal $b_1,a_3,\dots,a_{\ell+2}$, superdiagonal $a_1b_2,b_3,\dots,b_{\ell+1}$ and subdiagonal entries~$1$. In the notation of \cite[(2.10)]{PS26}, $B_\ell$ is the determinant of size $\ell+1$.
+
+Every nonempty Fibonacci word can be written uniquely either as $1^\ell$ with $\ell\ge1$ or as $1^\ell2z$ with $\ell\ge0$ and $z$ a Fibonacci word.
+
+\begin{definition}[{\cite{Oka94}, \cite[Definition~2.5]{PS26}}]\label{def:clone}
+The biserial clone Schur functions are defined recursively by $s_\varnothing(a\mid b)=1$ and
+\[
+s_{1^\ell}(a\mid b)=A_\ell(a\mid b),\qquad
+s_{1^\ell2z}(a\mid b)=B_\ell\bigl(a+|z|\bigm| b+|z|\bigr)\,s_z(a\mid b).
+\]
+\end{definition}
+
+The recursion terminates because $z$ contains fewer letters~$2$ than $1^\ell2z$. A pair $(a,b)$ is \emph{Fibonacci positive} if $s_w(a\mid b)>0$ for every Fibonacci word~$w$ \cite[Definition~4.1]{PS26}.
+
+The next identity is \cite[(2.13)]{PS26}. We include the short verification, since we use it for shifted sequences.
+
+\begin{lemma}\label{lem:rescale}
+Let $\gamma=(\gamma_k)_{k\ge1}$ be a sequence of nonzero reals, and put $a'_k=\gamma_ka_k$ and $b'_k=\gamma_k\gamma_{k+1}b_k$. Then
+\[
+s_w(a'\mid b')=\gamma_1\cdots\gamma_{|w|}\,s_w(a\mid b)
+\]
+for every Fibonacci word $w$.
+\end{lemma}
+
+\begin{proof}
+Let $M$ be an $n\times n$ tridiagonal matrix with diagonal entries $d_i$, superdiagonal entries $e_i$ and subdiagonal entries~$1$, and let $g_1,\dots,g_n$ be nonzero reals. Put $G=\operatorname{diag}(g_1,\dots,g_n)$ and let $P$ be the diagonal matrix with entries $p_i=g_1g_2\cdots g_i$. The matrix $GP^{-1}MP$ is tridiagonal with diagonal $g_id_i$, superdiagonal $g_ig_{i+1}e_i$ and subdiagonal entries~$1$, and its determinant is $g_1\cdots g_n\det M$.
+
+With $g_i=\gamma_i$ this gives $A_\ell(a'\mid b')=\gamma_1\cdots\gamma_\ell A_\ell(a\mid b)$. Let $r\ge0$. For $\ell=0$ we have $B_0(a'+r\mid b'+r)=b'_{r+1}=\gamma_{r+1}\gamma_{r+2}\,b_{r+1}$. For $\ell\ge1$, the matrix defining $B_\ell(a'+r\mid b'+r)$ arises in the same way from that of $B_\ell(a+r\mid b+r)$ with $g_1=\gamma_{r+1}\gamma_{r+2}$ and $g_i=\gamma_{r+i+1}$ for $2\le i\le\ell+1$; indeed $g_1g_2=\gamma_{r+1}\gamma_{r+2}\gamma_{r+3}$ is the factor acquired by the entry $a_{r+1}b_{r+2}$. Hence $B_\ell(a'+r\mid b'+r)=\gamma_{r+1}\cdots\gamma_{r+\ell+2}\,B_\ell(a+r\mid b+r)$ for all $\ell\ge0$. Since $|1^\ell2z|=|z|+\ell+2$, the lemma follows by induction on the number of letters~$2$ in~$w$.
+\end{proof}
+
+Applying Lemma~\ref{lem:rescale} to the shifted sequences $a+s$, $b+s$ and $\gamma+s$ gives
+\begin{equation}\label{eq:rescale-shift}
+s_w(a'+s\mid b'+s)=\Bigl(\prod_{j=s+1}^{s+|w|}\gamma_j\Bigr)\,s_w(a+s\mid b+s)\qquad(s\ge0).
+\end{equation}
+
+We now fix a real sequence $(t_k)_{k\ge0}$ with $t_0=0$ and $t_k\ge0$ for $k\ge1$, and consider the normalized sequences
+\[
+u_k=1+t_{k-1},\qquad v_k=t_k\qquad(k\ge1).
+\]
+For integers $m,\ell\ge0$ put
+\[
+D_\ell(m)=A_\ell(u+m\mid v+m),\qquad E_\ell(m)=B_\ell(u+m\mid v+m),\qquad \delta_m=1+t_m-t_{m+1}.
+\]
+The matrix defining $D_\ell(m)$ has diagonal entries $1+t_m,\dots,1+t_{m+\ell-1}$ and superdiagonal entries $t_{m+1},\dots,t_{m+\ell-1}$. The matrix defining $E_\ell(m)$ has diagonal entries $t_{m+1}$ and $1+t_{m+2},\dots,1+t_{m+\ell+1}$, and superdiagonal entries $(1+t_m)t_{m+2}$ and $t_{m+3},\dots,t_{m+\ell+1}$. The following expansions appear in the proof of \cite[Proposition~4.7]{PS26}.
+
+\begin{lemma}\label{lem:expansions}
+For all $m,\ell\ge0$,
+\begin{equation}\label{eq:D}
+D_\ell(m)=1+\sum_{j=1}^{\ell}\,t_mt_{m+1}\cdots t_{m+j-1}.
+\end{equation}
+Moreover $E_0(m)=t_{m+1}$, and for $\ell\ge1$,
+\begin{equation}\label{eq:E}
+E_\ell(m)=t_{m+1}-\delta_m\,t_{m+2}\,D_{\ell-1}(m+3).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+We have $D_0(m)=1$ and $D_1(m)=1+t_m$. Expansion along the last row gives
+\[
+D_\ell(m)=(1+t_{m+\ell-1})D_{\ell-1}(m)-t_{m+\ell-1}D_{\ell-2}(m)\qquad(\ell\ge2),
+\]
+so $D_\ell(m)-D_{\ell-1}(m)=t_{m+\ell-1}\bigl(D_{\ell-1}(m)-D_{\ell-2}(m)\bigr)$. By induction $D_\ell(m)-D_{\ell-1}(m)=t_mt_{m+1}\cdots t_{m+\ell-1}$ for $\ell\ge1$, which gives~\eqref{eq:D}.
+
+The value $E_0(m)=v_{m+1}=t_{m+1}$ is immediate. Let $\ell\ge1$. Deleting the first row and the first column of the matrix defining $E_\ell(m)$ leaves the matrix of $D_\ell(m+2)$, and deleting the first two rows and columns leaves that of $D_{\ell-1}(m+3)$. Expansion along the first row therefore gives
+\[
+E_\ell(m)=t_{m+1}D_\ell(m+2)-(1+t_m)t_{m+2}D_{\ell-1}(m+3).
+\]
+By \eqref{eq:D}, $D_\ell(m+2)=1+t_{m+2}D_{\ell-1}(m+3)$, also when $\ell=1$. Substituting this proves~\eqref{eq:E}.
+\end{proof}
+
+\section{The alternative \texorpdfstring{$q$}{q}-Charlier specialization}\label{sec:spec}
+
+Let $\rho>0$ and $0<q<1$. Following \cite[Conjecture~6.3]{PS26}, define for $k\ge1$
+\begin{equation}\label{eq:ct}
+c_k=\frac{q^{k-1}(1+\rho q^{k-1})}{(1+\rho q^{2k-1})(1+\rho q^{2k-2})},\qquad
+t_k=\frac{\rho\,q^{k-1}(1-q^k)(1+\rho q^{2k+1})}{(1+\rho q^{k})(1+\rho q^{2k-1})},
+\end{equation}
+and put $t_0=0$. Clearly $c_k>0$ and $t_k>0$ for $k\ge1$. In \cite{PS26} these sequences are obtained from \eqref{eq:spec} through \cite[Proposition~4.4]{PS26}; we verify the factorization directly.
+
+\begin{lemma}\label{lem:factor}
+For $\rho>0$, $0<q<1$ and every $k\ge1$,
+\[
+x_k=c_k(1+t_{k-1}),\qquad y_k=c_kc_{k+1}t_k.
+\]
+\end{lemma}
+
+\begin{proof}
+For $k=1$, the factor $1+\rho q^{-1}$ cancels in \eqref{eq:spec} and $x_1=1/(1+\rho q)=c_1=c_1(1+t_0)$. Let $k\ge2$. Bringing $c_k(1+t_{k-1})$ to the common denominator $(1+\rho q^{2k-1})(1+\rho q^{2k-2})(1+\rho q^{2k-3})$ gives the numerator $q^{k-1}N_k$, where
+\[
+\begin{aligned}
+N_k&=(1+\rho q^{k-1})(1+\rho q^{2k-3})+\rho q^{k-2}(1-q^{k-1})(1+\rho q^{2k-1})\\
+&=1+\rho q^{k-2}+\rho q^{k-1}+\rho^2q^{3k-4}+\rho^2q^{3k-3}-\rho^2q^{4k-4}\\
+&=(1+\rho q^{2k-2})\bigl(1+\rho q^{k-2}+\rho q^{k-1}-\rho q^{2k-2}\bigr).
+\end{aligned}
+\]
+Cancelling the factor $1+\rho q^{2k-2}$ yields the formula for $x_k$ in \eqref{eq:spec}. In the product $c_kc_{k+1}t_k$ the factors $1+\rho q^{k}$ and $1+\rho q^{2k+1}$ cancel, the power of $q$ is $q^{(k-1)+k+(k-1)}=q^{3k-2}$, and what remains is the expression for $y_k$ in \eqref{eq:spec}.
+\end{proof}
+
+By Lemma~\ref{lem:factor} and \eqref{eq:rescale-shift} with $\gamma=c$,
+\begin{equation}\label{eq:reduction}
+s_w(x+s\mid y+s)=\Bigl(\prod_{j=s+1}^{s+|w|}c_j\Bigr)\,s_w(u+s\mid v+s)\qquad(s\ge0),
+\end{equation}
+where $u_k=1+t_{k-1}$ and $v_k=t_k$ are built from the sequence~\eqref{eq:ct}.
+
+\section{Uniform estimates}\label{sec:estimates}
+
+Throughout this section $0<\rho\le1/4$ and $0<q\le1/5$, and $t$ is the sequence~\eqref{eq:ct}. Put
+\[
+T=\frac{5}{16},\qquad R=\frac38.
+\]
+
+\begin{lemma}\label{lem:estimates}
+For every $k\ge1$,
+\[
+0<t_k\le\rho(1+\rho)\,q^{k-1}\le T
+\qquad\text{and}\qquad
+0<\frac{t_{k+1}}{t_k}\le q(1+q)(1+\rho)^2\le R .
+\]
+\end{lemma}
+
+\begin{proof}
+In \eqref{eq:ct} we have $1-q^k<1$, $1+\rho q^{2k+1}\le1+\rho$ and the denominator is at least~$1$; hence $t_k\le\rho(1+\rho)q^{k-1}\le\frac14\cdot\frac54=T$. Dividing the expressions \eqref{eq:ct} for $t_{k+1}$ and $t_k$ gives
+\[
+\frac{t_{k+1}}{t_k}
+=q\cdot\frac{1-q^{k+1}}{1-q^k}\cdot\frac{1+\rho q^{2k+3}}{1+\rho q^{2k+1}}\cdot\frac{1+\rho q^{k}}{1+\rho q^{k+1}}\cdot\frac{1+\rho q^{2k-1}}{1+\rho q^{2k+1}}.
+\]
+The inequality $(1-q^{k+1})/(1-q^k)\le1+q$ is equivalent to $q^k\le q$, which holds for $k\ge1$. The second fraction is at most~$1$, and each of the last two is at most $1+\rho$, since its numerator is at most $1+\rho$ and its denominator is at least~$1$. Therefore
+\[
+\frac{t_{k+1}}{t_k}\le q(1+q)(1+\rho)^2\le\frac15\cdot\frac65\cdot\frac{25}{16}=R.\qedhere
+\]
+\end{proof}
+
+\begin{proposition}\label{prop:main-bound}
+For all integers $m,\ell\ge0$,
+\[
+1\le D_\ell(m)\le\frac{16}{11}
+\qquad\text{and}\qquad
+E_\ell(m)\ge\frac{25}{88}\,t_{m+1}>0.
+\]
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:estimates}, each product $t_mt_{m+1}\cdots t_{m+j-1}$ in \eqref{eq:D} is nonnegative and at most $T^j$. Hence $1\le D_\ell(m)\le\sum_{j\ge0}T^j=(1-T)^{-1}=16/11$.
+
+For $\ell=0$ we have $E_0(m)=t_{m+1}$. Let $\ell\ge1$. Since $0\le t_m,t_{m+1}\le T$, we have $0<1-T\le\delta_m\le1+T=21/16$. Lemma~\ref{lem:estimates} with $k=m+1$ gives $t_{m+2}\le R\,t_{m+1}$. By \eqref{eq:E} and the bound on $D_{\ell-1}(m+3)$,
+\[
+E_\ell(m)\ge t_{m+1}-\frac{21}{16}\cdot\frac38\cdot\frac{16}{11}\,t_{m+1}=\Bigl(1-\frac{63}{88}\Bigr)t_{m+1}=\frac{25}{88}\,t_{m+1}.
+\]
+Since $t_{m+1}>0$, the right-hand side is positive.
+\end{proof}
+
+The lower bound for $E_\ell(m)$ in Proposition~\ref{prop:main-bound} is proportional to $t_{m+1}$. No positive lower bound uniform in $m$ is possible, since $E_0(m)=t_{m+1}\to0$ as $m\to\infty$.
+
+\section{Proof of the main theorem}\label{sec:proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Fix $s\ge0$, and let $u_k=1+t_{k-1}$, $v_k=t_k$ with $t$ as in~\eqref{eq:ct}. We first show that $s_w(u+s\mid v+s)>0$ for every Fibonacci word $w$, by induction on the number of letters~$2$ in~$w$.
+
+If $w=\varnothing$, then $s_w=1$. If $w=1^\ell$ with $\ell\ge1$, then $s_w(u+s\mid v+s)=A_\ell(u+s\mid v+s)=D_\ell(s)\ge1$ by Proposition~\ref{prop:main-bound}. If $w=1^\ell2z$, then by Definition~\ref{def:clone}
+\[
+s_w(u+s\mid v+s)=B_\ell\bigl(u+s+|z|\bigm|v+s+|z|\bigr)\,s_z(u+s\mid v+s)=E_\ell\bigl(s+|z|\bigr)\,s_z(u+s\mid v+s).
+\]
+The first factor is positive by Proposition~\ref{prop:main-bound} with $m=s+|z|$, and the second is positive by the induction hypothesis, since $z$ has fewer letters~$2$ than~$w$.
+
+Finally, each $c_j$ is positive, so \eqref{eq:reduction} gives $s_w(x+s\mid y+s)>0$. The case $s=0$ is the Fibonacci positivity of $(x,y)$, which proves Conjecture~\ref{conj:PS}.
+\end{proof}
+
+The proof gives the explicit lower bound
+\[
+s_w(u+s\mid v+s)\ge\prod_{i}\frac{25}{88}\,t_{s+|z_i|+1},
+\]
+where $w=1^{\ell_1}2z_1$, $z_1=1^{\ell_2}2z_2$, and so on, the product running over the occurrences of the letter~$2$ in~$w$.
+
+\section{Remarks}\label{sec:remarks}
+
+\begin{remark}[Convergent type]\label{rem:convergent}
+Let
+\[
+A_\infty(m)=1+\sum_{j\ge1}t_mt_{m+1}\cdots t_{m+j-1},\qquad
+B_\infty(m)=t_{m+1}-\delta_m\,t_{m+2}\,A_\infty(m+3)
+\]
+be the quantities of \cite[(4.4)]{PS26}. Under the hypotheses of Theorem~\ref{thm:main}, the proof of Proposition~\ref{prop:main-bound} shows that $A_\infty(m)\le16/11$ and $B_\infty(m)\ge\frac{25}{88}t_{m+1}>0$ for all $m\ge0$. Thus $t$ is a sequence of convergent type in the sense of \cite[Definition~4.6]{PS26}. Fibonacci positivity of the normalized pair $(u,v)$ can therefore also be deduced from \cite[Proposition~4.7]{PS26}, that of $(x,y)$ then follows from the rescaling identity \cite[(2.13)]{PS26}, and the positivity of the shifted specializations follows from \cite[Proposition~5.8]{PS26}.
+\end{remark}
+
+\begin{remark}[Type-I component]
+By Lemma~\ref{lem:estimates}, $\sum_{k\ge1}t_k\le\rho(1+\rho)/(1-q)<\infty$, so the product $\prod_{k\ge1}(1+t_k)$ converges and the Type-I component of the clone harmonic function of $(x,y)$ satisfies $\mu_{\mathrm I}(1^\infty)=\prod_{k\ge1}(1+t_k)^{-1}>0$ \cite[Lemma~15.3]{PS26}. Since $t$ is of convergent type, \cite[Propositions~15.4 and~15.6]{PS26} apply: $\mu_{\mathrm I}(1^\infty2w)>0$ for every Fibonacci word $w$, and $\mu_{\mathrm I}$ is a probability measure on the Type-I words. By \cite[Theorem~1.5]{PS26}, a random Fibonacci word of weight $n$ distributed according to the clone coherent measure of $(x,y)$ converges in distribution, as $n\to\infty$, to a random Type-I word with law $\mu_{\mathrm I}$, that is, to $1^\infty$ or to $1^\infty2v$ with $v$ a finite Fibonacci word.
+\end{remark}
+
+\begin{remark}[Orthogonal polynomials]
+Let $a=\rho>0$ and $0<q<1$, and let
+\[
+\alpha_n=q^n\frac{1+aq^n}{(1+aq^{2n})(1+aq^{2n+1})},\qquad
+\beta_n=aq^{2n-1}\frac{1-q^n}{(1+aq^{2n-1})(1+aq^{2n})}\qquad(n\ge0)
+\]
+be the coefficients, denoted $A_n$ and $C_n$ in \cite[Section~2]{AK03}, of the three-term recurrence of the alternative $q$-Charlier polynomials
+\[
+K_n(\lambda;a;q)={}_2\phi_1(q^{-n},-aq^n;0;q,q\lambda).
+\]
+Comparing with \eqref{eq:ct}, we have $\alpha_n=c_{n+1}$ and $\beta_n=c_{n+1}t_n$ for $n\ge0$; in particular $\beta_0=0$. Lemma~\ref{lem:factor} therefore gives
+\[
+x_{n+1}=\alpha_n+\beta_n\quad(n\ge0),\qquad y_n=\alpha_{n-1}\beta_n\quad(n\ge1).
+\]
+Consequently the monic polynomials $P_n$ of \cite[Theorem~7.1]{PS26}, defined by $P_0=1$, $P_1(\lambda)=\lambda-x_1$ and
+\[
+P_{n+1}(\lambda)=(\lambda-x_{n+1})P_n(\lambda)-y_nP_{n-1}(\lambda)\qquad(n\ge1),
+\]
+are $P_n=(-1)^n\alpha_0\alpha_1\cdots\alpha_{n-1}K_n(\,\cdot\,;\rho;q)$. Atakishiyev and Klimyk \cite[(10) and Proposition in Section~3]{AK03} show that the $K_n$ are orthogonal with respect to the discrete measure with mass proportional to $\rho^nq^{n(n+1)/2}/(q;q)_n$ at $q^n$, $n\ge0$. Since $x$ and $y$ are bounded, the corresponding moment problem is determinate, and this measure, normalized to total mass one, is the measure $\nu$ attached to $(x,y)$ by \cite[Theorem~7.1]{PS26}.
+
+Two comments are in order. First, for the Al-Salam--Chihara and $q$-Charlier specializations of \cite{PS26}, Fibonacci positivity leads to orthogonal polynomials whose deformation parameter exceeds one \cite[Sections~1.3 and~10]{PS26}. Here the orthogonal polynomials are the alternative $q$-Charlier polynomials with $0<q<1$, the range considered in \cite{AK03}. Second, by \cite[Theorem~7.1]{PS26}, the existence of a nonnegative measure on $[0,\infty)$ with infinite support and with given recurrence coefficients is equivalent to the total positivity of the tridiagonal matrix with diagonals $(1,1,\dots)$, $(x_k)$ and $(y_k)$. This condition requires $y_k>0$ and $A_\ell(x+m\mid y+m)>0$ for all $\ell,m\ge0$, but it does not involve the determinants $B_\ell$. Fibonacci positivity is strictly stronger: the Laguerre polynomials are orthogonal with respect to a measure on $[0,\infty)$, but their recurrence coefficients $(x,y)$ give $B_2(x+1\mid y+1)<0$ \cite[Section~10.6.2]{PS26}. For this reason the estimates of Section~\ref{sec:estimates} are needed for the determinants~$B_\ell$. The results of \cite{AK03} are not used in the proof of Theorem~\ref{thm:main}.
+\end{remark}
+
+\begin{remark}[Parameter range]\label{rem:range}
+Let $\rho>0$ and $0<q<1$, and put
+\[
+T'=\rho(1+\rho),\qquad R'=q(1+q)(1+\rho)^2.
+\]
+For these values of $\rho$ and $q$, the calculations in the proof of Lemma~\ref{lem:estimates} give, for every $k\ge1$,
+\[
+t_k\le T'q^{k-1},\qquad \frac{t_{k+1}}{t_k}\le R'.
+\]
+In particular the series $A_\infty(m)$ of Remark~\ref{rem:convergent} converge for all $m$. By \cite[Proposition~4.7]{PS26} and the rescaling identity \cite[(2.13)]{PS26}, the specialization \eqref{eq:spec} is therefore Fibonacci positive if and only if $B_\infty(m)\ge0$ for all $m\ge0$.
+
+Assume in addition that
+\[
+T'<1\qquad\text{and}\qquad (1+T')R'<1-T'.
+\]
+Then the argument of Sections~\ref{sec:estimates} and~\ref{sec:proof} applies with $T$, $R$ and $16/11$ replaced by $T'$, $R'$ and $(1-T')^{-1}$. Hence the conclusion of Theorem~\ref{thm:main} holds for every such pair $(\rho,q)$, with lower bound $\bigl(1-(1+T')R'/(1-T')\bigr)t_{m+1}$ in Proposition~\ref{prop:main-bound}. The rectangle of Theorem~\ref{thm:main} is a convenient subset of this region with simple constants. An explicit description, in terms of $\rho$ and $q$, of the region where \eqref{eq:spec} is Fibonacci positive remains open.
+\end{remark}
+
+\section*{Use of AI-assisted tools}
+
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{9}
+
+\bibitem{AK03}
+N.~M. Atakishiyev and A.~U. Klimyk,
+\emph{A set of orthogonal polynomials, dual to alternative $q$-Charlier polynomials},
+preprint (2003), arXiv:math/0312312.
+
+\bibitem{Fom88}
+S.~V. Fomin,
+\emph{Generalized Robinson--Schensted--Knuth correspondence},
+J. Soviet Math. \textbf{41} (1988), no.~2, 979--991.
+
+\bibitem{Oka94}
+S.~Okada,
+\emph{Algebras associated to the Young--Fibonacci lattice},
+Trans. Amer. Math. Soc. \textbf{346} (1994), no.~2, 549--568.
+
+\bibitem{PS26}
+L.~Petrov and J.~Scott,
+\emph{Random Fibonacci words via clone Schur functions},
+Forum Math. Sigma \textbf{14} (2026), Paper No.~e15, 90 pp.;
+arXiv:2412.21126.
+
+\bibitem{Sta88}
+R.~P. Stanley,
+\emph{Differential posets},
+J. Amer. Math. Soc. \textbf{1} (1988), no.~4, 919--961.
+
+\end{thebibliography}
+
+\end{document}

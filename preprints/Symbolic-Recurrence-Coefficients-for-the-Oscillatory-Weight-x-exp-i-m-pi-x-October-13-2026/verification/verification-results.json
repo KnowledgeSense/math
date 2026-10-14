@@ -1,0 +1,180 @@
+{
+  "author": "Knowledge Sense",
+  "arithmetic": "integer polynomial Bareiss elimination with exact division; Fraction normalization",
+  "determinant_sizes": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "rows": [
+    {
+      "n": 1,
+      "degree": 0,
+      "lambda": 2,
+      "theta": 2,
+      "e": 0,
+      "table_row_matches": true,
+      "constant_identity_matches": true,
+      "K_divisible_by_z": true
+    },
+    {
+      "n": 2,
+      "degree": 1,
+      "lambda": -4,
+      "theta": 2,
+      "e": 4,
+      "table_row_matches": true,
+      "constant_identity_matches": true,
+      "K_divisible_by_z": true
+    },
+    {
+      "n": 3,
+      "degree": 2,
+      "lambda": 32,
+      "theta": 10,
+      "e": 2,
+      "table_row_matches": true,
+      "constant_identity_matches": true,
+      "K_divisible_by_z": true
+    },
+    {
+      "n": 4,
+      "degree": 4,
+      "lambda": 256,
+      "theta": 8,
+      "e": 12,
+      "table_row_matches": true,
+      "constant_identity_matches": true,
+      "K_divisible_by_z": true
+    },
+    {
+      "n": 5,
+      "degree": 6,
+      "lambda": 32768,
+      "theta": 24,
+      "e": 6,
+      "table_row_matches": true,
+      "constant_identity_matches": true,
+      "K_divisible_by_z": true
+    },
+    {
+      "n": 6,
+      "degree": 9,
+      "lambda": -4194304,
+      "theta": 18,
+      "e": 24,
+      "table_row_matches": true,
+      "constant_identity_matches": true,
+      "K_divisible_by_z": true
+    },
+    {
+      "n": 7,
+      "degree": 12,
+      "lambda": 19327352832,
+      "theta": 44,
+      "e": 12,
+      "table_row_matches": true,
+      "constant_identity_matches": true,
+      "K_divisible_by_z": true
+    },
+    {
+      "n": 8,
+      "degree": 16,
+      "lambda": 89060441849856,
+      "theta": 32,
+      "e": 40,
+      "table_row_matches": true,
+      "constant_identity_matches": true,
+      "K_divisible_by_z": true
+    },
+    {
+      "n": 9,
+      "degree": 20,
+      "lambda": 26264993026824732672,
+      "theta": 70,
+      "e": 20,
+      "table_row_matches": true,
+      "constant_identity_matches": true,
+      "K_divisible_by_z": true
+    },
+    {
+      "n": 10,
+      "degree": 25,
+      "lambda": -7745861623526935561764864,
+      "theta": 50,
+      "e": 60,
+      "table_row_matches": true,
+      "constant_identity_matches": true,
+      "K_divisible_by_z": true
+    }
+  ],
+  "table_entries_matched": 50,
+  "appendix_C4": {
+    "2": {
+      "all_coefficients_equal": true,
+      "coefficient_count": 3
+    },
+    "3": {
+      "all_coefficients_equal": true,
+      "coefficient_count": 4
+    },
+    "4": {
+      "all_coefficients_equal": true,
+      "coefficient_count": 5
+    },
+    "5": {
+      "all_coefficients_equal": true,
+      "coefficient_count": 6
+    },
+    "6": {
+      "all_coefficients_equal": true,
+      "coefficient_count": 7
+    },
+    "8": {
+      "all_coefficients_equal": true,
+      "coefficient_count": 9
+    },
+    "9": {
+      "all_coefficients_equal": true,
+      "coefficient_count": 10
+    },
+    "11": {
+      "all_coefficients_equal": true,
+      "coefficient_count": 12
+    },
+    "12": {
+      "all_coefficients_equal": true,
+      "coefficient_count": 13
+    },
+    "15": {
+      "all_coefficients_equal": true,
+      "coefficient_count": 16
+    },
+    "16": {
+      "all_coefficients_equal": true,
+      "coefficient_count": 17
+    }
+  },
+  "appendix_polynomials_matched": 11,
+  "appendix_coefficients_matched": 102,
+  "G1": [
+    "-2",
+    "1"
+  ],
+  "F2": [
+    "1"
+  ],
+  "F3": [
+    "-24",
+    "1"
+  ],
+  "normalizing_constant_ratios_match": true,
+  "all_checks_passed": true
+}

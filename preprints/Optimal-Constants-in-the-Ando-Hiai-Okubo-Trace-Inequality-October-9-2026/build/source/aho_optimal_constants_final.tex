@@ -1,0 +1,485 @@
+\documentclass{amsart}
+
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem*{definition}{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\PSD}{\mathcal{P}_n}
+\newcommand{\PD}{\mathcal{P}_n^{+}}
+\newcommand{\cut}{\kappa}
+
+\begin{document}
+
+\title[The Ando--Hiai--Okubo trace inequality]{Optimal constants in the Ando--Hiai--Okubo trace inequality}
+
+\author{Knowledge Sense}
+\address{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{9 October 2026}
+
+\subjclass[2020]{Primary 15A45; Secondary 15A42, 15B48, 47A63, 05C21}
+
+\keywords{Trace inequality, positive semidefinite matrix, Ando--Hiai--Okubo inequality, Araki--Lieb--Thirring inequality, word in two matrices, minimum cut}
+
+\begin{abstract}
+Ando, Hiai and Okubo asked whether, for all nonnegative exponents with $\sum_ip_i=\sum_iq_i=1$, the inequality $|\Tr(A^{p_1}B^{q_1}\cdots A^{p_K}B^{q_K})|\le\Tr(AB)$ holds for all positive semidefinite matrices $A$ and $B$. We determine the optimal constant in this inequality for every such word and every matrix size $n$. It equals one when $n\le 2$, by a theorem of Ando, Hiai and Okubo. For $n\ge 3$ it equals one if the exponents of the cyclically reduced word are sums of weights in $[0,1/2]$ attached to the adjacent pairs of factors, and it is infinite otherwise. That the weight condition implies the inequality is a cyclic form of the theorem of Ando, Hiai and Okubo; our contribution is the necessity of the condition, with unbounded trace ratios in every dimension at least three. When the weight condition fails, a minimum cut in an associated flow network selects one term of the spectral expansion of the trace, and this term dominates $\Tr(AB)$ on an explicit family of real $3\times 3$ matrices adapted from a construction of Carlen and Lieb. For four factors and $n\ge 3$ the inequality holds exactly on the closed diamond $|s-1/2|+|t-1/2|\le 1/2$ and on the boundary of the unit square; this answers questions of Plevnik and of Carlen and Lieb. We also show that an upper trace bound asked about by Furuichi, Kuriyama and Yanagi fails for products with three alternating pairs.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $A$ and $B$ be positive semidefinite matrices of the same size. In their study of trace inequalities for products of powers of two matrices, Ando, Hiai and Okubo \cite{AHO} asked whether
+\begin{equation}\label{eq:aho}
+|\Tr(A^{p_1}B^{q_1}A^{p_2}B^{q_2}\cdots A^{p_K}B^{q_K})|\le\Tr(AB)
+\end{equation}
+holds for all nonnegative exponents with $p_1+\dots+p_K=q_1+\dots+q_K=1$. Powers are spectral powers, with the convention $A^0=B^0=I$. The absolute value is needed, since the trace of a product of powers of two positive definite matrices need not be positive \cite{HJ}, or even real \cite{FKY}. Ando, Hiai and Okubo proved \eqref{eq:aho} when the alternating partial sums of the exponents lie in $[0,1/2]$ \cite[Theorem~2.1]{AHO}, and for arbitrary exponents when each of $A$ and $B$ has at most two distinct eigenvalues, in particular for $2\times 2$ matrices \cite[Theorem~4.1, Corollaries~4.3 and~4.4]{AHO}. They also observed that their sufficient condition fails for every cyclic permutation of the product $A^{3/5}B^{1/5}A^{1/5}B^{3/5}A^{1/5}B^{1/5}$ \cite[p.~312]{AHO}.
+
+Most of the later work concerns four factors, that is, the inequality
+\begin{equation}\label{eq:four}
+|\Tr(A^{s}B^{t}A^{1-s}B^{1-t})|\le\Tr(AB),\qquad 0\le s,t\le 1 .
+\end{equation}
+Ando, Hiai and Okubo proved \eqref{eq:four} for $|s-1/2|+|t-1/2|\le 1/2$ \cite[Corollary~2.2]{AHO}. The cases $s+t=1$ and $s=t$ were studied by Bhatia \cite{Bh} and by Bottazzi, Elencwajg, Larotonda and Varela \cite{BELV}; the latter used the Araki--Lieb--Thirring and H\"older inequalities. Hayajneh, Hayajneh and Kittaneh \cite{HHK} extended the diamond condition to complex exponents. Carlen and Lieb \cite{CL} gave another proof based on the same two inequalities. Plevnik \cite{Pl} found the first counterexample to \eqref{eq:aho}, with $3\times 3$ matrices. He also asked whether $[1/4,3/4]$ is the maximal interval of parameters $\tau$ for which $\operatorname{Re}\Tr(A^{\tau}B^{1-\tau}A^{1-\tau}B^{\tau})\le\Tr(AB)$ holds for all positive semidefinite $A$ and $B$ \cite[Question~2.3]{Pl}. Carlen and Lieb \cite[Section~IV]{CL} gave a systematic construction of counterexamples and asked whether the condition $s+t\le 3/2$ in their theorem, which concerns $1/2\le s,t\le 1$, is sharp. In a related direction, Furuichi, Kuriyama and Yanagi \cite{FKY} asked whether $|\Tr(T^{p_1}CT^{p_2}C\cdots T^{p_m}C)|\le\Tr(TC^m)$ for positive definite $T,C$ and positive $p_1,\dots,p_m$ with sum one; the editorial column \cite{Br} records that this upper bound remained open for $m\ge 3$ and matrices of size at least three. For strictly positive exponents, Drury \cite{Dr} classified the words for which an analogous inequality for the operator norm, with $\Tr(AB)$ replaced by a power of the operator norm of $AB$, holds; that problem has a different answer.
+
+In this paper we determine the optimal constant in \eqref{eq:aho} for every word and every fixed matrix size. Let $\PSD$ and $\PD$ denote the sets of complex Hermitian positive semidefinite and positive definite $n\times n$ matrices, and let $\Delta_K=\{x\in[0,1]^K:x_1+\dots+x_K=1\}$. For $p,q\in\Delta_K$ and $A,B\in\PSD$ put
+\[
+F_{p,q}(A,B)=\Tr(A^{p_1}B^{q_1}\cdots A^{p_K}B^{q_K}),\qquad
+C_n(p,q)=\sup_{A,B\in\PD}\frac{|F_{p,q}(A,B)|}{\Tr(AB)} .
+\]
+Taking $A=B=I$ shows that $C_n(p,q)\ge 1$.
+
+Our answer depends on the exponents only through the reduced word, which we now define. Place the $2K$ factors of $A^{p_1}B^{q_1}\cdots A^{p_K}B^{q_K}$ on a circle, delete the factors with exponent zero, and merge every maximal run of cyclically consecutive factors with the same letter into one factor whose exponent is the sum of the exponents in the run. Since both families of exponents sum to one, both letters survive, and we obtain a cyclic word $A^{\hat p_1}B^{\hat q_1}\cdots A^{\hat p_k}B^{\hat q_k}$ with $k\ge 1$ and strictly positive exponents, determined up to a cyclic shift of the indices. We call $(\hat p,\hat q)\in\Delta_k\times\Delta_k$ the \emph{reduction} of $(p,q)$. The reduced word has $2k$ cyclically adjacent pairs of factors, namely $(A^{\hat p_i},B^{\hat q_i})$ and $(B^{\hat q_i},A^{\hat p_{i+1}})$ for $1\le i\le k$, where indices are read modulo $k$; for $k=1$ these are two distinct pairs.
+
+\begin{definition}
+The pair $(p,q)$ is \emph{admissible} if there are numbers $a_i,b_i\in[0,1/2]$, $1\le i\le k$, with
+\begin{equation}\label{eq:weights}
+\hat q_i=a_i+b_i,\qquad \hat p_i=a_i+b_{i-1}\qquad(1\le i\le k),
+\end{equation}
+where $b_0=b_k$.
+\end{definition}
+
+Thus $a_i$ is a weight on the pair $(A^{\hat p_i},B^{\hat q_i})$, $b_i$ is a weight on the pair $(B^{\hat q_i},A^{\hat p_{i+1}})$, and \eqref{eq:weights} says that the exponent of every factor is the total weight of the two pairs that contain it. Admissibility does not depend on the cyclic shift chosen for the reduced word.
+
+\begin{theorem}\label{thm:main}
+Let $K\ge 1$ and $p,q\in\Delta_K$.
+\begin{enumerate}
+\item[(a)] $C_1(p,q)=C_2(p,q)=1$.
+\item[(b)] If $(p,q)$ is admissible, then $|F_{p,q}(A,B)|\le\Tr(AB)$ for every $n$ and all $A,B\in\PSD$. In particular $C_n(p,q)=1$ for every $n$.
+\item[(c)] If $(p,q)$ is not admissible, then $C_n(p,q)=\infty$ for every $n\ge 3$. More precisely, for every $n\ge 3$ and every $L>0$ there are real positive definite $n\times n$ matrices $A$ and $B$ such that $F_{p,q}(A,B)$ is real and $F_{p,q}(A,B)>L\,\Tr(AB)$.
+\end{enumerate}
+\end{theorem}
+
+Consequently $C_n(p,q)\in\{1,\infty\}$ for all $n$, $p$ and $q$, and for $n\ge 3$ the alternative is decided by admissibility. Since the matrices in (c) are real and $F_{p,q}(A,B)>0$ for them, the weaker inequality $\operatorname{Re}F_{p,q}(A,B)\le\Tr(AB)$ fails as well.
+
+\emph{Attribution.} Parts (a) and (b) are due to Ando, Hiai and Okubo. Part (a) is \cite[Corollary~4.4(i)]{AHO}. Part (b) follows from \cite[Theorem~2.1]{AHO} after a cyclic rotation of the word and the insertion of a factor $B^0$; Lemma~\ref{lem:chart} shows that every admissible pair is brought into the hypotheses of that theorem in this way. The new result of this paper is part (c), that is, the necessity of admissibility, with unbounded ratios in every dimension at least three. The proof of (c) uses the geometric construction of Carlen and Lieb \cite[Section~IV]{CL}, which we adapt by coupling the rotation angle to the spectral parameter.
+
+Admissibility is a finite system of linear inequalities. Lemma~\ref{lem:interval} reduces it to comparing $2k$ lower bounds with $2k$ upper bounds for a single real parameter, and Proposition~\ref{prop:cut} gives an equivalent condition in terms of cuts, which is the form used in the proof of (c). For four factors we obtain the following classification; here the reduced word has $k=1$ exactly when $(s,t)$ lies on the boundary of the unit square.
+
+\begin{corollary}\label{cor:four}
+Let $n\ge 3$ and $0\le s,t\le 1$. Then
+\[
+\sup_{A,B\in\PD}\frac{|\Tr(A^sB^tA^{1-s}B^{1-t})|}{\Tr(AB)}
+\]
+equals $1$ if $\{s,t\}\cap\{0,1\}\ne\emptyset$ or $|s-1/2|+|t-1/2|\le 1/2$, and equals $\infty$ otherwise.
+\end{corollary}
+
+This answers Plevnik's question in the affirmative and shows that the condition $s+t\le 3/2$ of Carlen and Lieb is sharp for $1/2\le s,t<1$ (Corollary~\ref{cor:plevnik} and Remark~\ref{rem:CL}). In Section~\ref{sec:consequences} we also show that the six-factor product of Ando, Hiai and Okubo violates \eqref{eq:aho} for $n\ge 3$, and we determine exactly when the upper bound of Furuichi, Kuriyama and Yanagi holds (Corollary~\ref{cor:fky}). For three alternating pairs and positive exponents it holds if and only if $\max_ip_i\le 2/3$; in particular it fails for $(p_1,p_2,p_3)=(4/5,1/10,1/10)$.
+
+\emph{Method.} Admissibility is the existence of a flow of value one in a network with $2k+2$ vertices. When it fails, the max-flow min-cut theorem provides a set $S$ of $A$-factors and a set $T$ of $B$-factors with $p(S)+q(T)>1+e(S,T)/2$, where $e(S,T)\le 1$ is the number of adjacent pairs joining a factor of $S$ to a factor of $T$ (see Section~\ref{sec:reduction}). We then use a family of real $3\times 3$ positive semidefinite matrices with spectrum $\{\varepsilon,0,1\}$ for which every term of the spectral expansion of the trace is nonnegative. The term selected by the cut $(S,T)$ already exceeds $\Tr(AB)$ by a factor that is a negative power of $\varepsilon$. Finally a small multiple of the identity makes the matrices positive definite in every dimension $n\ge 3$. Drury \cite{Dr} uses individual nonnegative terms of a trace expansion in a similar way for the operator norm problem.
+
+\emph{Organization.} Section~\ref{sec:reduction} treats the reduction and the equivalent forms of admissibility. Section~\ref{sec:known} recalls the affirmative results of Ando, Hiai and Okubo. Section~\ref{sec:family} introduces the three-dimensional family, and Section~\ref{sec:proof} proves Theorem~\ref{thm:main}. Section~\ref{sec:consequences} contains the consequences.
+
+\section{Reduction and the weight condition}\label{sec:reduction}
+
+Throughout, spectral powers of positive semidefinite matrices are taken with $A^0=I$. Thus $A^xA^y=A^{x+y}$ for all $x,y\ge 0$.
+
+\begin{lemma}\label{lem:reduction}
+Let $p,q\in\Delta_K$ have reduction $(\hat p,\hat q)\in\Delta_k\times\Delta_k$. Then $F_{p,q}(A,B)=F_{\hat p,\hat q}(A,B)$ for all $n$ and all $A,B\in\PSD$.
+\end{lemma}
+
+\begin{proof}
+Deleting a factor $A^0=I$ or $B^0=I$ does not change the product. Merging two consecutive factors of the same letter uses $A^xA^y=A^{x+y}$, and merging the last factor with the first one, when they have the same letter, uses the cyclicity of the trace. No commutation of $A$ with $B$ is used.
+\end{proof}
+
+\begin{remark}\label{rem:zero}
+The convention $A^0=I$ matters only for singular matrices, and $C_n$ is defined with positive definite matrices. If $A^0$ were instead interpreted as the support projection of $A$, Lemma~\ref{lem:reduction} would fail for singular matrices; compare the discussion of $\lim_{t\to 0}Y^t$ in \cite[Section~IV]{CL}.
+\end{remark}
+
+From now on we often assume that $(p,q)$ is \emph{reduced}, that is, $p,q\in\Delta_k$ have strictly positive entries and the word $A^{p_1}B^{q_1}\cdots A^{p_k}B^{q_k}$ is regarded cyclically; then \eqref{eq:weights} is read with $\hat p=p$ and $\hat q=q$. All indices are read modulo $k$, and for $S\subseteq\{1,\dots,k\}$ we write $p(S)=\sum_{i\in S}p_i$ and $q(S)=\sum_{i\in S}q_i$.
+
+\begin{lemma}\label{lem:interval}
+Let $(p,q)$ be reduced, and put $c_1=0$ and
+\[
+c_i=\sum_{j=2}^{i}p_j-\sum_{j=1}^{i-1}q_j\qquad(2\le i\le k).
+\]
+Then $(p,q)$ is admissible if and only if
+\begin{equation}\label{eq:interval}
+\max_{1\le i\le k}\max\{-c_i,\ q_i-c_i-\tfrac12\}\le\min_{1\le i\le k}\min\{\tfrac12-c_i,\ q_i-c_i\}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Subtracting $q_{i-1}=a_{i-1}+b_{i-1}$ from $p_i=a_i+b_{i-1}$ shows that every solution of \eqref{eq:weights} satisfies $a_i=a_{i-1}+p_i-q_{i-1}$ for $2\le i\le k$, so $a_i=x+c_i$ and $b_i=q_i-x-c_i$ with $x=a_1$. Conversely, for every real $x$ these numbers satisfy all equations in \eqref{eq:weights} except possibly $p_1=a_1+b_k$, which reads $c_k=q_k-p_1$ and holds because $\sum_ip_i=\sum_iq_i$. The constraints $0\le a_i\le 1/2$ and $0\le b_i\le 1/2$ say that $x$ lies in $[-c_i,1/2-c_i]\cap[q_i-c_i-1/2,q_i-c_i]$ for every $i$, and a common point exists exactly when \eqref{eq:interval} holds.
+\end{proof}
+
+For $k=1$ the condition \eqref{eq:interval} forces $a_1=b_1=1/2$; this is the trivial case $F_{p,q}(A,B)=\Tr(AB)$.
+
+The next lemma shows that every admissible pair satisfies, after a cyclic rotation, the hypotheses of \cite[Theorem~2.1]{AHO}. These hypotheses require, for exponents $p',q'\in\Delta_{K'}$, that
+\begin{equation}\label{eq:AHOchart}
+\begin{aligned}
+0\le\sum_{i\le j}p'_i-\sum_{i<j}q'_i&\le\tfrac12&&(1\le j\le K'),\\
+0\le\sum_{i\le j}q'_i-\sum_{i\le j}p'_i&\le\tfrac12&&(1\le j\le K'-1).
+\end{aligned}
+\end{equation}
+
+\begin{lemma}\label{lem:chart}
+Let $(p,q)$ be reduced and admissible, with weights $a_i,b_i$ as in \eqref{eq:weights}. Put
+\[
+p'=(a_1,p_2,\dots,p_k,b_k),\qquad q'=(q_1,\dots,q_k,0)\in\Delta_{k+1}.
+\]
+Then $F_{p',q'}(A,B)=F_{p,q}(A,B)$ for all $A,B\in\PSD$, and $(p',q')$ satisfies \eqref{eq:AHOchart} with $K'=k+1$. More precisely, the partial sums in \eqref{eq:AHOchart} are $a_j$ and $b_j$ for $j\le k$, and the first one is $0$ for $j=k+1$.
+\end{lemma}
+
+\begin{proof}
+The word of $(p',q')$ is $A^{a_1}B^{q_1}A^{p_2}\cdots A^{p_k}B^{q_k}A^{b_k}B^0$. Moving $A^{b_k}$ to the front by cyclicity and using $b_k+a_1=p_1$ gives the first claim. For $2\le j\le k$, \eqref{eq:weights} gives
+\[
+a_1+\sum_{i=2}^{j}p_i-\sum_{i=1}^{j-1}q_i
+=a_1+\sum_{i=2}^{j}(a_i+b_{i-1})-\sum_{i=1}^{j-1}(a_i+b_i)=a_j,
+\]
+and this holds trivially for $j=1$. Hence, for $1\le j\le k$, the second difference in \eqref{eq:AHOchart} is
+\[
+\sum_{i\le j}q'_i-\sum_{i\le j}p'_i=\sum_{i\le j}q_i-\Bigl(a_j+\sum_{i<j}q_i\Bigr)=q_j-a_j=b_j .
+\]
+For $j=k+1$ the first difference is $\sum_ip'_i-\sum_iq_i=0$.
+\end{proof}
+
+For $S,T\subseteq\{1,\dots,k\}$ let $e(S,T)$ be the number of adjacent pairs of the reduced cyclic word that consist of an $A$-factor with index in $S$ and a $B$-factor with index in $T$:
+\[
+e(S,T)=|\{i\in T:i\in S\}|+|\{i\in T:i+1\in S\}| .
+\]
+For $k=1$ and $S=T=\{1\}$ this number is $2$. Put
+\begin{equation}\label{eq:capacity}
+\cut(S,T)=2-p(S)-q(T)+\tfrac12 e(S,T).
+\end{equation}
+
+\begin{proposition}\label{prop:cut}
+A reduced pair $(p,q)$ is admissible if and only if $\cut(S,T)\ge 1$ for all $S,T\subseteq\{1,\dots,k\}$.
+\end{proposition}
+
+\begin{proof}
+Suppose that \eqref{eq:weights} holds, and let $S,T\subseteq\{1,\dots,k\}$. Give the pair $(A^{p_i},B^{q_i})$ the weight $a_i$ and the pair $(B^{q_i},A^{p_{i+1}})$ the weight $b_i$. Every pair contains exactly one $A$-factor and one $B$-factor, and by \eqref{eq:weights} the exponent of each factor is the total weight of the pairs containing it. Hence $p(S)$ is the total weight of the pairs whose $A$-factor has index in $S$. Among these pairs, the $e(S,T)$ pairs whose $B$-factor has index in $T$ have weight at most $1/2$ each, and the remaining ones have total weight at most $\sum_{j\notin T}q_j=1-q(T)$. Therefore $p(S)\le e(S,T)/2+1-q(T)$, that is, $\cut(S,T)\ge 1$.
+
+Conversely, suppose that \eqref{eq:weights} has no solution in $[0,1/2]$. Consider the network with a source $\sigma$, a sink $\tau$, vertices $\alpha_1,\dots,\alpha_k,\beta_1,\dots,\beta_k$, arcs $\sigma\to\alpha_i$ of capacity $p_i$, arcs $\beta_j\to\tau$ of capacity $q_j$, and for every adjacent pair of the reduced word an arc of capacity $1/2$ from the vertex of its $A$-factor to the vertex of its $B$-factor; for $k=1$ there are two parallel arcs $\alpha_1\to\beta_1$. A flow assigns to each arc a number between $0$ and its capacity, with conservation at every vertex other than $\sigma$ and $\tau$; its value is the total flow on the arcs leaving $\sigma$. If a flow had value one, all arcs leaving $\sigma$ and all arcs entering $\tau$ would be saturated, since the capacities in each of these two families sum to one, and the values on the arcs $\alpha_i\to\beta_i$ and $\alpha_{i+1}\to\beta_i$ would solve \eqref{eq:weights}. Hence every flow has value less than one.
+
+The remaining argument is the max-flow min-cut theorem of Ford and Fulkerson \cite{FF}; we include it for real capacities. The flows form a nonempty compact subset of a finite-dimensional space, so there is a flow $\varphi$ of maximal value. Let $X$ be the set of vertices that can be reached from $\sigma$ by a path in which each step either follows an arc carrying less than its capacity or traverses backwards an arc carrying positive flow. If $\tau\in X$, changing $\varphi$ along such a path by the smallest available amount would increase its value. Hence $\tau\notin X$, every arc from $X$ to its complement is saturated, and every arc from the complement into $X$ carries no flow. Summing the conservation equations over $X$ shows that the value of $\varphi$ equals the total capacity of the arcs leaving $X$. Let $S=\{i:\alpha_i\in X\}$ and $T=\{j:\beta_j\notin X\}$. The arcs leaving $X$ are the arcs $\sigma\to\alpha_i$ with $i\notin S$, the $e(S,T)$ arcs from $\{\alpha_i:i\in S\}$ to $\{\beta_j:j\in T\}$, and the arcs $\beta_j\to\tau$ with $j\notin T$. Their total capacity is $\cut(S,T)$, which is therefore less than one.
+\end{proof}
+
+\section{The known affirmative results}\label{sec:known}
+
+\begin{proposition}[Ando--Hiai--Okubo]\label{prop:AHO}
+If $(p,q)$ is admissible, then $|F_{p,q}(A,B)|\le\Tr(AB)$ for all $A,B\in\PSD$.
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:reduction} we may assume that $(p,q)$ is reduced. By Lemma~\ref{lem:chart}, $F_{p,q}(A,B)=F_{p',q'}(A,B)$, where $(p',q')$ satisfies the hypotheses \eqref{eq:AHOchart} of \cite[Theorem~2.1]{AHO}. That theorem gives $|F_{p',q'}(A,B)|\le\Tr(AB)$ \cite[(2.2)]{AHO}.
+\end{proof}
+
+\begin{remark}\label{rem:ALT}
+The following argument avoids log majorization. It combines the Araki--Lieb--Thirring and H\"older inequalities as in Bottazzi, Elencwajg, Larotonda and Varela \cite{BELV} and in Carlen and Lieb \cite[Theorem~2.1]{CL}, who note in \cite[Remark~2.3]{CL} that it extends to longer products; Hayajneh, Hayajneh and Kittaneh \cite{HHK} use the same ingredients. Let $A,B\in\PD$, let $(p,q)$ be reduced, and let $a_i,b_i$ satisfy \eqref{eq:weights}. By cyclicity of the trace,
+\begin{equation}\label{eq:factorization}
+F_{p,q}(A,B)=\Tr\prod_{i=1}^{k}(A^{a_i}B^{a_i})(B^{b_i}A^{b_i}),
+\end{equation}
+the product being taken in increasing order of $i$. Indeed, inside the $i$-th factor the powers of $B$ combine to $a_i+b_i=q_i$, between consecutive factors the powers of $A$ combine to $b_i+a_{i+1}=p_{i+1}$, and the last power $A^{b_k}$ combines with the first power $A^{a_1}$ to $A^{p_1}$. For $s\ge 1$ the Araki--Lieb--Thirring inequality \cite{Ar,LT} states that $\Tr((Y^{1/2}XY^{1/2})^s)\le\Tr(Y^{s/2}X^sY^{s/2})$ for positive semidefinite $X,Y$. Applied with $X=A^{2r}$, $Y=B^{2r}$ and $s=1/(2r)$ for $0<r\le 1/2$, it gives
+\[
+\|A^rB^r\|_{1/r}^{1/r}=\Tr\bigl((B^rA^{2r}B^r)^{1/(2r)}\bigr)\le\Tr(AB),
+\]
+where $\|\cdot\|_\rho$ is the Schatten norm, and the same bound holds for $B^rA^r=(A^rB^r)^*$. Since $\sum_i(a_i+b_i)=\sum_iq_i=1$, the H\"older inequality for Schatten norms \cite[Theorem~2.8]{Si} with exponents $1/a_i$ and $1/b_i$, factors of weight zero being equal to $I$, yields
+\[
+|F_{p,q}(A,B)|\le\prod_{i=1}^{k}\Tr(AB)^{a_i}\,\Tr(AB)^{b_i}=\Tr(AB).
+\]
+\end{remark}
+
+\begin{proposition}[Ando--Hiai--Okubo]\label{prop:twoeig}
+Let $p,q\in\Delta_K$ and let $A,B\in\PSD$ each have at most two distinct eigenvalues. Then $0\le F_{p,q}(A,B)\le\Tr(AB)$. In particular $C_1(p,q)=C_2(p,q)=1$.
+\end{proposition}
+
+\begin{proof}
+This is \cite[Corollary~4.3(i)]{AHO}, a consequence of \cite[Theorem~4.1]{AHO}; for $n\le 2$ it is \cite[Corollary~4.4(i)]{AHO}. Equality holds for $A=B=I$.
+\end{proof}
+
+The matrices constructed in Section~\ref{sec:family} have three distinct eigenvalues, in accordance with Proposition~\ref{prop:twoeig}.
+
+\section{A three-dimensional family}\label{sec:family}
+
+Throughout this section $(p,q)$ is reduced and not admissible. By Proposition~\ref{prop:cut} we may fix $S,T\subseteq\{1,\dots,k\}$ with $\cut(S,T)<1$, and we put
+\[
+b=e(S,T),\qquad\theta=2-p(S)-q(T).
+\]
+
+\begin{lemma}\label{lem:parameters}
+We have $b\in\{0,1\}$ and $0\le\theta<1-b/2$. Consequently the numbers
+\[
+h=\frac12\Bigl(\frac{\theta}{2-b}+\frac12\Bigr),\qquad\nu=\theta+bh,\qquad\delta=2h-\nu
+\]
+satisfy $0<h<1/2$ and $\delta=(1-\cut(S,T))/2>0$.
+\end{lemma}
+
+\begin{proof}
+Since $p(S),q(T)\le 1$, we have $\theta\ge 0$, and $\cut(S,T)=\theta+b/2<1$ forces $b\le 1$ and $\theta<1-b/2$. Thus $\theta/(2-b)<1/2$, and $h$ is the midpoint of the interval $(\theta/(2-b),1/2)$. Finally $\delta=(2-b)h-\theta=(2-b)/4-\theta/2=(1-\theta-b/2)/2$.
+\end{proof}
+
+Let $e_1,e_2,e_3$ be the standard basis of $\mathbb{R}^3$ and $\langle\cdot,\cdot\rangle$ the standard inner product. For $0<z<1$ let
+\[
+U=\frac12\begin{pmatrix}1&-1&\sqrt2\\-1&1&\sqrt2\\\sqrt2&\sqrt2&0\end{pmatrix},\qquad
+R_z=\frac{1}{1+z^2}\begin{pmatrix}1-z^2&0&-2z\\0&1+z^2&0\\2z&0&1-z^2\end{pmatrix}.
+\]
+The matrix $U$ is the Householder reflection that exchanges $e_3$ and $(e_1+e_2)/\sqrt2$, and $R_z$ is the rotation by the angle $2\arctan z$ in the plane of $e_1$ and $e_3$; both are orthogonal. For $0<\varepsilon<1$ let $z=\varepsilon^h$, $V=R_zU$, $v=Ve_1$, $u=Ve_3$, and
+\begin{equation}\label{eq:family}
+\begin{aligned}
+A_\varepsilon&=V\operatorname{diag}(\varepsilon,0,1)V^{T}=\varepsilon\,vv^{T}+uu^{T},\\
+B_\varepsilon&=\operatorname{diag}(\varepsilon,0,1)=\varepsilon\,e_1e_1^{T}+e_3e_3^{T}.
+\end{aligned}
+\end{equation}
+These are real positive semidefinite matrices with spectrum $\{\varepsilon,0,1\}$. They are of the form considered by Carlen and Lieb \cite[Section~IV]{CL}, who conjugate a diagonal matrix by $U$ and by a rotation in the plane of $e_1$ and $e_3$ and pair it with a second diagonal matrix; here both diagonal matrices are $\operatorname{diag}(\varepsilon,0,1)$ and the rotation angle is tied to $\varepsilon$.
+
+\begin{lemma}\label{lem:overlaps}
+Write $c_z=(1-z^2)/(1+z^2)$ and $s_z=2z/(1+z^2)$. Then
+\[
+v=\Bigl(\frac{c_z}{2}-\frac{s_z}{\sqrt2},\ -\frac12,\ \frac{s_z}{2}+\frac{c_z}{\sqrt2}\Bigr),\qquad
+u=\Bigl(\frac{c_z}{\sqrt2},\ \frac{1}{\sqrt2},\ \frac{s_z}{\sqrt2}\Bigr).
+\]
+If $0<z\le 1/8$, then
+\[
+\langle v,e_1\rangle>\tfrac14,\qquad \langle v,e_3\rangle>\tfrac12,\qquad\langle u,e_1\rangle>\tfrac12,\qquad z<\langle u,e_3\rangle\le\sqrt2\,z .
+\]
+\end{lemma}
+
+\begin{proof}
+The formulas follow from $Ue_1=(1,-1,\sqrt2)/2$, $Ue_3=(1,1,0)/\sqrt2$ and the definition of $R_z$. For $0<z\le 1/8$ we have $c_z\ge 63/65$ and $0<s_z\le 2z\le 1/4$. Using $4/3<\sqrt2<3/2$,
+\[
+\langle v,e_1\rangle\ge\frac{63}{130}-\frac{3}{16}=\frac{309}{1040}>\frac14,\qquad
+\langle v,e_3\rangle,\ \langle u,e_1\rangle\ge\frac{c_z}{\sqrt2}\ge\frac{42}{65}>\frac12,
+\]
+and $\langle u,e_3\rangle=\sqrt2\,z/(1+z^2)$ lies between $(4/3)(64/65)z=256z/195>z$ and $\sqrt2\,z$.
+\end{proof}
+
+\begin{lemma}\label{lem:expansion}
+For $0<\varepsilon<1$,
+\begin{equation}\label{eq:expansion}
+F_{p,q}(A_\varepsilon,B_\varepsilon)=\sum_{x\in\{v,u\}^k}\ \sum_{y\in\{e_1,e_3\}^k}\varepsilon^{N(x,y)}\prod_{i=1}^{k}\langle x_i,y_i\rangle\langle y_i,x_{i+1}\rangle,
+\end{equation}
+where $x_{k+1}=x_1$ and $N(x,y)=\sum_{i:\,x_i=v}p_i+\sum_{i:\,y_i=e_1}q_i$. If moreover $\varepsilon^h\le 1/8$, then every term of \eqref{eq:expansion} is nonnegative.
+\end{lemma}
+
+\begin{proof}
+All exponents of the reduced word are positive, so $A_\varepsilon^{\alpha}=\varepsilon^\alpha vv^T+uu^T$ and $B_\varepsilon^{\alpha}=\varepsilon^\alpha e_1e_1^T+e_3e_3^T$ for every exponent $\alpha$ that occurs. Expanding the product multilinearly and using $\Tr(w_1w_1^T w_2w_2^T\cdots w_mw_m^T)=\langle w_1,w_2\rangle\langle w_2,w_3\rangle\cdots\langle w_m,w_1\rangle$ for real vectors gives \eqref{eq:expansion}. Every inner product in \eqref{eq:expansion} is one of the four numbers of Lemma~\ref{lem:overlaps}, which are positive when $z=\varepsilon^h\le 1/8$.
+\end{proof}
+
+\begin{proposition}\label{prop:psd}
+For $0<\varepsilon\le 8^{-1/h}$,
+\[
+F_{p,q}(A_\varepsilon,B_\varepsilon)\ge 4^{-2k}\varepsilon^{\nu}\qquad\text{and}\qquad 0<\Tr(A_\varepsilon B_\varepsilon)\le 5\varepsilon^{2h}.
+\]
+In particular $F_{p,q}(A_\varepsilon,B_\varepsilon)/\Tr(A_\varepsilon B_\varepsilon)\ge 4^{-2k}\varepsilon^{-\delta}/5$.
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:expansion} every term of \eqref{eq:expansion} is nonnegative, so $F_{p,q}(A_\varepsilon,B_\varepsilon)$ is at least the single term with $x_i=u$ exactly for $i\in S$ and $y_i=e_3$ exactly for $i\in T$. Its power of $\varepsilon$ is
+\[
+\sum_{i\notin S}p_i+\sum_{i\notin T}q_i=2-p(S)-q(T)=\theta .
+\]
+Its $2k$ inner products correspond to the $2k$ adjacent pairs of the reduced word, and the inner product $\langle u,e_3\rangle$ occurs exactly for the $b$ pairs consisting of an $A$-factor indexed by $S$ and a $B$-factor indexed by $T$. By Lemma~\ref{lem:overlaps} the other inner products exceed $1/4$ and $\langle u,e_3\rangle>z$, so the term is at least $4^{-(2k-b)}\varepsilon^{\theta}z^{b}\ge 4^{-2k}\varepsilon^{\theta+bh}=4^{-2k}\varepsilon^{\nu}$.
+
+For the denominator, the spectral decompositions in \eqref{eq:family} give
+\[
+\Tr(A_\varepsilon B_\varepsilon)=\varepsilon^2\langle v,e_1\rangle^2+\varepsilon\langle v,e_3\rangle^2+\varepsilon\langle u,e_1\rangle^2+\langle u,e_3\rangle^2 .
+\]
+This is positive because $\langle u,e_3\rangle>0$. Since $u$ and $v$ are unit vectors, the first three terms are at most $\varepsilon^2+2\varepsilon\le 3\varepsilon$. By Lemma~\ref{lem:overlaps}, $\langle u,e_3\rangle^2\le 2z^2=2\varepsilon^{2h}$. Since $2h<1$, we have $\varepsilon\le\varepsilon^{2h}$, and the sum is at most $3\varepsilon+2\varepsilon^{2h}\le 5\varepsilon^{2h}$. The last claim follows from $\delta=2h-\nu$.
+\end{proof}
+
+\section{Proof of the main theorem}\label{sec:proof}
+
+The family \eqref{eq:family} consists of singular matrices. The following proposition makes it positive definite in any dimension $n\ge 3$.
+
+\begin{proposition}\label{prop:pd}
+Let $(p,q)$ be reduced and not admissible, and let $S,T,h,\nu,\delta$ be as in Section~\ref{sec:family}. Let $n\ge 3$ and $L>0$, and let $m>0$ be the smallest entry of $p$ and $q$. Let $A_0=A_\varepsilon\oplus 0_{n-3}$, $B_0=B_\varepsilon\oplus 0_{n-3}$, $\eta=\varepsilon^{(2h+1)/m}$, and
+\[
+A=A_0+\eta I_n,\qquad B=B_0+\eta I_n .
+\]
+If $0<\varepsilon\le 8^{-1/h}$ and
+\begin{equation}\label{eq:epsilon}
+\varepsilon^{1+\delta}\le\frac{1}{2nk\,4^{3k}},\qquad
+\varepsilon^{\delta}<\frac{4^{-2k}}{2(n+9)L},
+\end{equation}
+then $A$ and $B$ are real positive definite, $F_{p,q}(A,B)$ is real, and
+\[
+F_{p,q}(A,B)\ge\tfrac12\,4^{-2k}\varepsilon^{\nu}>L\,\Tr(AB).
+\]
+\end{proposition}
+
+\begin{proof}
+The matrices $A$ and $B$ are real and positive definite, so $F_{p,q}(A,B)$ is real. Since all exponents are positive, we have $A_0^{\alpha}=A_\varepsilon^{\alpha}\oplus 0$ and $B_0^{\alpha}=B_\varepsilon^{\alpha}\oplus 0$, so that $F_{p,q}(A_0,B_0)=F_{p,q}(A_\varepsilon,B_\varepsilon)$ and $\Tr(A_0B_0)=\Tr(A_\varepsilon B_\varepsilon)$.
+
+Every exponent $\alpha$ lies in $[m,1]$. The matrices $A_0$ and $A_0+\eta I$ have the same eigenvectors, and $(\lambda+\eta)^\alpha-\lambda^\alpha\le\eta^\alpha$ for $\lambda\ge 0$, so $\|(A_0+\eta I)^\alpha-A_0^\alpha\|\le\eta^\alpha\le\eta^m$ in the operator norm, since $\eta<1$; the same holds for $B_0$. All powers that occur have operator norm at most $(1+\eta)^\alpha\le 2$. Writing the difference of the two products of $2k$ factors as a telescoping sum of $2k$ terms and using $|\Tr Z|\le n\|Z\|$, we obtain
+\[
+|F_{p,q}(A,B)-F_{p,q}(A_0,B_0)|\le n\cdot 2k\cdot 2^{2k-1}\eta^m=nk\,4^{k}\varepsilon^{2h+1}.
+\]
+Since $2h+1-\nu=1+\delta$, the first condition in \eqref{eq:epsilon} makes this at most $\tfrac12\,4^{-2k}\varepsilon^{\nu}$, and Proposition~\ref{prop:psd} gives $F_{p,q}(A,B)\ge\tfrac12\,4^{-2k}\varepsilon^{\nu}$.
+
+For the denominator, $\Tr A_0=\Tr B_0=1+\varepsilon\le 2$, and $\eta\le\varepsilon^{2h+1}\le\varepsilon^{2h}$ because $m\le 1$. By Proposition~\ref{prop:psd},
+\[
+\Tr(AB)=\Tr(A_0B_0)+\eta\Tr(A_0+B_0)+n\eta^2\le 5\varepsilon^{2h}+4\varepsilon^{2h}+n\varepsilon^{2h}=(n+9)\varepsilon^{2h}.
+\]
+Hence $F_{p,q}(A,B)/\Tr(AB)\ge 4^{-2k}\varepsilon^{\nu-2h}/(2(n+9))=4^{-2k}\varepsilon^{-\delta}/(2(n+9))$, which exceeds $L$ by the second condition in \eqref{eq:epsilon}.
+\end{proof}
+
+Since $\delta>0$, every sufficiently small $\varepsilon>0$ satisfies the hypotheses of Proposition~\ref{prop:pd}.
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Part (a) is Proposition~\ref{prop:twoeig}, and part (b) is Proposition~\ref{prop:AHO} together with $C_n(p,q)\ge 1$. For part (c), let $(\hat p,\hat q)$ be the reduction of $(p,q)$. It is not admissible, so Proposition~\ref{prop:cut} provides $S,T$ with $\cut(S,T)<1$, and Proposition~\ref{prop:pd} applied to $(\hat p,\hat q)$ provides, for given $n\ge 3$ and $L>0$, real positive definite $A,B$ with $F_{\hat p,\hat q}(A,B)>L\Tr(AB)$. By Lemma~\ref{lem:reduction}, $F_{p,q}(A,B)=F_{\hat p,\hat q}(A,B)$.
+\end{proof}
+
+\begin{remark}\label{rem:rate}
+For fixed $n\ge 3$ the matrices of Proposition~\ref{prop:pd} satisfy
+\[
+\frac{F_{p,q}(A,B)}{\Tr(AB)}\ge\frac{4^{-2k}}{2(n+9)}\,\varepsilon^{-(1-\cut(S,T))/2}.
+\] We make no claim of uniformity as $(p,q)$ approaches the admissible set; the bound degenerates as $\min_{S,T}\cut(S,T)$ tends to one.
+\end{remark}
+
+\section{Consequences}\label{sec:consequences}
+
+\begin{proof}[Proof of Corollary~\ref{cor:four}]
+If $s\in\{0,1\}$ or $t\in\{0,1\}$, the reduced word is $AB$, with $k=1$, and the ratio equals one. Otherwise $0<s,t<1$, the word $A^sB^tA^{1-s}B^{1-t}$ is reduced with $k=2$, $p=(s,1-s)$ and $q=(t,1-t)$, and Theorem~\ref{thm:main} applies. In Lemma~\ref{lem:interval} we have $c_1=0$ and $c_2=1-s-t$, and \eqref{eq:interval} reads
+\[
+\max\{0,\ t-\tfrac12,\ s+t-1,\ s-\tfrac12\}\le\min\{\tfrac12,\ t,\ s+t-\tfrac12,\ s\}.
+\]
+For $0<s,t<1$ the only comparisons among these numbers that are not automatic are $s+t\le 3/2$, $s+t\ge 1/2$, $t-s\le 1/2$ and $s-t\le 1/2$. Together they are equivalent to $|s-1/2|+|t-1/2|\le 1/2$.
+\end{proof}
+
+The square $[0,1]^2$ is therefore divided as follows for $n\ge 3$: the optimal constant equals one on the closed diamond with vertices $(1/2,0)$, $(1,1/2)$, $(1/2,1)$, $(0,1/2)$ and on the boundary of the square, and it is infinite at the remaining points. In the four open corner triangles the inequality \eqref{eq:four} fails. On the boundary of the square it holds with equality, because the word reduces to $AB$ by Lemma~\ref{lem:reduction}; for singular matrices this uses the convention $A^0=B^0=I$.
+
+\begin{corollary}\label{cor:plevnik}
+Let $n\ge 3$ and $0\le\tau\le 1$. The inequality $\operatorname{Re}\Tr(A^{\tau}B^{1-\tau}A^{1-\tau}B^{\tau})\le\Tr(AB)$ holds for all $A,B\in\PD$ if and only if $\tau\in\{0,1\}$ or $1/4\le\tau\le 3/4$. For all other $\tau$ the ratio $\Tr(A^{\tau}B^{1-\tau}A^{1-\tau}B^{\tau})/\Tr(AB)$ takes arbitrarily large positive values on real positive definite $n\times n$ matrices.
+\end{corollary}
+
+\begin{proof}
+Apply Corollary~\ref{cor:four} and Theorem~\ref{thm:main} with $s=\tau$ and $t=1-\tau$; then $|s-1/2|+|t-1/2|=2|\tau-1/2|$.
+\end{proof}
+
+Corollary~\ref{cor:plevnik} answers \cite[Question~2.3]{Pl} in the affirmative: $[1/4,3/4]$ is the maximal interval, and outside it only the endpoints $\tau=0$ and $\tau=1$ survive.
+
+\begin{remark}\label{rem:CL}
+Carlen and Lieb proved $|\Tr(X^sY^tX^{1-s}Y^{1-t})|\le\Tr(XY)$ for $1/2\le s,t\le 1$ with $s+t\le 3/2$, found a counterexample with $s=t=0.79$, and asked whether the condition $s+t\le 3/2$ is sharp \cite[Section~IV]{CL}. By Corollary~\ref{cor:four} and Theorem~\ref{thm:main}(c) it is: for $1/2\le s,t<1$ with $s+t>3/2$ the ratio is unbounded on real positive definite $3\times 3$ matrices, while for $s=1$ or $t=1$ the trace equals $\Tr(XY)$. Plevnik's counterexample $\Tr(A^4BAB^4)>\Tr(A^5B^5)$ \cite[Example~2.1]{Pl} corresponds to $(s,t)=(4/5,1/5)$, which lies outside the diamond.
+\end{remark}
+
+\begin{example}\label{ex:six}
+Consider the six-factor product of Ando, Hiai and Okubo \cite[p.~312]{AHO},
+\[
+p=(\tfrac35,\tfrac15,\tfrac15),\qquad q=(\tfrac15,\tfrac35,\tfrac15).
+\]
+Take $S=\{1\}$ and $T=\{2\}$. The factor $A^{3/5}$ is adjacent only to $B^{q_1}$ and $B^{q_3}$, so $e(S,T)=0$ and $\cut(S,T)=2-\tfrac35-\tfrac35=\tfrac45<1$. Hence the pair is not admissible, and by Theorem~\ref{thm:main}
+\[
+\sup_{A,B\in\PD}\frac{|\Tr(A^{3}BAB^{3}AB)|}{\Tr(A^5B^5)}=\infty\qquad(n\ge 3),
+\]
+where we replaced $A,B$ by $A^5,B^5$. Here $\theta=4/5$, $b=0$, $h=9/20$ and $\delta=1/10$. Table~\ref{tab:six} lists the ratio $F_{p,q}(A,B)/\Tr(AB)$ for the positive definite matrices of Proposition~\ref{prop:pd} with $n=3$, computed with mpmath 1.3.0 at a precision of $2000$ decimal digits; the values for $n=6$ agree to the digits shown. The table illustrates the construction and is not used in any proof. The observed growth has a direct explanation. Among the $64$ nonnegative terms of \eqref{eq:expansion}, the term with $(x_1,x_2,x_3)=(u,v,v)$ and $(y_1,y_2,y_3)=(e_1,e_3,e_1)$ is the only one of order $\varepsilon^{4/5}$, and all other terms are $O(\varepsilon)$. Its coefficient is $\langle u,e_1\rangle^2\langle v,e_1\rangle^2\langle v,e_3\rangle^2\to 1/16$, while $\Tr(A_\varepsilon B_\varepsilon)$ is asymptotic to $\langle u,e_3\rangle^2\sim 2\varepsilon^{9/10}$. Hence the ratio for \eqref{eq:family} is asymptotic to $\varepsilon^{-1/10}/32$, and the perturbation by $\eta I$ in Proposition~\ref{prop:pd} does not change these leading terms.
+\end{example}
+
+\begin{table}[ht]
+\caption{The ratio $F_{p,q}(A,B)/\Tr(AB)$ in Example~\ref{ex:six} for the matrices of Proposition~\ref{prop:pd} with $n=3$.}\label{tab:six}
+\begin{tabular}{ccccc}
+\toprule
+$\varepsilon$ & $10^{-20}$ & $10^{-40}$ & $10^{-80}$ & $10^{-160}$\\
+\midrule
+ratio & $3.11105$ & $312.484$ & $3.12500\cdot 10^{6}$ & $3.12500\cdot 10^{14}$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+We now turn to the question of Furuichi, Kuriyama and Yanagi. For $m\ge 2$ and a set $I$ of indices modulo $m$ we say that $I$ is a \emph{cyclic interval} if it has the form $\{j+1,j+2,\dots,j+\ell\}$ with $1\le\ell\le m-1$.
+
+\begin{corollary}\label{cor:fky}
+Let $m\ge 2$, let $p_1,\dots,p_m>0$ with $p_1+\dots+p_m=1$, and let $n\ge 3$. Then
+\[
+\sup_{T,C\in\PD}\frac{|\Tr(T^{p_1}CT^{p_2}C\cdots T^{p_m}C)|}{\Tr(TC^m)}
+\]
+equals $1$ if
+\begin{equation}\label{eq:fky}
+\sum_{l\in I}p_l\le\frac{|I|+1}{m}\qquad\text{for every cyclic interval } I,
+\end{equation}
+and equals $\infty$ otherwise. In particular, for $m=3$ the upper bound
+\[
+|\Tr(T^{p_1}CT^{p_2}CT^{p_3}C)|\le\Tr(TC^3)
+\]
+holds for all positive definite $T,C$ of size $n$ if and only if $\max_lp_l\le 2/3$; it fails for $(p_1,p_2,p_3)=(4/5,1/10,1/10)$.
+\end{corollary}
+
+\begin{proof}
+The map $C\mapsto C^m$ is a bijection of $\PD$. Writing $A=T$ and $B=C^m$, the ratio becomes $|F_{p,q}(A,B)|/\Tr(AB)$ with $q=(1/m,\dots,1/m)$, and the word is reduced with $k=m$. Since $q_i=1/m\le 1/2$, the conditions $0\le a_i$ and $0\le b_i=1/m-a_i$ already imply $a_i,b_i\le 1/2$. By the proof of Lemma~\ref{lem:interval}, $(p,q)$ is therefore admissible if and only if there is $x$ with $0\le x+c_i\le 1/m$ for all $i$, where $c_i=\sum_{j=2}^{i}(p_j-1/m)$. This holds if and only if $c_j-c_i\le 1/m$ for all $i,j$. For $i<j$ the number $c_j-c_i$ is the sum of $p_l-1/m$ over the cyclic interval $\{i+1,\dots,j\}$, and for $i>j$ it is the same sum over the cyclic interval $\{i+1,\dots,m,1,\dots,j\}$, because $\sum_l(p_l-1/m)=0$. Every cyclic interval arises in this way, so admissibility is equivalent to \eqref{eq:fky}, and Theorem~\ref{thm:main} gives the first claim. For $m=3$, intervals of length two satisfy \eqref{eq:fky} automatically, and intervals of length one give $p_l\le 2/3$.
+\end{proof}
+
+For $m=2$ condition \eqref{eq:fky} always holds, and for $n\le 2$ the ratio in Corollary~\ref{cor:fky} is at most one for every $m$, by Proposition~\ref{prop:twoeig}; the case $n=2$ was proved by Furuichi, Kuriyama and Yanagi \cite{FKY}. For $(p_1,p_2,p_3)=(4/5,1/10,1/10)$ the sets $S=\{1\}$ and $T=\{2\}$ give $e(S,T)=0$ and $\cut(S,T)=13/15$, so that $\delta=1/15$ in Proposition~\ref{prop:pd}.
+
+\section*{Use of AI-assisted tools}
+
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{99}
+
+\bibitem{AHO}
+T.~Ando, F.~Hiai, and K.~Okubo, \emph{Trace inequalities for multiple products of two matrices}, Math. Inequal. Appl. \textbf{3} (2000), no.~3, 307--318.
+
+\bibitem{Ar}
+H.~Araki, \emph{On an inequality of Lieb and Thirring}, Lett. Math. Phys. \textbf{19} (1990), 167--170.
+
+\bibitem{Bh}
+R.~Bhatia, \emph{Trace inequalities for products of positive definite matrices}, J. Math. Phys. \textbf{55} (2014), 013509.
+
+\bibitem{BELV}
+T.~Bottazzi, R.~Elencwajg, G.~Larotonda, and A.~Varela, \emph{Inequalities related to Bourin and Heinz means with a complex parameter}, J. Math. Anal. Appl. \textbf{426} (2015), 765--773.
+
+\bibitem{Br}
+R.~A. Brualdi, \emph{From the Editor-in-Chief}, Linear Algebra Appl. \textbf{434} (2011), xv--xix.
+
+\bibitem{CL}
+E.~A. Carlen and E.~H. Lieb, \emph{A trace inequality of Ando, Hiai, and Okubo and a monotonicity property of the Golden--Thompson inequality}, J. Math. Phys. \textbf{63} (2022), 062203.
+
+\bibitem{Dr}
+S.~W. Drury, \emph{Operator norms of words formed from positive-definite matrices}, Electron. J. Linear Algebra \textbf{18} (2009), 13--20.
+
+\bibitem{FF}
+L.~R. Ford, Jr. and D.~R. Fulkerson, \emph{Maximal flow through a network}, Canad. J. Math. \textbf{8} (1956), 399--404.
+
+\bibitem{FKY}
+S.~Furuichi, K.~Kuriyama, and K.~Yanagi, \emph{Trace inequalities for products of matrices}, Linear Algebra Appl. \textbf{430} (2009), 2271--2276.
+
+\bibitem{HHK}
+M.~Hayajneh, S.~Hayajneh, and F.~Kittaneh, \emph{On the Ando--Hiai--Okubo trace inequality}, J. Operator Theory \textbf{77} (2017), no.~1, 77--86.
+
+\bibitem{HJ}
+C.~R. Johnson and C.~J. Hillar, \emph{Eigenvalues of words in two positive definite letters}, SIAM J. Matrix Anal. Appl. \textbf{23} (2002), 916--928.
+
+\bibitem{LT}
+E.~H. Lieb and W.~E. Thirring, \emph{Inequalities for the moments of the eigenvalues of the Schr\"odinger Hamiltonian and their relation to Sobolev inequalities}, in: Studies in Mathematical Physics (E.~Lieb, B.~Simon, and A.~Wightman, eds.), Princeton University Press, Princeton, 1976, 269--303.
+
+\bibitem{Pl}
+L.~Plevnik, \emph{On a matrix trace inequality due to Ando, Hiai and Okubo}, Indian J. Pure Appl. Math. \textbf{47} (2016), no.~3, 491--500.
+
+\bibitem{Si}
+B.~Simon, \emph{Trace Ideals and Their Applications}, 2nd ed., Mathematical Surveys and Monographs, vol.~120, American Mathematical Society, Providence, RI, 2005.
+
+\end{thebibliography}
+
+\end{document}

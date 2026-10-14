@@ -1,0 +1,50 @@
+[
+  {
+    "s": 0,
+    "first_normalized_moment_order": 3,
+    "first_normalized_moment_coefficient": "1/(N - 1)",
+    "projected_remaining_order": 0,
+    "projected_remaining_coefficient": "24*(6*N - 7)/(N*(N - 1)*(N + 1)*(N + 2)*(N + 3))",
+    "nonvanishing_by_N_shift_14": true
+  },
+  {
+    "s": 1,
+    "first_normalized_moment_order": 3,
+    "first_normalized_moment_coefficient": "1",
+    "projected_remaining_order": 0,
+    "projected_remaining_coefficient": "24*(6*N - 7)/(N*(N - 1)*(N + 1)*(N + 2)*(N + 3))",
+    "nonvanishing_by_N_shift_14": true
+  },
+  {
+    "s": 2,
+    "first_normalized_moment_order": 2,
+    "first_normalized_moment_coefficient": "120/(N*(N + 1)*(N + 2)*(N + 3)*(N + 4))",
+    "projected_remaining_order": 0,
+    "projected_remaining_coefficient": "24/(N*(N - 1)*(N + 1)*(N + 2))",
+    "nonvanishing_by_N_shift_14": true
+  },
+  {
+    "s": 3,
+    "first_normalized_moment_order": 2,
+    "first_normalized_moment_coefficient": "24/(N*(N + 1)*(N + 2)*(N + 3))",
+    "projected_remaining_order": 1,
+    "projected_remaining_coefficient": "(24*N**7 + 125*N**6 + 69*N**5 - 475*N**4 - 549*N**3 + 350*N**2 + 17736*N - 20160)/(30*N*(N - 1)*(N + 1)*(N + 2)*(N + 3))",
+    "nonvanishing_by_N_shift_14": true
+  },
+  {
+    "s": 4,
+    "first_normalized_moment_order": 2,
+    "first_normalized_moment_coefficient": "6/(N*(N + 1)*(N + 2))",
+    "projected_remaining_order": 0,
+    "projected_remaining_coefficient": "120*(N - 1)/(N*(N + 1)*(N + 2)*(N + 3)*(N + 4))",
+    "nonvanishing_by_N_shift_14": true
+  },
+  {
+    "s": 5,
+    "first_normalized_moment_order": 2,
+    "first_normalized_moment_coefficient": "2/(N*(N + 1))",
+    "projected_remaining_order": 0,
+    "projected_remaining_coefficient": "24*(6*N - 1)/(N*(N + 1)*(N + 2)*(N + 3)*(N + 4))",
+    "nonvanishing_by_N_shift_14": true
+  }
+]

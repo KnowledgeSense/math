@@ -1,0 +1,22 @@
+[
+  {
+    "control": "corrupted_matrix_bit",
+    "rejected": true,
+    "reason": "Hadamard identity fails"
+  },
+  {
+    "control": "incorrect_rank",
+    "rejected": true,
+    "reason": "Certificate rank differs"
+  },
+  {
+    "control": "duplicate_complement_point",
+    "rejected": true,
+    "reason": "Complement has duplicates"
+  },
+  {
+    "control": "correct_point_set_with_detached_column_labels",
+    "rejected": true,
+    "reason": "Supplied points not attached to source row space"
+  }
+]

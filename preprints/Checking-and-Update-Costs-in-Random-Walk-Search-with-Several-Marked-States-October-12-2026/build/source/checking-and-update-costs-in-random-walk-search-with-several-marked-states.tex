@@ -1,0 +1,444 @@
+\documentclass{amsart}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+  pdftitle={Checking and update costs in random walk search with several marked states},
+  pdfauthor={Knowledge Sense},
+  pdfsubject={Random walk search, hitting times, lower bounds},
+  pdfkeywords={Random walk search, hitting time, marked states, update and checking costs, lower bounds, Markov chains}
+}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\E}{\mathbb{E}}
+\renewcommand{\Pr}{\mathbb{P}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\res}{\mathcal{R}}
+\newcommand{\con}{\mathcal{C}}
+\newcommand{\HT}{\mathrm{HT}}
+\newcommand{\alg}{\mathcal{A}}
+
+\begin{document}
+
+\title[Checking and update costs with several marked states]{Checking and update costs in random walk search with several marked states}
+\author{Knowledge Sense}
+\address{Knowledge Sense}
+\email{math@knowledgesense.jp}
+\date{12 October 2026}
+\subjclass[2020]{Primary 68W20; Secondary 60J10, 68Q17, 05C81}
+\keywords{Random walk search, hitting time, marked states, update and checking costs, lower bounds, Markov chains}
+
+\begin{abstract}
+Random walk search is analysed in a cost model that charges separately for stationary samples (setups), for steps of the walk (updates) and for membership tests (checks). For a single marked state $m$, a walk that checks after blocks of random length finds $m$ with $O(\HT(m))$ updates and $O(1/\pi(m))$ checks, and Apers and Costes asked what happens for several marked states. We show that this cost split does not extend, in the local access models in which the question is posed. On the lazy walk on the cycle $\Z/N\Z$ with $N=k^8$ we consider the translates of a marked set formed by an interval of $N/k$ vertices and an arithmetic progression of step $L=k^2$, adapted from a construction of Ambainis, Gilyén, Jeffery and Kokainis. All translates have the same marked mass $\eps_k\sim 1/k$ and the same hitting time $H_k\sim k^4/3$. Let $a$ and $c$ be the expected numbers of updates and checks, averaged over the translate. If an algorithm makes at most $b$ setups, may update from and check any previously visited state, and succeeds with probability at least $1/2$ on every translate, then $c/L+a/N\ge 1/64$ for $k\ge 16(b+1)$; if every update must extend one of at most $b$ trajectories, then $c/L+\sqrt a/N\ge 1/(64b)$. Algorithms with one setup attain the endpoint orders $(L,L)$, $(N,k)$, $(L^2,L)$ and $(N^2,k)$. In particular $O(H_k)$ updates force $\Omega(L)$ checks, and $O(1/\eps_k)$ checks force $\Omega(N)$ updates.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $P$ be an irreducible Markov chain on a finite state space $X$ with stationary distribution $\pi$, and let $M\subseteq X$ be a set of marked states. A random walk search algorithm draws a state from $\pi$, moves it by steps of $P$, and tests from time to time whether the current state belongs to $M$. Following the quantum walk framework of Magniez, Nayak, Roland and Santha \cite{MNRS}, one charges a setup cost $S$ for each stationary sample, an update cost $U$ for each step of $P$, and a checking cost $C$ for each membership test. When $U$ and $C$ differ, each of the two elementary strategies recalled in \cite{AC} economizes on one of these costs at the expense of the other. Writing
+\[
+\HT(M)=\E_\pi\bigl[\min\{t\ge 0: X_t\in M\}\bigr]
+\]
+for the hitting time from stationarity, the walk that checks after every step costs $S+O(\HT(M))(U+C)$, and no single trajectory of $P$ started from stationarity reaches $M$ with fewer updates in expectation. If $P$ is reversible with spectral gap $\delta$, the walk that checks only after blocks of $O(1/\delta)$ steps costs $S+O(1/(\delta\pi(M)))U+O(1/\pi(M))C$; its number of checks is optimal, but its number of updates may far exceed $\HT(M)$.
+
+For a single marked state $m$ the two bounds hold simultaneously. Dohotaru and H{\o}yer \cite[Section~6]{DH} stated a classical walk of cost $S+O(\HT(m))U+O(1/\pi(m))C$, with a justification through their quantum framework, and Apers and Costes \cite{AC} gave a short classical proof for every irreducible chain: if each check is preceded by a number of steps drawn uniformly from $\{1,\dots,\tau\}$, with $\tau$ of order $\pi(m)\HT(m)$, then $m$ is found after $O(1/\pi(m))$ checks and $O(\HT(m))$ updates in expectation. Their proof uses the fact that the walk is at the known state $m$ when it first enters the marked set, and they raise \cite[Sections~7 and~8]{AC} the question of an analogue for several marked states, allowing for a negative answer in this generality.
+
+We show that the cost split, unchanged, fails for several marked states in the local access models in which the question is posed. On a cycle we give a family of marked sets with equal marked mass and equal hitting time on which no algorithm with a bounded number of stationary samples achieves $O(\HT(M))$ updates and $O(1/\pi(M))$ checks simultaneously, even if it may return to previously visited states free of charge. At the two ends of the tradeoff the bounds are attained by explicit algorithms.
+
+\emph{The instances.}
+Fix an integer $k\ge 2$ and put
+\[
+L=k^2,\qquad N=k^8,\qquad D=N/k=k^7 .
+\]
+On the cycle $\Z/N\Z$ we use the lazy nearest-neighbour walk, $P(x,x)=1/2$ and $P(x,x\pm 1)=1/4$, whose stationary distribution is uniform. For $A\in\Z/N\Z$ let $J=A\bmod L\in\Z/L\Z$,
+\[
+I_A=\{A,A+1,\dots,A+D-1\},\qquad G_J=\{x\in\Z/N\Z: x\equiv J\pmod L\},
+\]
+and $M_A=I_A\cup G_J$. Thus $M_A$ is the union of a dense interval of $D$ consecutive vertices and a sparse arithmetic progression of step $L$ through its endpoint, and $M_A=M_0+A$. Since $L$ divides $D$, every translate has the same marked mass
+\[
+\eps_k=\frac{|M_A|}{N}=\frac1k+\frac1{k^2}-\frac1{k^3},
+\]
+and we show in Proposition~\ref{prop:instances} that every translate also has the same hitting time
+\[
+H_k=\HT(M_A)=\Bigl(1-\frac1k\Bigr)\frac{k^4-1}{3}.
+\]
+In particular $\eps_k\sim 1/k$ and $H_k\sim k^4/3$, and both quantities may be given to the algorithm without revealing $A$. The hidden parameter $A$ is chosen uniformly, so that the interval phase $A$ and the progression phase $J$ are each uniform, although they are not independent.
+
+The sets $M_A$ are the one-dimensional form of the dense-plus-sparse arrangement of Ambainis, Gilyén, Jeffery and Kokainis \cite[Section~5, Lemma~10]{AGJK}, who place a small dense subgrid and a sparse periodic subgrid on the two-dimensional torus in order to separate the extended hitting time $\HT^+$ of Krovi, Magniez, Ozols and Roland \cite{KMOR} from $\HT$. In both constructions the sparse part keeps the hitting time small while the dense part carries almost all of the marked mass. Their separation concerns quantum algorithms that sample from the stationary distribution restricted to the marked set; here the same geometry is used to bound the update and checking costs of classical algorithms.
+
+\emph{The access models.}
+The algorithms we consider are randomized and adaptive, know $k$, and interact with the hidden set only through local operations, defined precisely in Section~\ref{sec:models}. A \emph{setup} produces a fresh uniform vertex; an \emph{update} from a previously visited vertex $x$ produces a vertex distributed according to $P(x,\cdot)$; a \emph{check} of a previously visited vertex returns whether it is marked; the algorithm finally \emph{outputs} a vertex, which need not have been visited or checked, and succeeds if that vertex is marked. Updates and checks are charged one unit each. For a fixed integer $b\ge 1$, the \emph{restoration model} $\res_b$ allows at most $b$ setups per run, updates from any visited vertex, and checks of any visited vertex, so that returning to a stored state is free. The \emph{consecutive model} $\con_b\subseteq\res_b$ requires in addition that every update extend, from its current endpoint, one of the at most $b$ trajectories started by the setups. The model of \cite[Section~3]{AC}, with one setup and updates and checks of the current state, is contained in $\con_1$. For an algorithm and a translate $A$ we write $p_A$ for the success probability and $a_A$, $c_A$ for the expected numbers of updates and checks; $a$ and $c$ denote the averages of $a_A$ and $c_A$ over uniform $A$.
+
+\begin{theorem}[free restoration]\label{thm:main}
+Let $b\ge 1$ and $k\ge 16(b+1)$. Every algorithm in $\res_b$ with $p_A\ge 1/2$ for every $A\in\Z/N\Z$ satisfies
+\[
+\frac cL+\frac aN\ge \frac1{64}.
+\]
+In particular it makes, on average, at least $L/128$ checks or at least $N/128$ updates.
+\end{theorem}
+
+\begin{theorem}[consecutive trajectories]\label{thm:consecutive}
+Let $b\ge 1$ and $k\ge 16(b+1)$. Every algorithm in $\con_b$ with $p_A\ge 1/2$ for every $A\in\Z/N\Z$ satisfies
+\[
+\frac cL+\frac{\sqrt a}{N}\ge \frac1{64b}.
+\]
+\end{theorem}
+
+\begin{theorem}[endpoints]\label{thm:endpoints}
+For every $k\ge 2$ there are algorithms with one setup and $p_A=1$ for every $A$ such that, on every translate, the expected number of updates and the number of checks are at most
+\[
+(4(L-1),\,L)\quad\text{and}\quad (4(N-1),\,k)\quad\text{in } \res_1,\qquad
+(2L^2,\,L)\quad\text{and}\quad (2N^2,\,k)\quad\text{in } \con_1 .
+\]
+In the other direction, let $b\ge 1$, $k\ge 16(b+1)$, and consider an algorithm in $\res_b$ with $p_A\ge 1/2$ for every $A$. Then $c\ge k/32$ and $a\ge L/64$; if the algorithm lies in $\con_b$, then moreover $a\ge L^2/(2^{13}b^2)$.
+\end{theorem}
+
+\begin{corollary}\label{cor:nouniform}
+Let $b\ge 1$ and $C\ge 1$, and let $k\ge\max\{16(b+1),66C\}$. No algorithm in $\res_b$ with $p_A\ge 1/2$ for every $A$ satisfies both $a\le C H_k$ and $c\le C/\eps_k$. Consequently the single-marked cost split $S+O(\HT(M))U+O(1/\pi(M))C$ of \cite{DH,AC} does not extend to several marked states, in the model of \cite{AC} or in any of the models $\con_b$ and $\res_b$, even when the exact values of $\HT(M)$ and $\pi(M)$ are available to the algorithm.
+\end{corollary}
+
+On the instances $M_A$ the single-marked split would mean $O(k^4)$ updates and $O(k)$ checks. Theorem~\ref{thm:main} shows that $O(k^4)=O(H_k)$ updates force $\Omega(L)=\Omega(k^2)$ checks, and that $O(k)=O(1/\eps_k)$ checks force $\Omega(N)=\Omega(k^8)$ updates even with free restoration; in the consecutive model, $O(k)$ checks force $\Omega(N^2)=\Omega(k^{16})$ updates. Theorem~\ref{thm:endpoints} shows that both coordinates of both endpoints are optimal up to constant factors: $\Omega(k)$ checks are needed whatever the number of updates, $\Omega(L)$ updates are needed in $\res_b$ and $\Omega(L^2)$ in $\con_b$ whatever the number of checks, and by Theorems~\ref{thm:main} and~\ref{thm:consecutive} the orders $N$ and $N^2$ of updates cannot be improved when only $O(k)$ checks are made. Between the two endpoints we have only the bounds of Theorems~\ref{thm:main} and~\ref{thm:consecutive}.
+
+\emph{Method.}
+The proofs are elementary. Consider first an algorithm with at most $b$ setups, $T$ updates and $Q$ checks, and fix its private randomness and the randomness of its setups and updates. Until its first positive answer, the algorithm behaves exactly as it would against an oracle that answers every check negatively, and this fictitious run does not depend on $A$. A first positive answer requires the fictitious run either to meet the interval $I_A$ or to check a vertex of the progression $G_J$. The second event depends on the fictitious run only through the residues modulo $L$ of its checked vertices; these form a set of at most $Q$ residues, independent of the uniform phase $J$, so the event has probability at most $Q/L$. For the first event, the visited set of an algorithm with $b$ setups is a union of at most $b$ arcs of the cycle, so after $T$ updates it meets $I_A$ with probability at most $(bD+T)/N$. In the genuine run, a negative answer at $x$ excludes both the phase $x\bmod L$ and the $D$ starting positions of an interval containing $x$; the argument never uses the resulting posterior distribution of $A$, only the independence of the fictitious run from $A$. The fictitious run may receive answers that are consistent with no $M_A$, and on such histories the model imposes no constraint; we complete the algorithm by halting without output there, which changes no genuine run (Lemma~\ref{lem:completion}). Markov's inequality, applied to each budget separately, then turns the bounds for hard budgets into bounds for expected costs. For consecutive trajectories, Doob's maximal inequality bounds the range of a lazy walk of $T$ steps by $O(\sqrt T)$, which replaces $T/N$ by $O(\sqrt T)/N$.
+
+Arguments through negative transcripts and locality are standard in lower bounds for local search, including its quantum versions \cite{AA}; free return to explored states is the mechanism of expanding search \cite{AL}; and search problems that charge both for travel and for inspection are studied in operations research, see \cite{BK} and the references there. What is new here is the translation-invariant family on which $\eps_k$ and $H_k$ are exactly constant, together with two-cost lower bounds for fully adaptive algorithms, with and without restoration, and the matching endpoints.
+
+\emph{Organization.}
+Section~\ref{sec:instances} computes the marked mass and the hitting time of the instances. Section~\ref{sec:models} defines the access models. Section~\ref{sec:allneg} proves the bounds for hard budgets in both models. Section~\ref{sec:proofs} derives Theorems~\ref{thm:main} and~\ref{thm:consecutive}, Corollary~\ref{cor:nouniform} and the lower bounds of Theorem~\ref{thm:endpoints}, and Section~\ref{sec:algorithms} gives the algorithms. Section~\ref{sec:remarks} contains remarks and open questions.
+
+\section{The instances}\label{sec:instances}
+
+Throughout, $k\ge 2$ and $L=k^2$, $N=k^8$, $D=k^7$, so that $L\mid D\mid N$. The lazy walk $P$ on $\Z/N\Z$ is irreducible and aperiodic with uniform stationary distribution. For a nonempty $M\subseteq\Z/N\Z$ let $T_M=\min\{t\ge 0: X_t\in M\}$ and $h_M(x)=\E_x[T_M]$, so that
+\[
+\HT(M)=\E_\pi[T_M]=\frac1N\sum_{x\in\Z/N\Z}h_M(x).
+\]
+No conditioning on $X_0\notin M$ is applied; this is the convention of \cite[Section~2]{AC}. The following identity is classical; we include its short proof.
+
+\begin{lemma}\label{lem:gaps}
+Let $M\subseteq\Z/N\Z$ be nonempty, let $m_1,\dots,m_r$ be its elements in cyclic order, and let $g_i\ge 1$ be the cyclic distance from $m_i$ to $m_{i+1}$, indices taken modulo $r$, so that $g_1+\dots+g_r=N$. Then
+\[
+\HT(M)=\frac1{3N}\sum_{i=1}^r (g_i^3-g_i).
+\]
+\end{lemma}
+
+\begin{proof}
+Since $P$ is irreducible, $T_M$ is almost surely finite with finite expectation from every start, and $h=h_M$ is the unique function on $\Z/N\Z$ with $h=0$ on $M$ and
+\begin{equation}\label{eq:poisson}
+h(x)=1+\tfrac12 h(x)+\tfrac14 h(x-1)+\tfrac14 h(x+1)\qquad (x\notin M).
+\end{equation}
+Indeed, $h$ satisfies \eqref{eq:poisson} by the Markov property, and the difference $u$ of two solutions vanishes on $M$ and satisfies $u(x)=\frac12(u(x-1)+u(x+1))$ off $M$; if $u$ were not identically zero, it would attain a nonzero extremum at some $x\notin M$, the mean value property would force $u(x\pm1)=u(x)$, and repeating the argument along the gap containing $x$ would reach a marked vertex with $u\neq 0$, a contradiction. For $x$ in the gap between $m_i$ and $m_{i+1}$ at distance $j$ from $m_i$, $1\le j\le g_i-1$, put $h(x)=2j(g_i-j)$. This vanishes on $M$ and satisfies \eqref{eq:poisson}, because \eqref{eq:poisson} is equivalent to $h(x)=2+\frac12(h(x-1)+h(x+1))$ and
+\[
+2+(j-1)(g_i-j+1)+(j+1)(g_i-j-1)=2+2j(g_i-j)-2=2j(g_i-j).
+\]
+Finally $\sum_{j=1}^{g-1}2j(g-j)=g^2(g-1)-\frac13(g-1)g(2g-1)=\frac13(g^3-g)$, and summing over the gaps proves the lemma.
+\end{proof}
+
+\begin{proposition}\label{prop:instances}
+For every $A\in\Z/N\Z$,
+\[
+\frac{|M_A|}{N}=\eps_k=\frac1k+\frac1{k^2}-\frac1{k^3}
+\qquad\text{and}\qquad
+\HT(M_A)=H_k=\Bigl(1-\frac1k\Bigr)\frac{k^4-1}{3}.
+\]
+Moreover $1/k\le\eps_k\le 2/k$ and $H_k<L^2/3$.
+\end{proposition}
+
+\begin{proof}
+Any $L$ consecutive vertices of the cycle contain exactly one vertex of each residue class modulo $L$. Since $L\mid D$, the interval $I_A$ contains exactly $D/L$ vertices of $G_J$, and
+\[
+|M_A|=D+\frac NL-\frac DL=N\Bigl(\frac1k+\frac1{k^2}-\frac1{k^3}\Bigr).
+\]
+The elements of $M_A$ in cyclic order starting at $A$ are $A,A+1,\dots,A+D-1$, followed by $A+D,A+D+L,\dots,A+N-L$, the latter being the elements of $G_J$ outside $I_A$ since $A+D\equiv A\pmod L$. Hence the gaps are $D$ gaps of length one, namely from $A+j$ to $A+j+1$ for $0\le j\le D-1$, and $(N-D)/L$ gaps of length $L$, and these lengths sum to $N$. By Lemma~\ref{lem:gaps},
+\[
+\HT(M_A)=\frac1{3N}\cdot\frac{N-D}{L}(L^3-L)=\Bigl(1-\frac DN\Bigr)\frac{L^2-1}3=H_k .
+\]
+The inequalities are immediate from $k\ge 2$.
+\end{proof}
+
+\section{Access models and costs}\label{sec:models}
+
+An algorithm is given $k$, hence $L$, $N$, $D$, $\eps_k$ and $H_k$, but not $A$. It has private randomness, unlimited computational power and unlimited memory. It maintains a finite list of \emph{visited} vertices of $\Z/N\Z$, initially empty, may read their labels, and may base every decision on its whole history. The available operations are the following.
+\begin{enumerate}
+\item[(S)] \emph{Setup.} A vertex $z$, uniform on $\Z/N\Z$ and independent of everything else, is produced and becomes visited.
+\item[(U)] \emph{Update} from a visited vertex $x$. A vertex $y$ with law $P(x,\cdot)$, independent of everything else given $x$, is produced and becomes visited.
+\item[(C)] \emph{Check} of a visited vertex $x$. The answer $\mathbf 1[x\in M_A]$ is returned.
+\item[(O)] \emph{Output} of a vertex $y\in\Z/N\Z$, which need not be visited, or halt without output. The run halts.
+\end{enumerate}
+A \emph{run} is an execution of the algorithm against one of the sets $M_A$. It \emph{succeeds} if it halts with an output $y\in M_A$; a run that halts without output or never halts fails. Each update and each check costs one unit, whatever its outcome and whether or not the outcome is used later; in particular an update whose outcome is $x$ itself is charged. Setups are counted separately. Only setups and updates create visited vertices; computation on labels does not.
+
+\begin{definition}\label{def:models}
+Let $b\ge 1$ be an integer. An algorithm belongs to the \emph{restoration model} $\res_b$ if it makes at most $b$ setups in every run. It belongs to the \emph{consecutive model} $\con_b$ if, in addition, its visited vertices are organized into at most $b$ trajectories, each started by a setup, and every update is made from the last vertex of one of these trajectories and appends its outcome to that trajectory.
+\end{definition}
+
+Here and below, a condition required in every run is required for every $A$ and every outcome of the randomness. In $\res_b$ an update may start from any visited vertex, however long ago it was produced; in both models a check may be made at any visited vertex. Thus $\con_b\subseteq\res_b$, and the search model of \cite[Section~3]{AC}, in which one stationary sample is updated along a single trajectory and only the current state is checked, is contained in $\con_1$. The number $b$ does not depend on $k$; Remark~\ref{rem:setups} shows that some bound on the number of setups is needed.
+
+For an algorithm and a translate $A$, let $p_A$ be its success probability, and let $a_A$ and $c_A$ be the expected numbers of updates and checks in a run, both possibly infinite. Let $\bar p$, $a$ and $c$ be the averages of $p_A$, $a_A$ and $c_A$ over uniform $A\in\Z/N\Z$. If $p_A\ge 1/2$ for every $A$, then $\bar p\ge 1/2$; the proofs below use only $\bar p$.
+
+\section{The all-negative run}\label{sec:allneg}
+
+\emph{A realization of the randomness.}
+Fix an algorithm in $\res_b$. We realize its randomness as follows. Let $\omega$ denote its private randomness. Let $z_1,z_2,\dots$ be independent uniform vertices, consumed in order by the setups. Let $\zeta_1,\zeta_2,\dots$ be independent with $\Pr(\zeta_t=0)=1/2$ and $\Pr(\zeta_t=\pm1)=1/4$, and let the $t$-th update of a run, made from $x$, produce $x+\zeta_t$. Since $x+\zeta_t$ has law $P(x,\cdot)$ and is independent of the past given $x$, every run of the algorithm against every $M_A$ has the correct distribution. For an algorithm in $\con_b$ we use instead independent sequences $\zeta^{(i)}_1,\zeta^{(i)}_2,\dots$ for $i=1,\dots,b$, with the same law, the $s$-th update of trajectory $i$ producing the last vertex of that trajectory plus $\zeta^{(i)}_s$. In either case the operations of the algorithm are a deterministic function of $(\omega,z,\zeta)$ and of the answers to its checks, and this function is defined for every sequence of answers, whether or not it arises from some $M_A$. The translate $A$ is uniform and independent of $(\omega,z,\zeta)$.
+
+\emph{Completion.}
+The answers received up to some moment are \emph{consistent with} $M_A$ if every check made so far, at a vertex $x$, was answered $\mathbf 1[x\in M_A]$. The \emph{completion} $\alg'$ of an algorithm $\alg$ runs $\alg$ and halts without output at the first moment at which the answers received are consistent with no $M_A$.
+
+\begin{lemma}\label{lem:completion}
+Let $\alg$ be an algorithm in $\res_b$ (respectively $\con_b$), and let $T,Q\in\Z_{\ge0}\cup\{\infty\}$ be such that $\alg$ makes at most $T$ updates and at most $Q$ checks in every run. Then $\alg'$ coincides with $\alg$ on every run against every $M_A$. Moreover, for every value of $(\omega,z,\zeta)$ and every sequence of answers, $\alg'$ makes at most $b$ setups, at most $T$ updates and at most $Q$ checks, and, in the case of $\con_b$, satisfies the trajectory condition of Definition~\ref{def:models}.
+\end{lemma}
+
+\begin{proof}
+In a run against $M_A$ the answers are consistent with $M_A$ at every moment, so $\alg'$ never halts early. Now fix $(\omega,z,\zeta)$ and an arbitrary sequence of answers, and consider any operation made by $\alg'$. The answers received before it are consistent with some $M_{A'}$, since otherwise $\alg'$ would already have halted. As the operations are determined by $(\omega,z,\zeta)$ and the answers, this operation and all earlier ones are also the first operations of the run of $\alg$ against $M_{A'}$ with the same $(\omega,z,\zeta)$. A violation of one of the stated conditions would occur at some operation, and the run of $\alg$ against $M_{A'}$ would then violate it as well.
+\end{proof}
+
+By the first statement, $\alg'$ lies in the same model as $\alg$ and has the same $p_A$, $a_A$ and $c_A$. From now on we replace every algorithm by its completion, so that the bounds on setups, updates and checks, and the trajectory condition, hold whatever answers the checks receive.
+
+\emph{The all-negative run.}
+The \emph{all-negative run} is the run of the completed algorithm with the same $(\omega,z,\zeta)$ against an oracle that answers $0$ to every check. It does not depend on $A$. Let $V^0$ be its set of visited vertices, $X^0$ its set of checked vertices, $R^0=\{x\bmod L: x\in X^0\}$, and $y^0$ its output, where $y^0=\bot$ if it halts without output or does not halt; the symbol $\bot$ is not a vertex and lies in no $M_A$. Let $E_A$ be the event that the genuine run against $M_A$ receives at least one answer $1$.
+
+\begin{lemma}\label{lem:coupling}
+For every $A$, with $J=A\bmod L$:
+\begin{enumerate}
+\item[\textup{(i)}] on $E_A$, the first check of the genuine run answered $1$ is made at a vertex $x\in X^0\cap M_A$; in particular $I_A\cap V^0\neq\emptyset$ or $J\in R^0$;
+\item[\textup{(ii)}] on the complement of $E_A$, the genuine run coincides with the all-negative run, and succeeds only if $y^0\in M_A$.
+\end{enumerate}
+Consequently $p_A\le \Pr(I_A\cap V^0\neq\emptyset)+\Pr(J\in R^0)+\Pr(y^0\in M_A)$ and also $p_A\le\Pr\bigl((X^0\cup\{y^0\})\cap M_A\neq\emptyset\bigr)$.
+\end{lemma}
+
+\begin{proof}
+Both runs are determined by $(\omega,z,\zeta)$ and by the answers received, and they receive the same answers until the first check of the genuine run answered $1$. Before that check these answers are consistent with $M_A$, so the all-negative run does not halt for inconsistency, and up to and including that check the two runs perform the same operations on the same vertices. Hence the check is made at a vertex $x$ that is also checked in the all-negative run, and $x\in M_A=I_A\cup G_J$. If $x\in I_A$, then $I_A$ meets $V^0\supseteq X^0$; if $x\in G_J$, then $x\bmod L=J\in R^0$. If no answer is $1$, the two runs coincide throughout, which gives (ii). The two bounds on $p_A$ follow.
+\end{proof}
+
+\emph{Arcs.}
+An \emph{arc} is a set $\{x,x+1,\dots,x+s-1\}\subseteq\Z/N\Z$ with $1\le s\le N$. The connected components of a nonempty subset of the cycle, in the graph with edges $\{x,x+1\}$, are arcs.
+
+\begin{lemma}\label{lem:arcs}
+Let $W$ be an arc of $s$ vertices. Then $I_A\cap W\neq\emptyset$ for exactly $\min\{N,D+s-1\}$ values of $A\in\Z/N\Z$. Consequently, if $V\subseteq\Z/N\Z$ has at most $m$ connected components and $A$ is uniform, then
+\[
+\Pr(I_A\cap V\neq\emptyset)\le\frac{mD+|V|-m}{N}.
+\]
+\end{lemma}
+
+\begin{proof}
+Let $W=\{x,\dots,x+s-1\}$. Then $I_A\cap W\neq\emptyset$ if and only if $A\in\{x-D+1,\dots,x+s-1\}$, an arc of $\min\{N,D+s-1\}$ vertices. If $V$ has components $W_1,\dots,W_{m'}$ with $m'\le m$, a union bound gives $\Pr(I_A\cap V\neq\emptyset)\le\sum_i(D+|W_i|-1)/N=(m'D+|V|-m')/N\le(mD+|V|-m)/N$, since $D\ge 1$.
+\end{proof}
+
+\begin{lemma}\label{lem:visited}
+In an execution with at most $b$ setups and at most $T$ updates, where every update is made from a visited vertex, the set of visited vertices has at most $b$ connected components and at most $T+b$ elements.
+\end{lemma}
+
+\begin{proof}
+A setup adds at most one vertex and at most one component. An update from a visited vertex $x$ produces a vertex of $\{x-1,x,x+1\}$, which is either already visited or adjacent to $x$; it adds at most one vertex and no component.
+\end{proof}
+
+\begin{proposition}[hard budgets, restoration]\label{prop:hard-res}
+Let $b\ge 1$, $T\in\Z_{\ge0}$ and $Q\in\Z_{\ge0}\cup\{\infty\}$, and let an algorithm in $\res_b$ make at most $T$ updates and at most $Q$ checks in every run. Then, for uniform $A$,
+\[
+\Pr(E_A)\le\frac{\min\{Q,T+b\}}{L}+\frac{bD+T}{N},
+\qquad
+\bar p\le\frac{Q+1}{L}+\frac{(b+1)D}{N}+\frac TN .
+\]
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:completion} the all-negative run makes at most $b$ setups, at most $T$ updates and at most $Q$ checks. Average Lemma~\ref{lem:coupling} over $A$. The set $R^0$ is a function of $(\omega,z,\zeta)$, hence independent of $A$, and $J=A\bmod L$ is uniform on $\Z/L\Z$ because $L\mid N$; thus $\Pr(J\in R^0)=\E|R^0|/L$, and $|R^0|\le\min\{Q,|V^0|\}\le\min\{Q,T+b\}$ by Lemma~\ref{lem:visited}. Conditionally on $V^0$, which is also independent of $A$, Lemmas~\ref{lem:arcs} and~\ref{lem:visited} give $\Pr(I_A\cap V^0\neq\emptyset\mid V^0)\le(bD+|V^0|-b)/N\le(bD+T)/N$. This proves the first bound. For the second, if $y^0\neq\bot$ then $y^0$ is independent of $A$ and $M_A=M_0+A$, so $\Pr(y^0\in M_A)\le|M_0|/N=\eps_k<D/N+1/L$, and $\min\{Q,T+b\}/L+1/L\le(Q+1)/L$.
+\end{proof}
+
+\emph{Ranges of lazy trajectories.}
+In the consecutive model the visited set is controlled by the ranges of the trajectories.
+
+\begin{lemma}\label{lem:range}
+Let $\zeta_1,\dots,\zeta_T$ be independent with $\Pr(\zeta_t=0)=1/2$ and $\Pr(\zeta_t=\pm1)=1/4$, and let $S_t=\zeta_1+\dots+\zeta_t$, $S_0=0$. Then
+\[
+\E\Bigl[\max_{0\le t\le T}S_t-\min_{0\le t\le T}S_t\Bigr]\le 2\sqrt{2T}.
+\]
+\end{lemma}
+
+\begin{proof}
+The partial sums form a martingale with $\E[S_T^2]=T\operatorname{Var}(\zeta_1)=T/2$. By Doob's $L^2$ maximal inequality \cite[Chapter~14]{W}, $\E[\max_{t\le T}S_t^2]\le 4\E[S_T^2]=2T$, so $\E[\max_{t\le T}|S_t|]\le\sqrt{2T}$ by the Cauchy--Schwarz inequality, and $\max S_t-\min S_t\le 2\max|S_t|$.
+\end{proof}
+
+\begin{proposition}[hard budgets, consecutive trajectories]\label{prop:hard-con}
+Let $b\ge 1$, $T\in\Z_{\ge0}$ and $Q\in\Z_{\ge0}\cup\{\infty\}$, and let an algorithm in $\con_b$ make at most $T$ updates and at most $Q$ checks in every run. Then, for uniform $A$,
+\[
+\Pr(E_A)\le\frac{\min\{Q,\,b(2\sqrt{2T}+1)\}}{L}+\frac{bD+2\sqrt2\,b\sqrt T}{N}
+\]
+and
+\[
+\bar p\le\frac{Q+1}{L}+\frac{(b+1)D}{N}+\frac{2\sqrt2\,b\sqrt T}{N}.
+\]
+\end{proposition}
+
+\begin{proof}
+Use the per-trajectory realization of the randomness, and for $i=1,\dots,b$ let $S^{(i)}_t=\zeta^{(i)}_1+\dots+\zeta^{(i)}_t$ for $0\le t\le T$, whether or not trajectory $i$ is started or uses $T$ updates. Put
+\[
+W_i=\Bigl\{z_i+j: \min_{t\le T}S^{(i)}_t\le j\le\max_{t\le T}S^{(i)}_t\Bigr\}\subseteq\Z/N\Z,
+\]
+an arc with at most $\rho_i+1$ vertices, where $\rho_i=\max_{t\le T}S^{(i)}_t-\min_{t\le T}S^{(i)}_t$. By Lemma~\ref{lem:completion}, trajectory $i$ of the all-negative run, if started, consists of the vertices $z_i+S^{(i)}_t$ for $t$ up to its number of updates, which is at most $T$; hence $V^0\subseteq W_1\cup\dots\cup W_b$. The sets $W_i$ are functions of $(z,\zeta)$ and independent of $A$. By Lemma~\ref{lem:arcs} and a union bound, conditionally on $(z,\zeta)$,
+\[
+\Pr(I_A\cap V^0\neq\emptyset\mid z,\zeta)\le\sum_{i=1}^b\frac{D+|W_i|-1}{N}\le\frac{bD+\sum_i\rho_i}{N},
+\]
+and $\E\rho_i\le 2\sqrt{2T}$ by Lemma~\ref{lem:range}. Moreover $R^0$ is contained in the set of residues of $V^0$, so $|R^0|\le\min\{Q,\sum_i|W_i|\}$ and $\E|R^0|\le\min\{Q,b(2\sqrt{2T}+1)\}$, while $J$ is uniform and independent of $R^0$. This gives the first bound, and the second follows as in Proposition~\ref{prop:hard-res}.
+\end{proof}
+
+\section{Proofs of the lower bounds}\label{sec:proofs}
+
+\begin{lemma}[truncation]\label{lem:truncation}
+Let an algorithm in $\res_b$ (respectively $\con_b$) have averaged expected costs $a$ and $c$ and averaged success probability $\bar p$. Let $T,Q\in\Z_{\ge1}\cup\{\infty\}$, and assume that $a<\infty$ if $T<\infty$ and that $c<\infty$ if $Q<\infty$. Let the truncated algorithm run the given one and halt without output at the moment the given algorithm would make its $(T+1)$-st update or its $(Q+1)$-st check. The truncated algorithm lies in the same model, makes at most $T$ updates and at most $Q$ checks in every run, and has averaged success probability at least $\bar p-\delta_T-\delta_Q$, where $\delta_T=a/T$ if $T<\infty$ and $\delta_T=0$ if $T=\infty$, and similarly $\delta_Q=c/Q$ or $\delta_Q=0$.
+\end{lemma}
+
+\begin{proof}
+Both algorithms behave identically on every run of the given algorithm with at most $T$ updates and at most $Q$ checks, so the averaged success probability decreases at most by the probability, for uniform $A$, that the given algorithm makes more than $T$ updates or more than $Q$ checks. If $T=\infty$ there is no update cap. If $T<\infty$, Markov's inequality applied to the averaged expectation $a<\infty$ bounds the probability of more than $T$ updates by $a/(T+1)\le a/T$. Checks are treated in the same way.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+If $a=\infty$ or $c=\infty$ there is nothing to prove, so let $a,c<\infty$ and $\bar p\ge 1/2$. Put $T=\lceil 16a+1\rceil$ and $Q=\lceil 16c+1\rceil$. Then $a/T<1/16$ and $c/Q<1/16$, so the truncated algorithm of Lemma~\ref{lem:truncation} has averaged success probability at least $3/8$. By Proposition~\ref{prop:hard-res}, using $T\le 16a+2$, $Q\le 16c+2$ and $D/N=1/k$,
+\[
+\frac38\le\frac{16c+3}{L}+\frac{b+1}{k}+\frac{16a+2}{N}.
+\]
+For $k\ge 16(b+1)$ we have $k\ge 32$, hence $3/L+(b+1)/k+2/N\le 3/1024+1/16+2^{-39}<1/8$. Therefore $16(c/L+a/N)\ge 3/8-1/8=1/4$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:consecutive}]
+Proceed as in the previous proof, now with Proposition~\ref{prop:hard-con}:
+\[
+\frac38\le\frac{16c+3}{L}+\frac{b+1}{k}+\frac{2\sqrt2\,b\sqrt{16a+2}}{N}.
+\]
+Since $\sqrt{16a+2}\le 4\sqrt a+\sqrt2$, the last term is at most $(8\sqrt2\,b\sqrt a+4b)/N$. For $k\ge 16(b+1)$ we have $4b/N\le 4b/(16(b+1))^8\le 4/16^8=2^{-30}$, so $3/L+(b+1)/k+4b/N<1/8$ and
+\[
+\frac{16c}{L}+\frac{8\sqrt2\,b\sqrt a}{N}\ge\frac14 .
+\]
+Both coefficients are at most $16b$, which gives $c/L+\sqrt a/N\ge 1/(64b)$.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:nouniform}]
+Suppose $a\le CH_k$ and $c\le C/\eps_k$. By Proposition~\ref{prop:instances}, $1/\eps_k\le k$ and $H_k<k^4/3$, so
+\[
+\frac cL+\frac aN\le\frac{Ck}{k^2}+\frac{Ck^4}{3k^8}=\frac Ck+\frac{C}{3k^4}.
+\]
+For $k\ge 66C$ this is at most $1/66+1/(3\cdot 66^4)<1/64$, contradicting Theorem~\ref{thm:main}. Since $\con_b\subseteq\res_b$ and the model of \cite{AC} is contained in $\con_1$, the same holds there, and since $H_k$ and $\eps_k$ do not depend on $A$, supplying them to the algorithm does not affect the argument.
+\end{proof}
+
+\begin{proof}[Proof of the lower bounds in Theorem~\ref{thm:endpoints}]
+Let $k\ge 16(b+1)$, so $k\ge 32$, and let the algorithm be in $\res_b$ with $\bar p\ge 1/2$. Each of the three bounds is proved by truncating in one coordinate only, and the finiteness of the other average is not needed.
+
+\emph{Checks.} If $c=\infty$ there is nothing to prove, so let $c<\infty$, whereas $a$ may be infinite. Truncate with $T=\infty$, that is, without an update cap, and $Q=\lceil 4c+1\rceil$. By Lemma~\ref{lem:truncation} the truncated algorithm has averaged success at least $1/4$. In its all-negative run at most $Q+1$ vertices are checked or output, they do not depend on $A$, and each fixed vertex lies in $M_A=M_0+A$ with probability $\eps_k$. By the second bound of Lemma~\ref{lem:coupling} and a union bound, $1/4\le(Q+1)\eps_k\le(4c+3)\eps_k$. Since $\eps_k\le(1+1/k)/k\le 33/(32k)$, this gives $4c+3\ge 8k/33$, hence $c\ge 2k/33-3/4\ge k/32$, the last step because $(2/33-1/32)k\ge 31\cdot 32/1056>3/4$.
+
+\emph{Updates, restoration.} If $a=\infty$ there is nothing to prove, so let $a<\infty$, whereas $c$ may be infinite. Truncate with $T=\lceil 4a+1\rceil\le 4a+2$ and $Q=\infty$; the truncated algorithm has averaged success at least $1/4$. The first bound of Proposition~\ref{prop:hard-res} with $\min\{Q,T+b\}\le T+b$, together with $\Pr(y^0\in M_A)\le\eps_k<D/N+1/L$, gives
+\[
+\frac14\le\frac{4a+b+3}{L}+\frac{b+1}{k}+\frac{4a+2}{N}.
+\]
+Now $(b+3)/L\le(b+3)/(256(b+1)^2)\le 1/256$, so $(b+3)/L+(b+1)/k+2/N<1/8$, and $4a(1/L+1/N)\ge 1/8$. As $1/L+1/N\le 2/L$, this yields $a\ge L/64$.
+
+\emph{Updates, consecutive trajectories.} If the algorithm is in $\con_b$, let again $a<\infty$ and use Proposition~\ref{prop:hard-con} instead, with $T\le 4a+2$ and $\sqrt T\le 2\sqrt a+\sqrt 2$, so that $2\sqrt2\,b\sqrt T\le 4\sqrt2\,b\sqrt a+4b$:
+\[
+\frac14\le\frac{4\sqrt2\,b\sqrt a+5b+1}{L}+\frac{b+1}{k}+\frac{4\sqrt2\,b\sqrt a+4b}{N}.
+\]
+Here $(5b+1)/L\le(5b+1)/(256(b+1)^2)\le 6/1024$, so the terms without $a$ sum to less than $1/8$, and $4\sqrt2\,b\sqrt a\,(1/L+1/N)\ge 1/8$. Hence $\sqrt a\ge L/(64\sqrt2\,b)$ and $a\ge L^2/(2^{13}b^2)$.
+\end{proof}
+
+\section{Algorithms attaining the endpoints}\label{sec:algorithms}
+
+\begin{lemma}\label{lem:exit}
+Let $S_t$ be the lazy walk on $\Z$ of Lemma~\ref{lem:range} started at $0$, and for $r\ge 1$ let $\tau_r=\min\{t\ge 0:|S_t|=r\}$. Then $\E[\tau_r]=2r^2$.
+\end{lemma}
+
+\begin{proof}
+Let $g(x)=\E_x[\tau_r]$ for $|x|\le r$. The walk restricted to $\{-r,\dots,r\}$ with absorbing endpoints is absorbed almost surely with finite expected time, and $g$ is the unique function with $g(\pm r)=0$ and $g(x)=1+\frac12 g(x)+\frac14 g(x-1)+\frac14 g(x+1)$ for $|x|<r$, by the same maximum principle argument as in Lemma~\ref{lem:gaps}. The function $g(x)=2(r^2-x^2)$ satisfies these equations, since $2+\frac12\bigl(2(r^2-(x-1)^2)+2(r^2-(x+1)^2)\bigr)=2(r^2-x^2)$.
+\end{proof}
+
+\begin{lemma}\label{lem:net}
+Let $\Lambda=\{0,D,2D,\dots,(k-1)D\}\subseteq\Z/N\Z$. Every $D$ consecutive vertices of the cycle contain exactly one vertex of $\Lambda$; in particular $I_A\cap\Lambda\neq\emptyset$ for every $A$. Every $L$ consecutive vertices contain exactly one vertex of each residue class modulo $L$; in particular they contain a vertex of $G_J$ for every $J$.
+\end{lemma}
+
+\begin{proof}
+Both statements follow from $D\mid N$ and $L\mid N$.
+\end{proof}
+
+\begin{proof}[Proof of the upper bounds in Theorem~\ref{thm:endpoints}]
+All four algorithms make one setup, producing a vertex $z$, halt at the first check answered $1$ and output the checked vertex, and succeed with probability one on every translate. We bound their numbers of checks and their expected numbers of updates.
+
+\emph{Restoration, $(4(L-1),L)$.} Maintain a frontier $f$, initially $z$. For $j=0,1,\dots,L-1$: check $f$; if $j<L-1$, update from $f$ repeatedly until the outcome is $f+1$, and then set $f=f+1$. Every update is made from the visited vertex $f$, which is permitted in $\res_1$ even after an outcome $f-1$ or $f$, and each advance of the frontier costs a geometric number of updates with mean $4$. The checked vertices are $z,z+1,\dots,z+L-1$, so at most $L$ checks are made and the expected number of updates is at most $4(L-1)$. By Lemma~\ref{lem:net} one of the checked vertices lies in $G_J\subseteq M_A$, so the algorithm halts with a marked output.
+
+\emph{Restoration, $(4(N-1),k)$.} Advance the frontier in the same way $N-1$ times, so that it visits the whole cycle, and check the frontier only when it lies in $\Lambda$. At most $k$ checks are made and the expected number of updates is at most $4(N-1)$. By Lemma~\ref{lem:net} the frontier reaches a vertex of $I_A\cap\Lambda\subseteq M_A$.
+
+\emph{Consecutive trajectories, $(2L^2,L)$.} Follow a single trajectory $y_t=z+S_t$ by updating from its last vertex, and check $y_t$ whenever its residue modulo $L$ has not been checked before. At most $L$ checks are made. The trajectory is the projection of the lazy walk $S_t$ on $\Z$, and by the time $\tau_L$ at which $|S_t|=L$ the walk has visited $L+1$ consecutive integers, so by Lemma~\ref{lem:net} a vertex of $G_J$ has been visited. The first visited vertex of residue $J$ is checked, since no vertex of that residue has been checked before, and the answer is $1$. Hence the algorithm halts no later than $\tau_L$, and its expected number of updates is at most $\E[\tau_L]=2L^2$ by Lemma~\ref{lem:exit}.
+
+\emph{Consecutive trajectories, $(2N^2,k)$.} Follow the trajectory and check $y_t$ when it lies in $\Lambda$ and has not been checked before. At most $k$ checks are made. By time $\tau_N$ the walk has visited $N+1$ consecutive integers, hence the whole cycle, so a vertex of $I_A\cap\Lambda$ has been checked by Lemma~\ref{lem:net}, and the expected number of updates is at most $\E[\tau_N]=2N^2$.
+\end{proof}
+
+By Proposition~\ref{prop:instances}, $L\sim\sqrt{3H_k}$ and $1/\eps_k\sim k$. Thus the endpoints of the restoration model use $O(\sqrt{H_k})$ updates with $\Theta(1/\eps_k^2)$ checks, and $\Theta(H_k^2)$ updates with $O(1/\eps_k)$ checks; in the consecutive model the corresponding orders are $\Theta(H_k)$ and $\Theta(H_k^4)$ updates. Theorem~\ref{thm:endpoints} shows that the orders $\sqrt{H_k}$ and $H_k$ of updates cannot be improved whatever the number of checks, and Theorems~\ref{thm:main} and~\ref{thm:consecutive} show that with $O(1/\eps_k)$ checks the orders $H_k^2$ and $H_k^4$ cannot be improved.
+
+\section{Remarks}\label{sec:remarks}
+
+\begin{remark}[small $k$]
+For $k=2$ one has $\eps_2=5/8>1/2$, so outputting a uniformly random vertex succeeds with probability $5/8$ on every translate at no cost. Some lower bound on $k$ is therefore necessary; the threshold $16(b+1)$ was chosen for convenience.
+\end{remark}
+
+\begin{remark}[the number of setups]\label{rem:setups}
+With $k$ setups and no updates, checking each sampled vertex succeeds with probability $1-(1-\eps_k)^k\ge 1-e^{-1}$, using $k=\Theta(1/\eps_k)$ checks. The obstruction of Theorem~\ref{thm:main} thus concerns algorithms whose number of stationary samples is bounded independently of $k$, as it is in the single-marked walk of \cite{AC}, which uses one. Likewise, if checks of arbitrary vertices were permitted rather than checks of visited vertices, then checking the $k$ vertices of $\Lambda$ would succeed surely without any update by Lemma~\ref{lem:net}. The locality of the operations is what makes the dense interval expensive to find.
+\end{remark}
+
+\begin{remark}[hard translates]
+The theorems bound averages over the translate, and they yield a hard translate for each algorithm. In the restoration model $c/L+a/N$ is the average of $c_A/L+a_A/N$, so every algorithm as in Theorem~\ref{thm:main} has a translate $A$ with $c_A/L+a_A/N\ge 1/64$. In the consecutive model the left-hand side of Theorem~\ref{thm:consecutive} is not such an average, since $\sqrt a$ is at least, and in general larger than, the average of $\sqrt{a_A}$. If $c_A/L+\sqrt{a_A}/N<1/(128b)$ for every $A$, then $c_A<L/(128b)$ and $a_A<(N/(128b))^2$ for every $A$, and averaging gives $c/L+\sqrt a/N<1/(64b)$, contrary to Theorem~\ref{thm:consecutive}. Hence every algorithm as in Theorem~\ref{thm:consecutive} has a translate $A$ with $c_A/L+\sqrt{a_A}/N\ge 1/(128b)$. In both cases the translate depends on the algorithm. The proofs use the uniform distribution of $A$ only through the uniform marginals of $A$ and $J$.
+\end{remark}
+
+\begin{remark}[the single-marked theorem]
+For a single marked vertex $m$ of the lazy cycle, $\pi(m)=1/N$ and $\HT(m)=(N^2-1)/3$ by Lemma~\ref{lem:gaps}, and the averaged walk of \cite{AC} with $\tau$ of order $\pi(m)\HT(m)=\Theta(N)$ uses $O(N)$ checks and $O(N^2)$ updates in expectation, in accordance with \cite[Theorem~1]{AC}. On $M_A$ the corresponding parameters are $\tau=\Theta(\eps_kH_k)=\Theta(k^3)$ and $R=\Theta(1/\eps_k)=\Theta(k)$ iterations, each consisting of a uniform number of updates in $\{1,\dots,\tau\}$ followed by a check of the current vertex; the walk halts at the first positive answer, and otherwise outputs the current vertex after the last iteration. This walk lies in $\con_1$, makes at most $Q=R$ checks and at most $T=R\tau=O(k^4)$ updates in every run, and commutes with translations, so its success probability does not depend on $A$. By Proposition~\ref{prop:hard-res} with $b=1$ it is at most
+\[
+\frac{R+1}{L}+\frac{2D}{N}+\frac{R\tau}{N}=O\Bigl(\frac1k\Bigr).
+\]
+Indeed, its $O(k)$ checks examine $O(k)$ of the $L=k^2$ residues, and within $O(k^4)$ steps it meets the interval $I_A$ with probability $O(1/k)$.
+\end{remark}
+
+\begin{remark}[open questions]
+The results determine the orders of the two endpoints of the tradeoff on the family $M_A$ in both models, but not the curve between them; randomizing between the endpoint algorithms gives intermediate costs whose optimality is open. It would be of interest to find a useful multi-marked analogue of the single-marked split, for instance a cost split in terms of a quantity other than $\HT(M)$ and $\pi(M)$, and to decide whether the restoration bound can be improved for restricted classes of chains. We do not know whether quantum walk search is subject to a tradeoff of this kind on the family $M_A$.
+\end{remark}
+
+\section*{Use of AI-assisted tools}
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{9}
+
+\bibitem{AA}
+S. Aaronson and A. Ambainis, \emph{Quantum search of spatial regions}, Theory Comput. \textbf{1} (2005), 47--79.
+
+\bibitem{AL}
+S. Alpern and T. Lidbetter, \emph{Constant factor approximate solutions for expanding search on general networks}, preprint (2016), arXiv:1608.05390.
+
+\bibitem{AGJK}
+A. Ambainis, A. Gilyén, S. Jeffery, and M. Kokainis, \emph{Quadratic speedup for finding marked vertices by quantum walks}, Proceedings of the 52nd Annual ACM SIGACT Symposium on Theory of Computing (STOC 2020), ACM, New York, 2020, 412--424.
+
+\bibitem{AC}
+S. Apers and M. Costes, \emph{Optimizing both checking and update costs in random walk search}, preprint (2026), arXiv:2609.18833.
+
+\bibitem{BK}
+V. Baston and K. Kikuta, \emph{Search games on a broken wheel with traveling and search costs}, J. Oper. Res. Soc. Japan \textbf{60} (2017), no.~3, 379--392.
+
+\bibitem{DH}
+C. Dohotaru and P. H{\o}yer, \emph{Controlled quantum amplification}, 44th International Colloquium on Automata, Languages, and Programming (ICALP 2017), LIPIcs, vol.~80, Schloss Dagstuhl, 2017, Art.~18, 13~pp.
+
+\bibitem{KMOR}
+H. Krovi, F. Magniez, M. Ozols, and J. Roland, \emph{Quantum walks can find a marked element on any graph}, Algorithmica \textbf{74} (2016), no.~2, 851--907.
+
+\bibitem{MNRS}
+F. Magniez, A. Nayak, J. Roland, and M. Santha, \emph{Search via quantum walk}, SIAM J. Comput. \textbf{40} (2011), no.~1, 142--164.
+
+\bibitem{W}
+D. Williams, \emph{Probability with martingales}, Cambridge University Press, Cambridge, 1991.
+
+\end{thebibliography}
+
+\end{document}

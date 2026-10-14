@@ -1,0 +1,577 @@
+\documentclass{amsart}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{float}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+  pdftitle={Chowla's cosine problem with near-unit coefficients},
+  pdfauthor={Knowledge Sense},
+  pdfsubject={Mathematics Subject Classification 2020: 42A05, 11B30},
+  pdfkeywords={Chowla's cosine problem, cosine polynomials, negative values of trigonometric sums, restricted coefficients}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\numberwithin{equation}{section}
+\numberwithin{table}{section}
+
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Btot}{B_{\mathrm{tot}}}
+\newcommand{\Ctot}{C_{\mathrm{tot}}}
+\newcommand{\D}{\mathcal{D}}
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\im}{Im}
+
+\begin{document}
+
+\title[Chowla's cosine problem with near-unit coefficients]{Chowla's cosine problem\\ with near-unit coefficients}
+\author{Knowledge Sense}
+\email{math@knowledgesense.jp}
+\date{12 October 2026}
+\subjclass[2020]{Primary 42A05; Secondary 11B30}
+\keywords{Chowla's cosine problem, cosine polynomials, negative values of trigonometric sums, restricted coefficients}
+
+\begin{abstract}
+Let $a_1,\dots,a_N$ be distinct positive integers and let $s_1,\dots,s_N$ be real numbers in the interval $[0.99,1.01]$. We prove that
+\[
+\min_{x\in\R}\sum_{j=1}^{N}s_j\cos(2\pi a_jx)\le-\frac{N^{1/9}}{20}.
+\]
+Bedert recalled a question of Ruzsa asking how negative such cosine sums must be; the lower bound recorded there is of order $\log N$. Our proof adapts a Fourier-analytic construction from Bedert's work on Chowla's cosine problem, where all coefficients are equal to one. Allowing the coefficients to vary creates an error term for each translation; after summation over all translations, this error is controlled by a counting identity of Shankar. The required bounds for two quadratic forms in five variables, each equal to $0$ or lying in $[0.99,1.01]$, reduce to finitely many exact checks, which are listed in an appendix.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+For a set $S$ of $N$ positive integers, the cosine sum $\sum_{a\in S}\cos(2\pi ax)$ has mean zero over a period and therefore takes negative values. Chowla's cosine problem \cite{Cho} asks how negative it must become, that is, for the order of growth of
+\[
+K(N)=\inf_{S\subset\N,\ |S|=N}\Bigl(-\min_{x\in\R}\sum_{a\in S}\cos(2\pi ax)\Bigr).
+\]
+Difference sets of Sidon sets give $K(N)\ll\sqrt N$, and Chowla conjectured that this is the correct order; see \cite[Section~1]{Bed}. The resolution of the Littlewood $L^1$ conjecture by McGehee, Pigno and Smith \cite{MPS} and by Konyagin \cite{Kon} gives $K(N)\gg\log N$. Bourgain \cite{Bou} was the first to go beyond logarithmic bounds, and Ruzsa \cite{Ruz} refined his method to obtain $K(N)\ge\exp(c\sqrt{\log N})$. Polynomial lower bounds were obtained independently by Bedert \cite{Bed} and by Jin, Milojevi\'c, Tomon and Zhang \cite{JMTZ}. The third version of \cite{Bed} gives $K(N)\ge N^{1/5-o(1)}$, and Shankar \cite{Sha} removed the subpolynomial factor, proving $K(N)\gg N^{1/5}$.
+
+This paper concerns coefficients that are close to one but are not required to be equal to one. Let $I=[0.99,1.01]$ and
+\[
+K_I(N)=\inf\Bigl(-\min_{x\in\R}\sum_{j=1}^{N}s_j\cos(2\pi a_jx)\Bigr),
+\]
+where the infimum is taken over all distinct positive integers $a_1,\dots,a_N$ and all $s_1,\dots,s_N\in I$. Bedert \cite[Theorems~1.2 and 6.1]{Bed} proved polynomial lower bounds when the coefficients range over a fixed finite set of nonzero reals; both the exponent and the constant depend on that set. He also observed that the other methods giving superlogarithmic bounds for $K(N)$ depend heavily on the coefficients being equal to one, and he recalled a question of Ruzsa: to estimate $K_I(N)$ \cite[Section~1]{Bed}. The bound recorded there is $K_I(N)\gg\log N$, which follows from the $L^1$ theorem of \cite{MPS}. Our main result is a polynomial lower bound.
+
+\begin{theorem}\label{thm:main}
+Let $N\ge1$, let $a_1,\dots,a_N$ be distinct positive integers, and let $s_1,\dots,s_N\in[0.99,1.01]$ be real numbers. Then
+\[
+\min_{x\in\R}\sum_{j=1}^{N}s_j\cos(2\pi a_jx)\le-\frac{N^{1/9}}{20}.
+\]
+Equivalently, $K_I(N)\ge N^{1/9}/20$ for every $N\ge1$.
+\end{theorem}
+
+There is no restriction on the size of the frequencies, on their gaps, or on the number of distinct coefficient values. Since all coefficients may equal one, $K_I(N)\le K(N)\ll\sqrt N$; thus $K_I(N)$ has polynomial order of growth (see Section~\ref{sec:upper}). We do not know the correct exponent.
+
+Theorem~\ref{thm:main} does not follow from the case of unit coefficients by a direct perturbation. Replacing every $s_j$ by $1$ changes the sum by up to $0.01N$ in the supremum norm, and for large $N$ this exceeds the quantity being estimated, since $K_I(N)\ll\sqrt N$. Bedert's argument for a finite set of coefficients separates the coefficient classes by convolution powers and the inversion of a Vandermonde matrix \cite[Section~6]{Bed}, and its constants depend on the set of coefficients; it gives no uniform statement for a continuum of coefficient values.
+
+Throughout, $e(x)=e^{2\pi ix}$. As in \cite{Bed} and \cite{Sha}, we work with a symmetric formulation.
+
+\begin{theorem}\label{thm:sym}
+Let $A=-A$ be a nonempty finite subset of $\Z\setminus\{0\}$, let $n=|A|$, and let $s\colon A\to[0.99,1.01]$ satisfy $s_{-a}=s_a$ for all $a\in A$. Put
+\[
+F(x)=\sum_{a\in A}s_a\,e(ax)\qquad\text{and}\qquad K=-\min_{x\in\R}F(x).
+\]
+Then $n\le10^8K^9$.
+\end{theorem}
+
+\subsection*{Outline}
+For $t\in\Z$ let
+\[
+B_t=\{m\in A:m-t\in A,\ m+t\notin A\},\qquad C_t=\{m\in A:m-t\in A,\ m+t\in A\}.
+\]
+Thus $A\cap(A+t)$ is the disjoint union of $B_t$ and $C_t$, and $B_t$ is the asymmetric part of $A\cap(A+t)$ studied in \cite[Section~7]{Bed} and \cite{Sha}. The proof has three steps.
+
+First, a Roth-type argument gives $\sum_{t\in A}|A\cap(A+t)|\ge n^2/(2K)$ when $n\ge3K^2$ (Lemma~\ref{lem:roth}). Shankar's identity \cite[Lemma~3.1]{Sha} shows that at least a third of this sum comes from the sets $B_t$ (Lemma~\ref{lem:shankar}), and from it we derive $\sum_{t\in A}|C_t|\le2\sum_{t\in A}|B_t|$ (Corollary~\ref{cor:Blower}).
+
+Second, for each $t\ne0$ Bedert \cite[Section~7]{Bed} constructs two real trigonometric polynomials $\psi_t$ and $\phi_t$ with $|\phi_t|\le\psi_t+O(K^2)$, whose Fourier coefficients at $m$ depend only on the coefficients of $F$ at $m-2t,\dots,m+2t$. For unit coefficients, the coefficients of $\phi_t$ on $B_t$ have modulus strictly larger than the largest Fourier coefficient of $\psi_t$ \cite[Lemma~7.2]{Bed}. For coefficients in $I$ these Fourier coefficients are values of two quadratic forms, and Proposition~\ref{prop:local} shows that a strict separation persists for all admissible coefficient values.
+
+Third, we test the inequality $|\phi_t|\le\psi_t+O(K^2)$ against $g_t*g_t$, where
+\[
+g_t=F*\bigl(e(t\,\cdot\,)F\bigr)-F*\bigl(e(t\,\cdot\,)F\bigr)*\bigl(e(-t\,\cdot\,)F\bigr).
+\]
+With $s$ extended by zero outside $A$, the Fourier coefficient of $g_t$ at $m$ is $s_ms_{m-t}(1-s_{m+t})$. For unit coefficients this is the indicator function of $B_t$. In general it is bounded below on $B_t$, vanishes outside $B_t\cup C_t$, and is small on $C_t$ (Lemma~\ref{lem:selector}). For a single $t$ the set $C_t$ may be much larger than $B_t$, so this error cannot be controlled one translation at a time (Remark~\ref{rem:single}). After summation over all $t\in A$, the inequality $\sum_t|C_t|\le2\sum_t|B_t|$ absorbs the total error with a positive margin (Section~\ref{sec:proof}).
+
+\subsection*{Dependencies}
+The functions $f_t$, $r_t$, $\psi_t$, $\phi_t$ and the formula for their Fourier coefficients are taken from \cite[Section~7, (36)--(41)]{Bed}. Lemma~\ref{lem:roth} is Roth's argument \cite{Rot}, in the form of \cite[Lemma~4.1]{Bed}, with weights. Lemma~\ref{lem:shankar} is \cite[Lemma~3.1]{Sha}; its proof uses only the support of $F$, and we include it for completeness. The new ingredients are the bounds for the perturbed local quadratic forms in Proposition~\ref{prop:local}, the test function $g_t$ of Lemma~\ref{lem:selector}, and the absorption of its error after summation over translations in Section~\ref{sec:proof}. To our knowledge, no polynomial lower bound for $K_I(N)$ has been recorded before.
+
+The exponent $1/9$ is weaker than the exponent $1/5$ available for unit coefficients. The loss comes from the crude bound $\|g_t\|_1\le13K^3$ in Lemma~\ref{lem:selector}; for unit coefficients Bedert's decomposition \cite[Lemma~7.1]{Bed} controls the corresponding test function much more efficiently. We have not attempted to adapt that decomposition.
+
+\subsection*{Organization}
+Section~\ref{sec:prelim} collects notation and the two counting inputs. Section~\ref{sec:bedert} recalls Bedert's inequality and states the uniform bounds for the perturbed local quadratic forms. Section~\ref{sec:selector} introduces the test function $g_t$ and proves an inequality for a single translation. Section~\ref{sec:proof} sums these inequalities and proves Theorems~\ref{thm:main} and~\ref{thm:sym}. Section~\ref{sec:remarks} contains remarks on upper bounds and constants. Appendix~\ref{app:cert} proves the uniform bounds of Proposition~\ref{prop:local} by a finite computation with exact numbers.
+
+\section{Preliminaries}\label{sec:prelim}
+
+Let $\T=\R/\Z$ with Haar probability measure. For $g\in L^1(\T)$ and $m\in\Z$ put $\widehat g(m)=\int_\T g(x)e(-mx)\,dx$, and let $(g*h)(x)=\int_\T g(x-y)h(y)\,dy$. Then $\widehat{g*h}=\widehat g\,\widehat h$, Parseval's identity reads $\int_\T g\overline h=\sum_m\widehat g(m)\overline{\widehat h(m)}$ for $g,h\in L^2(\T)$, and Young's inequality gives $\|g*h\|_1\le\|g\|_1\|h\|_1$.
+
+Throughout Sections~\ref{sec:prelim} to~\ref{sec:proof} we fix $A$, $n$, $s$, $F$ and $K$ as in Theorem~\ref{thm:sym}, and we put
+\[
+\alpha=\frac{99}{100},\qquad\beta=\frac{101}{100},\qquad\eta=\frac{\beta^2}{100}=\frac{10201}{10^6}.
+\]
+We extend $s$ to $\Z$ by $s_m=0$ for $m\notin A$. Then $\widehat F(m)=s_m$ for all $m$, $s_0=0$, $s_{-m}=s_m$, and $F$ is real-valued.
+
+\begin{lemma}\label{lem:basic}
+We have $K\ge\alpha$ and $\|F\|_1\le2K$.
+\end{lemma}
+
+\begin{proof}
+The function $P=F+K$ is nonnegative and $\int_\T P=K$, since $s_0=0$. For $a\in A$,
+\[
+\alpha\le s_a=\Bigl|\int_\T P(x)e(-ax)\,dx\Bigr|\le\int_\T P=K.
+\]
+Since $F\ge-K$, we have $|F|\le F+2K$ pointwise, and integration gives $\|F\|_1\le2K$.
+\end{proof}
+
+Let
+\[
+T_A=\#\{(m,t)\in A^2:m-t\in A\}.
+\]
+
+\begin{lemma}\label{lem:roth}
+If $n\ge3K^2$, then $T_A\ge n^2/(2K)$.
+\end{lemma}
+
+\begin{proof}
+This is Roth's argument \cite{Rot} as presented in \cite[Lemma~4.1]{Bed}, with weights. Let $E(x)=\sum_{a\in A}e(ax)$, which is real-valued because $A=-A$, and let $P=F+K\ge0$. By Parseval's identity and the Cauchy--Schwarz inequality with respect to the measure $P(x)\,dx$,
+\[
+\alpha^2n^2\le\Bigl(\sum_{a\in A}s_a\Bigr)^2=\Bigl(\int_\T PE\Bigr)^2\le\int_\T P\cdot\int_\T PE^2=K\int_\T PE^2.
+\]
+Now $E^2=\sum_{m,t\in A}e((m-t)x)$, so
+\[
+\int_\T PE^2=\sum_{m,t\in A}\widehat P(t-m)=Kn+\sum_{\substack{m,t\in A\\ m-t\in A}}s_{m-t}\le Kn+\beta T_A,
+\]
+where we used $\widehat P(0)=K$, $\widehat P(k)=s_k$ for $k\ne0$, and $s_{-k}=s_k$. Hence $\alpha^2n^2\le K^2n+\beta KT_A$. If $n\ge3K^2$, then $K^2n\le n^2/3$, and therefore
+\[
+T_A\ge\frac{\alpha^2-1/3}{\beta}\cdot\frac{n^2}{K}\ge\frac{n^2}{2K},
+\]
+because $(\alpha^2-1/3)/\beta=19403/30300>1/2$.
+\end{proof}
+
+For $t\in\Z$ let $B_t$ and $C_t$ be as in the introduction, and put
+\[
+\Btot=\sum_{t\in A}|B_t|,\qquad\Ctot=\sum_{t\in A}|C_t|.
+\]
+For fixed $t$, the sets $B_t$ and $C_t$ partition $\{m\in A:m-t\in A\}$. Summing over $t\in A$ gives
+\begin{equation}\label{eq:TBC}
+T_A=\Btot+\Ctot.
+\end{equation}
+Since $A=-A$, we have $-(A\cap(A+t))=A\cap(A-t)$, so
+\[
+B_t=\bigl(A\cap(A+t)\bigr)\setminus\bigl(-(A\cap(A+t))\bigr);
+\]
+this is the set denoted $B_t$ in \cite{Bed} and \cite{Sha}.
+
+\begin{lemma}[Shankar {\cite[Lemma~3.1]{Sha}}]\label{lem:shankar}
+We have $\Btot\ge T_A/3$.
+\end{lemma}
+
+\begin{proof}
+We recall the argument of \cite{Sha} in a slightly rearranged form. Let $P_+=A\cap\N$, and for $u,v\in P_+$ put $d_{u,v}=1_A(u-v)$ and $p_{u,v}=1_A(u+v)$. Every pair $(m,t)\in A^2$ lies in exactly one of the classes
+\[
+\{(u,v),\,(-u,-v),\,(u,-v),\,(-u,v)\},\qquad u,v\in P_+.
+\]
+Since $A=-A$, on these four pairs the pair $(1_A(m-t),1_A(m+t))$ equals $(d_{u,v},p_{u,v})$, $(d_{u,v},p_{u,v})$, $(p_{u,v},d_{u,v})$ and $(p_{u,v},d_{u,v})$, respectively. As $d(1-p)+p(1-d)=d+p-2dp$ for $d,p\in\{0,1\}$, we obtain
+\[
+T_A=2\sum_{u,v\in P_+}(d_{u,v}+p_{u,v}),\qquad\Btot=2\sum_{u,v\in P_+}(d_{u,v}+p_{u,v}-2d_{u,v}p_{u,v}).
+\]
+Let $Q=\sum_{u,v}p_{u,v}$, $D=\sum_{u,v}d_{u,v}$ and $J_0=\sum_{u,v}d_{u,v}p_{u,v}$, all sums over $u,v\in P_+$. Clearly $J_0\le Q$. Since $0\notin A$, every pair counted by $D$ has $u\ne v$; since $u-v\in A\cap\N$ when $u>v$, the map $(u,v)\mapsto(v,u-v)$ is a bijection from the pairs counted by $D$ with $u>v$ onto the pairs counted by $Q$, and the pairs with $u<v$ are handled by exchanging $u$ and $v$. Hence $D=2Q$, and so
+\[
+T_A=6Q,\qquad\Btot=6Q-4J_0\ge2Q=\frac{T_A}{3}.\qedhere
+\]
+\end{proof}
+
+The following consequences are derived here from Lemma~\ref{lem:shankar}; the first is the form in which Shankar's identity is used in Section~\ref{sec:proof}.
+
+\begin{corollary}\label{cor:Blower}
+We have $\Ctot\le2\Btot$. If moreover $n\ge3K^2$, then $\Btot\ge n^2/(6K)$.
+\end{corollary}
+
+\begin{proof}
+By \eqref{eq:TBC} and Lemma~\ref{lem:shankar}, $\Ctot=T_A-\Btot\le3\Btot-\Btot=2\Btot$. The second assertion follows from Lemmas~\ref{lem:roth} and~\ref{lem:shankar}.
+\end{proof}
+
+\section{Bedert's inequality with perturbed coefficients}\label{sec:bedert}
+
+Fix $t\in\Z\setminus\{0\}$. Following \cite[Section~7]{Bed}, let
+\[
+f_t(x)=2\bigl(1+\sin(2\pi tx)\bigr)F(x).
+\]
+Since $2\sin(2\pi tx)=-i\,e(tx)+i\,e(-tx)$, its Fourier coefficients are
+\begin{equation}\label{eq:lambda}
+\lambda_m:=\widehat{f_t}(m)=2s_m-i\,s_{m-t}+i\,s_{m+t}\qquad(m\in\Z).
+\end{equation}
+Let
+\[
+r_t(x)=\Bigl(1-\cos\bigl(2\pi tx+\tfrac\pi4\bigr)\Bigr)(f_t*f_t)(x)
+\]
+and
+\[
+\psi_t(x)=\frac{r_t(x)+r_t(-x)}2,\qquad\phi_t(x)=\frac{r_t(x)-r_t(-x)}2,
+\]
+and let $\omega=\tfrac12\exp(i\pi/4)=(1+i)/(2\sqrt2)$.
+
+\begin{lemma}[Bedert {\cite[Section~7]{Bed}}]\label{lem:bedert}
+The functions $\psi_t$ and $\phi_t$ are real trigonometric polynomials, $\psi_t$ is even, $\phi_t$ is odd, and
+\begin{equation}\label{eq:phipsi}
+|\phi_t(x)|\le\psi_t(x)+32K^2\qquad(x\in\T).
+\end{equation}
+Moreover $\widehat{\psi_t}(m)=\re\rho_m$ and $\widehat{\phi_t}(m)=i\im\rho_m$ for all $m\in\Z$, where
+\begin{equation}\label{eq:rho}
+\rho_m=\lambda_m^2-\omega\,\lambda_{m-t}^2-\overline\omega\,\lambda_{m+t}^2.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+This is \cite[(36)--(40)]{Bed}; the argument uses only $F\ge-K$, $s_0=0$ and $s_{-m}=s_m$, so it applies verbatim. We recall it. Since $0\le1+\sin(2\pi tx)\le2$ and $F+K\ge0$, we have $(1+\sin(2\pi tx))F\ge-(1+\sin(2\pi tx))K\ge-2K$, so $f_t\ge-4K$. Also $\lambda_0=2s_0-i s_{-t}+i s_t=0$, so $\int_\T f_t=0$ and
+\[
+f_t*f_t+16K^2=(f_t+4K)*(f_t+4K)\ge0.
+\]
+As $0\le1-\cos(2\pi tx+\pi/4)\le2$, this gives $r_t\ge-32K^2$, and hence $\psi_t\pm\phi_t\ge-32K^2$, because $\psi_t(x)\pm\phi_t(x)$ equals $r_t(\pm x)$. Since $f_t$ is real, so are $r_t$, $\psi_t$ and $\phi_t$, and \eqref{eq:phipsi} follows. Finally $1-\cos(2\pi tx+\pi/4)=1-\omega\,e(tx)-\overline\omega\,e(-tx)$ and $\widehat{f_t*f_t}(m)=\lambda_m^2$, which gives $\widehat{r_t}(m)=\rho_m$. Since $r_t$ is real, $\widehat{r_t}(-m)=\overline{\rho_m}$, and therefore $\widehat{\psi_t}(m)=(\rho_m+\overline{\rho_m})/2$ and $\widehat{\phi_t}(m)=(\rho_m-\overline{\rho_m})/2$.
+\end{proof}
+
+By \eqref{eq:lambda} and \eqref{eq:rho}, $\rho_m$ depends only on the vector
+\[
+z(m)=(s_{m-2t},s_{m-t},s_m,s_{m+t},s_{m+2t})\in\R^5.
+\]
+Precisely, $\rho_m=\rho(z(m))$, where for $z=(z_1,\dots,z_5)$ we set
+\[
+\rho(z)=(2z_3-iz_2+iz_4)^2-\omega\,(2z_2-iz_1+iz_3)^2-\overline\omega\,(2z_4-iz_3+iz_5)^2.
+\]
+Write $R(z)=\re\rho(z)$ and $J(z)=-\im\rho(z)$ for real $z$. Expanding gives
+\begin{align}
+R(z)&=\tfrac{\sqrt2}4z_1^2-\sqrt2z_1z_2-\tfrac{\sqrt2}2z_1z_3-(1+\sqrt2)z_2^2+\sqrt2z_2z_3+2z_2z_4\notag\\
+&\quad+\bigl(4+\tfrac{\sqrt2}2\bigr)z_3^2+\sqrt2z_3z_4-\tfrac{\sqrt2}2z_3z_5-(1+\sqrt2)z_4^2-\sqrt2z_4z_5+\tfrac{\sqrt2}4z_5^2,\label{eq:R}\\
+J(z)&=-\tfrac{\sqrt2}4z_1^2-\sqrt2z_1z_2+\tfrac{\sqrt2}2z_1z_3+\sqrt2z_2^2+(4+\sqrt2)z_2z_3\notag\\
+&\quad-(4+\sqrt2)z_3z_4-\tfrac{\sqrt2}2z_3z_5-\sqrt2z_4^2+\sqrt2z_4z_5+\tfrac{\sqrt2}4z_5^2.\label{eq:J}
+\end{align}
+Note that $R(z_5,\dots,z_1)=R(z)$ and $J(z_5,\dots,z_1)=-J(z)$.
+
+For $u\in\{0,1\}^5$ let
+\[
+\D(u)=\{z\in\R^5:z_k=0\text{ if }u_k=0,\ z_k\in[\alpha,\beta]\text{ if }u_k=1\}.
+\]
+If $u(m)=(1_A(m-2t),1_A(m-t),1_A(m),1_A(m+t),1_A(m+2t))$, then $z(m)\in\D(u(m))$. Moreover $m\in B_t$ if and only if $(u_2,u_3,u_4)=(1,1,0)$ for $u=u(m)$.
+
+\begin{proposition}\label{prop:local}
+For every $u\in\{0,1\}^5$ and every $z\in\D(u)$,
+\[
+R(z)\le4.86\qquad\text{and}\qquad|J(z)|\le8.
+\]
+If moreover $(u_2,u_3,u_4)=(1,1,0)$, then $J(z)\ge5.27$. Consequently, for all $m\in\Z$,
+\begin{equation}\label{eq:local}
+\widehat{\psi_t}(m)\le4.86,\qquad|\widehat{\phi_t}(m)|\le8,\qquad-\im\rho_m\ge5.27\ \text{ if } m\in B_t.
+\end{equation}
+\end{proposition}
+
+The proof is a finite computation with numbers in $\mathbb Q(\sqrt2)$, given in Appendix~\ref{app:cert}.
+
+\begin{remark}
+On the vertices $z\in\{0,1\}^5$ these quantities are the ones computed in \cite[Lemma~7.2]{Bed}: there $\max R=4+1/\sqrt2\approx4.707$, $\max|J|=4+2\sqrt2\approx6.828$, and $J\ge4+\sqrt2\approx5.414$ when $(z_2,z_3,z_4)=(1,1,0)$. Proposition~\ref{prop:local} states that a strict separation between the bound for $R$ and the bound for $J$ on $B_t$ survives on the full boxes $\D(u)$. The margin is small: among the bounds obtained in Appendix~\ref{app:cert}, the largest upper bound for $R$, which arises from the box $\D(0,1,1,1,0)$, is about $4.8593$, and the smallest lower bound for $J$ on $B_t$, which arises from $\D(1,1,1,0,1)$, is about $5.2766$.
+\end{remark}
+
+\section{A test function and an inequality for a single translation}\label{sec:selector}
+
+For $t\in\Z$ write $e_t(x)=e(tx)$.
+
+\begin{lemma}\label{lem:selector}
+For $t\in\Z\setminus\{0\}$ let
+\[
+g_t=F*(e_tF)-F*(e_tF)*(e_{-t}F).
+\]
+Then $\widehat{g_t}(m)=b_m$ for all $m\in\Z$, where
+\[
+b_m=s_m\,s_{m-t}\,(1-s_{m+t})\in\R.
+\]
+The coefficients $b_m$ satisfy the following:
+\begin{enumerate}
+\item $b_m=0$ unless $m\in B_t\cup C_t$;
+\item $\alpha^2\le b_m\le\beta^2$ for $m\in B_t$;
+\item $|b_m|\le\eta$ for $m\in C_t$.
+\end{enumerate}
+Moreover
+\begin{equation}\label{eq:gnorms}
+\|g_t\|_2^2\le\beta^4|B_t|+\eta^2|C_t|\qquad\text{and}\qquad\|g_t\|_1\le13K^3.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The Fourier coefficients of $e_tF$ and $e_{-t}F$ at $m$ are $s_{m-t}$ and $s_{m+t}$, so the formula for $\widehat{g_t}$ follows from the convolution rule. If $b_m\ne0$, then $m\in A$ and $m-t\in A$, that is, $m\in B_t\cup C_t$. If $m\in B_t$, then $s_{m+t}=0$ and $b_m=s_ms_{m-t}\in[\alpha^2,\beta^2]$. If $m\in C_t$, then $|1-s_{m+t}|\le1/100$ and $|b_m|\le\beta^2/100=\eta$. Parseval's identity gives the first bound in \eqref{eq:gnorms}. Since $\|e_{\pm t}F\|_1=\|F\|_1$, Young's inequality and Lemma~\ref{lem:basic} give
+\[
+\|g_t\|_1\le\|F\|_1^2+\|F\|_1^3\le4K^2+8K^3\le\Bigl(\frac4\alpha+8\Bigr)K^3\le13K^3.\qedhere
+\]
+\end{proof}
+
+When all coefficients equal one, $g_t$ is the exponential sum of $B_t$. In general the coefficients on $C_t$ are small but need not vanish, and they may be negative; only their squares enter below.
+
+\begin{proposition}\label{prop:single}
+For every $t\in\Z\setminus\{0\}$,
+\begin{equation}\label{eq:single}
+(5.27\,\alpha^4-4.86\,\beta^4)\,|B_t|\le12.86\,\eta^2\,|C_t|+5408\,K^8.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Let $G_t=g_t*g_t$, so that $\widehat{G_t}(m)=b_m^2$, and let $h_t=|g_t|$. Since the coefficients $b_m$ are real, $g_t(-x)=\overline{g_t(x)}$; hence $h_t$ is real and even, and its Fourier coefficients are real. Moreover $|G_t|\le h_t*h_t$ pointwise.
+
+By Parseval's identity and Lemma~\ref{lem:bedert},
+\[
+i\int_\T\phi_t\,\overline{G_t}=i\sum_{m\in\Z}\widehat{\phi_t}(m)\,b_m^2=\sum_{m\in\Z}(-\im\rho_m)\,b_m^2.
+\]
+We bound the right-hand side from below. By Lemma~\ref{lem:selector}, only $m\in B_t\cup C_t$ contribute. For $m\in B_t$ we have $-\im\rho_m\ge5.27$ by \eqref{eq:local} and $b_m^2\ge\alpha^4$; for $m\in C_t$ we have $|\im\rho_m|\le8$ and $b_m^2\le\eta^2$. Hence
+\[
+\sum_{m\in\Z}(-\im\rho_m)\,b_m^2\ge5.27\,\alpha^4|B_t|-8\,\eta^2|C_t|.
+\]
+For the upper bound we use \eqref{eq:phipsi}, the nonnegativity of $\psi_t+32K^2$ and of $h_t*h_t$, and Parseval's identity:
+\[
+\Bigl|\int_\T\phi_t\,\overline{G_t}\Bigr|\le\int_\T(\psi_t+32K^2)(h_t*h_t)
+=\sum_{m\in\Z}\widehat{\psi_t}(m)\,\widehat{h_t}(m)^2+32K^2\Bigl(\int_\T h_t\Bigr)^2.
+\]
+Since $\widehat{h_t}(m)^2\ge0$ and $\widehat{\psi_t}(m)\le4.86$ for all $m$ by \eqref{eq:local}, the sum is at most $4.86\,\|h_t\|_2^2=4.86\,\|g_t\|_2^2$. Using \eqref{eq:gnorms}, we obtain
+\[
+5.27\,\alpha^4|B_t|-8\,\eta^2|C_t|\le4.86\bigl(\beta^4|B_t|+\eta^2|C_t|\bigr)+32\cdot13^2K^8,
+\]
+which is \eqref{eq:single}, since $32\cdot13^2=5408$.
+\end{proof}
+
+\begin{remark}\label{rem:single}
+Inequality \eqref{eq:single} alone does not bound $|B_t|$, because $|C_t|$ may be much larger than $|B_t|$. For example, if $A=\{\pm1,\dots,\pm L\}$ with $L\ge2$ and $t=1$, then $B_t=\{-1,L\}$, while $|C_t|=2(L-2)$. The error terms are controlled only on average over $t$, by Corollary~\ref{cor:Blower}.
+\end{remark}
+
+\section{Proof of the main results}\label{sec:proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:sym}]
+Suppose first that $n<3K^2$. Since $K\ge\alpha$ by Lemma~\ref{lem:basic} and $3<10^8\alpha^7$, we obtain $n<3K^2<10^8K^9$.
+
+Suppose now that $n\ge3K^2$. Summing \eqref{eq:single} over all $t\in A$ (both positive and negative) and applying the inequality $\Ctot\le2\Btot$ of Corollary~\ref{cor:Blower}, we get
+\[
+(5.27\,\alpha^4-4.86\,\beta^4)\,\Btot\le12.86\,\eta^2\,\Ctot+5408\,nK^8\le25.72\,\eta^2\,\Btot+5408\,nK^8.
+\]
+The remaining margin is
+\[
+M=5.27\,\alpha^4-4.86\,\beta^4-2\cdot12.86\,\eta^2=\frac{58226264657}{25\cdot10^{12}}=0.00232905\ldots>\frac1{500}.
+\]
+Hence
+\[
+\Btot\le500\cdot5408\,nK^8=2{,}704{,}000\,nK^8.
+\]
+On the other hand $\Btot\ge n^2/(6K)$ by Corollary~\ref{cor:Blower}. Therefore
+\[
+n\le6\cdot2{,}704{,}000\,K^9=16{,}224{,}000\,K^9<10^8K^9.\qedhere
+\]
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Let $S=\{a_1,\dots,a_N\}$ and $A=S\cup(-S)$, a symmetric subset of $\Z\setminus\{0\}$ with $n=|A|=2N$. Put $s_{\pm a_j}=s_j$. Then
+\[
+F(x)=\sum_{a\in A}s_a\,e(ax)=2\sum_{j=1}^Ns_j\cos(2\pi a_jx),
+\]
+so $K=2K_{\cos}$, where $K_{\cos}=-\min_x\sum_js_j\cos(2\pi a_jx)$. Theorem~\ref{thm:sym} gives $2N\le10^8(2K_{\cos})^9$, that is,
+\[
+N\le2^8\cdot10^8\,K_{\cos}^9\le20^9K_{\cos}^9,
+\]
+because $2^8\cdot10^8=2.56\cdot10^{10}<5.12\cdot10^{11}=20^9$. Hence $K_{\cos}\ge N^{1/9}/20$.
+\end{proof}
+
+\section{Remarks}\label{sec:remarks}
+
+\subsection{Upper bounds}\label{sec:upper}
+Since unit coefficients lie in $I$, every upper bound for $K(N)$ is an upper bound for $K_I(N)$. For completeness we record the Sidon construction mentioned in \cite[Section~1]{Bed} in the simplest case.
+
+\begin{proposition}\label{prop:sidon}
+For every $m\ge2$ there is a set $S$ of $N=m(m-1)/2$ positive integers with
+\[
+\sum_{a\in S}\cos(2\pi ax)\ge-\frac m2\qquad(x\in\R).
+\]
+In particular $K_I(N)\le m/2\le\sqrt{N/2}+1/2$ for these $N$.
+\end{proposition}
+
+\begin{proof}
+Let $D=\{2^0,2^1,\dots,2^{m-1}\}$ and let $S$ be the set of positive differences of elements of $D$. The differences $2^i-2^j=2^j(2^{i-j}-1)$ with $i>j$ are pairwise distinct, since $j$ is the $2$-adic valuation of $2^i-2^j$ and $i-j$ is then determined. Hence $|S|=m(m-1)/2$ and
+\[
+\Bigl|\sum_{b\in D}e(bx)\Bigr|^2=m+2\sum_{a\in S}\cos(2\pi ax),
+\]
+which gives the inequality. Finally $m=(1+\sqrt{1+8N})/2\le1+\sqrt{2N}$.
+\end{proof}
+
+Together with Theorem~\ref{thm:main}, this gives $N^{1/9}/20\le K_I(N)\le\sqrt{N/2}+1/2$ along $N=m(m-1)/2$. For general $N$ one obtains $K_I(N)\ll\sqrt N$ by removing at most $m-2$ elements from such a set.
+
+\subsection{Scaling and constants}
+If all coefficients lie in $[0.99\lambda,1.01\lambda]$ for some $\lambda>0$, then dividing by $\lambda$ and applying Theorem~\ref{thm:main} shows that the minimum is at most $-\lambda N^{1/9}/20$.
+
+No attempt has been made to optimize the constants. The proof gives $n\le16{,}224{,}000\,K^9$ in Theorem~\ref{thm:sym} (also in the case $n<3K^2$, since $3<16{,}224{,}000\,\alpha^7$), and therefore the constant $1/20$ in Theorem~\ref{thm:main} may be replaced by $1/12$, because $2^8\cdot16{,}224{,}000\le12^9$.
+
+\appendix
+
+\section{Proof of Proposition~\ref{prop:local}}\label{app:cert}
+
+Throughout this appendix $\varepsilon=1/100$, so that $\alpha=1-\varepsilon$ and $\beta=1+\varepsilon$. For a real quadratic form $Q$ on $\R^5$ and $u\in\{0,1\}^5$ let
+\[
+G_Q(u)=\sum_{k:\,u_k=1}\bigl|\partial_kQ(u)\bigr|,
+\]
+and let $H_Q(u)$ be the sum of the absolute values of the coefficients of the quadratic form obtained from $Q$ by setting $z_k=0$ for every $k$ with $u_k=0$.
+
+\begin{lemma}\label{lem:taylor}
+For every quadratic form $Q$ on $\R^5$, every $u\in\{0,1\}^5$ and every $z\in\D(u)$,
+\[
+\bigl|Q(z)-Q(u)\bigr|\le\varepsilon\,G_Q(u)+\varepsilon^2H_Q(u).
+\]
+\end{lemma}
+
+\begin{proof}
+Write $z=u+h$. Then $h_k=0$ if $u_k=0$, and $|h_k|\le\varepsilon$ if $u_k=1$. Since $Q$ is a homogeneous quadratic polynomial,
+\[
+Q(u+h)=Q(u)+\sum_{k=1}^5\partial_kQ(u)\,h_k+Q(h)
+\]
+exactly. The linear term is at most $\varepsilon G_Q(u)$ in modulus. The form $Q(h)$ involves only variables $h_k$ with $u_k=1$, and each of its monomials is at most $\varepsilon^2$ in modulus, so $|Q(h)|\le\varepsilon^2H_Q(u)$.
+\end{proof}
+
+Table~\ref{tab:boxes} lists, for each $u\in\{0,1\}^5$, the values $Q(u)$, $G_Q(u)$ and $H_Q(u)$ for $Q=R$ and $Q=J$, computed from \eqref{eq:R} and \eqref{eq:J}. The entries for the reversed vector $(u_5,\dots,u_1)$ agree with those for $u$, except that $J(u)$ changes sign; this is consistent with the symmetries noted after \eqref{eq:J}. By Lemma~\ref{lem:taylor}, on $\D(u)$ we have
+\begin{equation}\label{eq:boxbounds}
+R(z)\le R(u)+\varepsilon G_R(u)+\varepsilon^2H_R(u),\qquad
+\bigl|J(z)-J(u)\bigr|\le\varepsilon G_J(u)+\varepsilon^2H_J(u).
+\end{equation}
+
+\begin{table}[p]
+\caption{Center values, gradient sums and coefficient sums for $R$ and $J$. The vector $u$ is written as the string $u_1u_2u_3u_4u_5$; $u_3$ corresponds to the frequency $m$.}\label{tab:boxes}
+\footnotesize
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}c>{$}c<{$}>{$}c<{$}>{$}c<{$}>{$}c<{$}>{$}c<{$}>{$}c<{$}@{}}
+\toprule
+$u$ & R(u) & G_R(u) & H_R(u) & J(u) & G_J(u) & H_J(u)\\
+\midrule
+00000 & 0 & 0 & 0 & 0 & 0 & 0 \\
+00001 & \tfrac{1}{4}\sqrt2 & \tfrac{1}{2}\sqrt2 & \tfrac{1}{4}\sqrt2 & \tfrac{1}{4}\sqrt2 & \tfrac{1}{2}\sqrt2 & \tfrac{1}{4}\sqrt2 \\
+00010 & -1-\sqrt2 & 2+2\sqrt2 & 1+\sqrt2 & -\sqrt2 & 2\sqrt2 & \sqrt2 \\
+00011 & -1-\tfrac{7}{4}\sqrt2 & 2+\tfrac{7}{2}\sqrt2 & 1+\tfrac{9}{4}\sqrt2 & \tfrac{1}{4}\sqrt2 & \tfrac{5}{2}\sqrt2 & \tfrac{9}{4}\sqrt2 \\
+00100 & 4+\tfrac{1}{2}\sqrt2 & 8+\sqrt2 & 4+\tfrac{1}{2}\sqrt2 & 0 & 0 & 0 \\
+00101 & 4+\tfrac{1}{4}\sqrt2 & 8+\tfrac{1}{2}\sqrt2 & 4+\tfrac{5}{4}\sqrt2 & -\tfrac{1}{4}\sqrt2 & \tfrac{1}{2}\sqrt2 & \tfrac{3}{4}\sqrt2 \\
+00110 & 3+\tfrac{1}{2}\sqrt2 & 10+3\sqrt2 & 5+\tfrac{5}{2}\sqrt2 & -4-2\sqrt2 & 8+4\sqrt2 & 4+2\sqrt2 \\
+00111 & 3-\tfrac{3}{4}\sqrt2 & 10+\tfrac{9}{2}\sqrt2 & 5+\tfrac{17}{4}\sqrt2 & -4-\tfrac{5}{4}\sqrt2 & 8+\tfrac{9}{2}\sqrt2 & 4+\tfrac{15}{4}\sqrt2 \\
+01000 & -1-\sqrt2 & 2+2\sqrt2 & 1+\sqrt2 & \sqrt2 & 2\sqrt2 & \sqrt2 \\
+01001 & -1-\tfrac{3}{4}\sqrt2 & 2+\tfrac{5}{2}\sqrt2 & 1+\tfrac{5}{4}\sqrt2 & \tfrac{5}{4}\sqrt2 & \tfrac{5}{2}\sqrt2 & \tfrac{5}{4}\sqrt2 \\
+01010 & -2\sqrt2 & 4\sqrt2 & 4+2\sqrt2 & 0 & 4\sqrt2 & 2\sqrt2 \\
+01011 & -\tfrac{11}{4}\sqrt2 & \tfrac{11}{2}\sqrt2 & 4+\tfrac{13}{4}\sqrt2 & \tfrac{5}{4}\sqrt2 & \tfrac{9}{2}\sqrt2 & \tfrac{13}{4}\sqrt2 \\
+01100 & 3+\tfrac{1}{2}\sqrt2 & 10+3\sqrt2 & 5+\tfrac{5}{2}\sqrt2 & 4+2\sqrt2 & 8+4\sqrt2 & 4+2\sqrt2 \\
+01101 & 3+\tfrac{1}{4}\sqrt2 & 10+\tfrac{5}{2}\sqrt2 & 5+\tfrac{13}{4}\sqrt2 & 4+\tfrac{7}{4}\sqrt2 & 8+\tfrac{7}{2}\sqrt2 & 4+\tfrac{11}{4}\sqrt2 \\
+01110 & 4+\tfrac{1}{2}\sqrt2 & 8+5\sqrt2 & 8+\tfrac{9}{2}\sqrt2 & 0 & 8+6\sqrt2 & 8+4\sqrt2 \\
+01111 & 4-\tfrac{3}{4}\sqrt2 & 8+\tfrac{13}{2}\sqrt2 & 8+\tfrac{25}{4}\sqrt2 & \tfrac{3}{4}\sqrt2 & 8+\tfrac{13}{2}\sqrt2 & 8+\tfrac{23}{4}\sqrt2 \\
+10000 & \tfrac{1}{4}\sqrt2 & \tfrac{1}{2}\sqrt2 & \tfrac{1}{4}\sqrt2 & -\tfrac{1}{4}\sqrt2 & \tfrac{1}{2}\sqrt2 & \tfrac{1}{4}\sqrt2 \\
+10001 & \tfrac{1}{2}\sqrt2 & \sqrt2 & \tfrac{1}{2}\sqrt2 & 0 & \sqrt2 & \tfrac{1}{2}\sqrt2 \\
+10010 & -1-\tfrac{3}{4}\sqrt2 & 2+\tfrac{5}{2}\sqrt2 & 1+\tfrac{5}{4}\sqrt2 & -\tfrac{5}{4}\sqrt2 & \tfrac{5}{2}\sqrt2 & \tfrac{5}{4}\sqrt2 \\
+10011 & -1-\tfrac{3}{2}\sqrt2 & 2+4\sqrt2 & 1+\tfrac{5}{2}\sqrt2 & 0 & 3\sqrt2 & \tfrac{5}{2}\sqrt2 \\
+10100 & 4+\tfrac{1}{4}\sqrt2 & 8+\tfrac{1}{2}\sqrt2 & 4+\tfrac{5}{4}\sqrt2 & \tfrac{1}{4}\sqrt2 & \tfrac{1}{2}\sqrt2 & \tfrac{3}{4}\sqrt2 \\
+10101 & 4 & 8 & 4+2\sqrt2 & 0 & 0 & \tfrac{3}{2}\sqrt2 \\
+10110 & 3+\tfrac{1}{4}\sqrt2 & 10+\tfrac{5}{2}\sqrt2 & 5+\tfrac{13}{4}\sqrt2 & -4-\tfrac{7}{4}\sqrt2 & 8+\tfrac{7}{2}\sqrt2 & 4+\tfrac{11}{4}\sqrt2 \\
+10111 & 3-\sqrt2 & 10+4\sqrt2 & 5+5\sqrt2 & -4-\sqrt2 & 8+4\sqrt2 & 4+\tfrac{9}{2}\sqrt2 \\
+11000 & -1-\tfrac{7}{4}\sqrt2 & 2+\tfrac{7}{2}\sqrt2 & 1+\tfrac{9}{4}\sqrt2 & -\tfrac{1}{4}\sqrt2 & \tfrac{5}{2}\sqrt2 & \tfrac{9}{4}\sqrt2 \\
+11001 & -1-\tfrac{3}{2}\sqrt2 & 2+4\sqrt2 & 1+\tfrac{5}{2}\sqrt2 & 0 & 3\sqrt2 & \tfrac{5}{2}\sqrt2 \\
+11010 & -\tfrac{11}{4}\sqrt2 & \tfrac{11}{2}\sqrt2 & 4+\tfrac{13}{4}\sqrt2 & -\tfrac{5}{4}\sqrt2 & \tfrac{9}{2}\sqrt2 & \tfrac{13}{4}\sqrt2 \\
+11011 & -\tfrac{7}{2}\sqrt2 & 7\sqrt2 & 4+\tfrac{9}{2}\sqrt2 & 0 & 5\sqrt2 & \tfrac{9}{2}\sqrt2 \\
+11100 & 3-\tfrac{3}{4}\sqrt2 & 10+\tfrac{9}{2}\sqrt2 & 5+\tfrac{17}{4}\sqrt2 & 4+\tfrac{5}{4}\sqrt2 & 8+\tfrac{9}{2}\sqrt2 & 4+\tfrac{15}{4}\sqrt2 \\
+11101 & 3-\sqrt2 & 10+4\sqrt2 & 5+5\sqrt2 & 4+\sqrt2 & 8+4\sqrt2 & 4+\tfrac{9}{2}\sqrt2 \\
+11110 & 4-\tfrac{3}{4}\sqrt2 & 8+\tfrac{13}{2}\sqrt2 & 8+\tfrac{25}{4}\sqrt2 & -\tfrac{3}{4}\sqrt2 & 8+\tfrac{13}{2}\sqrt2 & 8+\tfrac{23}{4}\sqrt2 \\
+11111 & 4-2\sqrt2 & 8+8\sqrt2 & 8+8\sqrt2 & 0 & 8+6\sqrt2 & 8+\tfrac{15}{2}\sqrt2 \\\bottomrule
+\end{tabular}
+\end{table}
+
+For each central triple $(u_2,u_3,u_4)$, Table~\ref{tab:grouped} gives the largest of the four upper bounds for $R$ in \eqref{eq:boxbounds}, taken over the outer bits $(u_1,u_5)$, together with the outer bits at which it is attained; the numerical values of these bounds are rounded up to five decimal places. The last column gives the largest of the four numbers $|J(u)|+\varepsilon G_J(u)+\varepsilon^2H_J(u)$, rounded up to three decimal places.
+
+\begin{table}[H]
+\caption{Upper bounds for $R$ and $|J|$, grouped by the central triple.}\label{tab:grouped}
+\small
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}ccccc@{}}
+\toprule
+$(u_2,u_3,u_4)$ & $(u_1,u_5)$ & upper bound for $R$ & numerical value & bound for $|J|$\\
+\midrule
+$(0,0,0)$ & $(1,1)$ & $\tfrac{10201}{20000}\sqrt2$ & $\phantom{-}0.72132$ & $0.361$\\
+$(0,0,1)$ & $(1,0)$ & $-\tfrac{9799}{10000}-\tfrac{5799}{8000}\sqrt2$ & $-2.00502$ & $1.804$\\
+$(0,1,0)$ & $(0,0)$ & $\tfrac{10201}{2500}+\tfrac{10201}{20000}\sqrt2$ & $\phantom{-}4.80172$ & $0.361$\\
+$(0,1,1)$ & $(0,0)$ & $\tfrac{6201}{2000}+\tfrac{2121}{4000}\sqrt2$ & $\phantom{-}3.85039$ & $6.966$\\
+$(1,0,0)$ & $(0,1)$ & $-\tfrac{9799}{10000}-\tfrac{5799}{8000}\sqrt2$ & $-2.00502$ & $1.804$\\
+$(1,0,1)$ & $(0,0)$ & $\tfrac{1}{2500}-\tfrac{9799}{5000}\sqrt2$ & $-2.77117$ & $1.832$\\
+$(1,1,0)$ & $(0,0)$ & $\tfrac{6201}{2000}+\tfrac{2121}{4000}\sqrt2$ & $\phantom{-}3.85039$ & $6.966$\\
+$(1,1,1)$ & $(0,0)$ & $\tfrac{5101}{1250}+\tfrac{11009}{20000}\sqrt2$ & $\phantom{-}4.85926$ & $1.235$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+For the central triple $(1,1,0)$, which corresponds to $m\in B_t$, Table~\ref{tab:boundary} lists the lower bounds $J(u)-\varepsilon G_J(u)-\varepsilon^2H_J(u)$ for the four choices of $(u_1,u_5)$; their numerical values are rounded down to five decimal places.
+
+\begin{table}[H]
+\caption{Lower bounds for $J$ on the boxes $\D(u_1,1,1,0,u_5)$.}\label{tab:boundary}
+\small
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}ccc@{}}
+\toprule
+$(u_1,u_5)$ & lower bound for $J$ & numerical value\\
+\midrule
+$(0,0)$ & $\tfrac{9799}{2500}+\tfrac{9799}{5000}\sqrt2$ & $6.69117$\\
+$(0,1)$ & $\tfrac{9799}{2500}+\tfrac{68589}{40000}\sqrt2$ & $6.34458$\\
+$(1,0)$ & $\tfrac{9799}{2500}+\tfrac{9637}{8000}\sqrt2$ & $5.62319$\\
+$(1,1)$ & $\tfrac{9799}{2500}+\tfrac{19191}{20000}\sqrt2$ & $5.27660$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{proof}[Proof of Proposition~\ref{prop:local}]
+By \eqref{eq:boxbounds} and Table~\ref{tab:grouped}, $R(z)$ is at most
+\[
+\frac{5101}{1250}+\frac{11009}{20000}\sqrt2
+\]
+on every box $\D(u)$. This is less than $4.86$: indeed $4.86-5101/1250=974/1250$, and $11009\sqrt2<15584=20000\cdot974/1250$ because $2\cdot11009^2=242{,}396{,}162<242{,}861{,}056=15584^2$. The last column of Table~\ref{tab:grouped} gives $|J(z)|\le6.966<8$ on every box. By \eqref{eq:boxbounds} and Table~\ref{tab:boundary}, on each box $\D(u_1,1,1,0,u_5)$ we have
+\[
+J(z)\ge\frac{9799}{2500}+\frac{19191}{20000}\sqrt2,
+\]
+and this exceeds $5.27$: indeed $5.27-9799/2500=3376/2500$, and $19191\sqrt2>27008=20000\cdot3376/2500$ because $2\cdot19191^2=736{,}588{,}962>729{,}432{,}064=27008^2$.
+
+For the consequences, recall from Section~\ref{sec:bedert} that $z(m)\in\D(u(m))$, that $\widehat{\psi_t}(m)=R(z(m))$ and $|\widehat{\phi_t}(m)|=|J(z(m))|$, that $-\im\rho_m=J(z(m))$, and that $m\in B_t$ exactly when the central triple of $u(m)$ is $(1,1,0)$.
+\end{proof}
+
+{\sloppy The supplementary material of this paper consists of three files: the program \texttt{verify.py}, its output \texttt{certificate.json}, and \texttt{README.md}. The program reconstructs \eqref{eq:R} and \eqref{eq:J} symbolically from the definition of $\rho$, computes the data of Table~\ref{tab:boxes}, and checks the bounds of this appendix and the constants of Section~\ref{sec:proof} in exact arithmetic over $\mathbb Q(\sqrt2)$. The output records these data for all $32$ boxes, and \texttt{README.md} describes how to run the program. The printed tables suffice for the proof.\par}
+
+\section*{Use of AI-assisted tools}
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{99}
+
+\bibitem{Bed}
+B.~Bedert, \emph{Polynomial bounds for the Chowla cosine problem}, preprint (2026), arXiv:2509.05260v3.
+
+\bibitem{Bou}
+J.~Bourgain, \emph{Sur le minimum d'une somme de cosinus}, Acta Arith.\ \textbf{45} (1986), no.~4, 381--389.
+
+\bibitem{Cho}
+S.~Chowla, \emph{Some applications of a method of A.~Selberg}, J.~Reine Angew.\ Math.\ \textbf{217} (1965), 128--132.
+
+\bibitem{JMTZ}
+Z.~Jin, A.~Milojevi\'c, I.~Tomon, and S.~Zhang, \emph{From small eigenvalues to large cuts, and Chowla's cosine problem}, preprint (2025), arXiv:2509.03490.
+
+\bibitem{Kon}
+S.~V.~Konyagin, \emph{On the Littlewood problem}, Izv.\ Akad.\ Nauk SSSR Ser.\ Mat.\ \textbf{45} (1981), no.~2, 243--265.
+
+\bibitem{MPS}
+O.~C.~McGehee, L.~Pigno, and B.~Smith, \emph{Hardy's inequality and the $L^1$ norm of exponential sums}, Ann.\ of Math.\ (2) \textbf{113} (1981), no.~3, 613--618.
+
+\bibitem{Rot}
+K.~F.~Roth, \emph{On cosine polynomials corresponding to sets of integers}, Acta Arith.\ \textbf{24} (1973), 87--98.
+
+\bibitem{Ruz}
+I.~Z.~Ruzsa, \emph{Negative values of cosine sums}, Acta Arith.\ \textbf{111} (2004), no.~2, 179--186.
+
+\bibitem{Sha}
+A.~Shankar, \emph{A log-free $n^{1/5}$ bound for Chowla's cosine problem}, preprint (2026), arXiv:2609.05338v1.
+
+\end{thebibliography}
+
+\end{document}

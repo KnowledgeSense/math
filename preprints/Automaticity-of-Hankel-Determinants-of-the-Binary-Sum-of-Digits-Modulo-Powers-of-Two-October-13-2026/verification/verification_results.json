@@ -1,0 +1,68 @@
+{
+  "exact_weighted_pairs": 351,
+  "N_range": [
+    2,
+    40
+  ],
+  "r_range": [
+    0,
+    8
+  ],
+  "direct_modular_checks": 468,
+  "K_direct_range": [
+    1,
+    12
+  ],
+  "annotation_index_checks": 50010,
+  "n_range": [
+    0,
+    5000
+  ],
+  "K_annotation_range": [
+    1,
+    10
+  ],
+  "long_input_checks": 720,
+  "long_input_K": [
+    1,
+    2,
+    3,
+    5,
+    10,
+    16
+  ],
+  "input_bit_lengths": [
+    3,
+    4,
+    8,
+    16,
+    64,
+    256,
+    1024,
+    2048
+  ],
+  "malformed_annotation_rejections": 1440,
+  "D_1_to_16": [
+    0,
+    -1,
+    2,
+    5,
+    -8,
+    3,
+    8,
+    141,
+    -204,
+    11,
+    -4,
+    -11,
+    -30,
+    99,
+    1836,
+    164997
+  ],
+  "mismatches": 0,
+  "seconds": 1.823,
+  "method": "integer Bareiss from defining matrices; rational recursion; modular integer-index and annotated-word calculations",
+  "script_sha256": "02c2718b6cb746b9234a119195b8933a02fb13a71e3056328a523df2e4c450c2",
+  "limits": "Tests are finite samples. No minimal automaton or DFA state enumeration is claimed."
+}

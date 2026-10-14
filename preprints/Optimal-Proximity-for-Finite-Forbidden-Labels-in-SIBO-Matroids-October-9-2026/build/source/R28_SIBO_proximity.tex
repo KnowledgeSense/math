@@ -1,0 +1,302 @@
+\documentclass{amsart}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{question}[theorem]{Question}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\raggedbottom
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\begin{document}
+
+\title[Proximity for forbidden labels in SIBO matroids]{Optimal proximity for finite forbidden labels in SIBO matroids}
+
+\author{Knowledge Sense}
+\address{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{9 October 2026}
+
+\subjclass[2020]{Primary 05B35; Secondary 20K01, 90C27}
+
+\keywords{matroid, group-labeled matroid, proximity, forbidden labels, subsequence-interchangeable base orderability, characters of abelian groups}
+
+\begin{abstract}
+Let $M$ be a finite subsequence-interchangeably base orderable (SIBO) matroid. For $t=1,\dots,k$ let $\psi_t$ be a labeling of the ground set of $M$ by an abelian group $\Gamma_t$, and let $F_t\subseteq\Gamma_t$ be finite. Call a basis feasible if, for every $t$, the sum of its $\psi_t$-labels lies outside $F_t$. We prove that if a feasible basis exists, then every basis can be turned into a feasible basis by exchanging at most $\prod_{t=1}^k(|F_t|+1)-1$ elements, and that this bound is attained for every tuple of sizes $(|F_1|,\dots,|F_k|)$. For singleton forbidden sets the bound is $2^k-1$; this answers a question of Garamv\"olgyi, Mizutani, Oki, Schwarcz and Yamaguchi for SIBO matroids, including uniform and strongly base orderable ones, and improves their bound $\lfloor(e-1/2)k!\rfloor-1$. The proof rests on a sharp statement about consecutive sums in products of abelian groups, proved by interpolation with characters and a rank bound for a triangular matrix.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $M$ be a matroid on a finite ground set $E$, let $\psi\colon E\to\Gamma$ be a labeling by an abelian group, and for $X\subseteq E$ write $\psi(X)$ for the sum of the labels $\psi(e)$, $e\in X$. For a finite set $F\subseteq\Gamma$ of forbidden labels, a basis $B$ is $F$-avoiding if $\psi(B)\notin F$. Such constraints express, for example, parity and congruency conditions: with $\Gamma=\Z/m\Z$ and $F=\Gamma\setminus\{c\}$, a basis is $F$-avoiding exactly when its label sum is congruent to $c$ modulo $m$. They were studied for matroid bases by Liu and Xu~\cite{LX} and by H\"orsch, Imolay, Mizutani, Oki and Schwarcz~\cite{HIMOS,HIMOS-full}. The latter authors proposed the following \emph{proximity conjecture}: if an $F$-avoiding basis exists, then every basis $A$ can be transformed into an $F$-avoiding basis $B$ with $|A\setminus B|\le|F|$ \cite[Conjecture~5.1]{HIMOS-full}. The bound $|F|$ is attained for every value of $|F|$ \cite[Section~5]{HIMOS-full}, and the conjecture implies a polynomial-time algorithm for finding an $F$-avoiding basis when $|F|$ is fixed. It is known in several cases, for example when $|F|\le2$ \cite{HIMOS-full}, when $\Gamma$ has prime order \cite{LX}, and for subsequence-interchangeably base orderable matroids, in particular strongly base orderable ones \cite[Corollary~5.15 and Remark~5.16]{HIMOS-full}, \cite[Lemma~2.4]{GMOSY}. Garamv\"olgyi, Mizutani, Oki, Schwarcz and Yamaguchi~\cite{GMOSY} proved it for sparse paving matroids and for $|F|\le4$.
+
+Garamv\"olgyi et al.~\cite{GMOSY} also considered several constraints at once. Given labelings $\psi_t\colon E\to\Gamma_t$ and elements $f_t\in\Gamma_t$ for $t=1,\dots,k$, one asks for a basis $B$ with $\psi_t(B)\ne f_t$ for all $t$, and the multi-labeled proximity conjecture \cite[Conjecture~1.6]{GMOSY} asserts that such a basis can be reached from any basis by at most $d(k)$ exchanges, for some function $d$. They showed that necessarily $d(k)\ge2^k-1$, even for uniform matroids \cite[Example~5.1]{GMOSY}, and proved the upper bounds $3$ for $k=2$ and arbitrary matroids and $\lfloor(e-1/2)k!\rfloor-1$ for SIBO matroids \cite[Theorem~5.5]{GMOSY}. They asked whether $2^k-1$ suffices \cite[Question~6.2]{GMOSY}, adding that they did not expect this for general matroids but considered it more likely for uniform, strongly base orderable and SIBO matroids.
+
+In this paper we settle this question for SIBO matroids, in the more general setting where each labeling has its own finite set of forbidden labels. Throughout, $\Gamma_1,\dots,\Gamma_k$ are abelian groups, $\psi_t\colon E\to\Gamma_t$ are labelings and $F_t\subseteq\Gamma_t$ are finite sets. We put $q_t=|F_t|$ and
+\[
+D=\prod_{t=1}^k(q_t+1),
+\]
+with the convention that the empty product is $1$. A set $X\subseteq E$ is \emph{feasible} if $\psi_t(X)\notin F_t$ for every $t$.
+
+\begin{theorem}\label{thm:main}
+Let $M$ be a SIBO matroid on a finite set $E$, and let $\psi_t$ and $F_t$ $(t=1,\dots,k)$ be as above. If $M$ has a feasible basis, then for every basis $A$ of $M$ there is a feasible basis $B$ with
+\[
+|A\setminus B|\le D-1.
+\]
+\end{theorem}
+
+The definition of SIBO matroids is recalled in Section~\ref{sec:prelim}; strongly base orderable matroids, and hence all gammoids, in particular uniform, partition, laminar and transversal matroids \cite[Section~42.6c]{Schrijver}, are SIBO. Since $|A\setminus B|$ never exceeds $\min\{r,n-r\}$ for a matroid of rank $r$ on $n$ elements, the bound of Theorem~\ref{thm:main} may of course be combined with this trivial one. The groups $\Gamma_t$ are arbitrary; empty forbidden sets contribute a factor $1$ to $D$, and the case $k=0$ is included.
+
+The bound depends only on the size tuple $(q_1,\dots,q_k)$, and among such bounds it is optimal.
+
+\begin{theorem}\label{thm:sharp}
+Let $k\ge0$ and let $q_1,\dots,q_k$ be nonnegative integers. Put $D=\prod_{t=1}^k(q_t+1)$ and $r=D-1$. There are finite cyclic groups $\Gamma_t$, labelings $\psi_t$ of the ground set of the uniform matroid $U_{r,2r}$, sets $F_t\subseteq\Gamma_t$ with $|F_t|=q_t$, and a basis $A$ of $U_{r,2r}$, such that $U_{r,2r}$ has exactly one feasible basis $B$ and $|A\setminus B|=D-1$.
+\end{theorem}
+
+In Theorem~\ref{thm:sharp} the groups and the rank $r=D-1$ are chosen according to the size tuple. For $k=1$ the example is the one given in \cite[Section~5]{HIMOS-full}, and for $q_1=\dots=q_k=1$ it is a variant of \cite[Example~5.1]{GMOSY} in which all groups are finite.
+
+For singleton forbidden sets we obtain the following.
+
+\begin{corollary}\label{cor:singletons}
+Let $M$ be a SIBO matroid, let $\psi_t\colon E\to\Gamma_t$ be labelings and $f_t\in\Gamma_t$ for $t=1,\dots,k$. If $M$ has a basis $B'$ with $\psi_t(B')\ne f_t$ for all $t$, then for every basis $A$ there is a basis $B$ with $\psi_t(B)\ne f_t$ for all $t$ and $|A\setminus B|\le2^k-1$. The bound $2^k-1$ is attained by uniform matroids.
+\end{corollary}
+
+Thus \cite[Question~6.2]{GMOSY} has an affirmative answer for SIBO matroids and every $k$. For $k\le2$ the bound $2^k-1$ was already known to hold for all matroids \cite{HIMOS-full,GMOSY}; for larger $k$ the comparison with \cite[Theorem~5.5]{GMOSY} is shown in Table~\ref{tab:compare}. The question remains open for matroids that are not SIBO.
+
+\begin{table}[ht]
+\caption{Upper bounds on the number of exchanges for SIBO matroids and $k$ singleton forbidden sets.}\label{tab:compare}
+\begin{tabular}{l|cccccc}
+$k$ & 1 & 2 & 3 & 4 & 5 & 6\\
+\hline
+$\lfloor(e-1/2)k!\rfloor-1$ \cite{GMOSY} & 1 & 3 & 12 & 52 & 265 & 1596\\
+$2^k-1$ (Corollary~\ref{cor:singletons}) & 1 & 3 & 7 & 15 & 31 & 63
+\end{tabular}
+\end{table}
+
+When some $F_t$ has more than one element, Theorem~\ref{thm:main} is stronger than what can be obtained by treating each forbidden label as a separate constraint. Splitting every $F_t$ into singletons produces $\sum_t q_t$ constraints, and the bound $2^{\sum_t q_t}-1$ that \cite[Question~6.2]{GMOSY} asks for in this situation exceeds $D-1$ as soon as some $q_t\ge2$. For instance, the size tuple $(2,3)$ gives $11$ instead of $31$. Combining the labelings into one labeling with values in $\Gamma_1\times\dots\times\Gamma_k$ does not help either: the corresponding forbidden set $\{z: z_t\in F_t\text{ for some }t\}$ has a size that depends on the groups, and it is infinite as soon as $k\ge2$, some $F_t$ is nonempty and some $\Gamma_u$ with $u\ne t$ is infinite.
+
+\subsection*{The method}
+The SIBO property allows us to compare a closest feasible basis $B$ with a given basis $A$ through the bases obtained from $B$ by exchanging consecutive blocks with respect to corresponding orderings $x_1,\dots,x_m$ of $B\setminus A$ and $y_1,\dots,y_m$ of $A\setminus B$. Each of these bases is closer to $A$ and therefore infeasible. The labels enter only through the differences $d_i$ of the exchanged pairs, and the problem becomes the following statement about consecutive sums, which may be of independent interest.
+
+\begin{theorem}\label{thm:interval}
+Let $\Gamma_1,\dots,\Gamma_k$ be abelian groups, let $T_t\subseteq\Gamma_t$ be finite sets with $0\notin T_t$, and put $D=\prod_{t=1}^k(|T_t|+1)$. Let $d_1,\dots,d_\ell$ be elements of $\Gamma_1\times\dots\times\Gamma_k$, and suppose that for all $1\le i\le j\le\ell$ there is an index $t$ such that the $t$-th coordinate of $d_i+\dots+d_j$ lies in $T_t$. Then $\ell\le D-1$.
+\end{theorem}
+
+Theorem~\ref{thm:interval} is sharp for every tuple $(|T_1|,\dots,|T_k|)$; see Proposition~\ref{prop:interval-sharp}. In the language of the proof of \cite[Lemma~5.2]{GMOSY}, it shows that the constant $c_k$ defined there equals $2^k$ (Remark~\ref{rem:ck}). Our proof of Theorem~\ref{thm:interval} constructs, from complex characters, a function on a finitely generated subgroup of $\Gamma_1\times\dots\times\Gamma_k$ that equals $1$ at $0$, vanishes whenever some coordinate lies in $T_t$, and is a linear combination of at most $D$ characters. Evaluating it on the differences of the prefix sums of $d_1,\dots,d_\ell$ gives a triangular matrix of size $\ell+1$ with nonzero diagonal, whose rank is at most $D$.
+
+\subsection*{Organization}
+Section~\ref{sec:prelim} recalls SIBO matroids and reduces an SI-ordering to the symmetric difference of two bases. Section~\ref{sec:interval} proves Theorem~\ref{thm:interval} and shows that it is sharp. Section~\ref{sec:proofs} proves Theorems~\ref{thm:main} and~\ref{thm:sharp} and Corollary~\ref{cor:singletons}. Section~\ref{sec:remarks} discusses consequences for weakly base orderable matroids, an algorithmic remark and open questions.
+
+\section{SIBO matroids}\label{sec:prelim}
+
+We use standard matroid terminology~\cite{Oxley}. For a set $X$ and elements $x\in X$, $y\notin X$ we write $X-x=X\setminus\{x\}$ and $X+y=X\cup\{y\}$. For bases $A$ and $B$ of a matroid we have $|A\setminus B|=|B\setminus A|$, and we call this number the distance between $A$ and $B$.
+
+\begin{definition}[\cite{Baumgart}; see {\cite[p.~85:3]{GMOSY}}]
+A matroid $M$ of rank $r$ is \emph{subsequence-interchangeably base orderable} (SIBO) if for every ordered pair $(A,B)$ of bases there are orderings $a_1,\dots,a_r$ of $A$ and $b_1,\dots,b_r$ of $B$ such that
+\[
+(B\setminus\{b_i,\dots,b_j\})\cup\{a_i,\dots,a_j\}
+\]
+is a basis for all $1\le i\le j\le r$. Such a pair of orderings is an \emph{SI-ordering} of $(A,B)$.
+\end{definition}
+
+Only consecutive intervals are required. A matroid is strongly base orderable if for any two bases $A$ and $B$ there is a bijection $\varphi\colon B\to A$ such that $(B\setminus Z)\cup\varphi(Z)$ is a basis for every $Z\subseteq B$; ordering $B$ arbitrarily and $A$ through $\varphi$ shows that strongly base orderable matroids are SIBO. Baumgart~\cite{Baumgart} conjectured that graphic matroids are SIBO, and the matroid $R_{10}$ is not SIBO \cite[Theorem~4.2]{GMOSY}. Every SI-ordering yields a sequential symmetric exchange in the sense of Gabow~\cite{Gabow}.
+
+The orderings in the definition involve all elements of $A$ and $B$, including common ones. The following lemma removes the common elements.
+
+\begin{lemma}\label{lem:reduce}
+Let $A$ and $B$ be bases of a SIBO matroid and let $m=|A\setminus B|$. There are orderings $x_1,\dots,x_m$ of $B\setminus A$ and $y_1,\dots,y_m$ of $A\setminus B$ such that
+\[
+B_{i,j}=(B\setminus\{x_i,\dots,x_j\})\cup\{y_i,\dots,y_j\}
+\]
+is a basis for all $1\le i\le j\le m$.
+\end{lemma}
+
+\begin{proof}
+Let $a_1,\dots,a_r$ and $b_1,\dots,b_r$ be an SI-ordering of $(A,B)$. If $a_p\in B$ and $a_p\ne b_p$, then $a_p\in B-b_p$, so the set $(B-b_p)\cup\{a_p\}$ obtained from the interval $\{p\}$ has only $r-1$ elements and is not a basis. Hence every element of $A\cap B$ occupies the same position in both orderings, that is, $a_p\in B$ implies $a_p=b_p$. Conversely, if $b_p\in A$, then $b_p=a_{p'}$ for some $p'$; since $a_{p'}\in B$, we get $a_{p'}=b_{p'}$, hence $b_p=b_{p'}$ and $p=p'$ because $b_1,\dots,b_r$ are distinct. Thus $b_p\in A$ implies $b_p=a_p$. Let $p_1<\dots<p_m$ be the positions $p$ with $a_p\notin B$, and put $x_s=b_{p_s}$ and $y_s=a_{p_s}$. These are orderings of $B\setminus A$ and $A\setminus B$. For $1\le i\le j\le m$, the interval of positions from $p_i$ to $p_j$ contains, besides $p_i,\dots,p_j$, only positions $p$ with $a_p=b_p$, and such an element is removed from $B$ and added back. Therefore
+\[
+\bigl(B\setminus\{b_p: p_i\le p\le p_j\}\bigr)\cup\{a_p: p_i\le p\le p_j\}=B_{i,j},
+\]
+and $B_{i,j}$ is a basis.
+\end{proof}
+
+\section{Consecutive sums avoiding forbidden sets}\label{sec:interval}
+
+A \emph{character} of an abelian group $L$ is a homomorphism $\chi\colon L\to\C^\times$; characters need not be unitary. The trivial character is the constant function $1$, and the pointwise product of two characters is a character.
+
+\begin{lemma}\label{lem:interpolation}
+Let $L$ be a finitely generated abelian group and let $T\subseteq L$ be a finite set with $0\notin T$ and $|T|=q$. There are characters $\chi_0,\dots,\chi_q$ of $L$ and complex numbers $c_0,\dots,c_q$ such that the function $\phi=\sum_{i=0}^q c_i\chi_i$ satisfies $\phi(0)=1$ and $\phi(a)=0$ for all $a\in T$.
+\end{lemma}
+
+\begin{proof}
+We first show that characters separate the points of $L$, that is, for every $z\ne0$ in $L$ there is a character $\chi$ with $\chi(z)\ne1$. By the structure theorem we may assume $L=\Z^a\times\Z/n_1\Z\times\dots\times\Z/n_b\Z$. If $z$ has a nonzero coordinate $z_i$ in a factor $\Z$, the character $w\mapsto2^{w_i}$ takes the value $2^{z_i}\ne1$ at $z$. Otherwise $z$ has a coordinate $z_i\not\equiv0$ in a factor $\Z/n\Z$, and $w\mapsto\zeta^{w_i}$ with a primitive $n$-th root of unity $\zeta$ takes the value $\zeta^{z_i}\ne1$ at $z$.
+
+Let $S=\{0\}\cup T$, so $|S|=q+1$, and let $W\subseteq\C^S$ be the linear span of the restrictions of all characters of $L$ to $S$. For distinct $a,b\in S$ choose a character $\chi_{a,b}$ with $\chi_{a,b}(a-b)\ne1$, that is, $\chi_{a,b}(a)\ne\chi_{a,b}(b)$. For $a\in S$ put
+\[
+h_a=\prod_{b\in S\setminus\{a\}}\frac{\chi_{a,b}-\chi_{a,b}(b)}{\chi_{a,b}(a)-\chi_{a,b}(b)}.
+\]
+Expanding the product writes $h_a$ as a linear combination of products of characters, that is, of characters. Its restriction to $S$ is the indicator function of $a$: every factor equals $1$ at $a$, and the factor indexed by $b$ vanishes at $b$. Hence $W=\C^S$. Choose characters $\chi_0,\dots,\chi_q$ whose restrictions to $S$ form a basis of $\C^S$, and write the indicator function of $0$ as $\sum_i c_i\chi_i|_S$. Then $\phi=\sum_i c_i\chi_i$ has the required properties.
+\end{proof}
+
+\begin{remark}
+The number $q+1$ of characters in Lemma~\ref{lem:interpolation} cannot be lowered in general, and in particular a single character does not suffice. For instance, if $L=\Z/2\Z\times\Z/2\Z$ and $T=L\setminus\{0\}$, then $\phi$ must be the indicator function $\delta_0$ of $0$. The four characters of $L$ take values $\pm1$, are linearly independent, and satisfy
+\[
+\delta_0=\tfrac14\sum_{\chi}\chi,
+\]
+the sum running over all four characters. Since this representation is unique and all its coefficients are nonzero, $\delta_0$ is not a linear combination of fewer than four characters.
+\end{remark}
+
+\begin{proof}[Proof of Theorem~\ref{thm:interval}]
+Write $q_t=|T_t|$ and $d_i=(d_{i,1},\dots,d_{i,k})$. For each $t$ let $L_t$ be the subgroup of $\Gamma_t$ generated by $T_t$ and $d_{1,t},\dots,d_{\ell,t}$. It is finitely generated, so Lemma~\ref{lem:interpolation} gives characters $\chi_{t,0},\dots,\chi_{t,q_t}$ of $L_t$ and coefficients $c_{t,0},\dots,c_{t,q_t}$ such that $\phi_t=\sum_i c_{t,i}\chi_{t,i}$ satisfies $\phi_t(0)=1$ and $\phi_t|_{T_t}=0$. Let $L=L_1\times\dots\times L_k$ and define $\Phi\colon L\to\C$ by
+\[
+\Phi(z)=\prod_{t=1}^k\phi_t(z_t).
+\]
+Then $\Phi(0)=1$, and $\Phi(z)=0$ whenever $z_t\in T_t$ for some $t$. Expanding the product gives
+\[
+\Phi=\sum_{\lambda\in\Lambda}c_\lambda\chi_\lambda,\qquad \Lambda=\prod_{t=1}^k\{0,\dots,q_t\},
+\]
+where $c_\lambda=\prod_t c_{t,\lambda_t}$ and $\chi_\lambda(z)=\prod_t\chi_{t,\lambda_t}(z_t)$ is a character of $L$. Note that $|\Lambda|=D$.
+
+Put $s_0=0$ and $s_j=d_1+\dots+d_j$ for $1\le j\le\ell$; all $s_j$ lie in $L$. Consider the $(\ell+1)\times(\ell+1)$ complex matrix
+\[
+K=\bigl(\Phi(s_j-s_i)\bigr)_{0\le i,j\le\ell}.
+\]
+Its diagonal entries are $\Phi(0)=1$. If $i<j$, then $s_j-s_i=d_{i+1}+\dots+d_j$, and by hypothesis some coordinate of this element lies in the corresponding set $T_t$; hence $K_{i,j}=0$. Thus $K$ is lower triangular with unit diagonal, and $\operatorname{rank}K=\ell+1$. On the other hand, $\chi_\lambda(s_j-s_i)=\chi_\lambda(-s_i)\chi_\lambda(s_j)$, so
+\[
+K=\sum_{\lambda\in\Lambda}c_\lambda\,u_\lambda v_\lambda^{\mathsf T},\qquad u_\lambda=\bigl(\chi_\lambda(-s_i)\bigr)_{i=0}^{\ell},\quad v_\lambda=\bigl(\chi_\lambda(s_j)\bigr)_{j=0}^{\ell},
+\]
+is a sum of $D$ matrices of rank at most one. Therefore $\ell+1\le D$.
+\end{proof}
+
+The characters are used only on the finitely generated subgroups $L_t$, so no extension to $\Gamma_t$ is needed.
+
+We now show that Theorem~\ref{thm:interval} is sharp. For nonnegative integers $q_1,\dots,q_k$ put
+\begin{equation}\label{eq:N}
+N_0=1,\qquad N_t=\prod_{u=1}^t(q_u+1)\quad(1\le t\le k),
+\end{equation}
+so that $N_k=D$, and define
+\begin{equation}\label{eq:T}
+T_t=\{\,jN_{t-1}+N_t\Z : 1\le j\le q_t\,\}\subseteq\Z/N_t\Z.
+\end{equation}
+Since $0<jN_{t-1}\le q_tN_{t-1}<N_t$ for $1\le j\le q_t$, the set $T_t$ has exactly $q_t$ elements and does not contain $0$.
+
+\begin{lemma}\label{lem:radix}
+Let $\nu$ be an integer with $1\le\nu\le D-1$. Then there is an index $t$ with $\nu+N_t\Z\in T_t$.
+\end{lemma}
+
+\begin{proof}
+Since $N_0=1$ divides $\nu$ and $N_k=D$ does not, there is a smallest $t\ge1$ with $N_t\nmid\nu$. Then $N_{t-1}$ divides both $\nu$ and $N_t$, so the residue of $\nu$ modulo $N_t$ in $\{0,\dots,N_t-1\}$ equals $jN_{t-1}$ for some $0\le j<N_t/N_{t-1}=q_t+1$. As $N_t\nmid\nu$, we have $j\ge1$, and hence $\nu+N_t\Z\in T_t$.
+\end{proof}
+
+\begin{proposition}\label{prop:interval-sharp}
+For all nonnegative integers $q_1,\dots,q_k$ there are finite cyclic groups $\Gamma_t$, sets $T_t\subseteq\Gamma_t$ with $0\notin T_t$ and $|T_t|=q_t$, and elements $d_1,\dots,d_{D-1}$ satisfying the hypothesis of Theorem~\ref{thm:interval}.
+\end{proposition}
+
+\begin{proof}
+Take $\Gamma_t=\Z/N_t\Z$, the sets $T_t$ of \eqref{eq:T}, and $d_1=\dots=d_{D-1}=(1,\dots,1)$. For $1\le i\le j\le D-1$, the $t$-th coordinate of $d_i+\dots+d_j$ is the residue of $\nu=j-i+1$ modulo $N_t$, and $1\le\nu\le D-1$. Lemma~\ref{lem:radix} completes the proof.
+\end{proof}
+
+\begin{remark}\label{rem:ck}
+In the proof of \cite[Lemma~5.2]{GMOSY}, $c_k$ denotes the least integer such that for any labelings $\psi_1,\dots,\psi_k$, elements $f_1,\dots,f_k$, set $B$ with $\psi_t(B)\ne f_t$ for all $t$, and pairwise disjoint nonempty sets $X_1,\dots,X_\ell\subseteq B$ and $Y_1,\dots,Y_\ell$ disjoint from $B$ with $\ell\ge c_k$, some interval exchange $B_{i,j}=(B\setminus(X_i\cup\dots\cup X_j))\cup(Y_i\cup\dots\cup Y_j)$ satisfies $\psi_t(B_{i,j})\ne f_t$ for all $t$; it is shown there that $c_k\le\lfloor(e-1/2)k!\rfloor$. Applying Theorem~\ref{thm:interval} with $T_t=\{f_t-\psi_t(B)\}$ and $d_i=(\psi_t(Y_i)-\psi_t(X_i))_t$ gives $c_k\le2^k$. Conversely, let $\ell=2^k-1$, let $d_1,\dots,d_\ell$ and $T_t$ be as in Proposition~\ref{prop:interval-sharp} for $q_1=\dots=q_k=1$, and let $f_t$ be the unique element of $T_t$. Take $B=\{x_1,\dots,x_\ell\}$, $X_i=\{x_i\}$ and $Y_i=\{y_i\}$, with $\psi_t(x_i)=0$ and $\psi_t(y_i)$ equal to the $t$-th coordinate of $d_i$. Then $\psi_t(B)=0\ne f_t$ for all $t$, while $\psi_t(B_{i,j})$ is the $t$-th coordinate of $d_i+\dots+d_j$, so every interval exchange has $\psi_t(B_{i,j})=f_t$ for some $t$. Hence $c_k=2^k$.
+\end{remark}
+
+\section{Proofs of the main results}\label{sec:proofs}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Fix a basis $A$. Since $M$ has a feasible basis and only finitely many bases, we may choose a feasible basis $B$ for which $m=|A\setminus B|$ is minimum. If $m=0$ there is nothing to prove, so assume $m\ge1$. Lemma~\ref{lem:reduce}, applied to $A$ and $B$, gives orderings $x_1,\dots,x_m$ of $B\setminus A$ and $y_1,\dots,y_m$ of $A\setminus B$ such that $B_{i,j}=(B\setminus\{x_i,\dots,x_j\})\cup\{y_i,\dots,y_j\}$ is a basis for all $1\le i\le j\le m$. Since $|A\setminus B_{i,j}|=m-(j-i+1)<m$, the minimality of $m$ shows that no $B_{i,j}$ is feasible.
+
+For $1\le t\le k$ put
+\[
+T_t=\{\,f-\psi_t(B): f\in F_t\,\}\subseteq\Gamma_t,
+\]
+so that $|T_t|=q_t$ and, since $B$ is feasible, $0\notin T_t$. Let $d_i=(\psi_t(y_i)-\psi_t(x_i))_{t=1}^k\in\Gamma_1\times\dots\times\Gamma_k$. For $1\le i\le j\le m$ we have
+\[
+\psi_t(B_{i,j})=\psi_t(B)+\sum_{s=i}^j\bigl(\psi_t(y_s)-\psi_t(x_s)\bigr),
+\]
+and $B_{i,j}$ is infeasible, so $\psi_t(B_{i,j})\in F_t$ for some $t$, that is, the $t$-th coordinate of $d_i+\dots+d_j$ lies in $T_t$. Theorem~\ref{thm:interval} yields $m\le D-1$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:sharp}]
+Let $N_t$ and $T_t$ be as in \eqref{eq:N} and \eqref{eq:T}, so that $r=D-1=N_k-1$. Let $E$ be the disjoint union of sets $A$ and $B$ with $|A|=|B|=r$, and consider $U_{r,2r}$ on $E$; if $D=1$ this is the matroid on the empty set whose only basis is empty. For $1\le t\le k$ let $\Gamma_t=\Z/N_t\Z$, $F_t=T_t$, and
+\[
+\psi_t(e)=\begin{cases}1&\text{if }e\in A,\\ 0&\text{if }e\in B.\end{cases}
+\]
+Then $|F_t|=q_t$. For a basis $X$ put $\ell(X)=|X\cap A|$, so that $\psi_t(X)=\ell(X)+N_t\Z$ for every $t$. The only basis with $\ell(X)=0$ is $B$, and $B$ is feasible because $0\notin F_t$ for all $t$. If $1\le\ell(X)\le r=D-1$, then Lemma~\ref{lem:radix} gives an index $t$ with $\psi_t(X)\in F_t$, so $X$ is infeasible. Hence $B$ is the unique feasible basis, and $|A\setminus B|=r=D-1$.
+\end{proof}
+
+For $k=1$ this is the rank-$q_1$ uniform matroid with labels $1$ and $0$ in $\Z/(q_1+1)\Z$ and $F_1=\Z/(q_1+1)\Z\setminus\{0\}$ from \cite[Section~5]{HIMOS-full}. For $q_1=\dots=q_k=1$ we obtain $N_t=2^t$ and $F_t=\{2^{t-1}\}\subseteq\Z/2^t\Z$; the mechanism is the one of \cite[Example~5.1]{GMOSY}, where one of the groups is $\Z$.
+
+\begin{proof}[Proof of Corollary~\ref{cor:singletons}]
+Apply Theorem~\ref{thm:main} with $F_t=\{f_t\}$, so that $D=2^k$, and Theorem~\ref{thm:sharp} with $q_1=\dots=q_k=1$.
+\end{proof}
+
+\section{Further remarks}\label{sec:remarks}
+
+\subsection{Weakly base orderable matroids}
+The proof of Theorem~\ref{thm:main} uses the SIBO property only to produce many infeasible interval exchanges. Following \cite{HIMOS-full}, an ordered pair $(B_1,B_2)$ of bases has the \emph{$p$-exchange property} if there are pairwise disjoint nonempty sets $X_1,\dots,X_p\subseteq B_1\setminus B_2$ and $Y_1,\dots,Y_p\subseteq B_2\setminus B_1$ such that $(B_1\setminus\bigcup_{i\in Z}X_i)\cup\bigcup_{i\in Z}Y_i$ is a basis for every $Z\subseteq\{1,\dots,p\}$, and a matroid is \emph{weakly $(\alpha,p)$-base orderable} if every ordered pair $(B_1,B_2)$ of bases with $|B_1\setminus B_2|\ge\alpha$ has the $p$-exchange property.
+
+\begin{corollary}\label{cor:weak}
+Let $M$ be a weakly $(\alpha,D)$-base orderable matroid, and let $\psi_t$ and $F_t$ be as in Theorem~\ref{thm:main}. If $M$ has a feasible basis, then for every basis $A$ there is a feasible basis $B$ with $|A\setminus B|\le\alpha-1$.
+\end{corollary}
+
+\begin{proof}
+Choose a feasible basis $B$ with $m=|A\setminus B|$ minimum, and suppose that $m\ge\alpha$. Let $X_1,\dots,X_D$ and $Y_1,\dots,Y_D$ be given by the $D$-exchange property of $(B,A)$. Taking $Z=\{i\}$ shows $|X_i|=|Y_i|$. For $1\le i\le j\le D$ the basis $(B\setminus(X_i\cup\dots\cup X_j))\cup(Y_i\cup\dots\cup Y_j)$ is at distance $m-|Y_i\cup\dots\cup Y_j|<m$ from $A$, hence infeasible. With $T_t$ as in the proof of Theorem~\ref{thm:main} and $d_i=(\psi_t(Y_i)-\psi_t(X_i))_t$, Theorem~\ref{thm:interval} gives $D\le D-1$, a contradiction.
+\end{proof}
+
+By \cite[Theorem~5.6]{GMOSY} there is a computable function $h$ such that every $\mathrm{GF}(q)$-representable matroid is weakly $(h(q,p),p)$-base orderable, and by \cite[Remark~5.10]{GMOSY} every sparse paving matroid is elementarily, and hence weakly, $(2p,p)$-base orderable. Corollary~\ref{cor:weak} therefore gives the bounds $h(q,D)-1$ and $2D-1$ for these classes. For singleton forbidden sets this replaces the number $\lfloor(e-1/2)k!\rfloor$ of blocks used in \cite[Corollary~5.11]{GMOSY} by $2^k$.
+
+\subsection{An algorithmic remark}
+Let $M$ be a SIBO matroid of rank $r$ on $n$ elements, given by an independence oracle, and assume that the group operations and equality tests in the groups $\Gamma_t$ can be performed by oracles. Given a basis $A$, one may test all sets $(A\setminus X)\cup Y$ with $X\subseteq A$, $Y\subseteq E\setminus A$ and $|X|=|Y|\le\min\{D-1,r,n-r\}$; by Theorem~\ref{thm:main} a feasible basis is found if one exists. The number of candidates is $\sum_{j=0}^{\min\{D-1,r,n-r\}}\binom{r}{j}\binom{n-r}{j}$, which is polynomial in $n$ for fixed $D$, in particular for fixed $k$ when all forbidden sets are singletons. This direct enumeration is an XP algorithm with parameter $D$.
+
+\subsection{Questions}
+For $k=1$, Theorem~\ref{thm:main} is the SIBO case of the proximity conjecture of H\"orsch et al., which was already known; our proof differs from the pigeonhole argument of \cite[Remark~5.16]{HIMOS-full} and \cite[Lemma~2.4]{GMOSY}. The following question contains both the proximity conjecture ($k=1$) and \cite[Question~6.2]{GMOSY} ($q_1=\dots=q_k=1$).
+
+\begin{question}
+Does the conclusion of Theorem~\ref{thm:main} hold for every matroid?
+\end{question}
+
+By \cite[Theorem~4.4 and Theorem~5.5]{GMOSY} the answer is affirmative when $k=1$ and $q_1\le4$, and when $k=2$ and $q_1=q_2=1$. If graphic matroids are SIBO, as conjectured by Baumgart~\cite{Baumgart}, then Theorem~\ref{thm:main} answers the question affirmatively for graphic matroids.
+
+\section*{Use of AI-assisted tools}
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{9}
+
+\bibitem{Baumgart}
+M.~Baumgart, \emph{Ranking and ordering problems of spanning trees}, Ph.D. thesis, Technische Universit\"at M\"unchen, 2009.
+
+\bibitem{Gabow}
+H.~Gabow, \emph{Decomposing symmetric exchanges in matroid bases}, Math. Programming \textbf{10} (1976), no.~1, 271--276.
+
+\bibitem{GMOSY}
+D.~Garamv\"olgyi, R.~Mizutani, T.~Oki, T.~Schwarcz, and Y.~Yamaguchi, \emph{Towards the proximity conjecture on group-labeled matroids}, 52nd International Colloquium on Automata, Languages, and Programming (ICALP 2025), LIPIcs, vol.~334, Schloss Dagstuhl, Leibniz-Zentrum f\"ur Informatik, 2025, Art. No.~85, 17~pp. Full version: arXiv:2411.06771.
+
+\bibitem{HIMOS}
+F.~H\"orsch, A.~Imolay, R.~Mizutani, T.~Oki, and T.~Schwarcz, \emph{Problems on group-labeled matroid bases}, 51st International Colloquium on Automata, Languages, and Programming (ICALP 2024), LIPIcs, vol.~297, Schloss Dagstuhl, Leibniz-Zentrum f\"ur Informatik, 2024, Art. No.~86, 20~pp.
+
+\bibitem{HIMOS-full}
+F.~H\"orsch, A.~Imolay, R.~Mizutani, T.~Oki, and T.~Schwarcz, \emph{Problems on group-labeled matroid bases}, preprint (2024), arXiv:2402.16259v1. Full version of~\cite{HIMOS}.
+
+\bibitem{LX}
+S.~Liu and C.~Xu, \emph{On the congruency-constrained matroid base}, Integer Programming and Combinatorial Optimization (IPCO 2024), Lecture Notes in Comput. Sci., vol.~14679, Springer, Cham, 2024, pp.~280--293, doi:10.1007/978-3-031-59835-7\_21.
+
+\bibitem{Oxley}
+J.~Oxley, \emph{Matroid theory}, 2nd ed., Oxford Graduate Texts in Mathematics, vol.~21, Oxford University Press, Oxford, 2011.
+
+\bibitem{Schrijver}
+A.~Schrijver, \emph{Combinatorial optimization: polyhedra and efficiency}, Springer, Berlin, 2003.
+
+\end{thebibliography}
+
+\end{document}

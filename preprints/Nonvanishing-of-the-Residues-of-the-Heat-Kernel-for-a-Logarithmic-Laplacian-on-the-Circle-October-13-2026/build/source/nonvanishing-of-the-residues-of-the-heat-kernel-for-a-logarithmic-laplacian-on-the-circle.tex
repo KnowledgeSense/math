@@ -1,0 +1,343 @@
+\documentclass[11pt]{amsart}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+
+\hypersetup{
+  pdftitle={Nonvanishing of the residues of the heat kernel for a logarithmic Laplacian on the circle},
+  pdfauthor={Knowledge Sense},
+  pdfsubject={Mathematics},
+  pdfkeywords={Bernoulli numbers, Bell polynomials, 2-adic valuation, digamma function, logarithmic Laplacian}
+}
+
+\hyphenation{manuscript}
+\emergencystretch=2em
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem*{problem}{Open Problem}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Zt}{\Z_{(2)}}
+\newcommand{\Bhat}{\widehat{B}}
+\newcommand{\Res}{\operatorname*{Res}}
+
+\begin{document}
+
+\title[Residues of the heat kernel for a logarithmic Laplacian]{Nonvanishing of the residues of the heat kernel for a logarithmic Laplacian on the circle}
+
+\author{Knowledge Sense}
+\address{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{13 October 2026}
+
+\subjclass[2020]{Primary 11B68; Secondary 11B73, 33B15, 35K08}
+
+\keywords{Bernoulli numbers, ordinary Bell polynomials, $2$-adic valuation, digamma function, logarithmic Laplacian, fundamental solution, meromorphic continuation}
+
+\begin{abstract}
+Rosenzweig and Stanfill showed that, on the diagonal, the fundamental solution (heat kernel) $K_1(t,\varphi,\varphi)$ of the Cauchy problem for a logarithmic Laplacian on the unit circle continues meromorphically in $t$, with a simple pole at $t=\frac12$ and possible further simple poles at $t=\frac12-m$, $m\ge1$. The residue at $\frac12-m$ is an explicit nonzero multiple of a rational number $P_m$, defined by ordinary Bell polynomials evaluated at Bernoulli numbers, and they asked whether $P_m\neq0$ for every $m$. We prove that $8^m m!\,P_m$ is a $2$-adic unit; hence $P_m\ne0$ and $v_2(P_m)=-3m-v_2(m!)$ for all $m\ge1$. Consequently, the poles of $K_1(t,\varphi,\varphi)$ are exactly the points $\frac12-m$, $m\ge0$. Elezovi\'c proved that, for a positive integer $q$, the coefficient of $x^{-1}$ in the asymptotic expansion of $\exp(q\psi(x+s))$ does not depend on the real shift $s$. Combined with this, our theorem shows that this coefficient is nonzero for every odd positive integer $q$ and every real $s$.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $A_1$ be the nonlocal operator on the unit circle given by
+\[
+  A_1h(e^{i\varphi})=-\frac12\int_0^{2\pi}\frac{h(e^{i\tau})-h(e^{i\varphi})}{|\sin(\frac{\tau-\varphi}{2})|}\,d\tau ,
+\]
+a logarithmic Laplacian on the circle; up to a constant shift and a multiplicative factor it is the conformal logarithmic Laplacian on $\mathbb{S}^1$ \cite[Section~1]{RS}. Its eigenfunctions are $e^{\pm in\varphi}$ with eigenvalues $2\lambda_n$, where $\lambda_n=2H_{2n}-H_n$ and $H_n$ is the $n$th harmonic number, $n\in\N_0$. The fundamental solution of $\partial_tu=-A_1u$, that is, the heat kernel of $A_1$, is
+\[
+  K_1(t,\varphi,\theta)=\frac1{2\pi}+\frac1{2\pi}\sum_{n\in\Z\setminus\{0\}}e^{in(\varphi-\theta)}e^{-2\lambda_{|n|}t},
+\]
+and on the diagonal $\varphi=\theta$ the series converges for $\operatorname{Re}t>\frac12$. Answering a question of Maz'ya recorded in \cite{RS}, Rosenzweig and Stanfill proved that $K_1(t,\varphi,\theta)$ is entire in $t$ for $\varphi\ne\theta$, and that $K_1(t,\varphi,\varphi)$ extends to a meromorphic function of $t$ with a simple pole at $t=\frac12$ and possible further simple poles at $t=\frac12-m$, $m\in\N$ \cite[Theorem~1.2]{RS}. To describe the residues we fix notation.
+
+Bernoulli numbers are defined by $u/(e^u-1)=\sum_{k\ge0}B_ku^k/k!$, so that $B_1=-\frac12$ \cite[Section~24.2(i)]{DLMF}. Put
+\begin{equation}\label{eq:s}
+  s_k=(1-2^{1-k})\frac{2B_k}{k}\qquad(k\ge1),\qquad S_1=(s_k)_{k\ge1}.
+\end{equation}
+For a sequence $S=(s_k)_{k\ge1}$ and $j\ge0$ let
+\begin{equation}\label{eq:pdef}
+  p_{j,S}(t)=\sum_{l=0}^{j}\frac{(-t)^l}{l!}\,\Bhat_{j,l}(s_1,s_2,\dots),
+\end{equation}
+where
+\[
+  \Bhat_{j,l}(s_1,s_2,\dots)=\sum\frac{l!}{\prod_i a_i!}\prod_i s_i^{a_i}
+\]
+and the sum runs over sequences $(a_i)_{i\ge1}$ of nonnegative integers with $\sum_ia_i=l$ and $\sum_iia_i=j$. Thus $\Bhat_{j,l}$ is the ordinary partial Bell polynomial \cite{OS}, and \eqref{eq:pdef} is \cite[Definition~1.1]{RS}. Equivalently, as formal power series in $z$,
+\begin{equation}\label{eq:genfun}
+  \sum_{j\ge0}p_{j,S}(t)\,z^j=\exp\Bigl(-t\sum_{k\ge1}s_kz^k\Bigr),
+\end{equation}
+which is the generating function of the ordinary Bell polynomials \cite[(2.6)]{RS}. Each coefficient in \eqref{eq:genfun} is a finite sum, and no convergence of the series $\sum_k s_kz^k$ is involved. We write
+\[
+  P_m=p_{2m,S_1}\bigl(\tfrac12-m\bigr)\in\Q\qquad(m\in\N_0),
+\]
+so that $P_0=1$. By \cite[Theorem~1.2, (1.7)]{RS}, the residue of $K_1(t,\varphi,\varphi)$ at $t=\frac12-m$ is
+\begin{equation}\label{eq:residue}
+  \frac{e^{-2\log2-\gamma}}{2\pi}\,e^{(4\log2+2\gamma)m}\,P_m\qquad(m\in\N_0),
+\end{equation}
+where $\gamma$ is the Euler--Mascheroni constant. Rosenzweig and Stanfill conjectured that every point $\frac12-m$ is an actual pole, which amounts to the following question.
+
+\begin{problem}[{\cite[Open Problem~1.3]{RS}}]
+Show that $p_{2m,S_1}(\frac12-m)\ne0$ for all $m\in\N$.
+\end{problem}
+
+For a nonzero rational number $x$ we write $v_2(x)$ for the exponent of $2$ in $x$, that is, the exponent of $2$ in the reduced numerator minus that in the reduced denominator. Let $\Zt$ be the ring of rational numbers with odd denominator; its units are the rationals $x$ with $v_2(x)=0$. Our main result answers the question above and determines the $2$-adic size of $P_m$.
+
+\begin{theorem}\label{thm:main}
+For every integer $m\ge1$, the number $8^m m!\,P_m$ is a unit of $\Zt$. In particular, $P_m\ne0$ and
+\[
+  v_2(P_m)=-3m-v_2(m!).
+\]
+\end{theorem}
+
+Combining Theorem~\ref{thm:main} with \cite[Theorem~1.2]{RS} gives the pole structure conjectured there.
+
+\begin{corollary}\label{cor:poles}
+For every $\varphi\in[0,2\pi)$, the poles of the meromorphic continuation of $t\mapsto K_1(t,\varphi,\varphi)$ are exactly the points $t=\frac12-m$, $m\in\N_0$. All of them are simple, and the residue at $\frac12-m$ is the nonzero number \eqref{eq:residue}.
+\end{corollary}
+
+The coefficients $P_m$ also occur in the asymptotic expansion
+\[
+  e^{q\psi(x+s)}\sim x^q\sum_{n\ge0}G_n(q,s)\,x^{-n}\qquad(x\to\infty,\ s\in\mathbb{R})
+\]
+studied by Elezovi\'c \cite{E}, where $\psi$ is the digamma function; Elezovi\'c writes $p$ and $t$ for the variables denoted here by $q$ and $s$. He proved that, for a positive integer $q$, the coefficient $G_{q+1}(q,s)$ of $x^{-1}$ does not depend on $s$ \cite[Theorem~3.1]{E}, and that it vanishes when $q$ is even \cite[Theorem~3.2]{E}. In the notation of Rosenzweig and Stanfill these two facts appear as \cite[Proposition~2.4 and Corollary~2.5]{RS}, and \cite[Remark~2.7]{RS} reformulates Open Problem~1.3 accordingly; see Section~\ref{sec:digamma}. We show there that \mbox{$P_m=G_{2m}(2m-1,\frac12)$}, which gives the complementary statement for odd $q$.
+
+\begin{corollary}\label{cor:digamma}
+Let $q$ be a positive integer. Then $G_{q+1}(q,s)=0$ for all $s\in\mathbb{R}$ if $q$ is even, and $G_{q+1}(q,s)=P_{(q+1)/2}\ne0$ for all $s\in\mathbb{R}$ if $q$ is odd. Thus the term $x^{-1}$ occurs in the asymptotic expansion of $e^{q\psi(x+s)}$ if and only if $q$ is odd.
+\end{corollary}
+
+\emph{Method of proof.} The definitions \eqref{eq:pdef}--\eqref{eq:genfun}, the analytic continuation of $K_1$ and the residue formula \eqref{eq:residue} are due to Rosenzweig and Stanfill \cite{RS}, and the statements about $G_{q+1}(q,s)$ quoted above are due to Elezovi\'c \cite{E}; we do not reprove them. The proof of Theorem~\ref{thm:main} expands $P_m$ as a finite sum over the partitions of $m$ and uses two classical facts: the von Staudt--Clausen theorem, only in the weak form $v_2(B_{2r})=-1$, and the fact that for a partition of $m$ with $a_r$ parts of size $r$ the number
+\[
+  \frac{m!}{\prod_r r^{a_r}a_r!}
+\]
+is an integer, since it counts the permutations of $\{1,\dots,m\}$ of that cycle type. With these facts, the term of the partition into singletons is the unique term of least $2$-adic valuation, which gives both $P_m\ne0$ and the value of $v_2(P_m)$.
+
+\emph{Organization.} Section~\ref{sec:prelim} collects the two classical inputs. Section~\ref{sec:proof} proves Theorem~\ref{thm:main}. Section~\ref{sec:kernel} deduces Corollary~\ref{cor:poles}, and Section~\ref{sec:digamma} treats the digamma expansion and Corollary~\ref{cor:digamma}.
+
+\section{Preliminaries}\label{sec:prelim}
+
+Throughout, $v_2(0)=+\infty$, so that $\Zt=\{x\in\Q:v_2(x)\ge0\}$ and $2\Zt=\{x\in\Q:v_2(x)\ge1\}$. Every $x\in\Zt$ with $v_2(x)=0$ is a unit of $\Zt$ and satisfies $x\equiv1\pmod{2\Zt}$, since $a/b-1=(a-b)/b$ for odd $a,b$.
+
+\begin{lemma}\label{lem:s}
+The numbers $s_k$ of \eqref{eq:s} satisfy $s_k=0$ for every odd $k$. For $r\ge1$,
+\[
+  s_{2r}=\frac{2^{2r-1}-1}{2^{2r-1}}\cdot\frac{B_{2r}}{r},
+  \qquad
+  v_2(s_{2r})=-2r-v_2(r).
+\]
+In particular $s_2=\frac1{12}$.
+\end{lemma}
+
+\begin{proof}
+For $k=1$ the factor $1-2^{1-k}$ vanishes, and $B_k=0$ for odd $k\ge3$ \cite[Section~24.2(i)]{DLMF}. The displayed formula for $s_{2r}$ is \eqref{eq:s} with $k=2r$. By the von Staudt--Clausen theorem \cite[24.10.1]{DLMF}, $B_{2r}+\sum_p p^{-1}\in\Z$, where $p$ runs over the primes with $(p-1)\mid 2r$. The prime $2$ always occurs, and the contribution of the odd primes lies in $\Zt$; hence $B_{2r}\in-\frac12+\Zt$ and $v_2(B_{2r})=-1$. Since $2^{2r-1}-1$ is odd for $r\ge1$, we get
+\[
+  v_2(s_{2r})=-(2r-1)+v_2(B_{2r})-v_2(r)=-2r-v_2(r).
+\]
+Finally $s_2=\frac12\cdot\frac16$.
+\end{proof}
+
+For $m\ge1$ let
+\[
+  \mathcal A_m=\Bigl\{a=(a_1,\dots,a_m)\in\Z_{\ge0}^m:\ \sum_{r=1}^m ra_r=m\Bigr\},
+\]
+the set of partitions of $m$ recorded by their multiplicities, and put
+\begin{equation}\label{eq:N}
+  N(a)=\frac{m!}{\prod_{r=1}^m r^{a_r}a_r!}\qquad(a\in\mathcal A_m).
+\end{equation}
+
+\begin{lemma}\label{lem:cycle}
+For every $a\in\mathcal A_m$, $N(a)$ is the number of permutations of $\{1,\dots,m\}$ having exactly $a_r$ cycles of length $r$ for each $r$. In particular $N(a)$ is a positive integer.
+\end{lemma}
+
+\begin{proof}
+This is classical \cite[26.4.7]{DLMF}; we recall the count. Consider the $m!$ arrangements of the labels $1,\dots,m$ in a row. Cut each arrangement, from left to right, into $a_1$ blocks of length $1$, then $a_2$ blocks of length $2$, and so on, and read each block as a cycle. This gives a permutation of the required type, and every such permutation arises. A given permutation of this type arises from exactly $\prod_r r^{a_r}a_r!$ arrangements, since each cycle of length $r$ can be written starting at any of its $r$ entries, and the $a_r$ cycles of length $r$ can be listed in any order. Hence the number of such permutations is $m!/\prod_r r^{a_r}a_r!=N(a)$.
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm:main}}\label{sec:proof}
+
+By Lemma~\ref{lem:s}, for every $t$ the exponent $-t\sum_ks_kz^k$ in \eqref{eq:genfun} with $S=S_1$ contains only even powers of $z$. Hence $p_{j,S_1}(t)$ vanishes identically for odd $j$, as observed in \cite[Lemma~2.2]{RS}.
+
+Fix $m\ge1$ and put $\alpha=m-\frac12$, so that $-(\frac12-m)=\alpha$ and $v_2(\alpha)=v_2(2m-1)-1=-1$. With $x=z^2$ we obtain
+\[
+  \sum_{j\ge0}p_{j,S_1}\bigl(\tfrac12-m\bigr)z^j=\exp\Bigl(\sum_{r\ge1}c_rx^r\Bigr),
+  \qquad c_r=\alpha\,s_{2r}.
+\]
+Since
+\[
+  \exp\Bigl(\sum_{r\ge1}c_rx^r\Bigr)=\prod_{r\ge1}\,\sum_{a\ge0}\frac{c_r^a\,x^{ra}}{a!},
+\]
+comparison of the coefficients of $x^m$ gives the finite expansion
+\begin{equation}\label{eq:partition-sum}
+  P_m=\sum_{a\in\mathcal A_m}T(a),\qquad T(a)=\prod_{r=1}^m\frac{c_r^{a_r}}{a_r!}.
+\end{equation}
+Since $\sum_rra_r=m$ for $a\in\mathcal A_m$, multiplication by $8^mm!=m!\prod_r8^{ra_r}$ gives
+\begin{equation}\label{eq:normalized}
+  8^mm!\,P_m=\sum_{a\in\mathcal A_m}N(a)\prod_{r=1}^mb_r^{a_r},
+  \qquad b_r=8^r\,r\,c_r,
+\end{equation}
+with $N(a)$ as in \eqref{eq:N}. By Lemma~\ref{lem:s},
+\[
+  v_2(b_r)=3r+v_2(r)+v_2(\alpha)+v_2(s_{2r})=3r+v_2(r)-1-2r-v_2(r)=r-1 .
+\]
+Thus $b_r\in\Zt$ for all $r$, $b_r\in2\Zt$ for $r\ge2$, and $b_1=8\alpha s_2=\frac{2m-1}{3}$ is a unit of $\Zt$.
+
+Let $a_*=(m,0,\dots,0)$ be the partition into singletons. Its term in \eqref{eq:normalized} is $N(a_*)b_1^m=b_1^m$, which is a unit. If $a\in\mathcal A_m$ and $a\ne a_*$, then $a_r\ge1$ for some $r\ge2$, so $\prod_rb_r^{a_r}\in2\Zt$; as $N(a)\in\Z$ by Lemma~\ref{lem:cycle}, the corresponding term of \eqref{eq:normalized} lies in $2\Zt$. Therefore
+\[
+  8^mm!\,P_m\equiv b_1^m\equiv1\pmod{2\Zt},
+\]
+so $8^mm!\,P_m$ is a unit of $\Zt$. In particular $P_m\ne0$, and taking valuations gives the formula for $v_2(P_m)$. \qed
+
+For $m=1$ the set $\mathcal A_1$ consists of $a_*$ alone and $P_1=c_1=\frac1{24}$.
+
+\begin{remark}\label{rem:separation}
+In terms of \eqref{eq:partition-sum}, the proof says that
+\[
+  T(a_*)=\frac{c_1^m}{m!}=\frac1{m!}\Bigl(\frac{2m-1}{24}\Bigr)^m
+\]
+is the unique term of least $2$-adic valuation. Indeed, with $L(a)=\sum_ra_r$, the identity $T(a)=N(a)\prod_rb_r^{a_r}/(8^mm!)$ gives
+\[
+  v_2(T(a))-v_2(T(a_*))=m-L(a)+v_2(N(a)),
+\]
+and $m-L(a)=\sum_r(r-1)a_r\ge1$ for $a\ne a_*$. By Legendre's formula $v_2(m!)=m-\sigma(m)$, where $\sigma(m)$ is the number of ones in the binary expansion of $m$, so Theorem~\ref{thm:main} can also be written as $v_2(P_m)=\sigma(m)-4m$.
+\end{remark}
+
+\begin{remark}\label{rem:other-t}
+The argument uses the point $t=\frac12-m$ only through $v_2(t)=-1$. Hence, for every $t\in\Q$ with $v_2(t)=-1$ and every $m\ge1$, the number $8^mm!\,p_{2m,S_1}(t)$ is a unit of $\Zt$; here $b_1=-2t/3$.
+\end{remark}
+
+\begin{remark}\label{rem:values}
+Differentiating \eqref{eq:genfun} gives the recurrence
+\[
+  j\,p_{j,S}(t)=-t\sum_{k=1}^jk\,s_k\,p_{j-k,S}(t)\qquad(j\ge1),
+\]
+which is convenient for exact computation. The first values are listed below.
+\[
+\begin{array}{cccccc}
+\toprule
+m & 1 & 2 & 3 & 4 & 5\\
+\midrule
+P_m & \dfrac1{24} & -\dfrac9{640} & \dfrac{7625}{580608} & -\dfrac{4311167}{199065600} & \dfrac{27527769}{504627200}\\[2ex]
+v_2(P_m) & -3 & -7 & -10 & -15 & -18\\
+\bottomrule
+\end{array}
+\]
+We also computed $P_m$ in exact rational arithmetic for $m\le50$ and found agreement with Theorem~\ref{thm:main}; these computations are not used in the proof.
+\end{remark}
+
+\section{The poles of \texorpdfstring{$K_1$}{K1} on the diagonal}\label{sec:kernel}
+
+We recall the part of \cite[Proposition~2.8]{RS} that is needed. On the diagonal the kernel does not depend on $\varphi$:
+\begin{equation}\label{eq:diag}
+  K_1(t,\varphi,\varphi)=\frac1{2\pi}+\frac1\pi\sum_{n\ge1}e^{-2\lambda_nt},
+\end{equation}
+and the series converges absolutely and locally uniformly for $\operatorname{Re}t>\frac12$. The eigenvalues have the asymptotic expansion \cite[(2.21)]{RS}
+\[
+  2\lambda_n\sim2\log n+s_0+\sum_{k\ge1}s_kn^{-k}\qquad(n\to\infty),\qquad s_0=4\log2+2\gamma,
+\]
+with $s_k$ as in \eqref{eq:s}. By \cite[Lemma~2.1, (2.1)]{RS}, for every $M\in\N$ and every compact set $\mathcal K\subset\C$,
+\[
+  e^{-2\lambda_nt}=n^{-2t}e^{-s_0t}\sum_{j=0}^{M-1}p_{j,S_1}(t)\,n^{-j}+e^{-s_0t}\,O\bigl(n^{-2\operatorname{Re}t-M}\bigr)
+\]
+uniformly for $t\in\mathcal K$. Summing over $n$ for $\operatorname{Re}t>\frac12$ yields \cite[(2.19)]{RS}
+\begin{equation}\label{eq:continuation}
+  K_1(t,\varphi,\varphi)=\frac1{2\pi}+\frac{e^{-s_0t}}{\pi}\sum_{j=0}^{M-1}p_{j,S_1}(t)\,\zeta(j+2t)+F_M(t),
+\end{equation}
+where $F_M$ is $\pi^{-1}$ times the sum over $n\ge1$ of the remainder terms. Each remainder term is holomorphic in $t$. Let $\mathcal K$ be a compact subset of the half-plane $\operatorname{Re}t>\frac{1-M}2$ and put $\sigma_{\mathcal K}=\min_{t\in\mathcal K}\operatorname{Re}t$. By the bound above, the $n$th remainder is bounded on $\mathcal K$ by $C_{\mathcal K,M}\,n^{-2\sigma_{\mathcal K}-M}$, where the constant $C_{\mathcal K,M}$ depends only on $\mathcal K$ and $M$. Since $2\sigma_{\mathcal K}+M>1$, the series of remainders converges uniformly on $\mathcal K$. Hence $F_M$ is holomorphic in the half-plane $\operatorname{Re}t>\frac{1-M}2$, and \eqref{eq:continuation} gives the meromorphic continuation of $K_1(t,\varphi,\varphi)$ to this half-plane.\footnote{The proof of \cite[Proposition~2.8]{RS} states the domination on $\operatorname{Re}t\ge\sigma$ with $Cn^{-2\sigma-M+1}$; the bound of \cite[(2.1)]{RS} gives the exponent $-2\sigma_{\mathcal K}-M$ used here. Since $M$ is arbitrary, either version suffices for the meromorphic continuation.}
+
+\begin{proof}[Proof of Corollary~\ref{cor:poles}]
+Fix $m\in\N_0$ and choose $M>2m$, so that $t_m=\frac12-m$ lies in the half-plane where $F_M$ is holomorphic. In \eqref{eq:continuation} the summand with index $j$ is holomorphic except for a possible simple pole at $t=\frac{1-j}2$, coming from the pole of $\zeta$ at $1$; as a function of $t$, $\zeta(j+2t)$ has residue $\frac12$ there. The point $t_m$ arises only for $j=2m$, so
+\[
+  \Res_{t=t_m}K_1(t,\varphi,\varphi)=\frac{e^{-s_0t_m}}{2\pi}\,p_{2m,S_1}(t_m)=\frac{e^{-2\log2-\gamma}}{2\pi}\,e^{(4\log2+2\gamma)m}\,P_m,
+\]
+which is \eqref{eq:residue}. This number is nonzero: for $m=0$ because $P_0=1$, and for $m\ge1$ by Theorem~\ref{thm:main}. For odd $j$ the polynomial $p_{j,S_1}$ vanishes identically (Section~\ref{sec:proof}), so the points $\frac{1-j}2\in\{0,-1,-2,\dots\}$ are regular. Since $M$ is arbitrary, $K_1(t,\varphi,\varphi)$ is meromorphic on $\C$ and its poles are exactly the points $\frac12-m$, $m\in\N_0$, all simple.
+\end{proof}
+
+\begin{remark}\label{rem:combined}
+Rosenzweig and Stanfill also study a second operator $A_2$ on $[-1,1]$, with a sequence $S_2$ given by $s^{(2)}_k=-B_k/k$ \cite[(2.8)]{RS}, where $B_1=-\frac12$. By \cite[Proposition~2.4, (2.17) and Remark~2.7]{RS}, \cite[Open Problem~1.3]{RS} is equivalent to the nonvanishing of $p_{j+2,S_2}(-j)$ for all odd $j$, while \cite[Open Problem~1.6(i)]{RS} is the same statement for even $j$. In fact \mbox{$p_{2m+1,S_2}(1-2m)=-\frac12P_m$}; we derive this in \eqref{eq:odd-shift} below, where we also comment on the convention for $S_2$ in \cite[(2.11) and (2.17)]{RS}. The sign plays no role in these nonvanishing statements. Theorem~\ref{thm:main} therefore settles the case of odd $j$. We do not address the case of even $j$, which concerns the operator $A_2$.
+\end{remark}
+
+\section{Exponentials of the digamma function}\label{sec:digamma}
+
+We follow Elezovi\'c \cite{E}, writing $q$ and $s$ for his variables $p$ and $t$. For $s\in\mathbb{R}$, by \cite[Theorem~2.3]{E}, the coefficients in $e^{q\psi(x+s)}\sim x^q\sum_nG_n(q,s)x^{-n}$ satisfy $G_0=1$ and
+\[
+  G_n(q,s)=\frac qn\sum_{k=1}^n(-1)^{k+1}B_k(s)\,G_{n-k}(q,s)\qquad(n\ge1),
+\]
+where $B_k(s)$ is the $k$th Bernoulli polynomial. Put $F(y)=\sum_{n\ge0}G_n(q,s)\,y^n$. Multiplying the recurrence by $ny^n$ and summing over $n$ shows that it is the coefficientwise form of
+\[
+  yF'(y)=q\Bigl(\sum_{k\ge1}(-1)^{k+1}B_k(s)\,y^k\Bigr)F(y),
+\]
+that is, the logarithmic derivative of $F$ is $q\sum_{k\ge1}(-1)^{k+1}B_k(s)y^{k-1}$. Since $F(0)=1$, the recurrence is equivalent to the identity of formal power series
+\begin{equation}\label{eq:Gfun}
+  \sum_{n\ge0}G_n(q,s)\,y^n=\exp\Bigl(q\sum_{k\ge1}\frac{(-1)^{k+1}B_k(s)}{k}\,y^k\Bigr).
+\end{equation}
+
+For $u\in\mathbb{R}$ let $S_2(u)=(-B_k(u)/k)_{k\ge1}$, as in \cite[(2.11)]{RS}; thus $S_2(0)$ is the sequence $S_2$ of Remark~\ref{rem:combined}. Since $B_k(1-s)=(-1)^kB_k(s)$, comparison of \eqref{eq:Gfun} with \eqref{eq:genfun} gives
+\begin{equation}\label{eq:Gall}
+  G_n(q,s)=p_{n,S_2(1-s)}(-q)\qquad(n\ge0,\ s\in\mathbb{R}).
+\end{equation}
+Since $B_1(u)=u-\frac12$ and $B_k(1)=(-1)^kB_k$, the sequences $S_2(0)$ and $S_2(1)$ differ only in their first terms, $\frac12$ and $-\frac12$, so that $p_{n,S_2(1)}(t)=(-1)^np_{n,S_2(0)}(t)$ \cite[Proposition~2.3]{RS}. Consequently, replacing $S_2(1-s)$ by $S_2(s)$ in \eqref{eq:Gall} would change the signs of the terms of odd degree. In \cite{RS}, the sentence following (2.11) identifies the sequence of (2.8) with $S_2(1)$; with the family (2.11) and $B_1=-\frac12$, the sequence of (2.8) is $S_2(0)$. Identities of odd degree must therefore be read with the appropriate member of the family; see \eqref{eq:odd-shift} below. For a positive integer $q$ and $j=q+1$, \eqref{eq:Gall} reads
+\[
+  G_{q+1}(q,s)=p_{j,S_2(1-s)}(1-j).
+\]
+Thus the independence of $s$ in \cite[Theorem~3.1]{E} corresponds to \cite[Proposition~2.4]{RS}, the vanishing for even $q$ in \cite[Theorem~3.2]{E} corresponds to \cite[Corollary~2.5]{RS}, and \cite[Remark~2.7]{RS} states \cite[Open Problem~1.3]{RS} as the nonvanishing of $p_{j,S_2(s)}(1-j)$ for even $j\ge2$.
+
+At $s=\frac12$ the coefficients can also be expressed through $S_1$. By \cite[(1.8)]{RS}, $s_k=-\frac2kB_k(\frac12)$ for $k\ge1$. In particular $B_k(\frac12)=0$ for odd $k$, since $s_k=0$ for odd $k$ by Lemma~\ref{lem:s}. Hence $(-1)^{k+1}B_k(\frac12)/k=s_k/2$ for every $k\ge1$, and comparison of \eqref{eq:Gfun} with \eqref{eq:genfun} gives
+\begin{equation}\label{eq:GP}
+  G_n\bigl(q,\tfrac12\bigr)=p_{n,S_1}\bigl(-\tfrac q2\bigr)\qquad(n\ge0).
+\end{equation}
+Taking $q=2m-1$ and $n=2m$ gives $P_m=G_{2m}(2m-1,\frac12)$.
+
+The coefficient of the next degree can be computed in the same way. For a positive integer $q$, the translation formula \cite[(3.1)]{E} with \mbox{$n=q+2$} reads $G_{q+2}(q,s+\tau)=G_{q+2}(q,s)-\tau\,G_{q+1}(q,s)$, because the binomial coefficients $\binom{k-2}{k}$ vanish for $k\ge2$. Take $q=2m-1$ and $s=\frac12$. Then \mbox{$G_{2m+1}(2m-1,\frac12)=0$} by \eqref{eq:GP}, since $p_{j,S_1}$ vanishes identically for odd $j$, and \mbox{$G_{2m}(2m-1,\frac12)=P_m$}. With \eqref{eq:Gall} and $u=1-s$, this gives
+\begin{equation}\label{eq:odd-shift}
+  p_{2m+1,S_2(u)}(1-2m)=\bigl(u-\tfrac12\bigr)P_m\qquad(m\ge1,\ u\in\mathbb{R}).
+\end{equation}
+For $u=0$, that is, for the sequence of \cite[(2.8)]{RS}, this is the identity $p_{2m+1,S_2}(1-2m)=-\frac12P_m$ of Remark~\ref{rem:combined}. The relation \cite[(2.17)]{RS} with the factor $-\frac12$ is printed for $S_2(1)$; by \eqref{eq:odd-shift} it holds for $S_2(0)$, while for $S_2(1)$ the sign is opposite. For example, $p_{3,S_2(0)}(-1)=-\frac1{48}$ and $p_{3,S_2(1)}(-1)=\frac1{48}$, with $P_1=\frac1{24}$.
+
+\begin{proof}[Proof of Corollary~\ref{cor:digamma}]
+For a positive integer $q$, the coefficient $G_{q+1}(q,s)$ does not depend on $s\in\mathbb{R}$ \cite[Theorem~3.1]{E}; see also \cite[Proposition~2.4]{RS} and \eqref{eq:Gall}. If $q$ is even, it vanishes \cite[Theorem~3.2]{E}; see also \cite[Corollary~2.5]{RS}. If $q=2m-1$ is odd, then by \eqref{eq:GP} it equals $G_{2m}(2m-1,\frac12)=P_m$, which is nonzero by Theorem~\ref{thm:main}. Since $x^q\cdot x^{-(q+1)}=x^{-1}$, the last statement follows.
+\end{proof}
+
+\begin{remark}
+For $q=3$, the table in \cite[p.~4]{E} lists $G_4=-\frac9{640}$, in agreement with $P_2$ and with the independence of $s$. Inserting $(-1)^{k+1}B_k(\frac12)=k s_k/2$ into \cite[Theorem~2.3]{E} and using Lemma~\ref{lem:s}, one obtains the recurrence
+\[
+  G_{2n}\bigl(q,\tfrac12\bigr)=\frac q{2n}\sum_{k=1}^n\bigl(1-2^{1-2k}\bigr)B_{2k}\,G_{2n-2k}\bigl(q,\tfrac12\bigr),
+\]
+which gives $G_2(q,\frac12)=\frac q{24}$. The recurrence printed as \cite[(4.1)]{E} differs from this one in sign and in the power of $2$; the argument above does not use it.
+\end{remark}
+
+\section*{Use of AI-assisted tools}
+
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{9}
+
+\bibitem{E}
+N. Elezovi\'c, \emph{Asymptotic expansions of exponentials of digamma function and identity for Bernoulli polynomials}, preprint (2013), arXiv:1312.1604v1.
+
+\bibitem{DLMF}
+F. W. J. Olver, A. B. Olde Daalhuis, D. W. Lozier, B. I. Schneider, R. F. Boisvert, C. W. Clark, B. R. Miller, B. V. Saunders, H. S. Cohl, and M. A. McClain (eds.), \emph{NIST Digital Library of Mathematical Functions}, Release 1.2.8 of 2026-09-15, \url{https://dlmf.nist.gov/}.
+
+\bibitem{OS}
+C. O'Sullivan, \emph{De Moivre and Bell polynomials}, Expo. Math. \textbf{40} (2022), no.~4, 870--893; arXiv:2203.02868.
+
+\bibitem{RS}
+B. Rosenzweig and J. Stanfill, \emph{On the fundamental solutions of two nonlocal parabolic equations related to logarithmic Laplacians}, preprint (2026), arXiv:2606.04225v1.
+
+\end{thebibliography}
+
+\end{document}

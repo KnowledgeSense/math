@@ -1,0 +1,3 @@
+# Exact algebra checks
+
+Requires Python 3 and SymPy 1.14.0. Install the dependency with python -m pip install -r requirements.txt. Run full_real_shape_exact_certificate.py and partial_laplacian_exact_check.py in this directory. Each writes its JSON certificate. The first checks 13 exact identities for resolvents, rank-one noncentrality, rank reduction and the symmetric-coordinate operator; the second directly differentiates a regularized determinant product at a rational matrix and checks identities and positivity there. These finite algebra checks supplement the analytic proof in the [accompanying paper](../article.pdf).

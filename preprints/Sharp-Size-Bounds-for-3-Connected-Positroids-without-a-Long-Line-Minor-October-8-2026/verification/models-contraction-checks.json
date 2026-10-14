@@ -1,0 +1,992 @@
+[
+  {
+    "label": "G(3,2) edge 0",
+    "compared_subset_ranks": 16,
+    "passed": true
+  },
+  {
+    "label": "G(3,2) edge 1",
+    "compared_subset_ranks": 16,
+    "passed": true
+  },
+  {
+    "label": "G(3,2) edge 2",
+    "compared_subset_ranks": 16,
+    "passed": true
+  },
+  {
+    "label": "G(3,3) edge 0",
+    "compared_subset_ranks": 64,
+    "passed": true
+  },
+  {
+    "label": "G(3,3) edge 1",
+    "compared_subset_ranks": 64,
+    "passed": true
+  },
+  {
+    "label": "G(3,3) edge 2",
+    "compared_subset_ranks": 64,
+    "passed": true
+  },
+  {
+    "label": "G(4,2) edge 0",
+    "compared_subset_ranks": 64,
+    "passed": true
+  },
+  {
+    "label": "G(4,2) edge 1",
+    "compared_subset_ranks": 64,
+    "passed": true
+  },
+  {
+    "label": "G(4,2) edge 2",
+    "compared_subset_ranks": 64,
+    "passed": true
+  },
+  {
+    "label": "G(4,2) edge 3",
+    "compared_subset_ranks": 64,
+    "passed": true
+  },
+  {
+    "label": "G(4,3) edge 0",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "G(4,3) edge 1",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "G(4,3) edge 2",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "G(4,3) edge 3",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "G(5,2) edge 0",
+    "compared_subset_ranks": 256,
+    "passed": true
+  },
+  {
+    "label": "G(5,2) edge 1",
+    "compared_subset_ranks": 256,
+    "passed": true
+  },
+  {
+    "label": "G(5,2) edge 2",
+    "compared_subset_ranks": 256,
+    "passed": true
+  },
+  {
+    "label": "G(5,2) edge 3",
+    "compared_subset_ranks": 256,
+    "passed": true
+  },
+  {
+    "label": "G(5,2) edge 4",
+    "compared_subset_ranks": 256,
+    "passed": true
+  },
+  {
+    "label": "A(3,2,[0, 1, 3]) edge 0 heavy=True",
+    "compared_subset_ranks": 16,
+    "passed": true
+  },
+  {
+    "label": "A(3,2,[0, 1, 3]) edge 1 heavy=False",
+    "compared_subset_ranks": 32,
+    "passed": true
+  },
+  {
+    "label": "A(3,2,[0, 1, 3]) edge 2 heavy=False",
+    "compared_subset_ranks": 32,
+    "passed": true
+  },
+  {
+    "label": "A(3,2,[0, 2, 3]) edge 0 heavy=False",
+    "compared_subset_ranks": 32,
+    "passed": true
+  },
+  {
+    "label": "A(3,2,[0, 2, 3]) edge 1 heavy=False",
+    "compared_subset_ranks": 32,
+    "passed": true
+  },
+  {
+    "label": "A(3,2,[0, 2, 3]) edge 2 heavy=True",
+    "compared_subset_ranks": 16,
+    "passed": true
+  },
+  {
+    "label": "A(3,2,[0, 1, 2, 3]) edge 0 heavy=False",
+    "compared_subset_ranks": 32,
+    "passed": true
+  },
+  {
+    "label": "A(3,2,[0, 1, 2, 3]) edge 1 heavy=False",
+    "compared_subset_ranks": 32,
+    "passed": true
+  },
+  {
+    "label": "A(3,2,[0, 1, 2, 3]) edge 2 heavy=False",
+    "compared_subset_ranks": 32,
+    "passed": true
+  },
+  {
+    "label": "A(3,3,[0, 1, 3]) edge 0 heavy=True",
+    "compared_subset_ranks": 64,
+    "passed": true
+  },
+  {
+    "label": "A(3,3,[0, 1, 3]) edge 1 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(3,3,[0, 1, 3]) edge 2 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(3,3,[0, 2, 3]) edge 0 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(3,3,[0, 2, 3]) edge 1 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(3,3,[0, 2, 3]) edge 2 heavy=True",
+    "compared_subset_ranks": 64,
+    "passed": true
+  },
+  {
+    "label": "A(3,3,[0, 1, 2, 3]) edge 0 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(3,3,[0, 1, 2, 3]) edge 1 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(3,3,[0, 1, 2, 3]) edge 2 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(4,2,[0, 1, 4]) edge 0 heavy=True",
+    "compared_subset_ranks": 64,
+    "passed": true
+  },
+  {
+    "label": "A(4,2,[0, 1, 4]) edge 1 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(4,2,[0, 1, 4]) edge 2 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(4,2,[0, 1, 4]) edge 3 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(4,2,[0, 2, 4]) edge 0 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(4,2,[0, 2, 4]) edge 1 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(4,2,[0, 2, 4]) edge 2 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(4,2,[0, 2, 4]) edge 3 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(4,2,[0, 3, 4]) edge 0 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(4,2,[0, 3, 4]) edge 1 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(4,2,[0, 3, 4]) edge 2 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(4,2,[0, 3, 4]) edge 3 heavy=True",
+    "compared_subset_ranks": 64,
+    "passed": true
+  },
+  {
+    "label": "A(4,2,[0, 1, 2, 4]) edge 0 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(4,2,[0, 1, 2, 4]) edge 1 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(4,2,[0, 1, 2, 4]) edge 2 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(4,2,[0, 1, 2, 4]) edge 3 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(4,2,[0, 1, 3, 4]) edge 0 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(4,2,[0, 1, 3, 4]) edge 1 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(4,2,[0, 1, 3, 4]) edge 2 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(4,2,[0, 1, 3, 4]) edge 3 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(4,2,[0, 2, 3, 4]) edge 0 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(4,2,[0, 2, 3, 4]) edge 1 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(4,2,[0, 2, 3, 4]) edge 2 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(4,2,[0, 2, 3, 4]) edge 3 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(4,2,[0, 1, 2, 3, 4]) edge 0 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(4,2,[0, 1, 2, 3, 4]) edge 1 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(4,2,[0, 1, 2, 3, 4]) edge 2 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(4,2,[0, 1, 2, 3, 4]) edge 3 heavy=False",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "A(4,3,[0, 1, 4]) edge 0 heavy=True",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(4,3,[0, 1, 4]) edge 1 heavy=False",
+    "compared_subset_ranks": 1024,
+    "passed": true
+  },
+  {
+    "label": "A(4,3,[0, 1, 4]) edge 2 heavy=False",
+    "compared_subset_ranks": 1024,
+    "passed": true
+  },
+  {
+    "label": "A(4,3,[0, 1, 4]) edge 3 heavy=False",
+    "compared_subset_ranks": 1024,
+    "passed": true
+  },
+  {
+    "label": "A(4,3,[0, 2, 4]) edge 0 heavy=False",
+    "compared_subset_ranks": 1024,
+    "passed": true
+  },
+  {
+    "label": "A(4,3,[0, 2, 4]) edge 1 heavy=False",
+    "compared_subset_ranks": 1024,
+    "passed": true
+  },
+  {
+    "label": "A(4,3,[0, 2, 4]) edge 2 heavy=False",
+    "compared_subset_ranks": 1024,
+    "passed": true
+  },
+  {
+    "label": "A(4,3,[0, 2, 4]) edge 3 heavy=False",
+    "compared_subset_ranks": 1024,
+    "passed": true
+  },
+  {
+    "label": "A(4,3,[0, 3, 4]) edge 0 heavy=False",
+    "compared_subset_ranks": 1024,
+    "passed": true
+  },
+  {
+    "label": "A(4,3,[0, 3, 4]) edge 1 heavy=False",
+    "compared_subset_ranks": 1024,
+    "passed": true
+  },
+  {
+    "label": "A(4,3,[0, 3, 4]) edge 2 heavy=False",
+    "compared_subset_ranks": 1024,
+    "passed": true
+  },
+  {
+    "label": "A(4,3,[0, 3, 4]) edge 3 heavy=True",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(4,3,[0, 1, 2, 4]) edge 0 heavy=False",
+    "compared_subset_ranks": 1024,
+    "passed": true
+  },
+  {
+    "label": "A(4,3,[0, 1, 2, 4]) edge 1 heavy=False",
+    "compared_subset_ranks": 1024,
+    "passed": true
+  },
+  {
+    "label": "A(4,3,[0, 1, 2, 4]) edge 2 heavy=False",
+    "compared_subset_ranks": 1024,
+    "passed": true
+  },
+  {
+    "label": "A(4,3,[0, 1, 2, 4]) edge 3 heavy=False",
+    "compared_subset_ranks": 1024,
+    "passed": true
+  },
+  {
+    "label": "A(4,3,[0, 1, 3, 4]) edge 0 heavy=False",
+    "compared_subset_ranks": 1024,
+    "passed": true
+  },
+  {
+    "label": "A(4,3,[0, 1, 3, 4]) edge 1 heavy=False",
+    "compared_subset_ranks": 1024,
+    "passed": true
+  },
+  {
+    "label": "A(4,3,[0, 1, 3, 4]) edge 2 heavy=False",
+    "compared_subset_ranks": 1024,
+    "passed": true
+  },
+  {
+    "label": "A(4,3,[0, 1, 3, 4]) edge 3 heavy=False",
+    "compared_subset_ranks": 1024,
+    "passed": true
+  },
+  {
+    "label": "A(4,3,[0, 2, 3, 4]) edge 0 heavy=False",
+    "compared_subset_ranks": 1024,
+    "passed": true
+  },
+  {
+    "label": "A(4,3,[0, 2, 3, 4]) edge 1 heavy=False",
+    "compared_subset_ranks": 1024,
+    "passed": true
+  },
+  {
+    "label": "A(4,3,[0, 2, 3, 4]) edge 2 heavy=False",
+    "compared_subset_ranks": 1024,
+    "passed": true
+  },
+  {
+    "label": "A(4,3,[0, 2, 3, 4]) edge 3 heavy=False",
+    "compared_subset_ranks": 1024,
+    "passed": true
+  },
+  {
+    "label": "A(4,3,[0, 1, 2, 3, 4]) edge 0 heavy=False",
+    "compared_subset_ranks": 1024,
+    "passed": true
+  },
+  {
+    "label": "A(4,3,[0, 1, 2, 3, 4]) edge 1 heavy=False",
+    "compared_subset_ranks": 1024,
+    "passed": true
+  },
+  {
+    "label": "A(4,3,[0, 1, 2, 3, 4]) edge 2 heavy=False",
+    "compared_subset_ranks": 1024,
+    "passed": true
+  },
+  {
+    "label": "A(4,3,[0, 1, 2, 3, 4]) edge 3 heavy=False",
+    "compared_subset_ranks": 1024,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 5]) edge 0 heavy=True",
+    "compared_subset_ranks": 256,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 5]) edge 1 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 5]) edge 2 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 5]) edge 3 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 5]) edge 4 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 2, 5]) edge 0 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 2, 5]) edge 1 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 2, 5]) edge 2 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 2, 5]) edge 3 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 2, 5]) edge 4 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 3, 5]) edge 0 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 3, 5]) edge 1 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 3, 5]) edge 2 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 3, 5]) edge 3 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 3, 5]) edge 4 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 4, 5]) edge 0 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 4, 5]) edge 1 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 4, 5]) edge 2 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 4, 5]) edge 3 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 4, 5]) edge 4 heavy=True",
+    "compared_subset_ranks": 256,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 2, 5]) edge 0 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 2, 5]) edge 1 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 2, 5]) edge 2 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 2, 5]) edge 3 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 2, 5]) edge 4 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 3, 5]) edge 0 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 3, 5]) edge 1 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 3, 5]) edge 2 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 3, 5]) edge 3 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 3, 5]) edge 4 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 4, 5]) edge 0 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 4, 5]) edge 1 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 4, 5]) edge 2 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 4, 5]) edge 3 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 4, 5]) edge 4 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 2, 3, 5]) edge 0 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 2, 3, 5]) edge 1 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 2, 3, 5]) edge 2 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 2, 3, 5]) edge 3 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 2, 3, 5]) edge 4 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 2, 4, 5]) edge 0 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 2, 4, 5]) edge 1 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 2, 4, 5]) edge 2 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 2, 4, 5]) edge 3 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 2, 4, 5]) edge 4 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 3, 4, 5]) edge 0 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 3, 4, 5]) edge 1 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 3, 4, 5]) edge 2 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 3, 4, 5]) edge 3 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 3, 4, 5]) edge 4 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 2, 3, 5]) edge 0 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 2, 3, 5]) edge 1 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 2, 3, 5]) edge 2 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 2, 3, 5]) edge 3 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 2, 3, 5]) edge 4 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 2, 4, 5]) edge 0 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 2, 4, 5]) edge 1 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 2, 4, 5]) edge 2 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 2, 4, 5]) edge 3 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 2, 4, 5]) edge 4 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 3, 4, 5]) edge 0 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 3, 4, 5]) edge 1 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 3, 4, 5]) edge 2 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 3, 4, 5]) edge 3 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 3, 4, 5]) edge 4 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 2, 3, 4, 5]) edge 0 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 2, 3, 4, 5]) edge 1 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 2, 3, 4, 5]) edge 2 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 2, 3, 4, 5]) edge 3 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 2, 3, 4, 5]) edge 4 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 2, 3, 4, 5]) edge 0 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 2, 3, 4, 5]) edge 1 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 2, 3, 4, 5]) edge 2 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 2, 3, 4, 5]) edge 3 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "A(5,2,[0, 1, 2, 3, 4, 5]) edge 4 heavy=False",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "B(1, 1, 1) edge 0",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "B(1, 1, 1) edge 1",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "B(1, 1, 1) edge 2",
+    "compared_subset_ranks": 128,
+    "passed": true
+  },
+  {
+    "label": "B(1, 1, 2) edge 0",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "B(1, 1, 2) edge 1",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "B(1, 1, 2) edge 2",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "B(1, 1, 2) edge 3",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "B(1, 2, 1) edge 0",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "B(1, 2, 1) edge 1",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "B(1, 2, 1) edge 2",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "B(1, 2, 1) edge 3",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "B(2, 1, 1) edge 0",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "B(2, 1, 1) edge 1",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "B(2, 1, 1) edge 2",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "B(2, 1, 1) edge 3",
+    "compared_subset_ranks": 512,
+    "passed": true
+  },
+  {
+    "label": "B(1, 1, 3) edge 0",
+    "compared_subset_ranks": 2048,
+    "passed": true
+  },
+  {
+    "label": "B(1, 1, 3) edge 1",
+    "compared_subset_ranks": 2048,
+    "passed": true
+  },
+  {
+    "label": "B(1, 1, 3) edge 2",
+    "compared_subset_ranks": 2048,
+    "passed": true
+  },
+  {
+    "label": "B(1, 1, 3) edge 3",
+    "compared_subset_ranks": 2048,
+    "passed": true
+  },
+  {
+    "label": "B(1, 1, 3) edge 4",
+    "compared_subset_ranks": 2048,
+    "passed": true
+  },
+  {
+    "label": "B(1, 2, 2) edge 0",
+    "compared_subset_ranks": 2048,
+    "passed": true
+  },
+  {
+    "label": "B(1, 2, 2) edge 1",
+    "compared_subset_ranks": 2048,
+    "passed": true
+  },
+  {
+    "label": "B(1, 2, 2) edge 2",
+    "compared_subset_ranks": 2048,
+    "passed": true
+  },
+  {
+    "label": "B(1, 2, 2) edge 3",
+    "compared_subset_ranks": 2048,
+    "passed": true
+  },
+  {
+    "label": "B(1, 2, 2) edge 4",
+    "compared_subset_ranks": 2048,
+    "passed": true
+  },
+  {
+    "label": "B(2, 2, 1) edge 0",
+    "compared_subset_ranks": 2048,
+    "passed": true
+  },
+  {
+    "label": "B(2, 2, 1) edge 1",
+    "compared_subset_ranks": 2048,
+    "passed": true
+  },
+  {
+    "label": "B(2, 2, 1) edge 2",
+    "compared_subset_ranks": 2048,
+    "passed": true
+  },
+  {
+    "label": "B(2, 2, 1) edge 3",
+    "compared_subset_ranks": 2048,
+    "passed": true
+  },
+  {
+    "label": "B(2, 2, 1) edge 4",
+    "compared_subset_ranks": 2048,
+    "passed": true
+  }
+]

@@ -1,0 +1,272 @@
+{
+  "checked_at_utc": "2026-10-12T16:17:51.205843+00:00",
+  "recurrence_comparison": {
+    "domain": "0 <= r,k <= 30; 0 <= d <= min(r,k)",
+    "triples": 10416,
+    "mismatches": 0
+  },
+  "generating_series_comparison": {
+    "domain": "0 <= a,b <= 8; 0 <= d <= 20",
+    "coefficients": 1701,
+    "mismatches": 0
+  },
+  "independent_ASM_generation": [
+    {
+      "n": 1,
+      "all_asms": 1,
+      "avoiding_312": 1
+    },
+    {
+      "n": 2,
+      "all_asms": 2,
+      "avoiding_312": 2
+    },
+    {
+      "n": 3,
+      "all_asms": 7,
+      "avoiding_312": 6
+    },
+    {
+      "n": 4,
+      "all_asms": 42,
+      "avoiding_312": 22
+    },
+    {
+      "n": 5,
+      "all_asms": 429,
+      "avoiding_312": 90
+    },
+    {
+      "n": 6,
+      "all_asms": 7436,
+      "avoiding_312": 394
+    }
+  ],
+  "prefix_comparison": [
+    {
+      "r": 0,
+      "k": 0,
+      "d": 0,
+      "prefixes_witnessed_in_ASMs_of_order_at_most_6": 1,
+      "formula": 1
+    },
+    {
+      "r": 0,
+      "k": 1,
+      "d": 0,
+      "prefixes_witnessed_in_ASMs_of_order_at_most_6": 1,
+      "formula": 1
+    },
+    {
+      "r": 0,
+      "k": 2,
+      "d": 0,
+      "prefixes_witnessed_in_ASMs_of_order_at_most_6": 1,
+      "formula": 1
+    },
+    {
+      "r": 0,
+      "k": 3,
+      "d": 0,
+      "prefixes_witnessed_in_ASMs_of_order_at_most_6": 1,
+      "formula": 1
+    },
+    {
+      "r": 1,
+      "k": 0,
+      "d": 0,
+      "prefixes_witnessed_in_ASMs_of_order_at_most_6": 1,
+      "formula": 1
+    },
+    {
+      "r": 1,
+      "k": 1,
+      "d": 0,
+      "prefixes_witnessed_in_ASMs_of_order_at_most_6": 1,
+      "formula": 1
+    },
+    {
+      "r": 1,
+      "k": 1,
+      "d": 1,
+      "prefixes_witnessed_in_ASMs_of_order_at_most_6": 1,
+      "formula": 1
+    },
+    {
+      "r": 1,
+      "k": 2,
+      "d": 0,
+      "prefixes_witnessed_in_ASMs_of_order_at_most_6": 1,
+      "formula": 1
+    },
+    {
+      "r": 1,
+      "k": 2,
+      "d": 1,
+      "prefixes_witnessed_in_ASMs_of_order_at_most_6": 2,
+      "formula": 2
+    },
+    {
+      "r": 1,
+      "k": 3,
+      "d": 0,
+      "prefixes_witnessed_in_ASMs_of_order_at_most_6": 1,
+      "formula": 1
+    },
+    {
+      "r": 1,
+      "k": 3,
+      "d": 1,
+      "prefixes_witnessed_in_ASMs_of_order_at_most_6": 3,
+      "formula": 3
+    },
+    {
+      "r": 2,
+      "k": 0,
+      "d": 0,
+      "prefixes_witnessed_in_ASMs_of_order_at_most_6": 1,
+      "formula": 1
+    },
+    {
+      "r": 2,
+      "k": 1,
+      "d": 0,
+      "prefixes_witnessed_in_ASMs_of_order_at_most_6": 1,
+      "formula": 1
+    },
+    {
+      "r": 2,
+      "k": 1,
+      "d": 1,
+      "prefixes_witnessed_in_ASMs_of_order_at_most_6": 2,
+      "formula": 2
+    },
+    {
+      "r": 2,
+      "k": 2,
+      "d": 0,
+      "prefixes_witnessed_in_ASMs_of_order_at_most_6": 1,
+      "formula": 1
+    },
+    {
+      "r": 2,
+      "k": 2,
+      "d": 1,
+      "prefixes_witnessed_in_ASMs_of_order_at_most_6": 3,
+      "formula": 3
+    },
+    {
+      "r": 2,
+      "k": 2,
+      "d": 2,
+      "prefixes_witnessed_in_ASMs_of_order_at_most_6": 2,
+      "formula": 2
+    },
+    {
+      "r": 2,
+      "k": 3,
+      "d": 0,
+      "prefixes_witnessed_in_ASMs_of_order_at_most_6": 1,
+      "formula": 1
+    },
+    {
+      "r": 2,
+      "k": 3,
+      "d": 1,
+      "prefixes_witnessed_in_ASMs_of_order_at_most_6": 4,
+      "formula": 4
+    },
+    {
+      "r": 2,
+      "k": 3,
+      "d": 2,
+      "prefixes_witnessed_in_ASMs_of_order_at_most_6": 6,
+      "formula": 6
+    },
+    {
+      "r": 3,
+      "k": 0,
+      "d": 0,
+      "prefixes_witnessed_in_ASMs_of_order_at_most_6": 1,
+      "formula": 1
+    },
+    {
+      "r": 3,
+      "k": 1,
+      "d": 0,
+      "prefixes_witnessed_in_ASMs_of_order_at_most_6": 1,
+      "formula": 1
+    },
+    {
+      "r": 3,
+      "k": 1,
+      "d": 1,
+      "prefixes_witnessed_in_ASMs_of_order_at_most_6": 3,
+      "formula": 3
+    },
+    {
+      "r": 3,
+      "k": 2,
+      "d": 0,
+      "prefixes_witnessed_in_ASMs_of_order_at_most_6": 1,
+      "formula": 1
+    },
+    {
+      "r": 3,
+      "k": 2,
+      "d": 1,
+      "prefixes_witnessed_in_ASMs_of_order_at_most_6": 4,
+      "formula": 4
+    },
+    {
+      "r": 3,
+      "k": 2,
+      "d": 2,
+      "prefixes_witnessed_in_ASMs_of_order_at_most_6": 5,
+      "formula": 5
+    },
+    {
+      "r": 3,
+      "k": 3,
+      "d": 0,
+      "prefixes_witnessed_in_ASMs_of_order_at_most_6": 1,
+      "formula": 1
+    },
+    {
+      "r": 3,
+      "k": 3,
+      "d": 1,
+      "prefixes_witnessed_in_ASMs_of_order_at_most_6": 5,
+      "formula": 5
+    },
+    {
+      "r": 3,
+      "k": 3,
+      "d": 2,
+      "prefixes_witnessed_in_ASMs_of_order_at_most_6": 10,
+      "formula": 10
+    },
+    {
+      "r": 3,
+      "k": 3,
+      "d": 3,
+      "prefixes_witnessed_in_ASMs_of_order_at_most_6": 6,
+      "formula": 6
+    }
+  ],
+  "interpretation": "Finite checks support the formal proof. Prefix enumeration establishes witnesses through order 6; exhaustion of arbitrary extension orders is not assumed.",
+  "example": {
+    "S_2_2_1": 3,
+    "excluded_single_one_at_row_2_column_1": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        0
+      ]
+    ],
+    "reason": "An extension forces a 1 right of the first empty row, then the displayed 1, then a later 1 in column 2, giving 312."
+  }
+}

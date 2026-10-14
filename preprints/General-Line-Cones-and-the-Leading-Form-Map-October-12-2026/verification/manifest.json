@@ -1,0 +1,130 @@
+{
+  "author": "Knowledge Sense",
+  "files": [
+    {
+      "path": "boundary_moment_v1/boundary_cubic_certificate_v1.json",
+      "bytes": 6538,
+      "sha256": "d491c2c9699818989c433a99f3e24f4f14f04714a83f38a7438b337fffefea1d"
+    },
+    {
+      "path": "boundary_moment_v1/boundary_minus_one_character_certificate_v1.json",
+      "bytes": 1863,
+      "sha256": "e524d13a119c62e7fc69657b13d9e47be7292bb77808e4ca5bbcf97d7c45d113"
+    },
+    {
+      "path": "boundary_moment_v1/boundary_quadratic_certificate_v1.json",
+      "bytes": 3802,
+      "sha256": "ce35d06cb04636c6709dc0832e4e527df35bda46abaefa792d1cbd6b2a1723ae"
+    },
+    {
+      "path": "boundary_moment_v1/boundary_small_global_core_v1.py",
+      "bytes": 3837,
+      "sha256": "406b6c7f41ab8d653750227882fff772793cf1f6ecba6786fe4bbad666813d1c"
+    },
+    {
+      "path": "boundary_moment_v1/boundary_symbolic_core_v1.py",
+      "bytes": 4711,
+      "sha256": "7845b0c16aaa5b5553dbe14d89f13503fc642169d54f894dfac20867176874a0"
+    },
+    {
+      "path": "boundary_moment_v1/boundary_two_moment_certificate_v1.json",
+      "bytes": 3940,
+      "sha256": "fa5298aaca462f6e41fac31a313bb71a5ac04a399f50a5f576fe758b6c7368b9"
+    },
+    {
+      "path": "boundary_moment_v1/boundary_zero_character_certificate_v1.json",
+      "bytes": 5446,
+      "sha256": "821d1e30f16aa4877f444cbb2a4dc497ceb2ed86df9a0082dea6072dc808b7d2"
+    },
+    {
+      "path": "boundary_moment_v1/certify_boundary_cubic_v1.py",
+      "bytes": 2767,
+      "sha256": "4783e57bb7a8c7095d9b62b89c781a77355e0a20cc84d1703fb235940c1130ec"
+    },
+    {
+      "path": "boundary_moment_v1/certify_boundary_minus_one_character_v1.py",
+      "bytes": 1024,
+      "sha256": "d4e4006eb68c395d36583b6d3aac716c99c9f597f54214e92e95e4fbc3f2608b"
+    },
+    {
+      "path": "boundary_moment_v1/certify_boundary_quadratic_v1.py",
+      "bytes": 680,
+      "sha256": "ec736d95bce9665de7d57774651d02f55ad5d7f7dd2cddf6181ec56caf31262e"
+    },
+    {
+      "path": "boundary_moment_v1/certify_boundary_two_moments_v1.py",
+      "bytes": 1116,
+      "sha256": "5674e2e3ab8d29fe6bb997ce54af8324e7c374bf4f65263677267f46c0e38d09"
+    },
+    {
+      "path": "boundary_moment_v1/certify_boundary_zero_character_v1.py",
+      "bytes": 1182,
+      "sha256": "2f798cf2e337a5e1149b32421776805d22ac96a51901415566af022596ae4ab0"
+    },
+    {
+      "path": "certify_cyclic_finite_composition_v1.json",
+      "bytes": 7729303,
+      "sha256": "8d1b83ef61e872208c3034a5fb07980bf202fe0d86eb4bf91db07bdb2678b501"
+    },
+    {
+      "path": "certify_cyclic_finite_composition_v1.py",
+      "bytes": 6979,
+      "sha256": "3253644aeb3a4369bc8faa088c049c2f5d67722c1c382aa6a6a2ba6d5899c134"
+    },
+    {
+      "path": "check_cyclic_bulk_moment_symbolic_v1.json",
+      "bytes": 666,
+      "sha256": "5e4e8c6878a972246e06e50d0d482e044bea669ad7d39a2b73f520dffe0d19b3"
+    },
+    {
+      "path": "check_cyclic_bulk_moment_symbolic_v1.py",
+      "bytes": 3061,
+      "sha256": "97821f61dd735fc150a2fb5754b0648aad033d51969b133847f13bb69aed77b1"
+    },
+    {
+      "path": "check_cyclic_uniform_origin_rank_v1.json",
+      "bytes": 62203,
+      "sha256": "a167ff3314cea01d191a5a461c8d0e8adac9c0e32d8022c10432047bf894362e"
+    },
+    {
+      "path": "check_cyclic_uniform_origin_rank_v1.py",
+      "bytes": 5746,
+      "sha256": "c7472bfae9990ca01e64ad461ce09b747f770f9b2bbf01aef061fca9598c56f1"
+    },
+    {
+      "path": "check_inductive_ranges.json",
+      "bytes": 2057,
+      "sha256": "eea6ff24485242a879f1aedfa2d3fc51caadc36f15178ba3dd18145638289eb7"
+    },
+    {
+      "path": "check_inductive_ranges.py",
+      "bytes": 4952,
+      "sha256": "fdaf7e1b828bbbd609e7aadf439885120e08210b2d7f1c21a881ebc56cfd40bd"
+    },
+    {
+      "path": "data/compile_one_seed_bridge_v2.json",
+      "bytes": 62277,
+      "sha256": "5c6cd8e8ac39bc837c398ea77224c52aa391c1ce53dff29abbce8352d22605c6"
+    },
+    {
+      "path": "FINITE_SEED_RATIONAL_DATA_v1.json",
+      "bytes": 67544,
+      "sha256": "36725f08045a619d5ea46108f7b327e7f395d7bba894c9127c1bb7514b2ce66b"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1697,
+      "sha256": "8df48ad045a51c9034e6ecd69ffecff9e551306c9aaf342e3ab00371c99feee1"
+    },
+    {
+      "path": "verify_direct_rational_seed_v1.py",
+      "bytes": 4811,
+      "sha256": "89e23a0cf20b2bbf6c1e700fc5abad11f2505d9781bce9c01742d572df8cfe12"
+    },
+    {
+      "path": "verify_direct_rational_seed_v1_execution.json",
+      "bytes": 24635,
+      "sha256": "9f3d487849d1754d2e7f658ea4aeb8cfcabd15d90c627d98515a0ea0dda3380a"
+    }
+  ]
+}

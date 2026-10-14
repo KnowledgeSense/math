@@ -1,0 +1,136 @@
+{
+  "status": "PASS",
+  "scope": "Independent alternating-sum construction n=1..18; endpoint checks n=3..18. Not an all-degree proof.",
+  "python": "3.12.10",
+  "sympy": "1.14.0",
+  "rows": [
+    {
+      "n": 3,
+      "lower": "-6",
+      "upper": "-2",
+      "lower_multiplicity": 2,
+      "upper_multiplicity": 2,
+      "other_endpoint_roots_simple_negative": true
+    },
+    {
+      "n": 4,
+      "lower": "-12",
+      "upper": "-8",
+      "lower_multiplicity": 2,
+      "upper_multiplicity": 3,
+      "other_endpoint_roots_simple_negative": true
+    },
+    {
+      "n": 5,
+      "lower": "-20",
+      "upper": "-8",
+      "lower_multiplicity": 2,
+      "upper_multiplicity": 2,
+      "other_endpoint_roots_simple_negative": true
+    },
+    {
+      "n": 6,
+      "lower": "-30",
+      "upper": "-17",
+      "lower_multiplicity": 2,
+      "upper_multiplicity": 3,
+      "other_endpoint_roots_simple_negative": true
+    },
+    {
+      "n": 7,
+      "lower": "-42",
+      "upper": "-17",
+      "lower_multiplicity": 2,
+      "upper_multiplicity": 2,
+      "other_endpoint_roots_simple_negative": true
+    },
+    {
+      "n": 8,
+      "lower": "-56",
+      "upper": "-496/17",
+      "lower_multiplicity": 2,
+      "upper_multiplicity": 3,
+      "other_endpoint_roots_simple_negative": true
+    },
+    {
+      "n": 9,
+      "lower": "-72",
+      "upper": "-496/17",
+      "lower_multiplicity": 2,
+      "upper_multiplicity": 2,
+      "other_endpoint_roots_simple_negative": true
+    },
+    {
+      "n": 10,
+      "lower": "-90",
+      "upper": "-1382/31",
+      "lower_multiplicity": 2,
+      "upper_multiplicity": 3,
+      "other_endpoint_roots_simple_negative": true
+    },
+    {
+      "n": 11,
+      "lower": "-110",
+      "upper": "-1382/31",
+      "lower_multiplicity": 2,
+      "upper_multiplicity": 2,
+      "other_endpoint_roots_simple_negative": true
+    },
+    {
+      "n": 12,
+      "lower": "-132",
+      "upper": "-43688/691",
+      "lower_multiplicity": 2,
+      "upper_multiplicity": 3,
+      "other_endpoint_roots_simple_negative": true
+    },
+    {
+      "n": 13,
+      "lower": "-156",
+      "upper": "-43688/691",
+      "lower_multiplicity": 2,
+      "upper_multiplicity": 2,
+      "other_endpoint_roots_simple_negative": true
+    },
+    {
+      "n": 14,
+      "lower": "-182",
+      "upper": "-929569/10922",
+      "lower_multiplicity": 2,
+      "upper_multiplicity": 3,
+      "other_endpoint_roots_simple_negative": true
+    },
+    {
+      "n": 15,
+      "lower": "-210",
+      "upper": "-929569/10922",
+      "lower_multiplicity": 2,
+      "upper_multiplicity": 2,
+      "other_endpoint_roots_simple_negative": true
+    },
+    {
+      "n": 16,
+      "lower": "-240",
+      "upper": "-102473312/929569",
+      "lower_multiplicity": 2,
+      "upper_multiplicity": 3,
+      "other_endpoint_roots_simple_negative": true
+    },
+    {
+      "n": 17,
+      "lower": "-272",
+      "upper": "-102473312/929569",
+      "lower_multiplicity": 2,
+      "upper_multiplicity": 2,
+      "other_endpoint_roots_simple_negative": true
+    },
+    {
+      "n": 18,
+      "lower": "-306",
+      "upper": "-443861162/3202291",
+      "lower_multiplicity": 2,
+      "upper_multiplicity": 3,
+      "other_endpoint_roots_simple_negative": true
+    }
+  ]
+}

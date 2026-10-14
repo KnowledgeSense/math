@@ -1,0 +1,518 @@
+\documentclass{amsart}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+  pdftitle={The honest embedding dimension of numerical semigroups of multiplicity five},
+  pdfauthor={Knowledge Sense},
+  pdfsubject={Numerical semigroups and space curve singularities},
+  pdfkeywords={numerical semigroup, value semigroup, space curve singularity, honest embedding dimension, Apéry set}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+\setlength{\emergencystretch}{3em}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\Ap}{\operatorname{Ap}}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\cond}{\mathfrak{c}}
+\newcommand{\gen}[1]{\langle #1\rangle}
+\newcommand{\Os}[1]{\cO\langle #1\rangle}
+
+\begin{document}
+
+\title[Honest embedding dimension in multiplicity five]{The honest embedding dimension of numerical semigroups of multiplicity five}
+
+\author{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{12 October 2026}
+
+\subjclass[2020]{Primary 14H20, 20M14; Secondary 13A18, 32S05}
+
+\keywords{Numerical semigroup, value semigroup, space curve singularity, honest embedding dimension, Ap\'ery set, Kunz coordinates}
+
+\begin{abstract}
+The honest embedding dimension of a numerical semigroup $S$ is the smallest $d$ such that $S$ is the value semigroup of a complex analytic curve germ in $\C^d$. We determine it for every numerical semigroup of multiplicity five. The new part of the result concerns honest embedding dimension three. If $S$ has the four minimal generators $5<a<b<c$, then $S$ is the value semigroup of a space curve germ if and only if $c$ exceeds the smallest element of $\gen{5,a,b}$ that has two different factorizations. If $S$ has the five minimal generators $5<a<b<c<d$, this happens if and only if $a,b,c,d$ are congruent to $i,2i,3i,4i$ modulo $5$ for some $i$, $c>2a$ and $d>a+b$. Necessity follows from a normal form for germs in $\C^3$: below the first collision of monomials the leading orders are those of the monomials, and leading orders in distinct residue classes modulo $5$ are independent over $\C((t^5))$. Sufficiency is proved by explicit parametrizations with three coordinates. Together with the planar criterion of Bresinsky and Montgomery's characterization of the semigroups whose honest embedding dimension equals their multiplicity, this decides between the values $2$, $3$, $4$ and $5$ for all numerical semigroups of multiplicity five. A finite computation, which is not used in the proofs, enumerates the $71{,}970$ semigroups of multiplicity five whose Kunz coordinates are at most $24$, checks the Ap\'ery and first-collision tables for $2{,}222$ pairs of generators, and verifies the value semigroups of the explicit germs for the $3{,}220$ semigroups classified by our criterion as having honest embedding dimension three.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $\gamma\colon(\C,0)\to(\C^n,0)$ be the germ of an analytic map. Pulling back convergent power series along $\gamma$ gives a subring $R_\gamma\subseteq\C\{t\}$, and the orders of its nonzero elements form a submonoid of $\N$. If this monoid has greatest common divisor one, $\gamma$ is called well-parametrized and the monoid is a numerical semigroup, the value semigroup of $\gamma$. Every numerical semigroup $S$ arises in this way: if $n_1,\dots,n_e$ are its minimal generators, the monomial curve $t\mapsto(t^{n_1},\dots,t^{n_e})$ in $\C^e$ has value semigroup $S$. The semigroup may, however, be realized in fewer dimensions. Montgomery~\cite{Mon} calls the smallest $n$ for which some well-parametrized germ in $\C^n$ has value semigroup $S$ the \emph{honest embedding dimension} of $S$; we denote it by $h(S)$. With $m(S)$ the multiplicity and $e(S)$ the embedding dimension of $S$,
+\begin{equation}\label{eq:basic}
+h(S)\le e(S)\le m(S).
+\end{equation}
+
+The semigroups of plane curves, those with $h(S)=2$, are classified by Bresinsky~\cite{Bre}, and the analytic classification of plane branches with a given semigroup goes back to Zariski~\cite{Zar}. Which semigroups arise from space curves is much less understood; the question of deciding whether a semigroup is the value semigroup of a curve singularity of a given embedding dimension is posed by Castellanos~\cite[Problem~2.4]{Cas}; see also~\cite[Section~4.2]{Ham}. Montgomery refines it by the multiplicity~\cite[Problem~3]{Mon}: given $m$ and $d$, classify the numerical semigroups of multiplicity $m$ and honest embedding dimension $d$. He solves the case $(m,d)=(4,3)$ and, for every $m$, the case $d=m$~\cite[Theorems~1 and~2]{Mon}. In this paper we solve the case $(m,d)=(5,3)$, and thereby determine $h(S)$ for all numerical semigroups of multiplicity five.
+
+\subsection*{Statement of the results}
+Throughout, $\equiv$ denotes congruence modulo $5$. Let $S$ be a numerical semigroup of multiplicity five whose minimal generators are $5<a<b<\cdots$. Since $\gcd(5,a)=1$, there is a unique $i\in\{1,2,3,4\}$ with $a\equiv i$, and every integer is congruent to $ri$ for a unique $r\in\{0,1,2,3,4\}$. For integers $5<a<b$ with $5\nmid a$ and $b\notin\gen{5,a}$ we let $\beta(5,a,b)$ be the smallest integer that has two different representations $5x+ay+bz$ with $x,y,z\in\N$. It is the smallest Betti element of $\gen{5,a,b}$ (Remark~\ref{rem:betti}), and Lemma~\ref{lem:beta} computes it: if $b\equiv ki$, then $k\in\{2,3,4\}$ and
+\begin{equation}\label{eq:beta}
+\beta(5,a,b)=
+\begin{cases}
+2a & \text{if } k=2,\\
+\min(3a,2b) & \text{if } k=3,\\
+\min(a+b,4a) & \text{if } k=4.
+\end{cases}
+\end{equation}
+
+\begin{theorem}\label{thm:main}
+Let $S$ be a numerical semigroup of multiplicity five, and let $i\in\{1,2,3,4\}$ be the residue of its smallest minimal generator other than $5$.
+\begin{enumerate}
+\item[(a)] Let $S=\gen{5,a,b,c}$ with minimal generators $5<a<b<c$, and let $b\equiv ki$ and $c\equiv ji$. Then $h(S)=3$ if and only if $c>\beta(5,a,b)$. Equivalently, $h(S)=3$ if and only if one of the following holds:
+\begin{enumerate}
+\item[(i)] $k=2$ and $c>2a$;
+\item[(ii)] $k=3$, $j=4$ and $c>3a$;
+\item[(iii)] $k=4$, $j=3$ and $c>a+b$.
+\end{enumerate}
+\item[(b)] Let $S=\gen{5,a,b,c,d}$ with minimal generators $5<a<b<c<d$. Then $h(S)=3$ if and only if
+\[
+(a,b,c,d)\equiv(i,2i,3i,4i),\qquad c>2a\qquad\text{and}\qquad d>a+b.
+\]
+\end{enumerate}
+\end{theorem}
+
+The inequalities in~(a) and~(b) are between integers, not residues. For $(k,j)=(3,2)$ and $(4,2)$ the inequality $c>\beta(5,a,b)$ never holds (Lemma~\ref{lem:explicit4}), so these cases have $h(S)=4$. Combining Theorem~\ref{thm:main} with~\eqref{eq:basic}, the planar criterion and Montgomery's theorem on the case $h(S)=m(S)$ gives the complete answer in multiplicity five.
+
+\begin{theorem}\label{thm:all}
+Let $S$ be a numerical semigroup of multiplicity five. Then $h(S)\in\{2,3,4,5\}$, and $h(S)$ is determined as follows.
+\begin{enumerate}
+\item If $e(S)=2$, then $h(S)=2$.
+\item If $e(S)=3$, then $h(S)=3$.
+\item If $S=\gen{5,a,b,c}$ with minimal generators $5<a<b<c$, then $h(S)=3$ if $c>\beta(5,a,b)$, and $h(S)=4$ otherwise.
+\item If $S=\gen{5,a,b,c,d}$ with minimal generators $5<a<b<c<d$, then $h(S)=5$ if $d<2a$; $h(S)=3$ if the conditions of Theorem~\textup{\ref{thm:main}(b)} hold; and $h(S)=4$ otherwise.
+\end{enumerate}
+\end{theorem}
+
+The two conditions in part~(4) are mutually exclusive, since the conditions of Theorem~\ref{thm:main}(b) give $d>c>2a$. For the implication from $h(S)=3$ to the arithmetic conditions we bring a germ in $\C^3$ into the normal form $(t^5,t^a+\cdots,t^b+\cdots)$ and compare the residues modulo $5$ of the orders that can occur below a suitable bound with the number of available generators over $\C\{t^5\}$ (Lemma~\ref{lem:residue}). For four generators the bound is the first collision $\beta(5,a,b)$ between monomials; for five generators two such counts suffice. For the converse we write down parametrizations with three coordinates, in which the third coordinate is a binomial in $t$ or a simple rational function of $t$, and we verify their value semigroups by reducing every element modulo a power of $t$ above the conductor.
+
+\subsection*{Relation to earlier work}
+The inequalities~\eqref{eq:basic} and the planar criterion are known: at prime multiplicity, $h(S)=2$ if and only if $e(S)=2$~\cite{Bre}, \cite[Section~6.1]{Mon}; we include the short argument in Corollary~\ref{cor:planar}. The case $h(S)=5$ is Montgomery's theorem~\cite[Theorem~2 and Proposition~1]{Mon}. The techniques we use are classical. Reduction modulo the conductor is the basis of Hamilton's description of the space of complete subalgebras of $\C[[t]]$ with a given semigroup~\cite{Ham}, and the computation of value semigroups through relations among leading monomials is the subject of the algorithms of Assi, Garc\'{\i}a-S\'anchez and Micale~\cite{AGM}. Obstructions coming from the first relation among leading terms already appear in~\cite[Remark~4.5]{Ham}, where they show that $\gen{4,6,11}$ is not the semigroup of a plane curve. Individual semigroups of multiplicity five with five generators and honest embedding dimension three are also known: Assi, Garc\'{\i}a-S\'anchez and Micale show~\cite[Example~2.17]{AGM} that the germ $(x^5,-x^{18}-x^{21},-x^{26})$ has value semigroup $\gen{5,18,26,39,47}$, which satisfies the conditions of Theorem~\ref{thm:main}(b) with $i=3$. The new contribution of this paper is the necessary and sufficient arithmetic criterion of Theorem~\ref{thm:main} for all semigroups of multiplicity five, with explicit convergent realizations in every positive case, and the resulting decision rule of Theorem~\ref{thm:all}.
+
+\subsection*{Dependencies}
+Besides standard facts on numerical semigroups and Ap\'ery sets~\cite{RGS}, the proofs use one result that we do not reprove, namely Montgomery's characterization of the semigroups with $h(S)=m(S)$~\cite[Theorem~2 and Proposition~1]{Mon}. It enters only in part~(4) of Theorem~\ref{thm:all}, through the value $h(S)=5$. Theorem~\ref{thm:main} is proved completely here. The finite computation described in Section~\ref{sec:computation} is a consistency check of the explicit constructions and is not used in any proof.
+
+\subsection*{Organization}
+Section~\ref{sec:prelim} collects facts on Ap\'ery sets and value semigroups and proves the normal form for germs in $\C^3$. Section~\ref{sec:three} treats the semigroup $\gen{5,a,b}$ and its first collision. Sections~\ref{sec:four} and~\ref{sec:five} prove Theorem~\ref{thm:main} for four and five generators. Section~\ref{sec:all} proves Theorem~\ref{thm:all} and gives examples, and Section~\ref{sec:computation} describes the finite verification.
+
+\section{Preliminaries}\label{sec:prelim}
+
+\subsection{Numerical semigroups of multiplicity five}
+Let $\N=\{0,1,2,\dots\}$. A numerical semigroup is a submonoid $S\subseteq\N$ with finite complement. Its multiplicity $m(S)$ is the smallest positive element, its embedding dimension $e(S)$ is the number of minimal generators, and its conductor $\cond(S)$ is the smallest integer $n$ with $n+\N\subseteq S$. If $5<n_1<n_2<\cdots$ are the minimal generators other than $5$, then
+\begin{equation}\label{eq:nextgen}
+n_j=\min\bigl(S\setminus\gen{5,n_1,\dots,n_{j-1}}\bigr),
+\end{equation}
+because every element of $S$ smaller than $n_j$ is a sum of generators smaller than $n_j$.
+
+Let $m(S)=5$. For a residue $r\in\Z/5\Z$ let $w_r=w_r(S)$ be the smallest element of $S$ congruent to $r$, so that $w_0=0$, and let $\Ap(S)=\{w_0,\dots,w_4\}$ be the Ap\'ery set of $S$ with respect to $5$. Every element of $S$ lies in $w_r+5\N$ for its residue $r$. The minimal generators other than $5$ are nonzero Ap\'ery elements, so they have pairwise different nonzero residues and $e(S)\le 5$. We use Selmer's formula~\cite{RGS}
+\begin{equation}\label{eq:selmer}
+\cond(S)=\max\Ap(S)-4,
+\end{equation}
+and Kunz's inequalities $w_{r+s}\le w_r+w_s$, which hold because $w_r+w_s\in S$. The numerical semigroups of multiplicity five correspond bijectively to their Ap\'ery sets, and hence to the Kunz coordinates $(w_r-r)/5$, $r=1,\dots,4$; see~\cite{Kun} and~\cite[Proposition~1 and Remark~4.1]{Mon}. The semigroup $S$ has $e(S)=5$ exactly when all nonzero Ap\'ery elements are minimal generators.
+
+\begin{lemma}\label{lem:decompose}
+Let $m(S)=5$ and $r\ne0$. If $w_r$ is not a minimal generator of $S$, then
+\[
+w_r=\min\{w_s+w_{r-s}: s\in\Z/5\Z\setminus\{0,r\}\}.
+\]
+\end{lemma}
+
+\begin{proof}
+The right-hand side is at least $w_r$ by Kunz's inequalities. Write $w_r=s_1+s_2$ with $s_1,s_2\in S\setminus\{0\}$. If $s_1-5\in S$, then $w_r-5\in S$, which is impossible; hence $s_1$ is an Ap\'ery element, and so is $s_2$. Both are nonzero, so their residues $s$ and $r-s$ are nonzero, and $w_r=w_s+w_{r-s}$.
+\end{proof}
+
+\begin{lemma}\label{lem:apery}
+Let $T=\gen{5,g_1,\dots,g_q}$ and let $u_0=0,u_1,\dots,u_4$ be elements of $T$ with $u_r\equiv r$. If $u_r+g_l\ge u_{r+g_l}$ for all $r$ and $l$, the index taken modulo $5$, then $w_r(T)=u_r$ for all $r$.
+\end{lemma}
+
+\begin{proof}
+The set $U=\bigcup_r(u_r+5\N)$ contains $0$ and is closed under adding $5$. Since $u_r+g_l$ is congruent to $u_{r+g_l}$ and not smaller, it lies in $U$; hence $U$ is closed under adding each $g_l$, and $T\subseteq U$. Thus $w_r(T)\ge u_r$, and $u_r\in T$ gives equality.
+\end{proof}
+
+\subsection{Value semigroups}
+Let $\C\{t\}$ be the ring of convergent power series, $\ord$ the order of a series, and $\ord 0=\infty$. For an analytic germ $\gamma=(\gamma_1,\dots,\gamma_n)$ with $\gamma_l\in t\C\{t\}$ we put $R_\gamma=\C\{\gamma_1,\dots,\gamma_n\}=\{F\circ\gamma: F\in\C\{x_1,\dots,x_n\}\}$ and $v(R_\gamma)=\{\ord\varphi:\varphi\in R_\gamma\setminus\{0\}\}$. The ring $R_\gamma$ does not change under analytic automorphisms of $(\C^n,0)$, and $v(R_\gamma)$ does not change under reparametrizations $t\mapsto\theta(t)$ with $\ord\theta=1$. We write $h(S)$ for the honest embedding dimension~\cite[Definition~3.1]{Mon}. For $n=1$ we have $v(R_\gamma)=\ord(\gamma_1)\N$, so $h(S)\ge2$ whenever $S\ne\N$.
+
+From now on we put
+\[
+X=t^5,\qquad \cO=\C\{X\}=\C\{t^5\}\subseteq\C\{t\},
+\]
+and we write $\C((t))$ for the field of formal Laurent series in $t$ and $\cK=\C((t^5))\subseteq\C((t))$ for its subfield of formal Laurent series in $t^5$, so that $\cO\subseteq\cK$ and $\C\{t\}\subseteq\C((t))$. For elements $\eta_1,\dots,\eta_q$ of $\C((t))$ let $\Os{\eta_1,\dots,\eta_q}=\sum_l\cO\eta_l$.
+
+\begin{lemma}[Residue lemma]\label{lem:residue}
+Let $\eta_1,\dots,\eta_q\in\C((t))$ be nonzero.
+\begin{enumerate}
+\item[(a)] Here $\ord$ is the order in $t$, so $\ord g\in5\Z$ for $g\in\cK\setminus\{0\}$. If $\ord\eta_1,\dots,\ord\eta_q$ are pairwise incongruent modulo $5$, then for $g_1,\dots,g_q\in\cK$, not all zero,
+\[
+\ord\Bigl(\sum_{l} g_l\eta_l\Bigr)=\min\{\ord g_l+\ord\eta_l: g_l\ne0\}.
+\]
+In particular, the orders of the nonzero elements of $\Os{\eta_1,\dots,\eta_q}$ lie in $\bigcup_l(\ord\eta_l+5\N)$.
+\item[(b)] In general, the orders of the nonzero elements of $\Os{\eta_1,\dots,\eta_q}$ lie in at most $q$ residue classes modulo $5$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) Since $\ord g_l\in5\Z$, the numbers $\ord g_l+\ord\eta_l$ with $g_l\ne0$ are pairwise incongruent modulo $5$, hence pairwise different. Hence the term of smallest order is not cancelled. In particular, elements of $\C((t))$ with pairwise incongruent orders are linearly independent over $\cK$.
+
+(b) If $q+1$ nonzero elements of $\Os{\eta_1,\dots,\eta_q}$ had pairwise incongruent orders, they would be linearly independent over $\cK$ by~(a), but they lie in the $\cK$-span of $\eta_1,\dots,\eta_q$, whose dimension is at most $q$.
+\end{proof}
+
+\begin{lemma}[Truncation]\label{lem:truncation}
+Let $Y,Z\in t\C\{t\}$ have orders $a$ and $b$, let $R=\C\{X,Y,Z\}$, and let $L\in\N$. Every $\varphi\in R$ can be written as $\varphi=\mu+\rho$, where $\mu$ is a finite linear combination of monomials $X^xY^pZ^q$ with $5x+pa+qb<L$, and $\ord\rho\ge L$. In particular,
+\[
+v(R)\cap[0,L)\subseteq\{\ord\mu:\mu\in\Os{Y^pZ^q: pa+qb<L}\setminus\{0\}\}.
+\]
+\end{lemma}
+
+\begin{proof}
+Let $\varphi=F(X,Y,Z)$ with $F\in\C\{x,y,z\}$. The exponents $(x,p,q)$ with $5x+pa+qb\ge L$ form an upward closed subset $E$ of $\N^3$; by Dickson's lemma, $E$ is the union of finitely many translates $e^{(1)}+\N^3,\dots,e^{(N)}+\N^3$ with $e^{(k)}\in E$. Assigning each monomial of $F$ with exponent in $E$ to the first such translate containing it, we can write the sum of these monomials as $\sum_k x^{e_1^{(k)}}y^{e_2^{(k)}}z^{e_3^{(k)}}H_k$ with convergent $H_k$, where $e^{(k)}=(e_1^{(k)},e_2^{(k)},e_3^{(k)})$. Its image $\rho$ has order at least $L$, and the remaining part of $F$ is a polynomial whose monomials satisfy $5x+pa+qb<L$. If $\ord\varphi<L$, then $\ord\varphi=\ord\mu$.
+\end{proof}
+
+\begin{lemma}\label{lem:plane}
+Let $Y\in\C\{t\}$ have order $a$ with $\gcd(a,5)=1$. Then $v(\C\{X,Y\})=\gen{5,a}$.
+\end{lemma}
+
+\begin{proof}
+The monomials $X^xY^y$ show that $\gen{5,a}\subseteq v(\C\{X,Y\})$. Conversely, write an element as $F(X,Y)$ with $F=\sum_{r=0}^{4}g_r(x)y^r+y^5H(x,y)$. By Lemma~\ref{lem:residue}(a) applied to $1,Y,\dots,Y^4$, whose orders $0,a,\dots,4a$ are pairwise incongruent, the first sum has order in $\gen{5,a}$ unless it vanishes, while $\ord(Y^5H(X,Y))\ge5a$. Thus every order below $5a$ lies in $\gen{5,a}$. Every integer at least $4(a-1)$ lies in $\gen{5,a}$, and $4(a-1)<5a$.
+\end{proof}
+
+\begin{lemma}[Normal form]\label{lem:normal}
+Let $S$ be a numerical semigroup of multiplicity five, let $n\in\{2,3\}$, and let $\gamma$ be a well-parametrized germ in $\C^n$ with value semigroup $S$. Put $a=\min(S\setminus5\N)$. After an analytic change of coordinates of $(\C^n,0)$ and a reparametrization of order one, $\gamma_1=X=t^5$ and $\gamma_2=Y$ with $Y=t^a+(\text{higher order terms})$. If $n=3$ and $e(S)\ge3$, one can moreover achieve $\gamma_3=Z$ with $Z=t^b+(\text{higher order terms})$, where $b=\min(S\setminus\gen{5,a})$.
+\end{lemma}
+
+\begin{proof}
+Every nonzero element of $R_\gamma$ vanishing at $0$ has order at least $\mu=\min_l\ord\gamma_l$. The number $\mu$ lies in $S\setminus\{0\}$, and an element of order $5$ vanishes at $0$; hence $\mu=5$. After permuting coordinates, $\gamma_1=t^5u(t)$ with $u(0)\ne0$, and the parameter $s=t\,u(t)^{1/5}$ gives $\gamma_1=s^5$. We write $t$ for the new parameter.
+
+For $l\ge2$, let $g_l\in\C\{x\}$ collect the terms of $\gamma_l$ whose exponents are divisible by $5$, so that $g_l(X)$ consists of these terms. Replacing $x_l$ by $x_l-g_l(x_1)$, we may assume that every $\gamma_l$ with $l\ge2$ is zero or has only exponents prime to $5$. Not all of them vanish, since otherwise $R_\gamma\subseteq\cO$. Let $a'$ be the least order among them; then $a'\in S\setminus5\N$, so $a'\ge a$. Let $\varphi=F(\gamma)$ have order $a$, and write $F=F_0(x_1)+\sum_{l\ge2}F_l(x_1)x_l+F_{\ge2}$, where $F_{\ge2}$ has degree at least two in $x_2,\dots,x_n$. The middle sum has order at least $a'$ and the last term at least $2a'$. If $a<a'$, then $\ord F_0(X)=a$, which is impossible because $a\notin5\N$. Hence $a'=a$. After permuting $\gamma_2,\dots,\gamma_n$ and rescaling we obtain $\gamma_2=Y=t^a+\cdots$.
+
+Let now $n=3$ and $e(S)\ge3$, so that $b$ exists. Starting from $Z_0=\gamma_3$, as long as $Z_\nu\ne0$, $\ord Z_\nu<5a$ and $\ord Z_\nu\in\gen{5,a}$, write $\ord Z_\nu=5x+ra$ with $0\le r\le4$ and put $Z_{\nu+1}=Z_\nu-c_\nu X^xY^r$, where $c_\nu$ is the leading coefficient of $Z_\nu$. The order increases strictly and stays below $5a$ while the process continues, so it stops at some $Z'=\gamma_3-G(X,Y)$ with a polynomial $G$. Replacing $x_3$ by $x_3-G(x_1,x_2)$ we have $R_\gamma=\C\{X,Y,Z'\}$, and $b'=\ord Z'$ satisfies $b'\notin\gen{5,a}$ or $b'\ge5a$. Let $\varphi\in R_\gamma$ have order $b$, and write $\varphi=F_0(X,Y)+Z'F_1(X,Y,Z')$. By Lemma~\ref{lem:plane}, $\ord F_0(X,Y)\in\gen{5,a}\cup\{\infty\}$, so $\ord F_0(X,Y)\ne b$. If $b'>b$, then $\ord(Z'F_1)>b$ forces $\ord F_0(X,Y)=b$, a contradiction. Hence $b'\le b$. By~\eqref{eq:nextgen}, $b$ is a minimal generator of $S$, hence the least element of $S$ in its residue class, which is the class of $ra$ for some $r\in\{2,3,4\}$ (the classes of $0$ and of $a$ have least elements $0$ and $a$); since $b\notin\gen{5,a}$, we get $b<ra\le4a$; in particular $b'<5a$, hence $b'\notin\gen{5,a}$, and $b'\ge b$ by the definition of $b$. Therefore $b'=b$, and rescaling gives $Z$.
+\end{proof}
+
+\begin{corollary}[Bresinsky]\label{cor:planar}
+If $m(S)=5$, then $h(S)=2$ if and only if $e(S)=2$. Consequently $h(S)\ge3$ whenever $e(S)\ge3$.
+\end{corollary}
+
+\begin{proof}
+If $e(S)=2$, the monomial curve is planar. If $\gamma$ is a well-parametrized germ in $\C^2$ with value semigroup $S$, Lemma~\ref{lem:normal} gives $R_\gamma=\C\{X,Y\}$ with $\ord Y=a$ prime to $5$, and Lemma~\ref{lem:plane} gives $S=\gen{5,a}$.
+\end{proof}
+
+The following lemma is the form in which we verify explicit realizations.
+
+\begin{lemma}\label{lem:sufficient}
+Let $S$ be a numerical semigroup, let $X=t^5$ and $Y,Z\in t\C\{t\}$, and let $R=\C\{X,Y,Z\}$. Suppose that
+\begin{enumerate}
+\item[(i)] for each minimal generator $n$ of $S$ there is an element of $R$ of order $n$; and
+\item[(ii)] there are an integer $L\ge\cond(S)$ and nonzero $\eta_1,\dots,\eta_q\in\C\{t\}$ whose orders lie in $S$ and are pairwise incongruent modulo $5$, such that every $\varphi\in R$ is congruent modulo $t^L\C\{t\}$ to an element of $\Os{\eta_1,\dots,\eta_q}$.
+\end{enumerate}
+Then $(X,Y,Z)$ is a well-parametrized germ with value semigroup $S$.
+\end{lemma}
+
+\begin{proof}
+By~(i), $S\subseteq v(R)$; in particular $\gcd v(R)=1$. Let $n\in v(R)$. If $n\ge\cond(S)$, then $n\in S$. Otherwise $n<L$, and $n=\ord\varphi$ with $\varphi=\mu+\rho$, $\mu\in\Os{\eta_1,\dots,\eta_q}$ and $\ord\rho\ge L$. Then $n=\ord\mu$, which lies in $S$ by Lemma~\ref{lem:residue}(a).
+\end{proof}
+
+In the applications, condition~(ii) is obtained from Lemma~\ref{lem:truncation}: one lists the finitely many monomials $Y^pZ^q$ with $pa+qb<L$ and rewrites each of them, by means of explicit identities, as an element of $\Os{\eta_1,\dots,\eta_q}$ plus a series of order at least $L$.
+
+\section{The semigroup generated by the first three generators}\label{sec:three}
+
+In this section $5<a<b$ are integers with $5\nmid a$ and $b\notin\gen{5,a}$, and $A=\gen{5,a,b}$. Let $a\equiv i$ and $b\equiv ki$. Then $k\ne0$, because $5\N\subseteq\gen{5,a}$, and $k\ne1$, because $b\equiv a$ and $b>a$ would give $b\in a+5\N$. Moreover
+\begin{equation}\label{eq:bbound}
+b<ka,
+\end{equation}
+since $ka\in\gen{5,a}$ is congruent to $b$. For $r\in\{1,2,3,4\}$ we write $w_{ri}(A)$ for the Ap\'ery element of $A$ congruent to $ri$, and likewise $w_{ri}(S)$ for a semigroup $S$ of multiplicity five.
+
+\begin{lemma}\label{lem:aperyA}
+The Ap\'ery set of $A$ is given by the following table.
+\begin{center}
+\begin{tabular}{ccccc}
+\toprule
+$k$ & $w_i(A)$ & $w_{2i}(A)$ & $w_{3i}(A)$ & $w_{4i}(A)$\\
+\midrule
+$2$ & $a$ & $b$ & $a+b$ & $2b$\\
+$3$ & $a$ & $2a$ & $b$ & $a+b$\\
+$4$ & $a$ & $2a$ & $\min(3a,2b)$ & $b$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{lemma}
+
+\begin{proof}
+The listed numbers lie in $A$ and have the indicated residues. We check the hypothesis of Lemma~\ref{lem:apery} with $g_1=a$ and $g_2=b$. Adding $a$ moves the class $ri$ to $(r+1)i$, and adding $b$ moves it to $(r+k)i$; comparisons with $w_0=0$ are trivial. For $k=2$ the remaining inequalities are $2a\ge b$, $2a+b\ge2b$ and $3b\ge a$ (besides identities). For $k=3$ they are $3a\ge b$, $2b\ge a$ and $a+2b\ge2a$. For $k=4$ they are $3a\ge\min(3a,2b)$, $\min(3a,2b)+a\ge b$, $2a+b\ge a$, $\min(3a,2b)+b\ge2a$ and $2b\ge\min(3a,2b)$. All of them follow from $a<b<ka$.
+\end{proof}
+
+\begin{lemma}\label{lem:beta}
+The smallest integer $\beta(A)=\beta(5,a,b)$ with two different representations $5x+ay+bz$, $x,y,z\in\N$, is given by~\eqref{eq:beta}.
+\end{lemma}
+
+\begin{proof}
+Let $\beta_0$ be the right-hand side of~\eqref{eq:beta}. It has two representations: for $k=2$, $2a=5u+b$ with $u=(2a-b)/5$, a positive integer by~\eqref{eq:bbound}; for $k=3$, $3a=5u+b$ with $u=(3a-b)/5>0$ and $2b=5u'+a$ with $u'=(2b-a)/5>0$; for $k=4$, $a+b=5w$ and $4a=5u+b$ with $u=(4a-b)/5>0$. Conversely, let $\Pi$ be the set of pairs $(y,z)$ with $ya+zb<\beta_0$. For $k=2$ we have $\Pi\subseteq\{(0,0),(1,0),(0,1)\}$; for $k=3$, $\Pi\subseteq\{(0,0),(1,0),(2,0),(0,1),(1,1)\}$; for $k=4$, $\Pi\subseteq\{(0,0),(1,0),(2,0),(3,0),(0,1)\}$. In each case the residues $(y+kz)i$ of the pairs in $\Pi$ are pairwise different. If $n<\beta_0$ had representations $5x+ay+bz=5x'+ay'+bz'$, then $(y,z),(y',z')\in\Pi$ have the same residue, so $(y,z)=(y',z')$ and $x=x'$.
+\end{proof}
+
+\begin{remark}\label{rem:betti}
+Two different representations of $\beta(A)$ have disjoint supports, since subtracting a common generator would produce a smaller integer with two representations. Hence $\beta(A)$ is a Betti element of $A$, and it is the smallest one, since every Betti element has at least two representations; see~\cite{RGS} for minimal presentations of numerical semigroups.
+\end{remark}
+
+\begin{proposition}\label{prop:first}
+Let $\gamma=(X,Y,Z)$ with $X=t^5$, $\ord Y=a$ and $\ord Z=b$, and let $R=\C\{X,Y,Z\}$. Then $v(R)\cap[0,\beta(A))\subseteq A$. Consequently, if $v(R)\ne A$, then $\min(v(R)\setminus A)>\beta(A)$.
+\end{proposition}
+
+\begin{proof}
+Let $\varphi\in R$ with $\ord\varphi<\beta(A)$, and write $\varphi=\mu+\rho$ as in Lemma~\ref{lem:truncation} with $L=\beta(A)$. By the definition of $\beta(A)$, the monomials $X^xY^pZ^q$ occurring in $\mu$ have pairwise different weighted degrees $5x+pa+qb$, and each of them has order equal to its weighted degree. Hence $\ord\varphi=\ord\mu$ is the smallest weighted degree of a monomial occurring in $\mu$, an element of $A$. For the second statement, $n=\min(v(R)\setminus A)$ satisfies $n\ge\beta(A)$, and $n\ne\beta(A)$ because $\beta(A)\in A$.
+\end{proof}
+
+\section{Four minimal generators}\label{sec:four}
+
+Let $S=\gen{5,a,b,c}$ with minimal generators $5<a<b<c$, and let $A=\gen{5,a,b}$, $a\equiv i$, $b\equiv ki$ and $c\equiv ji$. By~\eqref{eq:nextgen}, $a=\min(S\setminus5\N)$, $b=\min(S\setminus\gen{5,a})$ and $c=\min(S\setminus A)$, so Section~\ref{sec:three} applies to $a$ and $b$. Since $a$, $b$, $c$ are Ap\'ery elements of $S$ with different residues, $j\notin\{0,1,k\}$; since $c\notin A$,
+\begin{equation}\label{eq:cbound}
+c<w_{ji}(A).
+\end{equation}
+
+\begin{lemma}\label{lem:explicit4}
+The inequality $c>\beta(A)$ holds if and only if one of the conditions \textup{(i)}, \textup{(ii)}, \textup{(iii)} of Theorem~\textup{\ref{thm:main}(a)} holds.
+\end{lemma}
+
+\begin{proof}
+We use Lemmas~\ref{lem:aperyA} and~\ref{lem:beta}. If $k=2$, then $\beta(A)=2a$, which is condition~(i); here $j\in\{3,4\}$ automatically. If $k=3$, then $j\in\{2,4\}$. For $j=2$, \eqref{eq:cbound} gives $c<2a<\min(3a,2b)=\beta(A)$. For $j=4$, it gives $c<a+b<2b$, so $c>\min(3a,2b)$ is equivalent to $c>3a$. If $k=4$, then $j\in\{2,3\}$. For $j=2$, $c<2a<\min(a+b,4a)$. For $j=3$, $c<\min(3a,2b)\le3a<4a$, so $c>\min(a+b,4a)$ is equivalent to $c>a+b$.
+\end{proof}
+
+\begin{proposition}\label{prop:nec4}
+If $h(S)=3$, then $c>\beta(A)$.
+\end{proposition}
+
+\begin{proof}
+Let $\gamma$ be a well-parametrized germ in $\C^3$ with value semigroup $S$. By Lemma~\ref{lem:normal} we may assume $\gamma=(X,Y,Z)$ with $\ord Y=a$ and $\ord Z=b$. Since $S\ne A$ and $c=\min(S\setminus A)$, Proposition~\ref{prop:first} gives $c>\beta(A)$.
+\end{proof}
+
+\begin{proposition}\label{prop:real4}
+Suppose that $c>\beta(A)$, and put $X=t^5$ and $Y=t^a$. Define $\delta$ and $Z$ according to the four cases allowed by Lemma~\textup{\ref{lem:explicit4}}:
+\begin{center}
+\begin{tabular}{lllll}
+\toprule
+case & $k$ & $j$ & $\delta$ & $Z$\\
+\midrule
+\textup{(4A)} & $2$ & $3$ & $c-2a$ & $t^b/(1-t^\delta)$\\
+\textup{(4B)} & $2$ & $4$ & $c-2a$ & $t^b+t^{b+\delta}$\\
+\textup{(4C)} & $3$ & $4$ & $c-3a$ & $t^b+t^{b+\delta}$\\
+\textup{(4D)} & $4$ & $3$ & $c-a-b$ & $t^b+t^{b+\delta}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Then $\delta>0$, and $(X,Y,Z)$ is a well-parametrized germ in $\C^3$ with value semigroup $S$.
+\end{proposition}
+
+\begin{proof}
+In all cases $\delta>0$ is the hypothesis $c>\beta(A)$ in the form of Lemma~\ref{lem:explicit4}, and $Z$ is convergent near $0$ with leading term $t^b$. We verify the hypotheses of Lemma~\ref{lem:sufficient}; the elements $X$, $Y$, $Z$ have orders $5$, $a$, $b$, and an element $W$ of order $c$ is given below. The upper bound for $c$ is~\eqref{eq:cbound} together with Lemma~\ref{lem:aperyA}.
+
+\emph{Case \textup{(4A)}: $k=2$, $j=3$.} Here $b<2a$ and $2a<c<a+b$. The integers $u=(2a-b)/5$ and $v=(a+b-c)/5$ are positive, and
+\[
+W=Y^2-X^uZ=-\frac{t^c}{1-t^\delta},\qquad YZ+X^vW=0.
+\]
+By Lemma~\ref{lem:decompose}, $w_{4i}(S)=\min(w_i+w_{3i},2w_{2i})=\min(a+c,2b)$, so $\Ap(S)=\{0,a,b,c,e'\}$ with $e'=\min(a+c,2b)>c$, and $\cond(S)=e'-4$ by~\eqref{eq:selmer}. Take $L=e'$. Since $e'\le2b<4a$ and $2a+b>2b$, the pairs $(p,q)$ with $pa+qb<L$ are among $(0,0),(1,0),(2,0),(3,0),(0,1),(1,1)$. Using
+\[
+Y^2=X^uZ+W,\qquad YZ=-X^vW,\qquad Y^3=X^uYZ+YW=-X^{u+v}W+YW,
+\]
+and $\ord(YW)=a+c\ge L$, every element of $R$ is congruent modulo $t^L$ to an element of $\Os{1,Y,Z,W}$, whose generators have orders $0,a,b,c$ with residues $0,i,2i,3i$.
+
+\emph{Case \textup{(4B)}: $k=2$, $j=4$.} Here $b<2a$ and $2a<c<2b$. With $u=(2a-b)/5>0$,
+\[
+W=Y^2-X^uZ=-t^c.
+\]
+By Lemma~\ref{lem:decompose}, $w_{3i}(S)=\min(w_i+w_{2i},2w_{4i})=\min(a+b,2c)=a+b$, so $\Ap(S)=\{0,a,b,a+b,c\}$ and $\cond(S)=L-4$ with $L=\max(a+b,c)$. Since $L<2b<4a$ and $2a+b>2b$, the relevant pairs $(p,q)$ are again among $(0,0),(1,0),(2,0),(3,0),(0,1),(1,1)$. Using $Y^2=X^uZ+W$ and $Y^3=X^uYZ+YW$ with $\ord(YW)=a+c>L$, every element of $R$ is congruent modulo $t^L$ to an element of $\Os{1,Y,Z,YZ,W}$, whose generators have orders $0,a,b,a+b,c$ with residues $0,i,2i,3i,4i$.
+
+\emph{Case \textup{(4C)}: $k=3$, $j=4$.} Here $b<3a$ and $3a<c<a+b$; in particular $b>2a$. With $u=(3a-b)/5>0$,
+\[
+W=Y^3-X^uZ=-t^c.
+\]
+By Lemma~\ref{lem:decompose}, $w_{2i}(S)=\min(2w_i,w_{3i}+w_{4i})=\min(2a,b+c)=2a$, so $\Ap(S)=\{0,a,2a,b,c\}$ with largest element $c$, and $\cond(S)=c-4$. Take $L=c$. Since $a+b>c$, $2b>c$ and $4a>a+b$, the relevant pairs are $(0,0),(1,0),(2,0),(3,0),(0,1)$. Using $Y^3=X^uZ+W$ with $\ord W=c=L$, every element of $R$ is congruent modulo $t^L$ to an element of $\Os{1,Y,Y^2,Z}$, whose generators have orders $0,a,2a,b$ with residues $0,i,2i,3i$.
+
+\emph{Case \textup{(4D)}: $k=4$, $j=3$.} Here $a+b<c<\min(3a,2b)$; in particular $b<2a$. With $u=(a+b)/5$,
+\[
+W=YZ-X^u=t^c.
+\]
+By Lemma~\ref{lem:decompose}, $w_{2i}(S)=\min(2w_i,w_{3i}+w_{4i})=\min(2a,b+c)=2a$, so $\Ap(S)=\{0,a,2a,c,b\}$ with largest element $c$, and $\cond(S)=c-4$. Take $L=c$. Since $3a>c$, $2b>c$ and $2a+b>3a$, the relevant pairs are $(0,0),(1,0),(2,0),(0,1),(1,1)$. Using $YZ=X^u+W$ with $\ord W=L$, every element of $R$ is congruent modulo $t^L$ to an element of $\Os{1,Y,Y^2,Z}$, whose generators have orders $0,a,2a,b$ with residues $0,i,2i,4i$.
+
+In each case Lemma~\ref{lem:truncation} and the displayed identities give condition~(ii) of Lemma~\ref{lem:sufficient}, and $X,Y,Z,W\in R$ give condition~(i).
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\textup{\ref{thm:main}(a)}]
+If $h(S)=3$, then $c>\beta(A)$ by Proposition~\ref{prop:nec4}. Conversely, if $c>\beta(A)$, Proposition~\ref{prop:real4} gives $h(S)\le3$, and Corollary~\ref{cor:planar} gives $h(S)\ge3$. The explicit form is Lemma~\ref{lem:explicit4}.
+\end{proof}
+
+\section{Five minimal generators}\label{sec:five}
+
+Let $S=\gen{5,a,b,c,d}$ with minimal generators $5<a<b<c<d$ and $a\equiv i$. Then $e(S)=m(S)$, so $\Ap(S)=\{0,a,b,c,d\}$, and every nonzero Ap\'ery element is a minimal generator. In particular, for nonzero residues $r\ne s$ the element $w_s+w_{r-s}$, which is not a minimal generator, satisfies
+\begin{equation}\label{eq:strict}
+w_r<w_s+w_{r-s},
+\end{equation}
+including the case $s=r-s$, in which~\eqref{eq:strict} reads $w_r<2w_s$.
+
+\begin{proposition}\label{prop:nec5}
+If $h(S)=3$, then $(a,b,c,d)\equiv(i,2i,3i,4i)$, $c>2a$ and $d>a+b$.
+\end{proposition}
+
+\begin{proof}
+Let $\gamma$ be a well-parametrized germ in $\C^3$ with value semigroup $S$; by Lemma~\ref{lem:normal} and~\eqref{eq:nextgen} we may assume $\gamma=(X,Y,Z)$ with $\ord Y=a$ and $\ord Z=b$. Let $R=R_\gamma$.
+
+\emph{Step 1: $c>2a$.} Suppose $c<2a$ and let $L=c+1$. The pairs $(p,q)$ with $pa+qb\le c$ are $(0,0),(1,0),(0,1)$, since $2a$, $a+b$ and $2b$ exceed $c$. By Lemma~\ref{lem:truncation}, every element of $v(R)\cap[0,L)$ is the order of a nonzero element of $\Os{1,Y,Z}$, so by Lemma~\ref{lem:residue}(b) these elements lie in at most three residue classes. But $0,a,b,c\in v(R)\cap[0,L)$ are pairwise incongruent, a contradiction. Equality $c=2a$ is impossible since $c$ is a minimal generator.
+
+\emph{Step 2: $b\equiv2i$ and $b<2a$.} The element $2a$ is congruent to $2i$ and is not a minimal generator, so $w_{2i}<2a$. Since $c$ and $d$ exceed $2a$, and $a\equiv i$, we get $w_{2i}=b$.
+
+\emph{Step 3: $d>a+b$.} Suppose $d<a+b$ and let $L=d+1$. The pairs $(p,q)$ with $pa+qb\le d$ are among $(0,0),(1,0),(2,0),(0,1)$: indeed $a+b>d$, $2b>a+b$, and $3a>a+b$ by Step~2. As in Step~1, the elements of $v(R)\cap[0,L)$ lie in at most four residue classes, whereas $0,a,b,c,d$ lie in five. Equality $d=a+b$ is impossible.
+
+\emph{Step 4: $c\equiv3i$ and $d\equiv4i$.} The element $a+b\equiv3i$ is not a minimal generator, so $w_{3i}<a+b<d$. As $a\equiv i$ and $b\equiv2i$, we get $w_{3i}=c$, and then $d\equiv4i$.
+\end{proof}
+
+\begin{proposition}\label{prop:real5}
+Suppose that $(a,b,c,d)\equiv(i,2i,3i,4i)$, $c>2a$ and $d>a+b$. Put
+\[
+\delta=c-2a,\quad \varepsilon=d-a-b,\quad u=\frac{2a-b}{5},\quad v=\frac{a+b-c}{5},
+\]
+and
+\[
+X=t^5,\qquad Y=t^a,\qquad Z=t^b\,\frac{1+t^{\delta+\varepsilon}}{1-t^\delta}.
+\]
+Then $\delta,\varepsilon,u,v$ are positive integers, and $(X,Y,Z)$ is a well-parametrized germ in $\C^3$ with value semigroup $S$.
+\end{proposition}
+
+\begin{proof}
+By~\eqref{eq:strict} applied to the residues of $b,c,d$, we have
+\begin{equation}\label{eq:mededim}
+b<2a,\qquad c<a+b,\qquad d<2b,\qquad d<a+c.
+\end{equation}
+Hence $u,v>0$; they are integers because $2a-b\equiv0$ and $a+b-c\equiv0$. The positivity of $\delta$ and $\varepsilon$ is the hypothesis. A direct computation gives
+\begin{equation}\label{eq:ident5}
+W=Y^2-X^uZ=-t^c\,\frac{1+t^\varepsilon}{1-t^\delta},\qquad D=YZ+X^vW=-t^d,
+\end{equation}
+where for the second identity we use $5v+c=a+b$ and $a+b+\varepsilon=d$:
+\[
+D=\frac{t^{a+b}\bigl(1+t^{\delta+\varepsilon}\bigr)-t^{a+b}\bigl(1+t^{\varepsilon}\bigr)}{1-t^\delta}=-t^{a+b+\varepsilon}.
+\]
+Thus $X,Y,Z,W,-D\in R=\C\{X,Y,Z\}$ have the orders $5,a,b,c,d$.
+
+The largest Ap\'ery element is $d$, so $\cond(S)=d-4$; take $L=d$. By~\eqref{eq:mededim}, $L<2b<4a$ and $2a+b>2b$, so the pairs $(p,q)$ with $pa+qb<L$ are among $(0,0),(1,0),(2,0),(3,0),(0,1),(1,1)$. Using
+\[
+Y^2=X^uZ+W,\qquad Y^3=X^uYZ+YW,\qquad YZ=D-X^vW,
+\]
+together with $\ord(YW)=a+c>d$ and $\ord D=d$, every element of $R$ is congruent modulo $t^L$ to an element of $\Os{1,Y,Z,W}$, whose generators have orders $0,a,b,c$ with residues $0,i,2i,3i$. Lemmas~\ref{lem:truncation} and~\ref{lem:sufficient} complete the proof.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\textup{\ref{thm:main}(b)}]
+Necessity is Proposition~\ref{prop:nec5}. If the conditions hold, Proposition~\ref{prop:real5} gives $h(S)\le3$, and Corollary~\ref{cor:planar} gives $h(S)\ge3$.
+\end{proof}
+
+\begin{remark}\label{rem:polynomial}
+If $\delta=\varepsilon$, the polynomial germ $(t^5,t^a,t^b+t^{b+\delta})$ also has value semigroup $S$: then $Y^2-X^uZ=-t^c$ and $YZ+X^v(Y^2-X^uZ)=t^{a+b+\delta}=t^d$, and the proof of Proposition~\ref{prop:real5} applies verbatim. For example, $(t^5,t^{11},t^{17}+t^{18})$ has value semigroup $\gen{5,11,17,23,29}$. The rational third coordinate in Proposition~\ref{prop:real5} is used only to adjust $\delta$ and $\varepsilon$ independently.
+\end{remark}
+
+\section{All honest embedding dimensions in multiplicity five}\label{sec:all}
+
+\begin{proof}[Proof of Theorem~\textup{\ref{thm:all}}]
+Since $m(S)=5$, we have $h(S)\ge2$ (Section~\ref{sec:prelim}) and $h(S)\le e(S)\le5$ by~\eqref{eq:basic}. By Corollary~\ref{cor:planar}, $h(S)=2$ exactly when $e(S)=2$; this gives part~(1), and part~(2) follows. If $e(S)=4$, then $h(S)\in\{3,4\}$, and Theorem~\ref{thm:main}(a) gives part~(3).
+
+Let $e(S)=5$, so that $\Ap(S)\setminus\{0\}=\{a,b,c,d\}$. By~\cite[Proposition~1]{Mon}, the Ap\'ery point of $S$ lies in the interior of the Kunz cone, and by~\cite[Theorem~2]{Mon}, $h(S)=5$ if and only if the largest nonzero Ap\'ery element is smaller than twice the smallest one, that is, $d<2a$. If $d>2a$ (equality is impossible, because $d$ is a minimal generator), then $h(S)\in\{3,4\}$, and Theorem~\ref{thm:main}(b) decides between the two values.
+\end{proof}
+
+\begin{example}\label{ex:table}
+Table~\ref{tab:examples} lists examples together with germs of dimension $h(S)$. In the column $(i,k,j)$, the integers $i,k,j$ are defined by $a\equiv i$, $b\equiv ki$ and $c\equiv ji$, where $5<a<b<c$ are the three smallest minimal generators of $S$; this applies to four and to five generators. When $h(S)=e(S)$ the germ is the monomial curve. For four generators and $h(S)=3$ it is the germ of Proposition~\ref{prop:real4}; for $\gen{5,11,17,23,29}$ it is the germ of Remark~\ref{rem:polynomial}, and for $\gen{5,18,26,39,47}$ the germ of~\cite[Example~2.17]{AGM}. For $\gen{5,8,11,14,17}$ we list the germ in $\C^4$ obtained from Montgomery's construction~\cite[Section~5.3]{Mon}, in which $Y^2-XZ=-t^{17}$ for $X=t^5$, $Y=t^8$ and $Z=t^{11}+t^{12}$. The value $h(S)=4$ for $\gen{5,6,7,8}$ holds because $k=2$ and $c=8<12=2a$; for $\gen{5,8,11,14,17}$ the residues are $(i,2i,3i,4i)$ with $i=3$, but $c=14<16=2a\le d$.
+\end{example}
+
+\begin{table}[ht]
+\caption{Examples of numerical semigroups of multiplicity five.}\label{tab:examples}
+\begin{tabular}{lcccl}
+\toprule
+$S$ & $e(S)$ & $(i,k,j)$ & $h(S)$ & germ in $\C^{h(S)}$\\
+\midrule
+$\gen{5,6}$ & $2$ & & $2$ & $(t^5,t^6)$\\
+$\gen{5,6,7}$ & $3$ & & $3$ & $(t^5,t^6,t^7)$\\
+$\gen{5,6,7,8}$ & $4$ & $(1,2,3)$ & $4$ & $(t^5,t^6,t^7,t^8)$\\
+$\gen{5,11,17,23}$ & $4$ & $(1,2,3)$ & $3$ & $(t^5,t^{11},t^{17}/(1-t))$\\
+$\gen{5,8,11,17}$ & $4$ & $(3,2,4)$ & $3$ & $(t^5,t^{8},t^{11}+t^{12})$\\
+$\gen{5,11,28,34}$ & $4$ & $(1,3,4)$ & $3$ & $(t^5,t^{11},t^{28}+t^{29})$\\
+$\gen{5,16,24,43}$ & $4$ & $(1,4,3)$ & $3$ & $(t^5,t^{16},t^{24}+t^{27})$\\
+$\gen{5,6,7,8,9}$ & $5$ & & $5$ & $(t^5,t^6,t^7,t^8,t^9)$\\
+$\gen{5,8,11,14,17}$ & $5$ & $(3,2,3)$ & $4$ & $(t^5,t^8,t^{11}+t^{12},t^{14})$\\
+$\gen{5,11,17,23,29}$ & $5$ & $(1,2,3)$ & $3$ & $(t^5,t^{11},t^{17}+t^{18})$\\
+$\gen{5,18,26,39,47}$ & $5$ & $(3,2,3)$ & $3$ & $(t^5,-t^{18}-t^{21},-t^{26})$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{remark}
+For multiplicity four, Montgomery's Theorem~1 describes the semigroups with $e(S)=4$ and $h(S)=3$ by inequalities between the Ap\'ery elements~\cite{Mon}. In multiplicity five, Theorem~\ref{thm:main} shows that the answer also depends on how the residues of the generators are arranged relative to the residue of $a$: for five generators, honest embedding dimension three requires the arithmetic progression $(i,2i,3i,4i)$ of residues.
+\end{remark}
+
+\section{Finite verification}\label{sec:computation}
+
+The proofs above are complete without computer assistance. As an independent check of the arithmetic of Sections~\ref{sec:three} to~\ref{sec:five}, we ran a program that treats all numerical semigroups of multiplicity five whose four Kunz coordinates $(w_r-r)/5$ lie in $\{1,\dots,24\}$. The program, written in Python using only the standard library, performs the following steps.
+\begin{enumerate}
+\item It enumerates the $24^4=331{,}776$ candidate vectors $(w_1,w_2,w_3,w_4)$ and keeps those satisfying Kunz's inequalities; these are exactly the Ap\'ery sets of the semigroups in question. It reads off the minimal generators as the nonzero Ap\'ery elements that are not the sum of two nonzero Ap\'ery elements, and recomputes the Ap\'ery set from these generators by a shortest path computation.
+\item For each of the $2{,}222$ pairs $(a,b)$ that occur as the two smallest generators of a semigroup with $e(S)\ge3$, it checks the table of Lemma~\ref{lem:aperyA} and the formula~\eqref{eq:beta} for $\beta(5,a,b)$, the latter by enumerating representations $5x+ay+bz$. For every semigroup with $e(S)=4$ it checks that the conditions (i) to (iii) of Theorem~\ref{thm:main}(a) are equivalent to $c>\beta(5,a,b)$.
+\item For every semigroup with $h(S)=3$ according to Theorem~\ref{thm:all}, it takes the monomial curve if $e(S)=3$, and the germ of Proposition~\ref{prop:real4} or~\ref{prop:real5} otherwise, truncated modulo $t^L$ with $L=\max\Ap(S)+1>\cond(S)$. By exact Gaussian elimination over $\mathbb{Q}$ it computes the set of orders of the nonzero linear combinations of all monomials $X^xY^pZ^q$ with $5x+pa+qb<L$, and checks that this set equals $S\cap[0,L)$.
+\end{enumerate}
+By Lemma~\ref{lem:truncation}, the set computed in step~(3) is $v(R)\cap[0,L)$, and since $L$ exceeds the conductor and all minimal generators of $S$, the check in step~(3) proves $v(R)=S$ for each of these germs. Every check succeeds. Table~\ref{tab:counts} summarizes the counts.
+
+\begin{table}[ht]
+\caption{Semigroups of multiplicity five with Kunz coordinates in $\{1,\dots,24\}$.}\label{tab:counts}
+\begin{tabular}{lrrrrr}
+\toprule
+ & $2$ & $3$ & $4$ & $5$ & total\\
+\midrule
+number with $e(S)$ equal to & $21$ & $838$ & $9{,}773$ & $61{,}338$ & $71{,}970$\\
+number with $h(S)$ equal to & $21$ & $3{,}220$ & $21{,}279$ & $47{,}450$ & $71{,}970$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The $3{,}220$ semigroups with $h(S)=3$ split into $838$ with $e(S)=3$; $244$, $826$, $196$ and $208$ in the cases (4A), (4B), (4C) and (4D) of Proposition~\ref{prop:real4}; and $908$ with $e(S)=5$. The second row of Table~\ref{tab:counts} is derived from Theorem~\ref{thm:all} and is not an independent check. The computation verifies the positive constructions and the elementary tables, but it cannot verify the necessity statements, which concern all analytic germs in $\C^3$; these are proved in Propositions~\ref{prop:nec4} and~\ref{prop:nec5}.
+
+\subsection*{Data availability}
+The archive \texttt{verification.zip} accompanies this manuscript. It contains the program \texttt{verify.py}, its output in \texttt{verification-result.json}, and \texttt{README.md}, which describes how to run the program (Python~3.12, standard library only).
+
+\section*{Use of AI-assisted tools}
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{99}
+
+\bibitem{AGM}
+A.~Assi, P.~A. Garc\'{\i}a-S\'anchez, and V.~Micale, \emph{Bases of subalgebras of $\mathbb{K}[[x]]$ and $\mathbb{K}[x]$}, J. Symbolic Comput. \textbf{79} (2017), 4--22; arXiv:1412.4089.
+
+\bibitem{Bre}
+H.~Bresinsky, \emph{Semigroups corresponding to algebroid branches in the plane}, Proc. Amer. Math. Soc. \textbf{32} (1972), 381--384.
+
+\bibitem{Cas}
+J.~Castellanos, \emph{The semigroup of a space curve singularity}, Pacific J. Math. \textbf{221} (2005), no.~2, 227--251.
+
+\bibitem{Ham}
+E.~Hamilton, \emph{Classifying complete $\mathbb{C}$-subalgebras of $\mathbb{C}[[t]]$}, Manuscripta Math. \textbf{163} (2020), 437--462, doi:10.1007/s00229-019-01162-5.
+
+\bibitem{Kun}
+E.~Kunz, \emph{\"Uber die Klassifikation numerischer Halbgruppen}, Regensburger Mathematische Schriften, vol.~11, Universit\"at Regensburg, Regensburg, 1987.
+
+\bibitem{Mon}
+R.~Montgomery, \emph{The honest embedding dimension of a numerical semigroup}, Semigroup Forum \textbf{112} (2026), 924--938, doi:10.1007/s00233-026-10637-3.
+
+\bibitem{RGS}
+J.~C. Rosales and P.~A. Garc\'{\i}a-S\'anchez, \emph{Numerical semigroups}, Developments in Mathematics, vol.~20, Springer, New York, 2009.
+
+\bibitem{Zar}
+O.~Zariski, \emph{Le probl\`eme des modules pour les branches planes}, with an appendix by B.~Teissier, Hermann, Paris, 1986.
+
+\end{thebibliography}
+
+\end{document}

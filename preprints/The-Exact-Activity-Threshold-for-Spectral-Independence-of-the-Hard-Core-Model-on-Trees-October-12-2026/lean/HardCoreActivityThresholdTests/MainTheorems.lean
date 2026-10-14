@@ -1,0 +1,10 @@
+import HardCoreActivityThreshold
+#print axioms HardCoreActivityThreshold.main_a
+#print axioms HardCoreActivityThreshold.main_b
+#print axioms HardCoreActivityThreshold.main_a_spectral
+#print axioms HardCoreActivityThreshold.main_b_spectral
+#print axioms HardCoreActivityThreshold.subcritical_complete_spectral_independence
+#print axioms HardCoreActivityThreshold.heatBathGap_eq_ordinary_support_gap
+#print axioms HardCoreActivityThreshold.hardCore_gap_eq_one_sub_second_eigenvalue
+#print axioms HardCoreActivityThreshold.FiniteReversibleChain.symmetricTransition_charpoly
+#print axioms HardCoreActivityThreshold.FiniteReversibleChain.spectralGap_eq_ordinarySpectralGap

@@ -1,0 +1,58 @@
+{
+  "status": "PASS",
+  "scope": "Exact rational/complex verification of the forest coefficient identity and scalar mass bounds; analytic proof is separate",
+  "cases": [
+    {
+      "m": 4,
+      "edge_count": 6,
+      "beta": [
+        "29043",
+        "54881/9",
+        "33442/81",
+        "5228/243",
+        "800/2187"
+      ],
+      "coefficient_identities": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "patterns": {
+        "all": 210,
+        "overfull": 66,
+        "admissible": 144,
+        "repeated_edges": 153,
+        "unicyclic_components": 109,
+        "zero_mass_patterns": 0
+      },
+      "max_component_mass": "7/9"
+    },
+    {
+      "m": 3,
+      "edge_count": 2,
+      "beta": [
+        "30",
+        "9",
+        "1",
+        "0"
+      ],
+      "coefficient_identities": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "patterns": {
+        "all": 10,
+        "overfull": 1,
+        "admissible": 5,
+        "repeated_edges": 6,
+        "unicyclic_components": 3,
+        "zero_mass_patterns": 4
+      },
+      "max_component_mass": "3/4"
+    }
+  ]
+}

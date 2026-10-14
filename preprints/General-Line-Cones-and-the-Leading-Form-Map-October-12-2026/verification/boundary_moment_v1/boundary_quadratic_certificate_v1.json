@@ -1,0 +1,218 @@
+[
+  {
+    "h": 2,
+    "s": 0,
+    "order": 3,
+    "coefficient": "2/(N*(N - 1))"
+  },
+  {
+    "h": 2,
+    "s": 1,
+    "order": 3,
+    "coefficient": "1/(N - 1)"
+  },
+  {
+    "h": 2,
+    "s": 2,
+    "order": 3,
+    "coefficient": "1"
+  },
+  {
+    "h": 2,
+    "s": 3,
+    "order": 2,
+    "coefficient": "120/(N*(N + 1)*(N + 2)*(N + 3)*(N + 4))"
+  },
+  {
+    "h": 2,
+    "s": 4,
+    "order": 2,
+    "coefficient": "24/(N*(N + 1)*(N + 2)*(N + 3))"
+  },
+  {
+    "h": 2,
+    "s": 5,
+    "order": 2,
+    "coefficient": "6/(N*(N + 1)*(N + 2))"
+  },
+  {
+    "h": 4,
+    "s": 0,
+    "order": 2,
+    "coefficient": "48/(N*(N - 1)*(N + 1)*(N + 2))"
+  },
+  {
+    "h": 4,
+    "s": 1,
+    "order": 2,
+    "coefficient": "12/(N*(N - 1)*(N + 1))"
+  },
+  {
+    "h": 4,
+    "s": 2,
+    "order": 2,
+    "coefficient": "4/(N*(N - 1))"
+  },
+  {
+    "h": 4,
+    "s": 3,
+    "order": 2,
+    "coefficient": "2/(N - 1)"
+  },
+  {
+    "h": 4,
+    "s": 4,
+    "order": 2,
+    "coefficient": "2"
+  },
+  {
+    "h": 4,
+    "s": 5,
+    "order": 1,
+    "coefficient": "240/(N*(N + 1)*(N + 2)*(N + 3)*(N + 4))"
+  },
+  {
+    "h": 6,
+    "s": 0,
+    "order": 2,
+    "coefficient": "-48*(N + 8)/(N*(N - 1)*(N + 1)*(N + 2)*(N + 3))"
+  },
+  {
+    "h": 6,
+    "s": 1,
+    "order": 2,
+    "coefficient": "-12*(N + 6)/(N*(N - 1)*(N + 1)*(N + 2))"
+  },
+  {
+    "h": 6,
+    "s": 2,
+    "order": 2,
+    "coefficient": "-4*(N + 4)/(N*(N - 1)*(N + 1))"
+  },
+  {
+    "h": 6,
+    "s": 3,
+    "order": 2,
+    "coefficient": "-2*(N + 2)/(N*(N - 1))"
+  },
+  {
+    "h": 6,
+    "s": 4,
+    "order": 2,
+    "coefficient": "-2*N/(N - 1)"
+  },
+  {
+    "h": 6,
+    "s": 5,
+    "order": 1,
+    "coefficient": "-240/(N*(N + 1)*(N + 2)*(N + 3)*(N + 4))"
+  },
+  {
+    "h": 8,
+    "s": 0,
+    "order": 1,
+    "coefficient": "-2*(N - 2)/(N*(N - 1))"
+  },
+  {
+    "h": 8,
+    "s": 1,
+    "order": 1,
+    "coefficient": "-2*(N - 2)/(N - 1)"
+  },
+  {
+    "h": 8,
+    "s": 2,
+    "order": 0,
+    "coefficient": "-240/(N*(N + 1)*(N + 2)*(N + 3)*(N + 4))"
+  },
+  {
+    "h": 8,
+    "s": 3,
+    "order": 0,
+    "coefficient": "-48*(N - 1)/(N*(N + 1)*(N + 2)*(N + 3)*(N + 4))"
+  },
+  {
+    "h": 8,
+    "s": 4,
+    "order": 0,
+    "coefficient": "-12*(N - 1)/(N*(N + 1)*(N + 2)*(N + 3))"
+  },
+  {
+    "h": 8,
+    "s": 5,
+    "order": 0,
+    "coefficient": "-4*(N - 1)/(N*(N + 1)*(N + 2))"
+  },
+  {
+    "h": 10,
+    "s": 0,
+    "order": 1,
+    "coefficient": "-6*(N - 2)/(N*(N - 1)*(N + 1)*(N + 2))"
+  },
+  {
+    "h": 10,
+    "s": 1,
+    "order": 1,
+    "coefficient": "-2*(N - 2)/(N*(N - 1)*(N + 1))"
+  },
+  {
+    "h": 10,
+    "s": 2,
+    "order": 1,
+    "coefficient": "-(N - 2)/(N*(N - 1))"
+  },
+  {
+    "h": 10,
+    "s": 3,
+    "order": 1,
+    "coefficient": "-(N - 2)/(N - 1)"
+  },
+  {
+    "h": 10,
+    "s": 4,
+    "order": 0,
+    "coefficient": "-120/(N*(N + 1)*(N + 2)*(N + 3)*(N + 4))"
+  },
+  {
+    "h": 10,
+    "s": 5,
+    "order": 0,
+    "coefficient": "-24*(N - 1)/(N*(N + 1)*(N + 2)*(N + 3)*(N + 4))"
+  },
+  {
+    "h": 14,
+    "s": 0,
+    "order": 3,
+    "coefficient": "-2*(3*N - 8)/((N - 2)*(N - 1))"
+  },
+  {
+    "h": 14,
+    "s": 1,
+    "order": 3,
+    "coefficient": "-(6*N - 17)/(N - 2)"
+  },
+  {
+    "h": 14,
+    "s": 2,
+    "order": 2,
+    "coefficient": "-720/(N*(N - 1)*(N + 1)*(N + 2)*(N + 3))"
+  },
+  {
+    "h": 14,
+    "s": 3,
+    "order": 2,
+    "coefficient": "-24*(6*N - 7)/(N*(N - 1)*(N + 1)*(N + 2)*(N + 3))"
+  },
+  {
+    "h": 14,
+    "s": 4,
+    "order": 2,
+    "coefficient": "-12*(3*N - 4)/(N*(N - 1)*(N + 1)*(N + 2))"
+  },
+  {
+    "h": 14,
+    "s": 5,
+    "order": 2,
+    "coefficient": "-6*(2*N - 3)/(N*(N - 1)*(N + 1))"
+  }
+]

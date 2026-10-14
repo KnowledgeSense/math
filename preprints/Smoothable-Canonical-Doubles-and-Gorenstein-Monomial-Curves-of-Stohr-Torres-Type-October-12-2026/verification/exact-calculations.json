@@ -1,0 +1,69 @@
+{
+  "sympy_version": "1.14.0",
+  "base_apery": [
+    0,
+    73,
+    18,
+    51,
+    12,
+    69,
+    22,
+    55
+  ],
+  "canonical_apery": [
+    0,
+    73,
+    18,
+    51,
+    4,
+    61,
+    22,
+    55
+  ],
+  "canonical_minimal_generators": [
+    0,
+    4,
+    61
+  ],
+  "multiplier_apery": [
+    8,
+    73,
+    18,
+    51,
+    12,
+    69,
+    22,
+    55
+  ],
+  "base_frobenius": 65,
+  "base_genus": 34,
+  "genera_tested": 4196,
+  "dual_pairing_64": "identity",
+  "denominator_checks_8": true,
+  "subring_products_36": true,
+  "multiplication_lifts_36": true,
+  "global_generic_plane_basis": [
+    "1"
+  ],
+  "global_generic_branch_basis": [
+    "1"
+  ],
+  "extended_apery": [
+    0,
+    69,
+    18,
+    51
+  ],
+  "g208_Q": "r^3 lambda^48 p q",
+  "g208_semigroup": [
+    16,
+    24,
+    36,
+    44,
+    102,
+    110,
+    285,
+    293,
+    407
+  ]
+}

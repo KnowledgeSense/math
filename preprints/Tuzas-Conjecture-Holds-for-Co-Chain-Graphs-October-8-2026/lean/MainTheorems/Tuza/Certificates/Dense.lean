@@ -1,0 +1,1364 @@
+import MainTheorems.Tuza.Certificates.Basic
+import MainTheorems.Tuza.FiniteCertificates
+
+set_option maxRecDepth 4096
+set_option maxHeartbeats 1000000
+
+namespace ResearchMain.Tuza.Certificates
+
+def canonical_dense_5_9_3_5_0_profile : FerrersProfile 5 9 where
+  degree := ![5, 5, 5, 0, 0]
+  bound := by decide
+  antitone := by decide
+
+def canonical_dense_5_9_3_5_0_triples : List (Fin (5 + 9) × Fin (5 + 9) × Fin (5 + 9)) :=
+  [
+    (0, 1, 7),
+    (0, 2, 3),
+    (0, 5, 8),
+    (0, 6, 9),
+    (1, 2, 8),
+    (1, 3, 4),
+    (1, 5, 9),
+    (2, 5, 6),
+    (2, 7, 9),
+    (5, 7, 10),
+    (5, 12, 13),
+    (6, 7, 11),
+    (6, 8, 13),
+    (6, 10, 12),
+    (7, 8, 12),
+    (8, 10, 11),
+    (9, 10, 13),
+    (9, 11, 12)]
+
+def canonical_dense_5_9_3_5_0_triangles : Finset (Finset (Fin 5 ⊕ Fin 9)) :=
+  labeledPacking 5 9 canonical_dense_5_9_3_5_0_triples
+
+theorem canonical_dense_5_9_3_5_0_verified : Packing canonical_dense_5_9_3_5_0_profile.graph canonical_dense_5_9_3_5_0_triangles ∧
+    canonical_dense_5_9_3_5_0_triangles.card = 18 := by
+  have h := labeledPacking_correct canonical_dense_5_9_3_5_0_profile canonical_dense_5_9_3_5_0_triples (by decide) (by decide +kernel)
+  exact ⟨h.1, h.2⟩
+
+def canonical_dense_5_9_3_6_0_profile : FerrersProfile 5 9 where
+  degree := ![6, 6, 6, 0, 0]
+  bound := by decide
+  antitone := by decide
+
+def canonical_dense_5_9_3_6_0_triples : List (Fin (5 + 9) × Fin (5 + 9) × Fin (5 + 9)) :=
+  [
+    (0, 1, 4),
+    (0, 2, 6),
+    (0, 5, 8),
+    (0, 7, 9),
+    (1, 2, 7),
+    (1, 5, 9),
+    (2, 3, 4),
+    (2, 5, 10),
+    (2, 8, 9),
+    (5, 6, 12),
+    (5, 11, 13),
+    (6, 7, 8),
+    (6, 9, 13),
+    (6, 10, 11),
+    (7, 10, 13),
+    (7, 11, 12),
+    (8, 12, 13),
+    (9, 10, 12)]
+
+def canonical_dense_5_9_3_6_0_triangles : Finset (Finset (Fin 5 ⊕ Fin 9)) :=
+  labeledPacking 5 9 canonical_dense_5_9_3_6_0_triples
+
+theorem canonical_dense_5_9_3_6_0_verified : Packing canonical_dense_5_9_3_6_0_profile.graph canonical_dense_5_9_3_6_0_triangles ∧
+    canonical_dense_5_9_3_6_0_triangles.card = 18 := by
+  have h := labeledPacking_correct canonical_dense_5_9_3_6_0_profile canonical_dense_5_9_3_6_0_triples (by decide) (by decide +kernel)
+  exact ⟨h.1, h.2⟩
+
+def canonical_dense_5_9_3_7_0_profile : FerrersProfile 5 9 where
+  degree := ![7, 7, 7, 0, 0]
+  bound := by decide
+  antitone := by decide
+
+def canonical_dense_5_9_3_7_0_triples : List (Fin (5 + 9) × Fin (5 + 9) × Fin (5 + 9)) :=
+  [
+    (0, 1, 3),
+    (0, 2, 4),
+    (0, 8, 11),
+    (0, 9, 10),
+    (1, 2, 5),
+    (1, 6, 9),
+    (1, 7, 11),
+    (1, 8, 10),
+    (2, 6, 7),
+    (2, 8, 9),
+    (5, 6, 13),
+    (5, 7, 8),
+    (5, 9, 11),
+    (5, 10, 12),
+    (6, 10, 11),
+    (7, 9, 12),
+    (7, 10, 13),
+    (8, 12, 13)]
+
+def canonical_dense_5_9_3_7_0_triangles : Finset (Finset (Fin 5 ⊕ Fin 9)) :=
+  labeledPacking 5 9 canonical_dense_5_9_3_7_0_triples
+
+theorem canonical_dense_5_9_3_7_0_verified : Packing canonical_dense_5_9_3_7_0_profile.graph canonical_dense_5_9_3_7_0_triangles ∧
+    canonical_dense_5_9_3_7_0_triangles.card = 18 := by
+  have h := labeledPacking_correct canonical_dense_5_9_3_7_0_profile canonical_dense_5_9_3_7_0_triples (by decide) (by decide +kernel)
+  exact ⟨h.1, h.2⟩
+
+def canonical_dense_5_9_4_7_2_7_profile : FerrersProfile 5 9 where
+  degree := ![7, 7, 7, 7, 0]
+  bound := by decide
+  antitone := by decide
+
+def canonical_dense_5_9_4_7_2_7_triples : List (Fin (5 + 9) × Fin (5 + 9) × Fin (5 + 9)) :=
+  [
+    (0, 1, 11),
+    (0, 2, 4),
+    (0, 3, 8),
+    (0, 5, 7),
+    (1, 2, 5),
+    (1, 3, 6),
+    (1, 7, 8),
+    (2, 3, 7),
+    (2, 6, 10),
+    (2, 8, 9),
+    (3, 5, 9),
+    (3, 10, 11),
+    (5, 8, 11),
+    (5, 10, 12),
+    (6, 7, 11),
+    (6, 8, 12),
+    (6, 9, 13),
+    (7, 10, 13),
+    (9, 11, 12)]
+
+def canonical_dense_5_9_4_7_2_7_triangles : Finset (Finset (Fin 5 ⊕ Fin 9)) :=
+  labeledPacking 5 9 canonical_dense_5_9_4_7_2_7_triples
+
+theorem canonical_dense_5_9_4_7_2_7_verified : Packing canonical_dense_5_9_4_7_2_7_profile.graph canonical_dense_5_9_4_7_2_7_triangles ∧
+    canonical_dense_5_9_4_7_2_7_triangles.card = 19 := by
+  have h := labeledPacking_correct canonical_dense_5_9_4_7_2_7_profile canonical_dense_5_9_4_7_2_7_triples (by decide) (by decide +kernel)
+  exact ⟨h.1, h.2⟩
+
+def canonical_dense_6_7_3_4_0_profile : FerrersProfile 6 7 where
+  degree := ![4, 4, 4, 0, 0, 0]
+  bound := by decide
+  antitone := by decide
+
+def canonical_dense_6_7_3_4_0_triples : List (Fin (6 + 7) × Fin (6 + 7) × Fin (6 + 7)) :=
+  [
+    (0, 1, 8),
+    (0, 2, 7),
+    (0, 4, 5),
+    (0, 6, 9),
+    (1, 2, 9),
+    (1, 3, 4),
+    (2, 3, 5),
+    (2, 6, 8),
+    (6, 7, 12),
+    (6, 10, 11),
+    (7, 8, 11),
+    (7, 9, 10),
+    (8, 10, 12),
+    (9, 11, 12)]
+
+def canonical_dense_6_7_3_4_0_triangles : Finset (Finset (Fin 6 ⊕ Fin 7)) :=
+  labeledPacking 6 7 canonical_dense_6_7_3_4_0_triples
+
+theorem canonical_dense_6_7_3_4_0_verified : Packing canonical_dense_6_7_3_4_0_profile.graph canonical_dense_6_7_3_4_0_triangles ∧
+    canonical_dense_6_7_3_4_0_triangles.card = 14 := by
+  have h := labeledPacking_correct canonical_dense_6_7_3_4_0_profile canonical_dense_6_7_3_4_0_triples (by decide) (by decide +kernel)
+  exact ⟨h.1, h.2⟩
+
+def canonical_dense_6_7_3_5_0_profile : FerrersProfile 6 7 where
+  degree := ![5, 5, 5, 0, 0, 0]
+  bound := by decide
+  antitone := by decide
+
+def canonical_dense_6_7_3_5_0_triples : List (Fin (6 + 7) × Fin (6 + 7) × Fin (6 + 7)) :=
+  [
+    (0, 1, 2),
+    (0, 4, 5),
+    (0, 6, 10),
+    (0, 7, 9),
+    (1, 3, 4),
+    (1, 6, 9),
+    (1, 8, 10),
+    (2, 3, 5),
+    (2, 6, 8),
+    (2, 7, 10),
+    (6, 11, 12),
+    (7, 8, 11),
+    (8, 9, 12),
+    (9, 10, 11)]
+
+def canonical_dense_6_7_3_5_0_triangles : Finset (Finset (Fin 6 ⊕ Fin 7)) :=
+  labeledPacking 6 7 canonical_dense_6_7_3_5_0_triples
+
+theorem canonical_dense_6_7_3_5_0_verified : Packing canonical_dense_6_7_3_5_0_profile.graph canonical_dense_6_7_3_5_0_triangles ∧
+    canonical_dense_6_7_3_5_0_triangles.card = 14 := by
+  have h := labeledPacking_correct canonical_dense_6_7_3_5_0_profile canonical_dense_6_7_3_5_0_triples (by decide) (by decide +kernel)
+  exact ⟨h.1, h.2⟩
+
+def canonical_dense_6_9_3_5_0_profile : FerrersProfile 6 9 where
+  degree := ![5, 5, 5, 0, 0, 0]
+  bound := by decide
+  antitone := by decide
+
+def canonical_dense_6_9_3_5_0_triples : List (Fin (6 + 9) × Fin (6 + 9) × Fin (6 + 9)) :=
+  [
+    (0, 1, 8),
+    (0, 2, 7),
+    (0, 3, 4),
+    (0, 6, 9),
+    (1, 2, 9),
+    (1, 3, 5),
+    (1, 6, 7),
+    (2, 4, 5),
+    (2, 8, 10),
+    (6, 8, 11),
+    (6, 10, 14),
+    (6, 12, 13),
+    (7, 9, 14),
+    (7, 10, 13),
+    (7, 11, 12),
+    (8, 9, 13),
+    (8, 12, 14),
+    (9, 10, 12),
+    (11, 13, 14)]
+
+def canonical_dense_6_9_3_5_0_triangles : Finset (Finset (Fin 6 ⊕ Fin 9)) :=
+  labeledPacking 6 9 canonical_dense_6_9_3_5_0_triples
+
+theorem canonical_dense_6_9_3_5_0_verified : Packing canonical_dense_6_9_3_5_0_profile.graph canonical_dense_6_9_3_5_0_triangles ∧
+    canonical_dense_6_9_3_5_0_triangles.card = 19 := by
+  have h := labeledPacking_correct canonical_dense_6_9_3_5_0_profile canonical_dense_6_9_3_5_0_triples (by decide) (by decide +kernel)
+  exact ⟨h.1, h.2⟩
+
+def canonical_dense_6_9_3_6_0_profile : FerrersProfile 6 9 where
+  degree := ![6, 6, 6, 0, 0, 0]
+  bound := by decide
+  antitone := by decide
+
+def canonical_dense_6_9_3_6_0_triples : List (Fin (6 + 9) × Fin (6 + 9) × Fin (6 + 9)) :=
+  [
+    (0, 1, 3),
+    (0, 2, 5),
+    (0, 7, 10),
+    (0, 8, 11),
+    (1, 2, 9),
+    (1, 4, 5),
+    (1, 6, 10),
+    (1, 7, 8),
+    (2, 3, 4),
+    (2, 6, 8),
+    (2, 10, 11),
+    (6, 7, 12),
+    (6, 11, 14),
+    (7, 9, 14),
+    (7, 11, 13),
+    (8, 9, 12),
+    (8, 10, 14),
+    (9, 10, 13),
+    (12, 13, 14)]
+
+def canonical_dense_6_9_3_6_0_triangles : Finset (Finset (Fin 6 ⊕ Fin 9)) :=
+  labeledPacking 6 9 canonical_dense_6_9_3_6_0_triples
+
+theorem canonical_dense_6_9_3_6_0_verified : Packing canonical_dense_6_9_3_6_0_profile.graph canonical_dense_6_9_3_6_0_triangles ∧
+    canonical_dense_6_9_3_6_0_triangles.card = 19 := by
+  have h := labeledPacking_correct canonical_dense_6_9_3_6_0_profile canonical_dense_6_9_3_6_0_triples (by decide) (by decide +kernel)
+  exact ⟨h.1, h.2⟩
+
+def canonical_dense_6_9_3_7_0_profile : FerrersProfile 6 9 where
+  degree := ![7, 7, 7, 0, 0, 0]
+  bound := by decide
+  antitone := by decide
+
+def canonical_dense_6_9_3_7_0_triples : List (Fin (6 + 9) × Fin (6 + 9) × Fin (6 + 9)) :=
+  [
+    (0, 1, 6),
+    (0, 2, 9),
+    (0, 4, 5),
+    (0, 8, 11),
+    (0, 10, 12),
+    (1, 2, 12),
+    (1, 3, 4),
+    (1, 8, 10),
+    (2, 3, 5),
+    (2, 7, 10),
+    (6, 7, 13),
+    (6, 8, 14),
+    (6, 9, 11),
+    (7, 9, 14),
+    (7, 11, 12),
+    (8, 9, 12),
+    (9, 10, 13),
+    (10, 11, 14),
+    (12, 13, 14)]
+
+def canonical_dense_6_9_3_7_0_triangles : Finset (Finset (Fin 6 ⊕ Fin 9)) :=
+  labeledPacking 6 9 canonical_dense_6_9_3_7_0_triples
+
+theorem canonical_dense_6_9_3_7_0_verified : Packing canonical_dense_6_9_3_7_0_profile.graph canonical_dense_6_9_3_7_0_triangles ∧
+    canonical_dense_6_9_3_7_0_triangles.card = 19 := by
+  have h := labeledPacking_correct canonical_dense_6_9_3_7_0_profile canonical_dense_6_9_3_7_0_triples (by decide) (by decide +kernel)
+  exact ⟨h.1, h.2⟩
+
+def canonical_dense_6_9_4_7_2_7_profile : FerrersProfile 6 9 where
+  degree := ![7, 7, 7, 7, 0, 0]
+  bound := by decide
+  antitone := by decide
+
+def canonical_dense_6_9_4_7_2_7_triples : List (Fin (6 + 9) × Fin (6 + 9) × Fin (6 + 9)) :=
+  [
+    (0, 2, 6),
+    (0, 3, 4),
+    (0, 7, 10),
+    (0, 8, 9),
+    (1, 2, 9),
+    (1, 3, 5),
+    (1, 6, 11),
+    (1, 7, 12),
+    (2, 3, 10),
+    (2, 4, 5),
+    (2, 7, 8),
+    (2, 11, 12),
+    (3, 6, 7),
+    (3, 8, 12),
+    (3, 9, 11),
+    (6, 12, 13),
+    (7, 9, 14),
+    (8, 10, 13),
+    (9, 10, 12),
+    (10, 11, 14)]
+
+def canonical_dense_6_9_4_7_2_7_triangles : Finset (Finset (Fin 6 ⊕ Fin 9)) :=
+  labeledPacking 6 9 canonical_dense_6_9_4_7_2_7_triples
+
+theorem canonical_dense_6_9_4_7_2_7_verified : Packing canonical_dense_6_9_4_7_2_7_profile.graph canonical_dense_6_9_4_7_2_7_triangles ∧
+    canonical_dense_6_9_4_7_2_7_triangles.card = 20 := by
+  have h := labeledPacking_correct canonical_dense_6_9_4_7_2_7_profile canonical_dense_6_9_4_7_2_7_triples (by decide) (by decide +kernel)
+  exact ⟨h.1, h.2⟩
+
+def canonical_dense_7_7_4_4_0_profile : FerrersProfile 7 7 where
+  degree := ![4, 4, 4, 4, 0, 0, 0]
+  bound := by decide
+  antitone := by decide
+
+def canonical_dense_7_7_4_4_0_triples : List (Fin (7 + 7) × Fin (7 + 7) × Fin (7 + 7)) :=
+  [
+    (0, 1, 7),
+    (0, 2, 6),
+    (0, 3, 10),
+    (0, 4, 5),
+    (1, 2, 4),
+    (1, 3, 8),
+    (1, 5, 6),
+    (1, 9, 10),
+    (2, 3, 5),
+    (2, 7, 10),
+    (3, 4, 6),
+    (3, 7, 9),
+    (7, 8, 13),
+    (7, 11, 12),
+    (8, 10, 11),
+    (9, 11, 13),
+    (10, 12, 13)]
+
+def canonical_dense_7_7_4_4_0_triangles : Finset (Finset (Fin 7 ⊕ Fin 7)) :=
+  labeledPacking 7 7 canonical_dense_7_7_4_4_0_triples
+
+theorem canonical_dense_7_7_4_4_0_verified : Packing canonical_dense_7_7_4_4_0_profile.graph canonical_dense_7_7_4_4_0_triangles ∧
+    canonical_dense_7_7_4_4_0_triangles.card = 17 := by
+  have h := labeledPacking_correct canonical_dense_7_7_4_4_0_profile canonical_dense_7_7_4_4_0_triples (by decide) (by decide +kernel)
+  exact ⟨h.1, h.2⟩
+
+def canonical_dense_7_7_4_5_0_profile : FerrersProfile 7 7 where
+  degree := ![5, 5, 5, 5, 0, 0, 0]
+  bound := by decide
+  antitone := by decide
+
+def canonical_dense_7_7_4_5_0_triples : List (Fin (7 + 7) × Fin (7 + 7) × Fin (7 + 7)) :=
+  [
+    (0, 1, 9),
+    (0, 2, 5),
+    (0, 3, 8),
+    (0, 4, 6),
+    (0, 7, 11),
+    (1, 3, 4),
+    (1, 5, 6),
+    (1, 8, 10),
+    (2, 3, 6),
+    (2, 7, 8),
+    (2, 9, 11),
+    (3, 7, 9),
+    (3, 10, 11),
+    (7, 10, 12),
+    (8, 9, 12),
+    (9, 10, 13),
+    (11, 12, 13)]
+
+def canonical_dense_7_7_4_5_0_triangles : Finset (Finset (Fin 7 ⊕ Fin 7)) :=
+  labeledPacking 7 7 canonical_dense_7_7_4_5_0_triples
+
+theorem canonical_dense_7_7_4_5_0_verified : Packing canonical_dense_7_7_4_5_0_profile.graph canonical_dense_7_7_4_5_0_triangles ∧
+    canonical_dense_7_7_4_5_0_triangles.card = 17 := by
+  have h := labeledPacking_correct canonical_dense_7_7_4_5_0_profile canonical_dense_7_7_4_5_0_triples (by decide) (by decide +kernel)
+  exact ⟨h.1, h.2⟩
+
+def canonical_dense_7_7_5_4_0_4_profile : FerrersProfile 7 7 where
+  degree := ![4, 4, 4, 4, 4, 0, 0]
+  bound := by decide
+  antitone := by decide
+
+def canonical_dense_7_7_5_4_0_4_triples : List (Fin (7 + 7) × Fin (7 + 7) × Fin (7 + 7)) :=
+  [
+    (0, 1, 10),
+    (0, 2, 6),
+    (0, 3, 5),
+    (0, 4, 7),
+    (1, 2, 5),
+    (1, 3, 7),
+    (1, 4, 8),
+    (2, 4, 10),
+    (2, 7, 9),
+    (3, 4, 9),
+    (3, 8, 10),
+    (4, 5, 6),
+    (7, 8, 11),
+    (7, 10, 12),
+    (8, 9, 12),
+    (9, 10, 13),
+    (11, 12, 13)]
+
+def canonical_dense_7_7_5_4_0_4_triangles : Finset (Finset (Fin 7 ⊕ Fin 7)) :=
+  labeledPacking 7 7 canonical_dense_7_7_5_4_0_4_triples
+
+theorem canonical_dense_7_7_5_4_0_4_verified : Packing canonical_dense_7_7_5_4_0_4_profile.graph canonical_dense_7_7_5_4_0_4_triangles ∧
+    canonical_dense_7_7_5_4_0_4_triangles.card = 17 := by
+  have h := labeledPacking_correct canonical_dense_7_7_5_4_0_4_profile canonical_dense_7_7_5_4_0_4_triples (by decide) (by decide +kernel)
+  exact ⟨h.1, h.2⟩
+
+def canonical_dense_7_7_5_5_0_4_profile : FerrersProfile 7 7 where
+  degree := ![5, 5, 5, 5, 4, 0, 0]
+  bound := by decide
+  antitone := by decide
+
+def canonical_dense_7_7_5_5_0_4_triples : List (Fin (7 + 7) × Fin (7 + 7) × Fin (7 + 7)) :=
+  [
+    (0, 1, 10),
+    (0, 2, 5),
+    (0, 3, 6),
+    (0, 8, 11),
+    (1, 2, 9),
+    (1, 3, 7),
+    (1, 5, 6),
+    (2, 4, 7),
+    (2, 8, 10),
+    (3, 4, 10),
+    (3, 9, 11),
+    (4, 8, 9),
+    (7, 9, 12),
+    (7, 11, 13),
+    (8, 12, 13),
+    (9, 10, 13),
+    (10, 11, 12)]
+
+def canonical_dense_7_7_5_5_0_4_triangles : Finset (Finset (Fin 7 ⊕ Fin 7)) :=
+  labeledPacking 7 7 canonical_dense_7_7_5_5_0_4_triples
+
+theorem canonical_dense_7_7_5_5_0_4_verified : Packing canonical_dense_7_7_5_5_0_4_profile.graph canonical_dense_7_7_5_5_0_4_triangles ∧
+    canonical_dense_7_7_5_5_0_4_triangles.card = 17 := by
+  have h := labeledPacking_correct canonical_dense_7_7_5_5_0_4_profile canonical_dense_7_7_5_5_0_4_triples (by decide) (by decide +kernel)
+  exact ⟨h.1, h.2⟩
+
+def canonical_dense_7_7_5_5_1_5_profile : FerrersProfile 7 7 where
+  degree := ![5, 5, 5, 5, 5, 0, 0]
+  bound := by decide
+  antitone := by decide
+
+def canonical_dense_7_7_5_5_1_5_triples : List (Fin (7 + 7) × Fin (7 + 7) × Fin (7 + 7)) :=
+  [
+    (0, 1, 9),
+    (0, 2, 5),
+    (0, 3, 8),
+    (0, 7, 11),
+    (1, 3, 5),
+    (1, 4, 8),
+    (1, 10, 11),
+    (2, 3, 6),
+    (2, 4, 10),
+    (2, 7, 8),
+    (2, 9, 11),
+    (3, 4, 11),
+    (3, 9, 10),
+    (4, 5, 6),
+    (4, 7, 9),
+    (7, 12, 13),
+    (8, 9, 12),
+    (8, 11, 13)]
+
+def canonical_dense_7_7_5_5_1_5_triangles : Finset (Finset (Fin 7 ⊕ Fin 7)) :=
+  labeledPacking 7 7 canonical_dense_7_7_5_5_1_5_triples
+
+theorem canonical_dense_7_7_5_5_1_5_verified : Packing canonical_dense_7_7_5_5_1_5_profile.graph canonical_dense_7_7_5_5_1_5_triangles ∧
+    canonical_dense_7_7_5_5_1_5_triangles.card = 18 := by
+  have h := labeledPacking_correct canonical_dense_7_7_5_5_1_5_profile canonical_dense_7_7_5_5_1_5_triples (by decide) (by decide +kernel)
+  exact ⟨h.1, h.2⟩
+
+def canonical_dense_7_9_4_5_0_profile : FerrersProfile 7 9 where
+  degree := ![5, 5, 5, 5, 0, 0, 0]
+  bound := by decide
+  antitone := by decide
+
+def canonical_dense_7_9_4_5_0_triples : List (Fin (7 + 9) × Fin (7 + 9) × Fin (7 + 9)) :=
+  [
+    (0, 1, 8),
+    (0, 2, 11),
+    (0, 3, 7),
+    (0, 4, 5),
+    (0, 9, 10),
+    (1, 2, 9),
+    (1, 3, 4),
+    (1, 5, 6),
+    (1, 7, 10),
+    (2, 3, 5),
+    (2, 4, 6),
+    (2, 7, 8),
+    (3, 8, 9),
+    (3, 10, 11),
+    (7, 9, 14),
+    (7, 11, 13),
+    (7, 12, 15),
+    (8, 10, 15),
+    (8, 11, 14),
+    (8, 12, 13),
+    (9, 11, 15),
+    (10, 12, 14),
+    (13, 14, 15)]
+
+def canonical_dense_7_9_4_5_0_triangles : Finset (Finset (Fin 7 ⊕ Fin 9)) :=
+  labeledPacking 7 9 canonical_dense_7_9_4_5_0_triples
+
+theorem canonical_dense_7_9_4_5_0_verified : Packing canonical_dense_7_9_4_5_0_profile.graph canonical_dense_7_9_4_5_0_triangles ∧
+    canonical_dense_7_9_4_5_0_triangles.card = 23 := by
+  have h := labeledPacking_correct canonical_dense_7_9_4_5_0_profile canonical_dense_7_9_4_5_0_triples (by decide) (by decide +kernel)
+  exact ⟨h.1, h.2⟩
+
+def canonical_dense_7_9_4_6_0_profile : FerrersProfile 7 9 where
+  degree := ![6, 6, 6, 6, 0, 0, 0]
+  bound := by decide
+  antitone := by decide
+
+def canonical_dense_7_9_4_6_0_triples : List (Fin (7 + 9) × Fin (7 + 9) × Fin (7 + 9)) :=
+  [
+    (0, 1, 7),
+    (0, 2, 4),
+    (0, 3, 5),
+    (0, 8, 11),
+    (0, 9, 12),
+    (1, 3, 11),
+    (1, 4, 5),
+    (1, 8, 9),
+    (1, 10, 12),
+    (2, 3, 12),
+    (2, 8, 10),
+    (2, 9, 11),
+    (3, 4, 6),
+    (3, 7, 8),
+    (3, 9, 10),
+    (7, 9, 13),
+    (7, 10, 11),
+    (7, 12, 15),
+    (8, 12, 13),
+    (9, 14, 15),
+    (10, 13, 14),
+    (11, 12, 14),
+    (11, 13, 15)]
+
+def canonical_dense_7_9_4_6_0_triangles : Finset (Finset (Fin 7 ⊕ Fin 9)) :=
+  labeledPacking 7 9 canonical_dense_7_9_4_6_0_triples
+
+theorem canonical_dense_7_9_4_6_0_verified : Packing canonical_dense_7_9_4_6_0_profile.graph canonical_dense_7_9_4_6_0_triangles ∧
+    canonical_dense_7_9_4_6_0_triangles.card = 23 := by
+  have h := labeledPacking_correct canonical_dense_7_9_4_6_0_profile canonical_dense_7_9_4_6_0_triples (by decide) (by decide +kernel)
+  exact ⟨h.1, h.2⟩
+
+def canonical_dense_7_9_4_7_0_profile : FerrersProfile 7 9 where
+  degree := ![7, 7, 7, 7, 0, 0, 0]
+  bound := by decide
+  antitone := by decide
+
+def canonical_dense_7_9_4_7_0_triples : List (Fin (7 + 9) × Fin (7 + 9) × Fin (7 + 9)) :=
+  [
+    (0, 1, 6),
+    (0, 2, 4),
+    (0, 3, 13),
+    (0, 7, 12),
+    (0, 8, 10),
+    (0, 9, 11),
+    (1, 2, 9),
+    (1, 3, 11),
+    (1, 7, 13),
+    (1, 8, 12),
+    (2, 3, 8),
+    (2, 5, 6),
+    (2, 7, 10),
+    (2, 11, 12),
+    (3, 10, 12),
+    (7, 8, 11),
+    (7, 9, 14),
+    (8, 9, 15),
+    (8, 13, 14),
+    (9, 12, 13),
+    (10, 11, 14),
+    (10, 13, 15),
+    (12, 14, 15)]
+
+def canonical_dense_7_9_4_7_0_triangles : Finset (Finset (Fin 7 ⊕ Fin 9)) :=
+  labeledPacking 7 9 canonical_dense_7_9_4_7_0_triples
+
+theorem canonical_dense_7_9_4_7_0_verified : Packing canonical_dense_7_9_4_7_0_profile.graph canonical_dense_7_9_4_7_0_triangles ∧
+    canonical_dense_7_9_4_7_0_triangles.card = 23 := by
+  have h := labeledPacking_correct canonical_dense_7_9_4_7_0_profile canonical_dense_7_9_4_7_0_triples (by decide) (by decide +kernel)
+  exact ⟨h.1, h.2⟩
+
+def canonical_dense_7_9_5_7_2_7_profile : FerrersProfile 7 9 where
+  degree := ![7, 7, 7, 7, 7, 0, 0]
+  bound := by decide
+  antitone := by decide
+
+def canonical_dense_7_9_5_7_2_7_triples : List (Fin (7 + 9) × Fin (7 + 9) × Fin (7 + 9)) :=
+  [
+    (0, 1, 12),
+    (0, 2, 6),
+    (0, 3, 9),
+    (0, 4, 8),
+    (0, 10, 11),
+    (1, 2, 8),
+    (1, 3, 6),
+    (1, 4, 10),
+    (1, 7, 9),
+    (1, 11, 13),
+    (2, 3, 7),
+    (2, 4, 5),
+    (2, 9, 13),
+    (2, 10, 12),
+    (3, 8, 11),
+    (3, 10, 13),
+    (4, 7, 11),
+    (4, 9, 12),
+    (7, 8, 14),
+    (7, 13, 15),
+    (8, 9, 10),
+    (8, 12, 13),
+    (10, 14, 15),
+    (11, 12, 15)]
+
+def canonical_dense_7_9_5_7_2_7_triangles : Finset (Finset (Fin 7 ⊕ Fin 9)) :=
+  labeledPacking 7 9 canonical_dense_7_9_5_7_2_7_triples
+
+theorem canonical_dense_7_9_5_7_2_7_verified : Packing canonical_dense_7_9_5_7_2_7_profile.graph canonical_dense_7_9_5_7_2_7_triangles ∧
+    canonical_dense_7_9_5_7_2_7_triangles.card = 24 := by
+  have h := labeledPacking_correct canonical_dense_7_9_5_7_2_7_profile canonical_dense_7_9_5_7_2_7_triples (by decide) (by decide +kernel)
+  exact ⟨h.1, h.2⟩
+
+def canonical_dense_9_9_5_5_0_profile : FerrersProfile 9 9 where
+  degree := ![5, 5, 5, 5, 5, 0, 0, 0, 0]
+  bound := by decide
+  antitone := by decide
+
+def canonical_dense_9_9_5_5_0_triples : List (Fin (9 + 9) × Fin (9 + 9) × Fin (9 + 9)) :=
+  [
+    (0, 1, 10),
+    (0, 2, 12),
+    (0, 3, 5),
+    (0, 4, 6),
+    (0, 7, 8),
+    (0, 9, 13),
+    (1, 2, 8),
+    (1, 3, 11),
+    (1, 4, 9),
+    (1, 6, 7),
+    (1, 12, 13),
+    (2, 3, 7),
+    (2, 4, 10),
+    (2, 5, 6),
+    (2, 11, 13),
+    (3, 4, 13),
+    (3, 6, 8),
+    (3, 9, 10),
+    (4, 5, 8),
+    (4, 11, 12),
+    (9, 11, 16),
+    (9, 12, 17),
+    (9, 14, 15),
+    (10, 12, 14),
+    (10, 13, 15),
+    (10, 16, 17),
+    (11, 14, 17),
+    (12, 15, 16),
+    (13, 14, 16)]
+
+def canonical_dense_9_9_5_5_0_triangles : Finset (Finset (Fin 9 ⊕ Fin 9)) :=
+  labeledPacking 9 9 canonical_dense_9_9_5_5_0_triples
+
+theorem canonical_dense_9_9_5_5_0_verified : Packing canonical_dense_9_9_5_5_0_profile.graph canonical_dense_9_9_5_5_0_triangles ∧
+    canonical_dense_9_9_5_5_0_triangles.card = 29 := by
+  have h := labeledPacking_correct canonical_dense_9_9_5_5_0_profile canonical_dense_9_9_5_5_0_triples (by decide) (by decide +kernel)
+  exact ⟨h.1, h.2⟩
+
+def canonical_dense_9_9_7_7_4_7_7_profile : FerrersProfile 9 9 where
+  degree := ![7, 7, 7, 7, 7, 7, 7, 0, 0]
+  bound := by decide
+  antitone := by decide
+
+def canonical_dense_9_9_7_7_4_7_7_triples : List (Fin (9 + 9) × Fin (9 + 9) × Fin (9 + 9)) :=
+  [
+    (0, 1, 9),
+    (0, 2, 11),
+    (0, 3, 14),
+    (0, 4, 7),
+    (0, 5, 8),
+    (0, 12, 15),
+    (1, 2, 6),
+    (1, 3, 15),
+    (1, 4, 13),
+    (1, 5, 11),
+    (1, 7, 8),
+    (1, 10, 14),
+    (2, 3, 8),
+    (2, 5, 7),
+    (2, 12, 14),
+    (3, 4, 11),
+    (3, 5, 9),
+    (3, 6, 7),
+    (4, 6, 14),
+    (4, 9, 12),
+    (4, 10, 15),
+    (5, 6, 15),
+    (5, 10, 13),
+    (6, 9, 13),
+    (6, 11, 12),
+    (9, 10, 11),
+    (9, 14, 16),
+    (10, 12, 17),
+    (11, 13, 16),
+    (11, 14, 15),
+    (13, 15, 17)]
+
+def canonical_dense_9_9_7_7_4_7_7_triangles : Finset (Finset (Fin 9 ⊕ Fin 9)) :=
+  labeledPacking 9 9 canonical_dense_9_9_7_7_4_7_7_triples
+
+theorem canonical_dense_9_9_7_7_4_7_7_verified : Packing canonical_dense_9_9_7_7_4_7_7_profile.graph canonical_dense_9_9_7_7_4_7_7_triangles ∧
+    canonical_dense_9_9_7_7_4_7_7_triangles.card = 31 := by
+  have h := labeledPacking_correct canonical_dense_9_9_7_7_4_7_7_profile canonical_dense_9_9_7_7_4_7_7_triples (by decide) (by decide +kernel)
+  exact ⟨h.1, h.2⟩
+
+def canonical_dense_11_11_6_6_0_profile : FerrersProfile 11 11 where
+  degree := ![6, 6, 6, 6, 6, 6, 0, 0, 0, 0, 0]
+  bound := by decide
+  antitone := by decide
+
+def canonical_dense_11_11_6_6_0_triples : List (Fin (11 + 11) × Fin (11 + 11) × Fin (11 + 11)) :=
+  [
+    (0, 1, 10),
+    (0, 2, 6),
+    (0, 3, 12),
+    (0, 4, 8),
+    (0, 5, 15),
+    (0, 7, 9),
+    (0, 11, 16),
+    (0, 13, 14),
+    (1, 2, 8),
+    (1, 3, 7),
+    (1, 4, 11),
+    (1, 5, 6),
+    (1, 12, 14),
+    (1, 15, 16),
+    (2, 3, 15),
+    (2, 4, 13),
+    (2, 7, 10),
+    (2, 11, 12),
+    (2, 14, 16),
+    (3, 4, 9),
+    (3, 6, 10),
+    (3, 11, 14),
+    (3, 13, 16),
+    (4, 5, 14),
+    (4, 6, 7),
+    (4, 12, 15),
+    (5, 7, 8),
+    (5, 9, 10),
+    (5, 11, 13),
+    (5, 12, 16),
+    (6, 8, 9),
+    (11, 15, 18),
+    (11, 17, 20),
+    (11, 19, 21),
+    (12, 17, 18),
+    (12, 19, 20),
+    (13, 15, 20),
+    (13, 17, 21),
+    (13, 18, 19),
+    (14, 15, 21),
+    (14, 17, 19),
+    (14, 18, 20),
+    (16, 20, 21)]
+
+def canonical_dense_11_11_6_6_0_triangles : Finset (Finset (Fin 11 ⊕ Fin 11)) :=
+  labeledPacking 11 11 canonical_dense_11_11_6_6_0_triples
+
+theorem canonical_dense_11_11_6_6_0_verified : Packing canonical_dense_11_11_6_6_0_profile.graph canonical_dense_11_11_6_6_0_triangles ∧
+    canonical_dense_11_11_6_6_0_triangles.card = 43 := by
+  have h := labeledPacking_correct canonical_dense_11_11_6_6_0_profile canonical_dense_11_11_6_6_0_triples (by decide) (by decide +kernel)
+  exact ⟨h.1, h.2⟩
+
+def canonical_dense_11_11_6_7_0_profile : FerrersProfile 11 11 where
+  degree := ![7, 7, 7, 7, 7, 7, 0, 0, 0, 0, 0]
+  bound := by decide
+  antitone := by decide
+
+def canonical_dense_11_11_6_7_0_triples : List (Fin (11 + 11) × Fin (11 + 11) × Fin (11 + 11)) :=
+  [
+    (0, 1, 15),
+    (0, 2, 5),
+    (0, 3, 10),
+    (0, 4, 13),
+    (0, 6, 9),
+    (0, 7, 8),
+    (0, 11, 12),
+    (0, 14, 16),
+    (1, 2, 16),
+    (1, 3, 6),
+    (1, 4, 17),
+    (1, 7, 9),
+    (1, 8, 10),
+    (1, 11, 13),
+    (2, 3, 7),
+    (2, 4, 11),
+    (2, 6, 8),
+    (2, 14, 17),
+    (3, 4, 16),
+    (3, 5, 8),
+    (3, 11, 17),
+    (3, 14, 15),
+    (4, 5, 15),
+    (4, 7, 10),
+    (4, 8, 9),
+    (4, 12, 14),
+    (5, 6, 7),
+    (5, 9, 10),
+    (5, 11, 14),
+    (5, 12, 13),
+    (11, 15, 18),
+    (11, 16, 21),
+    (11, 19, 20),
+    (12, 15, 20),
+    (12, 17, 19),
+    (12, 18, 21),
+    (13, 14, 20),
+    (13, 15, 21),
+    (13, 16, 19),
+    (13, 17, 18),
+    (15, 16, 17),
+    (16, 18, 20),
+    (17, 20, 21)]
+
+def canonical_dense_11_11_6_7_0_triangles : Finset (Finset (Fin 11 ⊕ Fin 11)) :=
+  labeledPacking 11 11 canonical_dense_11_11_6_7_0_triples
+
+theorem canonical_dense_11_11_6_7_0_verified : Packing canonical_dense_11_11_6_7_0_profile.graph canonical_dense_11_11_6_7_0_triangles ∧
+    canonical_dense_11_11_6_7_0_triangles.card = 43 := by
+  have h := labeledPacking_correct canonical_dense_11_11_6_7_0_profile canonical_dense_11_11_6_7_0_triples (by decide) (by decide +kernel)
+  exact ⟨h.1, h.2⟩
+
+def canonical_dense_11_11_7_6_0_6_profile : FerrersProfile 11 11 where
+  degree := ![6, 6, 6, 6, 6, 6, 6, 0, 0, 0, 0]
+  bound := by decide
+  antitone := by decide
+
+def canonical_dense_11_11_7_6_0_6_triples : List (Fin (11 + 11) × Fin (11 + 11) × Fin (11 + 11)) :=
+  [
+    (0, 1, 15),
+    (0, 2, 10),
+    (0, 3, 14),
+    (0, 4, 9),
+    (0, 5, 13),
+    (0, 6, 7),
+    (0, 12, 16),
+    (1, 2, 7),
+    (1, 3, 16),
+    (1, 4, 11),
+    (1, 5, 10),
+    (1, 6, 13),
+    (1, 8, 9),
+    (1, 12, 14),
+    (2, 4, 12),
+    (2, 5, 15),
+    (2, 6, 9),
+    (2, 11, 16),
+    (2, 13, 14),
+    (3, 4, 10),
+    (3, 5, 9),
+    (3, 6, 15),
+    (3, 7, 8),
+    (3, 11, 13),
+    (4, 5, 8),
+    (4, 6, 14),
+    (4, 13, 15),
+    (5, 6, 12),
+    (5, 14, 16),
+    (6, 8, 10),
+    (7, 9, 10),
+    (11, 12, 15),
+    (11, 17, 19),
+    (11, 20, 21),
+    (12, 13, 19),
+    (12, 17, 18),
+    (13, 17, 20),
+    (14, 15, 18),
+    (14, 17, 21),
+    (15, 16, 17),
+    (15, 19, 20),
+    (16, 18, 20),
+    (16, 19, 21)]
+
+def canonical_dense_11_11_7_6_0_6_triangles : Finset (Finset (Fin 11 ⊕ Fin 11)) :=
+  labeledPacking 11 11 canonical_dense_11_11_7_6_0_6_triples
+
+theorem canonical_dense_11_11_7_6_0_6_verified : Packing canonical_dense_11_11_7_6_0_6_profile.graph canonical_dense_11_11_7_6_0_6_triangles ∧
+    canonical_dense_11_11_7_6_0_6_triangles.card = 43 := by
+  have h := labeledPacking_correct canonical_dense_11_11_7_6_0_6_profile canonical_dense_11_11_7_6_0_6_triples (by decide) (by decide +kernel)
+  exact ⟨h.1, h.2⟩
+
+def canonical_dense_11_11_7_7_0_6_profile : FerrersProfile 11 11 where
+  degree := ![7, 7, 7, 7, 7, 7, 6, 0, 0, 0, 0]
+  bound := by decide
+  antitone := by decide
+
+def canonical_dense_11_11_7_7_0_6_triples : List (Fin (11 + 11) × Fin (11 + 11) × Fin (11 + 11)) :=
+  [
+    (0, 1, 14),
+    (0, 2, 7),
+    (0, 3, 10),
+    (0, 4, 8),
+    (0, 5, 9),
+    (0, 6, 11),
+    (0, 12, 15),
+    (0, 16, 17),
+    (1, 3, 12),
+    (1, 4, 16),
+    (1, 5, 13),
+    (1, 6, 10),
+    (1, 8, 9),
+    (2, 3, 8),
+    (2, 4, 10),
+    (2, 5, 6),
+    (2, 12, 13),
+    (2, 14, 17),
+    (2, 15, 16),
+    (3, 5, 16),
+    (3, 6, 9),
+    (3, 11, 17),
+    (3, 13, 15),
+    (4, 6, 13),
+    (4, 12, 14),
+    (5, 8, 10),
+    (5, 11, 14),
+    (5, 12, 17),
+    (6, 7, 8),
+    (7, 9, 10),
+    (11, 16, 20),
+    (11, 18, 21),
+    (12, 16, 18),
+    (12, 20, 21),
+    (13, 16, 19),
+    (13, 17, 21),
+    (13, 18, 20),
+    (14, 15, 18),
+    (14, 16, 21),
+    (14, 19, 20),
+    (15, 17, 20),
+    (15, 19, 21),
+    (17, 18, 19)]
+
+def canonical_dense_11_11_7_7_0_6_triangles : Finset (Finset (Fin 11 ⊕ Fin 11)) :=
+  labeledPacking 11 11 canonical_dense_11_11_7_7_0_6_triples
+
+theorem canonical_dense_11_11_7_7_0_6_verified : Packing canonical_dense_11_11_7_7_0_6_profile.graph canonical_dense_11_11_7_7_0_6_triangles ∧
+    canonical_dense_11_11_7_7_0_6_triangles.card = 43 := by
+  have h := labeledPacking_correct canonical_dense_11_11_7_7_0_6_profile canonical_dense_11_11_7_7_0_6_triples (by decide) (by decide +kernel)
+  exact ⟨h.1, h.2⟩
+
+def canonical_dense_11_11_7_7_1_7_profile : FerrersProfile 11 11 where
+  degree := ![7, 7, 7, 7, 7, 7, 7, 0, 0, 0, 0]
+  bound := by decide
+  antitone := by decide
+
+def canonical_dense_11_11_7_7_1_7_triples : List (Fin (11 + 11) × Fin (11 + 11) × Fin (11 + 11)) :=
+  [
+    (0, 1, 5),
+    (0, 2, 15),
+    (0, 3, 10),
+    (0, 4, 8),
+    (0, 6, 17),
+    (0, 7, 9),
+    (0, 11, 12),
+    (0, 13, 16),
+    (1, 2, 12),
+    (1, 3, 8),
+    (1, 4, 17),
+    (1, 9, 10),
+    (1, 11, 16),
+    (1, 13, 15),
+    (2, 3, 11),
+    (2, 4, 9),
+    (2, 5, 7),
+    (2, 8, 10),
+    (2, 13, 14),
+    (2, 16, 17),
+    (3, 4, 7),
+    (3, 5, 13),
+    (3, 6, 16),
+    (3, 12, 14),
+    (3, 15, 17),
+    (4, 5, 14),
+    (4, 6, 12),
+    (4, 11, 15),
+    (5, 6, 15),
+    (5, 12, 17),
+    (6, 7, 10),
+    (6, 8, 9),
+    (6, 11, 14),
+    (11, 13, 21),
+    (11, 17, 20),
+    (11, 18, 19),
+    (12, 15, 19),
+    (12, 20, 21),
+    (13, 17, 18),
+    (13, 19, 20),
+    (14, 15, 20),
+    (14, 16, 19),
+    (14, 17, 21),
+    (16, 18, 20)]
+
+def canonical_dense_11_11_7_7_1_7_triangles : Finset (Finset (Fin 11 ⊕ Fin 11)) :=
+  labeledPacking 11 11 canonical_dense_11_11_7_7_1_7_triples
+
+theorem canonical_dense_11_11_7_7_1_7_verified : Packing canonical_dense_11_11_7_7_1_7_profile.graph canonical_dense_11_11_7_7_1_7_triangles ∧
+    canonical_dense_11_11_7_7_1_7_triangles.card = 44 := by
+  have h := labeledPacking_correct canonical_dense_11_11_7_7_1_7_profile canonical_dense_11_11_7_7_1_7_triples (by decide) (by decide +kernel)
+  exact ⟨h.1, h.2⟩
+
+def canonical_dense_11_13_6_7_0_profile : FerrersProfile 11 13 where
+  degree := ![7, 7, 7, 7, 7, 7, 0, 0, 0, 0, 0]
+  bound := by decide
+  antitone := by decide
+
+def canonical_dense_11_13_6_7_0_triples : List (Fin (11 + 13) × Fin (11 + 13) × Fin (11 + 13)) :=
+  [
+    (0, 1, 13),
+    (0, 2, 10),
+    (0, 3, 8),
+    (0, 4, 6),
+    (0, 5, 9),
+    (0, 11, 16),
+    (0, 12, 17),
+    (0, 14, 15),
+    (1, 2, 15),
+    (1, 3, 14),
+    (1, 6, 10),
+    (1, 8, 9),
+    (1, 11, 12),
+    (1, 16, 17),
+    (2, 3, 11),
+    (2, 5, 17),
+    (2, 6, 9),
+    (2, 7, 8),
+    (2, 12, 14),
+    (2, 13, 16),
+    (3, 4, 15),
+    (3, 5, 12),
+    (3, 6, 7),
+    (3, 9, 10),
+    (4, 5, 11),
+    (4, 7, 9),
+    (4, 8, 10),
+    (4, 12, 16),
+    (4, 14, 17),
+    (5, 6, 8),
+    (5, 7, 10),
+    (5, 13, 14),
+    (5, 15, 16),
+    (11, 13, 19),
+    (11, 15, 22),
+    (11, 17, 21),
+    (11, 18, 23),
+    (12, 13, 23),
+    (12, 15, 21),
+    (12, 18, 22),
+    (12, 19, 20),
+    (13, 15, 20),
+    (13, 21, 22),
+    (14, 16, 18),
+    (14, 19, 21),
+    (14, 20, 23),
+    (15, 17, 23),
+    (15, 18, 19),
+    (16, 19, 22),
+    (16, 21, 23),
+    (17, 20, 22),
+    (18, 20, 21)]
+
+def canonical_dense_11_13_6_7_0_triangles : Finset (Finset (Fin 11 ⊕ Fin 13)) :=
+  labeledPacking 11 13 canonical_dense_11_13_6_7_0_triples
+
+theorem canonical_dense_11_13_6_7_0_verified : Packing canonical_dense_11_13_6_7_0_profile.graph canonical_dense_11_13_6_7_0_triangles ∧
+    canonical_dense_11_13_6_7_0_triangles.card = 52 := by
+  have h := labeledPacking_correct canonical_dense_11_13_6_7_0_profile canonical_dense_11_13_6_7_0_triples (by decide) (by decide +kernel)
+  exact ⟨h.1, h.2⟩
+
+def canonical_dense_11_13_6_8_0_profile : FerrersProfile 11 13 where
+  degree := ![8, 8, 8, 8, 8, 8, 0, 0, 0, 0, 0]
+  bound := by decide
+  antitone := by decide
+
+def canonical_dense_11_13_6_8_0_triples : List (Fin (11 + 13) × Fin (11 + 13) × Fin (11 + 13)) :=
+  [
+    (0, 1, 6),
+    (0, 2, 8),
+    (0, 3, 12),
+    (0, 4, 9),
+    (0, 5, 15),
+    (0, 7, 10),
+    (0, 11, 18),
+    (0, 13, 17),
+    (0, 14, 16),
+    (1, 2, 9),
+    (1, 3, 7),
+    (1, 4, 18),
+    (1, 5, 8),
+    (1, 12, 13),
+    (1, 14, 17),
+    (1, 15, 16),
+    (2, 3, 11),
+    (2, 4, 14),
+    (2, 6, 7),
+    (2, 12, 17),
+    (2, 13, 16),
+    (2, 15, 18),
+    (3, 4, 16),
+    (3, 5, 6),
+    (3, 15, 17),
+    (4, 5, 10),
+    (4, 6, 8),
+    (4, 12, 15),
+    (5, 7, 9),
+    (5, 11, 13),
+    (5, 12, 14),
+    (5, 16, 17),
+    (6, 9, 10),
+    (11, 12, 23),
+    (11, 14, 15),
+    (11, 16, 22),
+    (11, 17, 19),
+    (11, 20, 21),
+    (12, 16, 21),
+    (12, 18, 22),
+    (12, 19, 20),
+    (13, 14, 18),
+    (13, 19, 22),
+    (13, 21, 23),
+    (14, 19, 23),
+    (14, 21, 22),
+    (15, 19, 21),
+    (15, 22, 23),
+    (16, 18, 19),
+    (17, 18, 21),
+    (17, 20, 22),
+    (18, 20, 23)]
+
+def canonical_dense_11_13_6_8_0_triangles : Finset (Finset (Fin 11 ⊕ Fin 13)) :=
+  labeledPacking 11 13 canonical_dense_11_13_6_8_0_triples
+
+theorem canonical_dense_11_13_6_8_0_verified : Packing canonical_dense_11_13_6_8_0_profile.graph canonical_dense_11_13_6_8_0_triangles ∧
+    canonical_dense_11_13_6_8_0_triangles.card = 52 := by
+  have h := labeledPacking_correct canonical_dense_11_13_6_8_0_profile canonical_dense_11_13_6_8_0_triples (by decide) (by decide +kernel)
+  exact ⟨h.1, h.2⟩
+
+def canonical_dense_11_13_6_9_0_profile : FerrersProfile 11 13 where
+  degree := ![9, 9, 9, 9, 9, 9, 0, 0, 0, 0, 0]
+  bound := by decide
+  antitone := by decide
+
+def canonical_dense_11_13_6_9_0_triples : List (Fin (11 + 13) × Fin (11 + 13) × Fin (11 + 13)) :=
+  [
+    (0, 1, 6),
+    (0, 2, 10),
+    (0, 3, 8),
+    (0, 4, 9),
+    (0, 5, 13),
+    (0, 11, 15),
+    (0, 14, 17),
+    (1, 2, 13),
+    (1, 3, 10),
+    (1, 4, 8),
+    (1, 5, 17),
+    (1, 7, 9),
+    (1, 11, 18),
+    (1, 12, 15),
+    (1, 14, 16),
+    (2, 3, 11),
+    (2, 4, 6),
+    (2, 5, 7),
+    (2, 8, 9),
+    (2, 12, 14),
+    (2, 17, 18),
+    (3, 4, 7),
+    (3, 5, 9),
+    (3, 12, 16),
+    (3, 13, 14),
+    (4, 5, 10),
+    (4, 11, 12),
+    (4, 14, 18),
+    (4, 15, 16),
+    (4, 17, 19),
+    (5, 15, 18),
+    (5, 16, 19),
+    (6, 9, 10),
+    (11, 13, 23),
+    (11, 14, 19),
+    (11, 16, 21),
+    (11, 20, 22),
+    (12, 13, 17),
+    (12, 18, 22),
+    (12, 20, 21),
+    (13, 16, 20),
+    (13, 18, 21),
+    (13, 19, 22),
+    (14, 15, 20),
+    (14, 21, 22),
+    (15, 17, 21),
+    (15, 22, 23),
+    (16, 17, 22),
+    (16, 18, 23),
+    (17, 20, 23),
+    (18, 19, 20),
+    (19, 21, 23)]
+
+def canonical_dense_11_13_6_9_0_triangles : Finset (Finset (Fin 11 ⊕ Fin 13)) :=
+  labeledPacking 11 13 canonical_dense_11_13_6_9_0_triples
+
+theorem canonical_dense_11_13_6_9_0_verified : Packing canonical_dense_11_13_6_9_0_profile.graph canonical_dense_11_13_6_9_0_triangles ∧
+    canonical_dense_11_13_6_9_0_triangles.card = 52 := by
+  have h := labeledPacking_correct canonical_dense_11_13_6_9_0_profile canonical_dense_11_13_6_9_0_triples (by decide) (by decide +kernel)
+  exact ⟨h.1, h.2⟩
+
+def canonical_dense_15_15_11_11_9_11_11_11_profile : FerrersProfile 15 15 where
+  degree := ![11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 0, 0, 0, 0]
+  bound := by decide
+  antitone := by decide
+
+def canonical_dense_15_15_11_11_9_11_11_11_triples : List (Fin (15 + 15) × Fin (15 + 15) × Fin (15 + 15)) :=
+  [
+    (0, 1, 14),
+    (0, 2, 16),
+    (0, 3, 15),
+    (0, 4, 5),
+    (0, 6, 20),
+    (0, 7, 22),
+    (0, 8, 11),
+    (0, 9, 25),
+    (0, 10, 18),
+    (0, 17, 24),
+    (1, 2, 10),
+    (1, 3, 24),
+    (1, 4, 13),
+    (1, 5, 16),
+    (1, 6, 19),
+    (1, 7, 9),
+    (1, 8, 23),
+    (1, 17, 25),
+    (1, 18, 22),
+    (2, 3, 23),
+    (2, 6, 11),
+    (2, 7, 25),
+    (2, 8, 19),
+    (2, 12, 13),
+    (2, 15, 18),
+    (2, 17, 20),
+    (2, 21, 22),
+    (3, 4, 14),
+    (3, 6, 22),
+    (3, 7, 16),
+    (3, 8, 25),
+    (3, 9, 13),
+    (3, 17, 19),
+    (3, 18, 20),
+    (4, 6, 21),
+    (4, 7, 18),
+    (4, 8, 17),
+    (4, 10, 25),
+    (4, 15, 22),
+    (4, 16, 23),
+    (5, 7, 12),
+    (5, 9, 20),
+    (5, 10, 11),
+    (5, 15, 17),
+    (5, 19, 22),
+    (5, 23, 24),
+    (6, 7, 13),
+    (6, 8, 12),
+    (6, 10, 24),
+    (6, 16, 17),
+    (6, 18, 25),
+    (7, 8, 21),
+    (7, 10, 20),
+    (7, 11, 14),
+    (7, 19, 24),
+    (8, 9, 22),
+    (8, 10, 16),
+    (8, 13, 14),
+    (8, 15, 24),
+    (9, 10, 17),
+    (9, 11, 12),
+    (9, 16, 21),
+    (9, 18, 24),
+    (10, 12, 14),
+    (10, 15, 19),
+    (10, 21, 23),
+    (15, 20, 27),
+    (15, 25, 26),
+    (16, 19, 29),
+    (16, 20, 26),
+    (16, 22, 24),
+    (16, 25, 27),
+    (17, 18, 27),
+    (17, 21, 29),
+    (17, 26, 28),
+    (18, 19, 23),
+    (18, 26, 29),
+    (19, 20, 25),
+    (19, 21, 28),
+    (20, 22, 28),
+    (20, 24, 29),
+    (21, 24, 25),
+    (21, 26, 27),
+    (22, 23, 25),
+    (22, 27, 29),
+    (25, 28, 29)]
+
+def canonical_dense_15_15_11_11_9_11_11_11_triangles : Finset (Finset (Fin 15 ⊕ Fin 15)) :=
+  labeledPacking 15 15 canonical_dense_15_15_11_11_9_11_11_11_triples
+
+theorem canonical_dense_15_15_11_11_9_11_11_11_verified : Packing canonical_dense_15_15_11_11_9_11_11_11_profile.graph canonical_dense_15_15_11_11_9_11_11_11_triangles ∧
+    canonical_dense_15_15_11_11_9_11_11_11_triangles.card = 86 := by
+  have h := labeledPacking_correct canonical_dense_15_15_11_11_9_11_11_11_profile canonical_dense_15_15_11_11_9_11_11_11_triples (by decide) (by decide +kernel)
+  exact ⟨h.1, h.2⟩
+
+end ResearchMain.Tuza.Certificates

@@ -1,0 +1,708 @@
+\documentclass{amsart}
+\usepackage{amssymb,mathtools}
+\usepackage{enumitem}
+\usepackage{needspace}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={EFX allocations of chores that are cheap for exactly two agents},pdfauthor={Knowledge Sense}}
+
+\numberwithin{equation}{section}
+\raggedbottom
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{claim}{Claim}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\inc}{\operatorname{inc}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\anc}{\mathrm{anc}}
+\newcommand{\fr}{\mathrm{fr}}
+\newcommand{\bd}{\partial}
+
+\begin{document}
+
+\title[EFX for chores cheap for two agents]{EFX allocations of chores that are cheap for exactly two agents}
+
+\author{Knowledge Sense}
+\address{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{7 October 2026}
+
+\subjclass[2020]{Primary 91B32; Secondary 05C21, 05C70, 90C27}
+
+\keywords{Fair division, indivisible chores, envy-freeness up to any item, bi-valued costs, multigraph, network flow}
+
+\begin{abstract}
+We consider indivisible chores, agents with additive costs and equal entitlements, and instances in which every chore costs $1$ to exactly two agents and a common real number $r>2$ to every other agent. Such an instance can be described by a finite loopless multigraph on the set of agents. We prove that for every number $n\ge 2$ of agents and every finite number of chores there is a complete allocation that is envy-free up to any chore (EFX). The allocation may assign a chore to an agent for whom it is expensive, and this is unavoidable in general. The proof extends the maximum-deficiency method that He and Tao used for four agents. We minimize a lexicographic objective over a finite family of allocations, show that at a minimum the only possible violations lie inside disjoint pairs of agents of a special form, and remove these by explicit exchanges. Together with known results for $1<r\le 2$, it follows that such instances admit EFX allocations for every $r>1$.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}\label{sec:intro}
+
+Let $N$ be a set of $n\ge 2$ agents and $M$ a finite set of $m\ge 0$ indivisible chores. Every agent $a$ has an additive cost function $c_a$ on the subsets of $M$, and all agents have equal entitlements. An \emph{allocation} $X=(X_a)_{a\in N}$ is a partition of $M$ into bundles indexed by $N$; all allocations in this paper are complete, that is, every chore is assigned to some agent. For $a\in N$ we put
+\[
+\tau_a(X)=c_a(X_a)-\min_{e\in X_a}c_a(e)\quad\text{if }X_a\ne\emptyset,\qquad \tau_a(X)=0\quad\text{if }X_a=\emptyset,
+\]
+and call $\tau_a(X)$ the \emph{threshold} of $a$. The allocation $X$ is \emph{envy-free up to any chore}, or EFX, if
+\[
+c_a(X_a\setminus\{e\})\le c_a(X_b)\qquad\text{for all distinct }a,b\in N\text{ and all }e\in X_a,
+\]
+that is, if $\tau_a(X)\le c_a(X_b)$ for all distinct $a,b\in N$. If $\tau_a(X)\le c_a(X_b)$ we say that $a$ is \emph{EFX toward} $b$, and otherwise that $a$ \emph{strongly envies} $b$; this depends only on the bundles $X_a$ and $X_b$.
+
+EFX was introduced by Caragiannis et al.~\cite{CKMPSW19}. For chores with additive costs, He and Tao~\cite{HT26} showed that EFX allocations need not exist: for every $n\ge 4$ there are instances with $n$ agents and only three distinct cost values that admit no EFX allocation. For bi-valued costs, where the cost of every chore to every agent lies in $\{1,r\}$ for a common real $r>1$, they proved that an EFX allocation exists when $n=4$. In their proof, chores that are cheap for exactly two agents are treated separately, and the present paper studies instances consisting of such chores only, for any number of agents.
+
+\begin{definition}\label{def:m2}
+Let $r>1$ be real. An \emph{M2 instance with cost $r$} is given by a finite loopless multigraph $G=(N,M)$ whose edges are the chores. Every chore $e$ has a set $\bd e\subseteq N$ of exactly two endpoints, and
+\[
+c_a(e)=\begin{cases}1,& a\in\bd e,\\ r,& a\notin\bd e.\end{cases}
+\]
+Distinct chores may have the same endpoints. The chore $e$ is \emph{cheap} for $a$ if $a\in\bd e$, and \emph{expensive} for $a$ otherwise.
+\end{definition}
+
+In the notation of~\cite[Section~5]{HT26}, the chores of a bi-valued instance that are cheap for exactly two agents form the set $M_2$, and an M2 instance is one in which all chores lie in $M_2$. Our main result is the following.
+
+\begin{theorem}\label{thm:main}
+Let $n\ge 2$ and $m\ge 0$ be integers and let $r>2$ be real. Every M2 instance with $n$ agents, $m$ chores and cost $r$ admits a complete EFX allocation.
+\end{theorem}
+
+The theorem allows a chore to be assigned to an agent who is not one of its endpoints, and this cannot be avoided in general.
+
+\begin{example}\label{ex:nonendpoint}
+Let $N=\{1,2,3\}$ and let $M$ consist of six parallel chores with endpoints $\{1,2\}$. If agent $3$ receives no chore, then one of the agents $1,2$ holds at least three chores; its threshold is at least $2$, while its cost for the empty bundle of agent $3$ is $0$. Hence every EFX allocation gives agent $3$ a chore that is expensive for it.
+\end{example}
+
+For $1<r\le 2$, He and Tao observed, in the paragraph following~\cite[Theorem~3]{HT26} at the beginning of~\cite[Section~5]{HT26}, that a variant of the round-robin procedure produces an EFX allocation of every bi-valued instance with costs $\{1,r\}$, for any number of agents. For $r=2$, Lin, Wu and Zhou~\cite[Theorem~4.1]{LWZ25} obtained in addition allocations that are EFX and fractionally Pareto optimal. Since an M2 instance with cost $r$ is bi-valued with costs $\{1,r\}$, Theorem~\ref{thm:main} and these results give the following corollary, which is proved in Section~\ref{sec:proof}.
+
+\begin{corollary}\label{cor:allr}
+For every real $r>1$, every M2 instance with cost $r$ admits a complete EFX allocation.
+\end{corollary}
+
+\subsubsection*{Related results}
+For goods with additive valuations, EFX allocations exist for three agents~\cite{CGM24}; for chores, before the counterexamples of~\cite{HT26}, existence was known in several restricted settings. Kobayashi, Mahara and Sakamoto~\cite{KMS23} proved that EFX allocations of additive chores exist when $m\le 2n$, when $n-1$ agents have identically ordered costs, and for three agents with personalized bi-valued costs. For bi-valued chores with $m\le 2n$, Garg, Murhekar and Qin obtained allocations that are EFX and fractionally Pareto optimal~\cite[arXiv version, Theorem~14]{GMQ25}. The same authors~\cite{GMQ23} showed that EFX and fractional Pareto optimality are compatible for three agents with bi-valued costs. For binary chores, with costs in $\{0,1\}$, Tao, Wu, Yu and Zhou~\cite{TWYZ25} proved the existence of allocations that are EFX and Pareto optimal, and Lin, Wu and Zhou~\cite{LWZ26} obtained weighted EFX together with fractional Pareto optimality and, for equal entitlements, lotteries whose realizations are EFX. Binary costs allow chores of cost zero, so that model is different from the positive costs $\{1,r\}$ considered here.
+
+For $n\le 4$ and for $m\le 2n$, Theorem~\ref{thm:main} is contained in known results: two agents are handled by divide and choose, three agents by~\cite{GMQ23} or~\cite{KMS23}, four agents by~\cite[Theorem~3]{HT26}, and instances with $m\le 2n$ by~\cite{KMS23}. The point of Theorem~\ref{thm:main} is that neither the number of agents nor the number of chores is restricted.
+
+\subsubsection*{The method}
+If $m<n$ we give every chore to a different agent. Otherwise we write $m=nq+s$ with $q\ge1$ and $0\le s<n$ and, following He and Tao, call a set $U$ of agents deficient if fewer than $\frac mn|U|$ chores have an endpoint in $U$. If no set is deficient, the multigraph has an orientation in which every agent receives $q$ or $q+1$ incident chores, and this allocation is EFX. Otherwise we fix a set $S$ of maximum deficiency and put $H=N\setminus S$. A flow argument produces \emph{separated} allocations: agents of $H$ hold only incident edges of $G[H]$, agents of $S$ hold incident edges and edges of $G[H]$, which are expensive for them, and all bundles have $q$ or $q+1$ chores (Section~\ref{sec:separated}). Among separated allocations with prescribed bundle sizes and fixed bundles on $H$, we minimize first the sum of the squares of the numbers of expensive chores held by agents of $S$, and then the number of \emph{bad comparisons}. These are ordered pairs of agents singled out by a condition on numbers of expensive chores which, at a minimizer of the first objective, covers every violation of EFX inside $S$. At such a minimum the bad comparisons form vertex-disjoint pairs whose members hold only chores joining them and chores expensive for everybody in $S$, and every other bundle in $S$ contains enough chores that are expensive for the members of a pair (Section~\ref{sec:exchange}). The remaining sections remove these pairs by explicit exchanges: all pairs at once when $n$ divides $m$ (Section~\ref{sec:divisible}), special pairs and several ordinary pairs together (Section~\ref{sec:several}), and a single pair by a case analysis on the bundles of the other agents of $S$ (Section~\ref{sec:onepair}). In one case of this analysis we minimize again over a smaller family, and when $S$ consists of the pair alone we choose the bundle sizes again, using a parity argument for flows.
+
+\subsubsection*{Dependencies}
+The notion of a deficient set and its use for chores cheap for two agents are taken from He and Tao~\cite[Section~5.4]{HT26}, where four agents are treated with the help of a balanced orientation lemma~\cite[Lemma~4]{HT26}; the extension of the repair argument to arbitrary numbers of agents and chores is the contribution of this paper. Apart from two standard facts of combinatorial optimization, namely the integrality of polytopes defined by totally unimodular matrices and the max-flow min-cut theorem~\cite{Sch03}, which enter through Lemmas~\ref{lem:integral} and~\ref{lem:hall}, the proof of Theorem~\ref{thm:main} is self-contained. Corollary~\ref{cor:allr} uses in addition the results for $1<r\le2$ quoted above. To our knowledge, Theorem~\ref{thm:main} has not appeared in the literature.
+
+\subsubsection*{Organization}
+Section~\ref{sec:prelim} collects elementary estimates and the facts on flows. Section~\ref{sec:separated} introduces deficient sets and separated allocations, and Section~\ref{sec:exchange} develops the minimization and its normal form. Sections~\ref{sec:divisible}, \ref{sec:several} and~\ref{sec:onepair} repair the bad pairs, and Section~\ref{sec:proof} assembles the proof of Theorem~\ref{thm:main} and of Corollary~\ref{cor:allr}. Section~\ref{sec:conclusion} contains concluding remarks.
+
+\section{Preliminaries}\label{sec:prelim}
+
+Throughout Sections~\ref{sec:prelim} to~\ref{sec:onepair}, an M2 instance with cost $r>2$ is fixed. For $a\in N$ and $Y\subseteq M$ let
+\[
+\ell_a(Y)=|\{e\in Y:\ a\notin\bd e\}|
+\]
+be the number of chores in $Y$ that are expensive for $a$, so that $c_a(Y)=|Y|+(r-1)\ell_a(Y)$. For an allocation $X$ we write $\ell_a=\ell_a(X_a)$ and $\alpha_a=|X_a|-\ell_a$ for the numbers of expensive and of cheap chores in the bundle of $a$. A bundle $Y$ is \emph{wholly expensive} for $a$ if $\ell_a(Y)=|Y|$.
+
+\begin{lemma}\label{lem:basic}
+Let $X$ be an allocation and let $a\ne b$ be agents.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item If $\alpha_a\ge 1$, then $\tau_a(X)=c_a(X_a)-1=|X_a|-1+(r-1)\ell_a$ and
+\[
+\tau_a(X)-c_a(X_b)=|X_a|-|X_b|-1+(r-1)\bigl(\ell_a-\ell_a(X_b)\bigr).
+\]
+In particular, $a$ is EFX toward $b$ whenever $|X_a|\le |X_b|+1$ and $\ell_a\le\ell_a(X_b)$.
+\item If $X_a\ne\emptyset$ and $\alpha_a=0$, then $\tau_a(X)=r(|X_a|-1)$.
+\item If $X_a\ne\emptyset$, then $\tau_a(X)\le r(|X_a|-1)$.
+\item If at most $p$ chores of $X_b$ are cheap for $a$, then $c_a(X_b)\ge r|X_b|-(r-1)p$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+All statements follow from $c_a(Y)=|Y|+(r-1)\ell_a(Y)$, together with the fact that the cheapest chore of $X_a$ costs $1$ to $a$ if $\alpha_a\ge1$ and $r$ otherwise. For (iii) with $\alpha_a\ge1$ note that $\ell_a\le|X_a|-1$.
+\end{proof}
+
+\begin{lemma}\label{lem:bounds}
+Let $q\ge 1$, let $X$ be an allocation and let $a\ne b$ be agents with $|X_b|\ge q$.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item If every chore of $X_a$ is cheap for $a$ and $|X_a|\le q+1$, then $a$ is EFX toward $b$.
+\item If $X_b$ is wholly expensive for $a$ and $\tau_a(X)\le rq$, then $a$ is EFX toward $b$.
+\item If at most one chore of $X_b$ is cheap for $a$ and $\tau_a(X)\le r(q-1)+1$, then $a$ is EFX toward $b$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+In (i), either $X_a=\emptyset$ and $\tau_a(X)=0$, or $\tau_a(X)=|X_a|-1\le q\le|X_b|\le c_a(X_b)$. Parts (ii) and (iii) follow from Lemma~\ref{lem:basic}(iv) with $p=0$ and $p=1$, since $r|X_b|-(r-1)\ge r(q-1)+1$.
+\end{proof}
+
+We shall use two standard facts on fractional and integral assignments. Let $R$ be a finite set of recipients and $F$ a finite set of chores, and let every $f\in F$ have a nonempty set $\Pi(f)\subseteq R$ of permitted recipients. A \emph{fractional assignment} is a vector $x=(x_{f\rho})_{f\in F,\ \rho\in\Pi(f)}\ge 0$ with $\sum_{\rho\in\Pi(f)}x_{f\rho}=1$ for every $f\in F$; its \emph{load} at $\rho\in R$ is $x(\rho)=\sum_{f:\,\rho\in\Pi(f)}x_{f\rho}$. It is \emph{integral} if all its entries are $0$ or $1$, that is, if it assigns every chore to one of its permitted recipients.
+
+\begin{lemma}\label{lem:integral}
+Let integers $\lambda_\rho\le\kappa_\rho$ $(\rho\in R)$ be given, and suppose that there is a fractional assignment with $\lambda_\rho\le x(\rho)\le\kappa_\rho$ for all $\rho\in R$.
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item There is an integral assignment satisfying the same bounds.
+\item Let $\rho_0\in R$. The set $\Lambda$ of loads $x(\rho_0)$ of fractional assignments satisfying the bounds is an interval with integer endpoints, and for every integer $t\in\Lambda$ there is an integral assignment satisfying the bounds with load $t$ at $\rho_0$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+The fractional assignments satisfying the bounds form the polytope of all $x\ge 0$ with $\sum_\rho x_{f\rho}=1$ for $f\in F$ and $\lambda_\rho\le x(\rho)\le\kappa_\rho$ for $\rho\in R$. Apart from the nonnegativity constraints, its constraint matrix is the incidence matrix of the bipartite graph on $F\cup R$ whose edges are the permitted pairs $(f,\rho)$. Incidence matrices of bipartite graphs are totally unimodular, and so is the matrix obtained by stacking such a matrix with its negative and with an identity matrix, which describes the polytope with two-sided bounds and nonnegativity. By the theorem of Hoffman and Kruskal the polytope is integral; see~\cite{Sch03}. It is bounded and nonempty, hence has an integral vertex, which proves (a). The set $\Lambda$ is the image of this polytope under a linear map, hence a closed interval, and its endpoints are attained at vertices, hence are integers. If $t\in\Lambda$ is an integer, replacing the bounds at $\rho_0$ by $t\le x(\rho_0)\le t$ leaves a nonempty polytope of the same form, and (a) applies.
+\end{proof}
+
+\begin{lemma}\label{lem:hall}
+Let $R$, $F$ and $\Pi$ be as above.
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item Let $\kappa_\rho\ge 0$ $(\rho\in R)$ be reals. If $|\{f\in F:\Pi(f)\subseteq Y\}|\le\sum_{\rho\in Y}\kappa_\rho$ for every $Y\subseteq R$, then there is a fractional assignment with $x(\rho)\le\kappa_\rho$ for all $\rho\in R$.
+\item Let $\beta\ge 0$ be real. If $|\{f\in F:\Pi(f)\cap Y\ne\emptyset\}|\ge\beta|Y|$ for every $Y\subseteq R$, then there are numbers $y_{f\rho}\ge0$ $(f\in F,\ \rho\in\Pi(f))$ with $\sum_\rho y_{f\rho}\le 1$ for every $f\in F$ and $\sum_{f}y_{f\rho}=\beta$ for every $\rho\in R$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Both statements follow from the max-flow min-cut theorem~\cite{Sch03}. Let $\sigma$ and $\vartheta$ be a source and a sink. For (a), take arcs $\sigma\to f$ of capacity $1$, arcs $f\to\rho$ of infinite capacity for $\rho\in\Pi(f)$, and arcs $\rho\to\vartheta$ of capacity $\kappa_\rho$. A cut of finite capacity has a source side $\{\sigma\}\cup F'\cup Y$ with $\Pi(f)\subseteq Y$ for all $f\in F'$, and its capacity $|F\setminus F'|+\sum_{\rho\in Y}\kappa_\rho$ is at least $|F|$ by hypothesis. Hence there is a flow of value $|F|$, which is the required assignment. For (b), take arcs $\sigma\to\rho$ of capacity $\beta$, arcs $\rho\to f$ of infinite capacity for $\rho\in\Pi(f)$, and arcs $f\to\vartheta$ of capacity $1$. A cut of finite capacity with source side $\{\sigma\}\cup Y\cup F'$ contains in $F'$ every $f$ with $\Pi(f)\cap Y\ne\emptyset$, so its capacity is at least $\beta|R\setminus Y|+|\{f:\Pi(f)\cap Y\ne\emptyset\}|\ge\beta|R|$. A flow of value $\beta|R|$ saturates every arc $\sigma\to\rho$ and gives the numbers $y_{f\rho}$.
+\end{proof}
+
+\section{Deficient sets and separated allocations}\label{sec:separated}
+
+If $m<n$, any allocation giving the chores to distinct agents is EFX, since every nonempty bundle is a single chore and has threshold $0$. Until Section~\ref{sec:proof} we assume $m\ge n$ and write
+\[
+m=nq+s,\qquad q\ge 1,\qquad 0\le s\le n-1,\qquad \mu=\frac{m}{n}.
+\]
+For $U\subseteq N$ let $\inc(U)$ be the number of chores with at least one endpoint in $U$, let $E(U)$ be the set of chores with both endpoints in $U$, and define the \emph{deficiency} $\Delta(U)=\mu|U|-\inc(U)$. A set $U$ is \emph{deficient} if $\Delta(U)>0$.
+
+\begin{lemma}\label{lem:nodef}
+If no set of agents is deficient, there is an EFX allocation in which every chore is assigned to one of its endpoints and every bundle has $q$ or $q+1$ chores.
+\end{lemma}
+
+\begin{proof}
+Apply Lemma~\ref{lem:hall}(b) with $R=N$, $F=M$, $\Pi(e)=\bd e$ and $\beta=\mu$; the hypothesis is $\inc(Y)\ge\mu|Y|$. The total load $\mu n=m$ equals $|M|$ and every chore carries at most $1$, so every chore carries exactly $1$, and we obtain a fractional assignment with all loads equal to $\mu\in[q,q+1]$. Lemma~\ref{lem:integral}(a) with bounds $[q,q+1]$ gives an integral one. Each of its bundles consists of chores cheap for the owner and has $q$ or $q+1$ chores, so the allocation is EFX by Lemma~\ref{lem:bounds}(i).
+\end{proof}
+
+Suppose now that some set is deficient, and fix a set $S\subseteq N$ of maximum deficiency, so that $\Delta(S)=\max_{U\subseteq N}\Delta(U)>0$. Put $H=N\setminus S$. The chores split into the set $M_S=E(S)$ of \emph{$S$-internal} chores, the set $M_\times$ of \emph{crossing} chores, with one endpoint in each of $S$ and $H$, and the set $M_H=E(H)$ of \emph{$H$-internal} chores. For $v\in S$ let $b_v$ be the number of crossing chores incident to $v$, and for $W\subseteq H$ let $\inc_H(W)$ be the number of $H$-internal chores with an endpoint in $W$.
+
+\Needspace{8\baselineskip}
+\begin{lemma}\label{lem:maxdef}
+The set $S$ has the following properties.
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $S\ne\emptyset$ and $|H|\ge 2$.
+\item $|E(U)|+\sum_{v\in U}b_v\le\mu|U|$ for every $U\subseteq S$.
+\item $\inc_H(W)\ge\mu|W|$ for every $W\subseteq H$.
+\item $|M_H|-\mu|H|=\mu|S|-|M_S|-|M_\times|=\Delta(S)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) We have $\Delta(\emptyset)=0$, so $S\ne\emptyset$. If $|N\setminus U|\le1$, every chore has an endpoint in $U$ because $G$ is loopless, so $\Delta(U)=\mu|U|-m\le\mu n-m=0$. Hence $|H|\ge2$.
+(b) The chores meeting $S$ but not $S\setminus U$ are those of $E(U)$ and the crossing chores at $U$, so $\Delta(S)\ge\Delta(S\setminus U)$ is the claim.
+(c) The chores meeting $S\cup W$ but not $S$ are the $H$-internal chores meeting $W$, so $\Delta(S)\ge\Delta(S\cup W)$ is the claim.
+(d) We have $|M_H|=m-\inc(S)$, $\inc(S)=|M_S|+|M_\times|$ and $m=\mu|S|+\mu|H|$.
+\end{proof}
+
+\begin{definition}\label{def:separated}
+An allocation $X$ is \emph{separated} (with respect to $S$) if every crossing chore is assigned to its endpoint in $S$, every $S$-internal chore to one of its endpoints, every $H$-internal chore either to one of its endpoints or to an agent of $S$, and $|X_a|\in\{q,q+1\}$ for every $a\in N$.
+\end{definition}
+
+In a separated allocation an agent of $H$ holds only $H$-internal chores incident to it, all of which are cheap for it. An $H$-internal chore held by an agent of $S$ is expensive for that agent, and every other chore held by $v\in S$ is incident to $v$.
+
+\begin{proposition}\label{prop:separated}
+There is a fractional assignment of $M$ to $N$ with load $\mu$ at every agent, in which crossing chores are assigned to their endpoints in $S$, $S$-internal chores to their endpoints, and $H$-internal chores to their endpoints or to agents of $S$. In particular, a separated allocation exists.
+\end{proposition}
+
+\begin{proof}
+Every crossing chore is given to its endpoint in $S$. By Lemma~\ref{lem:maxdef}(b) with $U=\{v\}$, the numbers $\kappa_v=\mu-b_v$ $(v\in S)$ are nonnegative, and Lemma~\ref{lem:maxdef}(b) is exactly the hypothesis of Lemma~\ref{lem:hall}(a) for $F=M_S$, $\Pi(e)=\bd e$ and the capacities $\kappa_v$. This gives a fractional assignment of $M_S$ to endpoints with load at most $\kappa_v$ at every $v\in S$. By Lemma~\ref{lem:maxdef}(c) and Lemma~\ref{lem:hall}(b), parts of the $H$-internal chores can be assigned to their endpoints so that every $h\in H$ receives exactly $\mu$. The unassigned parts of $H$-internal chores have total mass $|M_H|-\mu|H|$, and the unused capacity in $S$ is $\mu|S|-|M_\times|-|M_S|$; by Lemma~\ref{lem:maxdef}(d) both equal $\Delta(S)>0$. We distribute every unassigned part among the agents of $S$ in proportion to their unused capacities. Now every agent has load $\mu$, which proves the first statement. Lemma~\ref{lem:integral}(a) with bounds $[q,q+1]$ gives an integral assignment with the same permitted recipients, which is a separated allocation.
+\end{proof}
+
+We fix a separated allocation $X^\circ$, write $Q_a=|X^\circ_a|$ for $a\in N$, and let $D=M_H\cap\bigcup_{v\in S}X^\circ_v$ be the set of $H$-internal chores held by agents of $S$. Let $\cA$ be the set of separated allocations $X$ with $X_h=X^\circ_h$ for every $h\in H$ and $|X_v|=Q_v$ for every $v\in S$. An element of $\cA$ is determined by its restriction to $S$, which is an assignment of $M_S\cup M_\times\cup D$ to $S$; the set $\cA$ is finite and nonempty.
+
+\section{Exchange systems and their normal form}\label{sec:exchange}
+
+Agents of $S$ may have to hold expensive chores, and the difficulty is to distribute these chores so that no agent of $S$ strongly envies another. We minimize the sum of the squares of the numbers of expensive chores held by agents of $S$. If an agent $v$ holds at least two more expensive chores than an agent $w$ that holds a chore cheap for $v$, exchanging an expensive chore of $v$ for that chore lowers this sum; so at a minimum the numbers of expensive chores are as balanced as the cheap chores permit. Among the minimizers we then minimize the number of bad comparisons (Definition~\ref{def:normal}); that is, we take a lexicographic minimum of the pair of objectives, which we call a \emph{normal} allocation. At a normal allocation the only comparisons that can fail lie inside disjoint pairs of agents of a special form (Proposition~\ref{prop:normal}). Since the same minimization is applied to a smaller family in Section~\ref{sec:onepair}, we formulate it abstractly.
+
+\begin{definition}\label{def:system}
+An \emph{exchange system} is a tuple $\cE=(A,q,Q,M^\anc,M^\fr)$ consisting of a nonempty set $A\subseteq N$, an integer $q\ge1$, a map $Q\colon A\to\{q,q+1\}$ of sizes, a set $M^\anc$ of \emph{anchored} chores, each with at least one endpoint in $A$, and a set $M^\fr$ of \emph{free} chores, none with an endpoint in $A$, such that $\sum_{a\in A}Q_a=|M^\anc|+|M^\fr|$. The \emph{feasible family} $\cA(\cE)$ of the system is the set of all assignments $Y=(Y_a)_{a\in A}$ of the chores in $M^\anc\cup M^\fr$ to agents of $A$ such that every anchored chore $e$ lies in $Y_a$ for some $a\in\bd e\cap A$ and $|Y_a|=Q_a$ for all $a\in A$. We always assume $\cA(\cE)\ne\emptyset$.
+\end{definition}
+
+The family $\cA$ of Section~\ref{sec:separated} is the feasible family of the system with agent set $S$, sizes $Q|_S$, anchored chores $M_S\cup M_\times$ and free chores $D$.
+
+Fix an exchange system and $Y\in\cA(\cE)$. Every anchored chore in $Y_a$ is cheap for $a$ and every free chore is expensive for every agent of $A$, so $\ell_a=\ell_a(Y_a)$ is the number of free chores in $Y_a$ and $\alpha_a=Q_a-\ell_a$ the number of anchored ones. The \emph{type} of an anchored chore $e\in Y_a$ is the endpoint of $e$ other than $a$. For distinct $v,w\in A$, a chore of $Y_w$ is cheap for $v$ exactly when it is an anchored chore of type $v$; writing $t_{vw}$ for the number of such chores, we have
+\begin{equation}\label{eq:lvw}
+\ell_v(Y_w)=Q_w-t_{vw}=\ell_w+(\alpha_w-t_{vw})\ge\ell_w .
+\end{equation}
+An agent $w$ is \emph{pure toward} $v$ if $\alpha_w\ge1$ and all anchored chores of $Y_w$ have type $v$, and \emph{mixed} if its anchored chores have at least two different types. A mixed agent is pure toward nobody, and an agent is pure toward at most one agent.
+
+\begin{definition}\label{def:normal}
+Let $\Psi(Y)=\sum_{a\in A}\ell_a^2$. An ordered pair $(v,w)$ of distinct agents of $A$ is a \emph{bad comparison} $v\to w$ of $Y$ if $\alpha_v\ge1$ and $\ell_v>\ell_v(Y_w)$. Let $B(Y)$ be the number of bad comparisons. We call $Y$ \emph{$\Psi$-optimal} if $\Psi(Y)=\min_{Z\in\cA(\cE)}\Psi(Z)$, and \emph{normal} if it is $\Psi$-optimal and $B(Y)$ is minimal among $\Psi$-optimal elements of $\cA(\cE)$.
+\end{definition}
+
+Normal elements exist because $\cA(\cE)$ is finite and nonempty. By Lemma~\ref{lem:basic}(i) and $|Q_v-Q_w|\le1$, if $\alpha_v\ge1$ and $v\to w$ is not bad, then $v$ is EFX toward $w$. The converse fails: for instance, if $q=2$, $Q_v=2$, $Q_w=3$, $\ell_v=1$ and all three chores of $Y_w$ are cheap for $v$, then $v\to w$ is bad, while $\tau_v=r\le 3=c_v(Y_w)$ when $r\le 3$.
+
+If $v$ owns a free chore $e$ and $w\ne v$ owns an anchored chore $g$ of type $v$, the \emph{swap} of $e$ and $g$ moves $g$ to $v$ and $e$ to $w$. It preserves all sizes, $g$ goes to its endpoint $v$, and $e$ may go to any agent of $A$, so the result lies in $\cA(\cE)$. The swap replaces $\ell_v$ by $\ell_v-1$ and $\ell_w$ by $\ell_w+1$, and changes $\Psi$ by $2(\ell_w-\ell_v+1)$.
+
+\begin{lemma}[Exchange inequality]\label{lem:EI}
+Let $Y$ be $\Psi$-optimal. If $v$ owns a free chore and $w\ne v$ owns an anchored chore of type $v$, then $\ell_v\le\ell_w+1$.
+\end{lemma}
+
+\begin{proof}
+The swap changes $\Psi$ by $2(\ell_w-\ell_v+1)$, which is nonnegative by optimality.
+\end{proof}
+
+\begin{lemma}[Shape of bad comparisons]\label{lem:shape}
+Let $Y$ be $\Psi$-optimal and let $v\to w$ be bad. Then $\ell_v=\ell_w+1\ge 1$, and $w$ is pure toward $v$; in particular $t_{vw}=\alpha_w\ge1$.
+\end{lemma}
+
+\begin{proof}
+Since $\alpha_v\ge1$, we have $\ell_v\le Q_v-1\le q\le Q_w$. If $t_{vw}=0$, then $\ell_v(Y_w)=Q_w\ge\ell_v$ and $v\to w$ is not bad; so $w$ owns an anchored chore of type $v$. As $\ell_v>\ell_v(Y_w)\ge0$, the agent $v$ owns a free chore, and Lemma~\ref{lem:EI} together with~\eqref{eq:lvw} gives
+\[
+\ell_w+1\ge\ell_v\ge\ell_v(Y_w)+1=\ell_w+(\alpha_w-t_{vw})+1\ge\ell_w+1 .
+\]
+Hence all inequalities are equalities.
+\end{proof}
+
+For a bad comparison $v\to w$ of a $\Psi$-optimal $Y$, the \emph{basic exchange along $v\to w$} is the swap of a free chore of $v$ with an anchored chore of $w$ of type $v$; both exist by Lemma~\ref{lem:shape}. Since $\ell_v=\ell_w+1$, it leaves $\Psi$ unchanged, so the result is again $\Psi$-optimal, and the values of $\ell_v$ and $\ell_w$ are interchanged.
+
+\Needspace{12\baselineskip}
+\begin{lemma}[A single basic exchange]\label{lem:oneexchange}
+Let $Y$ be $\Psi$-optimal, let $x\to y$ be bad, and suppose that $x$ owns an anchored chore whose type is not $y$. Let $Y'$ be obtained by the basic exchange along $x\to y$. Then:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $x$ is mixed in $Y'$;
+\item no bad comparison of $Y'$ has target $x$ or $y$;
+\item no bad comparison of $Y'$ has source $x$;
+\item comparisons between agents outside $\{x,y\}$ are the same in $Y$ and $Y'$;
+\item if $y\to z$ is bad in $Y'$, then $z\ne x$, and $y$ owns in $Y'$ an anchored chore of type $x$, whose type is not $z$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Write $\ell_x=L+1$ and $\ell_y=L$ in $Y$; in $Y'$ these values become $\ell'_x=L$ and $\ell'_y=L+1$.
+(a) In $Y'$, the agent $x$ holds its old anchored chore of a type other than $y$ and the new chore of type $y$.
+(b) The target of a bad comparison of the $\Psi$-optimal allocation $Y'$ is pure toward the source (Lemma~\ref{lem:shape}), and $x$ is mixed. In $Y$ all anchored chores of $y$ had type $x$ (Lemma~\ref{lem:shape}), and in $Y'$ the agent $y$ has lost one of them and gained a free chore; so a bad comparison into $y$ would have source $x$ and would need $\ell'_x=\ell'_y+1=L+2$, whereas $\ell'_x=L$.
+(c) Suppose that $x\to z$ is bad in $Y'$. Then $z\ne y$ by (b), so $Y'_z=Y_z$, $\ell_z=\ell'_x-1=L-1$, and $z$ owns an anchored chore of type $x$. In $Y$ the agent $x$ owned a free chore and $\ell_x=L+1>\ell_z+1$, contradicting Lemma~\ref{lem:EI} for $Y$.
+(d) Only $Y_x$ and $Y_y$ change.
+(e) We have $z\ne x$ by (b). As $\alpha'_y\ge1$ and all anchored chores of $Y'_y$ have type $x$, the claim follows.
+\end{proof}
+
+\begin{lemma}[Walk from a mixed source]\label{lem:walk}
+Let $Y$ be $\Psi$-optimal, let $v_0\to v_1$ be bad, and suppose that $v_0$ owns an anchored chore whose type is not $v_1$. Then a sequence of at most $|A|-1$ basic exchanges produces a $\Psi$-optimal $Y'$ and a set $V\subseteq A$ containing $v_0,v_1$ such that $Y'$ agrees with $Y$ outside $V$, no bad comparison of $Y'$ has an endpoint in $V$, and $Y$ and $Y'$ have the same bad comparisons with both endpoints outside $V$. In particular $B(Y')<B(Y)$.
+\end{lemma}
+
+\begin{proof}
+We construct allocations $Y=Y^{(0)},Y^{(1)},\dots$ and distinct agents $v_0,v_1,\dots$ such that for each $\nu\ge1$ the following hold: $Y^{(\nu)}$ arises from $Y^{(\nu-1)}$ by the basic exchange along $v_{\nu-1}\to v_\nu$; $Y^{(\nu)}$ is $\Psi$-optimal and agrees with $Y$ outside $V_\nu =\{v_0,\dots,v_\nu\}$; the agents $v_0,\dots,v_{\nu-1}$ are mixed in $Y^{(\nu)}$; every bad comparison of $Y^{(\nu)}$ with an endpoint in $V_\nu$ has source $v_\nu$; and if $v_\nu\to z$ is such a comparison, then $v_\nu$ owns an anchored chore whose type is not $z$.
+
+For $\nu =1$ this is Lemma~\ref{lem:oneexchange} with $x=v_0$ and $y=v_1$: by (b) and (c) a bad comparison with an endpoint in $\{v_0,v_1\}$ has source $v_1$, and (e) gives the last property. Suppose the statements hold for $\nu$ and that $Y^{(\nu)}$ has a bad comparison $v_\nu\to z$. By hypothesis $v_\nu$ owns an anchored chore of a type other than $z$, so Lemma~\ref{lem:oneexchange} applies with $x=v_\nu$ and $y=z$. The target $z$ is pure and $v_0,\dots,v_{\nu-1}$ are mixed, while $z\ne v_\nu$; so $z\notin V_\nu$, and we put $v_{\nu+1}=z$. In $Y^{(\nu+1)}$ the agents $v_0,\dots,v_{\nu-1}$ keep their bundles and stay mixed, and $v_\nu$ is mixed by (a). A bad comparison of $Y^{(\nu+1)}$ with an endpoint in $V_{\nu+1}$ cannot have its target in $V_{\nu+1}$: targets are pure, $v_0,\dots,v_\nu$ are mixed, and $v_{\nu+1}$ is excluded by (b). It cannot have source $v_\nu$ by (c). If its source were some $u\in V_{\nu-1}$ and its target some $w\notin V_{\nu+1}$, then $Y^{(\nu+1)}_u=Y^{(\nu)}_u$ and $Y^{(\nu+1)}_w=Y^{(\nu)}_w$, so it would already be a bad comparison of $Y^{(\nu)}$ with source $u\ne v_\nu$, contrary to the hypothesis. Hence its source is $v_{\nu+1}$, and (e) gives the last property.
+
+Since the agents $v_\nu$ are distinct, the construction stops after at most $|A|-1$ exchanges at some $Y^{(\nu)}$ in which $v_\nu$ is the source of no bad comparison. Then $Y'=Y^{(\nu)}$ and $V=V_\nu$ have the stated properties; comparisons with both endpoints outside $V$ are those of $Y$. Since $v_0\to v_1$ was bad in $Y$, we get $B(Y')\le B(Y)-1$.
+\end{proof}
+
+\Needspace{12\baselineskip}
+\begin{proposition}[Normal form]\label{prop:normal}
+Let $Y$ be normal.
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item If $v\to w$ is bad, then $v$ and $w$ are pure toward each other and $\ell_v=\ell_w+1$. Every agent lies in at most one bad comparison. Thus the bad comparisons form vertex-disjoint \emph{bad pairs} $i\to j$; we call $i$ the \emph{high} and $j$ the \emph{low} member, and $L=\ell_j$ the \emph{level} of the pair.
+\item For every bad pair $i\to j$ we have $\alpha_j\ge 2$.
+\item \textup{(Margin.)} For every bad pair $i\to j$ of level $L$, every $v\in\{i,j\}$ and every $k\in A\setminus\{i,j\}$, we have $\ell_v(Y_k)\ge L+1$.
+\item \textup{(Reversal.)} Let $Y'$ be obtained by the basic exchange along a bad pair $i\to j$. Then $Y'$ is normal, its bad comparisons are those of $Y$ with $i\to j$ replaced by $j\to i$, and the pair $j\to i$ of $Y'$ has level $L$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(a) If $v$ owned an anchored chore of a type other than $w$, Lemma~\ref{lem:walk} would yield a $\Psi$-optimal allocation with fewer bad comparisons. Hence $v$ is pure toward $w$, and $w$ is pure toward $v$ by Lemma~\ref{lem:shape}. If $v\to w$ and $v\to w'$ were bad with $w\ne w'$, then $v$ would be pure toward both, which is impossible; similarly for $v\to w$ and $u\to w$ with $u\ne v$. If $v\to w$ and $w\to x$ were bad, then $w$ would be pure toward $v$ and toward $x$, so $x=v$; but $\ell_v=\ell_w+1$ and $\ell_w=\ell_v+1$ cannot both hold. The case of $u\to v$ and $v\to w$ is the same.
+
+For (b), (c) and (d), let $i\to j$ be a bad pair of level $L$ and let $Y'$ be the result of the basic exchange along $i\to j$. In $Y'$ we have $\ell'_i=L$, $\ell'_j=L+1$, $\alpha'_i=\alpha_i+1$ and $\alpha'_j=\alpha_j-1$, and all anchored chores of $i$ and of $j$ have types $j$ and $i$, respectively. Since $Y'$ is $\Psi$-optimal, Lemma~\ref{lem:shape} applies to it, and the possible bad comparisons of $Y'$ are as follows.
+\begin{itemize}
+\item Target $i$: as $i$ is pure toward $j$, the source is $j$. Since $\ell_j(Y'_i)=\ell'_i=L<\ell'_j$, the comparison $j\to i$ is bad exactly when $\alpha'_j\ge1$.
+\item Target $j$: the only candidate source is $i$, and $\ell'_i=L\ne\ell'_j+1$.
+\item Source $i$ and target $k\notin\{i,j\}$: then $\ell_k=L-1$ and $k$ owns a chore of type $i$, while in $Y$ the agent $i$ owned a free chore and $\ell_i=L+1$; this contradicts Lemma~\ref{lem:EI}.
+\item Source $j$ and target $k\notin\{i,j\}$: this is bad exactly when $\alpha'_j\ge1$ and $\ell_j(Y_k)<L+1$.
+\item Comparisons not involving $i$ or $j$ are unchanged; by (a), they include every bad comparison of $Y$ other than $i\to j$.
+\end{itemize}
+(b) If $\alpha_j=1$ then $\alpha'_j=0$, so the list gives $B(Y')=B(Y)-1$, contradicting normality.
+
+(c) For $v=i$ the claim says that $i\to k$ is not bad, which holds by (a). Let $v=j$. By (a), $j\to k$ is not bad in $Y$, and $\alpha_j\ge1$, so $\ell_j(Y_k)\ge\ell_j=L$. Suppose that $\ell_j(Y_k)=L$. By the list, $j\to k$ is bad in $Y'$, and by (b) the agent $j$ still owns a chore of type $i\ne k$. Apply Lemma~\ref{lem:walk} to $Y'$ and $j\to k$, obtaining $Y''$ and $V\ni j$. The bad comparisons of $Y'$ are the bad comparisons of $Y$ not involving $i$ or $j$, of which there are $B(Y)-1$, together with comparisons having source $j$. The latter have an endpoint in $V$ and do not survive in $Y''$, so $B(Y'')\le B(Y)-1$, a contradiction. Hence $\ell_j(Y_k)\ge L+1$.
+
+(d) By (b), (c) and the list, the bad comparisons of $Y'$ are those of $Y$ with $i\to j$ replaced by $j\to i$. Thus $\Psi(Y')=\Psi(Y)$ and $B(Y')=B(Y)$, so $Y'$ is normal, and the level of $j\to i$ is $\ell'_i=L$.
+\end{proof}
+
+\begin{lemma}\label{lem:localEFX}
+Let $Y$ be $\Psi$-optimal and let $v,w\in A$ be distinct agents such that $v\to w$ is not bad. Then $v$ is EFX toward $w$ with respect to the bundles $Y_v$ and $Y_w$.
+\end{lemma}
+
+\begin{proof}
+If $\alpha_v\ge1$, this was observed after Definition~\ref{def:normal}. Let $\alpha_v=0$; then $\ell_v=Q_v\ge1$ and $\tau_v=r(Q_v-1)$ by Lemma~\ref{lem:basic}(ii). If $t_{vw}=0$, then $c_v(Y_w)=rQ_w\ge rq\ge r(Q_v-1)$. If $t_{vw}\ge1$, Lemma~\ref{lem:EI} and~\eqref{eq:lvw} give $Q_v-1\le\ell_w\le\ell_v(Y_w)$, and hence $c_v(Y_w)\ge r\,\ell_v(Y_w)\ge r(Q_v-1)$.
+\end{proof}
+
+We return to the family $\cA$ of Section~\ref{sec:separated}. For $Y\in\cA$ we also write $Y$ for the full allocation, with the bundles $X^\circ_h$ on $H$.
+
+\begin{lemma}[Comparisons involving $H$]\label{lem:closing}
+Let $X$ be an allocation with $X_h=X^\circ_h$ for all $h\in H$, with $|X_a|\ge q$ for all $a\in N$, and with $\tau_v(X)\le rq$ for all $v\in S$. Then every agent of $H$ is EFX toward every other agent, and every agent of $S$ is EFX toward every agent of $H$.
+\end{lemma}
+
+\begin{proof}
+An agent $h\in H$ holds $Q_h\le q+1$ chores, all cheap for it, so Lemma~\ref{lem:bounds}(i) applies. A bundle $X^\circ_h$ consists of $H$-internal chores, which are expensive for every agent of $S$, and has at least $q$ chores, so Lemma~\ref{lem:bounds}(ii) applies.
+\end{proof}
+
+Every $Y\in\cA$ satisfies the hypotheses of Lemma~\ref{lem:closing}, since $\tau_v(Y)\le r(Q_v-1)\le rq$ by Lemma~\ref{lem:basic}(iii). Together with Lemma~\ref{lem:localEFX} this gives the following.
+
+\begin{corollary}\label{cor:B0}
+Let $Y\in\cA$ be $\Psi$-optimal. Every ordered pair of distinct agents that is not a bad comparison of $Y$ is EFX in $Y$. In particular, if $B(Y)=0$, then $Y$ is an EFX allocation.
+\end{corollary}
+
+\section{The divisible case}\label{sec:divisible}
+
+\begin{theorem}\label{thm:divisible}
+If $m=nq$ for an integer $q\ge0$, the M2 instance admits a complete EFX allocation.
+\end{theorem}
+
+\begin{proof}
+If $q=0$ the empty allocation is EFX, and if no set is deficient Lemma~\ref{lem:nodef} applies. Otherwise let $S$, $H$, $X^\circ$ and $\cA$ be as in Section~\ref{sec:separated}; since $\sum_aQ_a=nq$ and $Q_a\in\{q,q+1\}$, all sizes equal $q$. Let $Y\in\cA$ be normal. By Corollary~\ref{cor:B0} we may assume $B(Y)\ge1$. Every agent of $H$ holds $q$ chores cheap for it and has threshold $q-1$.
+
+\emph{Bad pairs.} Let $i\to j$ be a bad pair and put $t=\alpha_i\ge1$. As $Q_i=Q_j=q$ and $\ell_i=\ell_j+1$, we get $\ell_i=q-t$, $\ell_j=q-t-1$ and $\alpha_j=t+1$. Thus $1\le t\le q-1$ and $q\ge2$. We call the pair \emph{thin} if $t=1$ and \emph{thick} if $t\ge2$; thick pairs exist only when $q\ge3$. By Proposition~\ref{prop:normal}(c), for $v\in\{i,j\}$ and every agent $x\in S$ outside the pair, $\ell_v(Y_x)\ge q-t$. The anchored chores of $i$ and $j$ are \emph{pair chores}, that is, chores with endpoints $\{i,j\}$, and all other chores they hold are free.
+
+We use three operations on a bad pair $i\to j$ with parameter $t$.
+\begin{itemize}
+\item[(Z)] For a thin pair, move the unique pair chore of $i$ to $j$. Afterwards $i$ holds $q-1$ free chores and nothing else, so $\tau_i=r(q-2)$, and $j$ holds $3$ pair chores and $q-2$ free chores, so $\tau_j=r(q-2)+2$.
+\item[(D)] For any pair, remove one free chore from $i$; it exists since $\ell_i=q-t\ge1$. Afterwards $|X_i|=q-1$ and $|X_j|=q$, both members hold $q-t-1$ free chores, and $\alpha_i=t$, $\alpha_j=t+1$.
+\item[(R)] For a thick pair, give one additional free chore to $j$. Afterwards $|X_i|=q$ and $|X_j|=q+1$, both members hold $q-t$ free chores, and $\alpha_i=t$, $\alpha_j=t+1$.
+\end{itemize}
+Let $b$ be the number of thick and $a$ the number of thin pairs. We combine the operations so that every chore removed by (D) is used by (R) or given to an agent of $H$.
+\begin{enumerate}[label=(\arabic*)]
+\item If $b$ is even, split the thick pairs into couples; in each couple apply (D) to one pair and (R) to the other, the chore removed by (D) being the chore added by (R). Apply (Z) to all thin pairs.
+\item If $b$ is odd and $a\ge1$, choose a thin pair and a thick pair, and apply (D) to the thin pair and (R), with the removed chore, to the thick pair. Treat the remaining thick pairs as in (1), and apply (Z) to the remaining thin pairs.
+\item If $b$ is odd and $a=0$, apply (D) to one thick pair and give the removed chore $e$, which is $H$-internal, to an endpoint $h\in H$ of $e$. Treat the remaining thick pairs as in (1).
+\end{enumerate}
+Let $X$ be the resulting allocation; it is complete. Agents of $S$ outside bad pairs, called \emph{regular}, and agents of $H$ other than $h$ keep their bundles.
+
+\emph{Thresholds and bundles.} For (Z) the thresholds were computed above, and $r(q-2)+2\le r(q-1)$. After (D) both members hold a cheap chore, at most $q$ chores and $q-t-1\le q-2$ free chores, so their thresholds are at most $q-1+(r-1)(q-2)\le r(q-1)$. After (R) we have $\tau_i=q-1+(r-1)(q-t)$ and $\tau_j=q+(r-1)(q-t)=rq-(r-1)t\le r(q-1)$, using $t\ge2$ and $r\ge2$. A regular agent $x$ has $\tau_x\le r(q-1)$ by Lemma~\ref{lem:basic}(iii). Hence every agent of $S$ has threshold at most $r(q-1)$. Every moved chore is either a pair chore moved inside its pair or a free chore. Therefore every bundle of a processed pair consists of chores of that pair and free chores, and it is wholly expensive for every agent of $S$ outside the pair. Every bundle has at least $q-1$ chores.
+
+\emph{Inside a pair.} After (Z), $\tau_i=r(q-2)\le 3+r(q-2)=c_i(X_j)$ and $\tau_j=r(q-2)+2\le r(q-1)=c_j(X_i)$. After (D) or (R), both members hold cheap chores and the same number of free chores, and each sees exactly these free chores as the expensive chores in the bundle of the other; the sizes differ by one, so Lemma~\ref{lem:basic}(i) applies in both directions.
+
+\emph{Processed agents toward other agents of $S$.} A bundle of another processed pair is wholly expensive and has at least $q-1$ chores, so it costs at least $r(q-1)$. A regular agent $x$ holds $Y_x$, and $\ell_v(Y_x)\ge q-t$ gives $c_v(X_x)\ge q+(r-1)(q-t)$. For a thin pair processed by (Z) this is $r(q-1)+1$, which exceeds both thresholds; for $j$ after (R) it equals $\tau_j$; after (D) it exceeds both thresholds, which are at most $q-1+(r-1)(q-t-1)$. For $i$ after (R), the bundle of $i$ is unchanged and $i\to x$ was not bad.
+
+\emph{Regular agents.} A regular agent $x$ keeps its bundle and its threshold. Toward a processed agent it sees a wholly expensive bundle of at least $q-1$ chores, of cost at least $r(q-1)\ge\tau_x$. Toward other regular agents nothing has changed, and Lemma~\ref{lem:localEFX} applies.
+
+\emph{Toward $H$.} Every bundle of $H$ consists of $H$-internal chores and has at least $q$ chores, so it costs at least $rq$ to every agent of $S$, more than every threshold in $S$.
+
+\emph{Agents of $H$.} An agent of $H$ other than $h$ has threshold $q-1$, and every bundle has at least $q-1$ chores. In case (3) the agent $h$ holds $q+1$ cheap chores and has threshold $q$. Bundles with at least $q$ chores cost at least $q$ to $h$. In case (3) the only bundles with $q-1$ chores belong to high members of thick pairs processed by (D); such a bundle contains $t\ge2$ pair chores, which are expensive for $h$, so it costs at least $(q-1)+2(r-1)>q$.
+
+Hence $X$ is EFX. All bundles are nonempty, since bad pairs force $q\ge2$.
+\end{proof}
+
+\section{Special pairs and several ordinary pairs}\label{sec:several}
+
+In Sections~\ref{sec:several} and~\ref{sec:onepair} we assume $1\le s\le n-1$ and that some set is deficient, fix $S$, $H$, $X^\circ$ and $\cA$ as in Section~\ref{sec:separated}, and let $Y\in\cA$ be normal with $B(Y)\ge1$. By Proposition~\ref{prop:normal}, the bad comparisons of $Y$ form disjoint bad pairs. The anchored chores of a member of a bad pair $\{i,j\}$ are all \emph{pair chores}, with endpoints $\{i,j\}$. In particular the members own no crossing chore, and every chore between a member and another agent of $S$ is held by that other agent. Agents of $S$ outside all bad pairs are called \emph{regular}.
+
+\begin{lemma}\label{lem:classify}
+Let $i\to j$ be a bad pair of level $L$. Then $L\le q-1$. If $L=q-1$, then $Q_i=Q_j=q+1$, $\alpha_i=1$ and $\alpha_j=2$; we then call the pair \emph{special}. Otherwise $L\le q-2$ and $q\ge2$, and we call the pair \emph{ordinary}.
+\end{lemma}
+
+\begin{proof}
+We have $q+1\ge Q_i=L+1+\alpha_i\ge L+2$. If $L=q-1$, then $\alpha_i=1$ and $Q_i=q+1$; moreover $Q_j=q-1+\alpha_j\ge q+1$ by Proposition~\ref{prop:normal}(b), so $Q_j=q+1$ and $\alpha_j=2$.
+\end{proof}
+
+\begin{proposition}\label{prop:several}
+If $Y$ has a special pair or at least two ordinary pairs, then a complete EFX allocation exists.
+\end{proposition}
+
+\begin{proof}
+Let $(i_\sigma,j_\sigma)_{\sigma\in\Sigma}$ be the special pairs and $(i_\theta,j_\theta)_{\theta\in\Theta}$ the ordinary pairs, the latter with levels $L_\theta$. We construct $X$ from $Y$ in two steps.
+
+\emph{Step A.} For every special pair, move the unique pair chore of $i_\sigma$ to $j_\sigma$. Then $i_\sigma$ holds $q$ free chores, and $j_\sigma$ holds $3$ pair chores and $q-1$ free chores.
+
+\emph{Step B.} If $\Theta=\emptyset$, stop. If $|\Theta|=\omega\ge2$, identify $\Theta$ with $\mathbb Z/\omega\mathbb Z$, choose a pair chore $f_\theta$ of $j_\theta$ and a free chore $e_\theta$ of $i_\theta$ for every $\theta$ (they exist since $\alpha_{j_\theta}\ge2$ and $\ell_{i_\theta}=L_\theta+1\ge1$), and simultaneously move $f_\theta$ to $i_{\theta+1}$ and $e_{\theta+1}$ to $j_\theta$ for all $\theta$. If $|\Theta|=1$, say $\Theta=\{\theta\}$ with $(i,j)=(i_\theta,j_\theta)$ and $L=L_\theta$, then $\Sigma\ne\emptyset$; choose $\sigma\in\Sigma$, put $z=i_\sigma$, and swap a free chore $e$ of $z$ with a pair chore $f$ of $j$.
+
+Every moved chore is free or a pair chore of some bad pair, and all bundles of $H$ are those of $X^\circ$.
+
+\emph{Bundles and thresholds.} In $X$, the agent $i_\sigma$ holds $q$ chores, none of them cheap for it, so $\tau_{i_\sigma}=r(q-1)$; this also holds for $z$, which holds $q-1$ free chores and the chore $f$, expensive for $z$. The agent $j_\sigma$ has $\alpha=3$, $\ell=q-1$ and $q+2$ chores, so $\tau_{j_\sigma}=r(q-1)+2\le rq$. If $|\Theta|\ge2$, then $X_{i_\theta}=(Y_{i_\theta}\setminus\{e_\theta\})\cup\{f_{\theta-1}\}$ and $X_{j_\theta}=(Y_{j_\theta}\setminus\{f_\theta\})\cup\{e_{\theta+1}\}$; since $f_{\theta-1}$ is expensive for $i_\theta$, both members hold exactly $L_\theta+1$ expensive chores and at least one cheap chore. If $|\Theta|=1$, then $X_i=Y_i$ and $X_j=(Y_j\setminus\{f\})\cup\{e\}$, and again both members hold $L+1$ expensive chores and a cheap chore. In both cases the members of an ordinary pair keep their sizes and have threshold
+\begin{equation}\label{eq:Tt}
+\tau\le q+(r-1)(L_\theta+1)\le r(q-1)+1 .
+\end{equation}
+Regular agents keep their bundles and have threshold at most $rq$. All bundles have at least $q$ chores.
+
+The bundles of special pairs contain only free chores and chores of their own pair, except that $X_z$ also contains $f$. The bundle of a member of an ordinary pair contains free chores and chores of its own pair, and if $|\Theta|\ge2$ the bundle $X_{i_\theta}$ contains in addition one foreign chore $f_{\theta-1}$.
+
+\emph{Inside pairs.} For a special pair, $\tau_{i_\sigma}=r(q-1)\le 3+r(q-1)=c_{i_\sigma}(X_{j_\sigma})$ and $\tau_{j_\sigma}=r(q-1)+2\le rq=c_{j_\sigma}(X_{i_\sigma})$; for $z$ and its partner the same computation applies, as $f$ is expensive for the partner. For an ordinary pair, each member sees in the bundle of the other exactly $L_\theta+1$ expensive chores: the $L_\theta+1$ free chores of $X_{j_\theta}$, or the free chores and the foreign chore of $X_{i_\theta}$ (the $L+1$ free chores of $Y_i$ if $|\Theta|=1$). Sizes are unchanged, so Lemma~\ref{lem:basic}(i) applies.
+
+\emph{Regular sources.} Every moved chore is expensive for a regular agent $x$, and ordinary bundles keep their sizes, so $c_x(X_y)=c_x(Y_y)$ for every regular or ordinary $y$, and Lemma~\ref{lem:localEFX} applies. Special bundles, including $X_z$, are wholly expensive for $x$ and have at least $q$ chores, and $\tau_x\le rq$, so Lemma~\ref{lem:bounds}(ii) applies.
+
+\emph{Special sources.} Let $v$ be a member of a special pair, so that $\tau_v\le rq$. For a regular $y$ we have $X_y=Y_y$, and Proposition~\ref{prop:normal}(c) gives $\ell_v(Y_y)\ge q$, so $c_v(X_y)\ge rq$. Bundles of other special pairs and of ordinary pairs contain no chore incident to $v$, so they are wholly expensive for $v$ and have at least $q$ chores.
+
+\emph{Ordinary sources.} Let $v$ be a member of the ordinary pair $\theta$. For a regular $y$, the margin $\ell_v(Y_y)\ge L_\theta+1$ gives $c_v(X_y)\ge q+(r-1)(L_\theta+1)\ge\tau_v$. If $|\Theta|\ge2$, the bundle $X_{i_{\theta'}}$ of another ordinary pair contains at most one chore cheap for $v$ (namely $f_\theta$, if $\theta'=\theta+1$), the bundle $X_{j_{\theta'}}$ contains none, and special bundles contain none; Lemma~\ref{lem:bounds}(iii) and~\eqref{eq:Tt} apply. If $|\Theta|=1$, the bundle $X_z$ contains exactly one chore cheap for $v$, namely $f$, and the other special bundles contain none; again Lemma~\ref{lem:bounds}(iii) applies.
+
+\emph{Agents of $H$.} Lemma~\ref{lem:closing} applies, since all sizes are at least $q$ and all thresholds in $S$ are at most $rq$.
+\end{proof}
+
+\section{A single ordinary pair}\label{sec:onepair}
+
+In this section we assume, in addition to the standing assumptions of Section~\ref{sec:several}, that
+\begin{enumerate}[label=$(\star)$,leftmargin=*]
+\item $Y$ has exactly one bad comparison $i\to j$, and this pair is ordinary, of level $L\le q-2$; thus $q\ge2$.
+\end{enumerate}
+We write $P=\{i,j\}$ and $U=S\setminus P$. Thus $\ell_i=L+1$, $\ell_j=L$, $\alpha_i\ge1$, $\alpha_j\ge2$, the members of $P$ are pure toward each other, and
+\begin{equation}\label{eq:margin}
+\ell_v(Y_k)\ge L+1\qquad(v\in P,\ k\in U).
+\end{equation}
+By Corollary~\ref{cor:B0}, every ordered pair of agents other than $(i,j)$ is EFX in $Y$. By Proposition~\ref{prop:normal}(d), the basic exchange along $i\to j$, which we call the \emph{reversal}, yields a normal allocation satisfying $(\star)$ with the roles of $i$ and $j$ interchanged and with the same level $L$; it changes no bundle outside $P$. Hence we may assume, whenever convenient, that a prescribed member of $P$ is the high member.
+
+Except in Lemma~\ref{lem:SP}, the allocations constructed in this section keep the bundles of $H$, and we check the hypotheses of Lemma~\ref{lem:closing}; in Lemma~\ref{lem:SP} the agents of $H$ are treated directly. We put
+\[
+T^*=q+(r-1)(L+1).
+\]
+Since $L\le q-2$, we have $T^*\le r(q-1)+1\le rq$, and $T^*$ bounds the threshold of every agent of $S$ that holds a cheap chore, at most $q+1$ chores and at most $L+1$ expensive chores.
+
+\Needspace{6\baselineskip}
+\subsection{An outside donor with slack}
+
+\begin{lemma}\label{lem:slack}
+Assume $(\star)$. If some $k\in U$ owns a free chore $e$ and $\ell_v(Y_k)\ge L+2$ for both $v\in P$, then a complete EFX allocation exists.
+\end{lemma}
+
+\begin{proof}
+Swap $e$ with a pair chore $f$ of $j$, and call the result $X$. Sizes are unchanged, $\ell_i=\ell_j=L+1$, and $\alpha_j=\alpha_j(Y)-1\ge1$. In $X_j$ the agent $i$ sees $L+1$ expensive chores, namely the free ones, and in $X_i=Y_i$ the agent $j$ sees its $L+1$ free chores; Lemma~\ref{lem:basic}(i) gives EFX inside $P$. The agent $k$ gave and received a chore expensive for it, so its cost and threshold are unchanged. For $v\in P$ we have $\ell_v(X_k)=\ell_v(Y_k)-1\ge L+1=\ell_v$, since $e$ is expensive and $f$ cheap for $v$, and toward every other $y\in U$ we have $\ell_v(Y_y)\ge L+1$ by~\eqref{eq:margin}; as sizes differ by at most one and $v$ holds a cheap chore, Lemma~\ref{lem:basic}(i) shows that $v$ is EFX toward every agent of $U$. Every agent $x\in U$ sees $e$ and $f$ as expensive. Hence the costs that $x$ assigns to all bundles, as well as its own threshold, are those of $Y$, and the comparisons with source in $U$ remain EFX. Thresholds in $S$ are at most $rq$ and sizes are unchanged, so Lemma~\ref{lem:closing} completes the proof.
+\end{proof}
+
+\Needspace{6\baselineskip}
+\subsection{A neutral exchange}
+
+\begin{lemma}\label{lem:neutral}
+Assume $(\star)$. If some $k\in U$ with $\ell_k=L$ owns a chore of type $v$ for some $v\in P$, then a complete EFX allocation exists.
+\end{lemma}
+
+\begin{proof}
+After a reversal we may assume $v=i$. Let $g\in Y_k$ with $\bd g=\{i,k\}$, let $e$ be a free chore of $i$, swap $e$ and $g$, and call the result $Y'$. Then $\ell'_i=L$, $\ell'_k=L+1$ and $\Psi(Y')=\Psi(Y)$, and $i$ is mixed, holding chores of types $j$ and $k$.
+
+\begin{claim}\label{cl:neutral1}
+Every bad comparison of $Y'$ has source $k$.
+\end{claim}
+
+\begin{proof}
+Since $Y'$ is $\Psi$-optimal, targets of bad comparisons are pure toward their sources and Lemma~\ref{lem:shape} applies. The target $i$ is impossible since $i$ is mixed. For the target $j$, the source would be $i$, but $\ell'_i=L\ne\ell_j+1$. For the target $k$, the source $y$ would satisfy $\ell'_y=L+2$, so $y\notin\{i,j\}$ and $Y'_y=Y_y$; moreover $k$ would own a chore of type $y$, which it already owned in $Y$, as $k$ has only gained the free chore $e$. In $Y$ the agent $y$ owned a free chore and $\ell_y=L+2>\ell_k+1$, contradicting Lemma~\ref{lem:EI}. For the source $i$ and a target $x\notin\{j,k\}$, we would have $\ell_x=L-1$ and $x$ would own a chore of type $i$, while $\ell_i=L+1$ in $Y$, again contradicting Lemma~\ref{lem:EI} for $Y$. Every remaining comparison either avoids $i$ and $k$ or has source $j$ and a target outside $\{i,k\}$; its two bundles are those of $Y$, where it was not bad.
+\end{proof}
+
+Since $Y'$ is $\Psi$-optimal and $Y$ is normal with $B(Y)=1$, we have $B(Y')\ge1$. Let $k\to w$ be bad in $Y'$. If $k$ owned an anchored chore of a type other than $w$, Lemma~\ref{lem:walk} applied to $Y'$ would give a $\Psi$-optimal allocation without bad comparisons, since all bad comparisons of $Y'$ have the visited agent $k$ as source; this contradicts the normality of $Y$. Hence $k$ is pure toward $w$, and since an agent is pure toward at most one agent, the same argument shows that $k\to w$ is the only bad comparison of $Y'$. So $Y'$ is normal and satisfies $(\star)$ with the pair $k\to w$ of level $\ell'_w=L$. The agent $w$ is pure toward $k$, so $w\ne i$, which is mixed, and $w\ne j$, which is pure toward $i$; the four agents $i,j,k,w$ are distinct. Proposition~\ref{prop:normal} applied to $Y'$ gives $\alpha'_w\ge2$ and $\ell_v(Y'_x)\ge L+1$ for $v\in\{k,w\}$ and $x\in S\setminus\{k,w\}$.
+
+Now swap a pair chore $f$ of $j$, with $\bd f=\{i,j\}$, and a chore $f'$ of $w$ of type $k$, and call the final allocation $X$. Then
+\begin{align*}
+X_i&=(Y_i\setminus\{e\})\cup\{g\}, & X_j&=(Y_j\setminus\{f\})\cup\{f'\},\\
+X_k&=(Y_k\setminus\{g\})\cup\{e\}, & X_w&=(Y_w\setminus\{f'\})\cup\{f\},
+\end{align*}
+all sizes are unchanged, and the numbers of expensive chores are $\ell_i=L$ and $\ell_j=\ell_k=\ell_w=L+1$. Each of these four agents holds a cheap chore, as $\alpha_j\ge2$ and $\alpha'_w\ge2$, so its threshold is at most $T^*$.
+
+Inside the pairs we have $\ell_i(X_j)=L+1$ (the $L$ free chores and $f'$), $\ell_j(X_i)=L+1$ (the $L$ free chores and $g$), $\ell_k(X_w)=L+1$ (the $L$ free chores of $Y_w$ and $f$) and $\ell_w(X_k)=L+1$ (the $L+1$ free chores of $Y'_k$). Lemma~\ref{lem:basic}(i) gives EFX in all four directions.
+
+Across the pairs, $X_w$ contains exactly one chore cheap for $i$ and one cheap for $j$, namely $f$; $X_j$ contains exactly one chore cheap for $k$ and one cheap for $w$, namely $f'$; $X_i$ contains exactly one chore cheap for $k$, namely $g$, and none cheap for $w$; and $X_k$ contains no chore cheap for $i$ or $j$. By Lemma~\ref{lem:bounds}(iii), all eight comparisons across the pairs are EFX.
+
+Toward an agent $x\in S\setminus\{i,j,k,w\}$, whose bundle is $Y_x=Y'_x$: for $i$ we have $\ell_i=L<L+1\le\ell_i(Y_x)$; for $j$, \eqref{eq:margin} gives $\ell_j(Y_x)\ge L+1=\ell_j$; for $v\in\{k,w\}$ the margin in $Y'$ gives $\ell_v(Y'_x)\ge L+1=\ell_v$. So $i$, $j$, $k$ and $w$ are EFX toward $x$ by Lemma~\ref{lem:basic}(i). Conversely, such an agent $x$ keeps its bundle and sees $e$, $g$, $f$ and $f'$ as expensive, so its costs for all bundles are those of $Y$ and its comparisons remain EFX. The comparisons involving $H$ are covered by Lemma~\ref{lem:closing}.
+\end{proof}
+
+\Needspace{6\baselineskip}
+\subsection{A tight outside donor}
+
+\begin{lemma}\label{lem:tight}
+Assume $(\star)$, and let $k\in U$ own a free chore. Suppose that the hypothesis of Lemma~\ref{lem:slack} fails for $k$ and that no agent satisfies the hypothesis of Lemma~\ref{lem:neutral}. Then after a reversal if necessary we have $\ell_i(Y_k)=L+1$ and $\ell_k=L+1$, and all anchored chores of $k$ have type $i$; their number is $\alpha_k=t_{ik}=Q_k-L-1\ge q-L-1$.
+\end{lemma}
+
+\begin{proof}
+Some $v\in P$ satisfies $\ell_v(Y_k)\le L+1$, hence $\ell_v(Y_k)=L+1$ by~\eqref{eq:margin}. After a reversal, which does not change $Y_k$, we have $v=i$. Then $t_{ik}=Q_k-L-1\ge1$, so Lemma~\ref{lem:EI} gives $L+1\le\ell_k+1$, while~\eqref{eq:lvw} gives $\ell_k\le\ell_i(Y_k)=L+1$. The value $\ell_k=L$ is excluded because $k$ does not satisfy the hypothesis of Lemma~\ref{lem:neutral}. So $\ell_k=L+1$, and~\eqref{eq:lvw} becomes $L+1=\ell_k+\alpha_k-t_{ik}$, that is, $\alpha_k=t_{ik}$.
+\end{proof}
+
+\Needspace{6\baselineskip}
+\subsection{The boundary level}
+
+\begin{lemma}\label{lem:boundary}
+Assume $(\star)$ with $L=q-2$, and suppose that some $k\in U$ owns a free chore. Then a complete EFX allocation exists.
+\end{lemma}
+
+\begin{proof}
+By Lemmas~\ref{lem:slack}, \ref{lem:neutral} and~\ref{lem:tight} we may assume that $\ell_i=\ell_k=q-1$, $\ell_j=q-2$ and $\ell_i(Y_k)=q-1$, and that all $\alpha_k=Q_k-q+1$ anchored chores of $k$ have type $i$.
+
+\emph{Case $Q_k=q$.} Then $k$ has one anchored chore $g$, with $\bd g=\{i,k\}$. Swap $g$ with a free chore $e$ of $i$. Now $k$ holds $q$ chores, all expensive for it, so $\tau_k=r(q-1)$; moreover $\ell_i=q-2$ and $X_j=Y_j$. Inside $P$ we have $\ell_i(X_j)=q-2=\ell_i$ and $\ell_j(X_i)=q-1\ge\ell_j$ (the free chores and $g$). For $x\in U\setminus\{k\}$: in $Y$ the agent $k$ had a cheap chore and $k\to x$ was not bad, so $\ell_k(Y_x)\ge q-1$ and $c_k(X_x)\ge q+(r-1)(q-1)>\tau_k$. The bundle $X_i$ contains exactly one chore cheap for $k$, namely $g$, so $c_k(X_i)\ge r(q-1)+1$, and $X_j$ is wholly expensive for $k$. The agent $i$ now holds fewer expensive chores and has the same size, so by~\eqref{eq:margin} it is EFX toward every $x\in U\setminus\{k\}$; the bundle $X_k$ consists of $q$ free chores and is wholly expensive for $i$ and for $j$, while the thresholds of $i$ and $j$ are at most $T^*\le rq$. The agent $j$ and its targets in $U\setminus\{k\}$ are unchanged. Every other $x\in U$ sees $e$ and $g$ as expensive, so its comparisons keep their costs. The comparisons involving $H$ are covered by Lemma~\ref{lem:closing}.
+
+\Needspace{9\baselineskip}
+\emph{Case $Q_k=q+1$.} Then $k$ has two anchored chores $g_1,g_2$, both of type $i$. Move $g_1$ from $k$ to $i$; then move a pair chore $f$ from $j$ to $i$ and a free chore $e$ from $i$ to $j$. In the resulting allocation $X$:
+\begin{itemize}
+\item $i$ holds $Q_i+1$ chores, $q-2$ of them expensive, so $\alpha_i=Q_i-q+3$ and $\tau_i=r(q-2)+Q_i-q+2\le r(q-2)+3$;
+\item $j$ holds $Q_j$ chores, $q-1$ of them expensive, so $\alpha_j=Q_j-q+1=\alpha_j(Y)-1\ge1$ and $\tau_j=r(q-1)+Q_j-q\le r(q-1)+1$;
+\item $k$ holds $q$ chores, $q-1$ of them expensive, so $\alpha_k=1$ and $\tau_k=r(q-1)$.
+\end{itemize}
+All bundles have at least $q$ chores, and all three thresholds are at most $rq$.
+
+Inside $\{i,j,k\}$: the bundle $X_j$ contains $Q_j-q+1$ chores cheap for $i$, so $\tau_i-c_i(X_j)=Q_i-Q_j+1-r\le 2-r<0$. The bundle $X_i$ contains $Q_i-q+2$ chores cheap for $j$, its pair chores, and $q-1$ chores expensive for $j$, its free chores and $g_1$; so $\tau_j-c_j(X_i)=Q_j-Q_i-2<0$. The bundle $X_k$ contains one chore cheap for $i$, namely $g_2$, so $c_i(X_k)=1+r(q-1)\ge r(q-2)+3\ge\tau_i$ because $r\ge2$, and $X_k$ is wholly expensive for $j$, with cost $rq\ge\tau_j$. The bundle $X_i$ contains one chore cheap for $k$, so $c_k(X_i)=1+rQ_i\ge1+rq>\tau_k$, and $X_j$ is wholly expensive for $k$.
+
+Toward $x\in U\setminus\{k\}$, which keeps $Y_x$: by~\eqref{eq:margin}, $c_v(X_x)\ge q+(r-1)(q-1)=1+r(q-1)$ for $v\in P$, which is at least $\tau_i$ (as $r\ge2$) and at least $\tau_j$. The threshold of $k$ has dropped from $1+r(q-1)$ to $r(q-1)$, so its comparisons toward unchanged bundles remain EFX. An agent $x\in U\setminus\{k\}$ sees $X_i$, $X_j$ and $X_k$ as wholly expensive bundles of at least $q$ chores and has $\tau_x\le rq$; its other comparisons are unchanged. Finally, Lemma~\ref{lem:closing} covers the comparisons involving $H$.
+\end{proof}
+
+\Needspace{6\baselineskip}
+\subsection{A chain of exchanges below the boundary}
+
+\begin{lemma}\label{lem:chain}
+Assume $(\star)$ with $L\le q-3$, so that $q\ge3$, and suppose that some $k\in U$ owns a free chore. Then a complete EFX allocation exists.
+\end{lemma}
+
+\begin{proof}
+By Lemmas~\ref{lem:slack}, \ref{lem:neutral} and~\ref{lem:tight} we may assume that $\ell_i(Y_k)=\ell_k=L+1$ and that all anchored chores of $k$ have type $i$, their number being at least $q-L-1\ge2$. For $u\in U$ write $d_u=\ell_u(Y_u)$; these numbers always refer to $Y$. Every $u\in U$ with $d_u\le L+1$ satisfies $\alpha_u(Y)=Q_u-d_u\ge q-L-1\ge2$, and no comparison of $Y$ with source in $U$ is bad.
+
+\emph{Three-way exchange.} Choose a free chore $e$ of $i$, a pair chore $f$ of $j$, and a chore $g$ of $k$ with $\bd g=\{i,k\}$. Move $e$ to $j$, $f$ to $k$ and $g$ to $i$, and call the result $X^{(0)}$. All sizes are unchanged. In $X^{(0)}$ the agent $i$ holds $L$ expensive chores and cheap chores of types $j$ and $k$; the agent $j$ holds $L+1$ expensive chores and $\alpha_j(Y)-1\ge1$ pair chores; and $k$ holds $L+2$ expensive chores, its free chores and $f$, and at least one chore of type $i$. Inside $P$ we have $\ell_i(X^{(0)}_j)=L+1\ge\ell_i$ and $\ell_j(X^{(0)}_i)=L+1=\ell_j$ (the $L$ free chores and $g$), so by Lemma~\ref{lem:basic}(i) the members of $P$ are EFX toward each other. The bundles of $P$ will not change again.
+
+The chore $f$ is cheap for $i$ and $j$ and expensive for every agent of $U$. We now pass it along a sequence of distinct agents $v_0=k,v_1,v_2,\dots$ of $U$, producing allocations $X^{(0)},X^{(1)},\dots$; in $X^{(\nu)}$ the \emph{current} agent $v_\nu$ holds $f$.
+
+\emph{Rule.} If there is $w\in U\setminus\{v_\nu\}$ with $\ell_{v_\nu}(X^{(\nu)}_w)\le d_{v_\nu}$, choose one, put $v_{\nu+1}=w$, choose a chore $\gamma_\nu\in X^{(\nu)}_w$ of type $v_\nu$, and obtain $X^{(\nu+1)}$ by moving $\gamma_\nu$ to $v_\nu$ and $f$ to $w$. Otherwise stop.
+
+We prove by induction on $\nu$ the following statements.
+\begin{enumerate}[label=(W\arabic*)]
+\item The agents $v_0,\dots,v_\nu$ are distinct, $L+1=d_{v_0}\ge d_{v_1}\ge\dots\ge d_{v_\nu}$, and every agent of $U\setminus\{v_0,\dots,v_\nu\}$ holds its bundle from $Y$.
+\item For $1\le p\le \nu$, the bundle $X^{(\nu)}_{v_p}$ is obtained from $Y_{v_p}$ by removing $\gamma_{p-1}$, which has type $v_{p-1}$, and adding $\gamma_p$ if $p<\nu$, or $f$ if $p=\nu$. The bundle $X^{(\nu)}_k$ is obtained from $Y_k$ by removing $g$ and adding $\gamma_0$ if $\nu >0$, or $f$ if $\nu =0$.
+\item For $p<\nu$, the agent $v_p$ is mixed in $X^{(\nu)}$ and holds exactly $d_{v_p}$ expensive chores.
+\item $\alpha_{v_\nu}(X^{(\nu)})\ge1$.
+\end{enumerate}
+For $\nu =0$ these statements hold. Assume them for $\nu$, write $v=v_\nu$, and let $w$ be chosen by the rule.
+
+First, $w$ is not visited. Indeed, for $p<\nu$ the bundle $X^{(\nu)}_{v_p}$ contains $d_{v_p}$ free chores and, by (W3), anchored chores of two different types, at least one of which is not $v$; all these chores are expensive for $v$. Hence $\ell_v(X^{(\nu)}_{v_p})\ge d_{v_p}+1\ge d_v+1$ by (W1), and $v_p$ does not satisfy the rule. So $X^{(\nu)}_w=Y_w$.
+
+Second, we determine the shape of $Y_w$. In $Y$ the agent $v$ holds a cheap chore and $v\to w$ is not bad, so $\ell_v(Y_w)\ge d_v$; with the rule, $\ell_v(Y_w)=d_v$. Thus $t_{vw}=Q_w-d_v\ge q-L-1\ge2$, and $\gamma_\nu$ exists. If $d_v\ge1$, Lemma~\ref{lem:EI} in $Y$ gives $d_v\le d_w+1$; if $d_v=0$, all chores of $Y_w$ have type $v$ and $d_w=0$. By~\eqref{eq:lvw}, $d_w\le\ell_v(Y_w)=d_v$. Hence one of the following holds:
+\begin{itemize}
+\item[(K1)] $d_w=d_v$, and all anchored chores of $Y_w$ have type $v$;
+\item[(K2)] $d_w=d_v-1$, and exactly one anchored chore of $Y_w$ has a type other than $v$.
+\end{itemize}
+This gives (W1) for $\nu+1$, and (W2) is immediate.
+
+Third, we prove (W3) for $p=\nu$. Before receiving $\gamma_\nu$, the agent $v$ still owns an anchored chore of the type of the chore it gave away. For $v=k$ this is type $i$, since $k$ had at least two chores of type $i$ and gave away one. For $v=v_\nu$ with $\nu\ge1$ that entered under (K1), it had at least two chores of type $v_{\nu-1}$ and gave away one. Under (K2) it had $\alpha_v(Y)=Q_v-d_v\ge q-L\ge3$ anchored chores, at least two of type $v_{\nu-1}$, and gave away one. That type is $i$ or a visited agent, so it differs from $w$, whereas $\gamma_\nu$ has type $w$. Hence $v$ is mixed. It holds $d_v$ expensive chores, since it lost $f$ and gained a cheap chore. For $p<\nu$ nothing changes.
+
+Fourth, (W4) for $\nu+1$ holds because $\alpha_w(X^{(\nu+1)})=\alpha_w(Y)-1\ge1$.
+
+Since visited agents are distinct, the procedure stops at some $X=X^{(\nu)}$. Write $v^*=v_\nu$, let $V=\{v_0,\dots,v_{\nu-1}\}$ be the set of \emph{passed} agents, and let $O=U\setminus(V\cup\{v^*\})$ be the set of unvisited ones. All sizes are as in $Y$. We verify that $X$ is EFX.
+
+\emph{Own bundles.} By (W2) and (W3), a passed agent $u$ holds the same numbers of cheap and of expensive chores as in $Y$, hence has the same cost and threshold. The current agent holds $d_{v^*}+1\le L+2$ expensive chores and a cheap chore, so
+\[
+\tau_{v^*}\le q+(r-1)(L+2)\le q+(r-1)(q-1)=r(q-1)+1 .
+\]
+A passed agent $u$ has $\tau_u\le q+(r-1)(L+1)$. In $P$ we have $\tau_i\le q+(r-1)L$ and $\tau_j\le q+(r-1)(L+1)\le r(q-2)+2$.
+
+\emph{Unvisited sources.} An agent $x\in O$ keeps $Y_x$. Every moved chore is expensive for $x$: the chore $e$ is free, $\bd g=\{i,k\}$, $\bd f=\{i,j\}$, and each $\gamma_p$ has endpoints $\{v_p,v_{p+1}\}$. Since no size has changed, $c_x(X_y)=c_x(Y_y)$ for every $y\in S$, and $x$ is EFX toward every agent of $S$ by Lemma~\ref{lem:localEFX}.
+
+\emph{Passed sources inside $U$.} Let $u=v_p\in V$. Toward $y\in O$ we have $X_y=Y_y$, and $u$ has its old cost and threshold, so the comparison is EFX. Toward $y=v_{p'}$ with $p'<p$: the agent $y$ is passed, hence mixed with $d_y\ge d_u$ free chores, so $\ell_u(X_y)\ge d_y+1>d_u=\ell_u$, and Lemma~\ref{lem:basic}(i) applies. Toward $y=v_{p'}$ with $p'>p$: compared with $Y_y$, the bundle $X_y$ has lost $\gamma_{p'-1}$, which is cheap for $u$ only if $p'-1=p$, and has gained $\gamma_{p'}$ or $f$, which is expensive for $u$ because $v_{p'+1}\ne u$. Hence $c_u(X_y)\ge c_u(Y_y)$, and the comparison is EFX because it was EFX in $Y$.
+
+\emph{Current source inside $U$.} For $y\in O$ the stopping rule gives $\ell_{v^*}(X_y)\ge d_{v^*}+1=\ell_{v^*}$. For $y\in V$ we have, as above, $\ell_{v^*}(X_y)\ge d_y+1\ge d_{v^*}+1$. Lemma~\ref{lem:basic}(i) applies.
+
+\emph{From $U$ to $P$.} The bundle $X_j$ consists of free chores and pair chores, so it is wholly expensive for every agent of $U$ and costs at least $rq$. The bundle $X_i$ consists of free chores, pair chores and $g$, so it contains at most one chore cheap for any agent of $U$. Passed and current agents have thresholds at most $r(q-1)+1$, so Lemma~\ref{lem:bounds}(iii) applies; unvisited agents were treated above.
+
+\emph{From $P$ to $U$.} For $y\in O$, \eqref{eq:margin} gives $c_v(X_y)\ge q+(r-1)(L+1)\ge\tau_v$ for $v\in P$. For $y=k$: in $X_k$ the chore $g$ has been replaced by $f$ or by $\gamma_0$, which does not decrease the number of chores expensive for $i$, so $\ell_i(X_k)\ge\ell_i(Y_k)=L+1>\ell_i$; and all chores of $Y_k$ are expensive for $j$, so $X_k$ contains at most one chore cheap for $j$ and $c_j(X_k)\ge r(q-1)+1\ge\tau_j$. For a visited $y\ne k$: by (K1) or (K2), $Y_y$ contains at most one anchored chore whose type differs from the previous agent of the chain, which lies in $U$; hence $Y_y$ contains at most one chore cheap for $i$ and at most one cheap for $j$. The bundle $X_y$ arises by removing a chore and adding $f$ or a chore with both endpoints in $U$, so it contains at most two chores cheap for each $v\in P$. By Lemma~\ref{lem:basic}(iv), $c_v(X_y)\ge rq-2(r-1)=r(q-2)+2\ge\tau_v$.
+
+\emph{Agents of $H$.} All sizes are $q$ or $q+1$ and all thresholds in $S$ are at most $rq$, so Lemma~\ref{lem:closing} covers the comparisons involving $H$.
+
+The procedure performs one three-way exchange and at most $|U|-1$ further exchanges.
+\end{proof}
+
+\Needspace{6\baselineskip}
+\subsection{No free chore outside the pair}
+
+\begin{lemma}\label{lem:nofree}
+Assume $(\star)$ and $U\ne\emptyset$, and suppose that no agent of $U$ owns a free chore. Then a complete EFX allocation exists.
+\end{lemma}
+
+\begin{proof}
+Every chore between a member of $P$ and an agent of $U$ is held by the agent of $U$. Suppose first that some $k\in U$ owns a chore of type $v\in P$; after a reversal, $v=i$. As $i$ owns a free chore, Lemma~\ref{lem:EI} gives $L+1=\ell_i\le\ell_k+1=1$, so $L=0=\ell_k$, and Lemma~\ref{lem:neutral} applies.
+
+Suppose now that no chore joins $P$ and $U$. The members of $P$ own no crossing chore, and crossing chores are held by their endpoints in $S$, so no chore joins $P$ and $H$ either. Thus every chore with an endpoint in $P$ is a pair chore; that is, $P$ is isolated in $G$.
+
+\emph{First exchange.} Choose $k\in U$, an anchored chore $g\in Y_k$ (all chores of $Y_k$ are anchored, and $Q_k\ge q\ge2$), and a pair chore $f$ of $j$. Swap $g$ and $f$, and call the result $X^{(1)}$. The chore $g$ has no endpoint in $P$, so in $X^{(1)}$ both members of $P$ hold $L+1$ expensive chores and a cheap chore, and each sees exactly $L+1$ expensive chores in the bundle of the other; they are EFX toward each other and have thresholds at most $T^*$.
+
+\emph{A smaller exchange system.} Let $\cE_U$ be the exchange system with agent set $U$, the same $q$, sizes $Q|_U$, free set $\{f\}$, and anchored set consisting of all chores of $\bigcup_{u\in U}X^{(1)}_u$ other than $f$. Each of these anchored chores lies in $Y_u$ for some $u\in U$, so it is incident to $u$, while $f$ has no endpoint in $U$. Hence $\cE_U$ is an exchange system and $X^{(1)}|_U\in\cA(\cE_U)$. Every element of $\cA(\cE_U)$ contains exactly one free chore, so $\Psi\equiv1$ on $\cA(\cE_U)$. In this smaller system, $\ell_u$ is $1$ if $u$ holds $f$ and $0$ otherwise; since all other chores held by $u$ are incident to $u$, this is the number of chores in the bundle of $u$ that are expensive for $u$. Let $Z\in\cA(\cE_U)$ be normal. The source of a bad comparison owns a free chore, so by Proposition~\ref{prop:normal}(a) the allocation $Z$ has at most one bad comparison. We combine $Z$ with the bundles of $P$ and $H$ from $X^{(1)}$.
+
+If $Z$ has a bad comparison $k'\to w'$, then by Proposition~\ref{prop:normal} it is a bad pair of level $0$, the agent $k'$ owns $f$, $\alpha_{w'}\ge2$, and $\ell_{w'}(Z_x)\ge1$ for all $x\in U\setminus\{k',w'\}$. In this case we take a free chore $e'$ of $i$, which still holds $L+1\ge1$ of them, and swap it with a chore $g'\in Z_{w'}$ of type $k'$. Let $X$ be the final allocation; if $Z$ has no bad comparison, no swap is made.
+
+\emph{Inside $U$.} If $Z$ has no bad comparison, Lemma~\ref{lem:localEFX} for $\cE_U$ shows that all comparisons inside $U$ are EFX; the costs in $\cE_U$ are the true costs. Otherwise, after the swap, $\ell_{k'}=\ell_{w'}=1$, both agents hold cheap chores, $\ell_{k'}(X_{w'})=1$ (the chore $e'$) and $\ell_{w'}(X_{k'})=1$ (the chore $f$), so they are EFX toward each other. For $x\in U\setminus\{k',w'\}$, we have $\ell_{w'}(X_x)=\ell_{w'}(Z_x)\ge1=\ell_{w'}$; the agent $k'$ keeps its bundle, its targets other than $w'$ are unchanged, and $c_{k'}(X_{w'})\ge c_{k'}(Z_{w'})$; and $x$ sees $e'$ and $g'$ as expensive, so its costs are those of $Z$. Lemma~\ref{lem:basic}(i) and Lemma~\ref{lem:localEFX} give EFX inside $U$.
+
+\emph{Inside $P$.} The swap replaced $e'$ by $g'$, and both are expensive for $i$ and for $j$, so the comparisons inside $P$ are as in $X^{(1)}$.
+
+\emph{From $U$.} Every agent of $U$ owns at most one expensive chore, $f$ or $e'$, and at least $q\ge2$ chores, so its threshold is at most $q+r-1$. The bundle $X_j$ consists of free chores, pair chores and $g$, and $X_i$ of free chores, pair chores and possibly $g'$; hence each contains at most one chore cheap for any given agent of $U$, and costs at least $r(q-1)+1$ to it. Since
+\[
+r(q-1)+1-(q+r-1)=(r-1)(q-2)\ge0,
+\]
+every agent of $U$ is EFX toward the members of $P$; equality occurs when $q=2$.
+
+\emph{From $P$ to $U$.} Since $P$ is isolated, the only chores cheap for $i$ or $j$ are the pair chores, and the only pair chore outside $X_i\cup X_j$ is $f$. Hence every bundle of $U$ contains at most one chore cheap for $v\in P$ and costs at least $r(q-1)+1\ge T^*\ge\tau_v$ to it.
+
+\emph{Agents of $H$.} All sizes are $q$ or $q+1$ and all thresholds in $S$ are at most $rq$, so Lemma~\ref{lem:closing} covers the comparisons involving $H$.
+\end{proof}
+
+\Needspace{6\baselineskip}
+\subsection{The deficient set is the pair}
+
+\begin{lemma}\label{lem:SP}
+Assume $(\star)$ and $U=\emptyset$. Then a complete EFX allocation exists.
+\end{lemma}
+
+\begin{proof}
+Now $S=P$. Crossing chores would be held by members of $P$, which own none, so there are no crossing chores, and every chore is a pair chore or $H$-internal. Let $C$ be the number of pair chores. Then $C=\alpha_i+\alpha_j\ge3$, and since $\Delta(P)=2\mu-C>0$, we have $C<2\mu$. Write $\mu=q+\eta$ with $\eta=s/n\in(0,1)$.
+
+Consider assignments of $M$ to the recipients $H\cup\{\pi\}$, where $\pi$ stands for $P$: pair chores are permitted only at $\pi$, and an $H$-internal chore is permitted at its endpoints and at $\pi$. We impose the bounds $[q,q+1]$ at every $h\in H$ and $[2q,2q+2]$ at $\pi$. The fractional assignment of Proposition~\ref{prop:separated}, with the loads of $i$ and $j$ added up at $\pi$, has load $\mu$ at every $h\in H$ and $2\mu$ at $\pi$, so it satisfies these bounds. Let $\Lambda$ be the interval of Lemma~\ref{lem:integral}(b) for $\rho_0=\pi$. Its endpoints are integers and $2\mu\in\Lambda$, so $\lfloor2\mu\rfloor$ and $\lceil2\mu\rceil$ lie in $\Lambda$.
+
+We choose an integer $T_\pi\in\Lambda$ with $T_\pi\ge C$ and $T_\pi\equiv C\pmod 2$. If $2\mu\notin\mathbb Z$, then $\lfloor2\mu\rfloor$ and $\lceil2\mu\rceil$ have different parities, and we take for $T_\pi$ the one with the parity of $C$; as $C<2\mu$, we have $C\le\lfloor2\mu\rfloor\le T_\pi$. If $2\mu\in\mathbb Z$, then $\eta=\frac12$ and $2\mu=2q+1$. If $C$ is odd we take $T_\pi=2q+1$. If $C$ is even, then $C\le 2q$, and we take $T_\pi=2q+2$. This value lies in $\Lambda$. Indeed, choose distinct $h_1,h_2\in H$, which is possible by Lemma~\ref{lem:maxdef}(a); in the fractional assignment above each of $h_1$ and $h_2$ has load $q+\frac12$, coming from $H$-internal chores. Redirecting fractional mass $\frac12$ of these chores from each of $h_1$ and $h_2$ to $\pi$, possibly drawn from several chores, gives loads $q$ at $h_1$ and $h_2$ and $2q+2$ at $\pi$, and respects all bounds. In every case $2q\le T_\pi\le2q+2$.
+
+By Lemma~\ref{lem:integral}(b) there is an integral assignment with load $T_\pi$ at $\pi$. Every $h\in H$ receives $q$ or $q+1$ $H$-internal chores incident to it. The recipient $\pi$ receives the $C$ pair chores and an even number $T_\pi-C$ of $H$-internal chores. Give $i$ exactly $\lfloor C/2\rfloor$ pair chores and $(T_\pi-C)/2$ of these $H$-internal chores, and give the rest to $j$. Then $|X_i|=\lfloor T_\pi/2\rfloor$ and $|X_j|=\lceil T_\pi/2\rceil$, both in $\{q,q+1\}$. Both members hold $(T_\pi-C)/2$ expensive chores and at least $\lfloor C/2\rfloor\ge1$ cheap chores, and each sees exactly $(T_\pi-C)/2$ expensive chores in the bundle of the other, so by Lemma~\ref{lem:basic}(i) they are EFX toward each other. Every agent of $H$ holds $q$ or $q+1$ chores cheap for it and every bundle has at least $q$ chores, so Lemma~\ref{lem:bounds}(i) applies to the agents of $H$. A member of $P$ has threshold at most $rq$ by Lemma~\ref{lem:basic}(iii), and every bundle of $H$ is wholly expensive for it and has at least $q$ chores; Lemma~\ref{lem:bounds}(ii) applies. Hence the allocation is EFX.
+\end{proof}
+
+\section{Proof of the main results}\label{sec:proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+If $m<n$, we give the chores to distinct agents; this covers $m=0$. Let $m\ge n$ and write $m=nq+s$ with $q\ge1$ and $0\le s<n$. If no set is deficient, Lemma~\ref{lem:nodef} applies; this is always the case when $n=2$, since a deficient set leaves at least two agents outside it (Lemma~\ref{lem:maxdef}(a)). If $s=0$, Theorem~\ref{thm:divisible} applies. Otherwise let $S$, $H$, $X^\circ$ and $\cA$ be as in Section~\ref{sec:separated}, and let $Y\in\cA$ be normal; it exists because $\cA$ is finite and nonempty. If $B(Y)=0$, Corollary~\ref{cor:B0} applies. Otherwise, by Proposition~\ref{prop:normal} and Lemma~\ref{lem:classify}, the bad comparisons form disjoint special or ordinary pairs. If there is a special pair, or if there are at least two ordinary pairs, Proposition~\ref{prop:several} applies. Otherwise there is exactly one bad pair, which is ordinary, and since a bad pair carries exactly one bad comparison, $(\star)$ holds, with $q\ge2$. If $U=\emptyset$, Lemma~\ref{lem:SP} applies; if $U\ne\emptyset$ and no agent of $U$ owns a free chore, Lemma~\ref{lem:nofree} applies; if some agent of $U$ owns a free chore, Lemma~\ref{lem:boundary} applies when $L=q-2$ and Lemma~\ref{lem:chain} when $L\le q-3$. These cases are exhaustive.
+\end{proof}
+
+\begin{remark}\label{rem:smallq}
+For $q=1$ an ordinary pair would need $L\le-1$, so only special pairs occur and Proposition~\ref{prop:several} applies; there the high member of a special pair ends with a single chore and threshold $0$. For $q=2$ the only ordinary level is $L=0=q-2$, so Lemma~\ref{lem:chain}, which requires $q\ge3$, is not used, and in Lemma~\ref{lem:nofree} the inequality $(r-1)(q-2)\ge0$ holds with equality. In Sections~\ref{sec:several} and~\ref{sec:onepair} every final bundle has at least $q\ge1$ chores, and in Section~\ref{sec:divisible} a bundle that shrinks keeps at least $q-1\ge1$ chores. Every minimum used in the proof is taken over a finite nonempty family, the walk of Lemma~\ref{lem:walk} and the chain of Lemma~\ref{lem:chain} visit no agent twice, and all other steps consist of a bounded number of exchanges.
+\end{remark}
+
+\begin{proof}[Proof of Corollary~\ref{cor:allr}]
+For $r>2$ this is Theorem~\ref{thm:main}. An M2 instance with cost $r$ is a bi-valued instance with costs $\{1,r\}$. For $1<r\le2$ the round-robin argument of He and Tao, in the paragraph following~\cite[Theorem~3]{HT26}, gives an EFX allocation. For $r=2$, the theorem of Lin, Wu and Zhou~\cite[Theorem~4.1]{LWZ25} provides in addition an EFX allocation that is fractionally Pareto optimal.
+\end{proof}
+
+\begin{remark}\label{rem:r1}
+The value $r=1$ is excluded in Definition~\ref{def:m2}. If every chore costs $1$ to every agent, every allocation whose bundle sizes lie in $\{\lfloor m/n\rfloor,\lceil m/n\rceil\}$ is EFX.
+\end{remark}
+
+\section{Concluding remarks}\label{sec:conclusion}
+
+Theorem~\ref{thm:main} settles the existence of EFX allocations for one structured class of positive bi-valued instances, for any number of agents. For general bi-valued instances with five or more agents, existence is not settled by the results discussed here; He and Tao~\cite{HT26} treat four agents. Efficiency is not addressed in this paper: He and Tao showed that for $n\ge4$ EFX and Pareto optimality can be incompatible for positive bi-valued costs, and we do not know whether this happens within the M2 class. Nor do we analyze running times; the proof takes minima over finite families of allocations.
+
+The construction in the proof has been implemented in the Python program \texttt{verify\_m2.py}, which uses only the standard library and is contained in the archive \texttt{m2\_verification.zip} accompanying this paper as supplementary material. The program computes normal allocations exactly. The crossing chores stay at their endpoints in $S$; for every pair of agents of $S$, all ways of dividing the number of chores joining them between the two agents are enumerated; the free chores are treated as interchangeable; and a lexicographic minimum of $(\Psi,B)$ is selected. The construction does not use the value of $r$. An independent function \texttt{verify} in the same program checks that every chore is assigned exactly once and that the EFX condition holds; since every comparison is an affine inequality in $r$, it is checked for all real $r\ge2$ at once. The program was run on all edge multisets on labeled vertices with $n=2$ and $m\le12$, $n=3$ and $m\le10$, $n=4$ and $m\le10$, and $n=5$ and $m\le5$ (11{,}310 instances), on 4{,}000 random instances with $5\le n\le9$ and $m\le7n$, and in 15 further runs on fixed instances exercising particular cases of the proof; in total 333{,}376 comparisons were checked. These computations are not used in the proof.
+
+\section*{Use of AI-assisted tools}
+
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{10}
+
+\bibitem{CKMPSW19}
+I.~Caragiannis, D.~Kurokawa, H.~Moulin, A.~D. Procaccia, N.~Shah, and J.~Wang, \emph{The unreasonable fairness of maximum Nash welfare}, ACM Trans. Econ. Comput. 7 (2019), no.~3, Art. 12, 32 pp.
+
+\bibitem{CGM24}
+B.~R. Chaudhury, J.~Garg, and K.~Mehlhorn, \emph{EFX exists for three agents}, J. ACM 71 (2024), no.~1, Art. 4, 27 pp.
+
+\bibitem{GMQ23}
+J.~Garg, A.~Murhekar, and J.~Qin, \emph{New algorithms for the fair and efficient allocation of indivisible chores}, Proceedings of the Thirty-Second International Joint Conference on Artificial Intelligence (IJCAI 2023), 2023, pp.~2710--2718; arXiv:2212.02440v2.
+
+\bibitem{GMQ25}
+J.~Garg, A.~Murhekar, and J.~Qin, \emph{Constant-factor EFX exists for chores}, Proceedings of the 57th Annual ACM Symposium on Theory of Computing (STOC 2025), 2025, pp.~1580--1589; preprint version: \emph{Fair division of indivisible chores via earning restricted equilibria}, arXiv:2407.03318v2.
+
+\bibitem{HT26}
+W.~He and B.~Tao, \emph{EFX for additive chores: nonexistence, Pareto incompatibility, and bi-valued existence}, preprint (2026), arXiv:2606.08872v2.
+
+\bibitem{KMS23}
+Y.~Kobayashi, R.~Mahara, and S.~Sakamoto, \emph{EFX allocations for indivisible chores: matching-based approach}, Theoret. Comput. Sci. 1026 (2025), Paper No. 115010; arXiv:2305.04168.
+
+\bibitem{LWZ25}
+Z.~Lin, X.~Wu, and S.~Zhou, \emph{Approximately EFX and fPO allocations for bivalued chores}, Proceedings of the Thirty-Fourth International Joint Conference on Artificial Intelligence (IJCAI 2025), 2025, pp.~3952--3960; full version: \emph{Approximately EFX and PO allocations for bivalued chores}, arXiv:2501.04550v1, where the corresponding result is Theorem~4.13.
+
+\bibitem{LWZ26}
+Z.~Lin, X.~Wu, and S.~Zhou, \emph{Revisiting EFX and fPO allocations for binary chores}, preprint (2026), arXiv:2609.13970v1.
+
+\bibitem{Sch03}
+A.~Schrijver, \emph{Combinatorial optimization: polyhedra and efficiency}, Algorithms and Combinatorics, vol.~24, Springer, Berlin, 2003.
+
+\bibitem{TWYZ25}
+B.~Tao, X.~Wu, Z.~Yu, and S.~Zhou, \emph{On the existence of EFX (and Pareto-optimal) allocations for binary chores}, Theoret. Comput. Sci. 1042 (2025), Paper No. 115248.
+
+\end{thebibliography}
+
+\end{document}

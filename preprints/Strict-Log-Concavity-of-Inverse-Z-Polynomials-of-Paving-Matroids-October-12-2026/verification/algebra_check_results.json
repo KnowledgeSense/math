@@ -1,0 +1,36 @@
+{
+  "method": "exact rational arithmetic and full multivariate polynomial identity; finite checks supplement analytic proof",
+  "ranges": {
+    "k": "1..24",
+    "n": "k..k+40",
+    "h": "k..n-1",
+    "scalar_b": "1..14",
+    "scalar_s": "1..19",
+    "scalar_a": "s..s+24"
+  },
+  "symbolic_F_identity": true,
+  "checks": {
+    "uniform_normalization": 6888,
+    "paving_formula_equivalence": 18860,
+    "even_central_identity": 9840,
+    "ratio_bounds": 108240,
+    "single_hyperplane_matroids": 18860,
+    "scalar_bounds": 6650
+  },
+  "all_checks_passed": true,
+  "forbidden_saturated_component": {
+    "k": 4,
+    "n": 8,
+    "h": 7,
+    "penultimate_gap": "-5/784",
+    "actual_weight": "5/8",
+    "actual_matroid": "U(3,7) direct sum U(1,1)",
+    "actual_Y": [
+      15,
+      50,
+      70,
+      50,
+      15
+    ]
+  }
+}

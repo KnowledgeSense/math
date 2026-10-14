@@ -1,0 +1,196 @@
+{
+  "scope": "Symbolic identities and numerical round-ball integrals",
+  "count": 38,
+  "checks": [
+    {
+      "name": "all-degree product diagonal",
+      "result": "pass",
+      "detail": "lam*n*(2*lam + n)/((2*lam + 1)*(lam + n - 1)*(lam + n + 1))"
+    },
+    {
+      "name": "branch r1=-c22/2",
+      "result": "pass",
+      "detail": "-4*lam/((2*lam + 1)*(2*lam + 6))"
+    },
+    {
+      "name": "all-degree monotonicity identity",
+      "result": "pass",
+      "detail": "2*lam*(lam + n)*(lam**2 - 1)/((2*lam + 1)*((lam + n)**2 - 1)**2)"
+    },
+    {
+      "name": "n=2 coefficient identity c22+2*r1=0",
+      "result": "pass",
+      "detail": "c22+2*r1=0"
+    },
+    {
+      "name": "frequency twist",
+      "result": "pass",
+      "detail": "sqrt(d)*(d - 2)/((d - 1)**(3/2)*(d + 4))"
+    },
+    {
+      "name": "volume slope factor",
+      "result": "pass",
+      "detail": "-2*(d - 1)**(d/2 - 1)"
+    },
+    {
+      "name": "d=5: product c22",
+      "result": "pass",
+      "detail": "{c0: 1/14, c2: 1/3, c4: 25/42}"
+    },
+    {
+      "name": "d5 second complement",
+      "result": "pass",
+      "detail": "-5*sqrt(5)/72"
+    },
+    {
+      "name": "d=5: low nonresonance",
+      "result": "pass",
+      "detail": "Y4,Y6 at 1/sqrt(d)"
+    },
+    {
+      "name": "d=6: product c22",
+      "result": "pass",
+      "detail": "{c0: 1/20, c2: 8/25, c4: 63/100}"
+    },
+    {
+      "name": "d6 second complement",
+      "result": "pass",
+      "detail": "-1071*sqrt(6)/10000"
+    },
+    {
+      "name": "d=6: low nonresonance",
+      "result": "pass",
+      "detail": "Y4,Y6 at 1/sqrt(d)"
+    },
+    {
+      "name": "d=7: product c22",
+      "result": "pass",
+      "detail": "{c0: 1/27, c2: 10/33, c4: 196/297}"
+    },
+    {
+      "name": "d=7: low nonresonance",
+      "result": "pass",
+      "detail": "Y4,Y6 at 1/sqrt(d)"
+    },
+    {
+      "name": "d=8: product c22",
+      "result": "pass",
+      "detail": "{c0: 1/35, c2: 2/7, c4: 24/35}"
+    },
+    {
+      "name": "d=8: low nonresonance",
+      "result": "pass",
+      "detail": "Y4,Y6 at 1/sqrt(d)"
+    },
+    {
+      "name": "d=10: product c22",
+      "result": "pass",
+      "detail": "{c0: 1/54, c2: 16/63, c4: 275/378}"
+    },
+    {
+      "name": "d=10: low nonresonance",
+      "result": "pass",
+      "detail": "Y4,Y6 at 1/sqrt(d)"
+    },
+    {
+      "name": "d=12: product c22",
+      "result": "pass",
+      "detail": "{c0: 1/77, c2: 5/22, c4: 117/154}"
+    },
+    {
+      "name": "d=12: low nonresonance",
+      "result": "pass",
+      "detail": "Y4,Y6 at 1/sqrt(d)"
+    },
+    {
+      "name": "cross-ratio endpoint double factor",
+      "result": "pass",
+      "detail": "A*B*e**2 + 2*A*X*e**2 + 2*B*X*e**2 + X**2*e**2 - e"
+    },
+    {
+      "name": "cross-ratio at merged endpoint",
+      "result": "pass",
+      "detail": "Q_X(A,A,A)=0"
+    },
+    {
+      "name": "divergence cycle volume constant",
+      "result": "pass",
+      "detail": "-67/8"
+    },
+    {
+      "name": "divergence cycle multiplier constant",
+      "result": "pass",
+      "detail": "201 sqrt(-3)/64"
+    },
+    {
+      "name": "d=4: ray volume normalization",
+      "result": "pass",
+      "detail": "(21.765592370810612, 21.765592370810612)"
+    },
+    {
+      "name": "d=4: coarea derivative normalization",
+      "result": "pass",
+      "detail": "(43.53118474162123, 43.531184741621225)"
+    },
+    {
+      "name": "d=5: ray volume normalization",
+      "result": "pass",
+      "detail": "(78.95683520871495, 78.95683520871489)"
+    },
+    {
+      "name": "d=5: coarea derivative normalization",
+      "result": "pass",
+      "detail": "(176.5528508149354, 176.55285081493525)"
+    },
+    {
+      "name": "d=6: ray volume normalization",
+      "result": "pass",
+      "detail": "(294.2547513582252, 294.2547513582253)"
+    },
+    {
+      "name": "d=6: coarea derivative normalization",
+      "result": "pass",
+      "detail": "(720.773995217187, 720.7739952171872)"
+    },
+    {
+      "name": "d=7: ray volume normalization",
+      "result": "pass",
+      "detail": "(1116.2259604759472, 1116.2259604907938)"
+    },
+    {
+      "name": "d=7: coarea derivative normalization",
+      "result": "pass",
+      "detail": "(2953.2562983735706, 2953.25629841285)"
+    },
+    {
+      "name": "d=8: ray volume normalization",
+      "result": "pass",
+      "detail": "(4287.69062584384, 4287.690625843844)"
+    },
+    {
+      "name": "d=8: coarea derivative normalization",
+      "result": "pass",
+      "detail": "(12127.42046865669, 12127.420468656694)"
+    },
+    {
+      "name": "d=10: ray volume normalization",
+      "result": "pass",
+      "detail": "(64924.55073260604, 64924.55073260602)"
+    },
+    {
+      "name": "d=10: coarea derivative normalization",
+      "result": "pass",
+      "detail": "(205309.4563781887, 205309.4563781886)"
+    },
+    {
+      "name": "d=12: ray volume normalization",
+      "result": "pass",
+      "detail": "(1006386.0592196126, 1006386.0592196131)"
+    },
+    {
+      "name": "d=12: coarea derivative normalization",
+      "result": "pass",
+      "detail": "(3486223.573194784, 3486223.573194783)"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "title": "Fibonacci positivity of the alternative q-Charlier specialization",
+  "author": "Knowledge Sense",
+  "contact": "math@knowledgesense.jp",
+  "arithmetic": "Exact rational arithmetic using Python fractions.Fraction",
+  "result": "pass",
+  "relative_margin": "25/88",
+  "parameters": [
+    {
+      "rho": "1/4",
+      "q": "1/5"
+    },
+    {
+      "rho": "1/8",
+      "q": "1/10"
+    },
+    {
+      "rho": "1/100",
+      "q": "1/5"
+    }
+  ],
+  "sequence_indices": {
+    "min": 1,
+    "max": 16
+  },
+  "determinants": {
+    "ell_min": 0,
+    "ell_max": 6,
+    "m_min": 0,
+    "m_max": 5
+  },
+  "words": {
+    "weight_min": 0,
+    "weight_max": 8,
+    "shifts": [
+      0,
+      1,
+      5
+    ]
+  },
+  "counts": {
+    "factorizations": 96,
+    "sequence_bounds": 96,
+    "determinant_pairs": 126,
+    "word_shift_parameter_cases": 792
+  },
+  "examples": {
+    "12": "13/64",
+    "21": "1/16",
+    "22": "1/256"
+  },
+  "scope": "Finite exact checks of the displayed identities and bounds. The proof in the paper establishes the theorem for every word, shift and parameter pair in the stated range."
+}

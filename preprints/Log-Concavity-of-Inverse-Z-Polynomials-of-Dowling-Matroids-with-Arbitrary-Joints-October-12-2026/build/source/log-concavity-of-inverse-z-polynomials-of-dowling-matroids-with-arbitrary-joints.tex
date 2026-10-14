@@ -1,0 +1,1152 @@
+\documentclass[11pt]{amsart}
+
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage[hidelinks,
+  pdfauthor={Knowledge Sense},
+  pdftitle={Log-concavity of inverse Z-polynomials of Dowling matroids with arbitrary joints},
+  pdfsubject={Mathematics - Combinatorics},
+  pdfkeywords={inverse Z-polynomial, Kazhdan-Lusztig polynomial, Dowling geometry, gain graph, log-concavity}]{hyperref}
+
+\hyphenation{manuscript}
+\setlength{\emergencystretch}{2em}
+\raggedbottom
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+\newcommand{\Q}{\mathsf{Q}}
+\newcommand{\K}{\mathsf{K}}
+\newcommand{\U}{\mathsf{U}}
+\newcommand{\rk}{\operatorname{rk}}
+\newcommand{\si}{\operatorname{si}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\Ls}{\mathcal{L}_s}
+\newcommand{\coef}[1]{[#1]}
+\newcommand{\ff}[2]{(#1)_{\downarrow #2}}
+
+\begin{document}
+
+\title[Inverse $Z$-polynomials of Dowling matroids]{Log-concavity of inverse $Z$-polynomials of Dowling matroids with arbitrary joints}
+
+\author{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{12 October 2026}
+
+\subjclass[2020]{Primary 05B35; Secondary 05A15, 05A20, 05C22}
+
+\keywords{Inverse $Z$-polynomial, Kazhdan--Lusztig polynomial, Dowling geometry, gain graph, frame matroid, log-concavity, discrete Pr\'ekopa--Leindler inequality}
+
+\begin{abstract}
+Let $G$ be a finite group of order $m$, let $n\ge 1$, and let $X\subseteq\{1,\dots,n\}$. Consider the frame matroid $\Q_n(G;X)$ of the gain graph on $n$ vertices that has one link with each gain $g\in G$ between any two vertices and a half edge at each vertex of $X$. This family contains the Dowling geometries, the jointless Dowling geometries, the matroids of the reflection arrangements of types $B_n$ and $D_n$, the braid matroids, and the cycle matroids of complete graphs with an apex vertex joined to an arbitrary set of vertices. We prove that the inverse $Z$-polynomial of $\Q_n(G;X)$ depends only on $n$, $m$ and $|X|$, that its coefficients are positive, and that they form a strictly log-concave sequence. In particular, the conjecture of Gao, Ruan and Xie on the log-concavity of inverse $Z$-polynomials holds for all these matroids, for every finite group $G$. The proof combines the deletion formula of Braden, Ferroni, Matherne and Nepal with a closed formula for the exponential generating function of the inverse $Z$-polynomials of Dowling geometries, which we derive from the generating function of Ferroni and Larson. Each coefficient sequence is then written as a positive mixture of products of two log-concave sequences with explicit weights, and log-concavity of the weights is transferred to the coefficients through the discrete Pr\'ekopa--Leindler inequality of Klartag and Lehec.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $M$ be a loopless matroid with lattice of flats $\cL(M)$. The Kazhdan--Lusztig polynomial $P_M(t)$ of Elias, Proudfoot and Wakefield \cite{EPW16} and the $Z$-polynomial $Z_M(t)$ of Proudfoot, Xu and Young \cite{PXY18} are characterized by the conditions $P_M=1$ if $\rk M=0$, $\deg P_M<\frac12\rk M$ if $\rk M>0$, and the palindromicity of
+\[
+Z_M(t)=\sum_{F\in\cL(M)}t^{\rk F}P_{M/F}(t)
+\]
+in degree $\rk M$ \cite{PXY18,BV20}. Inverting $P$ and $Z$ in the incidence algebra of $\cL(M)$ produces the inverse Kazhdan--Lusztig polynomial $Q_M(t)$ of Gao and Xie \cite{GX21} and the inverse $Z$-polynomial $Y_M(t)$, which was introduced by Ferroni, Matherne, Stevens and Vecchi \cite{FMSV24} and studied by Gao, Ruan and Xie \cite{GRX25}; we recall the definition in Section~\ref{sec:prelim}. Gao, Ruan and Xie proved that $Y_M(t)$ has nonnegative coefficients and is multiplicative under direct sums \cite[Propositions~2.1 and~2.3]{GRX25}, and recorded that it is palindromic of degree $\rk M$ \cite[Lemma~2.2]{GRX25}; they computed it for uniform and sparse paving matroids and proposed the following conjecture.
+
+\begin{conjecture}[{\cite[Conjecture~1.5]{GRX25}}]\label{conj:GRX}
+For every matroid $M$, the coefficients of $Y_M(t)$ form a log-concave sequence with no internal zeros.
+\end{conjecture}
+
+They proved Conjecture~\ref{conj:GRX} for sparse paving matroids \cite[Theorem~1.6]{GRX25}. Braden, Ferroni, Matherne and Nepal \cite{BFMN25} later established a deletion formula for $Y_M(t)$ (Theorem~\ref{thm:deletion} below) and listed Conjecture~\ref{conj:GRX} among the main open problems on these invariants \cite[Conjecture~1.2(d)]{BFMN25}. An equivariant version of $Y_M$ has been considered in \cite{GLX26}.
+
+In this paper we prove Conjecture~\ref{conj:GRX}, with strict inequalities, for a family of matroids built from finite groups. Let $G$ be a finite group of order $m$, let $n\ge 1$, and let $X\subseteq[n]=\{1,\dots,n\}$. Consider the gain graph on the vertex set $[n]$ that has, for every pair of distinct vertices, one link carrying each gain $g\in G$, together with a half edge (a \emph{joint}) at every vertex of $X$. Its frame matroid is denoted $\Q_n(G;X)$, and we call it the \emph{Dowling matroid with joints $X$}; see Section~\ref{sec:gain} for the precise definition. For $X=[n]$ we obtain the Dowling geometry $\Q_n(G)$ of Dowling \cite{Dow73}, and for $X=\emptyset$ the jointless Dowling geometry. The whole family was considered by Zaslavsky \cite[Section~5.4, Example~2]{Zas22}, following the terminology of Kahn and Kung \cite{KK82}. For $G=\mathbb{Z}/2\mathbb{Z}$, the cases $X=[n]$ and $X=\emptyset$ are the matroids of the reflection arrangements of types $B_n$ and $D_n$. For the trivial group, $\Q_n(1;X)$ is the cycle matroid of the graph obtained from the complete graph on $\{0,1,\dots,n\}$ by deleting the edges $0i$ with $i\notin X$; in particular $\Q_n(1)$ is the braid matroid $\K_{n+1}$.
+
+\begin{theorem}\label{thm:main}
+Let $G$ be a finite group of order $m\ge1$, let $n\ge1$, let $X\subseteq[n]$ and $k=|X|$. Let $r$ be the rank of $\Q_n(G;X)$ and write $Y_{\Q_n(G;X)}(t)=\sum_{p=0}^{r}y_pt^p$.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $r=n-1$ if $k=0$ and either $m=1$ or $n=1$, and $r=n$ otherwise. If $m=1$ and $k=0$, then $\Q_n(G;\emptyset)$ is isomorphic to the braid matroid $\K_n$.
+\item $Y_{\Q_n(G;X)}$ depends only on $n$, $m$ and $k$. Its coefficients satisfy $y_p=y_{r-p}>0$ for $0\le p\le r$.
+\item $y_p^2>y_{p-1}y_{p+1}$ for $1\le p\le r-1$.
+\item If $n\ge2$ and $r=n$, then
+\[
+y_0=y_n=\bigl((m-1)(n-1)+k\bigr)\prod_{h=1}^{n-2}(mh+1).
+\]
+\end{enumerate}
+\end{theorem}
+
+For $n=1$ the matroid is empty if $k=0$ and consists of a single coloop if $k=1$, so that $Y=1$ or $Y=1+t$. No commutativity is assumed in Theorem~\ref{thm:main}: a nonabelian group has the same inverse $Z$-polynomials as a cyclic group of the same order. When $r\ge4$, three links forming a triangle with gain product $1$ are a circuit of size $3<r$, so $\Q_n(G;X)$ is not paving; Theorem~\ref{thm:main} therefore overlaps \cite[Theorem~1.6]{GRX25} only in low rank.
+
+\begin{corollary}\label{cor:families}
+Conjecture~\textup{\ref{conj:GRX}} holds, with strict log-concavity, for the Dowling geometries $\Q_n(G)$ of all finite groups $G$, for the braid matroids $\K_n$, for the matroids of the reflection arrangements of types $B_n$ and $D_n$, and for the cycle matroids of the graphs obtained from a complete graph by deleting some of the edges at one vertex.
+\end{corollary}
+
+A central ingredient is a closed form for the inverse $Z$-polynomials of Dowling geometries. For a real number $\beta$ and an integer $l$ put
+\[
+c_l(\beta)=\frac{\beta(\beta+1)\cdots(\beta+l-1)}{l!}\quad(l\ge0),\qquad c_l(\beta)=0\quad(l<0).
+\]
+
+\begin{theorem}\label{thm:dowling-gf}
+Let $G$ be a finite group of order $m$ and put $a=1/m$. Let $v=v(x,t)$ be the formal power series in $x$ with coefficients in $\mathbb{Q}[t]$ determined by $v(0,t)=0$ and $v\,e^{-tv^2/2}=mx$. Then
+\[
+\sum_{n\ge0}Y_{\Q_n(G)}(t)\,\frac{x^n}{n!}=\frac{e^{atv^2/2}}{(1-v)^a(1-tv)^a}.
+\]
+Equivalently, for $n\ge0$ and $0\le p\le n$, with $\lambda=(n+a)/2$,
+\[
+[t^p]\,Y_{\Q_n(G)}(t)=n!\,m^n\sum_{j=0}^{\min(p,n-p)}\frac{(\lambda-j)\lambda^{j-1}}{j!}\,c_{p-j}(a)\,c_{n-p-j}(a),
+\]
+where the factor $(\lambda-j)\lambda^{j-1}/j!$ equals $1$ for $j=0$.
+\end{theorem}
+
+For the trivial group this gives $\sum_{n\ge0}Y_{\K_{n+1}}(t)x^n/n!=e^{tv^2/2}(1-v)^{-1}(1-tv)^{-1}$ with $ve^{-tv^2/2}=x$.
+
+\subsection*{Outline of the proof}
+Theorem~\ref{thm:dowling-gf} follows from the generating function for $Z$-polynomials of Dowling geometries obtained by Ferroni and Larson \cite{FL24,FL26}: the relation $Z\cdot Z^{-1}=1$ in the incidence algebra, with $Z^{-1}$ expressed through $Y$ as in \eqref{eq:defY}, becomes a functional equation, and the two nested compositional inverses in their formula cancel after the change of variables $x=g_t(u)/m$ of Lemma~\ref{lem:uncompose} (Section~\ref{sec:dowling}). By the deletion formula of \cite{BFMN25}, removing a joint changes $Y$ by an amount that, for $m\ge2$, does not depend on the remaining joints; for $m=1$ it depends on their number, and the formula applies as long as at least two joints are present, since the last joint is a coloop (Proposition~\ref{prop:joint-deletion}). For $m\ge2$ it follows that $Y_{\Q_n(G;X)}$ is an affine function of $k=|X|$, interpolating between the Dowling geometry and the jointless Dowling geometry; for $m=1$ we obtain an expansion with nonnegative coefficients in terms of braid matroids.
+
+The coefficient formula in Theorem~\ref{thm:dowling-gf} does not exhibit log-concavity, because for $0<a<1$ the sequence $c_l(a)$ is log-convex. An Euler-operator identity (Lemma~\ref{lem:euler}) raises the parameter from $a$ to $a+1$ without changing the total degree. In every case of Theorem~\ref{thm:main} with $r=n\ge2$ we obtain a representation
+\begin{equation}\label{eq:shape}
+y_p=C\sum_{j=0}^{\min(p,n-p)}W_j\,d_{p-j}\,d_{n-p-j},\qquad d_l=c_l(a+1),
+\end{equation}
+with a constant $C>0$ and explicit weights $W_0,\dots,W_{\lfloor n/2\rfloor}$. The sequence $(d_l)$ has strictly decreasing ratios, and Lemma~\ref{lem:transfer}, which rests on the discrete Pr\'ekopa--Leindler inequality of Klartag and Lehec \cite{KL19}, shows that \eqref{eq:shape} is strictly log-concave whenever the weights are positive and log-concave. Most of the work (Sections~\ref{sec:nontrivial} and~\ref{sec:trivial}) consists in proving that the weights have these properties for all $n$, $m$ and $k$. We compare $W_j$ with the weights $U_j$ of the Dowling geometry, which are explicit and strictly log-concave. In all cases but one we show that the normalized second difference $(q_{j-1}+q_{j+1}-2q_j)/q_j$ of $q_j=W_j/U_j$ is smaller than $\log\bigl(U_j^2/(U_{j-1}U_{j+1})\bigr)$; in the remaining case $m=2$, $j=1$ we compare the products $q_0q_2$ and $q_1^2$ directly, using explicit bounds on $q_0,q_1,q_2$.
+
+\subsection*{Dependencies}
+Besides standard facts on Kazhdan--Lusztig invariants of matroids, the proof uses the following results, which we use without proof: the deletion formula for inverse $Z$-polynomials \cite[Theorem~1.4]{BFMN25}; the generating function for the $Z$-polynomials of braid matroids \cite[Propositions~2.3 and~2.8, Corollary~3.2]{FL24} and of Dowling geometries \cite[Theorem~1.1 and Proposition~3.2]{FL26}; the leading coefficient of the Kazhdan--Lusztig polynomial of an odd-rank Dowling geometry \cite[Example~4.2]{FL26}; and the inequality of Klartag and Lehec \cite{KL19} in the form of Theorem~3 of \cite{GRST19} (numbered as in arXiv:1905.04038v1). The flats, restrictions and contractions of $\Q_n(G;X)$ are derived directly from the rank function of frame matroids \cite{Zas91,Zas22}.
+
+\subsection*{Organization}
+Section~\ref{sec:prelim} collects facts on Kazhdan--Lusztig invariants, formal power series and log-concavity, and proves the transfer lemma. Section~\ref{sec:gain} describes the flats of $\Q_n(G;X)$ and computes the effect of deleting a joint. Section~\ref{sec:dowling} proves Theorem~\ref{thm:dowling-gf} and the case $X=[n]$ of Theorem~\ref{thm:main}. Section~\ref{sec:nontrivial} treats nontrivial groups and Section~\ref{sec:trivial} the trivial group. Section~\ref{sec:proof} completes the proof of Theorem~\ref{thm:main} and lists some examples.
+
+\section{Preliminaries}\label{sec:prelim}
+
+\subsection{Kazhdan--Lusztig invariants}
+We follow \cite{Oxl11} for matroid terminology. For a loopless matroid $M$ on $E$ we write $\cL(M)$ for its lattice of flats and $\rk$ for its rank function. For flats $F\subseteq F'$, the matroid $M|F'/F$ is loopless and its lattice of flats is the interval $[F,F']$ of $\cL(M)$. The simplification $\si(M)$ has the same lattice of flats as $M$.
+
+\begin{theorem}[{\cite{PXY18,BV20}; see \cite[Theorem~2.1]{BFMN25}}]\label{thm:PZ}
+There is a unique way to assign to every loopless matroid $M$ polynomials $P_M(t),Z_M(t)\in\mathbb{Z}[t]$ such that $P_M=1$ if $\rk M=0$, $\deg P_M<\frac12\rk M$ if $\rk M>0$, and $Z_M(t)=\sum_{F\in\cL(M)}t^{\rk F}P_{M/F}(t)$ is palindromic of degree $\rk M$.
+\end{theorem}
+
+For a loopless matroid $M$ we put $\tau(M)=[t^{(\rk M-1)/2}]P_M(t)$ if $\rk M$ is odd and $\tau(M)=0$ if $\rk M$ is even.
+
+Let $\mathcal{I}$ be the incidence algebra of $\cL(M)$ over $\mathbb{Z}[t,t^{-1}]$, whose elements assign an element $\alpha_{FF'}$ to every pair of flats $F\subseteq F'$, with product $(\alpha\beta)_{FF'}=\sum_{F\subseteq H\subseteq F'}\alpha_{FH}\beta_{HF'}$. The element $Z\in\mathcal{I}$ with $Z_{FF'}=Z_{M|F'/F}(t)$ satisfies $Z_{FF}=1$, so it is invertible. Following \cite[Section~2.2]{BFMN25} (see also \cite[(2)--(3)]{GRX25}), the \emph{inverse $Z$-polynomial} $Y_M(t)$ is defined by
+\begin{equation}\label{eq:defY}
+(Z^{-1})_{FF'}=(-1)^{\rk F'-\rk F}\,Y_{M|F'/F}(t)\qquad(F\subseteq F').
+\end{equation}
+For a matroid with loops one puts $Y_M=Y_{M\setminus\mathrm{loops}}$. Evaluating $Z\cdot Z^{-1}=1$ at the pair $(\emptyset,E)$ gives, for every loopless $M$ of positive rank,
+\begin{equation}\label{eq:convolution}
+\sum_{F\in\cL(M)}(-1)^{\rk M-\rk F}\,Z_{M|F}(t)\,Y_{M/F}(t)=0.
+\end{equation}
+
+\begin{lemma}\label{lem:basic}
+Let $M$, $M_1$, $M_2$ be loopless matroids.
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $P_M$, $Z_M$, $Y_M$ and $\tau(M)$ depend only on the lattice $\cL(M)$; in particular they are unchanged under simplification.
+\item $P_{M_1\oplus M_2}=P_{M_1}P_{M_2}$, $Z_{M_1\oplus M_2}=Z_{M_1}Z_{M_2}$ and $Y_{M_1\oplus M_2}=Y_{M_1}Y_{M_2}$.
+\item If $M=M_1\oplus\dots\oplus M_s$ and at least two of the $M_i$ have positive rank, then $\tau(M)=0$.
+\item $Y_M=1$ if $\rk M=0$, and $Y_M=1+t$ if $M$ consists of a single coloop.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) The conditions in Theorem~\ref{thm:PZ} and in \eqref{eq:defY} involve only the lattice of flats, its rank function and its intervals; by induction on the rank, all four invariants are determined by the ranked lattice.
+
+(b) The flats of $M=M_1\oplus M_2$ are the pairs $(F_1,F_2)$ of flats, and $M/(F_1\cup F_2)=M_1/F_1\oplus M_2/F_2$. We prove the first identity by induction on $\rk M$, the case of rank $0$ being trivial. Using the induction hypothesis for the contractions by nonempty flats,
+\[
+Z_M-Z_{M_1}Z_{M_2}=P_M-P_{M_1}P_{M_2}.
+\]
+The left side is palindromic of degree $\rk M$, and the right side has degree less than $\frac12\rk M$; hence both vanish. The identity for $Z$ follows from its definition, and the identity for $Y$ is \cite[Proposition~2.3]{GRX25}.
+
+(c) Let $r_i=\rk M_i$ and $r=\sum_ir_i$. We may assume that $r$ is odd. By (b), $\deg P_M\le\sum_{r_i>0}\frac{r_i-1}{2}\le\frac{r-2}{2}<\frac{r-1}{2}$, since at least two $r_i$ are positive. Hence $\tau(M)=0$.
+
+(d) The first statement is the definition. If $M$ consists of a single coloop, then $\cL(M)=\{\emptyset,E\}$, $Z_M=1+t$, and \eqref{eq:convolution} gives $Z_M-Y_M=0$.
+\end{proof}
+
+\begin{theorem}[{\cite[Theorem~1.4]{BFMN25}}]\label{thm:deletion}
+Let $M$ be a loopless matroid and let $e$ be an element of $M$ that is not a coloop. Then
+\[
+Y_M(t)=Y_{M\setminus e}(t)+(1+t)\,Y_{M/e}(t)-\sum_{F\in\mathcal{T}_e}\tau\bigl(M|F/e\bigr)\,t^{\rk F/2}\,Y_{M/F}(t),
+\]
+where $\mathcal{T}_e=\{F\in\cL(M):e\in F\text{ and }F\setminus\{e\}\notin\cL(M)\}$.
+\end{theorem}
+
+Since $\tau(M|F/e)=0$ unless $\rk F$ is even, all exponents of $t$ are integers.
+
+\subsection{Formal power series}\label{sec:series}
+All power series are formal. For a series $f$ with constant term $1$ and $\beta\in\mathbb{R}$ we put $f^\beta=\sum_{i\ge0}\binom{\beta}{i}(f-1)^i$; then $(fg)^\beta=f^\beta g^\beta$ and $(f^\beta)^{\beta'}=f^{\beta\beta'}$, and composition with a series without constant term commutes with these operations. We use the following form of the Lagrange inversion formula; see \cite[Section~5.4]{Sta99}. Let $K$ be a $\mathbb{Q}$-algebra and $\varphi\in K[[u]]$ with $\varphi(0)=1$. Then there is a unique $v\in K[[z]]$ with $v(0)=0$ and $v=z\varphi(v)$, and for every $F\in K[[u]]$ and $n\ge0$,
+\[
+[z^n]F(v)=[u^n]\,F(u)\,\varphi(u)^n\Bigl(1-\frac{u\varphi'(u)}{\varphi(u)}\Bigr).
+\]
+Indeed, $[z^n]F(v)$ is the formal residue of $F(v(z))z^{-n-1}$, and the substitution $z=u/\varphi(u)$ transforms this residue into that of $F(u)\varphi(u)^{n+1}u^{-n-1}\,\frac{d}{du}\frac{u}{\varphi(u)}$. We only need $K=\mathbb{Q}[t]$ and $\varphi(u)=e^{tu^2/2}$:
+\begin{equation}\label{eq:lagrange}
+v=z\,e^{tv^2/2}\quad\Longrightarrow\quad[z^n]F(v)=[u^n]\,F(u)\,(1-tu^2)\,e^{ntu^2/2}.
+\end{equation}
+
+We also use series in two variables $\xi,\eta$. Put
+\[
+z=\xi\eta,\qquad R=(1-\xi)(1-\eta),
+\]
+and for a series $\Phi\in\mathbb{R}[[\xi,\eta]]$ let $[\Phi]_N$ be its homogeneous component of degree $N$. Since $R^{-\beta}=\sum_{\alpha,\gamma\ge0}c_\alpha(\beta)c_\gamma(\beta)\xi^\alpha\eta^\gamma$,
+\begin{equation}\label{eq:extract}
+[\xi^{N-p}\eta^p]\,z^jR^{-\beta}=c_{N-p-j}(\beta)\,c_{p-j}(\beta).
+\end{equation}
+For $\Phi\in\mathbb{R}[[\xi,\eta]]$ the substitution $\xi=u$, $\eta=tu$ gives a series $\Phi(u,tu)\in\mathbb{R}[t][[u]]$, and
+\begin{equation}\label{eq:dictionary}
+[u^Nt^p]\,\Phi(u,tu)=[\xi^{N-p}\eta^p]\,\Phi.
+\end{equation}
+Under this substitution $z=tu^2$. For $\theta\in\mathbb{R}$ and an integer $j$ let
+\begin{equation}\label{eq:w}
+w_j(\theta)=[z^j]\,(1-z)e^{\theta z}=\frac{(\theta-j)\,\theta^{j-1}}{j!}\quad(j\ge0),\qquad w_j(\theta)=0\quad(j<0);
+\end{equation}
+for $j=0$ the middle expression equals $1$.
+
+\begin{lemma}\label{lem:euler}
+Let $N\ge0$ and $\beta,\theta\in\mathbb{R}$.
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item If $j\ge0$ and $N+\beta-2j\ne0$, then
+\[
+[z^jR^{-\beta}]_N=\frac{\beta}{N+\beta-2j}\,[z^j(1-z)R^{-\beta-1}]_N.
+\]
+\item If $2\theta=N+\beta\ne0$, then
+\[
+[(1-z)e^{\theta z}R^{-\beta}]_N=\frac{\beta}{N+\beta}\,[(1-z)e^{\theta z}R^{-\beta-1}]_N.
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Let $\cE=\xi\partial_\xi+\eta\partial_\eta$; it acts on homogeneous components of degree $N$ as multiplication by $N$. We have $\cE z=2z$ and $\cE R=-\xi-\eta+2\xi\eta=R-(1-z)$, hence
+\[
+(\cE+\beta)R^{-\beta}=\beta(1-z)R^{-\beta-1}.
+\]
+Consequently $(\cE+\beta-2j)(z^jR^{-\beta})=\beta z^j(1-z)R^{-\beta-1}$, and taking components of degree $N$ gives (a). Similarly
+\[
+(\cE+\beta)(e^{\theta z}R^{-\beta})=2\theta z\,e^{\theta z}R^{-\beta}+\beta(1-z)e^{\theta z}R^{-\beta-1}.
+\]
+Taking components of degree $N$ and using $2\theta=N+\beta$, the left side minus the first term on the right becomes $(N+\beta)[(1-z)e^{\theta z}R^{-\beta}]_N$, which gives (b).
+\end{proof}
+
+\begin{corollary}\label{cor:raise}
+Let $n\ge0$, $\beta>0$, $J=\lfloor n/2\rfloor$, and let $V(z)=\sum_jv_jz^j\in\mathbb{R}[[z]]$. Suppose $n+\beta-2j>0$ for $0\le j\le J$, and put $v_{-1}=0$ and
+\[
+W_j=\beta\Bigl(\frac{v_j}{n+\beta-2j}-\frac{v_{j-1}}{n+\beta-2j+2}\Bigr)\qquad(0\le j\le J).
+\]
+Then for $0\le p\le n$,
+\[
+[\xi^{n-p}\eta^p]\,V(z)R^{-\beta}=\sum_{j=0}^{\min(p,n-p)}W_j\,c_{p-j}(\beta+1)\,c_{n-p-j}(\beta+1).
+\]
+\end{corollary}
+
+\begin{proof}
+Only the terms with $j\le J$ contribute to the component of degree $n$. By Lemma~\ref{lem:euler}(a),
+\[
+[V(z)R^{-\beta}]_n=\sum_{j=0}^{J}\frac{\beta v_j}{n+\beta-2j}\,[z^jR^{-\beta-1}-z^{j+1}R^{-\beta-1}]_n,
+\]
+and the term $z^{J+1}R^{-\beta-1}$ has no component of degree $n$. Collecting the coefficient of $z^jR^{-\beta-1}$ and applying \eqref{eq:extract} gives the claim.
+\end{proof}
+
+\subsection{Log-concavity}
+A sequence of positive numbers $(e_i)_{i\in I}$ indexed by an interval $I$ of integers has \emph{nonincreasing ratios} if $e_{i+1}/e_i$ is nonincreasing in $i$; equivalently $e_i^2\ge e_{i-1}e_{i+1}$ whenever $i\pm1\in I$. A finite sequence $(e_0,\dots,e_N)$ of positive numbers is \emph{strictly log-concave} if $e_i^2>e_{i-1}e_{i+1}$ for $0<i<N$.
+
+\begin{lemma}\label{lem:balance}
+Let $(e_i)_{i\in I}$ be positive with nonincreasing ratios, let $i,i'\in I$, and put $u=\lfloor(i+i')/2\rfloor$ and $u'=\lceil(i+i')/2\rceil$. Then $e_ie_{i'}\le e_ue_{u'}$. If the ratios are strictly decreasing and $|i-i'|\ge2$, the inequality is strict.
+\end{lemma}
+
+\begin{proof}
+Let $i\le i'$. If $i'-i\ge2$, then $e_{i+1}e_{i'-1}/(e_ie_{i'})=(e_{i+1}/e_i)/(e_{i'}/e_{i'-1})\ge1$, with strict inequality if the ratios are strictly decreasing. Repeating this step until the indices differ by at most one proves the lemma.
+\end{proof}
+
+\begin{theorem}[Klartag--Lehec {\cite{KL19}}; see {\cite[arXiv:1905.04038v1, Theorem~3]{GRST19}}]\label{thm:KL}
+Let $f,g,h,k\colon\mathbb{Z}\to[0,\infty)$ satisfy
+\[
+f(x)\,g(y)\le h\Bigl(\Bigl\lfloor\frac{x+y}{2}\Bigr\rfloor\Bigr)\,k\Bigl(\Bigl\lceil\frac{x+y}{2}\Bigr\rceil\Bigr)\qquad\text{for all }x,y\in\mathbb{Z}.
+\]
+Then $\bigl(\sum_xf(x)\bigr)\bigl(\sum_yg(y)\bigr)\le\bigl(\sum_xh(x)\bigr)\bigl(\sum_yk(y)\bigr)$.
+\end{theorem}
+
+\begin{lemma}\label{lem:transfer}
+Let $n\ge2$, $J=\lfloor n/2\rfloor$ and $\beta>0$. Let $W_0,\dots,W_J$ be positive numbers with $W_j^2\ge W_{j-1}W_{j+1}$ for $1\le j\le J-1$, put $d_l=c_l(\beta+1)$ and
+\[
+S_p=\sum_{j=0}^{\min(p,n-p)}W_j\,d_{p-j}\,d_{n-p-j}\qquad(0\le p\le n).
+\]
+Then $S_p=S_{n-p}>0$ for $0\le p\le n$, and $S_p^2>S_{p-1}S_{p+1}$ for $1\le p\le n-1$.
+\end{lemma}
+
+\begin{proof}
+The sequence $d_l$ is positive for $l\ge0$, and $d_{l+1}/d_l=1+\beta/(l+1)$ is strictly decreasing. Symmetry is clear, and the term $j=0$ shows $S_p>0$. Extend $W$ by $W_j=0$ for $j\notin[0,J]$ and $d_l=0$ for $l<0$. Fix $1\le p\le n-1$ and define functions on $\mathbb{Z}$ by
+\begin{gather*}
+f(i)=W_i\,d_{p-1-i}\,d_{n-p+1-i},\qquad g(i)=W_i\,d_{p+1-i}\,d_{n-p-1-i},\\
+h(i)=W_i\,d_{p-i}\,d_{n-p-i},
+\end{gather*}
+so that $\sum f=S_{p-1}$, $\sum g=S_{p+1}$ and $\sum h=S_p$. Let $i,i'\in\mathbb{Z}$ with $f(i)g(i')>0$ and put $u=\lfloor(i+i')/2\rfloor$, $u'=\lceil(i+i')/2\rceil$. Then $i,i'\in[0,J]$, and the indices $p-1-i$, $n-p+1-i$, $p+1-i'$, $n-p-1-i'$ are nonnegative. Hence $u,u'\in[0,J]$; moreover $\{p-u,p-u'\}$ is the balanced pair of integers with the same sum as $\{p-1-i,\,p+1-i'\}$, and $\{n-p-u,n-p-u'\}$ is the balanced pair with the same sum as $\{n-p+1-i,\,n-p-1-i'\}$. All these indices are nonnegative. Applying Lemma~\ref{lem:balance} to $W$ on $[0,J]$ and twice to $d$ on $[0,\infty)$ gives $f(i)g(i')\le h(u)h(u')$. The differences within the two pairs of $d$-indices are $i'-i-2$ and $i'-i+2$, which cannot both have absolute value at most $1$; so one of the two applications to $d$ is strict, and
+\[
+h(u)\,h(u')>f(i)\,g(i')\qquad\text{whenever }f(i)g(i')>0.
+\]
+The functions $f,g$ have finite support, and $f(0)g(0)>0$. Hence
+\[
+\rho=\min\Bigl\{\frac{h(\lfloor\frac{i+i'}2\rfloor)\,h(\lceil\frac{i+i'}2\rceil)}{f(i)g(i')}:f(i)g(i')>0\Bigr\}
+\]
+exists and $\rho>1$. The functions $\rho f$, $g$, $h$, $h$ satisfy the hypothesis of Theorem~\ref{thm:KL}, which gives $\rho\,S_{p-1}S_{p+1}\le S_p^2$. Since $S_{p\pm1}>0$ and $\rho>1$, we obtain $S_p^2>S_{p-1}S_{p+1}$.
+\end{proof}
+
+We shall use the following elementary consequence of the arithmetic--geometric mean inequality several times. Let $q_{j-1},q_j,q_{j+1}>0$ and $\delta=q_{j-1}+q_{j+1}-2q_j$. Then
+\begin{equation}\label{eq:amgm}
+\log\frac{q_{j-1}q_{j+1}}{q_j^2}\le2\log\Bigl(1+\frac{\delta}{2q_j}\Bigr)\quad\text{if }\delta>-2q_j,
+\end{equation}
+so that $q_{j-1}q_{j+1}\le q_j^2$ if $\delta\le0$, and $\log(q_{j-1}q_{j+1}/q_j^2)<\delta/q_j$ if $\delta>0$.
+
+\section{Gain graphs and the matroids \texorpdfstring{$\Q_n(G;X)$}{Qn(G;X)}}\label{sec:gain}
+
+\subsection{Definition}
+Let $G$ be a finite group with identity $1$ and order $m$, let $n\ge0$ and $X\subseteq[n]$. Let $E=E_n(G;X)$ be the set consisting of the \emph{links} $e_{ij}(g)$ for $1\le i<j\le n$ and $g\in G$, and the \emph{joints} $h_i$ for $i\in X$. The link $e_{ij}(g)$ joins $i$ and $j$; it has gain $g$ when traversed from $i$ to $j$ and gain $g^{-1}$ when traversed from $j$ to $i$. The joint $h_i$ is a half edge at $i$. For $S\subseteq E$ we consider the graph $([n],S)$. A \emph{circle} is a closed path of links without repeated vertices; it may have length two. A circle is \emph{balanced} if the product of the gains of its links, in the order of traversal, is $1$; this does not depend on the starting point or the direction. A connected component of $([n],S)$ is \emph{balanced} if it contains no joint and all its circles are balanced. Let $b(S)$ be the number of balanced components, isolated vertices included, and
+\begin{equation}\label{eq:rank}
+\rk(S)=n-b(S).
+\end{equation}
+This is the rank function of the frame matroid of the gain graph $(\,[n],E)$ \cite[Section~2]{Zas91}, \cite[Section~1]{Zas22}. We denote this matroid by $\Q_n(G;X)$ and put $\Q_n(G)=\Q_n(G;[n])$. In the notation of \cite{Zas22}, $\Q_n(G;X)$ is the frame matroid of the partially filled group expansion $G\cdot K_n^{(X)}$, and $\Q_n(G)$ is the Dowling geometry of rank $n$ \cite{Dow73}, \cite[Section~1]{Zas22}. Deleting the joint $h_i$ from $\Q_n(G;X)$ gives $\Q_n(G;X\setminus\{i\})$.
+
+For $m=1$, the matroid $\Q_n(1;X)$ is the cycle matroid of the graph on $\{0,1,\dots,n\}$ with all edges $ij$, $1\le i<j\le n$, and the edges $0i$, $i\in X$: identifying $h_i$ with $0i$, the balanced components of $([n],S)$ are exactly the components of the corresponding subgraph that do not contain $0$, and \eqref{eq:rank} becomes the graphic rank function. In particular $\Q_n(1)\cong\K_{n+1}$.
+
+\subsection{Potentials}
+
+\begin{lemma}\label{lem:potential}
+Let $A\subseteq[n]$ be nonempty.
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item Let $S$ be a set of links with both ends in $A$ such that $(A,S)$ is connected and balanced. Then there is $\varphi\colon A\to G$ with $g=\varphi(i)^{-1}\varphi(j)$ for every $e_{ij}(g)\in S$, and $\varphi$ is unique up to replacing $\varphi$ by $c\varphi$, $c\in G$.
+\item For $\varphi\colon A\to G$ the set $S_\varphi(A)=\{e_{ij}(\varphi(i)^{-1}\varphi(j)):i<j,\ i,j\in A\}$ is balanced, and $S_\varphi(A)=S_{\varphi'}(A)$ if and only if $\varphi'=c\varphi$ for some $c\in G$. There are exactly $m^{|A|-1}$ distinct sets $S_\varphi(A)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) Fix $i_0\in A$. For $i\in A$ let $\varphi(i)$ be the product of the gains along a walk from $i_0$ to $i$ in $(A,S)$. In a balanced gain graph every closed walk has gain $1$ (cancel backtracks and split the walk into circles), so $\varphi$ is well defined, and for a link from $i$ to $j$ with gain $g$ we get $\varphi(j)=\varphi(i)g$. If $\varphi'$ is another such map, then $\varphi'(i)\varphi(i)^{-1}=\varphi'(j)\varphi(j)^{-1}$ for every link $e_{ij}(g)\in S$, so $\varphi'\varphi^{-1}$ is constant on the connected graph $(A,S)$.
+
+(b) The gain of a circle in $S_\varphi(A)$ is a telescoping product equal to $1$. If $S_\varphi(A)=S_{\varphi'}(A)$, then $\varphi'(i)\varphi(i)^{-1}=\varphi'(j)\varphi(j)^{-1}$ for all $i,j\in A$. Finally, $G$ acts freely on the set $G^A$ of maps by left multiplication, so there are $m^{|A|}/m$ orbits. No commutativity is needed.
+\end{proof}
+
+\subsection{Flats}
+For $B\subseteq[n]$ let $E(B)$ be the set of all elements of $E$ with all ends in $B$, that is, the links $e_{ij}(g)$ with $i,j\in B$ and the joints $h_i$ with $i\in X\cap B$. We call $B$ \emph{admissible} if $B=\emptyset$ or the gain graph $(B,E(B))$ is unbalanced. Since $(B,E(B))$ is connected, $B\neq\emptyset$ is admissible if and only if $B\cap X\ne\emptyset$, or $m\ge2$ and $|B|\ge2$; in the latter case two links $e_{ij}(g),e_{ij}(g')$ with $g\ne g'$ form an unbalanced circle.
+
+\begin{lemma}\label{lem:flats}
+A set $F\subseteq E$ is a flat of $\Q_n(G;X)$ if and only if
+\begin{equation}\label{eq:flat}
+F=E(B_0)\cup S_{\varphi_1}(B_1)\cup\dots\cup S_{\varphi_b}(B_b)
+\end{equation}
+for an admissible set $B_0$, a partition $\{B_1,\dots,B_b\}$ of $[n]\setminus B_0$ into nonempty blocks, and maps $\varphi_l\colon B_l\to G$. The set $B_0$, the blocks $B_l$ and the classes of the $\varphi_l$ modulo left multiplication are determined by $F$, and $\rk F=n-b$.
+\end{lemma}
+
+We call $B_0$ the \emph{zero block} and $B_1,\dots,B_b$ the \emph{balanced blocks} of $F$.
+
+\begin{proof}
+Let $F$ be a flat. If $([n],F)$ had two unbalanced components, a link joining them would not change $b(F)$, hence would lie in the closure of $F$; this is impossible. Let $B_0$ be the vertex set of the unbalanced component if it exists and $B_0=\emptyset$ otherwise. Adding to $F$ an element of $E(B_0)$ does not change the components or their balance, so $E(B_0)\subseteq F$, and $B_0$ is admissible. Let $B_1,\dots,B_b$ be the vertex sets of the balanced components. By Lemma~\ref{lem:potential}(a) there are $\varphi_l$ with $F\cap E(B_l)\subseteq S_{\varphi_l}(B_l)$; adding an element of $S_{\varphi_l}(B_l)$ keeps $B_l$ balanced, so equality holds. Since every element of $F$ lies inside a component, $F$ has the form \eqref{eq:flat}, and $\rk F=n-b$.
+
+Conversely, let $F$ be given by \eqref{eq:flat}. The components of $([n],F)$ are $B_0$ (if nonempty), which is unbalanced, and $B_1,\dots,B_b$, which are balanced; so $\rk F=n-b$. Let $e\in E\setminus F$. If $e$ is a link between two different blocks, then $F\cup\{e\}$ has one balanced component fewer: either a balanced block merges with $B_0$, or two balanced blocks merge into a balanced component, since $e$ is a bridge. If $e$ is a link inside $B_l$ not in $S_{\varphi_l}(B_l)$, it forms an unbalanced circle of length two with the link of $S_{\varphi_l}(B_l)$ on the same pair. If $e$ is a joint at a vertex of $B_l$, the component $B_l$ becomes unbalanced. In each case $\rk(F\cup\{e\})>\rk F$, so $F$ is a flat. The uniqueness statement follows from Lemma~\ref{lem:potential}.
+\end{proof}
+
+\begin{corollary}\label{cor:rank}
+Let $n\ge1$. The rank of $\Q_n(G;X)$ is $n$, except when $X=\emptyset$ and either $m=1$ or $n=1$, in which case it is $n-1$. If $m=1$, then $\Q_n(1;\emptyset)\cong\K_n$. For $n=0$ the matroid is empty and has rank $0$.
+\end{corollary}
+
+\begin{proof}
+The set $E$ is the flat with $B_0=[n]$ if $[n]$ is admissible, that is, if $X\neq\emptyset$ or $m\ge2$ and $n\ge2$. Otherwise $E=S_1([n])$ is a single balanced block, of rank $n-1$; for $m=1$ the matroid is then the cycle matroid of $K_n$.
+\end{proof}
+
+\subsection{Restrictions and contractions}
+
+\begin{lemma}\label{lem:restriction}
+Let $F$ be a flat as in \eqref{eq:flat}. Then
+\[
+\Q_n(G;X)|F\;\cong\;\Q_{|B_0|}(G;X\cap B_0)\oplus\K_{|B_1|}\oplus\dots\oplus\K_{|B_b|},
+\]
+where the first summand is $\Q_n(G;X)|E(B_0)$, read on the vertex set $B_0$, and $\K_1$ is the empty matroid.
+\end{lemma}
+
+\begin{proof}
+No element of $F$ joins two different blocks, so for $S\subseteq F$ the balanced components of $([n],S)$ are obtained separately inside each block; hence $\rk$ is additive over the blocks. The restriction to $E(B_0)$ is the frame matroid on $B_0$ described in the statement. On $S_{\varphi_l}(B_l)$ every subset is balanced, so the rank function is that of the cycle matroid of the complete graph on $B_l$.
+\end{proof}
+
+\begin{lemma}\label{lem:contraction}
+Let $F$ be a flat as in \eqref{eq:flat}, and suppose that $B_0\neq\emptyset$ or $X=[n]$. Then $\Q_n(G;X)/F$ is loopless and $\si(\Q_n(G;X)/F)\cong\Q_b(G)$. In particular, if $i\in X$, then $\{h_i\}$ is a flat and $\si(\Q_n(G;X)/h_i)\cong\Q_{n-1}(G)$.
+\end{lemma}
+
+\begin{proof}
+Let $M=\Q_n(G;X)$ and $\varphi\colon[n]\setminus B_0\to G$ the map that restricts to $\varphi_l$ on $B_l$. Let $M'=\Q_b(G)$ on the vertex set $[b]$. Define $\psi\colon E\setminus F\to E(M')$ as follows. A link $e_{ij}(g)$ with $i\in B_p$, $j\in B_q$, $p\ne q$, is sent to the link between $p$ and $q$ that has gain $\varphi(i)g\varphi(j)^{-1}$ when traversed from $p$ to $q$. A link inside some $B_p$ (necessarily not in $S_{\varphi_p}(B_p)$), a link between $B_0$ and $B_p$, and a joint at a vertex of $B_p$ are sent to the joint $h_p$. Elements of $E(B_0)$ lie in $F$. Every link of $M'$ lies in the image, since $g$ can be chosen freely; every joint $h_p$ lies in the image because $B_0\neq\emptyset$ or $B_p$ contains a joint.
+
+We claim that $\rk_M(S\cup F)-\rk_M(F)=\rk_{M'}(\psi(S))$ for all $S\subseteq E\setminus F$. Replacing every gain $g$ of a link from $i$ to $j$ by $\varphi(i)g\varphi(j)^{-1}$, for $i,j\notin B_0$, does not change the balance of any circle (circle gains are conjugated), and makes all links of $F$ outside $B_0$ have gain $1$. Every component of $([n],S\cup F)$ is a union of blocks. The component containing $B_0$, if any, is unbalanced; its blocks other than $B_0$ form components of $([b],\psi(S))$ each of which contains a joint coming from a link to $B_0$, hence is unbalanced. A component $C$ not meeting $B_0$, formed by blocks $B_p$, $p\in P$, is balanced if and only if it has a potential, which must be constant on every $B_p$ since the links of $F$ have gain $1$; this happens if and only if $S$ contains no joint and no link inside a block, and the links between blocks admit a potential on $P$, that is, if and only if the component of $([b],\psi(S))$ on $P$ is balanced. Hence $b(S\cup F)=b_{M'}(\psi(S))$, and the claim follows from \eqref{eq:rank} since $b(F)=b$.
+
+By the claim, every element of $M/F$ has rank one, and two elements are parallel if and only if they have the same image under $\psi$, because $M'$ is simple. Since $\psi$ is surjective, $\si(M/F)\cong M'$. The last statement is the case $B_0=\{i\}$, with all other blocks singletons.
+\end{proof}
+
+\subsection{Deleting a joint}
+For a finite group $G$ of order $m$ and $j\ge0$ we write
+\[
+Y_j(t)=Y_{\Q_j(G)}(t),\qquad Y_0=1,
+\]
+and for $h\ge1$
+\begin{equation}\label{eq:tau}
+\tau_h=\tau\bigl(\Q_{2h-1}(G)\bigr)=m^{2h-2}\,(2h-3)!!\,(2h-1)^{h-2},
+\end{equation}
+where $(-1)!!=1$. The formula \eqref{eq:tau} is \cite[Example~4.2]{FL26}; for $h=1$ it is the fact that $P=1$ for a matroid of rank one. For $m=1$ it gives the leading coefficient of $P_{\K_{2h}}$, conjectured in \cite{EPW16} and proved in \cite{FL24}; see also \cite[Theorem~2]{GPYZ23}.
+
+\begin{proposition}\label{prop:joint-deletion}
+Let $n\ge2$, $X\subseteq[n]$, $k=|X|$, $i\in X$, $M=\Q_n(G;X)$ and $e=h_i$. Assume that $m\ge2$ or $k\ge2$. Then $e$ is not a coloop of $M$, and
+\[
+Y_{M}(t)-Y_{M\setminus e}(t)=(1+t)\,Y_{n-1}(t)-\sum_{h=1}^{\lfloor n/2\rfloor}N_h\,\tau_h\,t^h\,Y_{n-2h}(t),
+\]
+where $N_h=\binom{n-1}{2h-1}$ if $m\ge2$, and $N_h=\binom{n-1}{2h-1}-\binom{n-k}{2h-1}$ if $m=1$.
+\end{proposition}
+
+\begin{proof}
+If $m\ge2$, choose $j\ne i$ and two links between $i$ and $j$ with different gains; they span a set of rank $2$ which contains $e$ in its closure. If $m=1$, choose $j\in X\setminus\{i\}$; then $\{h_j,e_{ij}(1)\}$ has rank $2$ and spans $e$. In both cases $e$ is not a coloop.
+
+By Lemma~\ref{lem:contraction}, $\si(M/e)\cong\Q_{n-1}(G)$, so $Y_{M/e}=Y_{n-1}$ by Lemma~\ref{lem:basic}(a). Let $F$ be a flat with zero block $B_0$ and balanced blocks $B_1,\dots,B_b$. Then $e\in F$ if and only if $i\in B_0$. In that case $F\setminus\{e\}$ is the union of $E(B_0)\setminus\{e\}$ and the sets $S_{\varphi_l}(B_l)$. If the gain graph $(B_0,E(B_0)\setminus\{e\})$ is unbalanced, then adding $e$ to $F\setminus\{e\}$ does not change $b$, so $F\setminus\{e\}$ is not a flat. Otherwise $E(B_0)\setminus\{e\}=S_1(B_0)$ (all gains are trivial and there are no joints, or $B_0=\{i\}$), and $F\setminus\{e\}$ is a flat by Lemma~\ref{lem:flats}, with $B_0$ turned into a balanced block. Hence $F\in\mathcal{T}_e$ if and only if $i\in B_0$ and
+\[
+|B_0|\ge2\quad\text{if }m\ge2,\qquad (B_0\cap X)\setminus\{i\}\neq\emptyset\quad\text{if }m=1.
+\]
+
+Let $F\in\mathcal{T}_e$ and $z=|B_0|\ge2$. By Lemma~\ref{lem:restriction}, $M|F/e$ is the direct sum of $\Q_{z}(G;X\cap B_0)/h_i$ and the matroids $\K_{|B_l|}$, and by Lemma~\ref{lem:contraction} the first summand simplifies to $\Q_{z-1}(G)$, which has positive rank. By Lemma~\ref{lem:basic}(c), $\tau(M|F/e)=0$ unless all balanced blocks are singletons. In that case $M|F/e$ simplifies to $\Q_{z-1}(G)$, so $\tau(M|F/e)\ne0$ forces $z=2h$ even, and then $\tau(M|F/e)=\tau_h$, $\rk F=n-b=2h$, and $\si(M/F)\cong\Q_{n-2h}(G)$ by Lemma~\ref{lem:contraction}. A flat with singleton balanced blocks is determined by $B_0$, since a map on a single vertex is unique up to left multiplication. The number of sets $B_0\ni i$ of size $2h$ satisfying the condition above is $\binom{n-1}{2h-1}$ for $m\ge2$, and $\binom{n-1}{2h-1}-\binom{n-k}{2h-1}$ for $m=1$, where the subtracted term counts the sets $B_0$ with $B_0\setminus\{i\}\subseteq[n]\setminus X$. Theorem~\ref{thm:deletion} now gives the formula.
+\end{proof}
+
+\section{Dowling geometries}\label{sec:dowling}
+
+Throughout this section $G$ is a finite group of order $m$, $a=1/m$, and $Y_n=Y_{\Q_n(G)}$.
+
+\subsection{The convolution identity}
+Put
+\begin{gather*}
+\mathcal{A}_G(x)=\sum_{n\ge0}Z_{\Q_n(G)}(t)\frac{x^n}{n!},\qquad\mathcal{D}(x)=\sum_{n\ge0}(-1)^nY_n(t)\frac{x^n}{n!},\\
+\Phi(x)=\sum_{u\ge1}m^{u-1}Z_{\K_u}(t)\frac{x^u}{u!}.
+\end{gather*}
+
+\begin{proposition}\label{prop:convolution}
+$\mathcal{A}_G(x)\,\mathcal{D}(\Phi(x))=1$.
+\end{proposition}
+
+\begin{proof}
+Let $n\ge1$ and $M=\Q_n(G)$. Since $X=[n]$, every subset of $[n]$ is admissible. By Lemmas~\ref{lem:flats}, \ref{lem:potential}(b), \ref{lem:restriction}, \ref{lem:contraction} and~\ref{lem:basic}, the flats $F$ of $M$ with zero block $B_0$ and balanced blocks $B_1,\dots,B_b$ are $\prod_lm^{|B_l|-1}$ in number, and each of them has
+\[
+Z_{M|F}=Z_{\Q_{|B_0|}(G)}\prod_{l=1}^bZ_{\K_{|B_l|}},\qquad Y_{M/F}=Y_b,\qquad\rk M-\rk F=b.
+\]
+Thus \eqref{eq:convolution} reads
+\[
+\sum_{B_0\subseteq[n]}Z_{\Q_{|B_0|}(G)}\sum_{b\ge0}(-1)^bY_b\sum_{\{B_1,\dots,B_b\}}\prod_{l=1}^bm^{|B_l|-1}Z_{\K_{|B_l|}}=0,
+\]
+where the inner sum is over the partitions of $[n]\setminus B_0$ into $b$ blocks. For $n=0$ the left side equals $1$. By the exponential formula \cite[Section~5.1]{Sta99}, the exponential generating function of the inner sum is $\Phi(x)^b/b!$, and the sum over $B_0$ is a binomial convolution. This proves the proposition.
+\end{proof}
+
+\subsection{The generating function of Ferroni and Larson}
+Let
+\[
+g_t(u)=\frac{\log(1+tu)}{t}+\log(1+u)-u=\sum_{i\ge1}\frac{(-1)^{i-1}(t^{i-1}+1)}{i}u^i-u\in\mathbb{Q}[t][[u]].
+\]
+Since $g_t(u)=u+O(u^2)$, it has a compositional inverse $g_t^{\langle-1\rangle}$ in $\mathbb{Q}[t][[u]]$. Put
+\[
+\mathcal{C}(x)=(1+t)x+t\int_0^xg_t^{\langle-1\rangle}(s)\,ds,\qquad\mathcal{A}(x)=e^{\mathcal{C}(x)},\qquad\mathcal{H}(x)=\int_0^x\mathcal{A}(s)\,ds.
+\]
+
+\begin{proposition}\label{prop:FL}
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $n!\,[x^n]\,\mathcal{A}(x)=Z_{\K_{n+1}}(t)$ for all $n\ge0$; consequently $\mathcal{H}(x)=\sum_{u\ge1}Z_{\K_u}(t)x^u/u!$ and $\Phi(x)=\mathcal{H}(mx)/m$.
+\item $\mathcal{A}_G(x)=\mathcal{A}(mx)^{1/m}$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(a) By \cite[Propositions~2.3 and~2.8]{FL24}, $\mathcal{A}(x)=\sum_{n,k}\alpha(n,k)\frac{x^n}{n!}t^k$, where $\alpha(n,k)$ is the number of quasi series-parallel matroids on $[n]$ of rank $k$, and \cite[Corollary~3.2]{FL24} states $n![x^n]\mathcal{A}(x)=Z_{\K_{n+1}}(t)$. The remaining statements follow by integration.
+
+(b) By \cite[Theorem~1.1]{FL26} and the enumerative form of it stated after that theorem, the coefficient of $t^i$ in $Z_{\Q_n(G)}(t)$ is the number $\alpha_G(n,n-i)$ of equivalence classes of $G$-labeled quasi series-parallel matroids on $[n]$ of rank $n-i$, and by \cite[Proposition~3.2]{FL26}, $\sum_{n,k}\alpha_G(n,k)\frac{x^n}{n!}t^k=\mathcal{A}(mx)^{1/m}$. Hence
+\[
+\mathcal{A}(mx)^{1/m}=\sum_{n\ge0}\frac{x^n}{n!}\,t^n\,Z_{\Q_n(G)}(t^{-1})=\mathcal{A}_G(x),
+\]
+because $Z_{\Q_n(G)}$ is palindromic of degree $n$.
+\end{proof}
+
+\begin{lemma}\label{lem:uncompose}
+$\mathcal{A}(g_t(u))=(1+u)(1+tu)\,e^{-tu^2/2}$ and $\mathcal{H}(g_t(u))=u\,e^{-tu^2/2}$.
+\end{lemma}
+
+\begin{proof}
+We have $g_t'(u)=\frac{1}{1+tu}+\frac{1}{1+u}-1=\frac{1-tu^2}{(1+u)(1+tu)}$ and $\mathcal{C}'(x)=1+t+t\,g_t^{\langle-1\rangle}(x)$, so
+\[
+\frac{d}{du}\mathcal{C}(g_t(u))=\frac{(1+t+tu)(1-tu^2)}{(1+u)(1+tu)}=\frac{1}{1+u}+\frac{t}{1+tu}-tu,
+\]
+where the second equality follows from $(1+t+tu)(1-tu^2)=(1+tu)+t(1+u)-tu(1+u)(1+tu)$. Both $\mathcal{C}(g_t(u))$ and $\log(1+u)+\log(1+tu)-tu^2/2$ vanish at $u=0$, so they are equal, which gives the first identity. Then
+\[
+\frac{d}{du}\mathcal{H}(g_t(u))=\mathcal{A}(g_t(u))\,g_t'(u)=(1-tu^2)e^{-tu^2/2}=\frac{d}{du}\bigl(ue^{-tu^2/2}\bigr),
+\]
+and both sides of the second identity vanish at $u=0$.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:dowling-gf}}
+By Propositions~\ref{prop:convolution} and~\ref{prop:FL}, $\mathcal{D}(\mathcal{H}(mx)/m)=\mathcal{A}(mx)^{-a}$. Substituting $x=g_t(u)/m$ and using Lemma~\ref{lem:uncompose},
+\[
+\mathcal{D}\Bigl(\frac{u\,e^{-tu^2/2}}{m}\Bigr)=(1+u)^{-a}(1+tu)^{-a}e^{atu^2/2}.
+\]
+Now substitute $u=-v$, where $ve^{-tv^2/2}=mx$. The argument of $\mathcal{D}$ becomes $-x$, and $\mathcal{D}(-x)=\sum_nY_nx^n/n!$. This proves the first statement of Theorem~\ref{thm:dowling-gf}.
+
+For the coefficients, write $z=mx$, so that $v=ze^{tv^2/2}$. By \eqref{eq:lagrange} with $F(u)=e^{atu^2/2}(1-u)^{-a}(1-tu)^{-a}$,
+\begin{equation}\label{eq:Yn-u}
+\frac{Y_n(t)}{n!\,m^n}=[u^n]\,(1-tu^2)\,e^{\lambda tu^2}(1-u)^{-a}(1-tu)^{-a},\qquad\lambda=\frac{n+a}{2}.
+\end{equation}
+By \eqref{eq:dictionary}, the coefficient of $t^p$ on the right is $[\xi^{n-p}\eta^p]\,(1-z)e^{\lambda z}R^{-a}$. Expanding with \eqref{eq:w} and \eqref{eq:extract} gives the second statement of Theorem~\ref{thm:dowling-gf}. \qed
+
+\begin{example}\label{ex:small}
+For small $n$, Theorem~\ref{thm:dowling-gf} gives
+\begin{align*}
+Y_{\Q_1(G)}&=1+t,\\
+Y_{\Q_2(G)}&=(m+1)+(m+2)t+(m+1)t^2,\\
+Y_{\Q_3(G)}&=(m+1)(2m+1)(1+t^3)+3(m+1)^2(t+t^2),\\
+Y_{\Q_4(G)}&=(m+1)(2m+1)(3m+1)(1+t^4)\\
+&\quad+2(m+1)(2m+1)(3m+2)(t+t^3)\\
+&\quad+3(4m^3+11m^2+8m+2)\,t^2.
+\end{align*}
+Since $\Q_2(G)$ is the uniform matroid $\U_{2,m+2}$, the case $n=2$ agrees with \cite[Theorem~1.1]{GRX25}.
+\end{example}
+
+\subsection{Raised weights and log-concavity}
+
+\begin{proposition}\label{prop:dowling-weights}
+Let $n\ge0$, $\lambda=(n+a)/2$, $J=\lfloor n/2\rfloor$, $d_l=c_l(a+1)$, and
+\begin{equation}\label{eq:U}
+U_j=\frac{a\,(\lambda-j)\,\lambda^{j-2}}{2\cdot j!}\qquad(0\le j\le J).
+\end{equation}
+Then $[t^p]\,Y_n=n!\,m^n\sum_{j=0}^{\min(p,n-p)}U_j\,d_{p-j}\,d_{n-p-j}$ for $0\le p\le n$. Consequently $Y_n$ has degree $n$, positive palindromic coefficients, and $Y_n(0)=\prod_{i=0}^{n-1}(1+im)$.
+\end{proposition}
+
+\begin{proof}
+Apply Corollary~\ref{cor:raise} to $V(z)=(1-z)e^{\lambda z}$ and $\beta=a$; here $n+a-2j=2(\lambda-j)>0$ for $j\le J$. Using $w_j(\lambda)/(\lambda-j)=\lambda^{j-1}/j!$ for $j\ge0$, the weights are
+\[
+\frac a2\Bigl(\frac{\lambda^{j-1}}{j!}-\frac{\lambda^{j-2}}{(j-1)!}\Bigr)=U_j\quad(j\ge1),\qquad\frac{a}{2\lambda}=U_0.
+\]
+The term $j=0$ is positive for every $p$, and the expression is symmetric under $p\mapsto n-p$. Finally $Y_n(0)=n!m^nU_0d_n=m^na(a+1)\cdots(a+n-1)=\prod_{i=0}^{n-1}(1+im)$.
+\end{proof}
+
+\begin{lemma}\label{lem:U}
+Let $n\ge2$, $1\le j\le\lfloor n/2\rfloor-1$ and $r=\lambda-j$. Then $r\ge1+a/2$ and
+\[
+\log\frac{U_j^2}{U_{j-1}U_{j+1}}=\log\Bigl(1+\frac1j\Bigr)-\log\Bigl(1-\frac1{r^2}\Bigr)\ge\frac1{j+1}+\frac1{r^2}.
+\]
+\end{lemma}
+
+\begin{proof}
+Since $j\le\lfloor n/2\rfloor-1$, we have $r\ge\frac{n+a}2-\lfloor\frac n2\rfloor+1\ge1+\frac a2$. The indices $j-1,j,j+1$ correspond to $r+1,r,r-1$, and a direct cancellation in \eqref{eq:U} gives $U_j^2/(U_{j-1}U_{j+1})=\frac{j+1}{j}\cdot\frac{r^2}{r^2-1}$. The inequality follows from $\log(1+x)\ge x/(1+x)$ and $-\log(1-x)\ge x$.
+\end{proof}
+
+\begin{theorem}\label{thm:dowling-lc}
+For every finite group $G$ and every $n\ge2$, the coefficients of $Y_{\Q_n(G)}$ are positive and strictly log-concave. In particular this holds for the braid matroids $\K_{n+1}$ and for the matroids of type $B_n$.
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{lem:U} the weights $U_j$ are positive and log-concave, so Lemma~\ref{lem:transfer} with $\beta=a$ applies to Proposition~\ref{prop:dowling-weights}.
+\end{proof}
+
+\section{Nontrivial groups}\label{sec:nontrivial}
+
+In this section $G$ is a finite group of order $m\ge2$, so that $0<a=1/m\le\frac12$. We keep the notation $Y_j=Y_{\Q_j(G)}$ and $\tau_h$ from \eqref{eq:tau}.
+
+\subsection{Interpolation}
+
+\begin{proposition}\label{prop:interpolation}
+Let $n\ge2$, $X\subseteq[n]$ and $k=|X|$. Put
+\[
+\Delta_n(t)=(1+t)\,Y_{n-1}(t)-\sum_{h=1}^{\lfloor n/2\rfloor}\binom{n-1}{2h-1}\tau_h\,t^hY_{n-2h}(t),\qquad Y^\circ_n=Y_n-n\Delta_n.
+\]
+Then $Y_{\Q_n(G;X)}=Y_n-(n-k)\Delta_n=\frac kn\,Y_n+\bigl(1-\frac kn\bigr)Y^\circ_n$. In particular $Y^\circ_n=Y_{\Q_n(G;\emptyset)}$.
+\end{proposition}
+
+\begin{proof}
+Since $m\ge2$, Proposition~\ref{prop:joint-deletion} applies to every joint, and the increment it gives does not depend on $X$. Deleting the joints of $\Q_n(G)$ one at a time down to $X$ gives the first formula, and the second is a rearrangement.
+\end{proof}
+
+\subsection{The jointless series}
+
+\begin{lemma}\label{lem:tau-series}
+Let $v$ be as in Theorem~\textup{\ref{thm:dowling-gf}}. Then
+\[
+T(x):=\sum_{h\ge1}\tau_h\,t^h\frac{x^{2h-1}}{(2h-1)!}=\frac tm\Bigl(v-\frac{tv^3}3\Bigr).
+\]
+\end{lemma}
+
+\begin{proof}
+Write $z=mx$ and $h=l+1$. Since $(2l+1)!=2^l\,l!\,(2l+1)!!$, \eqref{eq:tau} gives $\tau_{l+1}/(2l+1)!=m^{2l}(2l+1)^{l-2}/(2^l\,l!)$. On the other hand, by \eqref{eq:lagrange}, $[z^{2l+1}](v-tv^3/3)$ is $t^l$ times the coefficient of $y^l$ in $(1-\frac y3)(1-y)e^{\gamma y}$ with $\gamma=l+\frac12$, namely
+\[
+\frac{\gamma^{l-2}}{l!}\Bigl(\gamma^2-\frac43\,l\gamma+\frac13\,l(l-1)\Bigr)=\frac{\gamma^{l-2}}{4\cdot l!}=\frac{(2l+1)^{l-2}}{2^l\,l!}.
+\]
+The series $v$ is odd in $x$, so the even coefficients of both sides vanish, and the odd coefficients agree after multiplying by $t/m$ and $m^{2l+1}$.
+\end{proof}
+
+\begin{proposition}\label{prop:jointless-series}
+Let $\mathcal{F}(x)=\sum_{n\ge0}Y_n\,x^n/n!$. For every $n\ge2$,
+\[
+\frac{Y^\circ_n}{n!}=[x^n]\,\mathcal{F}(x)\Bigl(1-(1+t)x+\frac{tx}{m}\Bigl(v-\frac{tv^3}{3}\Bigr)\Bigr).
+\]
+\end{proposition}
+
+\begin{proof}
+We have $n(1+t)Y_{n-1}/n!=[x^n]\,(1+t)x\mathcal{F}(x)$ and $n\binom{n-1}{2h-1}/n!=1/((2h-1)!\,(n-2h)!)$, so $n\Delta_n/n!=[x^n]\,(1+t)x\mathcal F(x)-[x^n]\,xT(x)\mathcal{F}(x)$. Lemma~\ref{lem:tau-series} completes the proof.
+\end{proof}
+
+The series in Proposition~\ref{prop:jointless-series} has constant coefficient $1$, which agrees with $Y_{\Q_0(G;\emptyset)}=1$, but its linear coefficient is $0$, whereas $Y_{\Q_1(G;\emptyset)}=1$, because the joint of $\Q_1(G)$ is a coloop. We use the series only for $n\ge2$.
+
+\subsection{The raised weights}
+For the rest of this section fix $n\ge2$ and put
+\[
+\lambda=\frac{n+a}2,\quad\mu=\lambda-\frac12=\frac{n+a-1}2,\quad s=\frac\mu\lambda,\quad J=\Bigl\lfloor\frac n2\Bigr\rfloor,\quad r_j=\lambda-j,
+\]
+and let $U_j$ and $d_l=c_l(a+1)$ be as in Proposition~\ref{prop:dowling-weights}. Let
+\[
+\gamma_0=\frac{an}{n+a-1},\qquad\gamma_1=a(1-a),\qquad\gamma_2=\frac{a^2}3,
+\]
+\[
+V(z)=(1-z)\Bigl(e^{\lambda z}-(\gamma_0+\gamma_1z+\gamma_2z^2)e^{\mu z}\Bigr),\qquad v_j=[z^j]\,V(z),
+\]
+and $v_{-1}=0$.
+
+\begin{proposition}\label{prop:jointless-weights}
+For $0\le j\le J$ put $W_j=\frac a2\bigl(\frac{v_j}{\lambda-j}-\frac{v_{j-1}}{\lambda-j+1}\bigr)$. Then
+\[
+[t^p]\,Y^\circ_n=n!\,m^n\sum_{j=0}^{\min(p,n-p)}W_j\,d_{p-j}\,d_{n-p-j}\qquad(0\le p\le n).
+\]
+\end{proposition}
+
+\begin{proof}
+Put $z=mx$, so that $v=ze^{tv^2/2}$. Writing $u$ for $v$, we have $x=a\,u\,e^{-tu^2/2}$, and the bracket in Proposition~\ref{prop:jointless-series} becomes
+\[
+1-e^{-tu^2/2}\Bigl(a(1+t)u-a^2tu^2+\frac{a^2t^2u^4}3\Bigr).
+\]
+By \eqref{eq:lagrange}, as in \eqref{eq:Yn-u}, $Y^\circ_n/(n!m^n)$ is the coefficient of $u^n$ in
+\[
+(1-tu^2)(1-u)^{-a}(1-tu)^{-a}\Bigl(e^{\lambda tu^2}-e^{\mu tu^2}\Bigl(a(1+t)u-a^2tu^2+\frac{a^2t^2u^4}3\Bigr)\Bigr).
+\]
+With $\xi=u$, $\eta=tu$ and \eqref{eq:dictionary}, the coefficient of $t^p$ is $[\xi^{n-p}\eta^p]$ of
+\[
+K_a(\lambda)-\Bigl(a(\xi+\eta)-a^2z+\frac{a^2}3z^2\Bigr)K_a(\mu),\qquad K_\beta(\theta)=(1-z)e^{\theta z}R^{-\beta}.
+\]
+Write $\xi+\eta=1+z-R$, so that $(\xi+\eta)K_a(\mu)=(1+z)K_a(\mu)-K_{a-1}(\mu)$. Since $2\mu=n+(a-1)$ and $n+a-1>0$, Lemma~\ref{lem:euler}(b) gives $[K_{a-1}(\mu)]_n=\frac{a-1}{n+a-1}[K_a(\mu)]_n$. Hence the component of degree $n$ equals that of
+\[
+K_a(\lambda)-\Bigl(a+\frac{a(1-a)}{n+a-1}+a(1-a)z+\frac{a^2}3z^2\Bigr)K_a(\mu)=V(z)\,R^{-a},
+\]
+since $a+\frac{a(1-a)}{n+a-1}=\gamma_0$. Corollary~\ref{cor:raise} with $\beta=a$ completes the proof; note $n+a-2j=2(\lambda-j)>0$.
+\end{proof}
+
+We next compute $W_j$ in closed form. For $0<r$ put
+\begin{align}
+C(r)&=\frac{a^2r^3}{3}+\Bigl(a^2-\Bigl(a-\frac{a^2}3\Bigr)\mu\Bigr)r^2+\Bigl(\Bigl(2a-\frac{2a^2}3\Bigr)\mu^2-2a^2\mu+\frac{a^2}6\Bigr)r\notag\\
+&\quad+\frac{a(1-a)\mu}4-\frac{a^2}2+\frac{a^2(3r-2\mu)}{16\,r(r+1)},\label{eq:C}
+\end{align}
+and $\Psi(r)=C(r)/r$.
+
+\begin{proposition}\label{prop:closed}
+For $0\le j\le J$ we have $W_j=U_jq_j$ with
+\begin{equation}\label{eq:q}
+1-q_j=\frac{s^{j-2}\,\Psi(r_j)}{\mu^2}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Fix $j$ and write $r=r_j=\lambda-j$, so that $j=\mu+\frac12-r$. For $i\ge0$ we have $w_i(\theta)=(\theta-i)\theta^{i-1}/i!$, and $w_{-1}=w_{-2}=0$. Hence, for every $j\ge0$,
+\[
+\gamma_0w_j(\mu)+\gamma_1w_{j-1}(\mu)+\gamma_2w_{j-2}(\mu)=\frac{\mu^{j-3}}{j!}\,N(r),
+\]
+where
+\[
+N(r)=\gamma_0\mu^2\Bigl(r-\frac12\Bigr)+\gamma_1\mu\,j\Bigl(r+\frac12\Bigr)+\gamma_2\,j(j-1)\Bigl(r+\frac32\Bigr),\qquad j=\mu+\tfrac12-r;
+\]
+the factors $j$ and $j(j-1)$ vanish exactly when the corresponding $w$ has negative index. Thus $v_j=w_j(\lambda)-\mu^{j-3}N(r)/j!$, and $v_{j-1}=w_{j-1}(\lambda)-\mu^{j-4}N(r+1)/(j-1)!$ for $j\ge1$, where $N(r+1)$ is computed with $j-1=\mu+\frac12-(r+1)$. The contribution of $w(\lambda)$ to $W_j$ is $U_j=\frac a2\cdot\frac{r\lambda^{j-2}}{j!}$, as in the proof of Proposition~\ref{prop:dowling-weights}. Therefore
+\[
+W_j=U_j-\frac{a\,\mu^{j-4}}{2\cdot j!}\Bigl(\frac{\mu\,N(r)}{r}-\frac{j\,N(r+1)}{r+1}\Bigr),
+\]
+which is valid also for $j=0$. Using $\gamma_0\mu^2=\frac12a\mu(2\mu+1-a)$, a direct expansion shows that the bracket equals $C(r)$. Dividing by $U_j$ gives \eqref{eq:q}.
+\end{proof}
+
+We record two consequences of \eqref{eq:C} that are checked by direct expansion. First,
+\begin{equation}\label{eq:Psi-decomp}
+\Psi(r)=p(r)+\frac{\nu}r+\frac{3a^2}{16}\cdot\frac1{r(r+1)}-\frac{a^2\mu}{8}\,\varrho(r),\qquad\varrho(r)=\frac1{r^2(r+1)},
+\end{equation}
+where $\nu=\frac{a(1-a)\mu}4-\frac{a^2}2$ and
+\[
+p(r)=\frac{a^2r^2}3+\Bigl(a^2-\Bigl(a-\frac{a^2}3\Bigr)\mu\Bigr)r+\Bigl(2a-\frac{2a^2}3\Bigr)\mu^2-2a^2\mu+\frac{a^2}6.
+\]
+Second, $\Psi$ is a polynomial of degree two in $a$ for fixed $\mu$ and $r$: writing $\Psi_a$ to indicate the dependence on $a$, we have $\Psi_a=a\Psi^{(1)}+a^2\Psi^{(2)}$ with
+\begin{equation}\label{eq:Psi12}
+\begin{aligned}
+\Psi^{(1)}&=\mu\Bigl(2\mu-r+\frac1{4r}\Bigr),\\
+\Psi^{(1)}+\Psi^{(2)}&=\mu^2+\frac{(\mu-r)^2}3+r-2\mu+\frac16-\frac1{2r}+\frac{3}{16r(r+1)}-\frac{\mu}{8r^2(r+1)}.
+\end{aligned}
+\end{equation}
+Here $\mu$ and $r$ are treated as independent variables.
+
+\subsection{Positivity of the weights}
+
+\begin{lemma}\label{lem:positivity}
+Let $q_j$ be as in Proposition~\textup{\ref{prop:closed}}.
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $q_0=\dfrac{(1-a)(n-1)}{n+a-1}>0$.
+\item With $\varsigma=\mu-\frac12=\frac{n+a-2}2>0$,
+\[
+q_1=1-a-\frac{a(1-\frac32a)}{\varsigma}+\frac{a^2}{2\varsigma^2}>0,
+\]
+and $q_1>1-2a+\frac32a^2$ if $n\ge4$.
+\item $q_j>\frac16$ for $2\le j\le J$.
+\end{enumerate}
+In particular $W_j>0$ for $0\le j\le J$.
+\end{lemma}
+
+\begin{proof}
+(a) and the formula in (b) follow from \eqref{eq:q} and \eqref{eq:C} by substitution, or directly from the definition of $W_0$ and $W_1$. As a quadratic polynomial in $1/\varsigma$, $q_1$ has positive leading coefficient and discriminant $a^2(\frac94a^2-a-1)<0$ for $0<a\le\frac12$; hence $q_1>0$. If $n\ge4$, then $\varsigma\ge1+\frac a2>1$; since $1-\frac32a>0$, dropping the last term gives $q_1>1-a-a(1-\frac32a)$.
+
+(c) Let $2\le j\le J$ and $r=r_j$. Then $\mu=r+j-\frac12\ge r+\frac32$. A direct expansion of \eqref{eq:C} gives, for every $r>0$,
+\[
+\Bigl(2a-\frac{2a^2}3\Bigr)\mu^2-\Psi_a(r)=a^2\Bigl(4\Bigl(\frac56\mu^2-\Psi_{1/2}(r)\Bigr)+\Bigl(\frac1a-2\Bigr)\mu\Bigl(r-\frac1{4r}\Bigr)\Bigr)
+\]
+and
+\[
+\frac56\mu^2-\Psi_{1/2}(r)=\frac{r(5\mu-3-r)}{12}+\Bigl(\frac\mu2-\frac1{24}-\frac{\mu}{16r}\Bigr)
++\Bigl(\frac1{8r}-\frac{3r-2\mu}{64r^2(r+1)}\Bigr).
+\]
+Suppose first $r\ge\frac12$. The three groups on the right of the second identity are positive: $5\mu-3-r\ge4\mu-\frac32>0$; $\frac\mu2-\frac1{24}-\frac\mu{16r}\ge\frac{3\mu}8-\frac1{24}>0$; and $\frac{3r-2\mu}{64r^2(r+1)}\le\frac{3}{64r(r+1)}<\frac1{8r}$. Since $\frac1a-2\ge0$ and $r-\frac1{4r}\ge0$, we get $\Psi_a(r)<(2a-\frac{2a^2}3)\mu^2$. Otherwise $r<\frac12$, which happens only for $n$ even and $j=J$, where $r=\frac a2$. Substituting $r=\frac a2$ into \eqref{eq:C},
+\begin{multline*}
+\Psi_a\Bigl(\frac a2\Bigr)=\Bigl(2a-\frac{2a^2}3\Bigr)\mu^2+\Bigl(\frac{a^3}6-\frac{5a^2}2-\frac{a(1+a)}{2(a+2)}\Bigr)\mu\\
++a\Bigl(\frac{a^3}{12}+\frac{a^2}2+\frac a6-1+\frac{3}{4(a+2)}\Bigr).
+\end{multline*}
+For $0<a\le\frac12$ the coefficient of $\mu$ is negative, and the last bracket is at most $\frac1{96}+\frac18+\frac1{12}-1+\frac38<0$. Again $\Psi_a(r)<(2a-\frac{2a^2}3)\mu^2$.
+
+In both cases \eqref{eq:q}, $s^{j-2}\le1$ and $2a-\frac{2a^2}3\le\frac56$ give $1-q_j<\frac56$ if $\Psi_a(r)\ge0$, and $1-q_j\le0$ otherwise.
+\end{proof}
+
+\subsection{Log-concavity of the weights}
+For $1\le j\le J-1$ we write $\delta_j=q_{j-1}+q_{j+1}-2q_j$. For a function $f$ of $r$ let
+\[
+\Ls f(r)=s\,f(r-1)+s^{-1}f(r+1)-2f(r).
+\]
+Since the indices $j-1,j,j+1$ correspond to $r_j+1,r_j,r_j-1$, \eqref{eq:q} gives
+\begin{equation}\label{eq:delta}
+\delta_j=-\frac{s^{j-2}}{\mu^2}\,\Ls\Psi(r_j).
+\end{equation}
+
+\begin{lemma}\label{lem:Ls}
+Let $r>1$.
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $\Ls(1/r)\ge0$ and $\Ls\bigl(1/(r(r+1))\bigr)\ge0$.
+\item If $0<a\le\frac12$ and $0<r\le\mu$, then $2\mu(2\mu+1)\,\Ls p(r)\ge-a\mu(3\mu+1)$.
+\item $\Ls\varrho(r)\le s\,\varrho(r-1)+s^{-1}\varrho(r+1)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) For $r>0$ we have $\frac1r=\int_0^1x^{r-1}dx$ and $\frac1{r(r+1)}=\int_0^1x^{r-1}(1-x)\,dx$. For $r>1$ these representations hold at $r-1$ as well, and $\Ls$ multiplies the integrand by $\frac sx+\frac xs-2=(\sqrt{s/x}-\sqrt{x/s})^2\ge0$.
+
+(b) Since $s=\frac{2\mu}{2\mu+1}$, a direct expansion gives
+\begin{multline*}
+2\mu(2\mu+1)\Ls p(r)=\frac{a^2r^2}3+\Bigl((3a^2-a)\mu+\frac{5a^2}3\Bigr)r\\
++\Bigl(\frac{10a^2}3-2a\Bigr)\mu^2+\Bigl(\frac{11a^2}3-a\Bigr)\mu+\frac{3a^2}2.
+\end{multline*}
+If $3a^2-a\le0$, then $(3a^2-a)\mu r\ge(3a^2-a)\mu^2$, and the right side is at least $(\frac{19a^2}3-3a)\mu^2-a\mu\ge-a\mu(3\mu+1)$. If $3a^2-a>0$, the term with $r$ is positive and the right side is at least $-2a\mu^2-a\mu$.
+
+(c) Drop the term $-2\varrho(r)\le0$.
+\end{proof}
+
+\begin{proposition}\label{prop:internal}
+Let $0<a\le\frac12$, $2\le j\le J-1$ and $r=r_j$. Then $q_j>\frac13$ and $3\delta_j<\frac1{j+1}+\frac1{r^2}$.
+\end{proposition}
+
+\begin{proof}
+Since $J\ge j+1\ge3$, we have $n\ge6$ and
+\begin{equation}\label{eq:domain}
+\mu\ge\frac52,\qquad1+\frac a2\le r\le\mu-\frac32,\qquad j+1\le\frac n2=\mu+\frac{1-a}2.
+\end{equation}
+
+\emph{The bound $q_j>\frac13$.} By \eqref{eq:Psi12}, $\Psi^{(1)}>0$, and using $r\ge1$ and $\mu-r\ge\frac32$,
+\[
+\Psi^{(1)}+\Psi^{(2)}\ge\mu^2+\frac34+1-2\mu+\frac16-\frac12-\frac\mu{16}=\mu^2-\frac{33}{16}\mu+\frac{17}{12}>0.
+\]
+Hence $\partial\Psi_\alpha/\partial\alpha=(1-2\alpha)\Psi^{(1)}+2\alpha(\Psi^{(1)}+\Psi^{(2)})>0$ for $0\le\alpha\le\frac12$, and $\Psi_a(r)\le\Psi_{1/2}(r)$. Let $\Theta=\frac23\mu^2\bigl(1+\frac{j-2}{2\mu}\bigr)=\mu^2-\frac{\mu r}3-\frac\mu2$. A direct expansion gives
+\[
+\Theta-\Psi_{1/2}(r)=\frac{\mu^2}6+\frac{\mu r-r^2}{12}-\frac r4-\frac1{24}-\frac{\mu/16-1/8}{r}-\frac{3r-2\mu}{64r^2(r+1)}.
+\]
+Using $1\le r\le\mu$ and $\mu>2$, this is at least $\frac{\mu^2}6-\frac{5\mu}{16}+\frac{23}{384}$, which is positive for $\mu\ge\frac52$. If $\Psi_a(r)<0$ then $q_j>1$. Otherwise \eqref{eq:q} and Bernoulli's inequality $s^{-(j-2)}=(1+\frac1{2\mu})^{j-2}\ge1+\frac{j-2}{2\mu}$ give
+\[
+1-q_j\le\frac{s^{j-2}\Psi_{1/2}(r)}{\mu^2}<\frac{s^{j-2}\,\Theta}{\mu^2}=\frac23\,s^{j-2}\Bigl(1+\frac{j-2}{2\mu}\Bigr)\le\frac23.
+\]
+
+\emph{The bound on $\delta_j$.} By \eqref{eq:Psi-decomp}, \eqref{eq:delta} and Lemma~\ref{lem:Ls}, using $\nu=\frac a4((1-a)\mu-2a)>0$ (as $\mu>2\ge\frac{2a}{1-a}$), $s\le1$ and $j\ge2$,
+\begin{align*}
+\delta_j&\le\frac{s^{j-2}}{\mu^2}\Bigl(\frac{a\mu(3\mu+1)}{2\mu(2\mu+1)}+\frac{a^2\mu}8\bigl(s\varrho(r-1)+s^{-1}\varrho(r+1)\bigr)\Bigr)\\
+&\le\frac{a(3\mu+1)}{2\mu^2(2\mu+1)}+\frac{a^2}{8\mu}\bigl(\varrho(r-1)+s^{-1}\varrho(r+1)\bigr).
+\end{align*}
+The function $r/(r-1)^2$ is decreasing for $r>1$, so $r\ge1+\frac a2$ gives $a^2r^2\varrho(r-1)=\frac{a^2r}{(r-1)^2}\le4+2a\le5$. Moreover $s^{-1}=1+\frac1{2\mu}\le\frac65$ and $a^2r^2\varrho(r+1)\le\frac{a^2}{r+2}\le\frac1{12}$, so $a^2r^2s^{-1}\varrho(r+1)\le\frac1{10}$. Therefore, using $a\le\frac12$,
+\[
+3\delta_j\le\frac{3(3\mu+1)}{4\mu^2(2\mu+1)}+\frac{153}{80\,\mu\,r^2}.
+\]
+Now $\frac{3(3\mu+1)}{4\mu^2(2\mu+1)}<\frac1{\mu+1/2}\le\frac1{j+1}$, because $8\mu^2-9\mu-3>0$ for $\mu\ge\frac52$ and $j+1\le\mu+\frac12$ by \eqref{eq:domain}; and $\frac{153}{80\mu}\le\frac{153}{200}<1$.
+\end{proof}
+
+\begin{proposition}\label{prop:boundary}
+Let $n\ge4$, so that $j=1$ is an internal index, and let $r=r_1=\mu-\frac12$.
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item If $m\ge3$, then $q_1>\frac12$ and $2\delta_1<\frac12+\frac1{r^2}$.
+\item If $m=2$, then $q_0<\frac12$, $q_1>\frac49$ and $q_2<\frac34$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(a) Here $0<a\le\frac13$, $\mu\ge\frac32$ and $r\ge1+\frac a2>1$. By Lemma~\ref{lem:positivity}(b), $q_1>1-2a+\frac32a^2\ge\frac12$. By \eqref{eq:delta} with $j=1$, \eqref{eq:Psi-decomp} and Lemma~\ref{lem:Ls}, noting $\nu>0$ because $\mu>1\ge\frac{2a}{1-a}$,
+\begin{align*}
+2\delta_1&\le\frac{2s^{-1}}{\mu^2}\cdot\frac{a\mu(3\mu+1)}{2\mu(2\mu+1)}+\frac{a^2}{4\mu}\bigl(\varrho(r-1)+s^{-2}\varrho(r+1)\bigr)\\
+&=\frac{a(3\mu+1)}{2\mu^3}+\frac{a^2}{4\mu}\bigl(\varrho(r-1)+s^{-2}\varrho(r+1)\bigr).
+\end{align*}
+The first term is at most $\frac{3\mu+1}{6\mu^3}\le\frac{22}{81}$, since this function decreases in $\mu$. As before $a^2r^2\varrho(r-1)\le4+2a\le\frac{14}3$, and $s^{-2}\le\frac{16}9$, $a^2r^2\varrho(r+1)\le\frac{a^2}{r+2}\le\frac1{27}$. Hence the second term is at most $\frac{1}{4\mu r^2}\bigl(\frac{14}3+\frac{16}{243}\bigr)\le\frac{575}{729\,r^2}$. Thus $2\delta_1\le\frac{22}{81}+\frac{575}{729r^2}<\frac12+\frac1{r^2}$.
+
+(b) Here $a=\frac12$, $\mu=\frac{2n-1}4\ge\frac74$ and $\varsigma=\mu-\frac12$. By Lemma~\ref{lem:positivity}, $q_0=\frac{n-1}{2n-1}<\frac12$ and $q_1=\frac{4\varsigma^2-\varsigma+1}{8\varsigma^2}$; the inequality $q_1>\frac49$ is equivalent to $4\varsigma^2-9\varsigma+9>0$, whose discriminant is negative. For $q_2$ we use \eqref{eq:q} with $j=2$, that is $1-q_2=\Psi(r_2)/\mu^2$, where $r_2=\mu-\frac32\ge\frac14$. A direct expansion of \eqref{eq:C} at $a=\frac12$ gives
+\[
+C(r_2)-\frac{r_2\mu^2}4=f(\mu)-\frac{\mu}{32r_2}+\frac1{16(r_2+1)},\qquad f(\mu)=\frac{\mu^3}4-\frac{\mu^2}4-\frac{13\mu}{48}+\frac18.
+\]
+Since $\mu/r_2=1+\frac{3}{2r_2}\le7$, the right side exceeds $f(\mu)-\frac7{32}$. The function $f$ is increasing for $\mu\ge\frac74$ (its derivative is $\frac34\mu^2-\frac\mu2-\frac{13}{48}>0$ there), and $f(\frac74)-\frac7{32}=\frac5{768}>0$. Hence $C(r_2)>\frac{r_2\mu^2}4$, that is, $q_2<\frac34$.
+\end{proof}
+
+\subsection{Arbitrary sets of joints}
+
+\begin{proposition}\label{prop:nontrivial-weights}
+Let $n\ge2$, $X\subseteq[n]$, $k=|X|$ and $\vartheta=1-\frac kn$. Then
+\[
+[t^p]\,Y_{\Q_n(G;X)}=n!\,m^n\sum_{j=0}^{\min(p,n-p)}W_j(\vartheta)\,d_{p-j}\,d_{n-p-j},
+\]
+where $W_j(\vartheta)=U_j\bigl(1-\vartheta+\vartheta q_j\bigr)$, and the weights $W_0(\vartheta),\dots,W_J(\vartheta)$ are positive and satisfy $W_j(\vartheta)^2>W_{j-1}(\vartheta)W_{j+1}(\vartheta)$ for $1\le j\le J-1$.
+\end{proposition}
+
+\begin{proof}
+The formula follows from Propositions~\ref{prop:interpolation}, \ref{prop:dowling-weights}, \ref{prop:jointless-weights} and~\ref{prop:closed}. Put $q_j(\vartheta)=1-\vartheta+\vartheta q_j$; it is positive by Lemma~\ref{lem:positivity}, and its second difference is $\vartheta\delta_j$. Fix $1\le j\le J-1$. By Lemma~\ref{lem:U} it suffices to show that
+\begin{equation}\label{eq:need}
+\log\frac{q_{j-1}(\vartheta)q_{j+1}(\vartheta)}{q_j(\vartheta)^2}<\frac1{j+1}+\frac1{r_j^2}.
+\end{equation}
+If $\vartheta\delta_j\le0$, the left side is at most $0$ by \eqref{eq:amgm}. If $\vartheta\delta_j>0$, then \eqref{eq:amgm} and $q_j(\vartheta)\ge\vartheta q_j$ give
+\[
+\log\frac{q_{j-1}(\vartheta)q_{j+1}(\vartheta)}{q_j(\vartheta)^2}<\frac{\vartheta\delta_j}{q_j(\vartheta)}\le\frac{\delta_j}{q_j}.
+\]
+For $j\ge2$, Proposition~\ref{prop:internal} gives $\delta_j/q_j<3\delta_j<\frac1{j+1}+\frac1{r_j^2}$. For $j=1$ and $m\ge3$, Proposition~\ref{prop:boundary}(a) gives $\delta_1/q_1<2\delta_1<\frac12+\frac1{r_1^2}$. This proves \eqref{eq:need} in these cases.
+
+It remains to treat $j=1$ for $m=2$. By Proposition~\ref{prop:boundary}(b), $q_0(\vartheta)<1-\frac\vartheta2$, $q_2(\vartheta)<1-\frac\vartheta4$ and $q_1(\vartheta)>1-\frac{5\vartheta}9>0$. For $0\le\vartheta\le1$,
+\begin{multline*}
+2\Bigl(1-\frac{5\vartheta}9\Bigr)^2-\Bigl(1-\frac\vartheta2\Bigr)\Bigl(1-\frac\vartheta4\Bigr)\\
+=1-\frac{53\vartheta}{36}+\frac{319\vartheta^2}{648}\ge\frac{13}{648},
+\end{multline*}
+because this quadratic polynomial is decreasing on $[0,1]$ and takes the value $\frac{13}{648}$ at $\vartheta=1$. Since $U_1^2/(U_0U_2)=\frac{2r_1^2}{r_1^2-1}>2$ by Lemma~\ref{lem:U}, we obtain
+\[
+W_1(\vartheta)^2>2U_0U_2\,q_1(\vartheta)^2>U_0U_2\,q_0(\vartheta)\,q_2(\vartheta)=W_0(\vartheta)W_2(\vartheta).
+\]
+\end{proof}
+
+\begin{theorem}\label{thm:nontrivial}
+Let $G$ be a finite group of order $m\ge2$, $n\ge2$ and $X\subseteq[n]$. Then $Y_{\Q_n(G;X)}$ has degree $n$, positive palindromic coefficients, and its coefficients are strictly log-concave.
+\end{theorem}
+
+\begin{proof}
+Combine Proposition~\ref{prop:nontrivial-weights} with Lemma~\ref{lem:transfer}, where $\beta=a$.
+\end{proof}
+
+\section{The trivial group}\label{sec:trivial}
+
+In this section $m=1$, $a=1$, and $Y_j=Y_{\Q_j(1)}=Y_{\K_{j+1}}$. Thus $d_l=c_l(2)=l+1$ and $\tau_h=(2h-3)!!\,(2h-1)^{h-2}$. For $n\ge1$ and $X\subseteq[n]$ with $|X|=k$ write $H_{n,k}=Y_{\Q_n(1;X)}$; by Corollary~\ref{cor:rank} and Lemma~\ref{lem:basic}, $H_{n,0}=Y_{n-1}$, and $H_{n,1}=(1+t)Y_{n-1}$ because $\Q_n(1;\{i\})$ is the direct sum of $\K_n$ and the single coloop $h_i$.
+
+\subsection{A positive decomposition}
+
+\begin{lemma}\label{lem:braid-identity}
+For $n\ge2$ let $\Delta_n=(1+t)Y_{n-1}-\sum_{h\ge1}\binom{n-1}{2h-1}\tau_ht^hY_{n-2h}$. Then
+\[
+Y_n-n\Delta_n=\sum_{h\ge1}\binom n{2h}\tau_h\,t^h\,Y_{n-2h}.
+\]
+\end{lemma}
+
+\begin{proof}
+Let $\mathcal{F}(x)=\sum_nY_nx^n/n!$, let $v$ be defined by $ve^{-tv^2/2}=x$, and put $y=tv^2$. By Theorem~\ref{thm:dowling-gf}, $\mathcal{F}=e^{y/2}(1-v)^{-1}(1-tv)^{-1}$, and by Lemma~\ref{lem:tau-series}, $T(x)=t(v-tv^3/3)$. Let $\widetilde T(x)=\sum_{h\ge1}\tau_ht^hx^{2h}/(2h)!$, so that $\widetilde T'=T$ and $\widetilde T(0)=0$. We claim that
+\[
+\widetilde T(x)=1-\Bigl(1+\frac{y^2}3\Bigr)e^{-y/2}.
+\]
+Both sides vanish at $v=0$. Since $\frac{dx}{dv}=(1-y)e^{-y/2}$ and $\frac{dy}{dv}=2tv$, the derivative of the right side with respect to $v$ is
+\[
+tv\,e^{-y/2}\Bigl(1-\frac43y+\frac13y^2\Bigr)=tv\Bigl(1-\frac y3\Bigr)(1-y)e^{-y/2}=T\,\frac{dx}{dv},
+\]
+which proves the claim. Consequently
+\[
+1-(1+t)x+xT(x)-\widetilde T(x)=e^{-y/2}\bigl(1+y-(1+t)v\bigr)=\mathcal{F}(x)^{-1},
+\]
+since $1+y-(1+t)v=(1-v)(1-tv)$.
+Taking the coefficient of $x^n/n!$, $n\ge2$, in $\mathcal F(x)\bigl(1-(1+t)x+xT(x)-\widetilde T(x)\bigr)=1$ gives the lemma, as in the proof of Proposition~\ref{prop:jointless-series}.
+\end{proof}
+
+\begin{proposition}\label{prop:positive-decomp}
+Let $n\ge2$, $1\le k\le n$ and $\ell=n-k$. Then
+\[
+H_{n,k}=\frac kn\,Y_n+\sum_{h=1}^{\lfloor n/2\rfloor}\Bigl(\frac\ell n\binom n{2h}-\binom\ell{2h}\Bigr)\tau_h\,t^h\,Y_{n-2h},
+\]
+and all coefficients $\frac\ell n\binom n{2h}-\binom\ell{2h}$ are nonnegative.
+\end{proposition}
+
+\begin{proof}
+For $2\le k'\le n$, Proposition~\ref{prop:joint-deletion} gives
+\[
+H_{n,k'}-H_{n,k'-1}=\Delta_n+\sum_h\binom{n-k'}{2h-1}\tau_ht^hY_{n-2h}.
+\]
+Summing over $k<k'\le n$, using $H_{n,n}=Y_n$ and $\sum_{u=0}^{\ell-1}\binom u{2h-1}=\binom\ell{2h}$, we get $H_{n,k}=Y_n-\ell\Delta_n-\sum_h\binom\ell{2h}\tau_ht^hY_{n-2h}$ for $k\ge1$. Substituting $\Delta_n$ from Lemma~\ref{lem:braid-identity} gives the formula. Nonnegativity follows from $\binom\ell z/\binom nz=\prod_{i=0}^{z-1}\frac{\ell-i}{n-i}\le\frac\ell n$ for $z\ge1$.
+\end{proof}
+
+For $k=1$ the right side equals $(1+t)Y_{n-1}$, in accordance with Lemma~\ref{lem:basic}; note that the argument above never deletes the last joint, which is a coloop.
+
+\subsection{The weights}
+For the rest of this section fix $n\ge2$ and put
+\[
+\lambda=\frac{n+1}2,\quad\mu=\frac n2,\quad s=\frac\mu\lambda,\quad J=\Bigl\lfloor\frac n2\Bigr\rfloor,\quad r_j=\lambda-j,\quad U_j=\frac{(\lambda-j)\lambda^{j-2}}{2\cdot j!},
+\]
+in accordance with \eqref{eq:U}. For $h\ge1$ let $\kappa_h=\tau_h/(2h)!=\frac{(2h-1)^{h-3}}{2^h\,h!}$ and, for $0\le j\le J$,
+\[
+\omega_h(j)=\frac{\ff jh\,(\lambda-h)^{j-h-2}}{\lambda^{j-2}}\quad(h\le j),\qquad\omega_h(j)=0\quad(h>j),
+\]
+where $\ff jh=j(j-1)\cdots(j-h+1)$. Note that $\lambda-h\ge\lambda-J\ge\frac12$.
+
+\begin{proposition}\label{prop:trivial-weights}
+Let $1\le k\le n$ and $\ell=n-k$. Then
+\begin{gather*}
+[t^p]\,H_{n,k}=n!\sum_{j=0}^{\min(p,n-p)}U_j\,q^{(k)}_j\,d_{p-j}\,d_{n-p-j},\\
+q^{(k)}_j=\frac kn+\sum_{h=1}^{j}\Bigl(\frac\ell n-\frac{\ff\ell{2h}}{\ff n{2h}}\Bigr)\kappa_h\,\omega_h(j).
+\end{gather*}
+In particular $q^{(k)}_j\ge\frac kn>0$.
+\end{proposition}
+
+\begin{proof}
+Apply Proposition~\ref{prop:dowling-weights} with $m=1$ to $Y_{n-2h}$, whose parameter is $\lambda-h$. After the shift $j\mapsto j-h$, the coefficient of $t^p$ in $t^hY_{n-2h}$ equals
+\[
+(n-2h)!\sum_j\frac{(\lambda-j)(\lambda-h)^{j-h-2}}{2\,(j-h)!}\,d_{p-j}\,d_{n-p-j},
+\]
+the sum running over $h\le j\le\min(p,n-p)$. Insert this into Proposition~\ref{prop:positive-decomp}, divide by $n!$, and use $\binom n{2h}\frac{(n-2h)!}{n!}=\frac1{(2h)!}$ and $\binom\ell{2h}\frac{(n-2h)!}{n!}=\frac{\ff\ell{2h}}{(2h)!\,\ff n{2h}}$. Dividing the resulting weight by $U_j$ gives $q^{(k)}_j$.
+\end{proof}
+
+\subsection{Monotonicity of \texorpdfstring{$\sigma_h$}{sigma\_h}}
+Put $\sigma_0=1$ and, for $1\le h\le J$,
+\[
+\sigma_h=\frac{1}{k(2h-1)}\Bigl(\ell-\frac{n\,\ff\ell{2h}}{\ff n{2h}}\Bigr),
+\]
+so that
+\begin{equation}\label{eq:qk-sigma}
+q^{(k)}_j=\frac kn\Bigl(1+\sum_{h=1}^j\sigma_h(2h-1)\kappa_h\,\omega_h(j)\Bigr).
+\end{equation}
+For $k=1$ we have $\ff{n-1}{2h}/\ff n{2h}=(n-2h)/n$ and hence $\sigma_h=1$ for $0\le h\le J$. We write $Q_j=q^{(1)}_j=\frac1n\bigl(1+\sum_{h=1}^j(2h-1)\kappa_h\,\omega_h(j)\bigr)$.
+
+\begin{lemma}\label{lem:attenuation}
+For every $1\le k\le n$, the numbers $\sigma_h$, $0\le h\le J$, satisfy $1=\sigma_0\ge\sigma_1\ge\sigma_2\ge\dots\ge\sigma_J\ge0$.
+\end{lemma}
+
+\begin{proof}
+If $k=n$ then $\sigma_h=0$ for $1\le h\le J$. Let $k<n$, so $\ell\ge1$. For $0\le z\le n-1$ let $\Pi_z=1-\binom{\ell-1}z/\binom{n-1}z$; this is the probability that a uniformly random $z$-subset of a set with $k$ marked and $\ell-1$ unmarked elements contains a marked element. Since $\ff\ell{2h}/\ff n{2h}=\frac\ell n\binom{\ell-1}{2h-1}/\binom{n-1}{2h-1}$, we have $\sigma_h=\ell\,\Pi_{2h-1}/(k(2h-1))$. Let $\Delta\Pi_z=\Pi_{z+1}-\Pi_z=\frac{k}{n-1-z}\binom{\ell-1}z/\binom{n-1}z\ge0$. If $\Delta\Pi_z>0$ and $z+1\le n-2$, then $\Delta\Pi_{z+1}/\Delta\Pi_z=\frac{\ell-1-z}{n-2-z}\le1$; and once $\Delta\Pi_z=0$, all later increments vanish. Thus $\Pi$ is concave on $\{0,\dots,n-1\}$ with $\Pi_0=0$, so $\Pi_z/z$ is nonincreasing for $z\ge1$. Hence $\sigma_h$ is nonincreasing for $h\ge1$, and $\sigma_h\ge0$. Finally $\sigma_1=\ell\,\Pi_1/k=\frac\ell{n-1}\le1$.
+\end{proof}
+
+\begin{lemma}\label{lem:one-crossing}
+Let $1\le j\le J-1$, $r=r_j$, and for $1\le h\le j$ put $\epsilon_h=\bigl(\omega_h(j-1)+\omega_h(j+1)-2\omega_h(j)\bigr)/\omega_h(j)$. Then
+\[
+\epsilon_h=\frac{h\,\bigl(h(j+r^2)-\lambda^2\bigr)}{\lambda\,j\,(\lambda-h)(j+1-h)},
+\]
+and the sequence $\max(\epsilon_h,0)$ is nondecreasing in $h$ and strictly increasing once positive. Moreover $\omega_{j+1}(j-1)=\omega_{j+1}(j)=0<\omega_{j+1}(j+1)$, and $\omega_h$ vanishes at $j-1,j,j+1$ for $h\ge j+2$.
+\end{lemma}
+
+\begin{proof}
+For $1\le h\le j$ we have $\omega_h(j)>0$,
+\[
+\frac{\omega_h(j+1)}{\omega_h(j)}-1=\frac{h(r-1)}{\lambda(j+1-h)},\qquad\frac{\omega_h(j-1)}{\omega_h(j)}-1=-\frac{hr}{j(\lambda-h)},
+\]
+where for $h=j$ the second identity correctly gives $\omega_j(j-1)=0$. Adding the two and using $\lambda=r+j$ gives the formula for $\epsilon_h$. In it, the denominator is positive and decreasing in $h$, and once $h(j+r^2)-\lambda^2>0$ the numerator is positive and increasing in $h$. The last statements follow from the definition of $\omega_h$.
+\end{proof}
+
+\begin{proposition}\label{prop:compare}
+Let $1\le j\le J-1$, $1\le k\le n$, and write $\delta q_j=q_{j-1}+q_{j+1}-2q_j$ for a sequence $q$. Then
+\[
+\frac{\delta q^{(k)}_j}{q^{(k)}_j}\le\max\Bigl(0,\frac{\delta Q_j}{Q_j}\Bigr).
+\]
+\end{proposition}
+
+\begin{proof}
+Let $L=\max(0,\delta Q_j/Q_j)$. By \eqref{eq:qk-sigma}, $\frac nk\bigl(\delta q^{(k)}_j-Lq^{(k)}_j\bigr)=\sum_{h=0}^{j+1}\sigma_hx_h$, where
+\[
+x_0=-L,\qquad x_h=(2h-1)\kappa_h\bigl(\omega_h(j-1)+\omega_h(j+1)-(2+L)\omega_h(j)\bigr)\quad(h\ge1),
+\]
+and $\sum_hx_h=n(\delta Q_j-LQ_j)\le0$. Here $\sigma_{j+1}$ is defined by the same formula if $j+1\le J$; since $j\le J-1$, this is the case. For $1\le h\le j$ the sign of $x_h$ is that of $\epsilon_h-L$. By Lemma~\ref{lem:one-crossing} and $L\ge0$, the sequence $x_0,x_1,\dots,x_j$ is nonpositive up to some index and nonnegative afterwards, and $x_{j+1}>0$. Let $h_0$ be the first index with $x_{h_0}>0$ and $\sigma_*=\sigma_{h_0}$. By Lemma~\ref{lem:attenuation}, $\sigma_h\ge\sigma_*$ for $h<h_0$, where $x_h\le0$, and $\sigma_h\le\sigma_*$ for $h\ge h_0$, where $x_h\ge0$. Hence $\sum_h\sigma_hx_h\le\sigma_*\sum_hx_h\le0$, that is, $\delta q^{(k)}_j\le Lq^{(k)}_j$.
+\end{proof}
+
+\subsection{The case of one joint}
+
+\begin{proposition}\label{prop:coloop}
+For $0\le j\le J$ we have $Q_j=s^{j-2}\,\Omega(r_j)/n$, where
+\[
+\Omega(r)=2-\frac{r+\frac12}{\mu}+\frac3{8\mu}\Bigl(\frac1r+\frac1{r+1}\Bigr)+\frac1{4r^2(r+1)}.
+\]
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:basic}, $H_{n,1}=(1+t)Y_{n-1}$. By \eqref{eq:Yn-u} for $Y_{n-1}$ with $m=1$ (parameter $\frac n2=\mu$) and \eqref{eq:dictionary}, the coefficient of $t^p$ in $H_{n,1}/n!$ is $\frac1n[\xi^{n-p}\eta^p]\,(\xi+\eta)K_1(\mu)$, where $K_\beta(\theta)=(1-z)e^{\theta z}R^{-\beta}$. For a series $\Phi\in\mathbb{R}[[\xi,\eta]]$ we call the coefficient sequence $\bigl([\xi^{n-p}\eta^p]\,\Phi\bigr)_{0\le p\le n}$ of its homogeneous component of degree $n$ the \emph{row} of $\Phi$. Write $\xi+\eta=1+z-R$. The component of degree $n$ of $RK_1(\mu)=(1-z)e^{\mu z}$ vanishes: it is zero for $n$ odd, and for $n$ even it equals $w_{n/2}(\mu)z^{n/2}=0$ because $\mu=n/2$. Hence the row is that of $\frac1n(1-z^2)e^{\mu z}R^{-1}$. Corollary~\ref{cor:raise} with $\beta=1$ gives the weights $\frac1{2n}\bigl(\frac{v'_j}{r_j}-\frac{v'_{j-1}}{r_j+1}\bigr)$ with $v'_j=[z^j](1-z^2)e^{\mu z}=\frac{\mu^{j-2}}{j!}\bigl(\mu^2-j(j-1)\bigr)$. By \eqref{eq:extract} the rows $[z^jR^{-2}]_n$, $0\le j\le J$, are linearly independent: the coefficient of $\xi^{n-p}\eta^p$ vanishes for $p<j$ and equals $d_{n-2j}d_0\neq0$ for $p=j$. Hence these weights coincide with $U_jQ_j$ from Proposition~\ref{prop:trivial-weights}. Dividing by $U_j$ and substituting $j=\mu+\frac12-r$, we obtain $nQ_j=s^{j-2}\,\Omega_1(r_j)$ with
+\[
+\Omega_1(r)=\frac{\mu^2-j(j-1)}{r^2}-\frac{j\,\bigl(\mu^2-(j-1)(j-2)\bigr)}{\mu\,r(r+1)},
+\]
+and a direct expansion shows $\Omega_1=\Omega$.
+\end{proof}
+
+\begin{proposition}\label{prop:coloop-curvature}
+Let $1\le j\le J-1$ and $r=r_j$. Then $\dfrac{\delta Q_j}{Q_j}<\dfrac1{j+1}+\dfrac1{r^2}$.
+\end{proposition}
+
+\begin{proof}
+Since $J\ge2$, we have $n\ge4$, $\mu\ge2$, and $\frac32\le r\le\mu-\frac12$; moreover $r$ is an integer or a half-integer. By Proposition~\ref{prop:coloop},
+\[
+\frac{\delta Q_j}{Q_j}=\frac{\Ls\Omega(r)}{\Omega(r)},
+\]
+where $\Ls f(r)=s\,f(r-1)+s^{-1}f(r+1)-2f(r)$ is the operator of Section~\ref{sec:nontrivial}, now with $s=\mu/\lambda$ as defined in this section.
+Write $\Omega=\Lambda+\Xi$ with $\Lambda(r)=2-(r+\frac12)/\mu\ge1$ and $\Xi(r)=\frac3{8\mu}(\frac1r+\frac1{r+1})+\frac14\varrho(r)$, where $\varrho(r)=1/(r^2(r+1))$ as before. Put $\varepsilon=s+s^{-1}-2=\frac{1}{4\mu\lambda}$. Since $\Lambda$ is affine with slope $-1/\mu$ and $s-s^{-1}=-\frac{4\mu+1}{2\mu(2\mu+1)}$, a direct computation gives $\Ls\Lambda=-\varepsilon\bigl(2+(r+\frac32)/\mu\bigr)$. For a positive decreasing function $f$,
+\[
+\Ls f(r)-\nabla^2f(r)-\varepsilon f(r)=(s-1)\bigl(f(r-1)-f(r)\bigr)+(s^{-1}-1)\bigl(f(r+1)-f(r)\bigr),
+\]
+which is nonpositive; here $\nabla^2f(r)=f(r-1)+f(r+1)-2f(r)$.
+The function $\Xi$ is positive and decreasing for $r>0$, and $\Xi(r)\le\frac{2}{5\mu}+\frac2{45}<2$ because $r\ge\frac32$. Therefore $\Ls\Omega<\nabla^2\Xi$, and since $\Omega\ge\Lambda\ge1$, it suffices to show
+\begin{equation}\label{eq:target}
+\nabla^2\Xi(r)<\Bigl(\frac1{j+1}+\frac1{r^2}\Bigr)\Lambda(r)\quad\text{whenever }\nabla^2\Xi(r)>0.
+\end{equation}
+We have $\nabla^2\frac1r=\frac{2}{r(r^2-1)}$ and $\nabla^2\frac1{r+1}=\frac2{r(r+1)(r+2)}$, so
+\[
+\nabla^2\Bigl(\Xi-\frac\varrho4\Bigr)=\frac3{4\mu}\Bigl(\frac1{r(r^2-1)}+\frac1{r(r+1)(r+2)}\Bigr)\le\frac{16}{35\mu}<\frac1{j+1},
+\]
+where we used that the bracket decreases in $r$ and equals $\frac{64}{105}$ at $r=\frac32$, and that $j+1=\mu+\frac32-r\le\mu$. If $r\ge2$, then
+\begin{align*}
+r^2\,\nabla^2\frac\varrho4&=\frac r{4(r-1)^2}+\frac{r^2}{4(r+1)^2(r+2)}-\frac1{2(r+1)}\\
+&\le\frac r{4(r-1)^2}+\frac1{4(r+2)}\le\frac9{16},
+\end{align*}
+since both terms decrease in $r$; this gives \eqref{eq:target} with $\Lambda\ge1$. If $r=\frac32$ and $j\ge2$, then $\mu=j+1\ge3$, $\Lambda=2-\frac2\mu\ge\frac43$, and $r^2\nabla^2\frac\varrho4=\frac94\cdot\frac{928}{1575}=\frac{232}{175}<\frac43$, which again gives \eqref{eq:target}. Finally, if $r=\frac32$ and $j=1$, then $\mu=2$, $\Lambda=1$, and $\nabla^2\Xi=\frac8{35}+\frac{928}{1575}=\frac{184}{225}<\frac12+\frac49$.
+\end{proof}
+
+\begin{theorem}\label{thm:trivial}
+Let $n\ge2$ and $1\le k\le n$. Then $H_{n,k}$ has degree $n$, positive palindromic coefficients, and its coefficients are strictly log-concave.
+\end{theorem}
+
+\begin{proof}
+By Proposition~\ref{prop:trivial-weights}, the coefficients have the form of Lemma~\ref{lem:transfer} with $\beta=1$ and weights $U_jq^{(k)}_j>0$. If $J\le1$ there is nothing more to prove. Let $1\le j\le J-1$. If $\delta q^{(k)}_j\le0$, then $q^{(k)}_{j-1}q^{(k)}_{j+1}\le(q^{(k)}_j)^2$ by \eqref{eq:amgm}. Otherwise \eqref{eq:amgm}, Propositions~\ref{prop:compare} and~\ref{prop:coloop-curvature}, and Lemma~\ref{lem:U} give
+\[
+\log\frac{q^{(k)}_{j-1}q^{(k)}_{j+1}}{(q^{(k)}_j)^2}<\frac{\delta q^{(k)}_j}{q^{(k)}_j}\le\max\Bigl(0,\frac{\delta Q_j}{Q_j}\Bigr)<\frac1{j+1}+\frac1{r_j^2}\le\log\frac{U_j^2}{U_{j-1}U_{j+1}}.
+\]
+In both cases the weights $U_jq^{(k)}_j$ are strictly log-concave at $j$, and Lemma~\ref{lem:transfer} completes the proof.
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm:main} and examples}\label{sec:proof}
+
+\begin{proof}[Proof of Theorem~\textup{\ref{thm:main}}]
+Part (i) is Corollary~\ref{cor:rank}. If $n=1$, the matroid is empty or consists of a single coloop, and $Y=1$ or $1+t$ by Lemma~\ref{lem:basic}(d). Let $n\ge2$. If $m\ge2$, parts (ii) and (iii) follow from Proposition~\ref{prop:interpolation} and Theorem~\ref{thm:nontrivial}; all ingredients depend only on $n$, $m$ and $k$. If $m=1$ and $k\ge1$, they follow from Proposition~\ref{prop:positive-decomp} and Theorem~\ref{thm:trivial}. If $m=1$ and $k=0$, then $\Q_n(1;\emptyset)\cong\K_n=\Q_{n-1}(1)$, and Theorem~\ref{thm:dowling-lc} applies when $n-1\ge2$, while $Y_{\K_2}=1+t$.
+
+For (iv), let first $m\ge2$. By Proposition~\ref{prop:dowling-weights}, $Y_n(0)=\prod_{i=0}^{n-1}(1+im)$. By Propositions~\ref{prop:jointless-weights} and~\ref{prop:closed}, Lemma~\ref{lem:positivity}(a) and $U_0=\frac a{n+a}$,
+\begin{align*}
+Y^\circ_n(0)=n!\,m^nU_0q_0\,d_n&=m^n\frac{a(1-a)(n-1)}{(n+a)(n+a-1)}\,(a+1)\cdots(a+n)\\
+&=(m-1)(n-1)\prod_{h=1}^{n-2}(mh+1).
+\end{align*}
+By Proposition~\ref{prop:interpolation},
+\[
+y_0=\frac kn\bigl(1+(n-1)m\bigr)\prod_{h=1}^{n-2}(1+hm)+\frac{n-k}n(m-1)(n-1)\prod_{h=1}^{n-2}(mh+1),
+\]
+and $k(1+(n-1)m)+(n-k)(m-1)(n-1)=n\bigl((m-1)(n-1)+k\bigr)$. If $m=1$ and $k\ge1$, only the term $\frac knY_n$ in Proposition~\ref{prop:positive-decomp} contributes to the constant coefficient, which equals $\frac kn\,n!=k(n-1)!$, in accordance with (iv). The equality $y_n=y_0$ is palindromicity.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\textup{\ref{cor:families}}]
+The Dowling geometries are the case $X=[n]$, the braid matroid $\K_n$ is $\Q_{n-1}(1)$, the matroids of types $B_n$ and $D_n$ are $\Q_n(\mathbb{Z}/2\mathbb{Z};X)$ with $X=[n]$ and $X=\emptyset$, and the graphs in the last family are those of Section~\ref{sec:gain} for $m=1$.
+\end{proof}
+
+\begin{example}\label{ex:table}
+As an independent check, we computed $Y_{\Q_n(G;X)}$ for the groups and sizes in Table~\ref{tab:direct} directly from the definition: the lattice of flats was generated from the rank function \eqref{eq:rank} by closure, and $P$, $Z$ and $Y$ were obtained from Theorem~\ref{thm:PZ} and \eqref{eq:defY} with exact arithmetic. This computation uses neither the description of flats in Section~\ref{sec:gain} nor any generating function. In every case the result agrees with Theorem~\ref{thm:main} and the formulas of Sections~\ref{sec:dowling}--\ref{sec:trivial}; we list only $y_0,\dots,y_{\lfloor r/2\rfloor}$. The symmetric group $\mathfrak S_3$ and the cyclic group $\mathbb{Z}/6\mathbb{Z}$ give the same polynomials, and for $m\ge2$ the coefficients are affine functions of $k$, as predicted by Proposition~\ref{prop:interpolation}.
+\end{example}
+
+\begin{table}[H]
+\centering
+\caption{Inverse $Z$-polynomials computed from the lattice of flats.}\label{tab:direct}
+\vspace{6pt}
+\begin{tabular}{@{}lccl@{\qquad}lccl@{}}
+\toprule
+$G$ & $n$ & $k$ & $y_0,y_1,\dots$ & $G$ & $n$ & $k$ & $y_0,y_1,\dots$\\
+\midrule
+$1$ & $4$ & $0$ & $6,\,12$ & $\mathbb{Z}/2$ & $4$ & $0$ & $45,\,108,\,130$\\
+$1$ & $4$ & $1$ & $6,\,18,\,24$ & $\mathbb{Z}/2$ & $4$ & $1$ & $60,\,141,\,168$\\
+$1$ & $4$ & $2$ & $12,\,34,\,44$ & $\mathbb{Z}/2$ & $4$ & $2$ & $75,\,174,\,206$\\
+$1$ & $4$ & $3$ & $18,\,48,\,61$ & $\mathbb{Z}/2$ & $4$ & $3$ & $90,\,207,\,244$\\
+$1$ & $4$ & $4$ & $24,\,60,\,75$ & $\mathbb{Z}/2$ & $4$ & $4$ & $105,\,240,\,282$\\
+\midrule
+$\mathbb{Z}/3$ & $3$ & $0$ & $16,\,27$ & $\mathbb{Z}/6$, $\mathfrak S_3$ & $3$ & $0$ & $70,\,108$\\
+$\mathbb{Z}/3$ & $3$ & $1$ & $20,\,34$ & $\mathbb{Z}/6$, $\mathfrak S_3$ & $3$ & $1$ & $77,\,121$\\
+$\mathbb{Z}/3$ & $3$ & $2$ & $24,\,41$ & $\mathbb{Z}/6$, $\mathfrak S_3$ & $3$ & $2$ & $84,\,134$\\
+$\mathbb{Z}/3$ & $3$ & $3$ & $28,\,48$ & $\mathbb{Z}/6$, $\mathfrak S_3$ & $3$ & $3$ & $91,\,147$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The same check was carried out with exact arithmetic for the weight representations of Propositions~\ref{prop:dowling-weights}, \ref{prop:nontrivial-weights} and~\ref{prop:trivial-weights} against the recursions of Propositions~\ref{prop:interpolation} and~\ref{prop:positive-decomp}, for $2\le n\le24$, all admissible $k$, and $m\in\{1,2,3,4,6,10,100,1000\}$. These computations are not used in the proofs.
+
+\section*{Use of AI-assisted tools}
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{99}
+
+\bibitem{BFMN25}
+T.~Braden, L.~Ferroni, J.~P. Matherne, and N.~Nepal, \emph{Inverse Kazhdan--Lusztig polynomials of matroids under deletion}, preprint (2025), arXiv:2510.01086.
+
+\bibitem{BV20}
+T.~Braden and A.~Vysogorets, \emph{Kazhdan--Lusztig polynomials of matroids under deletion}, Electron. J. Combin. \textbf{27} (2020), no.~1, Paper No.~1.17.
+
+\bibitem{Dow73}
+T.~A. Dowling, \emph{A class of geometric lattices based on finite groups}, J. Combin. Theory Ser. B \textbf{14} (1973), 61--86.
+
+\bibitem{EPW16}
+B.~Elias, N.~Proudfoot, and M.~Wakefield, \emph{The Kazhdan--Lusztig polynomial of a matroid}, Adv. Math. \textbf{299} (2016), 36--70.
+
+\bibitem{FL24}
+L.~Ferroni and M.~Larson, \emph{Kazhdan--Lusztig polynomials of braid matroids}, Commun. Amer. Math. Soc. \textbf{4} (2024), 64--79.
+
+\bibitem{FL26}
+L.~Ferroni and M.~Larson, \emph{Kazhdan--Lusztig polynomials of Dowling geometries}, preprint (2026), arXiv:2605.04043.
+
+\bibitem{FMSV24}
+L.~Ferroni, J.~P. Matherne, M.~Stevens, and L.~Vecchi, \emph{Hilbert--Poincar\'e series of matroid Chow rings and intersection cohomology}, Adv. Math. \textbf{449} (2024), Paper No.~109733.
+
+\bibitem{GLX26}
+A.~L.~L. Gao, Y.~Li, and M.~H.~Y. Xie, \emph{Equivariant inverse $Z$-polynomials of matroids}, preprint (2026), arXiv:2601.17314.
+
+\bibitem{GPYZ23}
+A.~L.~L. Gao, N.~Proudfoot, A.~L.~B. Yang, and Z.-X. Zhang, \emph{The combinatorics behind the leading Kazhdan--Lusztig coefficients of braid matroids}, Electron. J. Combin. \textbf{31} (2024), no.~3, Paper No.~P3.21.
+
+\bibitem{GRX25}
+A.~L.~L. Gao, X.~Ruan, and M.~H.~Y. Xie, \emph{The inverse $Z$-polynomial of a matroid}, preprint (2025), arXiv:2507.01332.
+
+\bibitem{GX21}
+A.~L.~L. Gao and M.~H.~Y. Xie, \emph{The inverse Kazhdan--Lusztig polynomial of a matroid}, J. Combin. Theory Ser. B \textbf{151} (2021), 375--392.
+
+\bibitem{GRST19}
+N.~Gozlan, C.~Roberto, P.-M. Samson, and P.~Tetali, \emph{Transport proofs of some discrete variants of the Pr\'ekopa--Leindler inequality}, Ann. Sc. Norm. Super. Pisa Cl. Sci. (5) \textbf{22} (2021), no.~3, 1207--1232; arXiv:1905.04038.
+
+\bibitem{KK82}
+J.~Kahn and J.~P.~S. Kung, \emph{Varieties of combinatorial geometries}, Trans. Amer. Math. Soc. \textbf{271} (1982), 485--499.
+
+\bibitem{KL19}
+B.~Klartag and J.~Lehec, \emph{Poisson processes and a log-concave Bernstein theorem}, Studia Math. \textbf{247} (2019), no.~1, 85--107.
+
+\bibitem{Oxl11}
+J.~Oxley, \emph{Matroid theory}, second ed., Oxford Graduate Texts in Mathematics, vol.~21, Oxford University Press, Oxford, 2011.
+
+\bibitem{PXY18}
+N.~Proudfoot, Y.~Xu, and B.~Young, \emph{The $Z$-polynomial of a matroid}, Electron. J. Combin. \textbf{25} (2018), no.~1, Paper No.~1.26.
+
+\bibitem{Sta99}
+R.~P. Stanley, \emph{Enumerative combinatorics. Vol.~2}, Cambridge Studies in Advanced Mathematics, vol.~62, Cambridge University Press, Cambridge, 1999.
+
+\bibitem{Zas91}
+T.~Zaslavsky, \emph{Biased graphs. II. The three matroids}, J. Combin. Theory Ser. B \textbf{51} (1991), 46--72.
+
+\bibitem{Zas22}
+T.~Zaslavsky, \emph{Whitney numbers of partial Dowling lattices}, preprint (2022), arXiv:2209.01775.
+
+\end{thebibliography}
+
+\end{document}

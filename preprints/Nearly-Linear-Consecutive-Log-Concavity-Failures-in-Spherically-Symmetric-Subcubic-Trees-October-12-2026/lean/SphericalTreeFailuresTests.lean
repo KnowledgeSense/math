@@ -1,0 +1,27 @@
+import SphericalTreeFailures
+#print axioms SphericalTreeFailures.sphericalTree_card
+#print axioms SphericalTreeFailures.sphericalTree_isTree
+#print axioms SphericalTreeFailures.sphericalTree_subcubic
+#print axioms SphericalTreeFailures.independenceNumber_identity
+#print axioms SphericalTreeFailures.pathPolynomial_coeff
+#print axioms SphericalTreeFailures.tuned_partition_ratio
+#print axioms SphericalTreeFailures.tilting_preserves_failure
+#print axioms SphericalTreeFailures.exists_tuning_parameter
+#print axioms SphericalTreeFailures.tuned_root_probability
+
+#print axioms SphericalTreeFailures.rootSelectedSize_has_graphLaw
+#print axioms SphericalTreeFailures.rootSelectedSize_tendsto_L2
+#print axioms SphericalTreeFailures.releaseParameter_spec
+#print axioms SphericalTreeFailures.totalCenter_location_tendsto
+#print axioms SphericalTreeFailures.release_uniform_fourier_decay
+#print axioms SphericalTreeFailures.local_limit_uniform
+#print axioms SphericalTreeFailures.curvature_local_limit_uniform
+#print axioms SphericalTreeFailures.releaseRun_card_growth
+#print axioms SphericalTreeFailures.releaseRun_coefficient_failures
+#print axioms SphericalTreeFailures.normalizedRunError_tendsto
+#print axioms SphericalTreeFailures.releaseDensityDerivative_zero_pos
+#print axioms SphericalTreeFailures.releaseDensityDerivative_not_log_concave
+#print axioms SphericalTreeFailures.releaseLimitLaw_eq_withDensity
+
+#print axioms SphericalTreeFailures.release_positive_curvature_interval
+#print axioms SphericalTreeFailures.nearly_linear_consecutive_failures

@@ -1,0 +1,393 @@
+\documentclass[11pt]{amsart}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+  pdftitle={The density of suffix-replaceable pairs in Penney's ante},
+  pdfauthor={Knowledge Sense},
+  pdfsubject={Combinatorics on words},
+  pdfkeywords={Penney's ante, word overlaps, property R, asymptotic density, combinatorics on words}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\numberwithin{equation}{section}
+
+\newcommand{\pre}{\operatorname{pre}}
+\newcommand{\suf}{\operatorname{suf}}
+\newcommand{\Os}{\Omega^{*}}
+\newcommand{\R}{\mathcal{R}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\bits}{\{0,1\}}
+
+\begin{document}
+
+\title[Suffix-replaceable pairs in Penney's ante]{The density of suffix-replaceable pairs in Penney's ante}
+
+\author{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{13 October 2026}
+
+\subjclass[2020]{Primary 68R15; Secondary 05A16, 60C05}
+
+\keywords{Penney's ante, word overlaps, property R, asymptotic density, combinatorics on words}
+
+\begin{abstract}
+Drexel, Peng and Richey studied the pairs $(v,w)$ of binary words of the same length for which, in Penney's ante, the final copy of either word can be replaced by the other without creating a further occurrence of $v$ or $w$. For such pairs with $v\neq w$ the probability that $v$ appears before $w$ has a simple closed form. They conjectured that the proportion of such ordered pairs among all pairs of length $n$ converges to a positive limit. We prove this conjecture. Using a finite criterion in terms of the prefixes determined by the overlaps of $v$ and $w$, we show that, outside an event of small probability, the property depends only on the first and last $K$ letters of the two words. Consequently the proportion converges, with error $O(n^{2}2^{-n/3})$, and the proportion among pairs of distinct words has the same limit. Combining a boundary construction of Bóna, Maga and Richey with an exact calculation of the probabilities of long cross-overlaps, we obtain the explicit lower bound $1/512$ for the limit.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $v$ and $w$ be finite binary words, and generate independent random bits until one of the two words appears as a block of consecutive bits. This race is known as Penney's ante. Conway found a formula for the probability that $v$ appears first; proofs and generalizations are due to Li~\cite{Li} and to Guibas and Odlyzko~\cite{GO}. Drexel, Peng and Richey~\cite{DPR} studied the win probability as a function of the bias $p$ of the bits, in particular its symmetries under $p\mapsto 1-p$ and the bijections that explain them. The following class of pairs plays a central role in their work.
+
+For binary words $v$ and $w$, let $\Os_{v,w}(v)$ be the set of finite binary words $u$, possibly empty, such that $v$ occurs in $uv$ exactly once, namely as its suffix, and $w$ does not occur in $uv$. The set $\Os_{v,w}(w)$ is defined by interchanging $v$ and $w$~\cite[Definition~2]{DPR}. A pair $(v,w)$ of words of the same length has \emph{property~R} if
+\begin{equation}\label{eq:R}
+  \Os_{v,w}(v)=\Os_{v,w}(w).
+\end{equation}
+In other words, a game won by $v$ becomes a game won by $w$ when the final copy of $v$ is replaced by $w$, and conversely; we call such pairs \emph{suffix-replaceable}. If $(v,w)$ has property~R and $v\neq w$, then the probability that $v$ appears before $w$ under independent Bernoulli$(p)$ bits, $0<p<1$, equals
+\[
+  \frac{\PP_p(v)}{\PP_p(v)+\PP_p(w)},\qquad\text{where } \PP_p(x)=p^{|x|_1}(1-p)^{|x|_0}
+\]
+and $|x|_a$ is the number of letters of $x$ equal to $a$ \cite[Theorem~13]{DPR}. Every pair of distinct words without nontrivial self-overlaps or cross-overlaps has property~R, but there are many others \cite[p.~8]{DPR}.
+
+Let $\R_n$ be the set of ordered pairs $(v,w)\in\bits^n\times\bits^n$ with property~R. Drexel, Peng and Richey conjectured \cite[Conjecture~14]{DPR} that $4^{-n}|\R_n|$ converges to a strictly positive limit. A positive lower bound for this proportion is implicit in the remark following Theorem~3.6 of Bóna, Maga and Richey \cite[p.~10]{BMR}: two words that begin with $00$ and end with $11$ have no short overlaps, the longer overlaps can be excluded by a union bound, and pairs without overlaps have property~R \cite[p.~8]{DPR}. The existence of the limit is the main point of the present paper.
+
+\begin{theorem}\label{thm:main}
+The limit
+\[
+  \rho=\lim_{n\to\infty}4^{-n}|\R_n|
+\]
+exists, and $\rho\ge 1/512$. Moreover, if $\R_n^{\neq}=\{(v,w)\in\R_n: v\neq w\}$, then
+\[
+  \lim_{n\to\infty}\frac{|\R_n^{\neq}|}{4^n}=\lim_{n\to\infty}\frac{|\R_n^{\neq}|}{4^n-2^n}=\rho .
+\]
+\end{theorem}
+
+Under the literal definition~\eqref{eq:R}, every diagonal pair $(v,v)$ belongs to $\R_n$, since both sides of~\eqref{eq:R} are empty (Remark~\ref{rem:diag}). The second statement shows that the limit is unchanged if only pairs of distinct words, for which the race is non-trivial, are counted. Thus Theorem~\ref{thm:main} proves \cite[Conjecture~14]{DPR} under either reading of the definition.
+
+The proof gives a rate of convergence. For $K\ge1$ let $q_K$ be the probability that two independent uniformly random binary words of a common length $n>2K$ satisfy condition~\eqref{eq:EK} below; this condition involves only the first and last $K$ letters of the two words, and $q_K$ does not depend on $n$.
+
+\begin{theorem}\label{thm:rate}
+For every $K\ge1$ we have $|\rho-q_K|\le 2^{2-K}$. For every $n\ge3$, with $K=\lfloor n/3\rfloor$,
+\[
+  \bigl|4^{-n}|\R_n|-\rho\bigr|\le \bigl((K+1)(2K+1)+8\bigr)\,2^{-K}=O\bigl(n^{2}\,2^{-n/3}\bigr).
+\]
+\end{theorem}
+
+\emph{Outline.} The proof has three steps. First, property~R is equivalent to a finite condition: two sets of proper prefixes of $v$ and $w$ are read off from the overlaps among $v$ and $w$ in all four directions, and every element of either set must have a suffix in the other set (Proposition~\ref{prop:criterion}). This is a reformulation of a criterion of Drexel, Peng and Richey \cite[Lemma~19]{DPR}. Second, for random words, with probability $1-O(2^{-K}+K^{2}2^{-(n-2K)})$ there is no overlap longer than $K$, and none of the relevant prefixes is a suffix of another. On this event property~R depends only on the first and last $K$ letters of the two words (Lemma~\ref{lem:local}). The resulting estimate for $|4^{-n}|\R_n|-q_K|$ shows that the sequence is a Cauchy sequence. Third, for words that begin with $0^L$ and end with $1^L$, we compute the conditional probability of each cross-overlap exactly, including overlaps of length close to $n$, where boundary letters of both words are matched against each other, and we bound the conditional probability of a self-overlap of length $k$ by $2^{-k}$ (Lemma~\ref{lem:cond}). For $L=2$ this is the construction of~\cite{BMR}, and it gives $\rho\ge1/512$. This bound is far below the values of $p_n=4^{-n}|\R_n|$ observed numerically in Table~\ref{tab:counts}; see Remark~\ref{rem:numerics}.
+
+\emph{Related work.} Limiting densities of words and pairs of words defined by overlap conditions have been studied before. Holub and Shallit~\cite[Theorem~3]{HS} proved that the probability that a random word has a given maximal border length converges as the length grows. Gabric~\cite[Theorem~10 and Corollaries~11--12]{Gab} proved the existence of limiting densities for pairs of words classified by the presence of overlaps in the two directions between them, and Rivals and Wang~\cite{RW} counted the pairs of words with a prescribed correlation and obtained asymptotic bounds for the proportion of such pairs \cite[Theorem~22]{RW}. Property~R is not a condition on a single overlap set: by Proposition~\ref{prop:criterion} it compares the overlaps in the four directions $(v,v)$, $(v,w)$, $(w,v)$ and $(w,w)$ through suffix relations between prefixes. It is not determined by the cross-overlaps, and it does not force the sets of self-overlap lengths of $v$ and $w$ to coincide (Example~\ref{ex:pairs}). To our knowledge, the existence of the limit in Theorem~\ref{thm:main} has not appeared in the literature.
+
+\emph{Organization.} Section~\ref{sec:prelim} fixes notation and proves the finite criterion. Section~\ref{sec:local} proves the localization lemma and the estimate for $|4^{-n}|\R_n|-q_K|$. Section~\ref{sec:positive} treats words with prescribed boundary letters and gives the lower bound. Section~\ref{sec:proofs} completes the proofs of Theorems~\ref{thm:main} and~\ref{thm:rate}.
+
+\section{Preliminaries and a finite criterion}\label{sec:prelim}
+
+All words are over the alphabet $\bits$, and $\bits^*$ is the set of finite words, including the empty word. For a word $a=a_1\cdots a_n$ and $1\le i\le j\le n$ we write $a[i,j]=a_i\cdots a_j$, and for $0\le j\le n$ we write $\pre_j(a)=a_1\cdots a_j$ and $\suf_j(a)=a_{n-j+1}\cdots a_n$. A word $y$ is a \emph{suffix} of $x$ if $x=zy$ for some word $z$; we allow $y=x$. For a set $X$ of words, $\bits^*X$ is the set of words having a suffix in $X$. A word $a$ \emph{occurs} in $x$ if $a=x[i,i+|a|-1]$ for some $i$; we then say that this occurrence \emph{ends} at position $i+|a|-1$.
+
+Fix $n\ge1$. For $s,t\in\bits^n$ and $1\le k\le n-1$, we say that $(s,t)$ has an \emph{overlap of length $k$} if $\suf_k(s)=\pre_k(t)$. Following \cite[Definition~6]{DPR}, put
+\begin{equation}\label{eq:D}
+  D(s,t)=\{\pre_{n-k}(s): 1\le k\le n-1,\ \suf_k(s)=\pre_k(t)\}.
+\end{equation}
+For a pair $(v,w)$ of words of length $n$ we set
+\begin{equation}\label{eq:B}
+  B_v=D(v,v)\cup D(w,v),\qquad B_w=D(v,w)\cup D(w,w).
+\end{equation}
+Let $F_{v,w}$ be the set of words in which neither $v$ nor $w$ occurs. Every element of $B_v\cup B_w$ has length at most $n-1$ and therefore lies in $F_{v,w}$. When the pair is fixed we write $\Os(v)=\Os_{v,w}(v)$ and $\Os(w)=\Os_{v,w}(w)$.
+
+\begin{lemma}\label{lem:language}
+Let $v,w\in\bits^n$ be distinct. Then
+\[
+  \Os(v)=F_{v,w}\setminus \bits^*B_v,\qquad \Os(w)=F_{v,w}\setminus\bits^*B_w .
+\]
+\end{lemma}
+
+\begin{proof}
+By symmetry it suffices to prove the first identity. Let $u\in\bits^*$. If $u\notin F_{v,w}$, then an occurrence of $v$ or $w$ in $u$ is also an occurrence in $uv$. It ends before the last letter of $uv$, so it is a second occurrence of $v$ or an occurrence of $w$, and $u\notin\Os(v)$.
+
+Let $u\in F_{v,w}$. The final $n$ letters of $uv$ form $v$, and they do not form $w$ because $v\ne w$. Suppose that $a\in\{v,w\}$ has another occurrence in $uv$. It is not contained in $u$, and it ends before the last letter, so it ends at position $|u|+k$ with $1\le k\le n-1$. Its last $k$ letters are $\pre_k(v)$, and its first $n-k$ letters are $\suf_{n-k}(u)$. Hence $\suf_k(a)=\pre_k(v)$, and $\pre_{n-k}(a)$, an element of $D(a,v)\subseteq B_v$, is a suffix of $u$. Conversely, suppose that $u$ has a suffix $\pre_{n-k}(a)$ with $a\in\{v,w\}$, $1\le k\le n-1$ and $\suf_k(a)=\pre_k(v)$. Then
+\[
+  (uv)[\,|u|-n+k+1,\ |u|+k\,]=\pre_{n-k}(a)\,\pre_k(v)=\pre_{n-k}(a)\,\suf_k(a)=a,
+\]
+so $a$ occurs in $uv$ ending at position $|u|+k<|uv|$. This is either a second occurrence of $v$ or an occurrence of $w$, and $u\notin\Os(v)$. Therefore an element $u$ of $F_{v,w}$ belongs to $\Os(v)$ if and only if $u\notin\bits^*B_v$.
+\end{proof}
+
+\begin{proposition}\label{prop:criterion}
+Let $v,w\in\bits^n$ be distinct. Then $(v,w)$ has property~R if and only if
+\begin{equation}\label{eq:criterion}
+  \begin{gathered}
+  \text{every element of $B_v$ has a suffix in $B_w$, and}\\
+  \text{every element of $B_w$ has a suffix in $B_v$.}
+  \end{gathered}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+If~\eqref{eq:criterion} holds, then each of the sets $\bits^*B_v$ and $\bits^*B_w$ contains the other, and Lemma~\ref{lem:language} gives $\Os(v)=\Os(w)$. Conversely, suppose that $x\in B_v$ has no suffix in $B_w$. Then $x\in F_{v,w}$ since $|x|<n$, and $x\in\bits^*B_v$. By Lemma~\ref{lem:language}, $x\notin\Os(v)$ and $x\in\Os(w)$, so~\eqref{eq:R} fails. The case of an element of $B_w$ without a suffix in $B_v$ is symmetric.
+\end{proof}
+
+\begin{remark}\label{rem:diag}
+Drexel, Peng and Richey \cite[Lemma~19]{DPR} showed that property~R can be decided by finitely many tests involving the set $D(v,v)\cup D(w,w)\cup D(v,w)\cup D(w,v)$. For distinct words, Proposition~\ref{prop:criterion} is a reformulation of their criterion; we use the present form because it involves only suffix relations between elements of $B_v$ and $B_w$. If $v=w$, then the final copy of $v$ in $uv$ is an occurrence of $w$, so $\Os(v)=\Os(w)=\emptyset$; hence every diagonal pair has property~R, and
+\begin{equation}\label{eq:diag}
+  |\R_n|=|\R_n^{\neq}|+2^n .
+\end{equation}
+For $n=1$ the sets $B_v$ and $B_w$ are empty, and all four pairs have property~R.
+\end{remark}
+
+\begin{example}\label{ex:pairs}
+For $(v,w)=(00,11)$ neither word overlaps the other, but $B_v=\{0\}$ and $B_w=\{1\}$, so the pair does not have property~R. In particular, property~R is not implied by the absence of cross-overlaps, and the density of Theorem~\ref{thm:main} cannot be read off from the densities of pairs classified by cross-overlaps as in~\cite{Gab}. For the pair $(v,w)=(000100,001110)$ of \cite[p.~9]{DPR}, the sets of self-overlap lengths of $v$ and $w$ are $\{1,2\}$ and $\{1\}$, respectively, and
+\[
+  B_v=B_w=\{00010,\ 0001,\ 00111\},
+\]
+so the pair has property~R although the sets of self-overlap lengths of $v$ and $w$ differ.
+\end{example}
+
+\section{Localization}\label{sec:local}
+
+Throughout this section $n\ge1$, and $V$ and $W$ are independent uniformly random words in $\bits^n$. We write $\PP$ for the underlying probability and
+\[
+  p_n=\PP\bigl((V,W)\text{ has property R}\bigr)=4^{-n}|\R_n| .
+\]
+
+\begin{lemma}\label{lem:forest}
+Let $X_1,\dots,X_N$ be independent uniform bits, let $d\ge1$ and $I\subseteq\{1,\dots,N-d\}$. Then
+\[
+  \PP\bigl(X_i=X_{i+d}\ \text{for all } i\in I\bigr)=2^{-|I|}.
+\]
+\end{lemma}
+
+\begin{proof}
+Consider the graph on $\{1,\dots,N\}$ with the edges $\{i,i+d\}$, $i\in I$. A vertex is adjacent only to vertices at distance $d$, so each connected component is a set of consecutive elements of one residue class modulo $d$, joined in a path. The graph is therefore a forest with $|I|$ edges and $N-|I|$ components. The event in question says that the bits are constant on each component, and it has probability $2^{N-|I|}/2^{N}$.
+\end{proof}
+
+\begin{lemma}\label{lem:basic}
+Let $s,t\in\{V,W\}$, where $s$ and $t$ may be the same random word.
+\begin{enumerate}
+\item For $1\le k\le n-1$, $\PP(\suf_k(s)=\pre_k(t))=2^{-k}$.
+\item Let $1\le m\le n$ and $1\le i,j\le n-m+1$, with $i\ne j$ if $s$ and $t$ are the same word. Then $\PP(s[i,i+m-1]=t[j,j+m-1])=2^{-m}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+If $s$ and $t$ are different words, the two compared blocks are independent and uniform, and both statements are clear. If $s=t$, the event in~(1) is $s_i=s_{i+n-k}$ for $1\le i\le k$, and Lemma~\ref{lem:forest} applies with $d=n-k$ and $I=\{1,\dots,k\}$. In~(2) we may assume $i<j$; the event is $s_{r}=s_{r+d}$ for $i\le r\le i+m-1$, where $d=j-i$, and Lemma~\ref{lem:forest} applies with $I=\{i,\dots,i+m-1\}\subseteq\{1,\dots,n-d\}$.
+\end{proof}
+
+Now fix $K\ge1$ and assume $n>2K$; put $m=n-2K$. For a pair $(v,w)$ of words of length $n$ write $a^{(1)}=v$ and $a^{(2)}=w$; the indices $1,2$ distinguish the two positions in the pair even when $v=w$. We say that $(v,w)$ satisfies condition~\eqref{eq:EK} if, for all $c\in\{1,2\}$ and $1\le k\le K$,
+\begin{equation}\label{eq:EK}
+  \suf_k(a^{(c)})=\pre_k(v)\iff \suf_k(a^{(c)})=\pre_k(w).
+\end{equation}
+We also consider the two exceptional conditions:
+\begin{itemize}
+\item[(X1)] $\suf_k(a^{(c)})=\pre_k(a^{(c')})$ for some $c,c'\in\{1,2\}$ and some $k$ with $K<k<n$;
+\item[(X2)] $\beta_{c,i}=\beta_{c',i'}$ for some $(c,i)\ne(c',i')$ in $\{1,2\}\times\{1,\dots,K+1\}$, where $\beta_{c,i}=a^{(c)}[i,i+m-1]$.
+\end{itemize}
+The blocks $\beta_{c,i}$ are well defined since $i+m-1\le n-K$. Note that (X2) holds when $v=w$, since then $\beta_{1,1}=\beta_{2,1}$.
+
+\begin{lemma}[Localization]\label{lem:local}
+Let $K\ge1$, $n>2K$, and let $(v,w)$ be a pair of words of length $n$ satisfying neither \textup{(X1)} nor \textup{(X2)}. Then $(v,w)$ has property~R if and only if~\eqref{eq:EK} holds.
+\end{lemma}
+
+\begin{proof}
+Since (X2) fails, $v\ne w$, and Proposition~\ref{prop:criterion} applies. For $c\in\{1,2\}$ and $1\le k\le K$ put $x_{c,k}=\pre_{n-k}(a^{(c)})$. Since (X1) fails, every overlap in~\eqref{eq:D} has length at most $K$, and
+\begin{equation}\label{eq:Bloc}
+  \begin{aligned}
+  B_v&=\{x_{c,k}: c\in\{1,2\},\ 1\le k\le K,\ \suf_k(a^{(c)})=\pre_k(v)\},\\
+  B_w&=\{x_{c,k}: c\in\{1,2\},\ 1\le k\le K,\ \suf_k(a^{(c)})=\pre_k(w)\}.
+  \end{aligned}
+\end{equation}
+
+We claim that for $(c,k)\ne(c',l)$ the word $x_{c,k}$ is not a suffix of $x_{c',l}$. Suppose it is. Comparing lengths gives $l\le k$, and
+\[
+  a^{(c)}[1,n-k]=a^{(c')}[k-l+1,\,n-l].
+\]
+Since $m=n-2K\le n-k$, comparing the first $m$ letters gives $\beta_{c,1}=\beta_{c',k-l+1}$, where $1\le k-l+1\le K$. The indices $(c,1)$ and $(c',k-l+1)$ are different: if $c=c'$, then $k\ne l$. This contradicts the failure of (X2) and proves the claim. In particular the words $x_{c,k}$ are pairwise distinct, so by~\eqref{eq:Bloc} we have $x_{c,k}\in B_v$ if and only if $\suf_k(a^{(c)})=\pre_k(v)$, and similarly for $B_w$.
+
+By the claim, the only element of $B_v\cup B_w$ that is a suffix of an element $x$ of this set is $x$ itself. Hence~\eqref{eq:criterion} holds if and only if $B_v=B_w$, that is, if and only if $x_{c,k}\in B_v\Leftrightarrow x_{c,k}\in B_w$ for all $c$ and $k$. By the preceding paragraph this is condition~\eqref{eq:EK}.
+\end{proof}
+
+\begin{lemma}\label{lem:exc}
+For $K\ge1$ and $n>2K$,
+\begin{align*}
+  \PP\bigl((V,W)\text{ satisfies (X1)}\bigr)&\le 2^{2-K},\\
+  \PP\bigl((V,W)\text{ satisfies (X2)}\bigr)&\le (K+1)(2K+1)\,2^{-(n-2K)} .
+\end{align*}
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:basic}(1) and a union bound over the four choices of $(c,c')$,
+\[
+  \PP(\mathrm{X1})\le 4\sum_{k=K+1}^{n-1}2^{-k}<4\cdot2^{-K}.
+\]
+There are $\binom{2K+2}{2}=(K+1)(2K+1)$ pairs of distinct indices in (X2), and by Lemma~\ref{lem:basic}(2) each of the corresponding equalities has probability $2^{-m}$.
+\end{proof}
+
+\begin{proposition}\label{prop:qK}
+Let $K\ge1$. The probability $q_K$ that $(V,W)$ satisfies~\eqref{eq:EK} is the same for all $n>2K$, and
+\begin{equation}\label{eq:pq}
+  |p_n-q_K|\le 2^{2-K}+(K+1)(2K+1)\,2^{-(n-2K)}\qquad(n>2K).
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+For $c\in\{1,2\}$ and $k\le K$, the words $\suf_k(a^{(c)})$ and $\pre_k(a^{(c)})$ are determined by $\suf_K(a^{(c)})$ and $\pre_K(a^{(c)})$, respectively, where $a^{(1)}=V$ and $a^{(2)}=W$. Hence~\eqref{eq:EK} is a condition on the four blocks $\pre_K(V)$, $\suf_K(V)$, $\pre_K(W)$ and $\suf_K(W)$. Since $n>2K$, these blocks occupy disjoint sets of positions, so they are independent and uniform in $\bits^K$, and the probability of~\eqref{eq:EK} does not depend on $n$. By Lemma~\ref{lem:local}, the event that $(V,W)$ has property~R and the event~\eqref{eq:EK} coincide outside (X1)$\,\cup\,$(X2). Hence $|p_n-q_K|\le\PP(\mathrm{X1})+\PP(\mathrm{X2})$, and Lemma~\ref{lem:exc} gives~\eqref{eq:pq}.
+\end{proof}
+
+\section{Words with prescribed boundary letters}\label{sec:positive}
+
+In this section we bound $p_n$ from below. Fix $L\ge1$ and assume $n\ge4L$. Let $C_L$ be the event that each of $V$ and $W$ begins with $0^L$ and ends with $1^L$. It fixes $2L$ distinct positions in each of the two independent words, so
+\begin{equation}\label{eq:cyl}
+  \PP(C_L)=2^{-4L},
+\end{equation}
+and conditionally on $C_L$ the remaining $2(n-2L)$ letters are independent uniform bits. We call the $4L$ prescribed positions \emph{fixed} and the others \emph{free}, and write $\PP_L=\PP(\,\cdot\mid C_L)$.
+
+\begin{lemma}\label{lem:cond}
+Let $s,t\in\{V,W\}$, let $1\le k\le n-1$ and $d=n-k$, and let $O$ be the event $\suf_k(s)=\pre_k(t)$.
+\begin{enumerate}
+\item If $k<2L$, then $\PP_L(O)=0$.
+\item If $s$ and $t$ are the same word and $k\ge2L$, then $\PP_L(O)\le 2^{-k}$.
+\item If $s$ and $t$ are different words and $2L\le k\le n-L$, then $\PP_L(O)=2^{-k}$.
+\item If $s$ and $t$ are different words and $n-L<k\le n-1$, then $\PP_L(O)=2^{-(n-2L+d)}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+The event $O$ consists of the $k$ equations $s_{d+j}=t_j$, $1\le j\le k$.
+
+(1) Let $j=\max(1,k-L+1)$. Then $j\le\min(k,L)$ because $k<2L$, and $d+j\ge n-L+1$. Thus $s_{d+j}=1$ and $t_j=0$ on $C_L$, and $O$ is impossible.
+
+(2) Here $O$ says that $s$ is constant on each residue class modulo $d$ in $\{1,\dots,n\}$. If $d<L$, the positions $1,\dots,L$ meet every residue class, so $s$ would vanish identically, contradicting $s_n=1$. Let $d\ge L$. Then the positions $1,\dots,L$ lie in distinct residue classes, and so do $n-L+1,\dots,n$. If one of the former and one of the latter are congruent modulo $d$, then $O$ is impossible on $C_L$. Otherwise the $2L$ fixed positions of $s$ lie in $2L$ distinct classes; then $d\ge2L$, and exactly $2^{d-2L}$ of the $2^{n-2L}$ words with the prescribed boundary are constant on all classes. Hence $\PP_L(O)=2^{-k}$ in this case.
+
+(3) and (4). Now $s$ and $t$ are different words, and the equations pair the positions $d+1,\dots,n$ of $s$ with the positions $1,\dots,k$ of $t$, each position being used once. Different equations therefore involve disjoint sets of free letters. An equation with at least one free letter holds with conditional probability $1/2$, independently of the others, and an equation between two fixed letters holds with probability $1$ or $0$. We list the equations between fixed letters, using $k\ge2L$ and $n\ge4L$.
+\begin{itemize}
+\item A final letter of $s$ (position $d+j\ge n-L+1$, that is, $j\ge k-L+1$) against an initial letter of $t$ ($j\le L$): impossible, since $k-L+1>L$.
+\item An initial letter of $s$ ($d+j\le L$) against an initial letter of $t$: this happens exactly for $1\le j\le L-d$, and both letters are $0$.
+\item A final letter of $s$ against a final letter of $t$ ($j\ge n-L+1$): this happens exactly for $n-L+1\le j\le k$, that is, for $L-d$ values of $j$ if $d<L$, and both letters are $1$.
+\item An initial letter of $s$ against a final letter of $t$: impossible, since $L-d<n-L+1$.
+\end{itemize}
+If $k\le n-L$, then $d\ge L$ and no equation joins two fixed letters, so $\PP_L(O)=2^{-k}$. If $k>n-L$, then $1\le d<L$, exactly $2(L-d)$ equations join two equal fixed letters, and each of the remaining $k-2(L-d)=n-2L+d$ equations contains a free letter. This proves~(4).
+\end{proof}
+
+\begin{proposition}\label{prop:lower}
+For $L\ge1$ and $n\ge 4L$,
+\[
+  p_n\ge 2^{-4L}\bigl(1-2^{3-2L}-2^{1-(n-2L)}\bigr).
+\]
+\end{proposition}
+
+\begin{proof}
+Let $G$ be the event that $(s,t)$ has no overlap of any length $1\le k\le n-1$, for each of the four choices of $s,t\in\{V,W\}$. If a pair $(v,w)$ lies in $G$ and $v\ne w$, then $B_v=B_w=\emptyset$ and $(v,w)$ has property~R by Proposition~\ref{prop:criterion}; if $v=w$, it has property~R by Remark~\ref{rem:diag}. Hence $p_n\ge\PP(C_L)\,\PP_L(G)$.
+
+By Lemma~\ref{lem:cond}, for each of the two choices with $s=t$,
+\[
+  \sum_{k=1}^{n-1}\PP_L\bigl(\suf_k(s)=\pre_k(s)\bigr)\le\sum_{k=2L}^{n-1}2^{-k}<2^{1-2L},
+\]
+and for each of the two choices with $s\ne t$,
+\[
+  \sum_{k=1}^{n-1}\PP_L\bigl(\suf_k(s)=\pre_k(t)\bigr)
+  =\sum_{k=2L}^{n-L}2^{-k}+\sum_{d=1}^{L-1}2^{-(n-2L+d)}
+  <2^{1-2L}+2^{-(n-2L)},
+\]
+where the second sum is empty if $L=1$. By the union bound, $1-\PP_L(G)<4\cdot2^{1-2L}+2\cdot2^{-(n-2L)}$, and~\eqref{eq:cyl} completes the proof.
+\end{proof}
+
+\begin{corollary}\label{cor:lower}
+For every $n\ge8$, $p_n\ge 2^{-9}-2^{-(n+3)}$.
+\end{corollary}
+
+\begin{proof}
+For $L=2$ the bound of Proposition~\ref{prop:lower} equals $2^{-8}\bigl(1-2^{-1}-2^{5-n}\bigr)=2^{-9}-2^{-(n+3)}$.
+\end{proof}
+
+\begin{remark}
+The case $L=2$ is the construction of words beginning with $00$ and ending with $11$ described in the remark following Theorem~3.6 of Bóna, Maga and Richey \cite[p.~10]{BMR}. The point of Lemma~\ref{lem:cond}(4) is that for overlaps of length close to $n$ the boundary letters of $s$ and $t$ are matched against each other, so that the conditional probability $2^{-(n-2L+d)}$ is larger than $2^{-k}$; the sum of these terms is still at most $2^{-(n-2L)}$. Among the values of $L$, the choice $L=2$ gives the best bound in Proposition~\ref{prop:lower}: for $L=1$ the bound is negative, and for $L\ge3$ it is less than $2^{-12}$.
+\end{remark}
+
+\begin{remark}\label{rem:numerics}
+The lower bound $1/512$ is far below the observed proportions. Table~\ref{tab:counts} was computed by enumerating all ordered pairs of length $n$ and testing condition~\eqref{eq:criterion} of Proposition~\ref{prop:criterion}, with the diagonal pairs included as in Remark~\ref{rem:diag}; the C program and its output are provided as supplementary files. These values are not used in the proofs. For comparison, Drexel, Peng and Richey \cite[p.~8]{DPR} report the approximate value $0.15753$ from an exact computer search with $n=15$; our enumeration gives $0.15753$ for $n=10$ and $0.15342$ for $n=15$.
+\end{remark}
+
+\begin{table}[ht]
+\caption{The number of ordered pairs of length $n$ with property~R, and the proportion $p_n=4^{-n}|\R_n|$.}\label{tab:counts}
+\centering
+\begin{tabular}{rrr@{\qquad}rrr}
+\toprule
+$n$ & $|\R_n|$ & $p_n$ & $n$ & $|\R_n|$ & $p_n$\\
+\midrule
+1 & 4 & 1.00000 & 9 & 41880 & 0.15976\\
+2 & 8 & 0.50000 & 10 & 165180 & 0.15753\\
+3 & 16 & 0.25000 & 11 & 653600 & 0.15583\\
+4 & 56 & 0.21875 & 12 & 2598120 & 0.15486\\
+5 & 188 & 0.18359 & 13 & 10353508 & 0.15428\\
+6 & 716 & 0.17480 & 14 & 41286284 & 0.15380\\
+7 & 2732 & 0.16675 & 15 & 164729736 & 0.15342\\
+8 & 10636 & 0.16229 & & &\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Proofs of the main theorems}\label{sec:proofs}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Let $\varepsilon>0$. Choose $K\ge1$ with $2^{3-K}<\varepsilon/2$, and then $N>2K$ with $2(K+1)(2K+1)\,2^{-(N-2K)}<\varepsilon/2$. For $n,r\ge N$, Proposition~\ref{prop:qK} applied to $n$ and to $r$ with the same $K$ gives
+\[
+  \begin{aligned}
+  |p_n-p_r|&\le |p_n-q_K|+|q_K-p_r|\\
+  &\le 2^{3-K}+(K+1)(2K+1)\bigl(2^{-(n-2K)}+2^{-(r-2K)}\bigr)<\varepsilon .
+  \end{aligned}
+\]
+Thus $(p_n)_{n\ge1}$ is a Cauchy sequence and converges to some $\rho\in[0,1]$. By Corollary~\ref{cor:lower}, $\rho\ge2^{-9}=1/512$.
+
+By~\eqref{eq:diag}, $4^{-n}|\R_n^{\neq}|=p_n-2^{-n}$ and $|\R_n^{\neq}|/(4^n-2^n)=(p_n-2^{-n})/(1-2^{-n})$, and both tend to $\rho$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:rate}]
+Letting $n\to\infty$ in~\eqref{eq:pq} gives $|\rho-q_K|\le2^{2-K}$. Now let $n\ge3$ and $K=\lfloor n/3\rfloor\ge1$. Then $n-2K\ge K$, so $n>2K$, and by~\eqref{eq:pq}
+\[
+  |p_n-\rho|\le|p_n-q_K|+|q_K-\rho|\le 2^{3-K}+(K+1)(2K+1)\,2^{-K}.
+\]
+Since $K>n/3-1$, the right-hand side is at most $2\bigl((K+1)(2K+1)+8\bigr)2^{-n/3}=O(n^{2}2^{-n/3})$.
+\end{proof}
+
+\begin{remark}
+By Theorem~\ref{thm:rate}, $\rho$ is computable: $q_K$ is determined by an enumeration of the $2^{4K}$ possible quadruples of boundary blocks, and it approximates $\rho$ within $2^{2-K}$. This is not an efficient method of computing $\rho$ to high precision, and the rate in Theorem~\ref{thm:rate} has not been optimized. We do not know a closed form for $\rho$.
+\end{remark}
+
+\section*{Use of AI-assisted tools}
+
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{9}
+
+\bibitem{BMR}
+M. Bóna, B. Maga, and J. Richey, \emph{Letter frequency in shifts of finite type with one forbidden word}, preprint (2026), arXiv:2606.06655v2.
+
+\bibitem{DPR}
+M. Drexel, X. Peng, and J. Richey, \emph{Word length, bias and bijections in Penney's ante}, Electron. J. Combin. \textbf{32} (2025), no.~4, Paper No.~P4.57.
+
+\bibitem{Gab}
+D. Gabric, \emph{Mutual borders and overlaps}, IEEE Trans. Inform. Theory \textbf{68} (2022), no.~10, 6888--6893.
+
+\bibitem{GO}
+L. J. Guibas and A. M. Odlyzko, \emph{String overlaps, pattern matching, and nontransitive games}, J. Combin. Theory Ser. A \textbf{30} (1981), no.~2, 183--208.
+
+\bibitem{HS}
+Š. Holub and J. Shallit, \emph{Periods and borders of random words}, 33rd Symposium on Theoretical Aspects of Computer Science (STACS 2016), LIPIcs, vol.~47, Schloss Dagstuhl--Leibniz-Zentrum für Informatik, 2016, 44:1--44:10.
+
+\bibitem{Li}
+S.-Y. R. Li, \emph{A martingale approach to the study of occurrence of sequence patterns in repeated experiments}, Ann. Probab. \textbf{8} (1980), no.~6, 1171--1176.
+
+\bibitem{RW}
+E. Rivals and P. Wang, \emph{Counting overlapping pairs of words}, preprint (2025), arXiv:2405.09393v3.
+
+\end{thebibliography}
+
+\end{document}

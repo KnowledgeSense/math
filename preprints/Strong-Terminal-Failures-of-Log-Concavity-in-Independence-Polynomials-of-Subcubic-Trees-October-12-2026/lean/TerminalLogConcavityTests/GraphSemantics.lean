@@ -1,0 +1,14 @@
+import TerminalLogConcavity.EnvelopeWeightBound
+import TerminalLogConcavity.ReleaseIndependence
+import TerminalLogConcavity.ChainUpper
+
+#print axioms TerminalLogConcavity.releaseTree_isTree
+#print axioms TerminalLogConcavity.releaseTree_subcubic
+#print axioms TerminalLogConcavity.releaseForest_count_identity
+#print axioms TerminalLogConcavity.releaseForest_independence_identity
+#print axioms TerminalLogConcavity.releaseTree_polynomial
+#print axioms TerminalLogConcavity.scaledGaussian_le_graph
+#print axioms TerminalLogConcavity.lowerChain_phase_scaled
+#print axioms TerminalLogConcavity.upperChain_product_coeff_le
+#print axioms TerminalLogConcavity.release_common_envelope
+#print axioms TerminalLogConcavity.releaseEnvelope_sum_bound

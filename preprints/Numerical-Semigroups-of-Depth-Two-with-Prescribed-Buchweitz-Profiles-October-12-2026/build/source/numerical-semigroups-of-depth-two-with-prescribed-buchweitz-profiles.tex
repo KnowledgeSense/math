@@ -1,0 +1,479 @@
+\documentclass[11pt]{amsart}
+
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{array}
+\usepackage[pdfauthor={Knowledge Sense},
+  pdftitle={Numerical semigroups of depth two with prescribed Buchweitz profiles},
+  pdfsubject={Mathematics Subject Classification 20M14, 11P70, 14H55},
+  pdfkeywords={numerical semigroup, gapset, Buchweitz set, Weierstrass semigroup, iterated sumset, sumset growth},
+  colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+\hyphenation{manuscript}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{question}[theorem]{Question}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+\newcommand{\NN}{\mathbb{N}_0}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\Buch}{\operatorname{Buch}}
+\newcommand{\ind}[1]{\mathbf{1}[#1]}
+
+\begin{document}
+
+\title[Prescribed Buchweitz profiles]{Numerical semigroups of depth two with prescribed Buchweitz profiles}
+
+\author{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{12 October 2026}
+
+\subjclass[2020]{Primary 20M14, 11P70; Secondary 14H55}
+
+\keywords{Numerical semigroup, gapset, Buchweitz set, Weierstrass semigroup, iterated sumset, sumset growth}
+
+\begin{abstract}
+For a finite set $A$ of integers and $n\ge 1$ put $\beta_A(n)=|nA|-(2n-1)(|A|-1)$, where $nA$ is the $n$-fold sumset of $A$. By a criterion of Buchweitz, the gapset $G$ of a Weierstrass semigroup of genus at least two satisfies $\beta_G(n)\le 0$ for every $n\ge 2$, and Eliahou, Garc\'{\i}a-Garc\'{\i}a, Mar\'{\i}n-Arag\'on and Vigneron-Tenorio proved that the Buchweitz set $\{n\ge 2:\beta_G(n)>0\}$ of a numerical semigroup of genus at least two is finite. We show that the values $\beta_G(2),\dots,\beta_G(N)$ can be prescribed arbitrarily. For every $N\ge 2$ and all integers $a_2,\dots,a_N$ there is a numerical semigroup whose conductor is twice its multiplicity and whose gapset $G$ satisfies $\beta_G(n)=a_n$ for $2\le n\le N$ and $\beta_G(n)<0$ for every $n>N$; its multiplicity and genus are explicit polynomials in $N$ and $L=\max\{1,|a_2|,\dots,|a_N|\}$. Consequently, every finite subset of $\{2,3,\dots\}$ is the Buchweitz set of a numerical semigroup. This answers three questions of Eliahou et al.: Buchweitz sets of numerical semigroups need not be intervals, the function $\beta_G$ need not be unimodal, and every finite set occurs. We also give an example of genus $172$ whose Buchweitz set is $\{3,6\}$.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Write $\NN=\{0,1,2,\dots\}$. For integers $a\le b$ let $[a,b]=\{a,a+1,\dots,b\}$, and let $[a,\infty)=\{a,a+1,\dots\}$. A \emph{numerical semigroup} is a submonoid $S$ of $(\NN,+)$ with finite complement. Its \emph{gapset} is $G=\NN\setminus S$, its \emph{genus} is $g=|G|$, its \emph{multiplicity} is the least positive element $m$ of $S$, its \emph{conductor} is the least integer $c$ with $[c,\infty)\subseteq S$, and its \emph{depth} is $\lceil c/m\rceil$. We refer to \cite{RGS09} for background.
+
+Every point $P$ of a compact Riemann surface of genus $g$ determines a numerical semigroup of genus $g$, the \emph{Weierstrass semigroup} at $P$, which consists of the pole orders at $P$ of the meromorphic functions that are holomorphic away from $P$. A numerical semigroup is called \emph{Weierstrass} if it arises in this way. Hurwitz \cite{Hur93} asked which numerical semigroups are Weierstrass. Buchweitz \cite{Buc80} found a combinatorial obstruction: if $S$ is a Weierstrass semigroup of genus $g\ge 2$ and $G$ is its gapset, then the Riemann--Roch theorem gives
+\[
+|nG|\le (2n-1)(g-1)\qquad\text{for every } n\ge 2,
+\]
+where $nG$ denotes the set of sums of $n$ elements of $G$, repetitions allowed; see also \cite{EH87}, \cite[Proposition~2]{KY13} and \cite[Section~1]{GMTV21}. The restriction $g\ge 2$ is needed: the only numerical semigroup of genus $1$ is $\{0,2,3,\dots\}$, which is Weierstrass, and its gapset $G=\{1\}$ satisfies $|nG|=1$ for every $n$. Buchweitz exhibited a semigroup of genus $16$ violating the inequality for $n=2$, and so showed that not every numerical semigroup is Weierstrass. Among the numerical semigroups of genus $g$, those violating the inequality for some $n$ form a proportion that tends to $0$ as $g\to\infty$ \cite[Theorem~5]{KY13}, and explicit families of them have been constructed in \cite{Kom98, GMTV21, EGMV23}.
+
+The following notation is due to Eliahou, Garc\'{\i}a-Garc\'{\i}a, Mar\'{\i}n-Arag\'on and Vigneron-Tenorio \cite[Definition~1.1, Notation~1.2]{EGMV23}. For a finite set $A$ of integers and $n\ge 1$ put
+\[
+\beta_A(n)=|nA|-(2n-1)(|A|-1),\qquad \B(A)=\{n\ge 2:\beta_A(n)>0\}.
+\]
+For a numerical semigroup $S$ with gapset $G$, the \emph{Buchweitz set} of $S$ is $\Buch(S)=\B(G)$. Since $\beta_A(1)=1$ for every finite $A$, the information carried by $\beta_G$ lies in its values at $n\ge 2$, and we call the sequence $(\beta_G(n))_{n\ge 2}$ the \emph{Buchweitz profile} of $S$. Buchweitz's criterion states that $\Buch(S)=\emptyset$ for every Weierstrass semigroup $S$ of genus at least two.
+
+Eliahou et al.\ proved that $\Buch(S)$ is finite for every numerical semigroup $S$ of genus at least two \cite[Theorem~3.3]{EGMV23}. They also constructed numerical semigroups of depth two whose Buchweitz sets are prescribed intervals, namely every finite interval $I$ with $|I|\ge 2$ and $\min I\in[2,6]$, and the intervals $[7+2k,7+4k]$ for $k\ge 1$ \cite[Sections~3.2 and 3.3]{EGMV23}. They then asked the following questions \cite[Section~4]{EGMV23}.
+
+\begin{question}[{\cite[Question~4.1]{EGMV23}}]\label{q:interval}
+Let $A\subset\mathbb{Z}$ be a finite set, or more specifically a gapset. Is $\B(A)$ always an interval of integers?
+\end{question}
+
+\begin{question}[{\cite[Question~4.2]{EGMV23}}]\label{q:unimodal}
+Even more so, is the function $\beta_A$ unimodal?
+\end{question}
+
+\begin{question}[{\cite[Question~4.3]{EGMV23}}]\label{q:finite}
+Let $T\subset\{2,3,\dots\}$ be a finite set. Is there a finite set $A\subset\NN$, or more specifically a gapset, with $\B(A)=T$?
+\end{question}
+
+Our main result shows that the Buchweitz profile of a numerical semigroup can begin with any prescribed finite sequence of integers, while all subsequent values are negative.
+
+\begin{theorem}\label{thm:main}
+Let $N\ge 2$ and $L\ge 1$ be integers, and let $a_2,\dots,a_N$ be integers with $|a_n|\le L$ for $2\le n\le N$. Put $x=N+1$ and
+\begin{align}
+m&=2x(4x+3)(x^2+2Lx+1)+1,\label{eq:m}\\
+g&=8x^4+(16L+6)x^3+(12L+9)x^2+(2L+6)x+4.\label{eq:g}
+\end{align}
+There is a numerical semigroup $S$ of multiplicity $m$, conductor $2m$ and genus $g$ whose gapset $G$ satisfies
+\[
+\beta_G(n)=a_n\quad (2\le n\le N)\qquad\text{and}\qquad \beta_G(n)<0\quad (n>N).
+\]
+\end{theorem}
+
+The multiplicity and the genus depend only on $N$ and $L$, not on the sequence $(a_n)$. Given arbitrary integers $a_2,\dots,a_N$, one may take $L=\max\{1,|a_2|,\dots,|a_N|\}$; in particular, the zero sequence is covered with $L=1$. The number $g$ in \eqref{eq:g} is an upper bound for the least genus of a numerical semigroup realizing a given sequence. Taking $L=1$ and $a_n\in\{0,1\}$ we obtain the following consequence.
+
+\begin{corollary}\label{cor:sets}
+For every finite set $T\subseteq\{2,3,\dots\}$ there is a numerical semigroup $S$ of depth two with $\Buch(S)=T$. If $T\neq\emptyset$, then $S$ is not a Weierstrass semigroup.
+\end{corollary}
+
+In particular, Question~\ref{q:interval} has a negative answer, since $\{2,4\}$ occurs as a Buchweitz set, and Question~\ref{q:finite} has a positive answer, also in its form for gapsets. Question~\ref{q:unimodal} has a negative answer as well; see Remark~\ref{rem:unimodal}. The semigroups of Theorem~\ref{thm:main} have large genus. In Section~\ref{sec:example} we give a numerical semigroup of multiplicity $169$ and genus $172$ with
+\[
+(\beta_G(n))_{1\le n\le 7}=(1,0,1,0,0,1,-5),\qquad \Buch(S)=\{3,6\},
+\]
+which answers the first two questions negatively with a semigroup of comparatively small genus.
+
+\subsection*{Outline of the proof}
+The argument has two parts. Let $m\ge 3$ and let $C\subseteq[0,m-2]$ contain $0$ and a positive element. Then
+\[
+G_C=[1,m-1]\cup\{2m-1-c: c\in C\}
+\]
+is the gapset of a numerical semigroup $S_C$ of multiplicity $m$ and conductor $2m$, and we show in Section~\ref{sec:reflection} that
+\begin{equation}\label{eq:intro-identity}
+\beta_{G_C}(n)=|nC\cap[0,m-1]|-(2n-1)(|C|-1)\qquad\text{for every } n\ge 1.
+\end{equation}
+Thus the Buchweitz profile of $S_C$ is determined by the number of $n$-fold sums of $C$ below $m$. In the second part (Sections~\ref{sec:construction} and~\ref{sec:counting}) we choose $C$ to consist of $0$, three small elements $u,u+M,u+2M$, and $h$ large elements $v_1,\dots,v_h$ that lie in distinct nonzero residue classes modulo $M$. Every sum below $m$ then contains at most one large element, and the number of sums below $m$ that contain $v_j$ depends only on a pair $(d_j,t_j)$ of small integers. This gives an exact formula for $|nC\cap[0,m-1]|$ valid for all $n\ge1$. The pairs are obtained from the prescribed sequence $(a_n)$ by Euclidean division, and the same formula shows that $\beta_{G_C}(n)$ is negative for every $n>N$.
+
+\subsection*{Relation to other work}
+The passage from $G$ to the reflected set $(2m-1)-G$ for semigroups of depth two is used in \cite[Section~3]{EGMV23}, and the semigroups $S_C$ are those studied, under additional hypotheses, in \cite[Section~4]{GMTV21}, where $2$-Buchweitz semigroups of this shape are characterized by the size of a $2$-fold sumset \cite[Theorem~4.1]{GMTV21}; see Remark~\ref{rem:GMTV}. Identity \eqref{eq:intro-identity} extends the computations made there to all $n$.
+
+Nathanson \cite{Nat26} posed problems on oscillations in the sign of $|kA|-|kB|$ for finite sets $A,B\subseteq\mathbb{Z}$. Kravitz \cite[Theorem~1.1]{Kra25} showed that, in every sufficiently large abelian group, the relative order of $|kA_1|,\dots,|kA_d|$ can be prescribed independently for each $1\le k\le s$; in the integers he also allowed prescribed equalities among these sizes, together with a prescribed relative order valid for all $k>s$ \cite[Theorem~1.2]{Kra25}. Fox, Kravitz and Zhang \cite[Theorem~2]{FKZ26} showed that for all integers $c_1,\dots,c_s$ there are finite sets $A,B\subseteq\mathbb{Z}$ with $|kA|-|kB|=c_k$ for $1\le k\le s$, with explicit bounds on their size and diameter; their proof expresses these differences as linear combinations of auxiliary parameters, and the proof of Theorem~\ref{thm:main} uses a similar device. These results compare several freely chosen sets with one another. In Theorem~\ref{thm:main}, by contrast, a single gapset $G$ is compared with the quantity $(2n-1)(|G|-1)$ determined by $G$ itself, and the sign of $\beta_G(n)$ is controlled for all $n>N$. Eliahou and Mazumdar \cite[Theorem~4.12]{EM25} showed that every sequence $(d_k)_{k\ge 0}$ of positive integers with $d_0=1$ satisfying Macaulay's growth conditions occurs as $(|kA|)_{k\ge 0}$ for a finite subset $A$ of some abelian semigroup, and they note that the corresponding problem for abelian groups remains open \cite[Section~5]{EM25}. The construction below takes place in $\NN$.
+
+\subsection*{Organization}
+Section~\ref{sec:reflection} proves identity \eqref{eq:intro-identity}. Section~\ref{sec:construction} defines the set $C$ attached to the prescribed sequence, Section~\ref{sec:counting} counts its sums below $m$, and Section~\ref{sec:proof} proves Theorem~\ref{thm:main} and Corollary~\ref{cor:sets}. Section~\ref{sec:example} contains the example of genus $172$, and Section~\ref{sec:remarks} collects some remarks.
+
+\section{Reflection for semigroups of depth two}\label{sec:reflection}
+
+For a finite set $A\subseteq\mathbb{Z}$ and $n\ge1$, $nA$ is the set of sums of $n$ elements of $A$, repetitions allowed, and we put $0A=\{0\}$. For an integer $y$ we write $y-A=\{y-a:a\in A\}$ and $y+A=\{y+a:a\in A\}$. Since $n(y-A)=ny-nA$, we have $|n(y-A)|=|nA|$ and hence $\beta_{y-A}=\beta_A$.
+
+\begin{lemma}\label{lem:semigroup}
+Let $m\ge 3$ and let $C\subseteq[0,m-2]$ with $0\in C$. Then
+\[
+G_C=[1,m-1]\cup(2m-1-C)
+\]
+is the gapset of a numerical semigroup $S_C$ of multiplicity $m$, conductor $2m$ and genus $m-1+|C|$. Moreover $2m-1-G_C=C\cup[m,2m-2]$.
+\end{lemma}
+
+\begin{proof}
+Since $C\subseteq[0,m-2]$, the set $2m-1-C$ is contained in $[m+1,2m-1]$ and contains $2m-1$; in particular it is disjoint from $[1,m-1]$, so $|G_C|=m-1+|C|$. Let $S_C=\NN\setminus G_C$. Every positive element of $S_C$ is at least $m$, so the sum of two positive elements of $S_C$ is at least $2m$, and every integer at least $2m$ lies in $S_C$. Hence $S_C$ is a numerical semigroup. It contains $m$ but no element of $[1,m-1]$, and it contains $[2m,\infty)$ but not $2m-1$, so its multiplicity is $m$ and its conductor is $2m$. The last assertion follows from $2m-1-[1,m-1]=[m,2m-2]$.
+\end{proof}
+
+\begin{lemma}\label{lem:sumset}
+Let $m\ge 3$ and let $C\subseteq[0,m-2]$ with $0\in C$ and $\gamma=\max C>0$. Put $A=C\cup[m,2m-2]$. Then
+\[
+nA=nC\cup[m,2n(m-1)]\qquad\text{for every } n\ge 1.
+\]
+\end{lemma}
+
+\begin{proof}
+Put $J=[m,2m-2]$. Sorting the summands of an element of $nA$ according to how many of them lie in $J$, we obtain
+\[
+nA=nC\cup\bigcup_{r=1}^{n}\bigl(rJ+(n-r)C\bigr),\qquad rJ=[rm,2r(m-1)].
+\]
+Fix $1\le r\le n$ and put $D=(n-r)C$. The set $D$ contains $0,\gamma,2\gamma,\dots,(n-r)\gamma$ and is contained in $[0,(n-r)\gamma]$, so consecutive elements of $D$ differ by at most $\gamma$. If $d<d'$ are consecutive elements of $D$, then
+\[
+\min(rJ+d')=rm+d'\le rm+d+\gamma\le 2r(m-1)+d+1=\max(rJ+d)+1,
+\]
+because $\gamma\le m-2\le r(m-2)$. Hence the translates $rJ+d$, $d\in D$, fill an interval, and
+\[
+rJ+(n-r)C=I_r:=[rm,\,2r(m-1)+(n-r)\gamma].
+\]
+For $1\le r\le n-1$ we have $(n-r)\gamma\ge 1$, and therefore
+\[
+\max I_r+1-\min I_{r+1}=(r-1)m-2r+1+(n-r)\gamma\ge(r-1)(m-2)\ge 0.
+\]
+Moreover $\min I_r<\min I_{r+1}$ and $\max I_r<\max I_{r+1}$, the latter because $2(m-1)>\gamma$. It follows that $I_1\cup\dots\cup I_n$ is the interval from $\min I_1=m$ to $\max I_n=2n(m-1)$, which proves the lemma.
+\end{proof}
+
+For a finite set $C\subseteq\NN$, an integer $m$ and $n\ge1$ we put
+\[
+H_n(C)=|nC\cap[0,m-1]|,
+\]
+the dependence on $m$ being understood from the context.
+
+\begin{proposition}\label{prop:beta}
+Let $m\ge 3$ and let $C\subseteq[0,m-2]$ with $0\in C$ and $\max C>0$. Then the gapset $G_C$ of Lemma~\ref{lem:semigroup} satisfies
+\[
+\beta_{G_C}(n)=H_n(C)-(2n-1)(|C|-1)\qquad\text{for every } n\ge 1.
+\]
+\end{proposition}
+
+\begin{proof}
+Put $A=C\cup[m,2m-2]=2m-1-G_C$, so that $\beta_{G_C}=\beta_A$ and $|A|=|C|+m-1$. Since $nC\subseteq[0,n(m-2)]$ and $n(m-2)<2n(m-1)$, Lemma~\ref{lem:sumset} gives the disjoint decomposition
+\[
+nA=\bigl(nC\cap[0,m-1]\bigr)\sqcup[m,2n(m-1)],
+\]
+so $|nA|=H_n(C)+(2n-1)(m-1)$. Subtracting $(2n-1)(|A|-1)=(2n-1)(|C|+m-2)$ gives the claim.
+\end{proof}
+
+\begin{remark}\label{rem:GMTV}
+Proposition~\ref{prop:beta} reduces the Buchweitz profile of $S_C$ to the counts $H_n(C)$. If $2\max C\le m-1$, then $H_2(C)=|2C|$ and $\beta_{G_C}(2)=|2C|-3(|C|-1)$. The semigroups of \cite[Theorem~4.1]{GMTV21} have gapsets $[1,g-t]\cup\{2m-\alpha_1,\dots,2m-\alpha_t\}$ with $m=g-t+1$, $t\ge 3$, $\alpha_1>\dots>\alpha_t=1$ and $g\ge 2\alpha_1+t-1$. These are the sets $G_C$ with $C=\{\alpha_1-1,\dots,\alpha_t-1\}$, and the hypothesis on $g$ is equivalent to $2\max C\le m-2$. That theorem shows that these semigroups are PF-semigroups and that they are $2$-Buchweitz exactly when $|2\{\alpha_1,\dots,\alpha_t\}|>3(t-1)$; for them the case $n=2$ of Proposition~\ref{prop:beta} recovers the count of $|2G_C|$ in its proof. Likewise, the decompositions underlying the sumset formulas in \cite[Propositions~3.4 and 3.5]{EGMV23} are instances of Lemma~\ref{lem:sumset}.
+\end{remark}
+
+\section{The construction}\label{sec:construction}
+
+Throughout this section and the next we fix integers $N\ge 2$ and $L\ge 1$ and integers $a_2,\dots,a_N$ with $|a_n|\le L$. We also put $a_1=1$; note that $|a_1|\le L$. Define
+\begin{equation}\label{eq:params}
+\begin{gathered}
+x=N+1,\qquad h=x^2+2Lx,\qquad K=2x,\\
+M=h+1,\qquad u=(2K+1)M,\qquad m=K(u+2M)+1.
+\end{gathered}
+\end{equation}
+Then $m=2x(4x+3)M+1$, which is \eqref{eq:m}. For $2\le n\le N$ define
+\begin{equation}\label{eq:division}
+R_n=2h+5-2n+a_n-a_{n-1},\qquad q_n=\Bigl\lfloor\frac{R_n}{2n-1}\Bigr\rfloor,\qquad r_n=R_n-(2n-1)q_n,
+\end{equation}
+so that $0\le r_n\le 2n-2$, and put $q_1=h$.
+
+\begin{lemma}\label{lem:decreasing}
+We have $R_n>0$ for $2\le n\le N$, and
+\[
+h=q_1>q_2>\dots>q_N\ge 0.
+\]
+\end{lemma}
+
+\begin{proof}
+Since $|a_n-a_{n-1}|\le 2L$ and $n\le N=x-1$,
+\[
+R_n\ge 2h+5-2N-2L=2x^2+4Lx+7-2x-2L>0,
+\]
+so every $q_n$ is nonnegative. For $n=2$ we have $R_2=2h+a_2<3h$, because $a_2\le L<h$; hence $q_2\le R_2/3<h$. Now let $3\le n\le N$. A direct computation gives
+\[
+(2n-1)R_{n-1}-(2n-3)R_n=4h+8+(4n-4)a_{n-1}-(2n-1)a_{n-2}-(2n-3)a_n.
+\]
+Using $|a_k|\le L$ for $1\le k\le N$ and $n\le x-1$, the right-hand side is at least
+\[
+4h+8-8L(n-1)=4x^2+8L(x-n+1)+8>4x^2>(2n-3)(2n-1).
+\]
+Dividing by $(2n-3)(2n-1)$ we obtain $R_{n-1}/(2n-3)>R_n/(2n-1)+1$. Since the floor function is nondecreasing and $\lfloor y+1\rfloor=\lfloor y\rfloor+1$, it follows that $q_{n-1}\ge q_n+1$.
+\end{proof}
+
+By Lemma~\ref{lem:decreasing} the integers $e_n=q_{n-1}-q_n$, $2\le n\le N$, are positive. We form a multiset $P$ of pairs of integers as follows. For each $2\le n\le N$, $P$ contains the pair $(n,r_n)$ once and the pair $(n,0)$ with multiplicity $e_n-1$; in addition, $P$ contains the pair $(N+1,0)$ with multiplicity $q_N$. The number of pairs in $P$ is
+\[
+\sum_{n=2}^{N}e_n+q_N=q_1=h.
+\]
+We enumerate $P$ in an arbitrary order as $(d_1,t_1),\dots,(d_h,t_h)$. For every $j$ we have
+\begin{equation}\label{eq:pair-bounds}
+2\le d_j\le N+1,\qquad 0\le t_j\le 2d_j-2,\qquad t_j=0\ \text{if } d_j=N+1,
+\end{equation}
+and for $2\le n\le N$,
+\begin{equation}\label{eq:pair-counts}
+\bigl|\{j:d_j\ge n+1\}\bigr|=\sum_{k=n+1}^{N}e_k+q_N=q_n,\qquad \sum_{j:\,d_j=n}t_j=r_n.
+\end{equation}
+Finally, for $1\le j\le h$ we put
+\begin{equation}\label{eq:rho}
+\rho_j=(d_j-1)u+(t_j-1)M+j,\qquad v_j=m-1-\rho_j,
+\end{equation}
+and we define
+\begin{equation}\label{eq:C}
+U=\{u,\,u+M,\,u+2M\},\qquad V=\{v_1,\dots,v_h\},\qquad C=\{0\}\cup U\cup V.
+\end{equation}
+
+\section{Counting sums below \texorpdfstring{$m$}{m}}\label{sec:counting}
+
+We keep the notation of Section~\ref{sec:construction}. Recall that $K=2N+2$ and $h=M-1$.
+
+\begin{lemma}\label{lem:separation}
+For $1\le j\le h$ we have
+\[
+0<\rho_j\le N(u+2M)-1,\qquad (N+2)(u+2M)<v_j\le m-2,\qquad v_j\equiv -j\pmod M.
+\]
+Moreover $u+2M<m/2<v_j$ for every $j$, and the elements of $\{0\}\cup U$ are divisible by $M$. Consequently $|C|=h+4$, $C\subseteq[0,m-2]$, and every element of $nC\cap[0,m-1]$, $n\ge1$, is a sum of $n$ elements of $C$ at most one of which lies in $V$.
+\end{lemma}
+
+\begin{proof}
+Since $d_j\ge 2$, $t_j\ge 0$ and $j\ge 1$, we have $\rho_j\ge u-M+1>0$. Since $d_j-1\le N$, $t_j-1\le 2d_j-3\le 2N-1$ and $j\le h=M-1$, we have $\rho_j\le Nu+(2N-1)M+M-1=N(u+2M)-1$. As $m-1=K(u+2M)$ and $K-N=N+2$, this gives $v_j\ge(N+2)(u+2M)+1$, while $\rho_j\ge 1$ gives $v_j\le m-2$. Since $m-1$ and $u$ are multiples of $M$, we get $v_j\equiv-\rho_j\equiv -j\pmod M$. Next,
+\[
+\frac m2=(N+1)(u+2M)+\frac12,
+\]
+so $u+2M<m/2<(N+2)(u+2M)<v_j$. The residues $-1,\dots,-h$ modulo $M=h+1$ are distinct and nonzero, while $0$, $u$, $u+M$ and $u+2M$ are distinct multiples of $M$; hence $|C|=h+4$. Finally, the sum of two elements of $V$ exceeds $m$, which gives the last assertion.
+\end{proof}
+
+For $\ell\ge 0$ let $\Sigma_\ell$ be the set of sums of exactly $\ell$ elements of $U$, repetitions allowed, with $\Sigma_0=\{0\}$. Writing an element of $U$ as $u+iM$ with $i\in\{0,1,2\}$, we obtain
+\[
+\Sigma_\ell=\{\ell u+bM:0\le b\le 2\ell\},\qquad |\Sigma_\ell|=2\ell+1.
+\]
+
+\begin{lemma}\label{lem:rows}
+The sets $\Sigma_0,\Sigma_1,\dots,\Sigma_K$ are pairwise disjoint subsets of $[0,m-1]$, and $\min\Sigma_\ell\ge m$ for every $\ell\ge K+1$.
+\end{lemma}
+
+\begin{proof}
+For $0\le\ell\le K$ we have $\max\Sigma_\ell=\ell u+2\ell M<\ell u+u=\min\Sigma_{\ell+1}$, because $2\ell M\le 2KM<u$. Thus $\Sigma_0,\dots,\Sigma_K$ lie in successive disjoint ranges, and $\max\Sigma_K=K(u+2M)=m-1$. For $\ell\ge K+1$ we have $\min\Sigma_\ell\ge(K+1)u=K(u+2M)+M=m-1+M\ge m$.
+\end{proof}
+
+For a statement $\mathcal{P}$ we write $\ind{\mathcal{P}}$ for its indicator, equal to $1$ if $\mathcal{P}$ holds and $0$ otherwise.
+
+\begin{proposition}\label{prop:count}
+For every $n\ge 1$,
+\begin{equation}\label{eq:count}
+H_n(C)=\bigl(\min(n,K)+1\bigr)^2+\sum_{j=1}^{h}\Bigl(\bigl(\min(n-1,d_j-2)+1\bigr)^2+t_j\,\ind{n\ge d_j}\Bigr).
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:separation}, an element of $nC\cap[0,m-1]$ either lies in $\Sigma_\ell$ for some $0\le\ell\le n$, or lies in $v_j+\Sigma_\ell$ for some $j$ and some $0\le\ell\le n-1$. Conversely, since $0\in C$, all elements of these sets lie in $nC$. Hence
+\[
+nC\cap[0,m-1]=X_0\cup X_1\cup\dots\cup X_h,
+\]
+where
+\[
+X_0=\Bigl(\bigcup_{\ell=0}^{n}\Sigma_\ell\Bigr)\cap[0,m-1],\qquad X_j=\Bigl(\bigcup_{\ell=0}^{n-1}(v_j+\Sigma_\ell)\Bigr)\cap[0,m-1]\quad(1\le j\le h).
+\]
+Elements of $X_0$ are divisible by $M$, and elements of $X_j$ are congruent to $-j$ modulo $M$ by Lemma~\ref{lem:separation}. So the sets $X_0,\dots,X_h$ are pairwise disjoint.
+
+By Lemma~\ref{lem:rows}, $X_0$ is the disjoint union of $\Sigma_0,\dots,\Sigma_{\min(n,K)}$, and therefore
+\[
+|X_0|=\sum_{\ell=0}^{\min(n,K)}(2\ell+1)=\bigl(\min(n,K)+1\bigr)^2.
+\]
+
+Now fix $j$. An element $v_j+\ell u+bM$ of $v_j+\Sigma_\ell$ lies in $[0,m-1]$ if and only if $\ell u+bM\le\rho_j$. We distinguish three ranges of $\ell$.
+
+If $\ell\le d_j-2$, then all of $v_j+\Sigma_\ell$ lies below $m$. Indeed, $\max\Sigma_\ell\le(d_j-2)(u+2M)$, and by \eqref{eq:pair-bounds}
+\[
+\rho_j-(d_j-2)(u+2M)=u+(t_j+3-2d_j)M+j\ge u-(2N-1)M+1>0.
+\]
+
+If $\ell=d_j-1$, then the condition $(d_j-1)u+bM\le\rho_j$ reads $b\le t_j-1+j/M$. Since $0<j/M<1$, it holds exactly for $b\in\{0,1,\dots,t_j-1\}$, and these values satisfy $b\le 2\ell$ because $t_j\le 2d_j-2$. So exactly $t_j$ elements of $v_j+\Sigma_{d_j-1}$ lie below $m$.
+
+If $\ell\ge d_j$, then no element of $v_j+\Sigma_\ell$ lies below $m$, because
+\[
+d_ju-\rho_j=u-(t_j-1)M-j\ge u-(2N-1)M-(M-1)>0.
+\]
+
+The sets $\Sigma_\ell$ with $\ell\le d_j-1\le N<K$ are pairwise disjoint by Lemma~\ref{lem:rows}, and only $\ell\le n-1$ occurs in $X_j$. Hence
+\[
+|X_j|=\sum_{\ell=0}^{\min(n-1,d_j-2)}(2\ell+1)+t_j\,\ind{n-1\ge d_j-1}=\bigl(\min(n-1,d_j-2)+1\bigr)^2+t_j\,\ind{n\ge d_j}.
+\]
+Summing over $j$ proves \eqref{eq:count}.
+\end{proof}
+
+\section{Proof of the main results}\label{sec:proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Let $C$ be the set \eqref{eq:C} and let $S=S_C$ be the numerical semigroup of Lemma~\ref{lem:semigroup}, with gapset $G=G_C$. Note that $m\ge 3$. By Lemma~\ref{lem:separation}, $C\subseteq[0,m-2]$, $0\in C$, $\max C>0$ and $|C|=h+4$. Lemma~\ref{lem:semigroup} shows that $S$ has multiplicity $m$, conductor $2m$ and genus $m-1+|C|=m+h+3$. Substituting \eqref{eq:params} gives
+\[
+m+h+3=2x(4x+3)(x^2+2Lx+1)+x^2+2Lx+4,
+\]
+which expands to \eqref{eq:g}. Write $H_n=H_n(C)$. By Proposition~\ref{prop:beta},
+\[
+\beta_G(n)=H_n-(2n-1)(h+3)\qquad(n\ge1),
+\]
+and so, for $n\ge 2$,
+\begin{equation}\label{eq:beta-step}
+\beta_G(n)-\beta_G(n-1)=\Delta_n-2(h+3),\qquad \Delta_n=H_n-H_{n-1}.
+\end{equation}
+We compute $\Delta_n$ from Proposition~\ref{prop:count}. For $n\ge 2$ and $2\le d\le N+1$,
+\[
+\bigl(\min(n-1,d-2)+1\bigr)^2-\bigl(\min(n-2,d-2)+1\bigr)^2=(2n-1)\,\ind{d\ge n+1},
+\]
+and $\ind{n\ge d}-\ind{n-1\ge d}=\ind{n=d}$. Therefore
+\begin{equation}\label{eq:Delta}
+\Delta_n=(2n+1)\,\ind{n\le K}+(2n-1)\bigl|\{j:d_j\ge n+1\}\bigr|+\sum_{j:\,d_j=n}t_j\qquad(n\ge 2).
+\end{equation}
+
+\emph{The prescribed range.} Let $2\le n\le N$. Then $n\le K$, and \eqref{eq:Delta} together with \eqref{eq:pair-counts} and \eqref{eq:division} gives
+\[
+\Delta_n=2n+1+(2n-1)q_n+r_n=2n+1+R_n=2(h+3)+a_n-a_{n-1}.
+\]
+By \eqref{eq:beta-step}, $\beta_G(n)-\beta_G(n-1)=a_n-a_{n-1}$ for $2\le n\le N$. Since $\beta_G(1)=1=a_1$, induction gives $\beta_G(n)=a_n$ for $1\le n\le N$.
+
+\emph{The case $n=N+1$.} By \eqref{eq:pair-bounds}, no $d_j$ exceeds $N+1$, and $t_j=0$ whenever $d_j=N+1$. Since $N+1\le K$, \eqref{eq:Delta} gives $\Delta_{N+1}=2N+3$, and therefore
+\[
+\beta_G(N+1)=a_N+2N+3-2(h+3)\le L+2N-2h-3<0,
+\]
+because $h=x^2+2Lx>L+N$.
+
+\emph{The range $N+2\le n\le K$.} Here \eqref{eq:Delta} gives $\Delta_n=2n+1\le 2K+1=4x+1<2(h+3)$, so $\beta_G(n)<\beta_G(n-1)$ by \eqref{eq:beta-step}.
+
+\emph{The range $n>K$.} Here $\Delta_n=0$, so $\beta_G(n)=\beta_G(n-1)-2(h+3)$.
+
+Combining the last three steps, $\beta_G(n)<0$ for every $n>N$.
+\end{proof}
+
+\begin{remark}\label{rem:slope}
+For $n\ge K$ the last step gives $\beta_G(n)=\beta_G(K)-2(h+3)(n-K)$. This agrees with the proof of \cite[Theorem~2.3]{EGMV23}, where \cite[Corollary~2.2]{EGMV23} yields $\beta_G(n)=(f-2g+1)n+b+1-g$ for all sufficiently large $n$, with $f$ the Frobenius number and $b$ an integer. Here $f=2m-1$ and $g=m+h+3$, so $f-2g+1=-2(h+3)$.
+\end{remark}
+
+\begin{proof}[Proof of Corollary~\ref{cor:sets}]
+Let $N=\max(T\cup\{2\})$, $L=1$, and $a_n=\ind{n\in T}$ for $2\le n\le N$. The semigroup $S$ given by Theorem~\ref{thm:main} has conductor twice its multiplicity, hence depth two, and its gapset $G$ satisfies $\beta_G(n)>0$ exactly for $n\in T$ among $n\ge 2$. Thus $\Buch(S)=T$. If $T\ne\emptyset$, then $S$, whose genus is at least two, is not Weierstrass by Buchweitz's criterion.
+\end{proof}
+
+\begin{remark}\label{rem:unimodal}
+We call a sequence $(x_n)$ of integers, indexed by an interval of integers, \emph{unimodal} if there is an index $k$ such that $(x_n)$ is nondecreasing for $n\le k$ and nonincreasing for $n\ge k$. Theorem~\ref{thm:main} with $N=5$, $L=1$ and $(a_2,a_3,a_4,a_5)=(0,1,0,1)$ gives a numerical semigroup of depth two whose gapset satisfies $(\beta_G(n))_{1\le n\le 5}=(1,0,1,0,1)$. Neither $(\beta_G(n))_{n\ge1}$ nor $(\beta_G(n))_{n\ge 2}$ is unimodal, so Question~\ref{q:unimodal} has a negative answer. Proposition~\ref{prop:example} below gives an example of much smaller genus.
+\end{remark}
+
+\section{An example of small genus}\label{sec:example}
+
+The semigroups of Theorem~\ref{thm:main} have large genus; for $N=2$ and $L=1$, Theorem~\ref{thm:main} gives $m=1441$ and $g=1459$. The following example answers Questions~\ref{q:interval} and~\ref{q:unimodal} with a semigroup of much smaller genus. It is not obtained from the construction of Section~\ref{sec:construction}, but its analysis follows the same pattern.
+
+\begin{proposition}\label{prop:example}
+Let $m=169$ and $C=\{0,26,28,97\}$, and let $S$ be the numerical semigroup with gapset
+\[
+G=G_C=[1,168]\cup\{240,309,311,337\}.
+\]
+Then $S$ has multiplicity $169$, conductor $338$ and genus $172$. Its gapset satisfies
+\[
+\beta_G(n)=\binom{\min(n,6)+2}{2}+\binom{\min(n-1,2)+2}{2}-3(2n-1)\qquad(n\ge 1),
+\]
+so that
+\[
+\begin{array}{c|cccccccc}
+n & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8\\ \hline
+\beta_G(n) & 1 & 0 & 1 & 0 & 0 & 1 & -5 & -11
+\end{array}
+\]
+and $\beta_G(n)=37-6n$ for $n\ge 6$. In particular $\Buch(S)=\{3,6\}$, and $S$ is not a Weierstrass semigroup.
+\end{proposition}
+
+\begin{proof}
+Lemma~\ref{lem:semigroup} applies with $m=169$, and $2m-1-C=\{337,311,309,240\}$, which gives the multiplicity, the conductor and the genus $168+4=172$. By Proposition~\ref{prop:beta}, $\beta_G(n)=H_n(C)-3(2n-1)$, and it remains to count $nC\cap[0,168]$.
+
+The sums of exactly $\ell$ elements of $\{26,28\}$ form the set $\Sigma_\ell=\{26\ell+2b:0\le b\le\ell\}$ with $\ell+1$ elements. For $\ell\le 6$ we have $\max\Sigma_\ell=28\ell<26(\ell+1)=\min\Sigma_{\ell+1}$, and $\max\Sigma_6=168$, while $\min\Sigma_\ell\ge 182$ for $\ell\ge 7$. Since $2\cdot 97>168$, an element of $nC\cap[0,168]$ contains the summand $97$ at most once. The elements of the sets $\Sigma_\ell$ are even, whereas $97+\Sigma_\ell$ consists of odd numbers. Finally, $97+26\ell+2b\le 168$ holds for every $0\le b\le\ell$ when $\ell\le 2$, since $97+56=153$, and fails for $\ell\ge 3$, since $97+78=175$. Therefore
+\[
+H_n(C)=\sum_{\ell=0}^{\min(n,6)}(\ell+1)+\sum_{\ell=0}^{\min(n-1,2)}(\ell+1)=\binom{\min(n,6)+2}{2}+\binom{\min(n-1,2)+2}{2},
+\]
+which gives the stated formula. For $n\ge 6$ we get $H_n(C)=28+6=34$ and $\beta_G(n)=37-6n$, which is negative for $n\ge 7$. The table follows by evaluation, and $\Buch(S)=\{3,6\}$. The last assertion is Buchweitz's criterion.
+\end{proof}
+
+\section{Concluding remarks}\label{sec:remarks}
+
+\begin{remark}
+Theorem~\ref{thm:main} prescribes finitely many values of the Buchweitz profile and only the sign of the remaining ones. The tail cannot be prescribed arbitrarily: if $S$ has multiplicity at least $3$, then $\beta_G$ is eventually affine with slope $f-2g+1$, as recalled in Remark~\ref{rem:slope}, and $f-2g+1\le 0$ by \cite[Proposition~3.2]{EGMV23}. We do not address which infinite sequences occur as Buchweitz profiles.
+\end{remark}
+
+\begin{remark}
+The semigroups of Theorem~\ref{thm:main} have depth two, and their embedding dimension is close to their multiplicity: every element of $S\cap[m,2m-1]$ is a minimal generator, and this set has $m-|C|$ elements. It would be interesting to know whether prescribed profiles can be realized by numerical semigroups of bounded embedding dimension, and to determine the least genus of a numerical semigroup with a given Buchweitz set $T$. For $T=\{3,6\}$, Theorem~\ref{thm:main} with $N=6$ and $L=1$ gives genus $27843$, while Proposition~\ref{prop:example} gives genus $172$. For comparison, Komeda's computations show that there is no $2$-Buchweitz semigroup of genus $g$ with $2\le g\le 15$; see \cite[p.~161]{Kom98} and \cite[Section~2]{GMTV21}.
+\end{remark}
+
+\begin{remark}
+When $T=\emptyset$, Buchweitz's criterion gives no information, and we do not determine whether the corresponding semigroups of Corollary~\ref{cor:sets} are Weierstrass. An empty Buchweitz set also occurs in a much simpler way: symmetric numerical semigroups of multiplicity at least $3$ satisfy $\beta_G(n)=0$ for all $n\ge 2$ \cite{Kom98, Oli91}.
+\end{remark}
+
+\section*{Use of AI-assisted tools}
+
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{99}
+
+\bibitem{Buc80}
+R.-O. Buchweitz, \emph{On Zariski's criterion for equisingularity and non-smoothable monomial curves}, Preprint 115s, Universit\"at Hannover, Institut f\"ur Mathematik, 1980.
+
+\bibitem{EH87}
+D. Eisenbud and J. Harris, \emph{Existence, decomposition, and limits of certain Weierstrass points}, Invent. Math. \textbf{87} (1987), no.~3, 495--515.
+
+\bibitem{EGMV23}
+S. Eliahou, J. I. Garc\'{\i}a-Garc\'{\i}a, D. Mar\'{\i}n-Arag\'on, and A. Vigneron-Tenorio, \emph{The Buchweitz set of a numerical semigroup}, Bull. Braz. Math. Soc. (N.S.) \textbf{54} (2023), Paper No.~4.
+
+\bibitem{EM25}
+S. Eliahou and E. Mazumdar, \emph{Optimal bounds on the growth of iterated sumsets in abelian semigroups}, Ann. Inst. Fourier (Grenoble) \textbf{75} (2025), no.~6, 2321--2339.
+
+\bibitem{FKZ26}
+J. Fox, N. Kravitz, and S. Zhang, \emph{Finer control on relative sizes of iterated sumsets}, Electron. J. Combin. \textbf{33} (2026), no.~1, Paper No.~P1.56.
+
+\bibitem{GMTV21}
+J. I. Garc\'{\i}a-Garc\'{\i}a, D. Mar\'{\i}n-Arag\'on, F. Torres, and A. Vigneron-Tenorio, \emph{On reducible non-Weierstrass semigroups}, Open Math. \textbf{19} (2021), 1134--1144.
+
+\bibitem{Hur93}
+A. Hurwitz, \emph{\"Uber algebraische Gebilde mit eindeutigen Transformationen in sich}, Math. Ann. \textbf{41} (1893), 403--442.
+
+\bibitem{KY13}
+N. Kaplan and L. Ye, \emph{The proportion of Weierstrass semigroups}, J. Algebra \textbf{373} (2013), 377--391.
+
+\bibitem{Kom98}
+J. Komeda, \emph{Non-Weierstrass numerical semigroups}, Semigroup Forum \textbf{57} (1998), 157--185.
+
+\bibitem{Kra25}
+N. Kravitz, \emph{Relative sizes of iterated sumsets}, J. Number Theory \textbf{272} (2025), 113--128.
+
+\bibitem{Nat26}
+M. B. Nathanson, \emph{Inverse problems for sumset sizes of finite sets of integers}, Fibonacci Quart. \textbf{64} (2026), no.~1, 70--82.
+
+\bibitem{Oli91}
+G. Oliveira, \emph{Weierstrass semigroups and the canonical ideal of non-trigonal curves}, Manuscripta Math. \textbf{71} (1991), 431--450.
+
+\bibitem{RGS09}
+J. C. Rosales and P. A. Garc\'{\i}a-S\'anchez, \emph{Numerical semigroups}, Developments in Mathematics, vol.~20, Springer, New York, 2009.
+
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,303 @@
+{
+  "author": "Knowledge Sense",
+  "started_utc": "2026-10-12T09:47:04.155897+00:00",
+  "method": "exact integer and rational calculations",
+  "symbolic": {
+    "rational_identities": 3,
+    "integral_polynomial_identities": 91,
+    "sympy_version": "1.14.0"
+  },
+  "monomial_membership": {
+    "p_range": [
+      1,
+      4
+    ],
+    "q_range": "p..5",
+    "total_degree_range": [
+      0,
+      9
+    ],
+    "count": 140844
+  },
+  "direct_lengths": [
+    {
+      "p": 1,
+      "q": 1,
+      "s": 1,
+      "length": 3
+    },
+    {
+      "p": 1,
+      "q": 1,
+      "s": 2,
+      "length": 10
+    },
+    {
+      "p": 1,
+      "q": 1,
+      "s": 3,
+      "length": 21
+    },
+    {
+      "p": 1,
+      "q": 2,
+      "s": 1,
+      "length": 5
+    },
+    {
+      "p": 1,
+      "q": 2,
+      "s": 2,
+      "length": 22
+    },
+    {
+      "p": 1,
+      "q": 2,
+      "s": 3,
+      "length": 59
+    },
+    {
+      "p": 1,
+      "q": 3,
+      "s": 1,
+      "length": 9
+    },
+    {
+      "p": 1,
+      "q": 3,
+      "s": 2,
+      "length": 48
+    },
+    {
+      "p": 1,
+      "q": 3,
+      "s": 3,
+      "length": 153
+    },
+    {
+      "p": 1,
+      "q": 4,
+      "s": 1,
+      "length": 17
+    },
+    {
+      "p": 1,
+      "q": 4,
+      "s": 2,
+      "length": 106
+    },
+    {
+      "p": 1,
+      "q": 4,
+      "s": 3,
+      "length": 387
+    },
+    {
+      "p": 2,
+      "q": 2,
+      "s": 1,
+      "length": 7
+    },
+    {
+      "p": 2,
+      "q": 2,
+      "s": 2,
+      "length": 39
+    },
+    {
+      "p": 2,
+      "q": 2,
+      "s": 3,
+      "length": 132
+    },
+    {
+      "p": 2,
+      "q": 3,
+      "s": 1,
+      "length": 11
+    },
+    {
+      "p": 2,
+      "q": 3,
+      "s": 2,
+      "length": 72
+    },
+    {
+      "p": 2,
+      "q": 3,
+      "s": 3,
+      "length": 285
+    },
+    {
+      "p": 2,
+      "q": 4,
+      "s": 1,
+      "length": 19
+    },
+    {
+      "p": 2,
+      "q": 4,
+      "s": 2,
+      "length": 141
+    },
+    {
+      "p": 2,
+      "q": 4,
+      "s": 3,
+      "length": 622
+    }
+  ],
+  "coefficients": {
+    "p_range": [
+      1,
+      16
+    ],
+    "q_range": "p..30",
+    "parameter_pairs": 360,
+    "higher_coefficient_comparisons": 6400,
+    "all_power_polynomial_checks": 2880,
+    "s_range": [
+      1,
+      8
+    ],
+    "examples": [
+      {
+        "p": 1,
+        "q": 1,
+        "coefficients": [
+          4,
+          1,
+          0
+        ]
+      },
+      {
+        "p": 1,
+        "q": 2,
+        "coefficients": [
+          8,
+          4,
+          1,
+          0
+        ]
+      },
+      {
+        "p": 1,
+        "q": 4,
+        "coefficients": [
+          32,
+          32,
+          24,
+          8,
+          1,
+          0
+        ]
+      },
+      {
+        "p": 2,
+        "q": 2,
+        "coefficients": [
+          16,
+          12,
+          1,
+          -2,
+          0
+        ]
+      },
+      {
+        "p": 2,
+        "q": 3,
+        "coefficients": [
+          32,
+          32,
+          6,
+          -6,
+          -1,
+          0
+        ]
+      },
+      {
+        "p": 2,
+        "q": 4,
+        "coefficients": [
+          64,
+          80,
+          24,
+          -24,
+          -17,
+          -4,
+          0
+        ]
+      },
+      {
+        "p": 3,
+        "q": 3,
+        "coefficients": [
+          64,
+          80,
+          24,
+          1,
+          14,
+          6,
+          0
+        ]
+      },
+      {
+        "p": 3,
+        "q": 4,
+        "coefficients": [
+          128,
+          192,
+          80,
+          8,
+          33,
+          20,
+          2,
+          0
+        ]
+      },
+      {
+        "p": 4,
+        "q": 4,
+        "coefficients": [
+          256,
+          448,
+          240,
+          40,
+          1,
+          -84,
+          -82,
+          -20,
+          0
+        ]
+      },
+      {
+        "p": 4,
+        "q": 5,
+        "coefficients": [
+          512,
+          1024,
+          672,
+          160,
+          10,
+          -180,
+          -206,
+          -68,
+          -5,
+          0
+        ]
+      }
+    ]
+  },
+  "normalized_integral_and_monotonicity": {
+    "i_range": [
+      2,
+      22
+    ],
+    "r_range": "0..i-2",
+    "m_range": "1..i-1",
+    "checks": 3311
+  },
+  "all_assertions_passed": true,
+  "finished_utc": "2026-10-12T09:47:10.113937+00:00",
+  "script_sha256": "aefcf6bcb156d4e4aea1f1f3a822610466cd1798d1cb0036cc9fc58e6541fe63"
+}

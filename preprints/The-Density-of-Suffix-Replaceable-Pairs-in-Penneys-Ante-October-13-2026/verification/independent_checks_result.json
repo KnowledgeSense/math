@@ -1,0 +1,51 @@
+{
+  "scope": "Finite supplementary checks; the limiting theorem is proved analytically",
+  "ordered_pairs_checked": 5460,
+  "counts": [
+    {
+      "n": 1,
+      "all_ordered_pairs": 4,
+      "literal_R": 4,
+      "distinct_R": 2
+    },
+    {
+      "n": 2,
+      "all_ordered_pairs": 16,
+      "literal_R": 8,
+      "distinct_R": 4
+    },
+    {
+      "n": 3,
+      "all_ordered_pairs": 64,
+      "literal_R": 16,
+      "distinct_R": 8
+    },
+    {
+      "n": 4,
+      "all_ordered_pairs": 256,
+      "literal_R": 56,
+      "distinct_R": 40
+    },
+    {
+      "n": 5,
+      "all_ordered_pairs": 1024,
+      "literal_R": 188,
+      "distinct_R": 156
+    },
+    {
+      "n": 6,
+      "all_ordered_pairs": 4096,
+      "literal_R": 716,
+      "distinct_R": 652
+    }
+  ],
+  "localizations_outside_exceptions_checked": 472,
+  "redundancy_witness": null,
+  "conditional_probabilities_checked": 29408,
+  "conditional_ranges": {
+    "L": "1..8",
+    "n": "4L..64",
+    "k": "1..n-1"
+  },
+  "failures": 0
+}

@@ -1,0 +1,6 @@
+import EdgeColoringMixing.ColumnParameters
+
+#print axioms EdgeColoringMixing.columnError_recursion
+#print axioms EdgeColoringMixing.columnError_mono
+#print axioms EdgeColoringMixing.columnError_two
+#print axioms EdgeColoringMixing.columnError_spectral_cap

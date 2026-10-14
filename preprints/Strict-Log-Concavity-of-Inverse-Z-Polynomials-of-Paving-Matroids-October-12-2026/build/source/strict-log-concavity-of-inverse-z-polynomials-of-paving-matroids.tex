@@ -1,0 +1,583 @@
+\documentclass[11pt]{amsart}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+  pdftitle={Strict log-concavity of inverse Z-polynomials of paving matroids},
+  pdfauthor={Knowledge Sense},
+  pdfsubject={Mathematics Subject Classification 2020: 05B35, 05A20},
+  pdfkeywords={paving matroid, inverse Z-polynomial, inverse Kazhdan-Lusztig polynomial, log-concavity}
+}
+
+\hyphenation{manuscript}
+\emergencystretch=1.5em
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\numberwithin{equation}{section}
+
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\cl}{cl}
+\newcommand{\cL}{\mathcal{L}}
+
+\begin{document}
+
+\title[Inverse \texorpdfstring{$Z$}{Z}-polynomials of paving matroids]{Strict log-concavity of inverse \texorpdfstring{$Z$}{Z}-polynomials of paving matroids}
+
+\author{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{12 October 2026}
+
+\subjclass[2020]{Primary 05B35; Secondary 05A20}
+\keywords{Paving matroid, inverse $Z$-polynomial, inverse Kazhdan--Lusztig polynomial, log-concavity, stressed hyperplane}
+
+\begin{abstract}
+The inverse $Z$-polynomial $Y_M(t)$ of a loopless matroid $M$ is a palindromic polynomial of degree $\rk M$ with nonnegative coefficients. A related polynomial was introduced earlier by Ferroni, Matherne, Stevens and Vecchi; we use the normalization of Gao, Ruan and Xie. Gao, Ruan and Xie conjectured that the coefficients form a log-concave sequence with no internal zeros, and proved this for sparse paving matroids. We prove that for every loopless paving matroid of rank $k\ge 2$ the coefficients of $Y_M$ are strictly log-concave at every internal index. Separately, all coefficients of $Y_M$ in degrees $0,\dots,\rk M$ are positive for every loopless matroid $M$. The proof starts from the explicit formula of Gao, Li and Xie, which expresses $Y_M$ through inverse $Z$-polynomials of uniform matroids and the numbers of stressed hyperplanes of each size. After normalization, the coefficient sequence is a convex combination of explicit sequences whose consecutive ratios lie in common, pairwise separated intervals; this settles odd rank. In even rank $k=2m$ all components have the same increment at the central coefficient, which gives the middle inequality and settles $k=2$. For $k=2m$ with $m\ge2$, the inequalities at the indices $m-1$ and $m+1$ require a separate lower bound on the coefficient of $t^{m-1}$; it uses the fact that a paving matroid on $n$ elements has at most one hyperplane with more than $(n+k-2)/2$ elements.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $M$ be a loopless matroid. The Kazhdan--Lusztig polynomial $P_M(t)$ of Elias, Proudfoot and Wakefield~\cite{EPW}, the inverse Kazhdan--Lusztig polynomial $Q_M(t)$ of Gao and Xie~\cite{GX}, and the $Z$-polynomial
+\[
+Z_M(t)=\sum_{F\in\cL(M)} t^{\rk F}P_{M/F}(t)
+\]
+of Proudfoot, Xu and Young~\cite{PXY} have nonnegative coefficients~\cite{BHMPW}, and their coefficient sequences are the subject of several conjectures on unimodality, log-concavity and real-rootedness. Within the Kazhdan--Lusztig--Stanley framework, Ferroni, Matherne, Stevens and Vecchi~\cite[p.~19, footnote~7]{FMSV} introduced a related polynomial built from $Q_M$, as an analogue of $Z_M$. Gao, Ruan and Xie~\cite{GRX} studied the \emph{inverse $Z$-polynomial} $Y_M(t)$ in the normalization recalled in Definition~\ref{def:Y}, which we use throughout; it has nonnegative coefficients and satisfies $t^{\rk M}Y_M(t^{-1})=Y_M(t)$. They computed $Y_M$ for uniform and sparse paving matroids, proved that its coefficients are log-concave with no internal zeros when $M$ is sparse paving~\cite[Theorem~1.6]{GRX}, and conjectured that this holds for every matroid~\cite[Conjectures~1.4 and~1.5]{GRX}; see also~\cite[Conjecture~1.2(d)]{BFMN}. Gao, Li and Xie~\cite[Theorem~1.7]{GLX} later gave an explicit formula for $Y_M$ for all paving matroids, in a form different from the earlier formula~\cite[Proposition~5.3]{GRX}.
+
+A matroid of rank $k$ is \emph{paving} if every circuit has at least $k$ elements. Our main result settles the log-concavity question for this class, with strict inequalities.
+
+\begin{theorem}\label{thm:main}
+Let $M$ be a loopless paving matroid of rank $k\ge 1$ on a finite set of $n$ elements, and write $Y_M(t)=\sum_{i=0}^{k}a_it^i$. Then
+\begin{enumerate}
+\item[(i)] $a_i>0$ and $a_i=a_{k-i}$ for $0\le i\le k$;
+\item[(ii)] if $k\ge 2$, then $a_i^2>a_{i-1}a_{i+1}$ for $1\le i\le k-1$.
+\end{enumerate}
+\end{theorem}
+
+The symmetry in (i) holds for all matroids~\cite[Lemma~2.2]{GRX}, and positivity holds for all loopless matroids (Remark~\ref{rem:positivity}); our proof gives positivity for paving matroids independently. The new statement is (ii). It extends~\cite[Theorem~1.6]{GRX} from sparse paving matroids to all paving matroids and shows that every internal inequality is strict. Matroids covered by Theorem~\ref{thm:main} include uniform matroids, free matroids, and paving matroids with coloops or with several connected components; no representability assumption is made. Xie and Zhang~\cite{XZ} proved that the inverse Kazhdan--Lusztig polynomial $Q_M$ of a paving matroid is log-concave. The polynomial $Y_M$ is assembled from the polynomials $Q_{M|F}$ of the restrictions to all flats $F$, shifted and weighted by Möbius invariants of contractions (see~\eqref{eq:defYpos}); the argument below does not use~\cite{XZ}.
+
+\begin{corollary}\label{cor:unimodal}
+Under the hypotheses of Theorem~\ref{thm:main}, if $k\ge2$, then $a_{i-1}<a_i$ for $1\le i\le\lfloor k/2\rfloor$ and $a_i=a_{k-i}$ for $0\le i\le k$. In particular $a_{\lfloor k/2\rfloor}=a_{\lceil k/2\rceil}$, and $a_0,\dots,a_k$ is unimodal.
+\end{corollary}
+
+\begin{proof}
+Put $r_i=a_i/a_{i-1}$ for $1\le i\le k$. By Theorem~\ref{thm:main} the sequence $r_1,\dots,r_k$ is strictly decreasing, and $r_{k+1-i}=1/r_i$ by symmetry. If $i\le\lfloor k/2\rfloor$, then $i<k+1-i$, hence $r_i>r_{k+1-i}=1/r_i$ and $r_i>1$.
+\end{proof}
+
+A paving matroid of rank at least two is loopless, and under the convention of~\cite{GRX} that $Y_M$ equals the inverse $Z$-polynomial of the matroid obtained by deleting the loops, every matroid of rank zero has $Y_M=1$ and every matroid of rank one has $Y_M=1+t$; hence Conjectures~1.4 and~1.5 of~\cite{GRX} hold for all paving matroids.
+
+Strict log-concavity cannot be strengthened to real-rootedness: already $Y_{U_{3,4}}(t)=(1+t)(3+5t+3t^2)$ has two nonreal roots.
+
+\emph{Outline of the proof.} Let $k\ge2$. By the formula of Gao, Li and Xie, $Y_M$ is $Y_{U_{k,n}}$ minus one correction polynomial for each hyperplane with at least $k$ elements. In a paving matroid every $(k-1)$-subset of the ground set lies in exactly one hyperplane. Dividing by $\binom n{k-1}$ therefore writes the coefficient sequence of $Y_M$ as a convex combination of an explicit sequence $v$, coming from $U_{k,n}$, and explicit sequences $w_h$, one for each hyperplane size $h$; the weight of $w_h$ is the proportion of $(k-1)$-subsets covered by hyperplanes of size $h$ (Section~\ref{sec:decomposition}). Positive mixtures of log-concave sequences need not be log-concave. Here, however, the consecutive ratios of all components in a given position lie in a common interval, and these intervals are pairwise separated (Section~\ref{sec:ratios}). This proves all inequalities in odd rank (Section~\ref{sec:odd}). In even rank $k=2m$ the central coefficient of each correction contains an extra term, and the inequality at index $m-1$ needs a quantitative lower bound on $a_{m-1}$. We obtain it by noting that at most one hyperplane can be large, and that the weight of a large hyperplane is bounded in terms of its size (Section~\ref{sec:even}). Remark~\ref{rem:weights} shows that a single component $w_h$ need not be log-concave; the argument compensates for this by using the actual weights of the components.
+
+\emph{Dependencies.} Besides standard facts on matroids and Möbius functions, the proof uses three results from the literature that we do not reprove: the formula for $Y_{U_{k,n}}$~\cite[Theorem~1.1]{GRX}, the palindromicity of $Y_M$~\cite[Lemma~2.2]{GRX}, and the formula for paving matroids~\cite[Theorem~1.7]{GLX}. The latter is equivalent to~\cite[Proposition~5.3]{GRX}; as explained after Theorem~\ref{thm:paving}, this follows by applying both formulas to $U_{k-1,h}\oplus U_{1,1}$ and using the multiplicativity of $Y$~\cite[Proposition~2.3]{GRX}. The equivalence is not needed in the proof. The nonnegativity of the coefficients of $Q_M$~\cite{BHMPW} is used only in Remark~\ref{rem:positivity}. Theorem numbers of~\cite{GRX} and~\cite{GLX} refer to the arXiv versions arXiv:2507.01332v1 and arXiv:2601.17314v1, and the page number of~\cite{FMSV} to arXiv:2212.03190v3.
+
+\emph{Organization.} Section~\ref{sec:prelim} collects definitions and the results we use. Section~\ref{sec:decomposition} sets up the convex decomposition, Section~\ref{sec:ratios} proves the ratio bounds, and Sections~\ref{sec:odd} and~\ref{sec:even} treat odd and even rank. Section~\ref{sec:proof} completes the proof and contains remarks on rank two and on the role of the hyperplane weights.
+
+\section{Preliminaries}\label{sec:prelim}
+
+\subsection{Matroids}
+We follow Oxley~\cite{Oxley}. Let $M$ be a matroid on a finite set $E$ with rank function $\rk$ and closure operator $\cl$. Its flats form a geometric lattice $\cL(M)$. For a flat $F$ we write $M|F$ for the restriction to $F$ and $M/F$ for the contraction; if $M$ is loopless, so are $M|F$ and $M/F$, and $\cL(M|F)$ and $\cL(M/F)$ are the intervals below and above $F$ in $\cL(M)$. The Möbius invariant of $M$ is $\mu_M=\mu_{\cL(M)}(\cl(\emptyset),E)$. If $M$ is loopless, then $\mu_M\ne0$ and
+\begin{equation}\label{eq:rota}
+(-1)^{\rk M}\mu_M=|\mu_M|>0
+\end{equation}
+by Rota's sign theorem for geometric lattices~\cite{Rota}.
+
+Let $M$ have rank $k$. A \emph{hyperplane} is a flat of rank $k-1$. Following Ferroni, Nasr and Vecchi~\cite{FNV}, a hyperplane $H$ is \emph{stressed} if every $k$-element subset of $H$ is a circuit. The uniform matroid $U_{k,n}$ has rank $k$ and $n\ge k$ elements, every $k$-subset being a basis.
+
+\begin{lemma}\label{lem:hyperplanes}
+Let $M$ be a paving matroid of rank $k\ge2$ on a set $E$ of $n$ elements.
+\begin{enumerate}
+\item[(a)] Every hyperplane with at least $k$ elements is stressed.
+\item[(b)] Every $(k-1)$-subset of $E$ lies in exactly one hyperplane.
+\item[(c)] Distinct hyperplanes $H,H'$ satisfy $|H\cap H'|\le k-2$ and $|H|+|H'|\le n+k-2$.
+\end{enumerate}
+Consequently, if $\lambda_h$ denotes the number of hyperplanes of $M$ with $h$ elements, then
+\begin{equation}\label{eq:packing}
+\sum_{h=k}^{n-1}\lambda_h\binom{h}{k-1}\le\binom{n}{k-1}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Since every circuit has at least $k$ elements, every subset of $E$ with at most $k-1$ elements is independent. (a) A $k$-subset $X$ of a hyperplane is dependent, and each of its proper subsets is independent; hence $X$ is a circuit. (b) A $(k-1)$-subset $I$ is independent, so $\cl(I)$ is a hyperplane containing $I$. A hyperplane $H\supseteq I$ contains $\cl(I)$ and has the same rank, so $H=\cl(I)$. (c) By (b), $H\cap H'$ contains no $(k-1)$-subset, so $|H\cap H'|\le k-2$, and then $|H|+|H'|=|H\cup H'|+|H\cap H'|\le n+k-2$. Finally, by (b) the sets of $(k-1)$-subsets contained in the various hyperplanes are pairwise disjoint, which gives~\eqref{eq:packing}.
+\end{proof}
+
+A hyperplane is a proper subset of $E$, so hyperplanes have at most $n-1$ elements. By Lemma~\ref{lem:hyperplanes}(a), for a paving matroid $\lambda_h$ ($h\ge k$) is the number of stressed hyperplanes with $h$ elements, which is the quantity appearing in~\cite{GLX,GRX}. A paving matroid of rank at least two is loopless.
+
+\subsection{The inverse \texorpdfstring{$Z$}{Z}-polynomial}
+Let $M$ be loopless. We write $Q_M(t)$ for the inverse Kazhdan--Lusztig polynomial normalized as in~\cite[Section~2.2]{GX}: the polynomial $(-1)^{\rk M}Q_M(t)$ is the value at $(\cl(\emptyset),E)$ of the inverse, in the incidence algebra of $\cL(M)$ over $\mathbb{Z}[t]$, of the Kazhdan--Lusztig function. With this normalization $Q_M$ has nonnegative coefficients~\cite{BHMPW}. Since every Kazhdan--Lusztig polynomial has constant term $1$, setting $t=0$ turns the Kazhdan--Lusztig function into the zeta function of $\cL(M)$, whose inverse is the Möbius function; hence $Q_M(0)=(-1)^{\rk M}\mu_M=|\mu_M|$.
+
+\begin{definition}[\cite{GRX}]\label{def:Y}
+Let $M$ be a loopless matroid of rank $k$. The \emph{inverse $Z$-polynomial} of $M$ is
+\begin{equation}\label{eq:defY}
+Y_M(t)=(-1)^{k}\sum_{F\in\cL(M)}(-1)^{\rk F}\,Q_{M|F}(t)\,t^{\,k-\rk F}\,\mu_{M/F}.
+\end{equation}
+\end{definition}
+
+This is~\cite[equations~(2) and~(3)]{GRX}. A related polynomial appears earlier in~\cite[p.~19, footnote~7]{FMSV}; throughout we use the normalization~\eqref{eq:defY} of~\cite{GRX}. For matroids with loops one sets $Y_M=Y_{M'}$, where $M'$ is obtained by deleting the loops~\cite{GRX}; we only need loopless matroids. Since $\rk(M/F)=k-\rk F$, \eqref{eq:rota} turns~\eqref{eq:defY} into
+\begin{equation}\label{eq:defYpos}
+Y_M(t)=\sum_{F\in\cL(M)}|\mu_{M/F}|\,t^{\,k-\rk F}\,Q_{M|F}(t).
+\end{equation}
+
+\begin{remark}\label{rem:positivity}
+For every loopless matroid $M$ of rank $k$ all coefficients of $Y_M$ in degrees $0,\dots,k$ are positive. Indeed, every summand of~\eqref{eq:defYpos} has nonnegative coefficients by~\cite{BHMPW}. Given $0\le i\le k$, let $I$ be a set of $k-i$ elements of a basis and $F=\cl(I)$, a flat of rank $k-i$. The summand of $F$ contributes $|\mu_{M/F}|\,Q_{M|F}(0)=|\mu_{M/F}|\,|\mu_{M|F}|>0$ to the coefficient of $t^i$. This argument is not needed below: for paving matroids positivity also follows from the proof of Theorem~\ref{thm:main}.
+\end{remark}
+
+\begin{lemma}[{\cite[Lemma~2.2]{GRX}; see also~\cite[p.~5]{BHMPW}}]\label{lem:palindromic}
+For every matroid $M$, $t^{\rk M}Y_M(t^{-1})=Y_M(t)$.
+\end{lemma}
+
+\begin{theorem}[{\cite[Theorem~1.1]{GRX}}]\label{thm:uniform}
+Let $s\ge k\ge1$, and write $Y_{U_{k,s}}(t)=\sum_{i=0}^k u_i(s)t^i$. Then $u_{k-i}(s)=u_i(s)$ for $0\le i\le k$, and
+\begin{equation}\label{eq:uniform}
+u_i(s)=\binom{s}{i}\binom{s-i-1}{s-k}\qquad\Bigl(0\le i\le\Bigl\lfloor\frac k2\Bigr\rfloor\Bigr).
+\end{equation}
+\end{theorem}
+
+For instance, a loopless matroid of rank one on $n$ elements is $U_{1,n}$, and $Y_{U_{1,n}}(t)=1+t$.
+
+\begin{theorem}[{\cite[Theorem~1.7]{GLX}}]\label{thm:paving}
+Let $M$ be a paving matroid of rank $k$ on $n$ elements, and let $\lambda_h$ be the number of stressed hyperplanes of $M$ with $h$ elements. Then
+\begin{equation}\label{eq:paving}
+Y_M(t)=Y_{U_{k,n}}(t)-\sum_{h=k}^{n-1}\lambda_h\,c_{k,h}(t),
+\end{equation}
+where $c_{k,h}=Y_{U_{k,h}}$ if $k$ is odd, and, if $k=2m$ is even,
+\begin{equation}\label{eq:dh}
+c_{k,h}(t)=Y_{U_{k,h}}(t)-d_h\,t^{m},
+\end{equation}
+where
+\[
+d_h=\frac{4h}{(2h-2m)(2h-2m+2)}\binom{h-1}{m,\,m-1,\,h-2m}.
+\]
+\end{theorem}
+
+Here $\binom{h-1}{m,\,m-1,\,h-2m}=\frac{(h-1)!}{m!\,(m-1)!\,(h-2m)!}$ is a multinomial coefficient. In~\cite{GLX} the correction term is written with the factor $1+(-1)^k$, which vanishes for odd $k$. For $k\ge2$ and $h\ge k$ one also has
+\begin{equation}\label{eq:older}
+c_{k,h}=Y_{U_{k,h+1}}-(1+t)\,Y_{U_{k-1,h}},
+\end{equation}
+which is the correction term of~\cite[Proposition~5.3]{GRX}. Indeed, let $H$ be the ground set of $U_{k-1,h}$. The circuits of $U_{k-1,h}\oplus U_{1,1}$ are the $k$-subsets of $H$, so it is a paving matroid of rank $k$ on $h+1$ elements. The set $H$ is a hyperplane with $h\ge k$ elements, and every other hyperplane consists of the coloop and $k-2$ elements of $H$. So $H$ is its only hyperplane with at least $k$ elements, and~\eqref{eq:paving} gives $Y_{U_{k-1,h}\oplus U_{1,1}}=Y_{U_{k,h+1}}-c_{k,h}$. On the other hand $Y_{U_{k-1,h}\oplus U_{1,1}}=(1+t)Y_{U_{k-1,h}}$ by multiplicativity~\cite[Proposition~2.3]{GRX} and $Y_{U_{1,1}}=1+t$. Since both~\eqref{eq:paving} and~\cite[Proposition~5.3]{GRX} subtract from $Y_{U_{k,n}}$ one correction for each stressed hyperplane, depending only on $k$ and its size, \eqref{eq:older} shows that the two formulas agree. We shall use~\eqref{eq:dh}. A short computation puts $d_h$ in the form
+\begin{equation}\label{eq:dh-simplified}
+d_h=\binom{h}{2m-1}\binom{2m-1}{m}\frac{h-2m+1}{(h-m)(h-m+1)}.
+\end{equation}
+Indeed,
+\begin{gather*}
+\frac{4h\,(h-1)!}{(2h-2m)(2h-2m+2)}=\frac{h!}{(h-m)(h-m+1)},\\
+\frac{h!}{m!\,(m-1)!\,(h-2m)!}=\binom{h}{2m-1}\binom{2m-1}{m}(h-2m+1).
+\end{gather*}
+
+\section{A convex decomposition}\label{sec:decomposition}
+
+Throughout Sections~\ref{sec:decomposition}--\ref{sec:even}, $M$ is a paving matroid of rank $k\ge2$ on $n$ elements, $\lambda_h$ is the number of hyperplanes with $h$ elements, and $Y_M(t)=\sum_i a_it^i$. Put
+\[
+B=\binom{n}{k-1},\qquad b_h=\binom{h}{k-1},\qquad
+\alpha_h=\frac{\lambda_hb_h}{B}\quad(k\le h\le n-1),
+\]
+and $\alpha_0=1-\sum_{h=k}^{n-1}\alpha_h$.
+By~\eqref{eq:packing} all $\alpha$'s are nonnegative, and they sum to one. We also write
+\[
+\ell=\Bigl\lfloor\frac{k-1}{2}\Bigr\rfloor,
+\]
+so that $\ell=m$ if $k=2m+1$ and $\ell=m-1$ if $k=2m$; the indices $0\le i\le\ell$ are those strictly below $k/2$.
+
+\begin{lemma}\label{lem:normalized}
+For $s\ge k$ and $0\le i\le\lfloor k/2\rfloor$,
+\[
+f_s(i):=\frac{u_i(s)}{\binom{s}{k-1}}=\binom{k-1}{i}\frac{s-k+1}{s-i}.
+\]
+\end{lemma}
+
+\begin{proof}
+We have
+\begin{gather*}
+\binom{s-i-1}{s-k}=\binom{s-i-1}{k-1-i}=\frac{s-k+1}{s-i}\binom{s-i}{k-1-i},\\
+\binom{s}{i}\binom{s-i}{k-1-i}=\binom{s}{k-1}\binom{k-1}{i};
+\end{gather*}
+now use~\eqref{eq:uniform}.
+\end{proof}
+
+For $0\le i\le k$ put
+\[
+v_i=\frac{u_i(n)}{B},\qquad z_i=\frac{a_i}{B},
+\]
+and for $k\le h\le n-1$ and $0\le i\le k$ put
+\[
+w_{h,i}=v_i-\frac{[t^i]\,c_{k,h}}{b_h}.
+\]
+Thus $v_i=f_n(i)$ for $i\le\lfloor k/2\rfloor$. Since $Y_{U_{k,n}}$ and $Y_{U_{k,h}}$ are palindromic of degree $k$ and the extra term in~\eqref{eq:dh} sits in the middle degree, we have $v_{k-i}=v_i$ for $0\le i\le k$, and $w_{h,k-i}=w_{h,i}$ for each $h$ as above. Theorem~\ref{thm:paving} and $\alpha_0+\sum_h\alpha_h=1$ give
+\begin{equation}\label{eq:mixture}
+z_i=\alpha_0v_i+\sum_{h=k}^{n-1}\alpha_h\,w_{h,i}\qquad(0\le i\le k).
+\end{equation}
+If $n=k$, the sum is empty and $z_i=v_i$.
+We refer to $v$ and the $w_h$ as the \emph{components}; the component $w_h$ only matters when $\alpha_h>0$.
+
+\begin{lemma}\label{lem:components}
+\begin{enumerate}
+\item[(a)] For $0\le i\le\ell$ and every $h$ with $k\le h\le n-1$,
+\begin{equation}\label{eq:w}
+w_{h,i}=(k-1)\binom{k-2}{i}\frac{n-h}{(n-i)(h-i)}>0 .
+\end{equation}
+\item[(b)] If $k=2m$, then $v_m-v_{m-1}=\delta$, where
+\begin{equation}\label{eq:delta}
+\delta=\binom{2m-1}{m}\frac{n-2m+1}{(n-m)(n-m+1)}>0 ,
+\end{equation}
+and $w_{h,m}-w_{h,m-1}=\delta$ for every $h$ with $k\le h\le n-1$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) For $i\le\ell$ we have $[t^i]c_{k,h}=u_i(h)$: for odd $k$ by the definition $c_{k,h}=Y_{U_{k,h}}$, and for $k=2m$ by~\eqref{eq:dh}, since $i<m$. Hence $w_{h,i}=f_n(i)-f_h(i)$. By Lemma~\ref{lem:normalized},
+\begin{align*}
+w_{h,i}&=\binom{k-1}{i}\frac{(n-k+1)(h-i)-(h-k+1)(n-i)}{(n-i)(h-i)}\\
+&=\binom{k-1}{i}\frac{(n-h)(k-1-i)}{(n-i)(h-i)},
+\end{align*}
+and $\binom{k-1}{i}(k-1-i)=(k-1)\binom{k-2}{i}$. All factors are positive because $i\le k-2<h<n$.
+
+(b) Put $C=\binom{2m-1}{m}=\binom{2m-1}{m-1}$. For $s\ge 2m$, Lemma~\ref{lem:normalized} gives
+\begin{align*}
+f_s(m)-f_s(m-1)&=C(s-2m+1)\Bigl(\frac1{s-m}-\frac1{s-m+1}\Bigr)\\
+&=\frac{C(s-2m+1)}{(s-m)(s-m+1)}.
+\end{align*}
+For $s=n$ this is $\delta$. For $s=h$ it equals $d_h/b_h$ by~\eqref{eq:dh-simplified}. Hence
+\[
+\frac{[t^m]\,c_{k,h}}{b_h}=f_h(m)-\frac{d_h}{b_h}=f_h(m-1)=\frac{[t^{m-1}]\,c_{k,h}}{b_h},
+\]
+and therefore $w_{h,m}-w_{h,m-1}=v_m-v_{m-1}=\delta$. Finally $n\ge 2m$ gives $\delta>0$.
+\end{proof}
+
+\begin{corollary}\label{cor:positive}
+$z_i>0$ for $0\le i\le\lfloor k/2\rfloor$. If $k=2m$, then $z_m=z_{m-1}+\delta$.
+\end{corollary}
+
+\begin{proof}
+For $i\le\ell$ every component is positive by Lemmas \ref{lem:normalized} and~\ref{lem:components}(a), and the weights are nonnegative with sum one. If $k$ is odd, then $\lfloor k/2\rfloor=\ell$. If $k=2m$, then $z_m=z_{m-1}+\delta$ by~\eqref{eq:mixture} and Lemma~\ref{lem:components}(b), again because the weights sum to one.
+\end{proof}
+
+\section{Separated ratio intervals}\label{sec:ratios}
+
+For $1\le i\le\ell$ define
+\begin{equation}\label{eq:LU}
+L_i=\frac{(k-1-i)(n-i+1)}{i\,(n-i-1)},\qquad U_i=\frac{(k-i)(n-i+1)}{i\,(n-i)} .
+\end{equation}
+These are well defined and positive: $i\le\ell\le k-2$, and $n-i-1\ge k-\ell-1\ge1$.
+
+\begin{lemma}\label{lem:ratios}
+Let $1\le i\le\ell$. Then
+\[
+L_i\le\frac{v_i}{v_{i-1}}=U_i,
+\]
+and for every $h$ with $k\le h\le n-1$,
+\[
+L_i\le\frac{w_{h,i}}{w_{h,i-1}}<U_i .
+\]
+Moreover $L_i>U_{i+1}$ for $1\le i\le\ell-1$.
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:normalized} and~\eqref{eq:w},
+\[
+\frac{v_i}{v_{i-1}}=\frac{k-i}{i}\cdot\frac{n-i+1}{n-i}=U_i,\qquad
+\frac{w_{h,i}}{w_{h,i-1}}=\frac{k-1-i}{i}\cdot\frac{n-i+1}{n-i}\cdot\frac{h-i+1}{h-i}.
+\]
+A direct computation gives
+\[
+U_i-L_i=\frac{(n-i+1)(n-k)}{i\,(n-i)(n-i-1)}\ge0 .
+\]
+Next,
+\[
+\frac{w_{h,i}/w_{h,i-1}}{U_i}=\frac{(k-1-i)(h-i+1)}{(k-i)(h-i)}<1
+\]
+because $(k-i)(h-i)-(k-1-i)(h-i+1)=h-k+1>0$, and
+\[
+\frac{w_{h,i}/w_{h,i-1}}{L_i}=\frac{(h-i+1)(n-i-1)}{(h-i)(n-i)}\ge1
+\]
+because $(h-i+1)(n-i-1)-(h-i)(n-i)=n-h-1\ge0$. Finally, for $i\le\ell-1$,
+\[
+\frac{L_i}{U_{i+1}}=\frac{(i+1)(n-i+1)}{i\,(n-i)}>1 . \qedhere
+\]
+\end{proof}
+
+The following observation is the reason the components can be combined.
+
+\begin{lemma}\label{lem:mediant}
+Let $x^{(1)},\dots,x^{(r)}$ be sequences, let $\beta_1,\dots,\beta_r\ge0$ be weights, not all zero, and let $y=\sum_j\beta_jx^{(j)}$. If, for some index $i$ and some $0<L\le U$, every $x^{(j)}$ with $\beta_j>0$ satisfies $x^{(j)}_{i-1}>0$ and $L\le x^{(j)}_i/x^{(j)}_{i-1}\le U$, then $y_{i-1}>0$ and $L\le y_i/y_{i-1}\le U$.
+\end{lemma}
+
+\begin{proof}
+The quotient $y_i/y_{i-1}$ is the average of the ratios $x^{(j)}_i/x^{(j)}_{i-1}$ with the nonnegative weights $\beta_jx^{(j)}_{i-1}$, not all zero.
+\end{proof}
+
+\begin{corollary}\label{cor:lower}
+For $1\le i\le\ell$ we have $L_i\le z_i/z_{i-1}\le U_i$, and
+\[
+z_i^2>z_{i-1}z_{i+1}\qquad(1\le i\le\ell-1).
+\]
+\end{corollary}
+
+\begin{proof}
+The first assertion follows from~\eqref{eq:mixture} and Lemmas~\ref{lem:ratios} and~\ref{lem:mediant}. For $1\le i\le\ell-1$ it gives $z_{i+1}/z_i\le U_{i+1}<L_i\le z_i/z_{i-1}$, and all terms are positive.
+\end{proof}
+
+\section{Odd rank}\label{sec:odd}
+
+\begin{proposition}\label{prop:odd}
+If $k=2m+1\ge3$, then $a_i^2>a_{i-1}a_{i+1}$ for $1\le i\le k-1$.
+\end{proposition}
+
+\begin{proof}
+Here $\ell=m$. Since $a_i=a_{k-i}$ by Lemma~\ref{lem:palindromic}, the inequality at an index $i$ is equivalent to the inequality at $k-i$; as $i\le m$ or $k-i\le m$ for every $1\le i\le k-1$, it suffices to treat $1\le i\le m$. For $1\le i\le m-1$ this is Corollary~\ref{cor:lower}. By Corollary~\ref{cor:lower} with $i=m$,
+\[
+\frac{z_m}{z_{m-1}}\ge L_m=\frac{m\,(n-m+1)}{m\,(n-m-1)}=\frac{n-m+1}{n-m-1}>1 .
+\]
+Hence $a_m>a_{m-1}$, and since $a_{m+1}=a_m$,
+\[
+a_m^2-a_{m-1}a_{m+1}=a_m(a_m-a_{m-1})>0 .
+\]
+In rank three ($m=1$) the range $1\le i\le m-1$ is empty; the index $i=1$ is the case $i=m$ just treated, and $i=2$ follows by symmetry.
+\end{proof}
+
+\section{Even rank}\label{sec:even}
+
+Let $k=2m\ge2$, so that $\ell=m-1$. Put
+\[
+N=n-m,\qquad D=N-m+1=n-2m+1,\qquad C=\binom{2m-1}{m},
+\]
+so that $N\ge m$, $D\ge1$ and, by~\eqref{eq:delta}, $\delta=CD/(N(N+1))$. By Corollary~\ref{cor:positive}, $z_m=z_{m-1}+\delta>z_{m-1}$; together with $a_{m+1}=a_{m-1}$ this gives the inequality at the middle index,
+\begin{equation}\label{eq:middle}
+a_m^2-a_{m-1}a_{m+1}=a_m^2-a_{m-1}^2>0 .
+\end{equation}
+For $m=1$ this is the only internal index. From now on let $m\ge2$, and put
+\[
+p=z_{m-1},\qquad q=z_{m-2}.
+\]
+By symmetry, the inequality at index $m+1$ is the same as the one at index $m-1$, and the latter reads
+\begin{equation}\label{eq:target}
+p^2>q\,(p+\delta).
+\end{equation}
+
+\subsection{The two coefficients below the middle}
+For real $u$ with $m-1\le u\le N-1$ put
+\[
+\pi(u)=\frac{m\,(N-u)}{(N+1)(u+1)},\qquad \kappa(u)=\frac{(m-1)(N-u)}{(N+2)(u+2)} .
+\]
+The function $\pi$ is positive and strictly decreasing. Attach to $v$ the parameter $u=m-1$ and to $w_h$ the parameter $u=h-m$; the latter ranges over $m\le u\le N-1$.
+
+\begin{lemma}\label{lem:pikappa}
+For every component $x\in\{v\}\cup\{w_h:2m\le h\le n-1\}$ with parameter $u$,
+\[
+x_{m-1}=C\,\pi(u),\qquad x_{m-2}=C\,\kappa(u).
+\]
+Consequently $q<\eta\,p$, where
+\[
+\eta=\frac{(m-1)(N+1)}{m\,(N+2)}<1 .
+\]
+\end{lemma}
+
+\begin{proof}
+For $w_h$ use~\eqref{eq:w} together with $(2m-1)\binom{2m-2}{m-1}=mC$ and $(2m-1)\binom{2m-2}{m-2}=(m-1)C$, and note $n-h=N-u$, $n-m+1=N+1$, $h-m+1=u+1$, $n-m+2=N+2$, $h-m+2=u+2$. For $v$ use Lemma~\ref{lem:normalized} with $\binom{2m-1}{m-1}=C$ and $\binom{2m-1}{m-2}=\frac{m-1}{m+1}C$:
+\[
+v_{m-1}=\frac{CD}{N+1}=C\pi(m-1),\qquad v_{m-2}=\frac{(m-1)CD}{(m+1)(N+2)}=C\kappa(m-1).
+\]
+For every $u$ we have $\kappa(u)/\pi(u)=\eta\,(u+1)/(u+2)<\eta$, so every component satisfies $x_{m-2}<\eta\,x_{m-1}$; averaging with the weights of~\eqref{eq:mixture} gives $q<\eta p$.
+\end{proof}
+
+\subsection{A lower bound for the coefficient below the middle}
+
+\begin{lemma}\label{lem:scalar}
+For real numbers $a\ge s\ge1$ and $b\ge1$,
+\begin{equation}\label{eq:scalar}
+\frac{s}{a+2b+(2b+1)s}\Bigl(\frac{a+2b}{a+b}+\frac{(2b+1)a}{s+b}\Bigr)>\frac{a+s-1}{a+s+2b+1}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+All denominators are positive. Multiplying by them, \eqref{eq:scalar} becomes $\Phi>0$, where
+\begin{align*}
+\Phi={}&s\bigl[(a+2b)(s+b)+(2b+1)a(a+b)\bigr](a+s+2b+1)\\
+&-(a+s-1)(a+b)(s+b)\bigl[a+2b+(2b+1)s\bigr].
+\end{align*}
+Substituting $a=s+x$ and expanding gives $\Phi=\Phi_0+\Phi_1x+\Phi_2x^2+\Phi_3x^3$ with
+\begin{align*}
+\Phi_0&=2(s+b)\bigl((b+1)s+b\bigr)(2s+b),\\
+\Phi_1&=4b(s^3-1)+(6b^2+2b+6)(s^2-1)\\
+&\quad+2b(b^2-b+4)(s-1)+7b^2+14b+6,\\
+\Phi_2&=6b(s^2-1)+(4b^2-2b+2)(s-1)+b^2+5b+2,\\
+\Phi_3&=b(2s-1).
+\end{align*}
+For $s\ge1$ and $b\ge1$ every summand displayed in $\Phi_0,\dots,\Phi_3$ is nonnegative and the last one in each line is positive; since $x=a-s\ge0$, we get $\Phi>0$.
+\end{proof}
+
+\begin{proposition}\label{prop:lowerbound}
+Let $k=2m\ge4$. Then
+\begin{equation}\label{eq:pbound}
+p\ge\frac{C\,m\,D}{(N+1)(N+m+1)} .
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+By~\eqref{eq:mixture} and Lemma~\ref{lem:pikappa}, $p/C$ is a weighted average of the values $\pi(u)$ over the parameters $u$ of the components, with the weights $\alpha_0,\alpha_h$. Call a hyperplane $H$ \emph{large} if $2|H|>n+2m-2$. By Lemma~\ref{lem:hyperplanes}(c) there is at most one large hyperplane, and if $H$ is large, every other hyperplane $H'$ has $|H'|\le n+2m-2-|H|$.
+
+\emph{Case 1: no hyperplane is large.} Then every hyperplane with at least $k$ elements has parameter $u=h-m\le(n-2)/2=(N+m-2)/2$, and so does $v$, since $m-1\le(N+m-2)/2$ is equivalent to $m\le N$. As $\pi$ is decreasing,
+\[
+\frac pC\ge\pi\Bigl(\frac{N+m-2}{2}\Bigr)=\frac{m\,(D+1)}{(N+1)(N+m)}>\frac{m\,D}{(N+1)(N+m+1)},
+\]
+where the last inequality is $(D+1)(N+m+1)-D(N+m)=N+m+1+D>0$. This includes the case $\lambda_h=0$ for all $h$.
+
+\emph{Case 2: there is a large hyperplane $H$, with $h=|H|$ elements.} Any other hyperplane with $h$ elements would also be large, so $\lambda_h=1$, and the weight of $w_h$ is $\alpha:=\alpha_h=b_h/B$. Put
+\[
+s=n-h\ge1,\qquad a=h-2m+2,\qquad b=m-1\ge1 .
+\]
+Largeness of $H$ means $a>s$, and $h=a+2b$, $n=a+s+2b$, $N=a+s+b-1$, $D=a+s-1$. Every other hyperplane $H'$ with at least $k$ elements has parameter $|H'|-m\le s+m-2$, and so does $v$, because $s\ge1$. Since $\pi$ is decreasing,
+\begin{equation}\label{eq:twopoint}
+\frac pC\ge\alpha\,\pi(h-m)+(1-\alpha)\,\pi(s+m-2),
+\end{equation}
+where
+\[
+\pi(h-m)=\frac{m}{N+1}\cdot\frac{s}{a+b},\qquad \pi(s+m-2)=\frac{m}{N+1}\cdot\frac{a}{s+b}.
+\]
+We bound $\alpha=\binom{h}{2b+1}/\binom{h+s}{2b+1}$ from above. Each of the $2b+1$ factors in its product form is at most the first factor $h/(h+s)$, and Bernoulli's inequality bounds the resulting power:
+\[
+\alpha=\prod_{j=0}^{2b}\frac{h-j}{h+s-j}\le\Bigl(1+\frac sh\Bigr)^{-(2b+1)}\le\frac{1}{1+(2b+1)s/h}=:\bar\alpha .
+\]
+Since $a>s$, we have $s(s+b)<a(a+b)$, that is, $\pi(h-m)<\pi(s+m-2)$; so the right-hand side of~\eqref{eq:twopoint} decreases when $\alpha$ is replaced by $\bar\alpha\ge\alpha$. Using $h=a+2b$ this gives
+\begin{align*}
+\frac pC&\ge\frac{m}{N+1}\cdot\frac{s}{a+2b+(2b+1)s}\Bigl(\frac{a+2b}{a+b}+\frac{(2b+1)a}{s+b}\Bigr)\\
+&>\frac{m}{N+1}\cdot\frac{a+s-1}{a+s+2b+1}
+\end{align*}
+by Lemma~\ref{lem:scalar}. Since $a+s-1=D$ and $a+s+2b+1=N+m+1$, this is~\eqref{eq:pbound}.
+\end{proof}
+
+\begin{proposition}\label{prop:even}
+If $k=2m\ge2$, then $a_i^2>a_{i-1}a_{i+1}$ for $1\le i\le k-1$.
+\end{proposition}
+
+\begin{proof}
+The middle index is~\eqref{eq:middle}; this settles $m=1$. Let $m\ge2$. By symmetry it suffices to treat $1\le i\le m-1$. For $1\le i\le m-2$ this is Corollary~\ref{cor:lower}. For $i=m-1$ we prove~\eqref{eq:target}. We have
+\[
+1-\eta=\frac{N+m+1}{m\,(N+2)},\qquad \eta\,\delta=\frac{(m-1)\,C\,D}{m\,N\,(N+2)} .
+\]
+By Proposition~\ref{prop:lowerbound},
+\begin{align*}
+(1-\eta)\,p-\eta\,\delta&\ge\frac{CD}{(N+1)(N+2)}-\frac{(m-1)CD}{mN(N+2)}\\
+&=\frac{C\,D\,(N-m+1)}{mN(N+1)(N+2)}=\frac{C\,D^2}{mN(N+1)(N+2)}>0 .
+\end{align*}
+Since $q<\eta p$ (Lemma~\ref{lem:pikappa}) and $p+\delta>0$,
+\[
+p^2-q\,(p+\delta)>p^2-\eta p\,(p+\delta)=p\bigl[(1-\eta)p-\eta\delta\bigr]>0. \qedhere
+\]
+\end{proof}
+
+\section{Proof of the main theorem and remarks}\label{sec:proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+If $k=1$, then $M=U_{1,n}$ and $Y_M(t)=1+t$ by Theorem~\ref{thm:uniform}. Let $k\ge2$. Symmetry is Lemma~\ref{lem:palindromic}. By Corollary~\ref{cor:positive}, $a_i=Bz_i>0$ for $0\le i\le\lfloor k/2\rfloor$, and symmetry gives positivity for the remaining indices. Part~(ii) is Proposition~\ref{prop:odd} for odd $k$ and Proposition~\ref{prop:even} for even $k$.
+\end{proof}
+
+\begin{remark}[Rank two]\label{rem:ranktwo}
+Every loopless matroid of rank two is paving. If it has $c\ge2$ parallel classes, \eqref{eq:defYpos} gives directly
+\[
+Y_M(t)=(c-1)+c\,t+(c-1)\,t^2 ,
+\]
+since $|\mu_M|=c-1$, $Q_M(t)=c-1$, and each rank-one flat contributes $t$. The inequality of Theorem~\ref{thm:main}(ii) reads $c^2-(c-1)^2=2c-1>0$.
+\end{remark}
+
+\begin{remark}[The hyperplane weights matter]\label{rem:weights}
+A single component $w_h$ need not be log-concave. The proof compensates for this by using the actual weights of the components, through Proposition~\ref{prop:lowerbound}. Let $k=4$, $n=8$ and $h=7$. Then
+\begin{gather*}
+(v_0,\dots,v_4)=\tfrac1{56}(35,120,140,120,35),\\
+c_{4,7}(t)=20+70t+70t^2+70t^3+20t^4,
+\end{gather*}
+since $Y_{U_{4,7}}=20+70t+84t^2+70t^3+20t^4$ and $d_7=14$, and with $b_7=35$
+\[
+(w_{7,0},\dots,w_{7,4})=\Bigl(\frac{3}{56},\frac17,\frac12,\frac17,\frac3{56}\Bigr),\qquad
+w_{7,1}^2-w_{7,0}w_{7,2}=-\frac{5}{784}.
+\]
+In an actual paving matroid of rank four on eight elements, a hyperplane with seven elements has weight $\binom73/\binom83=5/8$ in~\eqref{eq:mixture}, not $1$, and by Lemma~\ref{lem:hyperplanes}(c) it is the only hyperplane with at least four elements. The resulting matroid is $U_{3,7}\oplus U_{1,1}$, and
+\[
+Y_{U_{3,7}\oplus U_{1,1}}(t)=15+50t+70t^2+50t^3+15t^4,
+\]
+in accordance with Theorem~\ref{thm:main} and with the multiplicativity of $Y$ under direct sums~\cite[Proposition~2.3]{GRX}.
+\end{remark}
+
+\begin{remark}
+The argument uses the paving hypothesis twice: through the explicit formula of Theorem~\ref{thm:paving}, and through Lemma~\ref{lem:hyperplanes}, which bounds the total weight of the corrections and allows at most one large hyperplane. Beyond paving matroids, the formula for elementary split matroids~\cite[Proposition~5.2]{GRX} involves stressed subsets of every rank together with the inverse $Z$-polynomials of cuspidal matroids, and we do not know whether a similar separation of ratio intervals holds in that setting.
+\end{remark}
+
+\section*{Use of AI-assisted tools}
+
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{99}
+
+\bibitem{BFMN}
+T. Braden, L. Ferroni, J. P. Matherne, and N. Nepal,
+\emph{Inverse Kazhdan--Lusztig polynomials of matroids under deletion},
+J. Comb. Algebra, accepted; arXiv:2510.01086.
+
+\bibitem{BHMPW}
+T. Braden, J. Huh, J. P. Matherne, N. Proudfoot, and B. Wang,
+\emph{Singular Hodge theory for combinatorial geometries},
+J. Amer. Math. Soc., doi:10.1090/jams/1083; arXiv:2010.06088v5.
+
+\bibitem{EPW}
+B. Elias, N. Proudfoot, and M. Wakefield,
+\emph{The Kazhdan--Lusztig polynomial of a matroid},
+Adv. Math. \textbf{299} (2016), 36--70.
+
+\bibitem{FMSV}
+L. Ferroni, J. P. Matherne, M. Stevens, and L. Vecchi,
+\emph{Hilbert--Poincar\'e series of matroid Chow rings and intersection cohomology},
+Adv. Math. \textbf{449} (2024), Paper No. 109733; arXiv:2212.03190v3.
+
+\bibitem{FNV}
+L. Ferroni, G. D. Nasr, and L. Vecchi,
+\emph{Stressed hyperplanes and Kazhdan--Lusztig gamma-positivity for matroids},
+Int. Math. Res. Not. IMRN \textbf{2023} (2023), no. 24, 20883--20942.
+
+\bibitem{GLX}
+A. L. L. Gao, Y. Li, and M. H. Y. Xie,
+\emph{Equivariant inverse $Z$-polynomials of matroids},
+preprint (2026), arXiv:2601.17314v1.
+
+\bibitem{GRX}
+A. L. L. Gao, X. Ruan, and M. H. Y. Xie,
+\emph{The inverse $Z$-polynomial of a matroid},
+J. Combin. Theory Ser. A \textbf{224} (2026), Paper No. 106220, doi:10.1016/j.jcta.2026.106220; arXiv:2507.01332v1.
+
+\bibitem{GX}
+A. L. L. Gao and M. H. Y. Xie,
+\emph{The inverse Kazhdan--Lusztig polynomial of a matroid},
+J. Combin. Theory Ser. B \textbf{151} (2021), 375--392.
+
+\bibitem{Oxley}
+J. Oxley,
+\emph{Matroid Theory}, 2nd ed.,
+Oxford Graduate Texts in Mathematics, vol.~21, Oxford University Press, Oxford, 2011.
+
+\bibitem{PXY}
+N. Proudfoot, Y. Xu, and B. Young,
+\emph{The $Z$-polynomial of a matroid},
+Electron. J. Combin. \textbf{25} (2018), no. 1, Paper No. 1.26.
+
+\bibitem{Rota}
+G.-C. Rota,
+\emph{On the foundations of combinatorial theory. I. Theory of M\"obius functions},
+Z. Wahrscheinlichkeitstheorie und Verw. Gebiete \textbf{2} (1964), 340--368.
+
+\bibitem{XZ}
+M. H. Y. Xie and P. B. Zhang,
+\emph{Log-concavity of inverse Kazhdan--Lusztig polynomials of paving matroids},
+Bull. Lond. Math. Soc. \textbf{58} (2026), e70264.
+
+\end{thebibliography}
+
+\end{document}

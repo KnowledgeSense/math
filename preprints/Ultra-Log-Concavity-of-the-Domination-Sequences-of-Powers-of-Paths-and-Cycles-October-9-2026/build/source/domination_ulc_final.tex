@@ -1,0 +1,455 @@
+\documentclass{amsart}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Ultra log-concavity of the domination sequences of powers of paths and cycles}, pdfauthor={Knowledge Sense}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\Cyc}{\mathcal{Z}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\coef}[1]{[z^{#1}]}
+
+\begin{document}
+
+\title[Ultra log-concavity of domination sequences]{Ultra log-concavity of the domination sequences of powers of paths and cycles}
+
+\author{Knowledge Sense}
+\address{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{9 October 2026}
+
+\subjclass[2020]{Primary 05C69; Secondary 05A17, 05A20, 05C31}
+
+\keywords{dominating set, domination polynomial, ultra log-concavity, power of a path, power of a cycle, integer composition}
+
+\begin{abstract}
+For a graph $G$ let $\gamma_k(G)$ be the number of dominating sets of $G$ with $k$ vertices. Galvin and Zhang proved that the domination sequences of all powers of paths and cycles are unimodal, and conjectured that they are ultra log-concave. We prove this conjecture: if $G$ is the $\ell$th power of the path or of the cycle on $n$ vertices, then $\gamma_k(G)/\binom nk$ is a log-concave function of $k$ with no internal zeros. For a family of sets closed under taking supersets, the normalized number of members of size $j-1$ divided by that of size $j$ is the expected proportion of elements that can be deleted from a uniformly random member of size $j$. We encode a set of chosen vertices by its gaps: for cycles these are the distances between cyclically consecutive chosen vertices, and for paths they also include the two end gaps measured from the ends of the path. When at least two vertices are chosen, deleting one of them merges the two gaps adjacent to it, and the smaller set stays in the family exactly when the merged gap satisfies the prescribed bound. We show that the probability of this event does not decrease as the number of gaps grows, by comparing convolutions of log-concave coefficient sequences. For paths the argument applies to all subsets of $\{1,\dots,v\}$ whose two end gaps are at most $q$ and whose interior gaps are at most $m$, for any $1\le q\le m$. Combined with a bijection from Zhang's dissertation, this also proves the conjecture, stated there, that the number of compositions of $n$ into $k$ parts with no $t$ consecutive parts equal to $1$ is log-concave in $k$.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+A set $D$ of vertices of a graph $G$ is \emph{dominating} if every vertex of $G$ lies in $D$ or has a neighbour in $D$. Let $\gamma_k(G)$ denote the number of dominating sets of $G$ with $k$ elements; the sequence $(\gamma_k(G))_{k\ge0}$ is the \emph{domination sequence} of $G$. Alikhani and Peng~\cite{AP} conjectured that the domination sequence of every graph is unimodal; this conjecture remains open. Beaton and Brown~\cite{BB} proved it for paths and cycles, among other families, and observed that domination sequences need not be log-concave; see~\cite{GZ, O} for further partial results and approaches, including the recent proof of log-concavity for threshold graphs in~\cite{O}.
+
+A sequence $(a_k)_{k=0}^n$ of nonnegative real numbers is \emph{log-concave} if $a_k^2\ge a_{k-1}a_{k+1}$ for $1\le k\le n-1$, and \emph{ultra log-concave} if the sequence $(a_k/\binom nk)_{k=0}^n$ is log-concave. Since the binomial coefficients form a log-concave sequence, an ultra log-concave sequence with no internal zeros is log-concave and hence unimodal.
+
+For a graph $G$ and an integer $\ell\ge1$, the $\ell$th power of $G$ is the graph on the vertex set of $G$ in which two distinct vertices are adjacent if their distance in $G$ is at most $\ell$. Let $P_n^\ell$ and $C_n^\ell$ denote the $\ell$th powers of the path and of the cycle on $n$ vertices. Following~\cite{GZ}, both $P_0^\ell$ and $C_0^\ell$ are the graph with no vertices, which has exactly one dominating set, the empty set; $C_1^\ell$ is a single vertex and $C_2^\ell$ is the complete graph on two vertices. Galvin and Zhang~\cite[Theorem~1.4]{GZ} proved that the domination sequences of $P_n^\ell$ and $C_n^\ell$ are unimodal for all $n\ge0$ and $\ell\ge1$. Having checked the cases $n,\ell\le500$ by computer, they proposed the following strengthening.
+
+\begin{conjecture}[{\cite[Conjecture~1.8]{GZ}}]\label{conj:GZ}
+For all $n\ge0$ and $\ell\ge1$, the domination sequences of $P_n^\ell$ and of $C_n^\ell$ are ultra log-concave.
+\end{conjecture}
+
+The conjecture is restated in Zhang's dissertation as~\cite[Conjecture~4.1.8]{Z}, and the statement for paths as~\cite[Conjecture~5.1.1]{Z}. As observed in~\cite[p.~73]{Z}, these domination polynomials need not be real-rooted, so ultra log-concavity cannot be obtained from Newton's inequalities, which give it for real-rooted polynomials with nonnegative coefficients. For example, the domination polynomial of $P_5=P_5^1$ is $x^2(x^3+5x^2+8x+3)$, and the cubic factor has discriminant $-31$, so it has two nonreal roots. Our main result confirms the conjecture.
+
+\begin{theorem}\label{thm:main}
+Let $n\ge0$ and $\ell\ge1$, and let $G$ be $P_n^\ell$ or $C_n^\ell$. Then the sequence
+\[
+\biggl(\gamma_k(G)\Big/\binom nk\biggr)_{k=0}^{n}
+\]
+is log-concave and has no internal zeros. In particular, Conjecture~\ref{conj:GZ} holds.
+\end{theorem}
+
+Multiplying by the binomial coefficients, we see that the domination sequences of $P_n^\ell$ and $C_n^\ell$ are log-concave and have no internal zeros. This gives a proof of~\cite[Theorem~1.4]{GZ} that differs from the one in~\cite{GZ}, which uses a computer verification for $\ell\le8$.
+
+\subsection*{Bounded gaps}
+For paths we prove a more general statement. Let $v\ge1$ and $[v]=\{1,\dots,v\}$. For a nonempty set $S=\{s_1<\dots<s_j\}\subseteq[v]$ we define its \emph{gaps}
+\begin{equation}\label{eq:gaps}
+g_0=s_1,\qquad g_i=s_{i+1}-s_i\quad(1\le i\le j-1),\qquad g_j=v+1-s_j.
+\end{equation}
+They are positive integers with sum $v+1$; we call $g_0$ and $g_j$ the \emph{end gaps} and the others \emph{interior gaps}.
+
+\begin{definition}\label{def:F}
+For integers $v\ge1$ and $1\le q\le m$, let $\cF(v;q,m)$ be the family of nonempty sets $S\subseteq[v]$ whose end gaps are at most $q$ and whose interior gaps are at most $m$. For $0\le j\le v$ let $f_j(v;q,m)$ be the number of $j$-element members of $\cF(v;q,m)$; thus $f_0(v;q,m)=0$.
+\end{definition}
+
+\begin{theorem}\label{thm:gaps}
+Let $v\ge1$ and $1\le q\le m$. Then the sequence $\bigl(f_j(v;q,m)/\binom vj\bigr)_{j=0}^{v}$ is log-concave and has no internal zeros.
+\end{theorem}
+
+For $n\ge1$, a set $S\subseteq[n]$ dominates $P_n^\ell$ exactly when $S\in\cF(n;\ell+1,2\ell+1)$ (Lemma~\ref{lem:graphs}), so the path case of Theorem~\ref{thm:main} is the case $(q,m)=(\ell+1,2\ell+1)$ of Theorem~\ref{thm:gaps}. The relation $m=2q-1$ plays no role in the proof, and the pairs $(q,m)=(t,t+1)$ are used in Corollary~\ref{cor:comp} below. For the cycle case we prove the analogous statement for subsets of $\Z/n\Z$ with bounded cyclic gaps (Theorem~\ref{thm:cyclic}).
+
+\subsection*{Compositions}
+For integers $t\ge2$, $n\ge0$ and $k\ge0$, let $A_t(n,k)$ be the number of compositions of $n$ into $k$ positive parts in which no $t$ consecutive parts are equal to~$1$. Zhang~\cite[Conjecture~5.1.7]{Z} conjectured, with $\ell$ in place of $t$, that $(A_t(n,k))_{k\ge0}$ is log-concave for all $t\ge2$ and all $n$; the case $t=2$ is related to the domination sequences of ordinary paths by~\cite[Theorem~5.1.5]{Z}. Since there are $\binom{n-1}{k-1}$ compositions of $n$ into $k$ parts, the ratio in the following corollary is the probability that a uniformly random composition of $n$ into $k$ parts has no $t$ consecutive parts equal to~$1$.
+
+\begin{corollary}\label{cor:comp}
+Let $t\ge2$ and $n\ge1$. Then the sequence $\bigl(A_t(n,k)/\binom{n-1}{k-1}\bigr)_{k=1}^{n}$ is log-concave and has no internal zeros. Consequently, for every $n\ge0$ the sequence $(A_t(n,k))_{k\ge0}$ is log-concave and has no internal zeros, and~\cite[Conjecture~5.1.7]{Z} holds.
+\end{corollary}
+
+The corollary follows from Theorem~\ref{thm:gaps} for $(q,m)=(t,t+1)$, combined with a bijection from the proof of~\cite[Theorem~5.1.8]{Z}. For $t\ge3$ the pair $(t,t+1)$ is not of the form $(\ell+1,2\ell+1)$, so this case uses Theorem~\ref{thm:gaps} outside the parameters that arise from powers of paths.
+
+\subsection*{Method}
+If a family of sets is closed under taking supersets, the normalized number of its members of size $j-1$ divided by that of size $j$ is the expected proportion of elements that can be deleted from a uniformly random member of size $j$ (Lemma~\ref{lem:deletion}). Ultra log-concavity is therefore equivalent to this proportion being nondecreasing in $j$. For the families above and members with at least two elements, deleting an element merges the two gaps adjacent to it, and the resulting set lies in the family exactly when the merged gap satisfies the relevant bound; deleting the only element of a one-element member leaves the empty set, which is not in the family. The probability of this event is the probability that two given adjacent parts of a uniformly random composition, with prescribed total and bounds on the parts, have sum at most that bound. Adding one more part to the composition does not decrease this probability. This follows from a likelihood ratio comparison based on the log-concavity of the coefficient sequence that counts the remaining parts (Proposition~\ref{prop:extra}), and it settles the cyclic case. For paths, deleting the smallest or the largest element is governed by the end bound $q$, and deleting any other element by the interior bound $m$. As $j$ grows, the proportion of elements of the first kind decreases, and a coefficientwise inequality (Lemma~\ref{lem:compare}) shows that a merge of two adjacent interior gaps is at least as likely as a merge of an end gap with its neighbour.
+
+\subsection*{Relation to earlier work}
+Several ingredients of the proof are known. The description of dominating sets of the ordinary path by blocks of bounded size is in~\cite[Section~5.1.3]{Z}; Lemma~\ref{lem:graphs} is its direct extension to powers of paths and cycles, written in terms of positive gaps. The correspondence between restricted compositions and bounded gaps in Section~\ref{sec:comp} is the stars-and-bars argument from the proof of~\cite[Theorem~5.1.8]{Z}. The identity in Lemma~\ref{lem:deletion}(2) counts exactly the pairs in the injection that Beaton and Brown~\cite{BB} used to prove the monotonicity of normalized domination counts (Remark~\ref{rem:BB}). That convolution preserves log-concavity of nonnegative sequences with no internal zeros is classical~\cite{Br, Ho, St}, and Proposition~\ref{prop:extra} is a likelihood ratio comparison of a standard kind; we include short proofs because we use intermediate inequalities. What is new is the application of these tools to bounded gaps: the expression of the normalized ratios through merging probabilities of adjacent gaps, the monotonicity of these probabilities obtained from Proposition~\ref{prop:extra}, and the comparison between end and interior merges in Lemma~\ref{lem:compare}. Together they give Theorems~\ref{thm:main}, \ref{thm:gaps} and~\ref{thm:cyclic} and Corollary~\ref{cor:comp}. The proofs do not use computer calculations or~\cite[Theorem~1.4]{GZ}. To our knowledge, Theorem~\ref{thm:main} and Corollary~\ref{cor:comp} have not appeared in the literature.
+
+\subsection*{Organization}
+Section~\ref{sec:lc} collects the facts on log-concave sequences that we need. Section~\ref{sec:families} contains the deletion identity and the gap encodings. Section~\ref{sec:cyclic} treats cyclic gaps and Section~\ref{sec:segment} proves Theorems~\ref{thm:gaps} and~\ref{thm:main}. Section~\ref{sec:comp} proves Corollary~\ref{cor:comp}, and Section~\ref{sec:remarks} contains further remarks.
+
+\section{Log-concave sequences}\label{sec:lc}
+
+In this section a \emph{sequence} is a finitely supported function $x\colon\Z\to[0,\infty)$; finite sequences $(x_k)_{k=a}^{b}$ are extended by zero. The \emph{support} of $x$ is $\{k:x(k)>0\}$, and $x$ has \emph{interval support} if its support is a nonempty set of consecutive integers, that is, if $x$ is not identically zero and has no internal zeros. A sequence $x$ is log-concave if $x(k)^2\ge x(k-1)x(k+1)$ for all $k\in\Z$. If $x$ has interval support, this needs to be checked only for those $k$ with $x(k-1)$, $x(k)$ and $x(k+1)$ all positive, where it says that $x(k-1)/x(k)\le x(k)/x(k+1)$. The convolution of two sequences is $(x*y)(k)=\sum_i x(i)y(k-i)$.
+
+We identify a polynomial with nonnegative coefficients with its coefficient sequence, so that products correspond to convolutions, and write $\coef{N}F$ for the coefficient of $z^N$ in $F$. For an integer $b\ge1$ let
+\[
+U_b(z)=z+z^2+\dots+z^b,\qquad D_b(z)=\sum_{s=2}^{b}(s-1)z^s,
+\]
+so that $D_1=0$. For integers $b_1,\dots,b_r\ge1$, the coefficient $\coef{N}U_{b_1}\cdots U_{b_r}$ is the number of compositions $(x_1,\dots,x_r)$ of $N$ with $1\le x_i\le b_i$ for all $i$. For $1\le s\le b$, the coefficient of $z^s$ in $D_b$ is $s-1$, which is the number of ordered pairs of positive integers with sum $s$.
+
+\begin{lemma}\label{lem:lc}
+Let $r$ be a log-concave sequence with interval support.
+\begin{enumerate}
+\item For all integers $u<v$ and $j\ge0$,
+\begin{equation}\label{eq:window}
+r(u)\,r(v-j)\ge r(u-j)\,r(v).
+\end{equation}
+\item Let $b$ be a sequence supported on $\{0,1,2,\dots\}$ and $r'=r*b$. Then, for all integers $u<v$,
+\begin{equation}\label{eq:shift}
+r(u)\,r'(v)\ge r'(u)\,r(v).
+\end{equation}
+\item If $b$ is log-concave with interval support, then so is $r*b$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) If $r(u-j)r(v)=0$ there is nothing to prove. Otherwise $u-j$ and $v$ lie in the support of $r$, and so does every integer between them, in particular $u$ and $v-j$. For $j=0$ the inequality is an equality. For $j\ge1$ put $\rho(w)=r(w)/r(w-1)$ for $u-j<w\le v$. Log-concavity says that $\rho$ is nonincreasing, so
+\[
+\frac{r(u)}{r(u-j)}=\prod_{i=1}^{j}\rho(u-j+i)\ge\prod_{i=1}^{j}\rho(v-j+i)=\frac{r(v)}{r(v-j)},
+\]
+because $u-j+i<v-j+i$ for each $i$.
+
+(2) Since $r'(w)=\sum_{j\ge0}b(j)r(w-j)$, we have
+\[
+r(u)r'(v)-r'(u)r(v)=\sum_{j\ge0}b(j)\bigl(r(u)r(v-j)-r(u-j)r(v)\bigr),
+\]
+a finite sum of nonnegative terms by~\eqref{eq:window}.
+
+(3) For a sequence $x$ consider the matrix $T_x=(x(\beta-\alpha))_{\alpha,\beta\in\Z}$, each of whose rows and columns has finitely many nonzero entries. For $\alpha<\alpha'$ and $\beta<\beta'$ write $p=\beta-\alpha'$, $d=\alpha'-\alpha$ and $e=\beta'-\beta$. The $2\times2$ minor of $T_r$ in rows $\alpha,\alpha'$ and columns $\beta,\beta'$ equals
+\[
+r(p+d)\,r(p+e)-r(p+d+e)\,r(p),
+\]
+which is nonnegative by~\eqref{eq:window} applied with $u=p+d$, $v=p+d+e$ and $j=d$. The same holds for $T_b$. Since $T_{r*b}=T_rT_b$, the Cauchy--Binet formula, whose sums are finite here, shows that all $2\times2$ minors of $T_{r*b}$ are nonnegative. The minor in rows $0,1$ and columns $k,k+1$ is $(r*b)(k)^2-(r*b)(k-1)(r*b)(k+1)$, so $r*b$ is log-concave. If the supports of $r$ and $b$ are $\{a_1,\dots,c_1\}$ and $\{a_2,\dots,c_2\}$, the support of $r*b$ is $\{a_1+a_2,\dots,c_1+c_2\}$.
+\end{proof}
+
+The coefficient sequence of $U_b$ is log-concave with interval support, so part~(3) of Lemma~\ref{lem:lc} gives the following.
+
+\begin{corollary}\label{cor:products}
+For all integers $b_1,\dots,b_r\ge1$, including the case $r=0$ of the constant polynomial $1$, the coefficient sequence of $U_{b_1}\cdots U_{b_r}$ is log-concave with interval support.
+\end{corollary}
+
+The next proposition is the main tool. Probabilistically, if a random variable $X$ has law proportional to $c(s)r(N-s)$, then replacing $r$ by $r*b$ moves the law of $X$ downwards in the likelihood ratio order, and hence in the usual stochastic order.
+
+\begin{proposition}\label{prop:extra}
+Let $r$ be a log-concave sequence with interval support, let $b$ be a sequence supported on $\{0,1,2,\dots\}$, and put $r'=r*b$. Let $c$ be a sequence and $N$ an integer, and suppose that
+\[
+Z=\sum_{s}c(s)\,r(N-s)\qquad\text{and}\qquad Z'=\sum_{s}c(s)\,r'(N-s)
+\]
+are positive. Then for every integer $a$,
+\begin{equation}\label{eq:extra}
+\frac1{Z'}\sum_{s\le a}c(s)\,r'(N-s)\ \ge\ \frac1Z\sum_{s\le a}c(s)\,r(N-s).
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Put $p(s)=c(s)r(N-s)/Z$ and $p'(s)=c(s)r'(N-s)/Z'$. For integers $s<t$, inequality~\eqref{eq:shift} with $u=N-t$ and $v=N-s$ gives
+\[
+p'(s)\,p(t)-p(s)\,p'(t)=\frac{c(s)c(t)}{ZZ'}\bigl(r(N-t)\,r'(N-s)-r'(N-t)\,r(N-s)\bigr)\ge0.
+\]
+Let $Q'$ and $Q$ denote the two sides of~\eqref{eq:extra}. Summing the last inequality over all pairs $s\le a<t$ gives $Q'(1-Q)\ge Q(1-Q')$, that is, $Q'\ge Q$.
+\end{proof}
+
+\section{Upward-closed families and gaps}\label{sec:families}
+
+\subsection{The deletion identity}
+Let $V$ be a finite set with $v\ge1$ elements. A family $\cF$ of nonempty subsets of $V$ is \emph{upward closed} if $S\in\cF$ and $S\subseteq T\subseteq V$ imply $T\in\cF$. For $0\le j\le v$ let $f_j$ be the number of $j$-element members of $\cF$, so that $f_0=0$, and let $e_j=f_j/\binom vj$. For $S\in\cF$ let $\delta(S)$ be the number of elements $s\in S$ such that $S\setminus\{s\}\in\cF$. For $1\le j\le v$ with $f_j>0$ define
+\[
+R_j=\frac{1}{j\,f_j}\sum_{S\in\cF,\ |S|=j}\delta(S),
+\]
+the expected proportion of deletable elements in a uniformly random $j$-element member of $\cF$.
+
+\begin{lemma}\label{lem:deletion}
+Let $\cF$ be a nonempty upward-closed family of nonempty subsets of $V$.
+\begin{enumerate}
+\item The support of $(e_j)_{j=0}^{v}$ is $\{j_0,\dots,v\}$ for some $j_0\ge1$.
+\item If $1\le j\le v$ and $f_j>0$, then $e_{j-1}=R_j\,e_j$.
+\item The sequence $(e_j)_{j=0}^{v}$ is log-concave if and only if $R_j\le R_{j+1}$ for every $j$ with $j_0<j<v$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) Every member of $\cF$ has supersets of all larger sizes, and these lie in $\cF$; moreover $\emptyset\notin\cF$.
+
+(2) The map $(T,x)\mapsto(T\cup\{x\},x)$ is a bijection from the pairs $(T,x)$ with $T\in\cF$, $|T|=j-1$ and $x\in V\setminus T$ onto the pairs $(S,s)$ with $S\in\cF$, $|S|=j$, $s\in S$ and $S\setminus\{s\}\in\cF$; it is well defined because $\cF$ is upward closed. Counting both sets gives $(v-j+1)f_{j-1}=j f_jR_j$. Dividing by $j\binom vj=(v-j+1)\binom v{j-1}$ gives the claim.
+
+(3) Let $1\le j\le v-1$. If $j\le j_0$, then $e_{j-1}=0$ and the inequality $e_j^2\ge e_{j-1}e_{j+1}$ is trivial. If $j_0<j<v$, then $e_{j-1}$, $e_j$ and $e_{j+1}$ are positive, and by~(2) the inequality is equivalent to $R_j\le R_{j+1}$.
+\end{proof}
+
+\begin{remark}\label{rem:BB}
+Beaton and Brown~\cite[Section~3]{BB} proved that the normalized domination counts of a graph are nondecreasing, using the injection $(v,S)\mapsto(v,S\cup\{v\})$ from the pairs consisting of an $i$-element dominating set $S$ and a vertex $v\notin S$ into the pairs consisting of an $(i+1)$-element dominating set and one of its vertices; this gives $(i+1)d_{i+1}\ge(n-i)d_i$ in their notation. The proof of Lemma~\ref{lem:deletion}(2) uses the same map and identifies its image as the set of pairs $(S,s)$ with $S\setminus\{s\}\in\cF$. Since $R_j\le1$, part~(2) recovers their monotonicity for every upward-closed family; see also~\cite[Proposition~2]{O}.
+\end{remark}
+
+\subsection{Gaps on a segment}
+For $v\ge1$ and $1\le q\le m$, let $\cF=\cF(v;q,m)$ and $f_j=f_j(v;q,m)$ be as in Definition~\ref{def:F}.
+
+\begin{lemma}\label{lem:segment}
+Let $v\ge1$ and $1\le q\le m$.
+\begin{enumerate}
+\item The family $\cF(v;q,m)$ is upward closed and contains $[v]$.
+\item For $1\le j\le v$, the map sending $S$ to its gap sequence $(g_0,\dots,g_j)$ is a bijection from the $j$-element members of $\cF(v;q,m)$ onto the compositions of $v+1$ into $j+1$ parts whose first and last parts are at most $q$ and whose other parts are at most $m$. In particular, $f_j(v;q,m)=\coef{v+1}U_q^2U_m^{j-1}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) All gaps of $[v]$ equal $1$. Adding an element $x\notin S$ to $S$ splits the gap containing $x$ into two positive parts and leaves the other gaps unchanged. If the split gap is interior, both parts are interior and smaller than it. If it is an end gap, one part is an end gap and the other is interior, and both are smaller than the original gap, which is at most $q\le m$.
+
+(2) Every composition $(g_0,\dots,g_j)$ of $v+1$ with positive parts arises from exactly one set, namely $\{g_0,\,g_0+g_1,\,\dots,\,g_0+\dots+g_{j-1}\}\subseteq[v]$.
+\end{proof}
+
+\subsection{Cyclic gaps}
+Let $n\ge1$ and identify $\Z/n\Z$ with $\{0,1,\dots,n-1\}$. For a nonempty set $S=\{s_1<\dots<s_k\}\subseteq\Z/n\Z$, its \emph{cyclic gaps} are $s_{i+1}-s_i$ for $1\le i\le k-1$ and $n+s_1-s_k$. They are positive integers with sum $n$; for $k=1$ the only cyclic gap is $n$. For $m\ge1$ let $\Cyc(n;m)$ be the family of nonempty sets $S\subseteq\Z/n\Z$ all of whose cyclic gaps are at most $m$, and let $c_k(n;m)$ be the number of its $k$-element members, so that $c_0(n;m)=0$. Let $\cC_k(n;m)$ be the set of compositions of $n$ into $k$ parts, each at most $m$, so that $|\cC_k(n;m)|=\coef{n}U_m^k$.
+
+\begin{lemma}\label{lem:cyclic}
+Let $n,m\ge1$.
+\begin{enumerate}
+\item The family $\Cyc(n;m)$ is upward closed and contains $\Z/n\Z$.
+\item For $k\ge1$, the map
+\[
+\Phi(x,g)=\bigl(\{x,\,x+g_1,\,x+g_1+g_2,\,\dots,\,x+g_1+\dots+g_{k-1}\},\ x\bigr)
+\]
+is a bijection from $\Z/n\Z\times\cC_k(n;m)$ onto the set of pairs $(S,s)$ with $S\in\Cyc(n;m)$, $|S|=k$ and $s\in S$. If $\Phi(x,g)=(S,s)$, then $g_1,\dots,g_k$ are the cyclic gaps of $S$ read in the positive direction starting from $s$. In particular, $k\,c_k(n;m)=n\,\coef{n}U_m^k$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) As in Lemma~\ref{lem:segment}, adding an element splits one cyclic gap into two smaller ones, and all cyclic gaps of $\Z/n\Z$ equal $1$.
+
+(2) The partial sums $0,g_1,\dots,g_1+\dots+g_{k-1}$ are distinct elements of $\{0,\dots,n-1\}$, so the first component of $\Phi(x,g)$ has $k$ elements, and its cyclic gaps read from $x$ are $g_1,\dots,g_k$. Conversely, a pair $(S,s)$ determines $x=s$ and $g$ as the cyclic gaps of $S$ read from $s$.
+\end{proof}
+
+\subsection{Powers of paths and cycles}
+
+\begin{lemma}\label{lem:graphs}
+Let $n,\ell\ge1$.
+\begin{enumerate}
+\item A set $S\subseteq[n]$ dominates $P_n^\ell$ if and only if $S\in\cF(n;\ell+1,2\ell+1)$.
+\item A set $S\subseteq\Z/n\Z$ dominates $C_n^\ell$ if and only if $S\in\Cyc(n;2\ell+1)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+In both cases the empty set is not dominating, so let $S$ be nonempty, and write $d(x,S)$ for the distance from a vertex $x$ to the nearest element of $S$ in the underlying path or cycle. A vertex $x\notin S$ is dominated if and only if $d(x,S)\le\ell$.
+
+(1) Label the path $1,2,\dots,n$, so that $d(x,y)=|x-y|$, and let $g_0,\dots,g_j$ be the gaps of $S=\{s_1<\dots<s_j\}$. The vertices $x<s_1$ satisfy $d(x,S)=s_1-x$. They are all dominated if and only if $s_1-1\le\ell$, that is, $g_0\le\ell+1$: there are no such vertices if $s_1=1$, and otherwise the vertex $1$ is the farthest of them from $S$. Similarly, the vertices after $s_j$ are all dominated if and only if $g_j\le\ell+1$. For $1\le i\le j-1$, the vertices strictly between $s_i$ and $s_{i+1}$ are $s_i+u$ with $1\le u\le g_i-1$, and $d(s_i+u,S)=\min(u,g_i-u)$. They are all dominated if and only if $g_i\le2\ell+1$: there are none if $g_i=1$, and otherwise the largest value of $\min(u,g_i-u)$ is $\lfloor g_i/2\rfloor$, which is at most $\ell$ exactly when $g_i\le2\ell+1$.
+
+(2) If $n\le2$, then $C_n^\ell$ is complete by convention, so every nonempty set dominates, and every nonempty set lies in $\Cyc(n;2\ell+1)$ because its cyclic gaps are at most $n<2\ell+1$. Let $n\ge3$. Then two vertices are at distance $\min(w,n-w)$ in $C_n$, where $w$ is the number of steps from one to the other in the positive direction. Let $x\notin S$, and suppose that the first elements of $S$ reached from $x$ in the negative and in the positive direction are $u$ and $u'$ steps away. Then $u+u'=g$ is the cyclic gap of $S$ containing $x$, and every element of $S$ is at least $u$ steps away from $x$ in the negative direction and at least $u'$ steps away in the positive direction, so $d(x,S)=\min(u,g-u)$. As in~(1), the vertices outside $S$ in a cyclic gap $g$ are all dominated if and only if $g\le2\ell+1$.
+\end{proof}
+
+For $\ell=1$, part~(1) is the description in~\cite[Section~5.1.3]{Z} of dominating sets of paths by blocks of non-chosen vertices: the block sizes are $g_0-1,\dots,g_j-1$.
+
+\section{Cyclic gaps}\label{sec:cyclic}
+
+\begin{theorem}\label{thm:cyclic}
+Let $n,m\ge1$. Then the sequence $\bigl(c_k(n;m)/\binom nk\bigr)_{k=0}^{n}$ is log-concave and has no internal zeros.
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{lem:cyclic}(1), Lemma~\ref{lem:deletion} applies to $\cF=\Cyc(n;m)$, with $f_k=c_k(n;m)$. Let $2\le k\le n$ with $c_k(n;m)>0$, and write $\cC_k=\cC_k(n;m)$, which is nonempty by Lemma~\ref{lem:cyclic}(2). Define
+\[
+T_k=\frac{|\{g\in\cC_k:\ g_1+g_2\le m\}|}{|\cC_k|}.
+\]
+
+We first show that $R_k=T_k$. Let $S\in\Cyc(n;m)$ have $k$ elements, let $s\in S$, and let $\Phi(x,g)=(S,s)$. The two cyclic gaps of $S$ adjacent to $s$ are $g_k$ and $g_1$, and the cyclic gaps of $S\setminus\{s\}$ are $g_k+g_1,g_2,\dots,g_{k-1}$ (for $k=2$, the single gap $g_1+g_2=n$). Hence $S\setminus\{s\}\in\Cyc(n;m)$ if and only if $g_k+g_1\le m$. By Lemma~\ref{lem:cyclic}(2),
+\[
+\sum_{|S|=k}\delta(S)=n\,\bigl|\{g\in\cC_k:\ g_k+g_1\le m\}\bigr|=n\,|\cC_k|\,T_k,
+\]
+where the second equality uses the cyclic rotation $(g_1,\dots,g_k)\mapsto(g_k,g_1,\dots,g_{k-1})$ of $\cC_k$. Since $k\,c_k(n;m)=n\,|\cC_k|$, we obtain $R_k=T_k$.
+
+Next we show that $T_k\le T_{k+1}$ if moreover $k<n$ and $c_{k+1}(n;m)>0$. Let $w(s)=\coef{s}U_m^2$ and let $r_k$ be the coefficient sequence of $U_m^{k-2}$. The number of $g\in\cC_k$ with $g_1+g_2=s$ is $w(s)\,r_k(n-s)$, so
+\[
+T_k=\frac{\sum_{s\le m}w(s)\,r_k(n-s)}{\sum_{s}w(s)\,r_k(n-s)},
+\]
+and similarly for $T_{k+1}$ with $r_{k+1}=r_k*U_m$. By Corollary~\ref{cor:products}, $r_k$ is log-concave with interval support, and Proposition~\ref{prop:extra} with $c=w$ and $a=m$ gives $T_{k+1}\ge T_k$.
+
+If $j_0<k<n$ in the notation of Lemma~\ref{lem:deletion}, then $k\ge2$ and $c_k(n;m),c_{k+1}(n;m)>0$, so $R_k=T_k\le T_{k+1}=R_{k+1}$. Lemma~\ref{lem:deletion}(3) completes the proof.
+\end{proof}
+
+\begin{remark}\label{rem:cyclic}
+Lemma~\ref{lem:cyclic}(2) also gives $c_k(n;m)/\binom nk=\coef{n}U_m^k\big/\binom{n-1}{k-1}$, the probability that a uniformly random composition of $n$ into $k$ parts has all parts at most $m$.
+\end{remark}
+
+\section{Bounded gaps on a segment}\label{sec:segment}
+
+Throughout this section fix $v\ge1$ and $1\le q\le m$, and put
+\[
+N=v+1,\qquad A=U_q,\qquad B=U_m.
+\]
+For $h\ge0$ let $\cG_h$ be the set of compositions $g=(g_0,g_1,\dots,g_{h+1})$ of $N$ into $h+2$ parts with $g_0,g_{h+1}\le q$ and $g_1,\dots,g_h\le m$. By Lemma~\ref{lem:segment}(2), $|\cG_h|=\coef{N}A^2B^h=f_{h+1}(v;q,m)$. For $h\ge1$ with $\cG_h\neq\emptyset$ define
+\[
+E_h=\frac{|\{g\in\cG_h:\ g_0+g_1\le q\}|}{|\cG_h|},
+\]
+and for $h\ge2$ with $\cG_h\neq\emptyset$ define
+\[
+I_h=\frac{|\{g\in\cG_h:\ g_1+g_2\le m\}|}{|\cG_h|}.
+\]
+Thus $E_h$ is the probability that the end gap $g_0$ and the adjacent interior gap $g_1$ can be merged into an end gap, and $I_h$ is the probability that the adjacent interior gaps $g_1$ and $g_2$ can be merged into an interior gap.
+
+\begin{lemma}\label{lem:EI}
+Let $h\ge1$ with $\cG_h\neq\emptyset$. Then
+\begin{equation}\label{eq:E}
+E_h=\frac{\coef{N}AB^{h-1}D_q}{\coef{N}A^2B^h},
+\end{equation}
+and if $h\ge2$, then
+\begin{equation}\label{eq:I}
+I_h=\frac{\coef{N}A^2B^{h-2}D_m}{\coef{N}A^2B^h}.
+\end{equation}
+If moreover $\cG_{h+1}\neq\emptyset$, then $E_{h+1}\ge E_h$, and if $h\ge2$, also $I_{h+1}\ge I_h$.
+\end{lemma}
+
+\begin{proof}
+The number of $g\in\cG_h$ with $g_0+g_1=s$ is $c(s)\,r_h(N-s)$, where $c(s)=\coef{s}AB$ counts the choices of $(g_0,g_1)$ and $r_h$ is the coefficient sequence of $AB^{h-1}$, which counts the choices of $(g_2,\dots,g_{h+1})$. If $s\le q$, then two positive integers with sum $s$ are at most $q-1\le m$, so $c(s)=s-1=\coef{s}D_q$; since $D_q$ has degree at most $q$, summing over $s\le q$ gives~\eqref{eq:E}. Equation~\eqref{eq:I} follows in the same way from the pair $(g_1,g_2)$, counted by $\coef{s}B^2$, which equals $\coef{s}D_m$ for $s\le m$, and the remaining parts, counted by $A^2B^{h-2}$.
+
+For the monotonicity, $E_h$ and $E_{h+1}$ are the two sides of~\eqref{eq:extra} with $c(s)=\coef{s}AB$, $r=r_h$, $b=B$ and $a=q$; indeed $r_{h+1}=r_h*B$, and $r_h$ is log-concave with interval support by Corollary~\ref{cor:products}. Similarly, $I_h$ and $I_{h+1}$ are the two sides of~\eqref{eq:extra} with $c(s)=\coef{s}B^2$, $r$ the coefficient sequence of $A^2B^{h-2}$, $b=B$ and $a=m$. Proposition~\ref{prop:extra} applies in both cases.
+\end{proof}
+
+\begin{lemma}\label{lem:compare}
+If $1\le q\le m$, then $U_qD_m-U_mD_q$ has nonnegative coefficients. Consequently $I_h\ge E_h$ for every $h\ge2$ with $\cG_h\neq\emptyset$.
+\end{lemma}
+
+\begin{proof}
+Let $\Pi_t$ be the set of pairs $(x,y)$ of integers with $1\le x\le q$, $1\le y\le m$ and $x+y=t$. Since the coefficient of $z^y$ in $D_m$ is $y-1$ for $1\le y\le m$, and that of $z^x$ in $D_q$ is $x-1$ for $1\le x\le q$,
+\[
+\coef{t}\bigl(U_qD_m-U_mD_q\bigr)=\sum_{(x,y)\in \Pi_t}\bigl((y-1)-(x-1)\bigr)=\sum_{(x,y)\in \Pi_t}(y-x).
+\]
+The pairs in $\Pi_t$ with $y\le q$ form a set that is invariant under $(x,y)\mapsto(y,x)$, because $q\le m$; their contribution is zero. Every other pair has $y>q\ge x$ and contributes a positive term.
+
+By~\eqref{eq:E} and~\eqref{eq:I}, the fractions $I_h$ and $E_h$ have the same denominator, and the difference of their numerators is
+\[
+\coef{N}AB^{h-2}\bigl(AD_m-BD_q\bigr),
+\]
+which is nonnegative by the first part.
+\end{proof}
+
+\begin{lemma}\label{lem:R}
+Let $2\le j\le v$ with $f_j(v;q,m)>0$, and let $R_j$ be defined as in Lemma~\ref{lem:deletion} for $\cF=\cF(v;q,m)$. Then
+\[
+R_2=E_1\qquad\text{and}\qquad R_j=\frac{2E_{j-1}+(j-2)I_{j-1}}{j}\quad(j\ge3).
+\]
+\end{lemma}
+
+\begin{proof}
+Let $S=\{s_1<\dots<s_j\}\in\cF$ with gaps $g=(g_0,\dots,g_j)\in\cG_{j-1}$. For $1\le i\le j$ the set $S\setminus\{s_i\}$ is nonempty, and its gaps are obtained from $g$ by replacing $g_{i-1}$ and $g_i$ by their sum. The merged gap is an end gap if $i\in\{1,j\}$ and an interior gap otherwise, and all other gaps keep their sizes and types. Hence $S\setminus\{s_1\}\in\cF$ if and only if $g_0+g_1\le q$, $S\setminus\{s_j\}\in\cF$ if and only if $g_{j-1}+g_j\le q$, and, for $2\le i\le j-1$, $S\setminus\{s_i\}\in\cF$ if and only if $g_{i-1}+g_i\le m$. The reversal $(g_0,\dots,g_j)\mapsto(g_j,\dots,g_0)$ and the permutations of $g_1,\dots,g_{j-1}$ map $\cG_{j-1}$ onto itself. By Lemma~\ref{lem:segment}(2), summing over $S$ gives
+\[
+\sum_{|S|=j}\delta(S)=|\cG_{j-1}|\bigl(2E_{j-1}+(j-2)I_{j-1}\bigr),
+\]
+where the term with $I_{j-1}$ is absent for $j=2$. Since $|\cG_{j-1}|=f_j(v;q,m)$, dividing by $jf_j(v;q,m)$ proves the lemma.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:gaps}]
+By Lemma~\ref{lem:segment}(1), Lemma~\ref{lem:deletion} applies to $\cF=\cF(v;q,m)$. Let $j_0<j<v$, where $j_0$ is as in Lemma~\ref{lem:deletion}(1). Then $j\ge2$ and $f_j,f_{j+1}>0$, so $\cG_{j-1}$ and $\cG_j$ are nonempty. If $j=2$, Lemmas~\ref{lem:R}, \ref{lem:EI} and~\ref{lem:compare} give
+\[
+R_3=\tfrac23E_2+\tfrac13I_2\ge E_2\ge E_1=R_2.
+\]
+If $j\ge3$, the same lemmas give
+\[
+R_{j+1}=\frac{2E_j+(j-1)I_j}{j+1}\ge\frac{2E_{j-1}+(j-1)I_{j-1}}{j+1}=R_j+\frac{2\,(I_{j-1}-E_{j-1})}{j(j+1)}\ge R_j.
+\]
+Lemma~\ref{lem:deletion}(3) completes the proof.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+For $n=0$ both graphs have the domination sequence $(1)$. Let $n\ge1$. The empty set does not dominate, so $\gamma_0=0$. By Lemma~\ref{lem:graphs}(1), $\gamma_k(P_n^\ell)=f_k(n;\ell+1,2\ell+1)$ for $0\le k\le n$, and Theorem~\ref{thm:gaps} applies because $\ell+1\le2\ell+1$. By Lemma~\ref{lem:graphs}(2), $\gamma_k(C_n^\ell)=c_k(n;2\ell+1)$ for $0\le k\le n$, and Theorem~\ref{thm:cyclic} applies.
+\end{proof}
+
+\begin{remark}\label{rem:qm}
+The hypothesis $q\le m$ is used in Lemma~\ref{lem:segment}(1), in the identification of the truncation of $AB$ with $D_q$ in Lemma~\ref{lem:EI}, and in Lemma~\ref{lem:compare}. It cannot be dropped: for $v=3$, $q=3$ and $m=1$, the sets with end gaps at most $3$ and interior gaps at most $1$ are $\{1\},\{2\},\{3\},\{1,2\},\{2,3\}$ and $\{1,2,3\}$. This family is not upward closed, and the normalized sequence $(0,1,\tfrac23,1)$ is not log-concave.
+\end{remark}
+
+\section{Compositions without long runs of ones}\label{sec:comp}
+
+Recall that $A_t(n,k)$ is the number of compositions of $n$ into $k$ parts with no $t$ consecutive parts equal to $1$. The empty composition is the only composition of $0$, so $A_t(0,k)$ is $1$ for $k=0$ and $0$ otherwise, and $A_t(n,0)=0$ for $n\ge1$.
+
+\begin{lemma}\label{lem:comp}
+Let $t\ge2$ and $n\ge2$. For $1\le k\le n-1$,
+\[
+A_t(n,k)=f_{n-k}(n-1;t,t+1).
+\]
+Moreover $A_t(n,n)=1$ if $n<t$ and $A_t(n,n)=0$ if $n\ge t$.
+\end{lemma}
+
+\begin{proof}
+The last statement holds because the only composition of $n$ into $n$ parts consists of $n$ ones. Let $1\le k\le n-1$. A composition $x=(x_1,\dots,x_k)$ of $n$ is determined by its partial sums $\sigma_i=x_1+\dots+x_i$, $0\le i\le k$, and the map $x\mapsto S(x)=[n-1]\setminus\{\sigma_1,\dots,\sigma_{k-1}\}$ is a bijection from the compositions of $n$ into $k$ parts onto the $(n-k)$-element subsets of $[n-1]$. The parts $x_i,\dots,x_{i+t-1}$ all equal $1$ if and only if $\sigma_{i-1},\dots,\sigma_{i+t-1}$ are $t+1$ consecutive integers. Since $\{0,1,\dots,n\}\setminus S(x)=\{\sigma_0,\dots,\sigma_k\}$, the composition $x$ is counted by $A_t(n,k)$ if and only if $\{0,1,\dots,n\}\setminus S(x)$ contains no $t+1$ consecutive integers.
+
+Write $S(x)=\{s_1<\dots<s_j\}$ with $j=n-k\ge1$, and let $g_0,\dots,g_j$ be its gaps as a subset of $[n-1]$, as in~\eqref{eq:gaps} with $v=n-1$. The set $\{0,\dots,n\}\setminus S(x)$ is the disjoint union of the blocks of consecutive integers $\{0,\dots,s_1-1\}$, $\{s_i+1,\dots,s_{i+1}-1\}$ for $1\le i\le j-1$, and $\{s_j+1,\dots,n\}$, of sizes $g_0$, $g_i-1$ and $g_j$, and no two of these blocks are adjacent. Hence it contains no $t+1$ consecutive integers if and only if every block has at most $t$ elements, that is, if and only if $S(x)\in\cF(n-1;t,t+1)$.
+\end{proof}
+
+Subtracting $1$ from each gap of $S(x)$ gives a weak composition $(g_0-1,\dots,g_j-1)$ of $k-1$ into $n-k+1$ parts whose first and last parts are at most $t-1$ and whose other parts are at most $t$. This is the weak composition attached to $x$ in the proof of~\cite[Theorem~5.1.8]{Z}. There each part of $x$ is decreased by $1$, and the resulting weak composition of $n-k$ is written as a word of length $n-1$ with $n-k$ stars and $k-1$ bars; the bars occupy the positions $\sigma_1,\dots,\sigma_{k-1}$ and the stars the positions in $S(x)$. Exchanging stars and bars gives $(g_0-1,\dots,g_j-1)$.
+
+\begin{proof}[Proof of Corollary~\ref{cor:comp}]
+For $n=1$ the sequence consists of the single term $1$. Let $n\ge2$, put $v=n-1$, and let $e_j=f_j(v;t,t+1)/\binom vj$ for $0\le j\le v$. Since $\binom{n-1}{k-1}=\binom{v}{n-k}$, Lemma~\ref{lem:comp} gives $A_t(n,k)/\binom{n-1}{k-1}=e_{n-k}$ for $1\le k\le n-1$.
+
+If $n\ge t$, then $A_t(n,n)=0=e_0$, so the sequence in the corollary is the reversal $(e_v,\dots,e_0)$ of $(e_j)_{j=0}^{v}$. By Theorem~\ref{thm:gaps} with $(q,m)=(t,t+1)$, it is log-concave and has no internal zeros. If $n<t$, every composition of $n$ has fewer than $t$ parts and is therefore counted, so $A_t(n,k)=\binom{n-1}{k-1}$, and the sequence is constant.
+
+For the second statement, let $n\ge1$. The sequence $(A_t(n,k))_{k=1}^{n}$ is the termwise product of the sequence in the first statement and the binomial sequence $\bigl(\binom{n-1}{k-1}\bigr)_{k=1}^{n}$. Both are log-concave and have no internal zeros, and the second is positive for $1\le k\le n$; hence their product is log-concave and has no internal zeros, and adding the term $A_t(n,0)=0$ preserves these properties. The case $n=0$ is trivial.
+\end{proof}
+
+\begin{remark}\label{rem:comp}
+For $t=2$ and $n\ge2$, Lemma~\ref{lem:graphs}(1) shows that $\cF(n-1;2,3)$ is the family of dominating sets of the path on $n-1$ vertices, and for $1\le k\le n-1$ Lemma~\ref{lem:comp} becomes $\gamma_k(P_{n-1})=A_2(n,n-k)$, which is~\cite[Theorem~5.1.5]{Z}; by~\cite[Observation~5.1.6]{Z}, log-concavity statements for the two sequences are equivalent. Since $(k/n)_{k=1}^{n}$ is log-concave, Corollary~\ref{cor:comp} also shows that $\bigl(A_t(n,k)/\binom nk\bigr)_{k=0}^{n}$ is log-concave, that is, $(A_t(n,k))_{k=0}^{n}$ is ultra log-concave.
+\end{remark}
+
+\section{Further remarks}\label{sec:remarks}
+
+\subsection*{Deletion and ultra log-concavity}
+For every graph $G$ on $n\ge1$ vertices, the dominating sets form an upward-closed family of nonempty subsets of the vertex set. By Lemma~\ref{lem:deletion}, the domination sequence of $G$ is ultra log-concave if and only if the expected proportion of vertices that can be removed from a uniformly random $k$-element dominating set is nondecreasing in $k$, for $k$ strictly between the domination number of $G$ and $n$. Since the domination sequence of a graph need not be log-concave~\cite{BB}, and hence need not be ultra log-concave, this monotonicity fails in general. For powers of paths and cycles it holds because every deletion merges two adjacent gaps, and the probabilities of the merges are controlled by Proposition~\ref{prop:extra} and Lemma~\ref{lem:compare}.
+
+\subsection*{Computations}
+Galvin and Zhang checked Conjecture~\ref{conj:GZ} for $n,\ell\le500$~\cite{GZ}, and Zhang checked~\cite[Conjecture~5.1.7]{Z} for $2\le t\le7$ and $n\le500$. As a consistency check, we confirmed the counting formulas of Sections~\ref{sec:families} and~\ref{sec:comp} and the inequalities of Theorems~\ref{thm:main} and~\ref{thm:gaps} and Corollary~\ref{cor:comp} in exact arithmetic for small parameters: by enumerating the dominating sets of $P_n^\ell$ and $C_n^\ell$ for $n\le16$ and $\ell\le n+2$ and the members of $\cF(v;q,m)$ for $v\le10$, $q\le8$ and $m\le12$, and by computing $A_t(n,k)$ for $n\le50$ and $t\le9$ with a dynamic program over the total, the number of parts and the length of the final run of parts equal to $1$. These computations are not used in the proofs.
+
+\section*{Use of AI-assisted tools}
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{9}
+
+\bibitem{AP}
+S.~Alikhani and Y.-H. Peng, \emph{Introduction to domination polynomial of a graph}, Ars Combin. \textbf{114} (2014), 257--266.
+
+\bibitem{BB}
+I.~Beaton and J.~I. Brown, \emph{On the unimodality of domination polynomials}, Graphs Combin. \textbf{38} (2022), no.~3, Paper No.~90.
+
+\bibitem{Br}
+F.~Brenti, \emph{Unimodal, log-concave and P\'olya frequency sequences in combinatorics}, Mem. Amer. Math. Soc. \textbf{81} (1989), no.~413.
+
+\bibitem{GZ}
+D.~Galvin and Y.~Zhang, \emph{The domination polynomial of powers of paths and cycles}, preprint (2024), arXiv:2408.12731v1.
+
+\bibitem{Ho}
+S.~G. Hoggar, \emph{Chromatic polynomials and logarithmic concavity}, J. Combin. Theory Ser.~B \textbf{16} (1974), no.~3, 248--254.
+
+\bibitem{O}
+M.~Omar, \emph{New perspectives on the unimodality of domination polynomials}, preprint (2026), arXiv:2601.14494v1.
+
+\bibitem{St}
+R.~P. Stanley, \emph{Log-concave and unimodal sequences in algebra, combinatorics, and geometry}, Ann. New York Acad. Sci. \textbf{576} (1989), 500--535.
+
+\bibitem{Z}
+Y.~Zhang, \emph{Some combinatorial problems involving total non-negativity and unimodality}, Ph.D. dissertation, University of Notre Dame, 2025, doi:10.7274/28786115.
+
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,839 @@
+\documentclass{amsart}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+
+\hyphenation{manuscript}
+\raggedbottom
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+\numberwithin{table}{section}
+
+\newcommand{\Z}{\mathbb{Z}}
+
+\begin{document}
+
+\title[Tuza's conjecture for powers of paths and cycles]{Tuza's conjecture for powers of paths and cycles}
+\author{Knowledge Sense}
+\address{Knowledge Sense}
+\email{math@knowledgesense.jp}
+\date{9 October 2026}
+\subjclass[2020]{Primary 05C70; Secondary 05B10, 05C38}
+\keywords{Tuza's conjecture, triangle packing, triangle cover, power of a path, power of a cycle, Skolem sequence, co-chain graph, computer-assisted proof}
+
+\begin{abstract}
+For a graph $G$ let $\nu(G)$ be the maximum number of pairwise edge-disjoint triangles in $G$ and $\tau(G)$ the minimum number of edges meeting every triangle. Tuza conjectured that $\tau(G)\le 2\nu(G)$ for every graph $G$. We prove this inequality for every power $P_n^k$ of a path and every power $C_n^k$ of a cycle, and therefore for every finite disjoint union of such graphs; equality holds for $K_4=P_4^3$ and $K_5=P_5^4$. For long powers we compare explicit covers, obtained by deleting the monochromatic edges of a two-coloring, with explicit packings obtained by translating the difference triples of Skolem and hooked Skolem sequences. For paths with exponent $8$ or $9$ the packing is completed by one additional triangle, and the cycle powers with exponent $2$ or $6$ are treated separately. Powers of paths with at most $2k+2$ vertices are co-chain graphs. We prove that $\tau\le2\nu$ holds for every co-chain graph, without parity conditions on its two cliques; this extends a theorem of Chahua and Guti\'errez. The proof, given in an appendix, combines analytic estimates for large orders with a finite computation supported by explicit certificates.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+All graphs in this paper are finite and simple. A \emph{triangle packing} of a graph $G$ is a set of pairwise edge-disjoint triangles of $G$, and a \emph{triangle cover} is a set of edges meeting every triangle of $G$. We write $\nu(G)$ for the maximum size of a triangle packing and $\tau(G)$ for the minimum size of a triangle cover. A cover needs a separate edge for each triangle of a packing, and the edges of a maximal packing form a cover, so $\nu(G)\le\tau(G)\le3\nu(G)$.
+
+\begin{conjecture}[Tuza \cite{Tuza81,Tuza90}]\label{conj:tuza}
+For every graph $G$ we have $\tau(G)\le 2\nu(G)$.
+\end{conjecture}
+
+The constant $2$ cannot be lowered, as $K_4$ and $K_5$ show. For general graphs Haxell \cite{Haxell} proved $\tau(G)\le\frac{66}{23}\nu(G)$, and a recent preprint of Wang \cite[Theorem~1]{Wang} gives $\tau(G)\le\frac{165}{59}\nu(G)$; fractional versions of the conjecture hold \cite{Krivelevich}. The conjecture is known for planar graphs \cite{Tuza90}, for tripartite graphs in a stronger form \cite{HaxellKohayakawa}, for graphs of maximum average degree less than $7$ \cite{Puleo}, and for graphs of treewidth at most six \cite[Theorem~3.4]{BFG}; the last result includes all $K_8$-free chordal graphs \cite[Corollary~3.6]{BFG}. Here and below, theorem numbers in \cite{BFG} are those of its arXiv version. For dense hereditary classes, Bonamy, Bo\.zyk, Grzesik, Hatzel, Masa\v{r}\'{\i}k, Novotn\'a and Okrasa \cite{BBGHMNO} proved the conjecture for threshold graphs and for co-chain graphs whose two cliques have the same size divisible by four, and Chahua and Guti\'errez \cite{CG} extended the latter to co-chain graphs whose two cliques have even sizes. The paper \cite{CG} asks whether the conjecture holds for all co-chain graphs and for all mixed unit interval graphs \cite[Section~4, Questions~1 and~2]{CG}, and \cite[Section~1]{BBGHMNO} proposes mixed unit interval graphs as a target, mentioning $k$-paths, described there as concatenations of well-structured same-sized co-chain graphs, as the simplest object for further study.
+
+In this paper we consider powers of paths and cycles, defined by distance as follows. For integers $n\ge0$ and $k\ge0$, the graph $P_n^k$ has vertex set $\{1,\dots,n\}$, and $ij$ is an edge if $0<|i-j|\le k$; thus $P_0^k$ is the empty graph, with $\tau(P_0^k)=\nu(P_0^k)=0$. For integers $n\ge3$ and $k\ge0$, the graph $C_n^k$ has vertex set $\Z_n$, and $ij$ is an edge if the circular distance between $i$ and $j$ is between $1$ and $k$. Assigning the interval $[i,i+k]$ to the vertex $i$ shows that $P_n^k$ is a unit interval graph, and for $n\le2k+2$ it is a co-chain graph (Lemma~\ref{lem:shortpath}). Coloring problems on these two families have also been studied; see, for instance, \cite{MDMF} for biclique-coloring.
+
+\begin{theorem}\label{thm:main}
+For all integers $n\ge0$ and $k\ge0$ we have $\tau(P_n^k)\le2\nu(P_n^k)$, and for all integers $n\ge3$ and $k\ge0$ we have $\tau(C_n^k)\le2\nu(C_n^k)$. Consequently $\tau(G)\le2\nu(G)$ for every graph $G$ each of whose connected components is a power of a path or a power of a cycle, with possibly different exponents. Equality holds for $K_4=P_4^3=C_4^2$ and $K_5=P_5^4=C_5^2$.
+\end{theorem}
+
+We note how these graphs relate to the results listed above. For $n\ge k+1$ the graph $P_n^k$ contains $K_{k+1}$, and the bags $\{i,\dots,i+k\}$ form a path decomposition of width $k$, so its treewidth is exactly $k$, and \cite[Theorem~3.4]{BFG} applies only for $k\le6$. For $n\ge2k+3$ the vertices $1$, $k+2$ and $2k+3$ are pairwise nonadjacent, so $P_n^k$ is not co-bipartite. For $k\ge4$ and $n$ large the average degree of $P_n^k$ exceeds $7$, and $C_n^k$ is $2k$-regular for $n\ge2k+1$.
+
+\subsection*{Method}
+Packings are obtained from \emph{difference triples}. If $u+v=w$ with $u\ne v$, then the triangles $\{x,x+u,x+w\}$ use one edge of each of the lengths $u$, $v$ and $w$, and distinct translates use distinct edges; triples with pairwise disjoint sets of entries give edge-disjoint triangles. A Skolem or hooked Skolem sequence of order $m$ provides $m$ such triples whose entries are $\{1,\dots,3m\}$ or $\{1,\dots,3m+1\}\setminus\{3m\}$. This is the classical construction of cyclic Steiner triple systems and cyclic cycle systems; see \cite[Section~1]{BGL}, \cite{Skolem}, \cite{OKeefe}, and \cite[Theorem~5.3]{BBW} for the existence statement in the form we use. It gives $\nu(C_n^k)\ge mn$ and $\nu(P_n^k)\ge mn-S(m)$ for an explicit $S(m)$ (Lemmas~\ref{lem:pathpacking} and~\ref{lem:cyclepacking}).
+
+Covers are obtained from two-colorings: deleting the monochromatic edges leaves a bipartite graph. For paths and for even exponents on cycles we use the parity coloring. For odd exponents on cycles we color runs of consecutive vertices alternately, with run lengths between $\lfloor k/2\rfloor+1$ and $k$, and show that at most $\lfloor k/2\rfloor n$ edges are monochromatic. Colorings of powers of cycles by alternating blocks of consecutive vertices go back to the study of their largest triangle-free subgraphs by Chung and Trotter \cite{ChungTrotter}, Bondy and Locke \cite{BondyLocke} and Locke \cite{Locke}; we only need the bound above.
+
+For powers of paths with $k\ge7$ and $n\ge2k+2$, the comparison of the two constructions reduces to the sign of an affine function of $n$ whose coefficients depend on $k$ modulo $12$ (Table~\ref{tab:path}). It fails only for $k\in\{8,9\}$, where the packing is short by exactly one triangle; in these two cases we add the triangle $\{n-8,n-2,n\}$ (Lemma~\ref{lem:repair}). For powers of cycles the comparison requires $2m\ge\lfloor k/2\rfloor$, which fails only for $k\in\{2,6\}$; these two exponents are treated directly (Propositions~\ref{prop:cycle2} and~\ref{prop:cycle6}). Powers of paths with $k\le6$ have treewidth at most six and are covered by \cite[Theorem~3.4]{BFG}. Powers of paths with $n\le2k+2$ are co-chain graphs, and for them we use the following result, proved in Appendix~\ref{app:cochain}.
+
+\begin{theorem}\label{thm:cochain-intro}
+Every co-chain graph $G$ satisfies $\tau(G)\le2\nu(G)$.
+\end{theorem}
+
+When both cliques have even size this is the theorem of Chahua and Guti\'errez \cite[Theorem~1]{CG}. Theorem~\ref{thm:cochain-intro} answers Question~1 of \cite{CG} in the affirmative. Its proof in Appendix~\ref{app:cochain} uses covers and packings of the kind constructed in \cite{BBGHMNO,CG}, analytic estimates for large orders, and a finite computation whose exceptional cases are settled by explicit packings and covers.
+
+\subsection*{Dependencies}
+Besides elementary arguments, the proof uses the following results, which we do not reprove: the existence of Skolem and hooked Skolem sequences \cite{Skolem,OKeefe}, in the form of \cite[Theorem~5.3]{BBW}; the existence of $C(n)$ edge-disjoint triangles in $K_n$ (Lemma~\ref{lem:feder-subi}), due to Feder and Subi \cite[Theorem~2]{FederSubi}; the decomposition of a complete graph into perfect or near-perfect matchings, in the form of \cite[Lemma~3]{BBGHMNO}; Tuza's conjecture for graphs of treewidth at most six \cite[Theorem~3.4]{BFG}; and the theorem of Chahua and Guti\'errez for co-chain graphs with two even cliques \cite[Theorem~1]{CG}. Appendix~\ref{app:cochain} also relies on a finite computation; the programs and certificates are supplementary files, described in Appendix~\ref{app:files}. The arguments for long powers of paths and cycles in Sections~\ref{sec:paths} and~\ref{sec:cycles} use no computation.
+
+\subsection*{Organization}
+Section~\ref{sec:prelim} collects covers from colorings, edge lengths, packings of complete graphs, matching factors and difference triples. Section~\ref{sec:cochain} states the co-chain theorem and shows that short path powers are co-chain graphs. Sections~\ref{sec:paths} and~\ref{sec:cycles} treat powers of paths and cycles, and Section~\ref{sec:proof} completes the proof of Theorem~\ref{thm:main} and adds a remark on exact values. Appendix~\ref{app:cochain} proves Theorem~\ref{thm:cochain-intro}, and Appendix~\ref{app:files} describes the supplementary files.
+
+\section{Preliminaries}\label{sec:prelim}
+
+For vertex sets $S$ and $T$ of a graph we write $E(S)$ for the set of edges with both ends in $S$ and, for disjoint $S$ and $T$, $E(S,T)$ for the set of edges with one end in $S$ and one in $T$. Two disjoint vertex sets are \emph{complete to each other} if all edges between them are present. The \emph{support} of a set of triangles is the set of edges of its members. Every triangle lies in one connected component, so for a vertex-disjoint union $G=G_1\sqcup G_2$,
+\begin{equation}\label{eq:additive}
+\nu(G)=\nu(G_1)+\nu(G_2),\qquad \tau(G)=\tau(G_1)+\tau(G_2).
+\end{equation}
+
+\begin{lemma}\label{lem:cut}
+Let $c\colon V(G)\to\{0,1\}$. The set of edges $xy$ with $c(x)=c(y)$ is a triangle cover of $G$.
+\end{lemma}
+
+\begin{proof}
+Two of the three vertices of a triangle receive the same color.
+\end{proof}
+
+\subsection{Edge lengths}\label{ssec:lengths}
+The \emph{length} of an edge $ij$ of $P_n^k$ is $|i-j|\in\{1,\dots,k\}$. For $1\le d\le\min(k,n-1)$ there are exactly $n-d$ edges of length $d$, namely $\{x,x+d\}$ with $1\le x\le n-d$. The length of an edge of $C_n^k$ is the circular distance of its ends. If $n\le2k+1$, every two vertices of $\Z_n$ have circular distance at most $\lfloor n/2\rfloor\le k$, so $C_n^k=K_n$. If $n\ge2k+1$, every edge of length $d$ can be written uniquely as $\{x,x+d\}$ with $x\in\Z_n$, because $d\le k<n/2$; hence there are exactly $n$ edges of each length $d\in\{1,\dots,k\}$, and $C_n^k$ is $2k$-regular.
+
+\subsection{Complete graphs}
+For an integer $n\ge0$ put
+\[
+C(n)=\frac13\Bigl(\binom n2-\ell(n)\Bigr),\qquad
+\ell(n)=\begin{cases}
+0 & n\equiv1,3 \pmod 6,\\
+4 & n\equiv5 \pmod 6,\\
+n/2 & n\equiv0,2 \pmod 6,\\
+n/2+1 & n\equiv4 \pmod 6.
+\end{cases}
+\]
+Thus $C(0)=C(1)=C(2)=0$, $C(3)=C(4)=1$ and $C(5)=2$.
+
+\begin{lemma}[Feder and Subi {\cite[Theorem~2]{FederSubi}}]\label{lem:feder-subi}
+For every $n\ge1$ the complete graph $K_n$ contains $C(n)$ pairwise edge-disjoint triangles.
+\end{lemma}
+
+Feder and Subi also show that $C(n)=\nu(K_n)$; we only use the existence of the packing. Since $2\ell(n)\le n+3$ for all $n$,
+\begin{equation}\label{eq:Cbound}
+6C(n)=n(n-1)-2\ell(n)\ge n(n-2)-3\qquad(n\ge0).
+\end{equation}
+
+\begin{lemma}\label{lem:complete}
+For every $n\ge1$ we have $\tau(K_n)\le2\nu(K_n)$.
+\end{lemma}
+
+\begin{proof}
+Coloring $\lceil n/2\rceil$ vertices with one color and the others with the other color, Lemma~\ref{lem:cut} gives a cover with $\binom n2-\lfloor n^2/4\rfloor=\lfloor (n-1)^2/4\rfloor$ edges. For $n\ge5$, \eqref{eq:Cbound} and Lemma~\ref{lem:feder-subi} give
+\[
+2\nu(K_n)-\Bigl\lfloor\frac{(n-1)^2}{4}\Bigr\rfloor\ \ge\ \frac{n^2-2n-3}{3}-\frac{(n-1)^2}{4}=\frac{(n-5)(n+3)}{12}\ge0.
+\]
+For $n=1,2,3,4$ the values of $(\nu(K_n),\tau(K_n))$ are $(0,0)$, $(0,0)$, $(1,1)$ and $(1,2)$.
+\end{proof}
+
+\subsection{Matching factors}
+The following decomposition goes back to Walecki; see \cite[Lemma~3]{BBGHMNO}.
+
+\begin{lemma}\label{lem:walecki}
+For even $q\ge2$ the edge set of $K_q$ is the disjoint union of $q-1$ perfect matchings. For odd $q\ge1$ it is the disjoint union of $q$ matchings with $(q-1)/2$ edges each.
+\end{lemma}
+
+For integers $c\ge0$ and $q\ge0$ put
+\[
+J(c,q)=\begin{cases}
+\frac q2\min(c,q-1) & q\ge2\text{ even},\\[2pt]
+\frac{q-1}2\min(c,q) & q\text{ odd},\\[2pt]
+0 & q=0.
+\end{cases}
+\]
+
+\begin{lemma}\label{lem:factor}
+Let $Q$ be a clique of a graph $G$ with $|Q|=q$, and let $Z$ be a set of $c$ vertices, disjoint from $Q$ and complete to $Q$. Then $G$ contains $J(c,q)$ edge-disjoint triangles, each consisting of a vertex of $Z$ and an edge of $Q$; their support lies in $E(Q)\cup E(Z,Q)$. Moreover $J(c,q)$ is nondecreasing in $c$, $J(c,q)=\binom q2$ if $c\ge q$, and
+\begin{equation}\label{eq:Jbound}
+2J(c,q)\ge(q-1)\min(c,q)\qquad(c\ge0,\ q\ge1).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Assign distinct matchings of Lemma~\ref{lem:walecki} to distinct vertices of $Z$, as many as possible, and join each vertex to each edge of its matching. Distinct matchings have disjoint edge sets, and an edge from $z\in Z$ to $Q$ is used at most once because the matching assigned to $z$ covers each vertex at most once. Edges inside $Z$ are not used, so $Z$ need not be independent. The remaining assertions follow from the definition: for even $q$, $q\min(c,q-1)\ge(q-1)\min(c,q)$, and for odd $q$ equality holds in \eqref{eq:Jbound}.
+\end{proof}
+
+\subsection{Skolem difference triples}
+A \emph{Skolem sequence} of order $m\ge1$ is a family of pairs $(a_i,b_i)$, $1\le i\le m$, with $b_i-a_i=i$ and $\{a_1,b_1,\dots,a_m,b_m\}=\{1,\dots,2m\}$. A \emph{hooked Skolem sequence} of order $m$ satisfies the same with $\{1,\dots,2m\}$ replaced by $\{1,\dots,2m+1\}\setminus\{2m\}$.
+
+\begin{theorem}[Skolem \cite{Skolem}; O'Keefe \cite{OKeefe}; see {\cite[Theorem~5.3]{BBW}}]\label{thm:skolem}
+A Skolem sequence of order $m$ exists if and only if $m\equiv0,1\pmod4$, and a hooked Skolem sequence of order $m$ exists if and only if $m\equiv2,3\pmod4$.
+\end{theorem}
+
+For $m\ge0$ put $\delta(m)=0$ if $m\equiv0,1\pmod4$ and $\delta(m)=1$ if $m\equiv2,3\pmod4$, and
+\[
+S(m)=\frac{9m^2+3m+2\delta(m)}{4}.
+\]
+
+\begin{lemma}\label{lem:triples}
+For every $m\ge1$ there are triples $(u_i,v_i,w_i)$, $1\le i\le m$, of positive integers with $u_i+v_i=w_i$ and $u_i\ne v_i$, whose $3m$ entries are pairwise distinct and form the set $\{1,\dots,3m\}$ if $\delta(m)=0$ and $\{1,\dots,3m+1\}\setminus\{3m\}$ if $\delta(m)=1$. In particular all entries are at most $3m+\delta(m)$, and $\sum_i w_i=S(m)$.
+\end{lemma}
+
+\begin{proof}
+Take a Skolem or hooked Skolem sequence $(a_i,b_i)$ of order $m$ by Theorem~\ref{thm:skolem} and put $(u_i,v_i,w_i)=(i,m+a_i,m+b_i)$; this is the classical construction of \cite[Section~1]{BGL}. Then $u_i+v_i=w_i$, and $u_i\le m<v_i$. The entries $u_i$ form $\{1,\dots,m\}$ and the entries $v_i,w_i$ form $m+\{1,\dots,2m\}$ or $m+(\{1,\dots,2m+1\}\setminus\{2m\})$. Since $u_i+v_i=w_i$, the sum of all entries is $2\sum_iw_i$. The sum of all entries is $\binom{3m+1}2$ if $\delta(m)=0$ and $\binom{3m+2}2-3m$ if $\delta(m)=1$, and in both cases equals $2S(m)$.
+\end{proof}
+
+For $k\ge0$ let $m(k)$ be the largest integer $m\ge0$ with $3m+\delta(m)\le k$. Thus $m(k)=0$ for $k\le2$, $m(k)=1$ for $3\le k\le6$, and, since $\delta(m+4)=\delta(m)$,
+\begin{equation}\label{eq:mperiodic}
+m(k+12)=m(k)+4\qquad(k\ge0).
+\end{equation}
+
+\section{Co-chain graphs and short powers of paths}\label{sec:cochain}
+
+\begin{definition}\label{def:cochain}
+A graph $G$ is a \emph{co-chain graph} if $V(G)$ is the disjoint union of two cliques $A$ and $B$, either of which may be empty, such that the sets $N(v)\cap B$, $v\in A$, are totally ordered by inclusion.
+\end{definition}
+
+The sets $N(v)\cap A$, $v\in B$, are then totally ordered as well, and the condition is equivalent to the requirement that the closed neighborhoods of the vertices of $A$, and those of the vertices of $B$, are totally ordered by inclusion, as in \cite{BBGHMNO}; see also \cite{CG}. Labeled representations are discussed in Appendix~\ref{app:cochain}.
+
+Theorem~\ref{thm:cochain-intro} asserts that every co-chain graph $G$ satisfies $\tau(G)\le2\nu(G)$; its proof is given in Appendix~\ref{app:cochain}.
+
+\begin{lemma}\label{lem:shortpath}
+If $1\le n\le2k+2$, then $P_n^k$ is a co-chain graph.
+\end{lemma}
+
+\begin{proof}
+Let $A=\{1,\dots,\min(n,k+1)\}$ and $B=\{1,\dots,n\}\setminus A$. Both sets consist of at most $k+1$ consecutive integers, so both are cliques. For $i\in A$ the set $N(i)\cap B$ consists of the $j\in B$ with $j\le i+k$, an initial segment of $B$; initial segments of $B$ are totally ordered by inclusion.
+\end{proof}
+
+\section{Powers of paths}\label{sec:paths}
+
+\begin{proposition}\label{prop:smallk}
+If $k\le6$, then $\tau(P_n^k)\le2\nu(P_n^k)$ for every $n\ge1$.
+\end{proposition}
+
+\begin{proof}
+The bags $\{i,\dots,\min(i+k,n)\}$, $1\le i\le n$, arranged along a path, form a tree decomposition of $P_n^k$ of width at most $k$: every edge lies in a bag, and the bags containing a fixed vertex are consecutive. Hence $P_n^k$ has treewidth at most six, and \cite[Theorem~3.4]{BFG} applies.
+\end{proof}
+
+\begin{lemma}\label{lem:pathpacking}
+Let $k\ge3$, $m=m(k)$, and $n\ge k+1$. Then $\nu(P_n^k)\ge mn-S(m)$. More precisely, for the triples $(u_i,v_i,w_i)$ of Lemma~\ref{lem:triples}, the triangles
+\[
+\{x,\,x+u_i,\,x+w_i\},\qquad 1\le i\le m,\ 1\le x\le n-w_i,
+\]
+are pairwise edge-disjoint triangles of $P_n^k$.
+\end{lemma}
+
+\begin{proof}
+All entries are at most $3m+\delta(m)\le k<n$, so these are triangles of $P_n^k$, with edges of lengths $u_i$, $v_i=w_i-u_i$ and $w_i$, and there are $\sum_i(n-w_i)=mn-S(m)$ of them. The lengths $u_i,v_i,w_i$ of one triangle are distinct, and different triples have disjoint sets of entries, so two triangles can share an edge only if they come from the same triple and use it in the same role. In each role the edge determines $x$: the edge of length $u_i$ is $\{x,x+u_i\}$, that of length $v_i$ is $\{x+u_i,x+w_i\}$, and that of length $w_i$ is $\{x,x+w_i\}$.
+\end{proof}
+
+\begin{lemma}\label{lem:paritypath}
+Let $k\ge1$, $h=\lfloor k/2\rfloor$ and $n\ge k+1$. Then $\tau(P_n^k)\le h(n-h-1)$.
+\end{lemma}
+
+\begin{proof}
+Color each vertex $i$ with $i\bmod2$. The monochromatic edges are exactly those of even length $2,4,\dots,2h$, and their number is $\sum_{j=1}^h(n-2j)=h(n-h-1)$. Apply Lemma~\ref{lem:cut}.
+\end{proof}
+
+\begin{lemma}\label{lem:repair}
+Let $k\in\{8,9\}$ and $n\ge2k+2$. Then $\nu(P_n^k)\ge2n-10$.
+\end{lemma}
+
+\begin{proof}
+Here $m(k)=2$, and the hooked Skolem sequence $(a_1,b_1)=(1,2)$, $(a_2,b_2)=(3,5)$ gives the triples $(1,3,4)$ and $(2,5,7)$, with $S(2)=11$. Lemma~\ref{lem:pathpacking} gives $2n-11$ edge-disjoint triangles. They use edges of lengths $1,2,3,4,5,7$ only, and the edges of length $2$ are $\{x,x+2\}$ with $x\le n-7$, coming from the triangles $\{x,x+2,x+7\}$. The triangle $\{n-8,n-2,n\}$ belongs to $P_n^k$ because $n-8\ge1$ and $8\le k$. Its edges have lengths $6$, $2$ and $8$, and its edge of length $2$ is $\{n-2,n\}$ with $n-2>n-7$. Hence it is edge-disjoint from the other triangles.
+\end{proof}
+
+\begin{table}[t]
+\caption{Data for Proposition~\ref{prop:longpath}. Here $k=k_0+12q$ with $7\le k_0\le18$ and $q\ge0$, so that $m(k)=m_0+4q$, $h=h_0+6q$ and $\delta(m(k))=\delta(m_0)$. The function $D$ is defined in \eqref{eq:Dpath}, and $D(n)=A\,n+D(2k+2)-A(2k+2)$.}\label{tab:path}
+\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{rrrrrr}
+\toprule
+$k_0$ & $m_0$ & $\delta(m_0)$ & $h_0$ & $A=2m(k)-h$ & $D(2k+2)$\\
+\midrule
+7 & 2 & 1 & 3 & $2q+1$ & $12q^2+20q+6$\\
+8 & 2 & 1 & 4 & $2q$ & $12q^2+12q-2$\\
+9 & 2 & 1 & 4 & $2q$ & $12q^2+16q-2$\\
+10 & 3 & 1 & 5 & $2q+1$ & $12q^2+20q+6$\\
+11 & 3 & 1 & 5 & $2q+1$ & $12q^2+24q+8$\\
+12 & 4 & 0 & 6 & $2q+2$ & $12q^2+28q+16$\\
+13 & 4 & 0 & 6 & $2q+2$ & $12q^2+32q+20$\\
+14 & 4 & 0 & 7 & $2q+1$ & $12q^2+24q+8$\\
+15 & 5 & 0 & 7 & $2q+3$ & $12q^2+40q+32$\\
+16 & 5 & 0 & 8 & $2q+2$ & $12q^2+32q+20$\\
+17 & 5 & 0 & 8 & $2q+2$ & $12q^2+36q+24$\\
+18 & 5 & 0 & 9 & $2q+1$ & $12q^2+28q+8$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{proposition}\label{prop:longpath}
+If $k\ge7$ and $n\ge2k+2$, then $\tau(P_n^k)\le2\nu(P_n^k)$.
+\end{proposition}
+
+\begin{proof}
+Let $m=m(k)$ and $h=\lfloor k/2\rfloor$. By Lemmas~\ref{lem:pathpacking} and~\ref{lem:paritypath} it suffices to show that
+\begin{equation}\label{eq:Dpath}
+\begin{split}
+D(n)&:=2\bigl(mn-S(m)\bigr)-h(n-h-1)\\
+&\phantom{:}=(2m-h)\,n+h(h+1)-\frac{9m^2+3m+2\delta(m)}2
+\end{split}
+\end{equation}
+is nonnegative, except for $k\in\{8,9\}$, where we use Lemma~\ref{lem:repair}. Write $k=k_0+12q$ with $7\le k_0\le18$ and $q\ge0$. By \eqref{eq:mperiodic}, $m=m_0+4q$ with $m_0=m(k_0)$, and $h=h_0+6q$ with $h_0=\lfloor k_0/2\rfloor$. Substituting these expressions and $n=2k+2=2k_0+2+24q$ into \eqref{eq:Dpath} gives the polynomials in Table~\ref{tab:path}. In every row the slope $A=2m-h$ is nonnegative, so $D(n)\ge D(2k+2)$ for $n\ge2k+2$. Every polynomial $D(2k+2)$ in the table is positive for all $q\ge0$, except that in the rows $k_0\in\{8,9\}$ it equals $-2$ at $q=0$; in these two rows it is positive for $q\ge1$. In the remaining cases $k\in\{8,9\}$ we have $h=4$, so Lemmas~\ref{lem:repair} and~\ref{lem:paritypath} give $\tau(P_n^k)\le4(n-5)=2(2n-10)\le2\nu(P_n^k)$.
+\end{proof}
+
+The entries of Table~\ref{tab:path} are obtained by direct substitution; the supplementary script \texttt{verify\_path\_cycle.py} recomputes them in exact integer arithmetic (Appendix~\ref{app:files}). For $k\in\{8,9\}$ the slope $A$ vanishes and $D(n)=-2$ for all $n\ge2k+2$, so the one additional triangle of Lemma~\ref{lem:repair} is exactly what is needed.
+
+\begin{corollary}\label{cor:paths}
+For all $n\ge0$ and $k\ge0$ we have $\tau(P_n^k)\le2\nu(P_n^k)$.
+\end{corollary}
+
+\begin{proof}
+If $n=0$, then $\tau=\nu=0$. Let $n\ge1$. If $k\le6$, use Proposition~\ref{prop:smallk}. If $k\ge7$ and $n\le2k+2$, then $P_n^k$ is a co-chain graph by Lemma~\ref{lem:shortpath}, and Theorem~\ref{thm:cochain-intro} applies. If $k\ge7$ and $n\ge2k+2$, use Proposition~\ref{prop:longpath}.
+\end{proof}
+
+\section{Powers of cycles}\label{sec:cycles}
+
+\begin{lemma}\label{lem:cyclepacking}
+Let $k\ge3$, $m=m(k)$ and $n\ge2k+1$. Then $\nu(C_n^k)\ge mn$. More precisely, for the triples of Lemma~\ref{lem:triples} the $mn$ triangles $\{x,x+u_i,x+w_i\}$, $1\le i\le m$, $x\in\Z_n$, are pairwise edge-disjoint triangles of $C_n^k$.
+\end{lemma}
+
+\begin{proof}
+All entries are at most $3m+\delta(m)\le k<n/2$, so each of these triangles has edges of the distinct lengths $u_i$, $v_i$, $w_i$. Since each edge of length $d\le k$ has a unique representation $\{y,y+d\}$, the argument of Lemma~\ref{lem:pathpacking} applies verbatim.
+\end{proof}
+
+\begin{lemma}\label{lem:evencover}
+Let $k=2h\ge2$ and $n\ge2k+1$. Color each vertex $x\in\Z_n$, represented by an integer $x\in\{0,\dots,n-1\}$, with $x\bmod2$. Then the number of monochromatic edges of $C_n^k$ is $hn$ if $n$ is even and $h(n-1)$ if $n$ is odd. In particular $\tau(C_n^k)\le hn$.
+\end{lemma}
+
+\begin{proof}
+The edges of length $d$ are $\{x,x+d\}$, $0\le x\le n-1$, with $x+d$ reduced modulo $n$. If $n$ is even, such an edge is monochromatic if and only if $d$ is even. If $n$ is odd, it is monochromatic if and only if $d$ is even and $x+d<n$, or $d$ is odd and $x+d\ge n$; this gives $n-d$ edges for even $d$ and $d$ edges for odd $d$, and in total $\sum_{j=1}^h(n-2j)+\sum_{j=1}^h(2j-1)=h(n-1)$. Apply Lemma~\ref{lem:cut}.
+\end{proof}
+
+\begin{lemma}\label{lem:oddcover}
+Let $k=2h+1\ge3$ and $n\ge2k+2$. Then $\tau(C_n^k)\le hn$.
+\end{lemma}
+
+\begin{proof}
+Put $p=2\lfloor n/(k+1)\rfloor$; then $p\ge4$ is even and $p(h+1)\le n$. Write $\Z_n=\{0,\dots,n-1\}$ as the union of $p$ cyclically consecutive intervals $R_1,\dots,R_p$, the \emph{runs}, with lengths $\ell_1,\dots,\ell_p$ satisfying $h+1\le\ell_j\le k$. This is possible: start with all lengths equal to $h+1$ and distribute the remaining $n-p(h+1)\le2h+1$ vertices, at most $h$ to each run, which is possible since $ph\ge4h\ge2h+1$. Color the runs alternately; as $p$ is even, the coloring is consistent around the cycle.
+
+A \emph{boundary} is a pair $(y,y+1)$ of cyclically consecutive vertices lying in different runs; there are $p$ boundaries. Let $1\le d\le k$. By Section~\ref{ssec:lengths} the edges of length $d$ correspond bijectively to the arcs $x,x+1,\dots,x+d$, $x\in\Z_n$, and such an arc \emph{crosses} the boundary $(y,y+1)$ if $y\in\{x,\dots,x+d-1\}$. An arc cannot cross three boundaries: otherwise it would contain two complete runs and one further vertex on each side, so $d+1\ge2(h+1)+2$, contradicting $d\le2h+1$. The ends of an arc have different colors exactly when it crosses one boundary. Every boundary is crossed by exactly $d$ arcs of length $d$, so if $c_1$ and $c_2$ arcs cross one and two boundaries, respectively, then $c_1+2c_2=pd$. An arc crossing two boundaries crosses the two boundaries of exactly one run. If a run of length $\ell$ consists of the vertices $y+1,\dots,y+\ell$, the arcs crossing both of its boundaries are those with $x\le y$ and $x+d\ge y+\ell+1$, and there are $\max(0,d-\ell)$ of them. Hence the number of monochromatic edges of length $d$ is
+\[
+n-c_1=n-pd+2\sum_{j=1}^p\max(0,d-\ell_j).
+\]
+Summing over $d=1,\dots,k$ and using $n=\sum_j\ell_j$ and $\sum_{d=\ell+1}^{k}(d-\ell)=\binom{k-\ell+1}2$, the number of monochromatic edges is
+\[
+\sum_{j=1}^p\Bigl(\ell_j^2-(k+1)\ell_j+\frac{k(k+1)}2\Bigr)
+= h n+\sum_{j=1}^p\bigl(\ell_j-(h+1)\bigr)\bigl(\ell_j-k\bigr)\le hn,
+\]
+since $h+1\le\ell_j\le k$. Apply Lemma~\ref{lem:cut}.
+\end{proof}
+
+\begin{proposition}\label{prop:cyclegeneral}
+Let $k\ge3$ with $k\ne6$, and $n\ge2k+2$. Then $\tau(C_n^k)\le2\nu(C_n^k)$.
+\end{proposition}
+
+\begin{proof}
+Let $m=m(k)$ and $h=\lfloor k/2\rfloor$. By Lemmas~\ref{lem:cyclepacking}, \ref{lem:evencover} and~\ref{lem:oddcover} it suffices that $2m\ge h$. For $k=3,4,5$ we have $m=1$ and $h\le2$. For $k\ge7$, $2m-h$ is the slope $A$ of Table~\ref{tab:path}, which is nonnegative.
+\end{proof}
+
+\begin{proposition}\label{prop:cycle2}
+If $n\ge6$, then $\tau(C_n^2)\le2\nu(C_n^2)$.
+\end{proposition}
+
+\begin{proof}
+The triangles $\{2j,2j+1,2j+2\}$, $0\le j<\lfloor n/2\rfloor$, indices modulo $n$, are edge-disjoint: their edges of length one are distinct, and their edges $\{2j,2j+2\}$ of length two are distinct because $2<n/2$. Hence $\nu(C_n^2)\ge\lfloor n/2\rfloor$. By Lemma~\ref{lem:evencover} with $h=1$, $\tau(C_n^2)\le n$ for even $n$ and $\tau(C_n^2)\le n-1$ for odd $n$; in both cases this is $2\lfloor n/2\rfloor$.
+\end{proof}
+
+\begin{proposition}\label{prop:cycle6}
+If $n\ge14$, then $\tau(C_n^6)\le2\nu(C_n^6)$.
+\end{proposition}
+
+\begin{proof}
+The $n$ translates $\{x,x+1,x+5\}$, $x\in\Z_n$, of the difference triple $(1,4,5)$ are edge-disjoint by the argument of Lemma~\ref{lem:cyclepacking} and use exactly the edges of lengths $1$, $4$ and $5$. The edges of length $3$ form $g=\gcd(n,3)$ vertex-disjoint cycles $(y,y+3,y+6,\dots)$, each of length $L=n/g\ge5$. In each of them, with vertices $y_0,\dots,y_{L-1}$ in cyclic order, take the triangles $\{y_{2j},y_{2j+1},y_{2j+2}\}$, $0\le j<\lfloor L/2\rfloor$, indices modulo $L$. Their edges of length $3$ are pairwise distinct (for odd $L$ the edge $y_{L-1}y_0$ is unused), and their third edges $\{y_{2j},y_{2j}+6\}$ have length $6<n/2$ and are distinct because they are determined by $y_{2j}$. None of these triangles uses an edge of length $1$, $4$ or $5$. Hence $\nu(C_n^6)\ge n+g\lfloor L/2\rfloor$.
+
+If $n$ is even, then $L$ is even and $2\nu(C_n^6)\ge2n+n=3n$, while $\tau(C_n^6)\le3n$ by Lemma~\ref{lem:evencover}. If $n$ is odd, then $2\nu(C_n^6)\ge2n+(n-g)\ge3n-3$, while $\tau(C_n^6)\le3(n-1)$ by Lemma~\ref{lem:evencover}.
+\end{proof}
+
+\begin{corollary}\label{cor:cycles}
+For all $n\ge3$ and $k\ge0$ we have $\tau(C_n^k)\le2\nu(C_n^k)$.
+\end{corollary}
+
+\begin{proof}
+If $n\le2k+1$, then $C_n^k=K_n$ and Lemma~\ref{lem:complete} applies. Let $n\ge2k+2$. For $k=0$ there are no edges, and for $k=1$ the graph $C_n$ with $n\ge4$ has no triangles. The case $k=2$ is Proposition~\ref{prop:cycle2}, the case $k=6$ is Proposition~\ref{prop:cycle6}, and all other $k\ge3$ are covered by Proposition~\ref{prop:cyclegeneral}.
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm:main} and remarks}\label{sec:proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+The inequalities for $P_n^k$ and $C_n^k$ are Corollaries~\ref{cor:paths} and~\ref{cor:cycles}, and the statement for disjoint unions follows from \eqref{eq:additive}. Any two triangles of $K_4$ share an edge, so $\nu(K_4)=1$, while one edge lies in only two of the four triangles and two opposite edges meet all of them, so $\tau(K_4)=2$. In $K_5$ the triangles $\{1,2,3\}$ and $\{1,4,5\}$ are edge-disjoint. Three edge-disjoint triangles would use $9$ of the $10$ edges; every vertex would then meet an even number of used edges, but the two ends of the unused edge meet exactly three. Hence $\nu(K_5)=2$. By Mantel's theorem a triangle-free subgraph of $K_5$ has at most $\lfloor25/4\rfloor=6$ edges, so $\tau(K_5)=10-6=4$.
+\end{proof}
+
+\begin{remark}\label{rem:exact}
+For $k\ge3$ with $k\equiv0,3\pmod{12}$ and $n\ge2k+1$ we have $3m(k)=k$ and $\delta(m(k))=0$, so the triangles of Lemma~\ref{lem:cyclepacking} use every edge of $C_n^k$ exactly once and $\nu(C_n^k)=kn/3$. For covers, note that $\tau(G)=|E(G)|-\operatorname{ex}_\triangle(G)$, where $\operatorname{ex}_\triangle(G)$ is the maximum number of edges of a triangle-free subgraph, and the latter quantity for powers of cycles was studied in \cite{ChungTrotter,BondyLocke,Locke}; as described in \cite{Locke}, the lower bound of Chung and Trotter comes from coloring blocks of a suitable number of consecutive vertices alternately.
+\end{remark}
+\appendix
+
+\section{Tuza's inequality for co-chain graphs}\label{app:cochain}
+
+In this appendix we prove Theorem~\ref{thm:cochain-intro}. We use $C(n)$ and $J(c,q)$ from Section~\ref{sec:prelim}, and $\binom q2$ denotes the binomial coefficient.
+
+\subsection{Profiles and basic constructions}\label{ssec:profiles}
+Let $G$ be a co-chain graph with cliques $A$ and $B$ of sizes $a$ and $b$. Order $B=\{b_1,\dots,b_b\}$ so that the sets $N(b_j)\cap A$ decrease with $j$; then each set $N(v)\cap B$, $v\in A$, is an initial segment $\{b_1,\dots,b_{d}\}$, because membership of $v$ in $N(b_j)$ is monotone in $j$. Ordering $A=\{a_1,\dots,a_a\}$ by decreasing $d$ we obtain integers $b\ge d_1\ge\dots\ge d_a\ge0$, the \emph{profile} of $G$, with
+\[
+a_ib_j\in E(G)\iff j\le d_i .
+\]
+Conversely every such profile defines a co-chain graph $G(a,b,d)$. Exchanging the roles of $A$ and $B$ replaces $d$ by the conjugate profile $d^*_j=|\{i:d_i\ge j\}|$, $1\le j\le b$. For $0\le j\le b$ put $p_j=|\{i:d_i\ge j\}|$, so $p_0=a$; the set $\{a_1,\dots,a_{p_j}\}$ is complete to $\{b_1,\dots,b_j\}$.
+
+We combine three types of packings, which we call \emph{modules}; each is a set of edge-disjoint triangles with a specified support:
+\begin{enumerate}
+\item[(K)] for a clique $S$, a set of $C(|S|)$ triangles with support in $E(S)$, by Lemma~\ref{lem:feder-subi};
+\item[(K$^-$)] for a vertex set $S$ such that $G[S]$ is a complete graph minus $\mu$ edges, a set of at least $C(|S|)-\mu$ triangles with support in $E(S)$, obtained from a module (K) of the complete graph on $S$ by deleting the triangles containing a missing edge, at most one for each missing edge;
+\item[(J)] for a clique $Q$ and a disjoint set $Z$ complete to $Q$, a set of $J(|Z|,|Q|)$ triangles with support in $E(Q)\cup E(Z,Q)$, by Lemma~\ref{lem:factor}; we call $Z$ the centers and $Q$ the endpoint clique.
+\end{enumerate}
+The union of modules with pairwise disjoint supports is a triangle packing, and its size is the sum of their sizes.
+
+\begin{lemma}\label{lem:prefix}
+For every $0\le j\le b$,
+\begin{align*}
+\nu(G)&\ge L_0:=C(a)+C(b),\\
+\nu(G)&\ge L_1(j):=C(a)+J(p_j,j)+J(j,b-j),\\
+\nu(G)&\ge L_2(j):=C(p_j+j)+J(p_j,a-p_j)+J(j,b-j).
+\end{align*}
+The same holds with $(a,b,d)$ replaced by $(b,a,d^*)$.
+\end{lemma}
+
+\begin{proof}
+Write $A_j=\{a_1,\dots,a_{p_j}\}$ and $B_j=\{b_1,\dots,b_j\}$. For $L_1(j)$ take a module (K) on $A$, a module (J) with centers $A_j$ and endpoint clique $B_j$, and a module (J) with centers $B_j$ and endpoint clique $B\setminus B_j$; their supports lie in $E(A)$, $E(B_j)\cup E(A_j,B_j)$ and $E(B\setminus B_j)\cup E(B_j,B\setminus B_j)$. For $L_2(j)$ take a module (K) on the clique $A_j\cup B_j$, a module (J) with centers $A_j$ and endpoint clique $A\setminus A_j$, and a module (J) with centers $B_j$ and endpoint clique $B\setminus B_j$. In both cases the supports are pairwise disjoint.
+\end{proof}
+
+\begin{lemma}\label{lem:orderedcut}
+For $0\le i\le a$ and $0\le j\le b$ put $\sigma=\sum_hd_h$,
+\[
+R(i,j)=\sum_{h\le i}\max(0,d_h-j)+\sum_{h>i}\min(d_h,j),
+\]
+and $U(i,j)=\binom a2+\binom b2+\sigma-i(a-i)-j(b-j)-\max\bigl(R(i,j),\sigma-R(i,j)\bigr)$. Then $\tau(G)\le U(i,j)$.
+\end{lemma}
+
+\begin{proof}
+Give $a_1,\dots,a_i$ color $0$ and $a_{i+1},\dots,a_a$ color $1$; color $b_1,\dots,b_j$ with one color and $b_{j+1},\dots,b_b$ with the other, in either of the two ways. The bichromatic edges inside $A$ and $B$ number $i(a-i)$ and $j(b-j)$. The number $R(i,j)$ counts the edges between $\{a_1,\dots,a_i\}$ and $\{b_{j+1},\dots\}$ and between $\{a_{i+1},\dots\}$ and $\{b_1,\dots,b_j\}$; these edges are bichromatic for one choice and the other $\sigma-R(i,j)$ cross edges for the other. Apply Lemma~\ref{lem:cut}.
+\end{proof}
+
+
+\subsection{First reductions}
+
+\begin{lemma}\label{lem:emptypart}
+If $a=0$ or $b=0$, then $\tau(G)\le2\nu(G)$.
+\end{lemma}
+
+\begin{proof}
+If $a=b=0$, then $G$ has no vertices and $\tau(G)=\nu(G)=0$. Otherwise $G$ is the complete graph $K_{a+b}$ with $a+b\ge1$; use Lemma~\ref{lem:complete}.
+\end{proof}
+
+\begin{theorem}[Chahua and Guti\'errez {\cite[Theorem~1]{CG}}]\label{thm:CG}
+If $a$ and $b$ are positive and even, then $\tau(G)\le2\nu(G)$.
+\end{theorem}
+
+\begin{proposition}\label{prop:small}
+If $a,b\ge1$ and $a+b\le12$, then $\tau(G)\le2\nu(G)$.
+\end{proposition}
+
+\begin{proof}
+By Theorem~\ref{thm:CG} we may assume that $a$ or $b$ is odd, and by exchanging $A$ and $B$ that $a\le b$. For each such pair $(a,b)$ there are $\binom{a+b}a$ integer profiles, and in total $2{,}861$. For each profile we computed the maximum $L$ of the bounds of Lemma~\ref{lem:prefix}, over all $j$ and both orientations, and the minimum $U$ of the bounds of Lemma~\ref{lem:orderedcut}; then $\nu(G)\ge L$ and $\tau(G)\le U$. For $2{,}850$ profiles $U\le2L$. The remaining $11$ profiles are listed in Table~\ref{tab:small} with an explicit triangle packing $\mathcal P$ and an explicit triangle cover $T$ satisfying $|T|\le2|\mathcal P|$. The computation and the verification of the certificates, namely that $\mathcal P$ consists of triangles of $G$ with pairwise disjoint edge sets and that $T$ is a set of edges of $G$ meeting every triangle of $G$, are performed by \texttt{cochain/verify\_full\_candidate.py} (Appendix~\ref{app:files}).
+\end{proof}
+
+\begin{table}[t]
+\caption{The eleven profiles of Proposition~\ref{prop:small} not settled by Lemmas~\ref{lem:prefix} and~\ref{lem:orderedcut}. The vertices are labeled $0,\dots,a+b-1$, with $a_i=i-1$ and $b_j=a+j-1$. A triangle $\{x,y,z\}$ is written $xyz$ and an edge $\{x,y\}$ is written $xy$.}\label{tab:small}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}llr>{\raggedright\arraybackslash}p{4.0cm}r>{\raggedright\arraybackslash}p{4.0cm}@{}}
+\toprule
+$(a,b)$ & profile & $|\mathcal P|$ & packing $\mathcal P$ & $|T|$ & cover $T$\\
+\midrule
+$(4,5)$ & $(4,1,1,1)$ & 6 & \texttt{023, 045, 067, 134, 478, 568} & 9 & \texttt{04, 05, 12, 13, 23, 45, 67, 68, 78} \\
+$(4,5)$ & $(4,2,1,1)$ & 7 & \texttt{013, 047, 056, 145, 234, 468, 578} & 9 & \texttt{04, 05, 12, 13, 23, 45, 67, 68, 78} \\
+$(4,5)$ & $(4,3,1,1)$ & 7 & \texttt{016, 024, 057, 123, 145, 467, 568} & 9 & \texttt{01, 07, 23, 24, 34, 45, 46, 56, 78} \\
+$(4,5)$ & $(4,2,2,1)$ & 7 & \texttt{013, 047, 056, 125, 234, 468, 578} & 9 & \texttt{04, 05, 12, 13, 23, 45, 67, 68, 78} \\
+$(4,5)$ & $(4,3,2,1)$ & 8 & \texttt{013, 047, 056, 125, 146, 234, 458, 678} & 9 & \texttt{01, 02, 07, 12, 34, 45, 46, 56, 78} \\
+$(4,5)$ & $(5,4,3,1)$ & 9 & \texttt{017, 026, 034, 058, 123, 146, 245, 478, 567} & 11 & \texttt{04, 05, 06, 12, 13, 17, 23, 45, 46, 56, 78} \\
+$(5,5)$ & $(5,4,3,2,0)$ & 10 & \texttt{017, 034, 056, 089, 124, 135, 168, 236, 578, 679} & 13 & \texttt{01, 05, 06, 15, 16, 23, 24, 27, 34, 56, 78, 79, 89} \\
+$(5,5)$ & $(5,4,3,1,1)$ & 10 & \texttt{014, 027, 058, 069, 123, 157, 168, 256, 345, 789} & 13 & \texttt{01, 05, 06, 15, 16, 23, 24, 27, 34, 56, 78, 79, 89} \\
+$(5,5)$ & $(5,3,3,2,1)$ & 10 & \texttt{014, 023, 059, 068, 127, 136, 256, 345, 578, 679} & 13 & \texttt{05, 06, 07, 12, 13, 14, 23, 24, 34, 56, 57, 67, 89} \\
+$(5,5)$ & $(4,4,3,2,1)$ & 10 & \texttt{012, 034, 058, 067, 145, 168, 236, 257, 569, 789} & 13 & \texttt{01, 05, 06, 15, 16, 23, 24, 27, 34, 56, 78, 79, 89} \\
+$(5,5)$ & $(5,4,3,2,1)$ & 10 & \texttt{016, 023, 058, 079, 125, 134, 178, 267, 356, 689} & 13 & \texttt{01, 05, 06, 15, 16, 23, 24, 27, 34, 56, 78, 79, 89} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Halves}\label{ssec:halves}
+From now on $a,b\ge1$. Put
+\[
+r=\lceil a/2\rceil,\quad s=a-r,\quad t=\lceil b/2\rceil,\quad u=b-t,\quad \varepsilon=r-s,\quad \eta=t-u,
+\]
+so $\varepsilon,\eta\in\{0,1\}$ and $r,t\ge1$. Let $A_H=\{a_1,\dots,a_r\}$, $A_L=A\setminus A_H$, $B_H=\{b_1,\dots,b_t\}$, $B_L=B\setminus B_H$, and
+\[
+x=p_t=|\{i:d_i\ge t\}|,\qquad y=d_r,\qquad X=\{a_1,\dots,a_x\},\qquad Y=\{b_1,\dots,b_y\}.
+\]
+Then $X$ is the set of vertices of $A$ complete to $B_H$ and $Y$ the set of vertices of $B$ complete to $A_H$. Put
+\begin{gather*}
+H=\binom r2+\binom s2+\binom t2+\binom u2,\qquad B_0=\binom s2+\binom u2=J(r,s)+J(t,u),\\
+D_0=\varepsilon(r-1)+\eta(t-1).
+\end{gather*}
+Since $\binom{r-1}2=\binom r2-(r-1)$, we have
+\begin{equation}\label{eq:B0H}
+2B_0-H=-D_0,\qquad D_0\le r+t-2.
+\end{equation}
+
+\begin{lemma}\label{lem:dichotomy}
+Either $x<r$ and $y<t$ (the \emph{sparse case}) or $x\ge r$ and $y\ge t$ (the \emph{dense case}). Exchanging $A$ and $B$ maps the parameters $(a,b,x,y)$ to $(b,a,y,x)$.
+\end{lemma}
+
+\begin{proof}
+We have $x\ge r$ if and only if $d_r\ge t$, that is, $y\ge t$. After the exchange the roles of $r$ and $t$ are interchanged, and for the conjugate profile $|\{j:d^*_j\ge r\}|=|\{j:j\le d_r\}|=y$ and $d^*_t=p_t=x$.
+\end{proof}
+
+\subsection{The sparse case}\label{ssec:sparse}
+Assume $x<r$ and $y<t$, so $X\subsetneq A_H$ and $Y\subsetneq B_H$.
+
+\begin{lemma}\label{lem:sparsecover}
+$\tau(G)\le T_{\mathrm{sp}}:=H+tx+ry-xy$.
+\end{lemma}
+
+\begin{proof}
+Let $T$ consist of $E(A_H)$, $E(A_L)$, $E(B_H)$, $E(B_L)$, $E(X,B_H)$ and $E(A_H,Y)$. The last two sets are complete bipartite and meet in $E(X,Y)$, so $|T|=T_{\mathrm{sp}}$. Every triangle has two vertices in $A$ or two in $B$. If these two lie in the same half, their edge is in $T$. If two vertices $a_i\in A_H$ and $a_{i'}\in A_L$ lie in a triangle whose third vertex $b_j$ is in $B$, then $j\le d_{i'}\le d_r=y$, so $a_ib_j\in E(A_H,Y)$. If $b_j\in B_H$ and $b_{j'}\in B_L$ lie in a triangle with third vertex $a_i\in A$, then $d_i\ge j'>t$, so $a_i\in X$ and $a_ib_j\in E(X,B_H)$. If the third vertex lies on the same side as the pair, two of the three vertices lie in the same half.
+\end{proof}
+
+\begin{lemma}\label{lem:transfer}
+Let $F$ be the co-chain graph $G(a,b,f)$ with profile $f=(t^{x},y^{\,r-x},0^{s})$, where exponents denote repetition. Then $F$ has the parameters $(a,b,x,y)$, it is a spanning subgraph of $G$ on the same labeled vertices, and $T_{\mathrm{sp}}$ depends only on $(a,b,x,y)$. Hence $\nu(F)\ge T_{\mathrm{sp}}/2$ implies $\tau(G)\le2\nu(G)$.
+\end{lemma}
+
+\begin{proof}
+Since $y<t$, the profile is nonincreasing, $|\{i:f_i\ge t\}|=x$ and $f_r=y$. In $G$ we have $d_i\ge t$ for $i\le x$ and $d_i\ge d_r=y$ for $i\le r$, so $f\le d$ entrywise. A packing of $F$ is a packing of $G$, and Lemma~\ref{lem:sparsecover} gives $\tau(G)\le T_{\mathrm{sp}}\le2\nu(F)\le2\nu(G)$.
+\end{proof}
+
+\begin{lemma}\label{lem:sparsepackings}
+In the sparse case each of the following numbers is a lower bound for $\nu(F)$, and hence for $\nu(G)$. Here \emph{transpose} means the same expression for the parameters $(b,a,y,x)$.
+\begin{enumerate}
+\item[(S1)] $C(a)+C(b)$;
+\item[(S2)] $P_1:=C(t+x)+J(x+y,r-x)+B_0$, and its transpose $C(r+y)+J(x+y,t-y)+B_0$;
+\item[(S3)] $J(r+t-x-y,x+y)+B_0$;
+\item[(S4)] $C(r)+J(x,t)+B_0$, and its transpose;
+\item[(S5)] $C(a)+J(x,t)+J(t,u)$, and its transpose;
+\item[(S6)] $C(a)+J(x,t-1)+J(t-1,u+1)$, and its transpose;
+\item[(S7)] $C(x+t)+J(x,a-x)+J(t,u)$, and its transpose;
+\item[(S8)] $C(r+t)-(r-x)(t-y)+B_0$;
+\item[(S9)] $L_1(j)$ and $L_2(j)$ of Lemma~\ref{lem:prefix} for the profile $f$, for all $j$ and both orientations.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+In each case we list modules with pairwise disjoint supports. The term $B_0$ is realized by the modules (J) with centers $A_H$ and endpoint clique $A_L$, and with centers $B_H$ and endpoint clique $B_L$; their supports lie in $E(A_L)\cup E(A_H,A_L)$ and $E(B_L)\cup E(B_H,B_L)$, and all other modules used together with $B_0$ have supports in $E(A_H\cup B_H)$.
+
+(S2): a module (K) on the clique $X\cup B_H$, and a module (J) with centers $X\cup Y$ and endpoint clique $A_H\setminus X$; the centers are complete to $A_H\setminus X$ because $A$ is a clique and $Y$ is complete to $A_H$. The supports $E(X\cup B_H)$ and $E(A_H\setminus X)\cup E(X\cup Y,A_H\setminus X)$ are disjoint since $A_H\setminus X$ is disjoint from $X\cup B_H$. (S3): a module (J) with endpoint clique $X\cup Y$ and centers $(A_H\setminus X)\cup(B_H\setminus Y)$, which are complete to $X\cup Y$ as before. (S4): a module (K) on $A_H$ and a module (J) with centers $X$ and endpoint clique $B_H$. (S5) and (S7) are $L_1(t)$ and $L_2(t)$, since $p_t=x$. (S6) is at most $L_1(t-1)$, since $p_{t-1}\ge x$ and $J$ is nondecreasing in its first argument. (S8): $F[A_H\cup B_H]$ misses exactly $(r-x)(t-y)$ edges, so a module (K$^-$) applies. (S9) is Lemma~\ref{lem:prefix}.
+\end{proof}
+
+\begin{lemma}\label{lem:sparseineq}
+In the sparse case assume $t+x\ge r+y$. Then
+\begin{equation}\label{eq:sparseineq}
+6P_1-3T_{\mathrm{sp}}\ \ge\ \frac3{14}(r^2+t^2)-6(r+t)+\frac{83}{28}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+By \eqref{eq:Cbound}, \eqref{eq:Jbound} (with $r-x\ge1$) and \eqref{eq:B0H},
+\begin{multline}\label{eq:sparsebase}
+6P_1-3T_{\mathrm{sp}}\ge(t+x)(t+x-2)-3+3(r-x-1)\min(x+y,r-x)\\
+-3tx-3ry+3xy-3D_0 .
+\end{multline}
+The hypothesis gives $x\ge r-t+y\ge r-t$.
+
+\emph{Case $x+y<r-x$.} The right-hand side of \eqref{eq:sparsebase} equals
+\[
+Q(x)-2t-5x-3y-3-3D_0,\qquad Q(x)=t^2-tx-2x^2+3rx .
+\]
+Here $2x+y<r$, so $\max(0,r-t)\le x\le r/2$ and $5x+3y\le3(2x+y)\le3r$. The function $Q$ is concave, so on this interval it is at least the smaller of its values at the end points. At $x=\max(0,r-t)$ the value is $t^2$ if $t\ge r$ and $r^2$ if $t\le r$, and at $x=r/2$ it is $r^2+t^2-rt/2$. All three are at least $(r^2+t^2)/2$. Using also $D_0\le r+t-2$ we obtain $6P_1-3T_{\mathrm{sp}}\ge(r^2+t^2)/2-6r-5t+3$, which exceeds the right-hand side of \eqref{eq:sparseineq} by $\frac27(r^2+t^2)+t+\frac1{28}>0$.
+
+\emph{Case $x+y\ge r-x$.} The minimum in \eqref{eq:sparsebase} is $r-x$, and $y$ enters only through $-3y(r-x)$, with negative coefficient. Substituting the upper bound $y\le t+x-r$ we obtain
+\[
+6P_1-3T_{\mathrm{sp}}\ge t^2-2t-3+6r^2-3r-3rt+7x^2-(12r-2t-1)x-3D_0 .
+\]
+Minimizing over real $x$ gives
+\[
+6P_1-3T_{\mathrm{sp}}\ge\frac{24r^2+24t^2-36rt-60r-60t-85}{28}-3D_0 .
+\]
+Since $24r^2+24t^2-36rt\ge6(r^2+t^2)$ and $D_0\le r+t-2$, the right-hand side is at least $\frac3{14}(r^2+t^2)-\frac{36}7(r+t)+\frac{83}{28}$, which implies \eqref{eq:sparseineq}.
+\end{proof}
+
+\begin{proposition}\label{prop:sparselarge}
+In the sparse case, if $3(r^2+t^2)\ge84(r+t)$, then $\tau(G)\le2\nu(G)$. This holds in particular if $a+b\ge111$.
+\end{proposition}
+
+\begin{proof}
+Exchanging $A$ and $B$ if necessary (Lemma~\ref{lem:dichotomy}), we may assume $t+x\ge r+y$; the hypothesis is symmetric. The right-hand side of \eqref{eq:sparseineq} is then at least $83/28>0$, so $T_{\mathrm{sp}}<2P_1\le2\nu(G)$ by Lemmas~\ref{lem:sparsecover} and~\ref{lem:sparsepackings}. If $a+b\ge111$, then $r+t\ge56$ and $r^2+t^2\ge(r+t)^2/2\ge28(r+t)$.
+\end{proof}
+
+\begin{proposition}\label{prop:sparsefinite}
+In the sparse case, $\tau(G)\le2\nu(G)$.
+\end{proposition}
+
+\begin{proof}
+By Theorem~\ref{thm:CG} and Lemma~\ref{lem:dichotomy} we may assume that $a\le b$ and that $a$ or $b$ is odd. By Proposition~\ref{prop:sparselarge} it suffices to treat $a+b\le110$; the computation covers the slightly larger range $a+b\le113$. Among the pairs $(a,b)$ with $a+b\le113$ and the properties above, $929$ satisfy $3(r^2+t^2)\ge84(r+t)$ and are covered by Proposition~\ref{prop:sparselarge}; the others give $374{,}409$ tuples $(a,b,x,y)$ with $0\le x<r$ and $0\le y<t$. For each tuple we computed $T_{\mathrm{sp}}$ and the maximum $P$ of the bounds (S1)--(S8), and, where $T_{\mathrm{sp}}>2P$, also (S9). Exactly $82$ tuples satisfy $T_{\mathrm{sp}}>2P$ after this step; they are listed in \texttt{cochain/sparse\_scalar\_failures.json}. Of these, $21$ have $a+b\le10$ and are covered by Proposition~\ref{prop:small}. The other $61$ are listed in Table~\ref{tab:sparsecert}. For each of them the file \texttt{cochain/sparse\_canonical\_certificates.json} contains an explicit triangle packing of the canonical graph $F$ of Lemma~\ref{lem:transfer} with at least $T_{\mathrm{sp}}/2$ triangles, and Lemma~\ref{lem:transfer} applies. Fourteen of them, with $a+b\in\{11,12\}$, are also covered by Proposition~\ref{prop:small}.
+\end{proof}
+
+\subsection{The dense case}\label{ssec:dense}
+Assume $x\ge r$ and $y\ge t$, so $A_H\subseteq X$, $B_H\subseteq Y$, and $A_H$ is complete to $B_H$. Put
+\begin{gather*}
+w=x-r,\quad z=y-t,\quad W=X\setminus A_H,\quad Z=Y\setminus B_H,\\
+e=|E(W,Z)|,\quad N=r+t,\quad T_0=H+rt,
+\end{gather*}
+so $0\le w\le s$, $0\le z\le u$ and $0\le e\le wz$.
+
+\begin{lemma}\label{lem:densecover}
+$E(A_L,B_L)\subseteq E(W,Z)$, and $\tau(G)\le T_0+e$.
+\end{lemma}
+
+\begin{proof}
+If $a_ib_j\in E(G)$ with $i>r$ and $j>t$, then $d_i\ge j>t$, so $a_i\in X\setminus A_H=W$, and $j\le d_i\le d_r=y$, so $b_j\in Z$. Delete $E(A_H)$, $E(A_L)$, $E(B_H)$, $E(B_L)$, $E(A_H,B_H)$ and $E(W,Z)$, in total $T_0+e$ edges. Every remaining edge joins $A_H\cup B_H$ to $A_L\cup B_L$, so the remaining graph is bipartite.
+\end{proof}
+
+\begin{lemma}\label{lem:densepackings}
+In the dense case each of the following numbers is a lower bound for $\nu(G)$; transposes are defined as in Lemma~\ref{lem:sparsepackings}, with $(w,z)$ exchanged.
+\begin{enumerate}
+\item[(D1)] $P_L:=C(a)+C(b)=C(2r-\varepsilon)+C(2t-\eta)$;
+\item[(D2)] $P_D:=J(x,t)+J(z,r)+B_0$, and its transpose;
+\item[(D3)] $C(a)+J(x,t)+J(t,u)$, and its transpose;
+\item[(D4)] $C(x+t)+J(x,a-x)+J(t,u)$, and its transpose;
+\item[(D5)] $J(t,x)+J(r,z)+J(u,t)+M_A+M_B$, where $M_A=\max\bigl(C(a-x),J(x,a-x)\bigr)$ and $M_B=\max\bigl(C(b-y),J(z,b-y)\bigr)$, and its transpose;
+\item[(D6)] $L_1(j)$ and $L_2(j)$ of Lemma~\ref{lem:prefix} for the profile $(y^{r},t^{w},0^{a-x})$, for all $j$ and both orientations;
+\item[(D7)] $P_F:=C(x+y)-(wz-e)+\binom{s-w}2+\binom{u-z}2$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(D1): modules (K) on $A$ and on $B$. (D2): modules (J) with centers $X$ and endpoint clique $B_H$, with centers $Z$ and endpoint clique $A_H$, with centers $A_H$ and endpoint clique $A_L$, and with centers $B_H$ and endpoint clique $B_L$. Their supports lie in $E(B_H)\cup E(X,B_H)$, $E(A_H)\cup E(Z,A_H)$, $E(A_L)\cup E(A_H,A_L)$ and $E(B_L)\cup E(B_H,B_L)$; the cross edges in the first two sets have their $B$-ends in $B_H$ and in $Z\subseteq B_L$, respectively. (D3) and (D4) are $L_1(t)$ and $L_2(t)$, since $p_t=x$.
+
+(D5): modules (J) with centers $B_H$ and endpoint clique $X$, with centers $A_H$ and endpoint clique $Z$, and with centers $B_L$ and endpoint clique $B_H$, with supports in $E(X)\cup E(B_H,X)$, $E(Z)\cup E(A_H,Z)$ and $E(B_H)\cup E(B_L,B_H)$; these are pairwise disjoint. Add either a module (K) on $A\setminus X$ or a module (J) with centers $X$ and endpoint clique $A\setminus X$, with support in $E(A\setminus X)\cup E(X,A\setminus X)$; and either a module (K) on $B\setminus Y$ or a module (J) with centers $Z$ and endpoint clique $B\setminus Y$, with support in $E(B\setminus Y)\cup E(Z,B\setminus Y)$. None of these edges occurs in the first three modules, and the last two supports are disjoint.
+
+(D6): the profile $(y^r,t^w,0^{a-x})$ is bounded above by $d$ entrywise, since $d_i\ge d_r=y$ for $i\le r$ and $d_i\ge t$ for $i\le x$; so this graph is a spanning subgraph of $G$, and Lemma~\ref{lem:prefix} applies to it.
+
+(D7): the graph $G[X\cup Y]$ is complete except for the $wz-e$ non-edges between $W$ and $Z$, since $X$ is complete to $B_H$ and $Y$ to $A_H$. Take a module (K$^-$) on $X\cup Y$, a module (J) with centers $X$ and endpoint clique $A\setminus X$, and a module (J) with centers $Y$ and endpoint clique $B\setminus Y$. Since $x\ge r\ge s\ge s-w=a-x$ and $y\ge u-z=b-y$, the last two contribute $\binom{s-w}2$ and $\binom{u-z}2$ triangles. The three supports are disjoint. If $C(x+y)-(wz-e)<0$, the bound holds a fortiori.
+\end{proof}
+
+Put $S_0=P_F-e=C(x+y)-wz+\binom{s-w}2+\binom{u-z}2$; it depends only on $(a,b,x,y)$.
+
+\begin{proposition}\label{prop:denselarge}
+In the dense case, if $N=r+t\ge88$, then $\tau(G)\le2\nu(G)$.
+\end{proposition}
+
+\begin{proof}
+Exchanging $A$ and $B$ if necessary, we may assume $r\le t$. Put $\Delta_D=2P_D-T_0-e$, $\Delta_F=2P_F-T_0-e$ and $\Delta_L=2P_L-T_0-e$. By Lemmas~\ref{lem:densecover} and~\ref{lem:densepackings} it suffices to show that one of $\Delta_D$, $\Delta_F$, $\Delta_L$ is nonnegative. Define the leading quadratic forms
+\begin{align*}
+\Lambda_D&=t\min(r+w,t)+r\min(z,r)-rt-e,\\
+\Lambda_F&=\tfrac13(N+w+z)^2+(r-w)^2+(t-z)^2-r^2-t^2-rt-2wz+e,\\
+\Lambda_L&=\tfrac13(r^2+t^2)-rt-e .
+\end{align*}
+
+\emph{Error terms.} By \eqref{eq:Jbound} and \eqref{eq:B0H},
+\[
+\Delta_D\ge(t-1)\min(r+w,t)+(r-1)\min(z,r)-D_0-rt-e\ge \Lambda_D-2N+2 .
+\]
+By \eqref{eq:Cbound} and exact expansion of the binomial coefficients, with $s=r-\varepsilon$ and $u=t-\eta$,
+\[
+\Delta_F\ge \Lambda_F-\tfrac23N-1-\varepsilon r-\eta t+\bigl(2\varepsilon+\tfrac13\bigr)w+\bigl(2\eta+\tfrac13\bigr)z+\varepsilon+\eta\ \ge\ \Lambda_F-\tfrac53N+1,
+\]
+using $\varepsilon(r-1)+\eta(t-1)\le N-2$ and $w,z\ge0$. Similarly
+\[
+\Delta_L\ge \Lambda_L-\tfrac13\bigl((1+\varepsilon)r+(1+\eta)t\bigr)-2\ \ge\ \Lambda_L-\tfrac23N-2 .
+\]
+
+\emph{The leading inequality.} We claim that, for all real $0\le r\le t$ and $w,z\ge0$,
+\begin{equation}\label{eq:H}
+Q:=\Lambda_F+\tfrac34\Lambda_D+\tfrac14\Lambda_L\ \ge\ \tfrac{29}{768}N^2 .
+\end{equation}
+The coefficients of $e$ cancel. On each of the four regions defined by $r+w\lessgtr t$ and $z\lessgtr r$ the function $Q$ is a homogeneous quadratic polynomial in $(r,t,w,z)$. On the region $r+w\le t$, $z\le r$, with $h=t-r\ge0$, one checks by expansion that
+\[
+Q-\frac{N^2}{16}=\frac43\Bigl(z-\frac{h+w}2\Bigr)^2+\frac{h^2}{48}+\frac{rw}{12}+\frac{3hw}4+w^2+\frac{rz}{12}\ \ge0 .
+\]
+On each of the other three regions we normalize $N=1$, so $t=1-r$ and $r\le\frac12$, and write $v=(r,w,z)$. Table~\ref{tab:quadratic} gives a point $p$, the value $Q(p)$, a linear form $\lambda$ and a symmetric matrix $M$ such that
+\[
+Q(v)=Q(p)+\lambda(v)+(v-p)^{\mathsf T}M(v-p)
+\]
+identically. The leading principal minors of $M$, listed in the table, are positive, so $M$ is positive definite, and $\lambda\ge0$ on the region. Hence $Q\ge Q(p)\ge\frac{29}{768}$ there, and \eqref{eq:H} follows by homogeneity. These identities are polynomial identities with rational coefficients; \texttt{cochain/verify\_dense\_algebra.py} checks them, and the minors, in exact arithmetic.
+
+\emph{Conclusion.} Combining \eqref{eq:H} with the three error bounds,
+\[
+\Delta_F+\tfrac34\Delta_D+\tfrac14\Delta_L\ \ge\ Q-\tfrac{10}3N+2\ \ge\ \tfrac{29}{768}N^2-\tfrac{10}3N+2 .
+\]
+At $N=88$ the right-hand side equals $13/12$, and it increases for $N\ge88$. Hence one of $\Delta_F$, $\Delta_D$, $\Delta_L$ is positive.
+\end{proof}
+
+\begin{table}[t]
+\caption{Quadratic certificates for \eqref{eq:H}, normalized to $r+t=1$, in the variables $v=(r,w,z)$.}\label{tab:quadratic}
+\small
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}lllll@{}}
+\toprule
+region & $p$ & $Q(p)$ & $\lambda(v)$ & $M$; leading principal minors\\
+\midrule\addlinespace[4pt]
+$r+w\le t$, $z\ge r$ & $(\frac5{34},0,\frac{53}{136})$ & $\frac{43}{816}$ & $\frac{67}{136}w$ &
+$\left(\begin{smallmatrix}13/6&-11/8&1\\-11/8&4/3&-2/3\\1&-2/3&4/3\end{smallmatrix}\right)$; $\frac{13}6,\frac{575}{576},\frac{125}{144}$\\[10pt]
+$r+w\ge t$, $z\le r$ & $(\frac12,\frac5{32},\frac1{16})$ & $\frac{29}{768}$ & $\frac{57}{64}(\frac12-r)$ &
+$\left(\begin{smallmatrix}35/12&-1&11/8\\-1&4/3&-2/3\\11/8&-2/3&4/3\end{smallmatrix}\right)$; $\frac{35}{12},\frac{26}9,\frac{269}{144}$\\[10pt]
+$r+w\ge t$, $z\ge r$ & $(\frac{25}{59},\frac{33}{118},\frac{25}{59})$ & $\frac{71}{354}$ & $\frac{16}{59}(z-r)$ &
+$\left(\begin{smallmatrix}11/3&-1&1\\-1&4/3&-2/3\\1&-2/3&4/3\end{smallmatrix}\right)$; $\frac{11}3,\frac{35}9,\frac{32}9$\\[6pt]
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{proposition}\label{prop:densefinite}
+In the dense case, $\tau(G)\le2\nu(G)$.
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:emptypart}, Theorem~\ref{thm:CG}, Proposition~\ref{prop:denselarge} and Lemma~\ref{lem:dichotomy} we may assume $a\le b$, that $a$ or $b$ is odd, and that $r+t\le87$. Fix $(a,b,x,y)$ and let $P$ be the maximum of (D1)--(D6); these bounds do not depend on $e$. If $e\le2P-T_0$, then $T_0+e\le2P$; if $e\ge T_0-2S_0$, then $T_0+e\le2(S_0+e)=2P_F$. By Lemmas~\ref{lem:densecover} and~\ref{lem:densepackings}, the only values of $e$ still to be treated satisfy
+\begin{equation}\label{eq:interval}
+\max(0,2P-T_0+1)\le e\le\min(wz,\,T_0-2S_0-1).
+\end{equation}
+There are $3{,}785{,}892$ tuples $(a,b,x,y)$ with $1\le a\le b$, $a$ or $b$ odd, $r+t\le87$, $r\le x\le a$ and $t\le y\le b$. For each we computed the interval \eqref{eq:interval}, first with (D1)--(D5) and, if it was nonempty, also with (D6). Exactly $70$ tuples have a nonempty interval, containing $73$ values of $e$ in total; they are listed in \texttt{cochain/dense\_scalar\_failures.json}. All have $a+b\le30$. Those with $a+b\le12$ are covered by Proposition~\ref{prop:small}. For the remaining $30$ pairs of a tuple and a value of $e$, listed in Table~\ref{tab:densecert}, the value is $e=0$ or $e=wz$. Let $F_e=G(a,b,f)$ with $f=(y^r,t^w,0^{a-x})$ if $e=0$ and $f=(y^{r+w},0^{a-x})$ if $e=wz$. Then $F_e$ has the parameters $(a,b,x,y,e)$, and every co-chain graph $G$ with these parameters contains $F_e$ as a spanning subgraph on the same labeled vertices: $d_i\ge y$ for $i\le r$, $d_i\ge t$ for $r<i\le x$, and, if $e=wz$, every vertex of $W$ is adjacent to all of $Z$, so $d_i\ge y$ for $i\le x$. The file \texttt{cochain/dense\_canonical\_certificates.json} contains for each of the $30$ cases an explicit triangle packing of $F_e$ with at least $(T_0+e)/2$ triangles. By Lemma~\ref{lem:densecover}, $\tau(G)\le T_0+e\le2\nu(F_e)\le2\nu(G)$.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:cochain-intro}}
+Let $G$ be a co-chain graph with cliques of sizes $a$ and $b$. If $a=0$ or $b=0$, use Lemma~\ref{lem:emptypart}. If $a$ and $b$ are positive and even, use Theorem~\ref{thm:CG}. Otherwise $a,b\ge1$, and by Lemma~\ref{lem:dichotomy} $G$ is in the sparse case or in the dense case; use Proposition~\ref{prop:sparsefinite} or Proposition~\ref{prop:densefinite}. \qed
+
+\begin{table}[p]
+\caption{The $61$ sparse tuples $(a,b,x,y)$ of Proposition~\ref{prop:sparsefinite} with $a+b\ge11$, the cover size $T_{\mathrm{sp}}$, and the size $|\mathcal P|$ of the certified packing of the canonical graph $F$.}\label{tab:sparsecert}
+\small
+\renewcommand{\arraystretch}{1.05}
+\begin{tabular}{@{}lrr@{\qquad}lrr@{\qquad}lrr@{}}
+\toprule
+$(a,b,x,y)$ & $T_{\mathrm{sp}}$ & $|\mathcal P|$ & $(a,b,x,y)$ & $T_{\mathrm{sp}}$ & $|\mathcal P|$ & $(a,b,x,y)$ & $T_{\mathrm{sp}}$ & $|\mathcal P|$\\
+\midrule
+$(3,8,0,3)$ & 19 & 10 & $(5,9,2,3)$ & 33 & 17 & $(9,9,4,2)$ & 54 & 27 \\
+$(3,8,1,2)$ & 19 & 10 & $(5,9,2,4)$ & 34 & 17 & $(9,9,4,3)$ & 55 & 28 \\
+$(5,6,0,2)$ & 16 & 8 & $(5,10,1,2)$ & 33 & 17 & $(9,9,4,4)$ & 56 & 28 \\
+$(5,6,1,1)$ & 15 & 8 & $(5,10,1,3)$ & 35 & 18 & $(9,11,1,4)$ & 63 & 32 \\
+$(5,6,1,2)$ & 17 & 9 & $(5,11,1,4)$ & 43 & 22 & $(9,11,2,4)$ & 65 & 33 \\
+$(5,6,2,0)$ & 16 & 8 & $(6,7,2,2)$ & 25 & 13 & $(9,11,3,4)$ & 67 & 34 \\
+$(5,6,2,1)$ & 17 & 9 & $(7,7,3,3)$ & 33 & 17 & $(9,13,3,4)$ & 81 & 41 \\
+$(5,6,2,2)$ & 18 & 9 & $(7,8,2,3)$ & 35 & 18 & $(9,13,4,5)$ & 85 & 43 \\
+$(5,7,1,2)$ & 21 & 11 & $(7,9,2,4)$ & 43 & 22 & $(10,11,3,4)$ & 71 & 36 \\
+$(5,7,1,3)$ & 23 & 12 & $(7,9,3,3)$ & 43 & 22 & $(11,11,3,3)$ & 77 & 39 \\
+$(5,7,2,0)$ & 21 & 11 & $(7,9,3,4)$ & 44 & 22 & $(11,11,4,4)$ & 82 & 41 \\
+$(5,7,2,1)$ & 22 & 11 & $(7,11,2,4)$ & 54 & 27 & $(11,11,5,5)$ & 85 & 43 \\
+$(5,7,2,2)$ & 23 & 12 & $(7,12,2,5)$ & 61 & 31 & $(11,13,4,3)$ & 95 & 48 \\
+$(5,7,2,3)$ & 24 & 12 & $(7,14,2,5)$ & 75 & 38 & $(11,16,4,6)$ & 125 & 63 \\
+$(5,8,0,3)$ & 25 & 13 & $(8,9,3,2)$ & 45 & 23 & $(13,13,5,6)$ & 119 & 60 \\
+$(5,8,1,2)$ & 24 & 12 & $(8,11,3,4)$ & 59 & 30 & $(13,13,6,5)$ & 119 & 60 \\
+$(5,8,2,1)$ & 25 & 13 & $(9,9,1,4)$ & 53 & 27 & $(13,13,6,6)$ & 120 & 60 \\
+$(5,8,2,3)$ & 27 & 14 & $(9,9,2,4)$ & 54 & 27 & $(13,17,5,6)$ & 157 & 79 \\
+$(5,9,1,4)$ & 33 & 17 & $(9,9,3,3)$ & 53 & 27 & $(17,17,5,5)$ & 193 & 97 \\
+$(5,9,2,1)$ & 31 & 16 & $(9,9,3,4)$ & 55 & 28 & & & \\
+$(5,9,2,2)$ & 32 & 16 & $(9,9,4,1)$ & 53 & 27 & & & \\
+\bottomrule
+\end{tabular}
+
+\bigskip
+\caption{The $30$ dense cases $(a,b,x,y,e)$ of Proposition~\ref{prop:densefinite} with $a+b\ge13$, the cover size $T_0+e$, and the size $|\mathcal P|$ of the certified packing of $F_e$.}\label{tab:densecert}
+\begin{tabular}{@{}lrr@{\qquad}lrr@{}}
+\toprule
+$(a,b,x,y,e)$ & $T_0+e$ & $|\mathcal P|$ & $(a,b,x,y,e)$ & $T_0+e$ & $|\mathcal P|$\\
+\midrule
+$(5,9,3,5,0)$ & 35 & 18 & $(7,9,4,5,0)$ & 45 & 23 \\
+$(5,9,3,6,0)$ & 35 & 18 & $(7,9,4,6,0)$ & 45 & 23 \\
+$(5,9,3,7,0)$ & 35 & 18 & $(7,9,4,7,0)$ & 45 & 23 \\
+$(5,9,4,7,2)$ & 37 & 19 & $(7,9,5,7,2)$ & 47 & 24 \\
+$(6,7,3,4,0)$ & 27 & 14 & $(9,9,5,5,0)$ & 57 & 29 \\
+$(6,7,3,5,0)$ & 27 & 14 & $(9,9,7,7,4)$ & 61 & 31 \\
+$(6,9,3,5,0)$ & 37 & 19 & $(11,11,6,6,0)$ & 86 & 43 \\
+$(6,9,3,6,0)$ & 37 & 19 & $(11,11,6,7,0)$ & 86 & 43 \\
+$(6,9,3,7,0)$ & 37 & 19 & $(11,11,7,6,0)$ & 86 & 43 \\
+$(6,9,4,7,2)$ & 39 & 20 & $(11,11,7,7,0)$ & 86 & 43 \\
+$(7,7,4,4,0)$ & 34 & 17 & $(11,11,7,7,1)$ & 87 & 44 \\
+$(7,7,4,5,0)$ & 34 & 17 & $(11,13,6,7,0)$ & 103 & 52 \\
+$(7,7,5,4,0)$ & 34 & 17 & $(11,13,6,8,0)$ & 103 & 52 \\
+$(7,7,5,5,0)$ & 34 & 17 & $(11,13,6,9,0)$ & 103 & 52 \\
+$(7,7,5,5,1)$ & 35 & 18 & $(15,15,11,11,9)$ & 171 & 86 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\clearpage
+\section{Supplementary files}\label{app:files}
+
+The programs and certificates used in Appendix~\ref{app:cochain}, and a script reproducing Table~\ref{tab:path}, are provided as the supplementary archive \texttt{verification.zip}, with the following content. All programs use only the Python standard library (version 3.10 or later), read their inputs without modifying them, and exit with code zero after printing a summary if all checks pass.
+
+\begin{itemize}
+\item \texttt{README.md}: instructions and the correspondence below.
+\item \texttt{cochain/packing\_bounds.py}: the functions $C$ and $J$, the bounds (S1)--(S9) of Lemma~\ref{lem:sparsepackings} with $T_{\mathrm{sp}}$, and the bounds (D1)--(D6) with $T_0$, $S_0$ and the interval \eqref{eq:interval}.
+\item \texttt{cochain/verify\_dense\_algebra.py}: the identities in the proof of Proposition~\ref{prop:denselarge}, the data of Table~\ref{tab:quadratic}, and the value $13/12$ at $N=88$, in exact rational arithmetic.
+\item \texttt{cochain/verify\_full\_candidate.py}: runs the previous script; carries out the computation of Proposition~\ref{prop:small} ($2{,}861$ profiles, of which $2{,}850$ are settled by Lemmas~\ref{lem:prefix} and~\ref{lem:orderedcut}) and checks the $11$ certificates of Table~\ref{tab:small}; carries out the computations of Propositions~\ref{prop:sparsefinite} and~\ref{prop:densefinite}, asserting the counts $374{,}409$, $929$, $82$, $3{,}785{,}892$, $70$ and $73$ and the agreement with the two lists of exceptions; and checks the $61$ and $30$ packing certificates, including the canonical profiles, the edge-disjointness, the sizes and the coverage of all exceptional cases with $a+b>12$.
+\item \texttt{cochain/small\_exception\_certificates.json}: the $11$ packings and covers of Table~\ref{tab:small}.
+\item The $82$ exceptional sparse tuples and the $61$ packings of Table~\ref{tab:sparsecert}:\\
+\texttt{cochain/sparse\_scalar\_failures.json},\\
+\texttt{cochain/sparse\_canonical\_certificates.json}.
+\item The $70$ exceptional dense tuples with their intervals \eqref{eq:interval} and the $30$ packings of Table~\ref{tab:densecert}:\\
+\texttt{cochain/dense\_scalar\_failures.json},\\
+\texttt{cochain/dense\_canonical\_certificates.json}.
+\item \texttt{verify\_path\_cycle.py}: recomputes Table~\ref{tab:path} as exact polynomial identities and checks \eqref{eq:mperiodic} and $2m(k)\ge\lfloor k/2\rfloor$ for $7\le k\le10{,}000$. It also checks on finite ranges of $n$ the constructions of Lemma~\ref{lem:repair}, Propositions~\ref{prop:cycle2} and~\ref{prop:cycle6}, the count in Lemma~\ref{lem:oddcover} for all admissible run lengths, and Lemma~\ref{lem:shortpath}. These finite checks corroborate the proofs of Sections~\ref{sec:paths} and~\ref{sec:cycles}, which do not depend on them.
+\end{itemize}
+
+In the certificate files a co-chain graph with parameters $a$, $b$ and profile $d$ has vertices $0,\dots,a+b-1$, where vertex $i<a$ is $a_{i+1}$ and vertex $a+j$ is $b_{j+1}$, and $\{i,a+j\}$ is an edge exactly when $j<d_{i+1}$; this is the labeling of Table~\ref{tab:small}. The packings in the certificate files were found by a search program, which plays no role in the proof: only the listed triangles and the elementary checks above are used. The complete verification takes about one minute on a current personal computer. Theorem~\ref{thm:skolem}, Lemma~\ref{lem:feder-subi}, Theorem~\ref{thm:CG} and \cite[Theorem~3.4]{BFG} are mathematical inputs and are not verified by the programs.
+
+\section*{Use of AI-assisted tools}
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{99}
+
+\bibitem{BBGHMNO}
+M. Bonamy, \L. Bo\.zyk, A. Grzesik, M. Hatzel, T. Masa\v{r}\'{\i}k, J. Novotn\'a, and K. Okrasa, \emph{Tuza's conjecture for threshold graphs}, Discrete Math. Theor. Comput. Sci. \textbf{24} (2022), no.~1, Paper No.~24.
+
+\bibitem{BondyLocke}
+J. A. Bondy and S. C. Locke, \emph{Triangle-free subgraphs of powers of cycles}, Graphs Combin. \textbf{8} (1992), no.~2, 109--118.
+
+\bibitem{BFG}
+F. Botler, C. G. Fernandes, and J. Guti\'errez, \emph{On Tuza's conjecture for triangulations and graphs with small treewidth}, Discrete Math. \textbf{344} (2021), no.~4, 112281; arXiv:2002.07925v2.
+
+\bibitem{BBW}
+D. Bryant, M. Buchanan, and I. M. Wanless, \emph{The spectrum for quasigroups with cyclic automorphisms and additional symmetries}, Discrete Math. \textbf{309} (2009), no.~4, 821--833.
+
+\bibitem{BGL}
+D. Bryant, H. Gavlas, and A. C. H. Ling, \emph{Skolem-type difference sets for cycle systems}, Electron. J. Combin. \textbf{10} (2003), Research Paper~38.
+
+\bibitem{CG}
+L. Chahua and J. Guti\'errez, \emph{On Tuza's conjecture in co-chain graphs}, preprint (2023), arXiv:2211.07766v2.
+
+\bibitem{ChungTrotter}
+F. R. K. Chung and W. T. Trotter, Jr., \emph{Triangle-free graphs with restricted bandwidth}, in: Progress in Graph Theory (J. A. Bondy and U. S. R. Murty, eds.), Academic Press, Toronto, 1984, 175--190.
+
+\bibitem{FederSubi}
+T. Feder and C. Subi, \emph{Packing edge-disjoint triangles in given graphs}, Electronic Colloquium on Computational Complexity, Report TR12-013, 2012.
+
+\bibitem{Haxell}
+P. E. Haxell, \emph{Packing and covering triangles in graphs}, Discrete Math. \textbf{195} (1999), no.~1--3, 251--254.
+
+\bibitem{HaxellKohayakawa}
+P. E. Haxell and Y. Kohayakawa, \emph{Packing and covering triangles in tripartite graphs}, Graphs Combin. \textbf{14} (1998), no.~1, 1--10.
+
+\bibitem{Krivelevich}
+M. Krivelevich, \emph{On a conjecture of Tuza about packing and covering of triangles}, Discrete Math. \textbf{142} (1995), no.~1--3, 281--286.
+
+\bibitem{Locke}
+S. C. Locke, \emph{Further notes on: largest triangle-free subgraphs in powers of cycles}, Ars Combin. \textbf{49} (1998), 65--77.
+
+\bibitem{MDMF}
+H. B. Mac\^edo Filho, S. Dantas, R. C. S. Machado, and C. M. H. de Figueiredo, \emph{Biclique-colouring verification complexity and biclique-colouring power graphs}, Discrete Appl. Math. \textbf{192} (2015), 65--76.
+
+\bibitem{OKeefe}
+E. S. O'Keefe, \emph{Verification of a conjecture of Th. Skolem}, Math. Scand. \textbf{9} (1961), 80--82.
+
+\bibitem{Puleo}
+G. J. Puleo, \emph{Tuza's conjecture for graphs with maximum average degree less than $7$}, European J. Combin. \textbf{49} (2015), 134--152.
+
+\bibitem{Skolem}
+Th. Skolem, \emph{On certain distributions of integers in pairs with given differences}, Math. Scand. \textbf{5} (1957), 57--68.
+
+\bibitem{Tuza81}
+Zs. Tuza, \emph{Conjecture}, in: Finite and Infinite Sets, Vol.~II (Eger, 1981) (A. Hajnal, L. Lov\'asz, and V. T. S\'os, eds.), Colloq. Math. Soc. J\'anos Bolyai, vol.~37, North-Holland, Amsterdam, 1984, p.~888.
+
+\bibitem{Tuza90}
+Zs. Tuza, \emph{A conjecture on triangles of graphs}, Graphs Combin. \textbf{6} (1990), no.~4, 373--380.
+
+\bibitem{Wang}
+S. Wang, \emph{A bound below $2.8$ for Tuza's conjecture}, preprint (2026), arXiv:2609.13831v1.
+
+\end{thebibliography}
+
+\end{document}

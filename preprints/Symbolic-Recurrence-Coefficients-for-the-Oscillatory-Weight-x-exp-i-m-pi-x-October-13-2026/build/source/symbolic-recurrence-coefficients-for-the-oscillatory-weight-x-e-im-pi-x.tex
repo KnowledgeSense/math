@@ -1,0 +1,481 @@
+\documentclass[11pt]{amsart}
+
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+  pdftitle={Symbolic recurrence coefficients for the oscillatory weight x exp(i m pi x)},
+  pdfauthor={Knowledge Sense},
+  pdfsubject={Orthogonal polynomials with respect to an oscillatory weight},
+  pdfkeywords={Orthogonal polynomials, complex oscillatory weight, three-term recurrence, Hankel determinant, bordered determinant, endpoint expansion}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+\emergencystretch=2em
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\abs}[1]{\lvert #1\rvert}
+
+\begin{document}
+
+\DeclareRobustCommand{\theweight}{\ensuremath{x\,e^{im\pi x}}}
+\title[Recurrence coefficients for \theweight]{Symbolic recurrence coefficients for the oscillatory weight \texorpdfstring{\theweight}{x exp(i m pi x)}}
+
+\author{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{13 October 2026}
+
+\subjclass[2020]{Primary 42C05; Secondary 33C47, 15A15, 41A60}
+
+\keywords{Orthogonal polynomials, complex oscillatory weight, three-term recurrence, Hankel determinant, bordered determinant, endpoint expansion}
+
+\begin{abstract}
+Let $m$ be a nonzero integer and $\eta=m\pi$. The monic polynomials orthogonal with respect to the bilinear form $\int_{-1}^{1}f(x)g(x)\,x\,e^{i\eta x}\,dx$ satisfy $xP_n=P_{n+1}+i\alpha_nP_n+\beta_nP_{n-1}$. Lyu and Zhou conjectured four closed formulas expressing $\alpha_{2k},\alpha_{2k+1}$ for $k\ge2$ and $\beta_{2k},\beta_{2k+1}$ for $k\ge1$ through a single family of monic polynomials $G_j(\eta^2)$ of degree $j$. We prove this conjecture for every nonzero integer $m$. Regarded as polynomials in $z=\eta^2$, the denominator polynomials are normalizations of the moment Hankel determinants, and the numerator polynomials are normalizations of a combination of these determinants with their one-column bordered versions. Both determinants are $n$-fold integrals with polynomial amplitudes, and for such integrals the endpoint expansion terminates and is an exact finite identity. At integer frequencies, in addition, all vertex exponentials in this expansion take the same value. For the Hankel determinant this expansion gives the degree and the leading coefficient, in accordance with the large-frequency analysis of Celsus, Deaño, Huybrechs and Iserles. For the bordered determinant the dominant endpoint contribution vanishes, and we compute the first coefficient that survives. Together with the values of the normalized determinants at $z=0$, this yields the numerator polynomials, and all four formulas then follow from one common family with rational coefficients that does not depend on $m$.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $m$ be a nonzero integer, put $\eta=m\pi$, and consider the complex weight
+\[
+w(x)=x\,e^{i\eta x},\qquad -1\le x\le 1 .
+\]
+It defines the bilinear, non-Hermitian form $\langle f,g\rangle=\int_{-1}^{1}f(x)g(x)w(x)\,dx$ on polynomials. Since $w$ is complex-valued, the existence theory for positive weights does not apply, and the existence of orthogonal polynomials is not automatic. Milovanović and Cvetković \cite[Theorem~2.3]{MC} proved that for every nonzero integer $m$ the monic orthogonal polynomials $P_n$, $\deg P_n=n$, exist for all $n\ge0$. Because $\langle xf,g\rangle=\langle f,xg\rangle$, they satisfy a three-term recurrence, which we write as in \cite[(1.5)]{LZ} and \cite[(3.1)]{MC}:
+\begin{equation}\label{eq:recurrence}
+xP_n(x)=P_{n+1}(x)+i\alpha_nP_n(x)+\beta_nP_{n-1}(x),\qquad P_0=1,\quad P_{-1}=0 .
+\end{equation}
+In \cite{MC} the first coefficients were computed symbolically and many more numerically, and a conjecture on their structure was formulated \cite[Conjecture~3.1]{MC}. The closely related weight $e^{i\omega x}$ on $[-1,1]$ was studied in connection with Gaussian quadrature for oscillatory integrals by Asheim, Deaño, Huybrechs and Wang \cite{ADHW}, and the corresponding polynomials and Hankel determinants were analysed by Celsus, Deaño, Huybrechs and Iserles \cite{CDHI}, whose large-frequency analysis of multiple oscillatory integrals plays a role below.
+
+Recently Lyu and Zhou \cite{LZ} derived, by ladder operators, coupled difference equations for the recurrence coefficients of the weights $x(1-x^2)^{\gamma-1/2}e^{i\eta x}$. For $\gamma=1/2$ and $\eta=m\pi$ they obtained $\alpha_n$ and $\beta_n$ for $n\le 9$ in closed form \cite[Corollary~3.8, Table~4]{LZ} and proposed the following conjecture.
+
+\begin{conjecture}[{\cite[Conjecture~3.9]{LZ}}]\label{conj:LZ}
+There are monic polynomials $G_j$ of degree $j$, with $G_0=1$ and $G_1(z)=z-2$, such that for every nonzero integer $m$ and $\eta=m\pi$
+\begin{align}
+\alpha_{2k}&=\frac{2(2k+1)}{\eta}+k(k+1)\,\eta\left(\frac{2G_{k^2-1}(\eta^2)}{G_{k^2}(\eta^2)}-\frac{G_{k(k+1)-1}(\eta^2)}{G_{k(k+1)}(\eta^2)}\right),\label{eq:alpha-even}\\
+\alpha_{2k+1}&=\frac{2(2k+2)}{\eta}+\eta\left(k(k+1)\frac{G_{k(k+1)-1}(\eta^2)}{G_{k(k+1)}(\eta^2)}\right.\notag\\
+&\qquad\qquad\qquad\left.{}-2(k+1)(k+2)\frac{G_{k(k+2)}(\eta^2)}{G_{(k+1)^2}(\eta^2)}\right)\label{eq:alpha-odd}
+\end{align}
+for $k\ge2$, and
+\begin{equation}\label{eq:beta}
+\begin{aligned}
+\beta_{2k}&=-(2k)^2\,\frac{G_{k(k-1)}(\eta^2)\,G_{k(k+1)}(\eta^2)}{\eta^2\,G_{k^2}(\eta^2)^2},\\
+\beta_{2k+1}&=\frac{G_{k^2}(\eta^2)\,G_{(k+1)^2}(\eta^2)}{\eta^2\,G_{k(k+1)}(\eta^2)^2}
+\end{aligned}
+\end{equation}
+for $k\ge1$.
+\end{conjecture}
+
+The polynomials $G_j$ for $j=2,3,4,5,6,8,9,11,12,15,16$ are listed explicitly in \cite[Appendix~C(4)]{LZ}. Our main result is the following.
+
+\begin{theorem}\label{thm:main}
+There is a sequence $(G_j)_{j\ge0}$ of monic polynomials $G_j\in\Q[z]$ with $\deg G_j=j$, $G_0=1$ and $G_1(z)=z-2$, not depending on $m$, with the following property. For every nonzero integer $m$ and $\eta=m\pi$ the numbers $G_{k^2}(\eta^2)$ and $G_{k(k+1)}(\eta^2)$, $k\ge0$, are nonzero, the formulas \eqref{eq:alpha-even} and \eqref{eq:alpha-odd} hold for all $k\ge2$, and the formulas \eqref{eq:beta} hold for all $k\ge1$. In particular, Conjecture~\ref{conj:LZ} is true.
+\end{theorem}
+
+The family is explicit. With $d_n=\lfloor n^2/4\rfloor$, the polynomial $G_{d_n}$ is a normalized Hankel determinant of the moments, and for $n\ge4$ the polynomial $G_{d_n-1}$ is a normalized combination of that determinant and of the corresponding one-column bordered determinant; see Section~\ref{sec:proof}. The eleven polynomials listed in \cite[Appendix~C(4)]{LZ} agree coefficient by coefficient with the members of this family (Section~\ref{sec:computations}).
+
+\smallskip
+\emph{Determinants.} Put $t=i\eta$ and $z=\eta^2$. After the removal of explicit powers of $t$, the Hankel determinant $D_n$ of the moments and its one-column bordered version $E_n$ (denoted $\Delta_n$ and $\Delta_n'$ in \cite{MC}; the prime does not denote a derivative) become polynomials $H_n(z)$ and $J_n(z)$ with integer coefficients that do not depend on $m$ (Section~\ref{sec:determinants}). The recurrence coefficients are rational expressions in $H_n$ and $J_n$, and Conjecture~\ref{conj:LZ} becomes a statement about the degrees, the leading coefficients and the constant terms of these polynomials.
+
+\emph{Endpoint expansion.} Heine-type identities express $D_n$ and $E_n$ as $n$-fold integrals over $[-1,1]^n$ with the oscillator $e^{t(x_1+\dots+x_n)}$. The expansion of such integrals in terms of the vertices of the cube is stated in \cite[Proposition~3.2]{CDHI}; in one variable it is the steepest descent representation used in \cite[Lemma~3.4]{MC} and \cite[(5)]{ADHW}. For polynomial amplitudes this expansion terminates and is an exact identity. Moreover, at $t=im\pi$ every vertex exponential $e^{t(\varepsilon_1+\dots+\varepsilon_n)}$, $\varepsilon\in\{\pm1\}^n$, equals $(-1)^{mn}$. Grouping the vertices according to the number of coordinates equal to $-1$ gives an exact finite formula (Proposition~\ref{prop:clusters}). For $H_n$ the dominant vertices yield the degree and the leading coefficient; this is the case $f(x)=\prod_a x_a$ of \cite[Theorem~3.8]{CDHI}. For the bordered determinant the amplitude carries the additional factor $x_1+\dots+x_n$. For even $n$ this factor vanishes at the dominant vertices, and for odd $n$ the two dominant contributions cancel, so \cite[Theorem~3.8]{CDHI} either does not apply or gives a vanishing leading term. The first coefficient that survives is determined in the following theorem.
+
+\begin{theorem}\label{thm:leading}
+For $n\ge1$ put $d_n=\lfloor n^2/4\rfloor$, $C_l=\prod_{j=0}^{l-1}(j!)^2$, and
+\[
+\begin{aligned}
+\lambda_{2k}&=(-1)^k\,4^{k^2}C_k^2, &\qquad \lambda_{2k+1}&=2\cdot4^{k(k+1)}C_kC_{k+1},\\
+\theta_{2k}&=2k^2, &\qquad \theta_{2k+1}&=(k+1)(3k+2).
+\end{aligned}
+\]
+Then $H_n$ and $J_n$ have degree $d_n$, the leading coefficient of $H_n$ is $\lambda_n$, the leading coefficient of $J_n$ is $\theta_n\lambda_n$, and $J_n(0)=n(n+1)H_n(0)$.
+\end{theorem}
+
+The assertion about $H_n$ can also be read off from \cite[Theorem~3.8]{CDHI} with $f(x)=\prod_ax_a$ (the factor $G(N+1)$ there is a Barnes function, and $G(l+1)^2=C_l$), and the identity $J_n(0)=n(n+1)H_n(0)$ is \cite[(2.8)]{MC}; we include short proofs of both. Thus the endpoint method, the constants $C_l$ and the leading coefficients of $H_n$ are known. What this paper adds is the leading coefficient $\theta_n\lambda_n$ of $J_n$, that is, the first surviving coefficient of the bordered determinant, and the simultaneous construction, described next, of a single family that gives all four formulas of Conjecture~\ref{conj:LZ} in their full ranges.
+
+\emph{Construction.} For $n\ge2$, Theorem~\ref{thm:leading} shows that the polynomial $n(n+1)H_n-J_n$ is divisible by $z$, has degree $d_n$, and has leading coefficient $(n(n+1)-\theta_n)\lambda_n\ne0$. Normalizing $H_n$ and $(n(n+1)H_n-J_n)/z$ to monic polynomials gives the denominators $G_{d_n}$ and the numerators $G_{d_n-1}$. The two sets of indices do not overlap as soon as $n\ge4$, which is exactly the range $k\ge2$ of the formulas \eqref{eq:alpha-even} and \eqref{eq:alpha-odd}. The four formulas then reduce to identities between the normalizing constants.
+
+\emph{Scope.} To our knowledge, Conjecture~\ref{conj:LZ} has not been proved before. We do not address the integrality assertions in \cite[Conjecture~3.1]{MC}, real frequencies that are not integer multiples of $\pi$, or the companion conjecture \cite[Conjecture~3.7]{LZ} for the weight $x(1-x^2)^{-1/2}e^{i\eta x}$.
+
+\emph{Dependencies.} The proof uses the existence theorem \cite[Theorem~2.3]{MC}, which guarantees that the recurrence coefficients are defined; see also Remark~\ref{rem:existence}. It also uses the moment formula \eqref{eq:moments}, which is \cite[(2.5)]{MC}, and the determinant criterion and formulas \cite[Theorem~2.2, (3.2)]{MC} for orthogonal polynomials and their recurrence coefficients.
+
+\emph{Organization.} Section~\ref{sec:determinants} expresses the recurrence coefficients through $H_n$ and $J_n$. Section~\ref{sec:integrals} collects the integral identities, and Section~\ref{sec:clusters} proves the exact endpoint formula. Section~\ref{sec:leading} proves Theorem~\ref{thm:leading}, and Section~\ref{sec:proof} constructs the family and proves Theorem~\ref{thm:main}. Section~\ref{sec:computations} reports the comparison with the polynomials of \cite{LZ}.
+
+\section{Moments and determinants}\label{sec:determinants}
+
+Throughout, $m$ is a nonzero integer and
+\[
+\eta=m\pi,\qquad t=i\eta,\qquad z=\eta^2=-t^2,\qquad s=(-1)^m=e^{t}=e^{-t}.
+\]
+The moments of $w$ are $\mu_r=\int_{-1}^{1}x^rw(x)\,dx=\int_{-1}^{1}x^{r+1}e^{tx}\,dx$, $r\ge0$. For $r\ge0$ define
+\[
+M_r(z)=(r+1)!\sum_{\ell=0}^{r}\frac{(1+(-1)^\ell)(-t)^\ell}{(\ell+1)!}
+=2(r+1)!\sum_{j=0}^{\lfloor r/2\rfloor}\frac{(-z)^j}{(2j+1)!}\in\Z[z].
+\]
+Thus $M_0=2$, $M_1=4$ and $M_2=12-2z$. In the present notation \cite[(2.5)]{MC} reads
+\begin{equation}\label{eq:moments}
+\mu_r=s\,(-1)^r\,t^{-r-1}M_r(z)\qquad(r\ge0).
+\end{equation}
+For $n\ge1$ let
+\[
+H_n(z)=\det\bigl[M_{a+b}(z)\bigr]_{0\le a,b\le n-1},
+\]
+and let $J_n(z)$ be the determinant of the $n\times n$ matrix with entries $M_{a+b}(z)$, where $a=0,\dots,n-1$ and $b$ runs through the column indices $0,1,\dots,n-2,n$. Thus $J_1=M_1=4$ and $H_1=M_0=2$. Put $H_0=1$ and $J_0=0$. Similarly, let $D_n$ and $E_n$ be the corresponding determinants built from the moments $\mu_{a+b}$, with $D_0=1$ and $E_0=0$. These are the determinants $\Delta_n$ and $\Delta_n'$ of \cite{MC}.
+
+\begin{lemma}\label{lem:normalization}
+For $n\ge0$,
+\[
+D_n=s^n\,t^{-n^2}H_n(z),\qquad E_n=-s^n\,t^{-n^2-1}J_n(z).
+\]
+\end{lemma}
+
+\begin{proof}
+For $n=0$ there is nothing to prove. By \eqref{eq:moments}, the $(a,b)$ entry is $s\,t^{-1}\bigl((-1)^at^{-a}\bigr)\bigl((-1)^bt^{-b}\bigr)M_{a+b}$. Removing the factor $(-1)^at^{-a}$ from row $a$, the factor $(-1)^bt^{-b}$ from column $b$, and $s\,t^{-1}$ from every row, we obtain $D_n=s^nt^{-n}(-1)^{2\sigma}t^{-2\sigma}H_n$ with $\sigma=n(n-1)/2$, which is the first identity. For $E_n$ the sum of the column indices is $\sigma+1$, so the same operations give the factor $s^nt^{-n}(-1)^{2\sigma+1}t^{-2\sigma-1}=-s^nt^{-n^2-1}$.
+\end{proof}
+
+\begin{lemma}\label{lem:alpha-beta}
+For $n\ge0$ the number $H_{n+1}(\eta^2)$ is nonzero, and
+\begin{equation}\label{eq:alpha-beta-HJ}
+\begin{gathered}
+\alpha_n=\frac1\eta\left(\frac{J_{n+1}(\eta^2)}{H_{n+1}(\eta^2)}-\frac{J_n(\eta^2)}{H_n(\eta^2)}\right),\\
+\beta_{n+1}=-\frac{H_{n+2}(\eta^2)\,H_n(\eta^2)}{\eta^2\,H_{n+1}(\eta^2)^2}.
+\end{gathered}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+By \cite[Theorem~2.3]{MC} the orthogonal polynomials exist, which is equivalent to $D_n\ne0$ for all $n\ge1$ \cite[Theorem~2.2]{MC}; by Lemma~\ref{lem:normalization}, $H_n(\eta^2)\ne0$. The determinant formulas
+\[
+i\alpha_n=\frac{E_{n+1}}{D_{n+1}}-\frac{E_n}{D_n},\qquad \beta_{n}=\frac{D_{n+1}D_{n-1}}{D_n^2}
+\]
+are \cite[(3.2)]{MC}. For completeness: by Cramer's rule the coefficient of $x^{n-1}$ in $P_n$ is $-E_n/D_n$, and comparing the coefficients of $x^n$ in \eqref{eq:recurrence} gives the first formula; the second follows from $\langle P_n,P_n\rangle=D_{n+1}/D_n$ and
+\[
+\beta_n\langle P_{n-1},P_{n-1}\rangle=\langle xP_n,P_{n-1}\rangle=\langle P_n,P_n\rangle .
+\]
+Substituting Lemma~\ref{lem:normalization}, we get $E_n/D_n=-t^{-1}J_n/H_n$ and $D_{n+1}D_{n-1}/D_n^2=t^{-2}H_{n+1}H_{n-1}/H_n^2$. Since $t=i\eta$ and $t^2=-\eta^2$, this is \eqref{eq:alpha-beta-HJ}.
+\end{proof}
+
+For example, $\alpha_0=(J_1/H_1)/\eta=2/\eta$ and $\beta_1=-H_2H_0/(\eta^2H_1^2)$ with $H_2=M_0M_2-M_1^2=-4(z-2)$, so $\beta_1=1-2/\eta^2$, in accordance with \cite[Table~4]{LZ}.
+
+\section{Integral identities}\label{sec:integrals}
+
+For $x=(x_1,\dots,x_n)$ we write
+\[
+V(x)=\prod_{1\le a<b\le n}(x_b-x_a),\qquad p_1(x)=x_1+\dots+x_n,
+\]
+with $V=1$ if $n\le1$; thus $p_1$ is the first power sum.
+
+\begin{lemma}[Heine-type identities]\label{lem:heine}
+Let $\rho$ be a complex Borel measure on $\R$ with $\int\abs{x}^k\,d\abs{\rho}(x)<\infty$ for all $k\ge0$, and let $\nu_k=\int x^k\,d\rho$. For $n\ge1$,
+\begin{align*}
+\det[\nu_{a+b}]_{0\le a,b\le n-1}&=\frac1{n!}\int_{\R^n}V(x)^2\,d\rho^{\otimes n}(x),\\
+\det[\nu_{a+b}]_{0\le a\le n-1,\ b\in\{0,\dots,n-2,n\}}&=\frac1{n!}\int_{\R^n}p_1(x)\,V(x)^2\,d\rho^{\otimes n}(x).
+\end{align*}
+\end{lemma}
+
+\begin{proof}
+Let $0\le\ell_1<\dots<\ell_n$ be integers. By multilinearity in the columns and Fubini's theorem,
+\[
+\det\bigl[\nu_{a+\ell_c}\bigr]_{0\le a\le n-1,\,1\le c\le n}
+=\int\det\bigl[x_c^{a+\ell_c}\bigr]\,d\rho^{\otimes n}(x)
+=\int\prod_{c=1}^nx_c^{\ell_c}\,V(x)\,d\rho^{\otimes n}(x).
+\]
+The measure $\rho^{\otimes n}$ is invariant under permutations of the coordinates and $V$ is alternating, so averaging over all permutations replaces $\prod_cx_c^{\ell_c}$ by $(n!)^{-1}\det[x_c^{\ell_a}]_{a,c}$. For $(\ell_c)=(0,1,\dots,n-1)$ this alternant is $V(x)$. For $(\ell_c)=(0,1,\dots,n-2,n)$ it is an alternating polynomial, hence divisible by $V$, and the quotient is a symmetric polynomial that is homogeneous of degree one, hence equal to $\kappa\,p_1(x)$ for a constant $\kappa$. The monomial $x_n^{n}\prod_{j=1}^{n-1}x_j^{j-1}$ has coefficient $1$ in the alternant; in $p_1(x)V(x)$ it arises only as $x_n$ times the monomial $\prod_{j=1}^{n}x_j^{j-1}$ of $V$, which has coefficient $1$, because for $j<n$ the exponent vector obtained by lowering the $j$-th exponent is not a permutation of $(0,\dots,n-1)$. Hence $\kappa=1$, which also covers $n=1$.
+\end{proof}
+
+Applied to $d\rho=x\,e^{tx}\,dx$ on $[-1,1]$, Lemma~\ref{lem:heine} gives, for $n\ge1$,
+\begin{equation}\label{eq:heine-DE}
+\begin{aligned}
+D_n&=\frac1{n!}\int_{[-1,1]^n}F_0(x)\,e^{tp_1(x)}\,dx,\\
+E_n&=\frac1{n!}\int_{[-1,1]^n}F_1(x)\,e^{tp_1(x)}\,dx,
+\end{aligned}
+\end{equation}
+where $F_0(x)=V(x)^2\prod_{a=1}^nx_a$ and $F_1(x)=p_1(x)F_0(x)$.
+
+\begin{lemma}[Exact endpoint representation]\label{lem:endpoint}
+Let $F$ be a polynomial in $n$ variables with complex coefficients and let $t\in\C\setminus\{0\}$. Then
+\begin{multline*}
+\int_{[-1,1]^n}F(x)\,e^{tp_1(x)}\,dx\\
+=t^{-n}\sum_{\varepsilon\in\{\pm1\}^n}\Bigl(\prod_{a=1}^n\varepsilon_a\Bigr)e^{tp_1(\varepsilon)}\int_{(0,\infty)^n}F\bigl(\varepsilon-u/t\bigr)\,e^{-p_1(u)}\,du .
+\end{multline*}
+\end{lemma}
+
+\begin{proof}
+Both sides are linear in $F$, and for a monomial both sides factor into products of one-dimensional expressions. It therefore suffices to treat $n=1$ and a polynomial $f$. Repeated integration by parts gives
+\[
+\int_{-1}^1f(x)e^{tx}\,dx=\sum_{\varepsilon=\pm1}\varepsilon\,e^{\varepsilon t}\sum_{j\ge0}(-1)^j\frac{f^{(j)}(\varepsilon)}{t^{j+1}}.
+\]
+On the other hand, Taylor's formula and $\int_0^\infty u^je^{-u}\,du=j!$ give $\int_0^\infty f(\varepsilon-u/t)e^{-u}\,du=\sum_{j\ge0}(-1)^jf^{(j)}(\varepsilon)t^{-j}$. All sums are finite.
+\end{proof}
+
+For polynomial amplitudes Lemma~\ref{lem:endpoint} is thus an identity, not merely an asymptotic expansion. It is the terminating case of \cite[Proposition~3.2]{CDHI}, and its one-dimensional form is the representation behind \cite[Lemma~3.4]{MC} and \cite[(5)]{ADHW}.
+
+\begin{lemma}[Laguerre blocks]\label{lem:laguerre}
+For $l\ge0$ and $\kappa\in\{0,1\}$ put $\Phi_{l,\kappa}(u)=\prod_{a=1}^lu_a^\kappa\,V(u)^2e^{-p_1(u)}$ on $(0,\infty)^l$. Then
+\begin{enumerate}
+\item[(a)] $\int_{(0,\infty)^l}\Phi_{l,0}(u)\,du=l!\,C_l$, where $C_l=\prod_{j=0}^{l-1}(j!)^2$ and $C_0=1$;
+\item[(b)] $\int_{(0,\infty)^l}p_1(u)\,\Phi_{l,\kappa}(u)\,du=l(l+\kappa)\int_{(0,\infty)^l}\Phi_{l,\kappa}(u)\,du$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Both statements are trivial for $l=0$. (a) By Lemma~\ref{lem:heine} with $d\rho=e^{-u}du$ on $(0,\infty)$, the integral equals $l!\det[(a+b)!]_{0\le a,b\le l-1}$. Removing $a!$ from row $a$ and $b!$ from column $b$ leaves the matrix $\bigl[\binom{a+b}{a}\bigr]$, which equals $LL^{\mathsf T}$ with the unit lower triangular matrix $L=\bigl[\binom{a}{j}\bigr]_{a,j}$ by Vandermonde's identity $\binom{a+b}{a}=\sum_j\binom aj\binom bj$. Hence its determinant is $1$.
+
+(b) For $c>0$ put
+\[
+I(c)=\int_{(0,\infty)^l}\prod_au_a^\kappa\,V(u)^2e^{-cp_1(u)}\,du .
+\]
+The substitution $u\mapsto u/c$ shows that $I(c)=c^{-l(l+\kappa)}I(1)$, since the integrand without the exponential is homogeneous of degree $l(l-1)+\kappa l$. For $c\in[1/2,2]$ the derivative of the integrand in $c$ is dominated by $p_1(u)\prod_au_a^\kappa V(u)^2e^{-p_1(u)/2}$, which is integrable. Differentiating at $c=1$ gives $\int p_1(u)\,\Phi_{l,\kappa}=l(l+\kappa)I(1)$.
+\end{proof}
+
+\section{The exact endpoint formula}\label{sec:clusters}
+
+For integers $r,q\ge0$ let $\E_{r,q}$ denote expectation with respect to the probability measure on $(0,\infty)^r\times(0,\infty)^q$ with density
+\[
+\frac{V(u)^2V(v)^2e^{-p_1(u)-p_1(v)}}{r!\,C_r\;q!\,C_q},\qquad u\in(0,\infty)^r,\ v\in(0,\infty)^q,
+\]
+which is a probability measure by Lemma~\ref{lem:laguerre}(a). Define the polynomial
+\[
+\mathcal P_{r,q}(h;u,v)=\prod_{a=1}^r(1+hu_a)\prod_{b=1}^q(1-hv_b)\prod_{a=1}^r\prod_{b=1}^q\Bigl(1+\frac{h(u_a-v_b)}2\Bigr)^2,
+\]
+and the polynomials in $h$
+\begin{align*}
+W_{r,q}(h)&=\E_{r,q}\bigl[\mathcal P_{r,q}(h;u,v)\bigr],\\
+B_{r,q}(h)&=\E_{r,q}\Bigl[\bigl(q-r-h(p_1(u)+p_1(v))\bigr)\mathcal P_{r,q}(h;u,v)\Bigr],
+\end{align*}
+together with the constants
+\[
+A_{r,q}=4^{rq}\,C_rC_q,\qquad p_{r,q}=r^2+q^2 .
+\]
+
+\begin{proposition}\label{prop:clusters}
+For $n\ge1$ and every nonzero integer $m$,
+\begin{align*}
+D_n&=s^n\sum_{r=0}^nA_{r,n-r}\,t^{-p_{r,n-r}}\,W_{r,n-r}(1/t),\\
+E_n&=s^n\sum_{r=0}^nA_{r,n-r}\,t^{-p_{r,n-r}}\,B_{r,n-r}(1/t).
+\end{align*}
+\end{proposition}
+
+\begin{proof}
+We apply Lemma~\ref{lem:endpoint} to \eqref{eq:heine-DE}. Let $\varepsilon\in\{\pm1\}^n$ have $r$ coordinates equal to $-1$ and put $q=n-r$. Then $e^{tp_1(\varepsilon)}=e^{t(q-r)}=s^{q-r}=s^n$, because $e^{t}=e^{-t}=s$ and $s^2=1$. Since $F_0$ and $F_1$ are symmetric, the integral attached to $\varepsilon$ depends only on $r$, and each value of $r$ occurs for $\binom nr$ vertices. We may therefore take $\varepsilon=(-1,\dots,-1,1,\dots,1)$ and write the integration variables as $(u,v)\in(0,\infty)^r\times(0,\infty)^q$, so that, with $h=1/t$,
+\[
+x_a=-1-hu_a\quad(1\le a\le r),\qquad x_{r+b}=1-hv_b\quad(1\le b\le q).
+\]
+Then $\prod_ax_a=(-1)^r\prod_a(1+hu_a)\prod_b(1-hv_b)$, and the sign $(-1)^r$ cancels the factor $\prod_a\varepsilon_a=(-1)^r$. For $a<a'$ and $b<b'$ the differences within the blocks are $x_{a'}-x_a=-h(u_{a'}-u_a)$ and $x_{r+b'}-x_{r+b}=-h(v_{b'}-v_b)$; the signs disappear after squaring, and these differences contribute $h^{r(r-1)+q(q-1)}V(u)^2V(v)^2$ to $V(x)^2$. A difference between the blocks is $x_{r+b}-x_a=2\bigl(1+h(u_a-v_b)/2\bigr)$, and these contribute $4^{rq}\prod_{a,b}(1+h(u_a-v_b)/2)^2$. Finally $p_1(x)=(q-r)-h(p_1(u)+p_1(v))$. Since $n+r(r-1)+q(q-1)=r^2+q^2$, Lemma~\ref{lem:endpoint} gives
+\[
+D_n=\frac{s^n}{n!}\sum_{r=0}^n\binom nr\,4^{rq}\,t^{-(r^2+q^2)}\int V(u)^2V(v)^2\,\mathcal P_{r,q}(h;u,v)\,e^{-p_1(u)-p_1(v)}\,du\,dv,
+\]
+and the same expression with the extra factor $(q-r)-h(p_1(u)+p_1(v))$ for $E_n$. By the definition of $\E_{r,q}$ the integral equals $r!\,C_r\,q!\,C_q\,W_{r,q}(h)$, respectively $r!\,C_r\,q!\,C_q\,B_{r,q}(h)$, and $\binom nr\,r!\,q!/n!=1$.
+\end{proof}
+
+In particular, at integer frequencies there is no relative oscillatory factor between the configurations with different $r$; this is the point where the hypothesis $\eta\in\pi\Z$ enters the endpoint analysis.
+
+\begin{lemma}\label{lem:linear}
+Let $r,q\ge0$, $n=r+q$, and $b_{r,q}=(r-q)(rq+n)$. Then
+\begin{align*}
+W_{r,q}(h)&=1+b_{r,q}\,h+h^2\,\widetilde W_{r,q}(h),\\
+B_{r,q}(h)&=(q-r)+\bigl((q-r)\,b_{r,q}-(r^2+q^2)\bigr)h+h^2\,\widetilde B_{r,q}(h),
+\end{align*}
+with polynomials $\widetilde W_{r,q},\widetilde B_{r,q}$.
+\end{lemma}
+
+\begin{proof}
+The coefficient of $h$ in $\mathcal P_{r,q}$ is $p_1(u)-p_1(v)+\sum_{a,b}(u_a-v_b)=(q+1)p_1(u)-(r+1)p_1(v)$. By Lemma~\ref{lem:laguerre}(b) with $\kappa=0$, $\E_{r,q}\,p_1(u)=r^2$ and $\E_{r,q}\,p_1(v)=q^2$. Hence the coefficient of $h$ in $W_{r,q}$ is $(q+1)r^2-(r+1)q^2=(r-q)(rq+r+q)=b_{r,q}$. For $B_{r,q}$, multiply $\mathcal P_{r,q}=1+h\bigl((q+1)p_1(u)-(r+1)p_1(v)\bigr)+O(h^2)$ by $(q-r)-h(p_1(u)+p_1(v))$ and take expectations; the coefficient of $h$ is $(q-r)b_{r,q}-(r^2+q^2)$.
+\end{proof}
+
+\section{Degrees and leading coefficients}\label{sec:leading}
+
+In this section we prove Theorem~\ref{thm:leading}. For $n\ge1$ consider the Laurent polynomials in an indeterminate $\tau$
+\begin{align*}
+\mathcal L_n(\tau)&=\sum_{r=0}^nA_{r,n-r}\,\tau^{\,n^2-p_{r,n-r}}\,W_{r,n-r}(\tau^{-1}),\\
+\mathcal M_n(\tau)&=-\sum_{r=0}^nA_{r,n-r}\,\tau^{\,n^2+1-p_{r,n-r}}\,B_{r,n-r}(\tau^{-1}).
+\end{align*}
+
+\begin{lemma}\label{lem:laurent}
+For $n\ge1$, $H_n(-\tau^2)=\mathcal L_n(\tau)$ and $J_n(-\tau^2)=\mathcal M_n(\tau)$ in $\C[\tau,\tau^{-1}]$.
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:normalization} and Proposition~\ref{prop:clusters}, $H_n(-t^2)=s^nt^{n^2}D_n=\mathcal L_n(t)$ and $J_n(-t^2)=-s^nt^{n^2+1}E_n=\mathcal M_n(t)$ for every $t\in i\pi\Z\setminus\{0\}$. After multiplication by a suitable power of $\tau$, both sides of each identity become polynomials that agree at infinitely many points.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:leading}]
+Write $q=n-r$. Since $p_{r,q}=\bigl(n^2+(r-q)^2\bigr)/2$, the exponent $n^2-p_{r,q}=\bigl(n^2-(r-q)^2\bigr)/2$ is maximal exactly when $\abs{r-q}$ is minimal.
+
+\emph{Even $n=2k$.} The maximum $2k^2=2d_n$ is attained only for $r=q=k$, and every other $r$ gives an exponent at most $2d_n-2$. Since $W_{r,q}(0)=1$, the coefficient of $\tau^{2d_n}$ in $\mathcal L_n$ is $A_{k,k}=4^{k^2}C_k^2$, and no larger power occurs. In $\mathcal M_n$ the configuration $r=q=k$ contributes $-A_{k,k}\tau^{2d_n+1}B_{k,k}(\tau^{-1})$, and $B_{k,k}(h)=-2k^2h+O(h^2)$ by Lemma~\ref{lem:linear}, since $q-r=0$. Its top term is therefore $2k^2A_{k,k}\tau^{2d_n}$, while all other configurations contribute powers at most $\tau^{2d_n-1}$.
+
+\emph{Odd $n=2k+1$.} The maximum $2k(k+1)=2d_n$ is attained exactly for $(r,q)=(k,k+1)$ and $(k+1,k)$, both with $A_{r,q}=4^{k(k+1)}C_kC_{k+1}$; every other $r$ gives an exponent at most $2d_n-4$. The coefficient of $\tau^{2d_n}$ in $\mathcal L_n$ is $2\cdot4^{k(k+1)}C_kC_{k+1}$. In $\mathcal M_n$ the two dominant configurations contribute $\mp A_{r,q}\tau^{2d_n+1}$ from the constant terms $q-r=\pm1$ of $B_{r,q}$, and these cancel. For the linear terms, $(q-r)b_{r,q}=-(q-r)^2(rq+n)=-(rq+n)$, so the coefficient of $h$ in $B_{r,q}$ equals
+\[
+-(rq+n)-(r^2+q^2)=-\bigl(k(k+1)+2k+1\bigr)-\bigl(2k^2+2k+1\bigr)=-(k+1)(3k+2)
+\]
+for both configurations. Hence the top term of $\mathcal M_n$ is $2\theta_{2k+1}A_{k,k+1}\tau^{2d_n}$; the remaining configurations contribute powers at most $\tau^{2d_n-3}$.
+
+In both cases $\mathcal L_n(\tau)=(-1)^{d_n}\lambda_n\tau^{2d_n}+(\text{lower powers})$ and $\mathcal M_n(\tau)=(-1)^{d_n}\theta_n\lambda_n\tau^{2d_n}+(\text{lower powers})$; here we used $(-1)^{k^2}=(-1)^k$ and that $k(k+1)$ is even. If a polynomial $Q(z)$ has degree $d$ and leading coefficient $c$, then $Q(-\tau^2)$ has top term $(-1)^dc\,\tau^{2d}$. By Lemma~\ref{lem:laurent}, $H_n$ and $J_n$ have degree $d_n$ and leading coefficients $\lambda_n$ and $\theta_n\lambda_n$.
+
+It remains to compute the constant terms. Since $M_r(0)=2(r+1)!=\int_0^\infty y^r\cdot2y\,e^{-y}\,dy$, Lemma~\ref{lem:heine} with $d\rho=2ye^{-y}dy$ on $(0,\infty)$ gives
+\[
+H_n(0)=\frac{2^n}{n!}\int\Phi_{n,1}(y)\,dy,\qquad J_n(0)=\frac{2^n}{n!}\int p_1(y)\,\Phi_{n,1}(y)\,dy,
+\]
+and Lemma~\ref{lem:laguerre}(b) with $\kappa=1$ yields $J_n(0)=n(n+1)H_n(0)$.
+\end{proof}
+
+\begin{remark}
+The same argument shows $H_n(0)>0$; its value $2^n\prod_{k=1}^{n-1}k!\,(k+1)!$ is computed in \cite[(2.7)]{MC} through the Laguerre polynomials with parameter $1$, and $J_n(0)=n(n+1)H_n(0)$ is \cite[(2.8)]{MC}.
+\end{remark}
+
+\section{Construction of the family and proof of Theorem~\ref{thm:main}}\label{sec:proof}
+
+\subsection{Numerator polynomials}
+For $n\ge0$ define
+\[
+K_n(z)=n(n+1)H_n(z)-J_n(z)\in\Z[z],
+\]
+so that $K_0=0$ and $K_1=2\cdot2-4=0$. By Theorem~\ref{thm:leading}, for $n\ge1$ the polynomial $K_n$ vanishes at $z=0$, has degree at most $d_n$, and its coefficient of $z^{d_n}$ is $e_n\lambda_n$, where
+\[
+e_n=n(n+1)-\theta_n,\qquad e_{2k}=2k(k+1),\qquad e_{2k+1}=k(k+1).
+\]
+Indeed $2k(2k+1)-2k^2=2k(k+1)$ and $(2k+1)(2k+2)-(k+1)(3k+2)=k(k+1)$. Thus $e_n\ne0$ for $n\ge2$, and
+\[
+F_n(z)=\frac{K_n(z)}{e_n\lambda_n\,z}\qquad(n\ge2)
+\]
+is a monic polynomial in $\Q[z]$ of degree $d_n-1$. For instance $F_2=1$ and $F_3=z-24$ (see Section~\ref{sec:computations}).
+
+\subsection{The family}
+Define polynomials $G_j$, $j\ge0$, by
+\begin{equation}\label{eq:family}
+G_{d_n}=\frac{H_n}{\lambda_n}\quad(n\ge1),\qquad G_{d_n-1}=F_n\quad(n\ge4),
+\end{equation}
+and $G_j=z^j$ for all other $j\ge0$.
+
+\begin{lemma}\label{lem:family}
+The definition \eqref{eq:family} is consistent. Each $G_j$ is a monic polynomial in $\Q[z]$ of degree $j$, independent of $m$, and $G_0=1$, $G_1=z-2$.
+\end{lemma}
+
+\begin{proof}
+We have $d_n-d_{n-1}=\lfloor n/2\rfloor$ for $n\ge1$, so $0=d_1<d_2<d_3<\cdots$, and $d_{n-1}<d_n-1<d_n$ for $n\ge4$. Hence the indices $d_n$ ($n\ge1$) are distinct, the indices $d_n-1$ ($n\ge4$) are distinct, and no index of the second kind equals one of the first kind. Monicity and degrees follow from Theorem~\ref{thm:leading} and the definition of $F_n$, and $H_n,K_n\in\Z[z]$ do not involve $m$. Finally $G_0=H_1/\lambda_1=2/2=1$, and $G_1=H_2/\lambda_2=-4(z-2)/(-4)=z-2$.
+\end{proof}
+
+Note that the low indices $d_2-1=0$ and $d_3-1=1$ coincide with $d_1$ and $d_2$; this is why the numerators are taken only for $n\ge4$. Since $F_3=z-24\ne G_1$, the formulas \eqref{eq:alpha-even} and \eqref{eq:alpha-odd} cannot be extended to $k=1$ with the same family. In accordance with this, the factor $\eta^2-24$ appears in the entries for $\alpha_2$ and $\alpha_3$ in \cite[Table~4]{LZ}.
+
+\subsection{The recurrence coefficients}
+For $n\ge0$ let $R_n=K_n(\eta^2)/H_n(\eta^2)$, which is defined by Lemma~\ref{lem:alpha-beta}. Since $J_n/H_n=n(n+1)-R_n$, Lemma~\ref{lem:alpha-beta} gives
+\begin{equation}\label{eq:alpha-R}
+\alpha_n=\frac{2(n+1)+R_n-R_{n+1}}{\eta}\qquad(n\ge0),
+\end{equation}
+and by \eqref{eq:family}, for $n\ge4$,
+\begin{equation}\label{eq:R}
+R_n=e_n\,\eta^2\,\frac{G_{d_n-1}(\eta^2)}{G_{d_n}(\eta^2)}.
+\end{equation}
+
+We also put $\lambda_0=1$, the value of the formula for $\lambda_{2k}$ in Theorem~\ref{thm:leading} at $k=0$; then $H_0=\lambda_0G_{d_0}$ with $d_0=0$. The normalizing constants satisfy, for $k\ge1$ and $k\ge0$ respectively,
+\begin{equation}\label{eq:ratios}
+\frac{\lambda_{2k+1}\lambda_{2k-1}}{\lambda_{2k}^2}=4k^2,\qquad
+\frac{\lambda_{2k+2}\lambda_{2k}}{\lambda_{2k+1}^2}=-1.
+\end{equation}
+Indeed, in the first ratio the signs cancel, the exponent of $4$ is $k(k+1)+k(k-1)-2k^2=0$, and the remaining factor is
+\[
+\frac{4\,C_{k+1}C_{k-1}}{C_k^2}=\frac{4\,(k!)^2}{((k-1)!)^2}=4k^2 .
+\]
+In the second ratio the sign is $(-1)^{k+1}(-1)^k=-1$, the exponent of $4$ is $(k+1)^2+k^2-2k(k+1)-1=0$, and the factors $C_k,C_{k+1}$ cancel.
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Let $(G_j)$ be the family \eqref{eq:family}; by Lemma~\ref{lem:family} it has the stated properties. Fix a nonzero integer $m$ and put $\eta=m\pi$.
+
+\emph{Denominators.} For $k\ge0$ we have $k^2=d_{2k}$ and $k(k+1)=d_{2k+1}$. By Lemma~\ref{lem:alpha-beta}, $G_{d_n}(\eta^2)=H_n(\eta^2)/\lambda_n\ne0$ for $n\ge1$, and $G_0=1$.
+
+\emph{The formula for $\alpha_{2k}$, $k\ge2$.} Take $n=2k\ge4$ in \eqref{eq:alpha-R}. By \eqref{eq:R} with $d_{2k}=k^2$, $e_{2k}=2k(k+1)$, $d_{2k+1}=k(k+1)$ and $e_{2k+1}=k(k+1)$,
+\[
+\alpha_{2k}=\frac{2(2k+1)}\eta+2k(k+1)\,\eta\,\frac{G_{k^2-1}(\eta^2)}{G_{k^2}(\eta^2)}-k(k+1)\,\eta\,\frac{G_{k(k+1)-1}(\eta^2)}{G_{k(k+1)}(\eta^2)},
+\]
+which is \eqref{eq:alpha-even}.
+
+\emph{The formula for $\alpha_{2k+1}$, $k\ge2$.} Take $n=2k+1\ge5$. Now $d_{2k+2}=(k+1)^2$, $d_{2k+2}-1=k(k+2)$ and $e_{2k+2}=2(k+1)(k+2)$, so \eqref{eq:alpha-R} and \eqref{eq:R} give
+\begin{align*}
+\alpha_{2k+1}&=\frac{2(2k+2)}\eta+k(k+1)\,\eta\,\frac{G_{k(k+1)-1}(\eta^2)}{G_{k(k+1)}(\eta^2)}\\
+&\qquad-2(k+1)(k+2)\,\eta\,\frac{G_{k(k+2)}(\eta^2)}{G_{(k+1)^2}(\eta^2)},
+\end{align*}
+which is \eqref{eq:alpha-odd}.
+
+\emph{The formulas for $\beta_n$.} By Lemma~\ref{lem:alpha-beta} and \eqref{eq:family}, for $n\ge1$,
+\[
+\beta_n=-\frac{\lambda_{n+1}\lambda_{n-1}}{\lambda_n^2}\cdot\frac{G_{d_{n+1}}(\eta^2)\,G_{d_{n-1}}(\eta^2)}{\eta^2\,G_{d_n}(\eta^2)^2},
+\]
+where for $n=1$ we use $H_0=\lambda_0G_{d_0}$. For $n=2k$, $k\ge1$, we have $(d_{2k-1},d_{2k},d_{2k+1})=(k(k-1),k^2,k(k+1))$, and the first identity in \eqref{eq:ratios} gives the first formula in \eqref{eq:beta}. For $n=2k+1$, $k\ge1$, we have $(d_{2k},d_{2k+1},d_{2k+2})=(k^2,k(k+1),(k+1)^2)$, and the second identity in \eqref{eq:ratios} gives the second formula in \eqref{eq:beta}.
+\end{proof}
+
+\begin{remark}\label{rem:existence}
+Lemma~\ref{lem:alpha-beta} used \cite[Theorem~2.3]{MC} to ensure $H_n(\eta^2)\ne0$. This can also be deduced from Theorem~\ref{thm:leading}: $H_n$ is a nonzero polynomial with rational coefficients, and $\eta^2=m^2\pi^2$ is transcendental. This is essentially the argument of \cite{MC}, where the nonvanishing of $H_n$ is derived from $H_n(0)\neq0$.
+\end{remark}
+
+\begin{remark}
+The argument treats positive and negative $m$ simultaneously: \eqref{eq:moments}, Lemma~\ref{lem:normalization} and Proposition~\ref{prop:clusters} hold for every nonzero integer $m$, and the family \eqref{eq:family} depends only on $z=\eta^2$. This agrees with the reduction to $m>0$ by complex conjugation in \cite[Section~2]{MC}. For $n\le3$ the identities \eqref{eq:alpha-R} and \eqref{eq:alpha-beta-HJ} reproduce the initial values in \cite[Table~4]{LZ}.
+\end{remark}
+
+\begin{remark}
+The $\beta$-formulas alone determine the denominators. Indeed, \eqref{eq:beta} expresses $\beta_n$, $n\ge2$, as a nonzero constant times $G_{d_{n+1}}G_{d_{n-1}}/(zG_{d_n}^2)$ evaluated at $z=\eta^2$. Suppose that another family of monic polynomials $\widetilde G_j$, not depending on $m$, with $\widetilde G_0=1$ and $\widetilde G_1=z-2$, satisfies \eqref{eq:beta}, with nonzero denominators, for infinitely many $m$. Then $\widetilde G_{d_n}=G_{d_n}$ for all $n\ge1$, by induction on $n$. Since $d_1=0$ and $d_2=1$, the cases $n=1,2$ are the initial values $\widetilde G_0=G_0=1$ and $\widetilde G_1=G_1=z-2$. Let $n\ge2$ and assume $\widetilde G_{d_j}=G_{d_j}$ for $j\le n$; the first step, $n=2$, uses the formula for $\beta_2$ and yields $\widetilde G_{d_3}=G_{d_3}$, that is, $\widetilde G_2=G_2$. Comparing the two expressions for $\beta_n$ and cross-multiplying, we find that the polynomial $(\widetilde G_{d_{n+1}}-G_{d_{n+1}})\,G_{d_{n-1}}$ vanishes at $z=m^2\pi^2$ for infinitely many $m$, hence at infinitely many distinct points. It is therefore identically zero, and since $G_{d_{n-1}}$ is a nonzero polynomial, the polynomials $\widetilde G_{d_{n+1}}$ and $G_{d_{n+1}}$ coincide.
+\end{remark}
+
+\section{Exact computations}\label{sec:computations}
+
+The proofs above do not depend on computer calculations. As a consistency check we computed $H_n$ and $J_n$ for $1\le n\le10$ in exact arithmetic. The entries $M_r$ are integer polynomials, and both determinants were evaluated by fraction-free (Bareiss) elimination over $\Z[z]$, where every polynomial division was verified to be exact. From these determinants we formed $G_{d_n}=H_n/\lambda_n$ and, for $n\ge4$, $G_{d_n-1}=F_n$ with rational arithmetic. The computation confirms the degrees and leading coefficients of Theorem~\ref{thm:leading} and the identity $J_n(0)=n(n+1)H_n(0)$ for $n\le10$; see Table~\ref{tab:leading}.
+
+\begin{table}[ht]
+\caption{Degrees and leading coefficients for $1\le n\le10$.}\label{tab:leading}
+\begin{tabular}{rrrrr}
+\toprule
+$n$ & $d_n$ & $\lambda_n$ & $\theta_n$ & $e_n$\\
+\midrule
+1 & 0 & 2 & 2 & 0\\
+2 & 1 & $-4$ & 2 & 4\\
+3 & 2 & 32 & 10 & 2\\
+4 & 4 & 256 & 8 & 12\\
+5 & 6 & 32768 & 24 & 6\\
+6 & 9 & $-4194304$ & 18 & 24\\
+7 & 12 & 19327352832 & 44 & 12\\
+8 & 16 & 89060441849856 & 32 & 40\\
+9 & 20 & 26264993026824732672 & 70 & 20\\
+10 & 25 & $-7745861623526935561764864$ & 50 & 60\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The resulting polynomials were compared with those listed in \cite[Appendix~C(4)]{LZ}. For each of the eleven indices $j=2,3,4,5,6,8,9,11,12,15,16$, the polynomial $G_j$ of \eqref{eq:family} coincides with the polynomial of \cite{LZ}; altogether $102$ coefficients agree. For example,
+\begin{align*}
+G_2&=z^2-13z+6, & G_3&=z^3-7z^2+12z-360,\\
+G_4&=z^4-14z^3+165z^2-1224z+216, & F_3&=z-24,
+\end{align*}
+and $G_8$ and $G_{11}$ have non-integral coefficients, in agreement with the normalizations $2G_8$ and $2G_{11}$ used in \cite[Appendix~C(4)]{LZ}. Here $G_2,G_4$ are denominators ($d_3=2$, $d_4=4$) and $G_3=F_4$ is a numerator.
+
+\section*{Use of AI-assisted tools}
+
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{9}
+
+\bibitem{ADHW}
+A.~Asheim, A.~Deaño, D.~Huybrechs, and H.~Wang, \emph{A Gaussian quadrature rule for oscillatory integrals on a bounded interval}, Discrete Contin. Dyn. Syst. \textbf{34} (2014), no.~3, 883--901.
+
+\bibitem{CDHI}
+A.~F. Celsus, A.~Deaño, D.~Huybrechs, and A.~Iserles, \emph{The kissing polynomials and their Hankel determinants}, Trans. Math. Appl. \textbf{6} (2022), tnab005; arXiv:1504.07297v4. We use the numbering of the arXiv version; Theorem~3.8 there is Theorem~3.7 in the published version.
+
+\bibitem{LZ}
+S.~Lyu and X.~Zhou, \emph{Recurrence coefficients of the orthogonal polynomials for oscillatory Jacobi-type weight functions}, preprint (2026), arXiv:2607.19797v1.
+
+\bibitem{MC}
+G.~V. Milovanović and A.~S. Cvetković, \emph{Orthogonal polynomials and Gaussian quadrature rules related to oscillatory weight functions}, J. Comput. Appl. Math. \textbf{179} (2005), 263--287.
+
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,875 @@
+\documentclass{amsart}
+
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\hypersetup{
+  pdftitle={Generic value semigroups with prescribed coordinate orders},
+  pdfauthor={Knowledge Sense},
+  pdfkeywords={Value semigroup, curve singularity, generic cusp, numerical semigroup, delta invariant, total positivity, Hermite--Birkhoff interpolation}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\bfr}{\mathbf{r}}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\gen}[1]{\langle #1\rangle}
+
+\allowdisplaybreaks
+
+\begin{document}
+
+\title[Generic value semigroups]{Generic value semigroups with prescribed coordinate orders}
+
+\author{Knowledge Sense}
+\email{math@knowledgesense.jp}
+
+\date{12 October 2026}
+
+\subjclass[2020]{Primary 14H20; Secondary 20M14, 15B48, 41A05}
+
+\keywords{Value semigroup, curve singularity, generic cusp, numerical semigroup, delta invariant, total positivity, Hermite--Birkhoff interpolation}
+
+\begin{abstract}
+\binoppenalty=10000\relpenalty=10000
+Fix $d\ge 2$ and positive integers $r_1,\dots,r_d$, not necessarily distinct.
+We determine the value semigroup of the curve germ
+$t\mapsto(f_1(t),\dots,f_d(t))$ with $\ord_t f_i=r_i$ when the higher Taylor
+coefficients of the $f_i$ are generic. List the weights
+$\alpha\cdot\mathbf{r}=\alpha_1r_1+\dots+\alpha_dr_d$, $\alpha\in\N^d$, in
+nondecreasing order with multiplicity as $w_0\le w_1\le\cdots$; then the
+semigroup consists of the numbers $k_0=0$ and $k_j=\max(w_j,k_{j-1}+1)$. Its
+genus is the maximum of $n-\#\{\alpha:\alpha\cdot\mathbf{r}<n\}$ over $n\ge0$,
+and its conductor is the least $n$ at which this maximum is attained. The proof
+combines a term-rank bound, which uses only the zero pattern of the matrix of
+Taylor coefficients, with the explicit germ
+$t\mapsto(t^{r_1}e^{\lambda_1t},\dots,t^{r_d}e^{\lambda_dt})$, whose relevant
+minors are positive by a total nonnegativity argument. We deduce that the genus
+differs from $\frac{d-1}{d}\bigl((d-1)!\,r_1\cdots r_d\bigr)^{1/(d-1)}$ by at
+most $r_1+\dots+r_d+1$. For $\mathbf{r}=(2\ell,2\ell+2,2\ell+4)$ the genus is
+$\frac83\ell^{3/2}+O(\ell)$, so the lower bound of Cotterill, Kaplan and Vieira
+Costa has the correct leading term. For $\ell=3$ the generic semigroup is
+$\gen{6,8,10,17,19,21}$; the value $21$ does not lie in the five-generator
+semigroup stated by Cotterill, Lima and Martins.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $d\ge2$ and let $\bfr=(r_1,\dots,r_d)$ be a vector of positive integers,
+not necessarily distinct. For formal power series
+\begin{equation}\label{eq:germ}
+  f_i(t)=t^{r_i}\bigl(1+a_{i,1}t+a_{i,2}t^2+\cdots\bigr)\in\C[[t]],
+  \qquad 1\le i\le d,
+\end{equation}
+let $A_f\subseteq\C[[t]]$ be the image of $\C[[x_1,\dots,x_d]]$ under the
+substitution $x_i\mapsto f_i$, and let
+\[
+  S(f)=\{\ord_t h: 0\ne h\in A_f\}\subseteq\N=\{0,1,2,\dots\}
+\]
+be its set of values. If the $f_i$ are convergent, the image of the analytic
+algebra $\C\{x_1,\dots,x_d\}$ has the same set of values (Lemma~\ref{lem:jets}).
+Rescaling the $f_i$ does not change $A_f$, so we may assume that the leading
+coefficients are $1$, as in \eqref{eq:germ}. When $S(f)$ is a
+numerical semigroup, $t\mapsto(f_1(t),\dots,f_d(t))$ is a primitive
+parametrization of an irreducible curve germ, and the genus
+$\#(\N\setminus S(f))$ is its delta invariant; see
+\cite[Section~1.1]{CLM} and \cite[Section~1.2]{CKV}.
+
+This paper determines $S(f)$ when the coefficients $a_{i,k}$ are generic. The
+question arises in the study of Severi varieties of unicuspidal rational
+curves, where the semigroup of a cusp with generic higher coefficients plays a
+distinguished role \cite{CLM,CKV}. There the cusp is described by its
+ramification profile, the sequence of distinct vanishing orders at $t=0$ of
+linear combinations of the coordinate functions. If $r_1<\dots<r_d$, these
+orders are $r_1,\dots,r_d$, and the germs \eqref{eq:germ} with generic
+coefficients are the generic cusps with profile $\bfr$ in the sense of
+\cite{CLM,CKV}. We also allow repeated entries, which give a different profile
+in their sense: for $\bfr=(2,2)$ the difference $f_2-f_1$ has order $3$ for
+generic coefficients. For $d=2$ the generic semigroup is known
+(Section~\ref{sec:plane}). For general profiles, Cotterill, Kaplan and Vieira
+Costa remark that precisely determining it ``appears to be difficult, if in
+principle algorithmically resolvable'' \cite[Section~1.1]{CKV}; for triples in
+arithmetic progression they bound its genus.
+
+Enumerate $\N^d$ as $\alpha^{(0)}=0,\alpha^{(1)},\alpha^{(2)},\dots$ so that the
+weights $w_j=\alpha^{(j)}\cdot\bfr$ are nondecreasing. Thus $w_0\le w_1\le\cdots$
+is the list of all weights $\alpha\cdot\bfr$ with multiplicity; it does not
+depend on how ties are broken. Put
+\begin{equation}\label{eq:G}
+  k_0=0,\qquad k_j=\max(w_j,\,k_{j-1}+1)\quad(j\ge1),\qquad
+  G(\bfr)=\{k_j: j\ge0\}.
+\end{equation}
+Thus each weight is placed at the least integer that is at least the weight
+and not yet used; we call $(k_j)$ the greedy sequence of $\bfr$. Equal entries
+of $\bfr$ still correspond to distinct coordinates, and their monomials are
+counted separately: for $\bfr=(2,2)$ the weights are $0,2,2,4,4,4,\dots$ and
+$G(\bfr)=\gen{2,3}$.
+
+\begin{theorem}\label{thm:main}
+Let $d\ge2$ and $\bfr\in\Z_{>0}^d$. Then $G(\bfr)$ is a numerical semigroup.
+Let $c$ be its conductor and $N=c+\min\bfr$. There exist polynomials
+$\Delta_1,\dots,\Delta_K$ with integer coefficients in the variables $a_{i,k}$
+$(1\le i\le d,\ 1\le k<N)$, depending only on $\bfr$ and none of them
+identically zero, with the following property. If $f$ is as in
+\eqref{eq:germ} and $\Delta_1(a)\cdots\Delta_K(a)\ne0$, then
+\[
+  S(f)=G(\bfr)
+\]
+for all values of the coefficients $a_{i,k}$ with $k\ge N$. The same holds for
+convergent $f$ and the analytic algebra $\C\{f_1,\dots,f_d\}$. In particular
+$S(f)=G(\bfr)$ whenever the coefficients $a_{i,k}$ are algebraically
+independent over $\Q$.
+\end{theorem}
+
+\begin{example}\label{ex:6810}
+For $\bfr=(6,8,10)$ the weights below $24$, with multiplicity, are
+\[
+  0,\ 6,\ 8,\ 10,\ 12,\ 14,\ 16,\ 16,\ 18,\ 18,\ 20,\ 20,\ 22,\ 22,
+\]
+and the recursion \eqref{eq:G} gives the elements $0,6,8,10,12,14$ and
+$16,17,\dots,23$ of $G(\bfr)$ below $24$. Since $G(\bfr)$ is closed under
+addition (Theorem~\ref{thm:main}) and contains $6$ and $16,\dots,21$, it
+contains every integer $n\ge16$. Hence
+\[
+  G(6,8,10)=\gen{6,8,10,17,19,21},
+\]
+with genus $10$ and conductor $16$. The ties $16=6+10=8+8$, $18=6+6+6=8+10$
+and $20=6+6+8=10+10$ produce the values $17$, $19$ and $21$; see
+Section~\ref{sec:CLM}.
+\end{example}
+
+For $n\ge0$ put
+\[
+  M_{\bfr}(n)=\#\{\alpha\in\N^d:\alpha\cdot\bfr<n\},
+  \qquad
+  F_{\bfr}(n)=n-M_{\bfr}(n).
+\]
+
+\begin{theorem}\label{thm:genus}
+Let $d\ge2$, $\bfr\in\Z_{>0}^d$, and let $g$ and $c$ be the genus and the
+conductor of $G(\bfr)$. Then
+\[
+  g=\max_{n\ge0}F_{\bfr}(n)=\max_{j\ge0}(w_j-j),
+  \qquad
+  c=\min\{n\ge0:F_{\bfr}(n)=g\}.
+\]
+If $a\le b$ are the two smallest entries of $\bfr$, counted with
+multiplicity, then $F_{\bfr}(n)\le0$ for
+$n\ge4ab$, so the maximum and the minimum above are attained below $4ab$. Moreover
+$G(\bfr)=\N$ if and only if $\min\bfr=1$; if $m=\min\bfr\ge2$, then
+$g\ge m-1$ and every minimal generator of $G(\bfr)$ is smaller than $c+m$.
+\end{theorem}
+
+Since $M_{\bfr}(n)$ counts lattice points in a simplex, volume estimates give
+the following bounds.
+
+\begin{theorem}\label{thm:asymp}
+Let $d\ge2$, $\bfr\in\Z_{>0}^d$, $P=r_1\cdots r_d$, $R=r_1+\dots+r_d$ and
+$n_*=\bigl((d-1)!\,P\bigr)^{1/(d-1)}$. The genus $g$ of $G(\bfr)$ satisfies
+\[
+  \frac{d-1}{d}\,n_*-R-1\;\le\;g\;\le\;\frac{d-1}{d}\,n_*.
+\]
+\end{theorem}
+
+If $d$ is fixed and $r_i=\kappa_i\tau+O(1)$ with fixed $\kappa_i>0$ as
+$\tau\to\infty$, then $n_*$ has order $\tau^{d/(d-1)}$ and the error term is
+$O(\tau)$. For triples in arithmetic
+progression we obtain the following.
+
+\begin{corollary}\label{cor:arith}
+Let $m,\ell\ge1$, $\bfr=(m\ell,m\ell+m,m\ell+2m)$, and let $g$ be the genus of
+$G(\bfr)$. Then
+\[
+  -3m(\ell+1)-1\;\le\;g-\frac{(2m)^{3/2}}{3}\,\ell^{3/2}\;\le\;
+  \frac{2(2m)^{3/2}}{3}\,\ell^{1/2}.
+\]
+In particular, for $\bfr=(2\ell,2\ell+2,2\ell+4)$ we have
+$g=\frac83\ell^{3/2}+O(\ell)$.
+\end{corollary}
+
+\subsection*{Relation to earlier work}
+For $d=2$ the generic value semigroup is that of a generic plane branch,
+generated by $a$, $b$ and $ab/e+1$, where $a\le b$ are the orders and
+$e=\gcd(a,b)$; see \cite[Section~1 and Section~1.1]{GMO} and
+Section~\ref{sec:plane}. For $d=3$, Cotterill, Kaplan and Vieira Costa bound the
+genus of the generic semigroup and give first approximations to it for
+arithmetic and supersymmetric triples \cite[Sections~2 and~3]{CKV}, and
+Cotterill, Lima and Martins state an explicit five-generator description for
+$(2m,2m+2,2m+4)$ \cite[Theorem~3.16]{CLM}. Theorem~\ref{thm:main} determines the
+generic semigroup uniformly for all $d\ge2$ and all positive orders.
+
+For $\bfr=(2\ell,2\ell+2,2\ell+4)$, Cotterill, Kaplan and Vieira Costa proved
+that $g>(\frac83-\epsilon)\ell^{3/2}$ for large $\ell$ \cite[Corollary~2.5]{CKV}
+and $g\le\lceil\ell^2/2\rceil+2\ell$ \cite[Theorem~2.9]{CKV}, and they expected
+the lower bound to be closer to the truth. Corollary~\ref{cor:arith} confirms
+this: the lower bound has the correct leading term, and the same holds for
+their bound \cite[Corollary~2.7]{CKV} for $(m\ell,m\ell+m,m\ell+2m)$.
+
+For $m=3$ the semigroup in \cite[Theorem~3.16]{CLM} is $\gen{6,8,10,17,19}$.
+It does not contain $21$, which is a generic value by
+Example~\ref{ex:6810}. Already the binomial $f_3^2-f_1^2f_2$ has order $21$
+for generic coefficients (Proposition~\ref{prop:CLM}). The same five-generator
+semigroups appear in \cite[Theorem~2.9]{CKV} only as subsemigroups of the
+generic semigroup, which is consistent with Theorem~\ref{thm:main}.
+
+\subsection*{Method}
+Modulo $t^N$, the algebra $A_f$ is spanned by the finitely many monomials
+$f^\alpha$ with $\alpha\cdot\bfr<N$, and the values below $N$ can be read off
+from the ranks of the submatrices formed by the first $L$ rows of the matrix of
+their Taylor coefficients, $0\le L\le N$ (Lemma~\ref{lem:prefix}). The column
+of $f^\alpha$ vanishes in the rows $0,\dots,\alpha\cdot\bfr-1$. Using only this
+zero pattern, a term-rank count bounds the rank of the first $L$ rows by
+$\#\{j:k_j<L\}$ (Lemma~\ref{lem:matching}). For the reverse inequality we show
+that suitable minors are nonzero polynomials in the coefficients by evaluating
+them at the germ $f_i=t^{r_i}e^{\lambda_it}$. Then
+$f^\alpha=t^{\alpha\cdot\bfr}e^{(\alpha\cdot\lambda)t}$, so the exponents
+$\alpha\cdot\lambda$ are determined by $\lambda_1,\dots,\lambda_d$ and cannot be
+chosen independently. Choosing $\lambda_i=Cr_i+\omega_i$ makes them increase
+with the weight. Each column of the resulting matrix is a column of
+$\exp(\lambda\Lambda)$ for some $\lambda\ge0$, where $\Lambda$ is the shift
+matrix. The matrices $\exp(\lambda\Lambda)$ are totally nonnegative, and the
+minors we need are positive because one term of a Cauchy--Binet expansion is
+positive (Lemma~\ref{lem:TP}). Their nonvanishing is
+also a statement about poised Hermite--Birkhoff interpolation problems and
+follows from a theorem of Atkinson and Sharma \cite{AS} (Remark~\ref{rem:HB}).
+Apart from the comparison in Section~\ref{sec:plane}, the proofs are
+self-contained.
+
+\subsection*{Organization}
+Section~\ref{sec:prelim} contains the combinatorics of the sequence $(k_j)$ and
+the reduction to jets. Section~\ref{sec:TP} proves the positivity lemma.
+Section~\ref{sec:proof} proves Theorem~\ref{thm:main}, Section~\ref{sec:genus}
+proves Theorem~\ref{thm:genus} and describes the computation, and
+Section~\ref{sec:asymp} proves Theorem~\ref{thm:asymp} and
+Corollary~\ref{cor:arith}. Section~\ref{sec:compare} compares the results with
+\cite{GMO}, \cite{CKV} and \cite{CLM}.
+
+\section{Jets and the greedy sequence}\label{sec:prelim}
+
+For $h\in\C[[t]]$ and $N\ge1$ let $j_N(h)\in\C^N$ be the vector of the
+coefficients of $t^0,\dots,t^{N-1}$. For $0\ne v\in\C^N$ let $\ord v$ be the
+least index of a nonzero coordinate.
+
+\begin{lemma}\label{lem:jets}
+Let $f$ be as in \eqref{eq:germ} and $N\ge1$. Then
+\[
+  \{j_N(h):h\in A_f\}=V_N(f):=\operatorname{span}\{j_N(f^\alpha):\alpha\cdot
+  \bfr<N\},
+\]
+and $S(f)\cap[0,N)=\{\ord v:0\ne v\in V_N(f)\}$. The same holds with $A_f$
+replaced by the polynomial algebra $\C[f_1,\dots,f_d]$, or, for convergent $f$,
+by $\C\{f_1,\dots,f_d\}$.
+\end{lemma}
+
+\begin{proof}
+Since $\ord f^\alpha=\alpha\cdot\bfr$, every $P=\sum_\alpha c_\alpha x^\alpha$
+satisfies
+\[
+  j_N(P(f))=\sum_{\alpha\cdot\bfr<N}c_\alpha\, j_N(f^\alpha);
+\]
+conversely
+every vector of $V_N(f)$ is the jet of a polynomial in the $f_i$. For $h\ne0$,
+$\ord h<N$ holds if and only if $j_N(h)\ne0$, and then $\ord h=\ord j_N(h)$.
+\end{proof}
+
+For a subspace $V\subseteq\C^N$ and $0\le L\le N$ let $\pi_L:\C^N\to\C^L$ be the
+projection onto the first $L$ coordinates and $\rho_V(L)=\dim\pi_L(V)$.
+
+\begin{lemma}\label{lem:prefix}
+Let $V\subseteq\C^N$ and $0\le L<N$. Then $\rho_V(L+1)-\rho_V(L)\in\{0,1\}$, and
+$L=\ord v$ for some $0\ne v\in V$ if and only if $\rho_V(L+1)=\rho_V(L)+1$.
+\end{lemma}
+
+\begin{proof}
+Let $K_L=V\cap\ker\pi_L$, the set consisting of $0$ and the vectors of order at
+least $L$. Then $\dim K_L=\dim V-\rho_V(L)$, and $K_{L+1}$ is the kernel of the
+coordinate of index $L$ on $K_L$, so it has codimension $0$ or $1$ in $K_L$. The
+codimension is $1$ exactly when some vector of $V$ has order $L$.
+\end{proof}
+
+\begin{lemma}\label{lem:greedy}
+Let $d\ge2$ and let $(w_j)$ and $(k_j)$ be as in \eqref{eq:G}.
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $k_j=j+\max_{0\le i\le j}(w_i-i)$. In particular $(k_j)$ is strictly
+  increasing and $k_j\ge w_j$.
+\item The maximum $D=\max_{j\ge0}(w_j-j)$ exists. Let $J$ be the least index
+  with $w_J-J=D$. Then $k_j=j+D$ for $j\ge J$, and $k_{J-1}\le J+D-2$ if $J>0$.
+\item $G(\bfr)$ is cofinite in $\N$, with $\#(\N\setminus G(\bfr))=D$ and
+  conductor $J+D=w_J$. Moreover $D=0$ if and only if $J=0$ if and only if
+  $G(\bfr)=\N$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) By induction: $k_0=0=w_0$, and
+$k_j=\max\bigl(w_j,\,j+\max_{i<j}(w_i-i)\bigr)=j+\max_{i\le j}(w_i-i)$.
+
+(b) Here we use $d\ge2$. All $\alpha$ with $\alpha\cdot\bfr<w_j$ precede the
+index $j$. Counting only the vectors supported on the first two coordinates
+with $\alpha_1r_1<w_j/2$ and $\alpha_2r_2<w_j/2$, we get
+\[
+  j\ge M_{\bfr}(w_j)\ge
+  \Bigl\lceil\frac{w_j}{2r_1}\Bigr\rceil\Bigl\lceil\frac{w_j}{2r_2}\Bigr\rceil
+  \ge\frac{w_j^2}{4r_1r_2}.
+\]
+Hence $w_j-j\le w_j-w_j^2/(4r_1r_2)$. Since only finitely many $\alpha$ have a given
+weight, $w_j\to\infty$, so $w_j-j\to-\infty$ and the maximum $D$ exists. For
+$j\ge J$ we get $k_j=j+D$ from (a). If $J>0$, the minimality of $J$ gives
+$w_i-i\le D-1$ for $i<J$, so $k_{J-1}\le J-1+D-1$.
+
+(c) The elements of $G(\bfr)$ below $k_j$ are $k_0,\dots,k_{j-1}$, so exactly
+$k_j-j$ integers below $k_j$ are missing from $G(\bfr)$. For $j\ge J$ this
+number is $D$, and $G(\bfr)\supseteq\{J+D,J+D+1,\dots\}$. If $J>0$, then
+$J+D-1$ lies strictly between $k_{J-1}$ and $k_J=J+D$, so it is a gap and the
+conductor is $J+D=w_J$. If $J=0$, then $D=w_0=0$ and $k_j=j$ for all $j$.
+\end{proof}
+
+The following bound uses only the positions of the structural zeros.
+
+\begin{lemma}\label{lem:matching}
+Let $p\ge1$ and $L\ge0$, and let $Q$ be an $L\times p$ matrix, with rows
+indexed by $0,\dots,L-1$ and columns by $0,\dots,p-1$, such that $Q_{u,j}=0$
+whenever $u<w_j$. Then $\rank Q\le\mu(L):=\#\{j<p:k_j<L\}$.
+\end{lemma}
+
+\begin{proof}
+A nonzero minor of size $s$ has a nonzero term in its Leibniz expansion, that
+is, $s$ nonzero entries of $Q$ in distinct rows and columns. It suffices to
+bound the size of such a set $T$ of entries by $m=\mu(L)$. If $m=p$ there is
+nothing to prove, so let $m<p$; then $k_m\ge L$, and by
+Lemma~\ref{lem:greedy}(a) there is $i\le m$ with $m+w_i-i\ge L$. Every column
+$j\ge i$ satisfies $w_j\ge w_i\ge L-(m-i)$, so its nonzero entries lie in the
+at most $m-i$ rows $L-(m-i),\dots,L-1$. Therefore $T$ contains at most $i$
+entries in the columns $0,\dots,i-1$ and at most $m-i$ entries in the other
+columns.
+\end{proof}
+
+The bound is attained by the pattern of positions $(k_j,j)$, $j<\mu(L)$, and
+Proposition~\ref{prop:jetvalues} shows that equality holds for the jet matrix of
+a generic germ.
+
+\section{A positivity lemma}\label{sec:TP}
+
+A real matrix is \emph{totally nonnegative} if all its minors are nonnegative.
+Fix $N\ge1$, let $\Lambda$ be the $N\times N$ lower shift matrix,
+$\Lambda e_u=e_{u+1}$ for $u<N-1$ and $\Lambda e_{N-1}=0$, and for $s\in\R$ put
+\[
+  E(s)=\sum_{k=0}^{N-1}\frac{s^k\Lambda^k}{k!},
+  \qquad
+  E(s)_{u,v}=
+  \begin{cases}
+    s^{u-v}/(u-v)!, & u\ge v,\\
+    0, & u<v,
+  \end{cases}
+\]
+with rows and columns indexed by $0,\dots,N-1$. Then $E(s)E(s')=E(s+s')$, and
+the column $E(s)e_v$ is the jet $j_N(t^ve^{st})$.
+
+\begin{lemma}\label{lem:Etn}
+For $s\ge0$ the matrix $E(s)$ is totally nonnegative.
+\end{lemma}
+
+\begin{proof}
+Let $B$ be a lower bidiagonal matrix with nonnegative entries, and consider the
+submatrix on rows $i_1<\dots<i_p$ and columns $j_1<\dots<j_p$. If $j_1>i_1$, its
+first row vanishes. If $j_1<i_1-1$, its first column vanishes. If $j_1=i_1$,
+the only possibly nonzero entry of its first row is the corner entry, and if
+$j_1=i_1-1$ the same holds for its first column. By induction every minor of
+$B$ is either zero or a product of entries of $B$, hence nonnegative. Products
+of totally nonnegative matrices are totally nonnegative by the Cauchy--Binet
+formula, so $(I+s\Lambda/n)^n$ is totally nonnegative for every $n\ge1$. Since
+$\Lambda^N=0$, we have $(I+s\Lambda/n)^n=\sum_{k<N}\binom nk(s/n)^k\Lambda^k\to
+E(s)$ as $n\to\infty$, and minors depend continuously on the entries.
+\end{proof}
+
+\begin{lemma}\label{lem:TP}
+Let $q\ge1$, let $0<\lambda_1<\dots<\lambda_q$ be real numbers, and let
+$0\le a_1\le\dots\le a_q<N$ be integers. Let $X$ be the $N\times q$ matrix with
+columns $E(\lambda_j)e_{a_j}$. Then $X$ is totally nonnegative, and for all
+integers $u_1<\dots<u_q<N$ with $a_j\le u_j$ for every $j$,
+\[
+  \det\Bigl(\frac{\lambda_j^{\,u_i-a_j}}{(u_i-a_j)!}\Bigr)_{1\le i,j\le q}>0,
+\]
+where an entry with $u_i<a_j$ is read as $0$. This determinant is the minor of
+$X$ on the rows $u_1,\dots,u_q$.
+\end{lemma}
+
+\begin{proof}
+We use induction on $q$. For $q=1$ the column $X$ has nonnegative entries, and
+its entry in row $u_1\ge a_1$ is $\lambda_1^{u_1-a_1}/(u_1-a_1)!>0$.
+
+Let $q\ge2$. The $N\times(q-1)$ matrix $Y$ with columns
+$E(\lambda_j-\lambda_1)e_{a_j}$, $2\le j\le q$, satisfies the hypotheses with
+the nodes $0<\lambda_2-\lambda_1<\dots<\lambda_q-\lambda_1$. By induction, $Y$
+is totally nonnegative and its minor on the rows $u_2,\dots,u_q$ is positive.
+Since $E(\lambda_j)=E(\lambda_1)E(\lambda_j-\lambda_1)$, we have $X=E(\lambda_1)B$
+with $B=(e_{a_1}\mid Y)$.
+
+We claim that $B$ is totally nonnegative. Minors not involving the first
+column are minors of $Y$. Consider a minor of $B$ on rows $t_1<\dots<t_p$ that
+involves the first column. If $a_1$ is not among the $t_i$, the first column of
+the submatrix vanishes. If $a_1=t_s$ with $s\ge2$, then the row $t_1<a_1$
+vanishes, because the column $e_{a_1}$ is zero there and the column of $Y$
+indexed by $j$ is zero in the rows of index less than $a_j\ge a_1$. If $a_1=t_1$, the first column of the
+submatrix is $(1,0,\dots,0)^{\mathsf T}$, and the minor equals a minor of $Y$.
+In all cases the minor is nonnegative.
+
+By the Cauchy--Binet formula $X$ is totally nonnegative, and for
+$U=(u_1,\dots,u_q)$
+\[
+  \det X[U]=\sum_{T}\det E(\lambda_1)[U,T]\,\det B[T],
+\]
+where $T$ runs over the increasing $q$-tuples of row indices. All terms are
+nonnegative. Take $T_0=(a_1,u_2,\dots,u_q)$, which is increasing because
+$a_1\le u_1<u_2$. By the previous paragraph,
+$\det B[T_0]=\det Y[(u_2,\dots,u_q)]>0$. The matrix $E(\lambda_1)[U,T_0]$ is
+lower triangular: for $j>i$ its $(i,j)$ entry is $E(\lambda_1)_{u_i,u_j}=0$,
+because $u_i<u_j$. Its diagonal is
+$\lambda_1^{u_1-a_1}/(u_1-a_1)!,1,\dots,1$, which is positive. Hence the term
+for $T_0$ is positive, and so is $\det X[U]$.
+\end{proof}
+
+\begin{remark}\label{rem:HB}
+The nonvanishing part of Lemma~\ref{lem:TP} is a classical statement about
+Hermite--Birkhoff interpolation. Put $n_0=u_q$ and consider polynomials of
+degree at most $n_0$ in the basis $x^h/h!$, $0\le h\le n_0$. Prescribe
+$\phi^{(h)}(0)$ for $h\in\{0,\dots,n_0\}\setminus\{u_1,\dots,u_q\}$ and
+$\phi^{(a_j)}(\lambda_j)$ for $1\le j\le q$; these are $n_0+1$ conditions. The condition at $0$ of order
+$h$ picks out the coefficient of $x^h/h!$, and the condition of order $a$ at
+$\lambda$ sends $x^u/u!$ to $\lambda^{u-a}/(u-a)!$. Expanding the determinant
+of the problem along the conditions at $0$ leaves, up to sign and
+transposition, the determinant of Lemma~\ref{lem:TP}. The number of
+conditions of order at most $p$ is
+\[
+  (p+1)-\#\{j:u_j\le p\}+\#\{j:a_j\le p\}\ge p+1,
+\]
+because $a_j\le u_j$; this is the P\'olya condition. Every sequence at the
+node $0$ is conservative in the sense of \cite[Definition~2]{AS}, since $0$
+is the leftmost node. The node $\lambda_j$ carries a single condition, of
+order $a_j$, and every node carrying a condition of order smaller than $a_j$ is
+$0$ or some $\lambda_i$ with $a_i<a_j$, hence $i<j$ and $\lambda_i<\lambda_j$;
+so this sequence is conservative too. By \cite[Theorem~2]{AS} the problem is
+poised, and the determinant is nonzero. The proof above is self-contained and
+also gives the sign.
+\end{remark}
+
+\section{Proof of Theorem~\ref{thm:main}}\label{sec:proof}
+
+Fix $N\ge1$. Let $\Omega_N=\{\alpha\in\N^d:\alpha\cdot\bfr<N\}$, put
+$p=\#\Omega_N=M_{\bfr}(N)$ and $\omega=(1,N,N^2,\dots,N^{d-1})$. For
+$\alpha\in\Omega_N$ every coordinate satisfies $\alpha_i\le N-1$, so the
+numbers $\alpha\cdot\omega$ are pairwise distinct. Enumerate
+$\Omega_N=\{\alpha^{(0)},\dots,\alpha^{(p-1)}\}$ by increasing weight, and
+among vectors of equal weight by increasing $\alpha\cdot\omega$. This is an
+initial segment of an enumeration as in \eqref{eq:G}, so the
+corresponding $w_j$ and $k_j$, $j<p$, are those of \eqref{eq:G}.
+
+Let $X_N(f)$ be the $N\times p$ matrix with columns $j_N(f^{\alpha^{(j)}})$.
+Its entries are polynomials with integer coefficients in the $a_{i,k}$,
+$1\le k<N$, and $X_N(f)_{u,j}=0$ for $u<w_j$. Let $m_N=\#\{j:k_j<N\}$; note
+that $k_j<N$ implies $w_j<N$, hence $j<p$. For $1\le q\le m_N$ let
+$\Delta_q^{(N)}$ be the minor of $X_N(f)$ on the rows $k_0,\dots,k_{q-1}$ and
+the columns $0,\dots,q-1$.
+
+\begin{proposition}\label{prop:jetvalues}
+If $\Delta^{(N)}_q(a)\ne0$ for $1\le q\le m_N$, then
+\[
+  S(f)\cap[0,N)=G(\bfr)\cap[0,N).
+\]
+\end{proposition}
+
+\begin{proof}
+Let $0\le L\le N$. The column space of the $L\times p$ submatrix of $X_N(f)$
+formed by its first $L$ rows is $\pi_L(V_N(f))$, so this submatrix has rank
+$\rho(L)=\rho_{V_N(f)}(L)$. Lemma~\ref{lem:matching} gives
+$\rho(L)\le\mu(L)=\#\{j<p:k_j<L\}$; since $k_j<L\le N$ implies $w_j<N$ and
+hence $j<p$, also $\mu(L)=\#\{j:k_j<L\}$. If $\mu(L)=q\ge1$, the rows
+$k_0,\dots,k_{q-1}$ are smaller than $L$, and the nonzero minor
+$\Delta^{(N)}_q$ shows $\rho(L)\ge q$. Hence $\rho(L)=\mu(L)$ for all $L\le N$.
+By Lemmas~\ref{lem:jets} and~\ref{lem:prefix}, an integer $L<N$ lies in $S(f)$
+if and only if $\mu(L+1)=\mu(L)+1$, that is, if and only if $L\in G(\bfr)$.
+\end{proof}
+
+\begin{proposition}\label{prop:witness}
+None of the polynomials $\Delta^{(N)}_q$, $1\le q\le m_N$, is identically zero.
+More precisely, let $C=1+\max_{\alpha\in\Omega_N}\alpha\cdot\omega$,
+$\lambda_i=Cr_i+\omega_i$, and $f_i=t^{r_i}e^{\lambda_it}$, that is,
+$a_{i,k}=\lambda_i^k/k!$. Then $\Delta^{(N)}_q(a)>0$ for $1\le q\le m_N$.
+\end{proposition}
+
+\begin{proof}
+For $\alpha\in\Omega_N$ we have $f^\alpha=t^{\alpha\cdot\bfr}e^{\lambda_\alpha t}$
+with
+\[
+  \lambda_\alpha=\alpha\cdot\lambda=C\,(\alpha\cdot\bfr)+\alpha\cdot\omega,
+\]
+so the $j$-th column of $X_N(f)$ is $E(\lambda_{(j)})e_{w_j}$, where
+$\lambda_{(j)}=\lambda_{\alpha^{(j)}}$. The numbers $\lambda_{(j)}$ are strictly
+increasing in $j$. Indeed, if $w_j<w_{j'}$, then
+$\lambda_{(j)}\le Cw_j+C-1<Cw_{j'}\le\lambda_{(j')}$; if $w_j=w_{j'}$ and
+$j<j'$, the tie-breaking rule gives
+$\alpha^{(j)}\cdot\omega<\alpha^{(j')}\cdot\omega$. Moreover
+$\lambda_{(0)}=0$ and $\lambda_{(j)}>0$ for $j\ge1$.
+
+The column $0$ is $E(0)e_0=e_0$, and every column $j\ge1$ has weight
+$w_j\ge\min\bfr\ge1$, hence vanishes in row $0=k_0$. Expanding along this row,
+$\Delta^{(N)}_q$ equals the minor on the rows $k_1,\dots,k_{q-1}$ and the
+columns $1,\dots,q-1$ (and $\Delta^{(N)}_1=1$). This is the minor of
+Lemma~\ref{lem:TP} with $q-1$ columns, nodes
+$\lambda_{(1)}<\dots<\lambda_{(q-1)}$,
+orders $a_j=w_j$ and rows $u_j=k_j\ge w_j$; it is positive.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+First, $G(\bfr)$ is a numerical semigroup. It contains $0$ and is cofinite by
+Lemma~\ref{lem:greedy}(c). Let $x,y\in G(\bfr)$ and $N>x+y$. By
+Proposition~\ref{prop:witness} there is $f$ with
+$\Delta_1^{(N)}\cdots\Delta_{m_N}^{(N)}(a)\ne0$, and by
+Proposition~\ref{prop:jetvalues} there are $h_x,h_y\in A_f$ of orders $x$ and
+$y$. Then $h_xh_y\in A_f$ has order $x+y<N$, so $x+y\in S(f)\cap[0,N)
+=G(\bfr)\cap[0,N)$.
+
+Now let $c$ be the conductor of $G(\bfr)$, let $m=\min\bfr=r_{i_0}$, and take
+$N=c+m$ and $\Delta_\nu=\Delta^{(N)}_\nu$, $1\le\nu\le K=m_N$. These polynomials
+depend only on $\bfr$, are not identically zero by
+Proposition~\ref{prop:witness}, and involve only the $a_{i,k}$ with $k<N$.
+Suppose that $\Delta_1(a)\cdots\Delta_K(a)\ne0$.
+By Proposition~\ref{prop:jetvalues}, $S(f)\cap[0,c+m)=G(\bfr)\cap[0,c+m)$. In
+particular $A_f$ contains elements $h_c,\dots,h_{c+m-1}$ of the orders
+$c,\dots,c+m-1$, and the products $h_{c+\nu}f_{i_0}^k$ show that every integer
+$n\ge c$ lies in $S(f)$. Since also $S(f)\cap[0,c)=G(\bfr)\cap[0,c)$, we get
+$S(f)=G(\bfr)$. The argument used only jets, so by Lemma~\ref{lem:jets} it
+applies verbatim to $\C\{f_1,\dots,f_d\}$ for convergent $f$. Finally, a
+nonzero polynomial with rational coefficients does not vanish at a point whose
+coordinates are algebraically independent over $\Q$.
+\end{proof}
+
+\begin{remark}\label{rem:simultaneous}
+(a) For $N=c+\min\bfr$, Proposition~\ref{prop:witness} makes all the minors
+$\Delta^{(N)}_q$ nonzero at one point, so the entire germ
+$t\mapsto(t^{r_1}e^{\lambda_1t},\dots,t^{r_d}e^{\lambda_dt})$ constructed there
+has value semigroup exactly $G(\bfr)$.
+
+(b) Only the coefficients $a_{i,k}$ with $k<N$ enter the condition of
+Theorem~\ref{thm:main}. Hence $S(f)=G(\bfr)$ also when each $f_i$ is a
+polynomial $t^{r_i}(1+a_{i,1}t+\dots+a_{i,D_i}t^{D_i})$ with $D_i\ge N-1$ and
+generic coefficients. Germs with $\Delta_1(a)\cdots\Delta_K(a)=0$ may have other
+value semigroups, and Theorem~\ref{thm:main} does not describe them.
+
+(c) We work over $\C$. The polynomials $\Delta_\nu$ are not identically zero
+and have integer coefficients, but we make no claim in positive characteristic.
+For $d=1$ the values are the multiples of $r_1$, which form a numerical
+semigroup only when $r_1=1$.
+\end{remark}
+
+\section{Genus, conductor and computation}\label{sec:genus}
+
+\begin{proof}[Proof of Theorem~\ref{thm:genus}]
+Let $D$ and $J$ be as in Lemma~\ref{lem:greedy}, so that $g=D=\max_j(w_j-j)$
+and $c=w_J$ if $D>0$, $c=0$ if $D=0$.
+
+For every $n\ge0$, the elements of $G(\bfr)$ below $n$ are the $k_j<n$, and
+$k_j\ge w_j$, so there are at most $\#\{j:w_j<n\}=M_{\bfr}(n)$ of them. Thus
+at least $F_{\bfr}(n)$ gaps lie below $n$, and $F_{\bfr}(n)\le g$.
+
+If $D=0$, then $F_{\bfr}(0)=0=g$ and $c=0$. Let $D>0$. If $i<J$ had $w_i=w_J$,
+then $w_i-i>w_J-J=D$, which is impossible; hence the indices $j$ with
+$w_j<w_J$ are exactly $0,\dots,J-1$, $M_{\bfr}(w_J)=J$ and
+$F_{\bfr}(c)=w_J-J=D$. If $n<c$, the gap $c-1$ is not below $n$, so at most
+$g-1$ gaps lie below $n$ and $F_{\bfr}(n)\le g-1$. This proves the formulas for
+$g$ and $c$.
+
+Let $n\ge4ab$, and let $i_1\ne i_2$ be positions with $r_{i_1}=a$ and
+$r_{i_2}=b$. The vectors supported on $\{i_1,i_2\}$ with $\alpha_{i_1}a<n/2$ and
+$\alpha_{i_2}b<n/2$ have weight less than $n$, so
+\[
+  M_{\bfr}(n)\ge\Bigl\lceil\frac n{2a}\Bigr\rceil\Bigl\lceil\frac n{2b}\Bigr\rceil
+  \ge\frac{n^2}{4ab}\ge n,
+\]
+and $F_{\bfr}(n)\le0$. If $m=\min\bfr=1$, then the multiples of the
+corresponding coordinate give $M_{\bfr}(n)\ge n$ for all $n$, so $g=0$ and
+$G(\bfr)=\N$. If $m\ge2$, only $\alpha=0$ has weight less than $m$, so
+$g\ge F_{\bfr}(m)=m-1>0$. Finally, an element $n\ge c+m$ of $G(\bfr)$ is the sum
+of $m\in G(\bfr)$ and $n-m\ge c$, so it is not a minimal generator.
+\end{proof}
+
+\begin{remark}\label{rem:algorithm}
+Let $\varpi(n)=\#\{\alpha:\alpha\cdot\bfr=n\}$, so that
+\[
+  \sum_{n\ge0}\varpi(n)z^n=\prod_{i=1}^d\frac1{1-z^{r_i}}.
+\]
+The numbers $\varpi(n)$, $n<n_1$, are obtained by the usual recursion for
+unbounded knapsack counts, one pass per coordinate (also for repeated orders),
+with $O(dn_1)$ additions. Put $\beta_n=\#\{j:w_j\le n\le k_j\}$, the number of
+indices whose weight has been reached but which have not been placed below $n$.
+If $\beta_n>0$, the least such $j$ satisfies $k_j=n$; hence $n\in G(\bfr)$ if and
+only if $\beta_n>0$, and
+\[
+  \beta_0=1,\qquad \beta_{n+1}=\beta_n-[\beta_n>0]+\varpi(n+1).
+\]
+By Theorem~\ref{thm:genus} it suffices to take $n_1=4ab+\min\bfr$, which yields
+the gaps, $g$, $c$ and the minimal generators in $O(dab)$ additions of
+integers. The cost is polynomial in the orders, but not in their bit length.
+\end{remark}
+
+Table~\ref{tab:examples} lists some values obtained in this way. The row
+$(4,6)$ agrees with the plane case of Section~\ref{sec:plane}, and the row
+$(6,8,10)$ is Example~\ref{ex:6810}. The values in Tables~\ref{tab:examples}
+and~\ref{tab:asymp} and in Section~\ref{sec:CLM} were computed with this
+procedure; a short program carrying out these computations is distributed with
+the paper.
+
+\begin{table}[ht]
+\caption{Generic value semigroups for some coordinate orders.}
+\label{tab:examples}
+\centering
+\begin{tabular}{@{}lccl@{}}
+\toprule
+$\bfr$ & genus & conductor & minimal generators\\
+\midrule
+$(2,2)$ & $1$ & $2$ & $2,3$\\
+$(4,6)$ & $8$ & $16$ & $4,6,13$\\
+$(4,4,4)$ & $4$ & $8$ & $4,5,6$\\
+$(3,3,3,3)$ & $2$ & $3$ & $3,4,5$\\
+$(5,7,9)$ & $8$ & $14$ & $5,7,9$\\
+$(6,8,10)$ & $10$ & $16$ & $6,8,10,17,19,21$\\
+$(8,10,12)$ & $16$ & $28$ & $8,10,12,21,25$\\
+$(10,12,14)$ & $22$ & $34$ & $10,12,14,25,41,43$\\
+$(12,15,20)$ & $35$ & $59$ & $12,15,20,61$\\
+$(20,22,24)$ & $67$ & $104$ & $20,22,24,45,95,121,123$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Asymptotics}\label{sec:asymp}
+
+\begin{lemma}\label{lem:volume}
+Let $P=r_1\cdots r_d$ and $R=r_1+\dots+r_d$. For every $n\ge0$,
+\[
+  \frac{n^d}{d!\,P}\le M_{\bfr}(n)\le\frac{(n+R)^d}{d!\,P}.
+\]
+\end{lemma}
+
+\begin{proof}
+The cubes $\alpha+[0,1)^d$, $\alpha\in\N^d$, are disjoint. If $x\in\R_{\ge0}^d$
+and $x\cdot\bfr<n$, then $\alpha=\lfloor x\rfloor$ satisfies
+$\alpha\cdot\bfr\le x\cdot\bfr<n$; hence the simplex
+$\{x\ge0:x\cdot\bfr<n\}$, of volume $n^d/(d!P)$, is covered by the cubes with
+$\alpha\cdot\bfr<n$. Conversely, each such cube lies in
+$\{x\ge0:x\cdot\bfr<n+R\}$, of volume $(n+R)^d/(d!P)$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:asymp}]
+Put $\phi(x)=x-x^d/(d!P)$ for $x\ge0$. It is concave, with
+$\phi'(x)=1-x^{d-1}/((d-1)!P)\le1$, and it attains its maximum at $n_*$, where
+\[
+  \phi(n_*)=n_*-n_*\cdot\frac{n_*^{d-1}}{d!\,P}=n_*-\frac{n_*}{d}
+  =\frac{d-1}{d}\,n_*.
+\]
+By
+Lemma~\ref{lem:volume}, $F_{\bfr}(n)\le\phi(n)\le\phi(n_*)$, and
+Theorem~\ref{thm:genus} gives the upper bound.
+
+If $n_*<R$, then $\frac{d-1}dn_*-R-1<0\le g$. Let $n_*\ge R$, put
+$n=\lfloor n_*-R\rfloor\ge0$ and $x=n+R\in(n_*-1,n_*]$; note $x\ge0$. By
+Lemma~\ref{lem:volume},
+\[
+  F_{\bfr}(n)\ge n-\frac{(n+R)^d}{d!\,P}=\phi(x)-R.
+\]
+Since $0\le\phi'\le1$ on $[x,n_*]$, we have $\phi(x)\ge\phi(n_*)-(n_*-x)\ge
+\phi(n_*)-1$. Hence $g\ge F_{\bfr}(n)\ge\frac{d-1}dn_*-R-1$.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:arith}]
+Here $d=3$, $P=m^3\ell(\ell+1)(\ell+2)$, $R=3m(\ell+1)$ and
+$n_*=(2P)^{1/2}$, so $\frac23n_*=\frac{(2m)^{3/2}}{3}\sigma$ with
+$\sigma=(\ell(\ell+1)(\ell+2))^{1/2}$. Using $(1+x)^{1/2}\le1+x/2$,
+\[
+  \ell^{3/2}\le\sigma\le\ell^{3/2}\Bigl(1+\frac1{2\ell}\Bigr)\Bigl(1+\frac1\ell\Bigr)
+  \le\ell^{3/2}+\frac32\ell^{1/2}+\frac12\ell^{-1/2}\le\ell^{3/2}+2\ell^{1/2}.
+\]
+By Theorem~\ref{thm:asymp},
+\begin{align*}
+  g&\le\frac{(2m)^{3/2}}3\,\sigma
+  \le\frac{(2m)^{3/2}}3\,\ell^{3/2}+\frac{2(2m)^{3/2}}3\,\ell^{1/2},\\
+  g&\ge\frac{(2m)^{3/2}}3\,\sigma-R-1\ge\frac{(2m)^{3/2}}3\,\ell^{3/2}-3m(\ell+1)-1.
+\end{align*}
+For $m=2$ the constant is $\frac{(2m)^{3/2}}3=\frac83$.
+\end{proof}
+
+Table~\ref{tab:asymp} compares the exact genus with the bounds of
+Theorem~\ref{thm:asymp} and with the upper bound $\lceil\ell^2/2\rceil+2\ell$ of
+\cite[Theorem~2.9]{CKV}, for $\bfr=(2\ell,2\ell+2,2\ell+4)$. The lower bound
+is rounded up and the upper bound is rounded down.
+
+\begin{table}[ht]
+\caption{The genus $g$ of $G(2\ell,2\ell+2,2\ell+4)$.}
+\label{tab:asymp}
+\centering
+\begin{tabular}{@{}rrrrrr@{}}
+\toprule
+$\ell$ & lower bound & $g$ & upper bound & $g/\ell^{3/2}$ &
+$\lceil\ell^2/2\rceil+2\ell$\\
+\midrule
+$10$ & $30$ & $67$ & $96$ & $2.119$ & $70$\\
+$30$ & $274$ & $382$ & $460$ & $2.325$ & $510$\\
+$100$ & $2100$ & $2472$ & $2706$ & $2.472$ & $5200$\\
+$300$ & $12119$ & $13262$ & $13925$ & $2.552$ & $45600$\\
+$1000$ & $78447$ & $82338$ & $84453$ & $2.604$ & $502000$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Comparison with earlier results}\label{sec:compare}
+
+\subsection{Two coordinates}\label{sec:plane}
+Let $d=2$, $\bfr=(a,b)$ with $a\le b$, and $e=\gcd(a,b)$. Reparametrizing by
+$s=t\,(f_1/t^a)^{1/a}$ we may write $f_1=s^a$ and
+$f_2=s^b(1+\lambda s+\cdots)$ with $\lambda=a_{2,1}-\frac ba\,a_{1,1}$. For
+$\lambda\ne0$ these are the generic plane curve singularities studied by
+Gorsky, Mazin and Oblomkov, whose semigroup is generated by $a$, $b$ and
+$ab/e+1$ \cite[Section~1 and Section~1.1]{GMO}; the delta invariant is
+\mbox{$\bigl((a-1)(b-1)+e-1\bigr)/2$}, which is the box count in
+\cite[Theorem~1.1(b)]{GMO}. Let $N$ be as in Theorem~\ref{thm:main} and
+$N'=\max(N,2)$. The conditions $\lambda\ne0$ and
+$\Delta_1(a)\cdots\Delta_K(a)\ne0$ define nonempty Zariski open subsets of the
+irreducible affine space of coefficients $a_{i,k}$, $k<N'$, so they hold
+simultaneously for generic coefficients. Comparing the two descriptions gives
+\[
+  G(a,b)=\gen{a,\,b,\,ab/e+1}.
+\]
+This identity is not evident from \eqref{eq:G}; here it follows by comparing
+two descriptions of the generic semigroup. For coprime orders the third
+generator is redundant and $G(a,b)=\gen{a,b}$, and for $a=b$ one gets
+$\gen{a,a+1}$.
+
+\subsection{Arithmetic and supersymmetric triples}\label{sec:CKV}
+Cotterill, Kaplan and Vieira Costa \cite{CKV} call the value semigroup of a
+germ with prescribed orders and algebraically independent higher coefficients
+the generic semigroup adapted to the profile; there $\bfr$ is strictly
+increasing, and for such $\bfr$ this semigroup is $G(\bfr)$ by
+Theorem~\ref{thm:main}. For $\bfr=(2\ell,2\ell+2,2\ell+4)$ they prove
+$g>(\frac83-\epsilon)\ell^{3/2}$ for large $\ell$ \cite[Corollary~2.5]{CKV}, a
+containment $S^*\subseteq S$ for an explicit five-generator semigroup $S^*$
+together with $g\le\lceil\ell^2/2\rceil+2\ell$ \cite[Theorem~2.9]{CKV}, and the
+analogous statements for $(m\ell,m\ell+m,m\ell+2m)$
+\cite[Corollary~2.7, Theorem~2.10]{CKV}, the latter under the assumptions
+$m\ge2$ and $\ell\ge2m$. After \cite[Theorem~2.9]{CKV} they
+remark that the lower bound seems closer to the true genus than the upper
+bound. Corollary~\ref{cor:arith} shows that the lower bounds of
+\cite[Corollaries~2.5 and~2.7]{CKV} have the correct leading terms and that
+the genus has order $\ell^{3/2}$; Table~\ref{tab:asymp} illustrates this. The
+containment $S^*\subseteq S$ is consistent with Theorem~\ref{thm:main}; for
+$\ell=3$ it is strict (Section~\ref{sec:CLM}).
+
+In \cite[Remark~2.8]{CKV} the generic semigroup is conjectured to be the limit
+of a discrete dynamical system that inserts new elements at Betti elements.
+Theorem~\ref{thm:main} determines the limit object, but we do not prove that it
+is produced by that procedure.
+
+For supersymmetric triples $\bfr=(ab,ac,bc)$ with pairwise coprime
+\mbox{$2\le a<b<c$}, \cite[Section~3]{CKV} studies the generic semigroup through the
+first approximation $S'=\gen{ab,ac,bc,abc+1}$. When
+$abc+1\notin\gen{ab,ac,bc}$, it computes the genus of $S'$, which is an upper
+bound for the genus of the generic semigroup \cite[Proposition~3.12]{CKV}. For
+$(a,b,c)=(3,4,5)$ Theorem~\ref{thm:main} gives
+$G(12,15,20)=\gen{12,15,20,61}=S'$, so the generic genus $35$ attains the upper
+bound of \cite[Proposition~3.12]{CKV}.
+
+\subsection{The five-generator statement for consecutive even orders}\label{sec:CLM}
+We use the numbering of the arXiv version of \cite{CLM}. Its Theorem~3.16
+states that for every positive integer $m$ the value semigroup of a generic
+parametrization with ramification profile $(2m,2m+2,2m+4)$ is
+\begin{align*}
+  &\gen{2m,\,2m+2,\,2m+4,\,4m+5,\,(m+2)m+1} && \text{if $m$ is even},\\
+  &\gen{2m,\,2m+2,\,2m+4,\,4m+5,\,(m+3)m+1} && \text{if $m$ is odd}.
+\end{align*}
+These are the semigroups $S^*$
+of \cite[Theorem~2.9]{CKV}. For $m=3$ the statement reads
+$S_{\mathrm{gen}}=\gen{6,8,10,17,19}$.
+
+\begin{proposition}\label{prop:CLM}
+Let $f_1=t^6(1+a_{1,1}t+O(t^2))$, $f_2=t^8(1+a_{2,1}t+O(t^2))$ and
+$f_3=t^{10}(1+a_{3,1}t+O(t^2))$. Then
+\[
+  f_3^2-f_1^2f_2=(2a_{3,1}-2a_{1,1}-a_{2,1})\,t^{21}+O(t^{22}).
+\]
+Hence $21$ is a value for generic coefficients, while
+$21\notin\gen{6,8,10,17,19}$. In particular the generic semigroup for
+$(6,8,10)$ is not $\gen{6,8,10,17,19}$.
+\end{proposition}
+
+\begin{proof}
+The expansion follows from $f_3^2=t^{20}(1+2a_{3,1}t+O(t^2))$ and
+$f_1^2f_2=t^{20}(1+(2a_{1,1}+a_{2,1})t+O(t^2))$. The coefficient
+$2a_{3,1}-2a_{1,1}-a_{2,1}$ is a nonzero polynomial. A representation of the odd number $21$ in
+$\gen{6,8,10,17,19}$ would use an odd number of odd generators; one odd
+generator leaves $4$ or $2$, which are not in $\gen{6,8,10}$, and three odd
+generators already exceed $21$.
+\end{proof}
+
+The tie at weight $20$ involves the monomials $f_3^2$ and $f_1^2f_2$ of
+different total degrees. In the proof of \cite[Theorem~3.16]{CLM} (pp.~27--28), the
+case of even $m$ is reduced to ties of two monomials at weights divisible by
+$4m+4$, and the case of odd $m$ is said to be analogous; the tie at weight
+$20$ for $m=3$ is not of this kind. By Example~\ref{ex:6810} the generic
+semigroup is $\gen{6,8,10,17,19,21}$, of genus $10$, whereas
+$\gen{6,8,10,17,19}$ has genus $11$. Computing $G(2m,2m+2,2m+4)$ with
+Remark~\ref{rem:algorithm} for $1\le m\le15$, we found that it coincides with
+the semigroup of \cite[Theorem~3.16]{CLM} exactly for $m\in\{1,2,4,6\}$;
+Table~\ref{tab:examples} shows the cases $m=3,4,5,10$.
+
+Theorem~3.16 of \cite{CLM} also states the genus as \mbox{$\frac12m^2+2m-1$}
+for even $m$ and \mbox{$\frac12m^2+2m-\frac32$} for odd $m$. For $m=3$ this gives $9$, while
+$\gen{6,8,10,17,19}$ has genus $11$ and the generic semigroup has genus $10$.
+For $m=2,4,6$, where the generators agree, the formula gives $5,15,29$, and the
+generic genus is $6,16,30$.
+
+\section*{Use of AI-assisted tools}
+AI-assisted tools were used in the research and preparation of this manuscript.
+
+\begin{thebibliography}{GMO26}
+
+\bibitem[AS69]{AS}
+K.~Atkinson and A.~Sharma, \emph{A partial characterization of poised
+Hermite--Birkhoff interpolation problems}, SIAM J. Numer. Anal. \textbf{6}
+(1969), no.~2, 230--235.
+
+\bibitem[CKV23]{CKV}
+E.~Cotterill, N.~Kaplan, and R.~Vieira Costa, \emph{Cusps in $\C^3$ with
+prescribed ramification}, preprint (2023), arXiv:2303.09303v2.
+
+\bibitem[CLM22]{CLM}
+E.~Cotterill, V.~L.~Lima, and R.~V.~Martins, \emph{Severi dimensions for
+unicuspidal curves}, J. Algebra \textbf{597} (2022), 299--331,
+doi:10.1016/j.jalgebra.2021.11.028; theorem and page numbers as in
+arXiv:2006.09580v4.
+
+\bibitem[GMO26]{GMO}
+E.~Gorsky, M.~Mazin, and A.~Oblomkov, \emph{Generic curves and non-coprime
+Catalan numbers}, Algebr. Geom. \textbf{13} (2026), no.~1, 25--57,
+doi:10.14231/AG-2026-002.
+
+\end{thebibliography}
+
+\end{document}

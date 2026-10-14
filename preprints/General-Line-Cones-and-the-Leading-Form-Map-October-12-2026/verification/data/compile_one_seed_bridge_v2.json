@@ -1,0 +1,2754 @@
+{
+  "scope": "Finite propagation from degree 11, position 14, using the stated transition gates; independent of the infinite lower-boundary theorem.",
+  "rows": [
+    {
+      "d": 11,
+      "lower": 14,
+      "upper": 14,
+      "kind": "new_finite_star_opening_seed"
+    },
+    {
+      "d": 12,
+      "lower": 16,
+      "upper": 16,
+      "M": 91,
+      "m_lower": 75,
+      "covering_intervals": [
+        {
+          "lower": 16,
+          "upper": 16,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 14,
+          "residual_upper": 14,
+          "q": 5,
+          "required_k": 55
+        }
+      ]
+    },
+    {
+      "d": 13,
+      "lower": 18,
+      "upper": 18,
+      "M": 105,
+      "m_lower": 87,
+      "covering_intervals": [
+        {
+          "lower": 18,
+          "upper": 18,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 16,
+          "residual_upper": 16,
+          "q": 6,
+          "required_k": 66
+        }
+      ]
+    },
+    {
+      "d": 14,
+      "lower": 20,
+      "upper": 20,
+      "M": 120,
+      "m_lower": 100,
+      "covering_intervals": [
+        {
+          "lower": 20,
+          "upper": 20,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 18,
+          "residual_upper": 18,
+          "q": 6,
+          "required_k": 75
+        }
+      ]
+    },
+    {
+      "d": 15,
+      "lower": 22,
+      "upper": 22,
+      "M": 136,
+      "m_lower": 114,
+      "covering_intervals": [
+        {
+          "lower": 22,
+          "upper": 22,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 20,
+          "residual_upper": 20,
+          "q": 7,
+          "required_k": 88
+        }
+      ]
+    },
+    {
+      "d": 16,
+      "lower": 24,
+      "upper": 24,
+      "M": 153,
+      "m_lower": 129,
+      "covering_intervals": [
+        {
+          "lower": 24,
+          "upper": 24,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 22,
+          "residual_upper": 22,
+          "q": 7,
+          "required_k": 98
+        }
+      ]
+    },
+    {
+      "d": 17,
+      "lower": 26,
+      "upper": 26,
+      "M": 171,
+      "m_lower": 145,
+      "covering_intervals": [
+        {
+          "lower": 26,
+          "upper": 26,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 24,
+          "residual_upper": 24,
+          "q": 8,
+          "required_k": 113
+        }
+      ]
+    },
+    {
+      "d": 18,
+      "lower": 28,
+      "upper": 28,
+      "M": 190,
+      "m_lower": 162,
+      "covering_intervals": [
+        {
+          "lower": 28,
+          "upper": 28,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 26,
+          "residual_upper": 26,
+          "q": 8,
+          "required_k": 124
+        }
+      ]
+    },
+    {
+      "d": 19,
+      "lower": 30,
+      "upper": 30,
+      "M": 210,
+      "m_lower": 180,
+      "covering_intervals": [
+        {
+          "lower": 30,
+          "upper": 30,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 28,
+          "residual_upper": 28,
+          "q": 9,
+          "required_k": 141
+        }
+      ]
+    },
+    {
+      "d": 20,
+      "lower": 32,
+      "upper": 32,
+      "M": 231,
+      "m_lower": 199,
+      "covering_intervals": [
+        {
+          "lower": 32,
+          "upper": 32,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 30,
+          "residual_upper": 30,
+          "q": 9,
+          "required_k": 153
+        }
+      ]
+    },
+    {
+      "d": 21,
+      "lower": 34,
+      "upper": 34,
+      "M": 253,
+      "m_lower": 219,
+      "covering_intervals": [
+        {
+          "lower": 34,
+          "upper": 34,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 32,
+          "residual_upper": 32,
+          "q": 10,
+          "required_k": 172
+        }
+      ]
+    },
+    {
+      "d": 22,
+      "lower": 36,
+      "upper": 37,
+      "M": 276,
+      "m_lower": 239,
+      "covering_intervals": [
+        {
+          "lower": 36,
+          "upper": 36,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 34,
+          "residual_upper": 34,
+          "q": 10,
+          "required_k": 185
+        },
+        {
+          "lower": 37,
+          "upper": 37,
+          "kind": "extended_sparse",
+          "c": 3,
+          "residual_lower": 34,
+          "residual_upper": 34,
+          "q": 7,
+          "required_k": 158
+        }
+      ]
+    },
+    {
+      "d": 23,
+      "lower": 38,
+      "upper": 40,
+      "M": 300,
+      "m_lower": 260,
+      "covering_intervals": [
+        {
+          "lower": 38,
+          "upper": 39,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 36,
+          "residual_upper": 37,
+          "q": 11,
+          "required_k": 206
+        },
+        {
+          "lower": 39,
+          "upper": 40,
+          "kind": "extended_sparse",
+          "c": 3,
+          "residual_lower": 36,
+          "residual_upper": 37,
+          "q": 7,
+          "required_k": 168
+        }
+      ]
+    },
+    {
+      "d": 24,
+      "lower": 40,
+      "upper": 43,
+      "M": 325,
+      "m_lower": 282,
+      "covering_intervals": [
+        {
+          "lower": 40,
+          "upper": 42,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 38,
+          "residual_upper": 40,
+          "q": 11,
+          "required_k": 220
+        },
+        {
+          "lower": 41,
+          "upper": 43,
+          "kind": "extended_sparse",
+          "c": 3,
+          "residual_lower": 38,
+          "residual_upper": 40,
+          "q": 7,
+          "required_k": 178
+        }
+      ]
+    },
+    {
+      "d": 25,
+      "lower": 42,
+      "upper": 46,
+      "M": 351,
+      "m_lower": 305,
+      "covering_intervals": [
+        {
+          "lower": 42,
+          "upper": 45,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 40,
+          "residual_upper": 43,
+          "q": 12,
+          "required_k": 243
+        },
+        {
+          "lower": 43,
+          "upper": 46,
+          "kind": "extended_sparse",
+          "c": 3,
+          "residual_lower": 40,
+          "residual_upper": 43,
+          "q": 8,
+          "required_k": 201
+        }
+      ]
+    },
+    {
+      "d": 26,
+      "lower": 44,
+      "upper": 49,
+      "M": 378,
+      "m_lower": 329,
+      "covering_intervals": [
+        {
+          "lower": 44,
+          "upper": 48,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 42,
+          "residual_upper": 46,
+          "q": 12,
+          "required_k": 258
+        },
+        {
+          "lower": 45,
+          "upper": 49,
+          "kind": "extended_sparse",
+          "c": 3,
+          "residual_lower": 42,
+          "residual_upper": 46,
+          "q": 8,
+          "required_k": 212
+        }
+      ]
+    },
+    {
+      "d": 27,
+      "lower": 46,
+      "upper": 52,
+      "M": 406,
+      "m_lower": 354,
+      "covering_intervals": [
+        {
+          "lower": 46,
+          "upper": 51,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 44,
+          "residual_upper": 49,
+          "q": 13,
+          "required_k": 283
+        },
+        {
+          "lower": 47,
+          "upper": 52,
+          "kind": "extended_sparse",
+          "c": 3,
+          "residual_lower": 44,
+          "residual_upper": 49,
+          "q": 8,
+          "required_k": 223
+        }
+      ]
+    },
+    {
+      "d": 28,
+      "lower": 48,
+      "upper": 55,
+      "M": 435,
+      "m_lower": 380,
+      "covering_intervals": [
+        {
+          "lower": 48,
+          "upper": 54,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 46,
+          "residual_upper": 52,
+          "q": 13,
+          "required_k": 299
+        },
+        {
+          "lower": 49,
+          "upper": 55,
+          "kind": "extended_sparse",
+          "c": 3,
+          "residual_lower": 46,
+          "residual_upper": 52,
+          "q": 9,
+          "required_k": 249
+        }
+      ]
+    },
+    {
+      "d": 29,
+      "lower": 50,
+      "upper": 58,
+      "M": 465,
+      "m_lower": 407,
+      "covering_intervals": [
+        {
+          "lower": 50,
+          "upper": 57,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 48,
+          "residual_upper": 55,
+          "q": 14,
+          "required_k": 326
+        },
+        {
+          "lower": 51,
+          "upper": 58,
+          "kind": "extended_sparse",
+          "c": 3,
+          "residual_lower": 48,
+          "residual_upper": 55,
+          "q": 9,
+          "required_k": 261
+        }
+      ]
+    },
+    {
+      "d": 30,
+      "lower": 52,
+      "upper": 61,
+      "M": 496,
+      "m_lower": 435,
+      "covering_intervals": [
+        {
+          "lower": 52,
+          "upper": 60,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 50,
+          "residual_upper": 58,
+          "q": 14,
+          "required_k": 343
+        },
+        {
+          "lower": 53,
+          "upper": 61,
+          "kind": "extended_sparse",
+          "c": 3,
+          "residual_lower": 50,
+          "residual_upper": 58,
+          "q": 9,
+          "required_k": 273
+        }
+      ]
+    },
+    {
+      "d": 31,
+      "lower": 54,
+      "upper": 64,
+      "M": 528,
+      "m_lower": 464,
+      "covering_intervals": [
+        {
+          "lower": 54,
+          "upper": 63,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 52,
+          "residual_upper": 61,
+          "q": 15,
+          "required_k": 372
+        },
+        {
+          "lower": 55,
+          "upper": 64,
+          "kind": "extended_sparse",
+          "c": 3,
+          "residual_lower": 52,
+          "residual_upper": 61,
+          "q": 10,
+          "required_k": 302
+        }
+      ]
+    },
+    {
+      "d": 32,
+      "lower": 56,
+      "upper": 67,
+      "M": 561,
+      "m_lower": 494,
+      "covering_intervals": [
+        {
+          "lower": 56,
+          "upper": 66,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 54,
+          "residual_upper": 64,
+          "q": 15,
+          "required_k": 390
+        },
+        {
+          "lower": 57,
+          "upper": 67,
+          "kind": "extended_sparse",
+          "c": 3,
+          "residual_lower": 54,
+          "residual_upper": 64,
+          "q": 10,
+          "required_k": 315
+        }
+      ]
+    },
+    {
+      "d": 33,
+      "lower": 58,
+      "upper": 83,
+      "M": 595,
+      "m_lower": 512,
+      "covering_intervals": [
+        {
+          "lower": 58,
+          "upper": 69,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 56,
+          "residual_upper": 67,
+          "q": 16,
+          "required_k": 421
+        },
+        {
+          "lower": 59,
+          "upper": 70,
+          "kind": "extended_sparse",
+          "c": 3,
+          "residual_lower": 56,
+          "residual_upper": 67,
+          "q": 10,
+          "required_k": 328
+        },
+        {
+          "lower": 71,
+          "upper": 82,
+          "kind": "mixed_full_syzygy",
+          "c": 15,
+          "residual_lower": 56,
+          "residual_upper": 67,
+          "t": 19,
+          "p": 2,
+          "q": 2,
+          "required_k": 96
+        },
+        {
+          "lower": 72,
+          "upper": 83,
+          "kind": "mixed_full_syzygy",
+          "c": 16,
+          "residual_lower": 56,
+          "residual_upper": 67,
+          "t": 18,
+          "p": 2,
+          "q": 2,
+          "required_k": 96
+        }
+      ]
+    },
+    {
+      "d": 34,
+      "lower": 60,
+      "upper": 100,
+      "M": 630,
+      "m_lower": 530,
+      "covering_intervals": [
+        {
+          "lower": 60,
+          "upper": 85,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 58,
+          "residual_upper": 83,
+          "q": 16,
+          "required_k": 440
+        },
+        {
+          "lower": 75,
+          "upper": 100,
+          "kind": "mixed_full_syzygy",
+          "c": 17,
+          "residual_lower": 58,
+          "residual_upper": 83,
+          "t": 18,
+          "p": 2,
+          "q": 1,
+          "required_k": 67
+        }
+      ]
+    },
+    {
+      "d": 35,
+      "lower": 62,
+      "upper": 121,
+      "M": 666,
+      "m_lower": 545,
+      "covering_intervals": [
+        {
+          "lower": 62,
+          "upper": 102,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 60,
+          "residual_upper": 100,
+          "q": 17,
+          "required_k": 473
+        },
+        {
+          "lower": 77,
+          "upper": 117,
+          "kind": "mixed_full_syzygy",
+          "c": 17,
+          "residual_lower": 60,
+          "residual_upper": 100,
+          "t": 19,
+          "p": 2,
+          "q": 2,
+          "required_k": 102
+        },
+        {
+          "lower": 113,
+          "upper": 121,
+          "kind": "high_c_short_syzygy",
+          "c": 21,
+          "residual_lower": 92,
+          "residual_upper": 100,
+          "t": 15,
+          "p": 3,
+          "q": 7,
+          "required_k": 69
+        }
+      ]
+    },
+    {
+      "d": 36,
+      "lower": 64,
+      "upper": 142,
+      "M": 703,
+      "m_lower": 561,
+      "covering_intervals": [
+        {
+          "lower": 64,
+          "upper": 123,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 62,
+          "residual_upper": 121,
+          "q": 17,
+          "required_k": 493
+        },
+        {
+          "lower": 116,
+          "upper": 142,
+          "kind": "high_c_short_syzygy",
+          "c": 21,
+          "residual_lower": 95,
+          "residual_upper": 121,
+          "t": 16,
+          "p": 3,
+          "q": 6,
+          "required_k": 71
+        }
+      ]
+    },
+    {
+      "d": 37,
+      "lower": 66,
+      "upper": 166,
+      "M": 741,
+      "m_lower": 575,
+      "covering_intervals": [
+        {
+          "lower": 66,
+          "upper": 144,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 64,
+          "residual_upper": 142,
+          "q": 18,
+          "required_k": 528
+        },
+        {
+          "lower": 119,
+          "upper": 164,
+          "kind": "high_c_short_syzygy",
+          "c": 22,
+          "residual_lower": 97,
+          "residual_upper": 142,
+          "t": 16,
+          "p": 3,
+          "q": 7,
+          "required_k": 73
+        },
+        {
+          "lower": 160,
+          "upper": 166,
+          "kind": "high_c_short_syzygy",
+          "c": 24,
+          "residual_lower": 136,
+          "residual_upper": 142,
+          "t": 14,
+          "p": 4,
+          "q": 11,
+          "required_k": 73
+        }
+      ]
+    },
+    {
+      "d": 38,
+      "lower": 68,
+      "upper": 191,
+      "M": 780,
+      "m_lower": 589,
+      "covering_intervals": [
+        {
+          "lower": 68,
+          "upper": 168,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 66,
+          "residual_upper": 166,
+          "q": 18,
+          "required_k": 549
+        },
+        {
+          "lower": 164,
+          "upper": 191,
+          "kind": "high_c_short_syzygy",
+          "c": 25,
+          "residual_lower": 139,
+          "residual_upper": 166,
+          "t": 14,
+          "p": 4,
+          "q": 12,
+          "required_k": 75
+        }
+      ]
+    },
+    {
+      "d": 39,
+      "lower": 70,
+      "upper": 218,
+      "M": 820,
+      "m_lower": 602,
+      "covering_intervals": [
+        {
+          "lower": 70,
+          "upper": 193,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 68,
+          "residual_upper": 191,
+          "q": 19,
+          "required_k": 586
+        },
+        {
+          "lower": 168,
+          "upper": 216,
+          "kind": "high_c_short_syzygy",
+          "c": 25,
+          "residual_lower": 143,
+          "residual_upper": 191,
+          "t": 15,
+          "p": 4,
+          "q": 11,
+          "required_k": 77
+        },
+        {
+          "lower": 212,
+          "upper": 218,
+          "kind": "high_c_short_syzygy",
+          "c": 27,
+          "residual_lower": 185,
+          "residual_upper": 191,
+          "t": 13,
+          "p": 5,
+          "q": 15,
+          "required_k": 77
+        }
+      ]
+    },
+    {
+      "d": 40,
+      "lower": 72,
+      "upper": 246,
+      "M": 861,
+      "m_lower": 615,
+      "covering_intervals": [
+        {
+          "lower": 72,
+          "upper": 214,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 70,
+          "residual_upper": 212,
+          "q": 19,
+          "required_k": 608
+        },
+        {
+          "lower": 172,
+          "upper": 244,
+          "kind": "high_c_short_syzygy",
+          "c": 26,
+          "residual_lower": 146,
+          "residual_upper": 218,
+          "t": 15,
+          "p": 4,
+          "q": 12,
+          "required_k": 79
+        },
+        {
+          "lower": 217,
+          "upper": 246,
+          "kind": "high_c_short_syzygy",
+          "c": 28,
+          "residual_lower": 189,
+          "residual_upper": 218,
+          "t": 13,
+          "p": 5,
+          "q": 16,
+          "required_k": 79
+        }
+      ]
+    },
+    {
+      "d": 41,
+      "lower": 74,
+      "upper": 276,
+      "M": 903,
+      "m_lower": 627,
+      "covering_intervals": [
+        {
+          "lower": 74,
+          "upper": 216,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 72,
+          "residual_upper": 214,
+          "q": 20,
+          "required_k": 647
+        },
+        {
+          "lower": 176,
+          "upper": 273,
+          "kind": "high_c_short_syzygy",
+          "c": 27,
+          "residual_lower": 149,
+          "residual_upper": 246,
+          "t": 15,
+          "p": 4,
+          "q": 13,
+          "required_k": 81
+        },
+        {
+          "lower": 269,
+          "upper": 276,
+          "kind": "high_c_short_syzygy",
+          "c": 30,
+          "residual_lower": 239,
+          "residual_upper": 246,
+          "t": 12,
+          "p": 6,
+          "q": 19,
+          "required_k": 81
+        }
+      ]
+    },
+    {
+      "d": 42,
+      "lower": 76,
+      "upper": 307,
+      "M": 946,
+      "m_lower": 639,
+      "covering_intervals": [
+        {
+          "lower": 76,
+          "upper": 235,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 74,
+          "residual_upper": 233,
+          "q": 20,
+          "required_k": 670
+        },
+        {
+          "lower": 227,
+          "upper": 306,
+          "kind": "high_c_short_syzygy",
+          "c": 30,
+          "residual_lower": 197,
+          "residual_upper": 276,
+          "t": 13,
+          "p": 5,
+          "q": 18,
+          "required_k": 83
+        },
+        {
+          "lower": 275,
+          "upper": 307,
+          "kind": "high_c_short_syzygy",
+          "c": 31,
+          "residual_lower": 244,
+          "residual_upper": 276,
+          "t": 12,
+          "p": 6,
+          "q": 20,
+          "required_k": 83
+        }
+      ]
+    },
+    {
+      "d": 43,
+      "lower": 78,
+      "upper": 340,
+      "M": 990,
+      "m_lower": 650,
+      "covering_intervals": [
+        {
+          "lower": 78,
+          "upper": 237,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 76,
+          "residual_upper": 235,
+          "q": 21,
+          "required_k": 711
+        },
+        {
+          "lower": 232,
+          "upper": 337,
+          "kind": "high_c_short_syzygy",
+          "c": 30,
+          "residual_lower": 202,
+          "residual_upper": 307,
+          "t": 14,
+          "p": 5,
+          "q": 17,
+          "required_k": 85
+        },
+        {
+          "lower": 331,
+          "upper": 340,
+          "kind": "high_c_short_syzygy",
+          "c": 33,
+          "residual_lower": 298,
+          "residual_upper": 307,
+          "t": 11,
+          "p": 7,
+          "q": 23,
+          "required_k": 85
+        }
+      ]
+    },
+    {
+      "d": 44,
+      "lower": 80,
+      "upper": 374,
+      "M": 1035,
+      "m_lower": 661,
+      "covering_intervals": [
+        {
+          "lower": 80,
+          "upper": 257,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 78,
+          "residual_upper": 255,
+          "q": 21,
+          "required_k": 735
+        },
+        {
+          "lower": 237,
+          "upper": 371,
+          "kind": "high_c_short_syzygy",
+          "c": 31,
+          "residual_lower": 206,
+          "residual_upper": 340,
+          "t": 14,
+          "p": 5,
+          "q": 18,
+          "required_k": 87
+        },
+        {
+          "lower": 338,
+          "upper": 374,
+          "kind": "high_c_short_syzygy",
+          "c": 34,
+          "residual_lower": 304,
+          "residual_upper": 340,
+          "t": 11,
+          "p": 7,
+          "q": 24,
+          "required_k": 87
+        }
+      ]
+    },
+    {
+      "d": 45,
+      "lower": 82,
+      "upper": 409,
+      "M": 1081,
+      "m_lower": 672,
+      "covering_intervals": [
+        {
+          "lower": 82,
+          "upper": 259,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 80,
+          "residual_upper": 257,
+          "q": 22,
+          "required_k": 778
+        },
+        {
+          "lower": 242,
+          "upper": 405,
+          "kind": "high_c_short_syzygy",
+          "c": 31,
+          "residual_lower": 211,
+          "residual_upper": 374,
+          "t": 15,
+          "p": 5,
+          "q": 17,
+          "required_k": 89
+        },
+        {
+          "lower": 345,
+          "upper": 409,
+          "kind": "high_c_short_syzygy",
+          "c": 35,
+          "residual_lower": 310,
+          "residual_upper": 374,
+          "t": 11,
+          "p": 7,
+          "q": 25,
+          "required_k": 89
+        }
+      ]
+    },
+    {
+      "d": 46,
+      "lower": 84,
+      "upper": 445,
+      "M": 1128,
+      "m_lower": 683,
+      "covering_intervals": [
+        {
+          "lower": 84,
+          "upper": 280,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 82,
+          "residual_upper": 278,
+          "q": 22,
+          "required_k": 803
+        },
+        {
+          "lower": 247,
+          "upper": 441,
+          "kind": "high_c_short_syzygy",
+          "c": 32,
+          "residual_lower": 215,
+          "residual_upper": 409,
+          "t": 15,
+          "p": 5,
+          "q": 18,
+          "required_k": 91
+        },
+        {
+          "lower": 406,
+          "upper": 445,
+          "kind": "high_c_short_syzygy",
+          "c": 36,
+          "residual_lower": 370,
+          "residual_upper": 409,
+          "t": 11,
+          "p": 8,
+          "q": 26,
+          "required_k": 91
+        }
+      ]
+    },
+    {
+      "d": 47,
+      "lower": 86,
+      "upper": 482,
+      "M": 1176,
+      "m_lower": 694,
+      "covering_intervals": [
+        {
+          "lower": 86,
+          "upper": 282,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 84,
+          "residual_upper": 280,
+          "q": 23,
+          "required_k": 848
+        },
+        {
+          "lower": 252,
+          "upper": 478,
+          "kind": "high_c_short_syzygy",
+          "c": 33,
+          "residual_lower": 219,
+          "residual_upper": 445,
+          "t": 15,
+          "p": 5,
+          "q": 19,
+          "required_k": 93
+        },
+        {
+          "lower": 414,
+          "upper": 482,
+          "kind": "high_c_short_syzygy",
+          "c": 37,
+          "residual_lower": 377,
+          "residual_upper": 445,
+          "t": 11,
+          "p": 8,
+          "q": 27,
+          "required_k": 93
+        }
+      ]
+    },
+    {
+      "d": 48,
+      "lower": 88,
+      "upper": 520,
+      "M": 1225,
+      "m_lower": 705,
+      "covering_intervals": [
+        {
+          "lower": 88,
+          "upper": 304,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 86,
+          "residual_upper": 302,
+          "q": 23,
+          "required_k": 874
+        },
+        {
+          "lower": 257,
+          "upper": 516,
+          "kind": "high_c_short_syzygy",
+          "c": 34,
+          "residual_lower": 223,
+          "residual_upper": 482,
+          "t": 15,
+          "p": 5,
+          "q": 20,
+          "required_k": 95
+        },
+        {
+          "lower": 422,
+          "upper": 520,
+          "kind": "high_c_short_syzygy",
+          "c": 38,
+          "residual_lower": 384,
+          "residual_upper": 482,
+          "t": 11,
+          "p": 8,
+          "q": 28,
+          "required_k": 95
+        }
+      ]
+    },
+    {
+      "d": 49,
+      "lower": 90,
+      "upper": 560,
+      "M": 1275,
+      "m_lower": 715,
+      "covering_intervals": [
+        {
+          "lower": 90,
+          "upper": 306,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 88,
+          "residual_upper": 304,
+          "q": 24,
+          "required_k": 921
+        },
+        {
+          "lower": 262,
+          "upper": 555,
+          "kind": "high_c_short_syzygy",
+          "c": 35,
+          "residual_lower": 227,
+          "residual_upper": 520,
+          "t": 15,
+          "p": 5,
+          "q": 21,
+          "required_k": 97
+        },
+        {
+          "lower": 547,
+          "upper": 560,
+          "kind": "high_c_short_syzygy",
+          "c": 40,
+          "residual_lower": 507,
+          "residual_upper": 520,
+          "t": 10,
+          "p": 10,
+          "q": 31,
+          "required_k": 97
+        }
+      ]
+    },
+    {
+      "d": 50,
+      "lower": 92,
+      "upper": 601,
+      "M": 1326,
+      "m_lower": 725,
+      "covering_intervals": [
+        {
+          "lower": 92,
+          "upper": 329,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 90,
+          "residual_upper": 327,
+          "q": 24,
+          "required_k": 948
+        },
+        {
+          "lower": 323,
+          "upper": 597,
+          "kind": "high_c_short_syzygy",
+          "c": 37,
+          "residual_lower": 286,
+          "residual_upper": 560,
+          "t": 14,
+          "p": 6,
+          "q": 24,
+          "required_k": 99
+        },
+        {
+          "lower": 557,
+          "upper": 601,
+          "kind": "high_c_short_syzygy",
+          "c": 41,
+          "residual_lower": 516,
+          "residual_upper": 560,
+          "t": 10,
+          "p": 10,
+          "q": 32,
+          "required_k": 99
+        }
+      ]
+    },
+    {
+      "d": 51,
+      "lower": 94,
+      "upper": 644,
+      "M": 1378,
+      "m_lower": 734,
+      "covering_intervals": [
+        {
+          "lower": 94,
+          "upper": 331,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 92,
+          "residual_upper": 329,
+          "q": 25,
+          "required_k": 997
+        },
+        {
+          "lower": 329,
+          "upper": 638,
+          "kind": "high_c_short_syzygy",
+          "c": 37,
+          "residual_lower": 292,
+          "residual_upper": 601,
+          "t": 15,
+          "p": 6,
+          "q": 23,
+          "required_k": 101
+        },
+        {
+          "lower": 629,
+          "upper": 644,
+          "kind": "high_c_short_syzygy",
+          "c": 43,
+          "residual_lower": 586,
+          "residual_upper": 601,
+          "t": 9,
+          "p": 11,
+          "q": 35,
+          "required_k": 101
+        }
+      ]
+    },
+    {
+      "d": 52,
+      "lower": 96,
+      "upper": 688,
+      "M": 1431,
+      "m_lower": 743,
+      "covering_intervals": [
+        {
+          "lower": 96,
+          "upper": 355,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 94,
+          "residual_upper": 353,
+          "q": 25,
+          "required_k": 1025
+        },
+        {
+          "lower": 335,
+          "upper": 682,
+          "kind": "high_c_short_syzygy",
+          "c": 38,
+          "residual_lower": 297,
+          "residual_upper": 644,
+          "t": 15,
+          "p": 6,
+          "q": 24,
+          "required_k": 103
+        },
+        {
+          "lower": 640,
+          "upper": 688,
+          "kind": "high_c_short_syzygy",
+          "c": 44,
+          "residual_lower": 596,
+          "residual_upper": 644,
+          "t": 9,
+          "p": 11,
+          "q": 36,
+          "required_k": 103
+        }
+      ]
+    },
+    {
+      "d": 53,
+      "lower": 98,
+      "upper": 733,
+      "M": 1485,
+      "m_lower": 752,
+      "covering_intervals": [
+        {
+          "lower": 98,
+          "upper": 357,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 96,
+          "residual_upper": 355,
+          "q": 26,
+          "required_k": 1076
+        },
+        {
+          "lower": 341,
+          "upper": 727,
+          "kind": "high_c_short_syzygy",
+          "c": 39,
+          "residual_lower": 302,
+          "residual_upper": 688,
+          "t": 15,
+          "p": 6,
+          "q": 25,
+          "required_k": 105
+        },
+        {
+          "lower": 716,
+          "upper": 733,
+          "kind": "high_c_short_syzygy",
+          "c": 45,
+          "residual_lower": 671,
+          "residual_upper": 688,
+          "t": 9,
+          "p": 12,
+          "q": 37,
+          "required_k": 105
+        }
+      ]
+    },
+    {
+      "d": 54,
+      "lower": 100,
+      "upper": 779,
+      "M": 1540,
+      "m_lower": 761,
+      "covering_intervals": [
+        {
+          "lower": 100,
+          "upper": 382,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 98,
+          "residual_upper": 380,
+          "q": 26,
+          "required_k": 1105
+        },
+        {
+          "lower": 347,
+          "upper": 773,
+          "kind": "high_c_short_syzygy",
+          "c": 40,
+          "residual_lower": 307,
+          "residual_upper": 733,
+          "t": 15,
+          "p": 6,
+          "q": 26,
+          "required_k": 107
+        },
+        {
+          "lower": 728,
+          "upper": 779,
+          "kind": "high_c_short_syzygy",
+          "c": 46,
+          "residual_lower": 682,
+          "residual_upper": 733,
+          "t": 9,
+          "p": 12,
+          "q": 38,
+          "required_k": 107
+        }
+      ]
+    },
+    {
+      "d": 55,
+      "lower": 102,
+      "upper": 826,
+      "M": 1596,
+      "m_lower": 770,
+      "covering_intervals": [
+        {
+          "lower": 102,
+          "upper": 384,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 100,
+          "residual_upper": 382,
+          "q": 27,
+          "required_k": 1158
+        },
+        {
+          "lower": 353,
+          "upper": 820,
+          "kind": "high_c_short_syzygy",
+          "c": 41,
+          "residual_lower": 312,
+          "residual_upper": 779,
+          "t": 15,
+          "p": 6,
+          "q": 27,
+          "required_k": 109
+        },
+        {
+          "lower": 740,
+          "upper": 826,
+          "kind": "high_c_short_syzygy",
+          "c": 47,
+          "residual_lower": 693,
+          "residual_upper": 779,
+          "t": 9,
+          "p": 12,
+          "q": 39,
+          "required_k": 109
+        }
+      ]
+    },
+    {
+      "d": 56,
+      "lower": 104,
+      "upper": 874,
+      "M": 1653,
+      "m_lower": 779,
+      "covering_intervals": [
+        {
+          "lower": 104,
+          "upper": 410,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 102,
+          "residual_upper": 408,
+          "q": 27,
+          "required_k": 1188
+        },
+        {
+          "lower": 359,
+          "upper": 868,
+          "kind": "high_c_short_syzygy",
+          "c": 42,
+          "residual_lower": 317,
+          "residual_upper": 826,
+          "t": 15,
+          "p": 6,
+          "q": 28,
+          "required_k": 111
+        },
+        {
+          "lower": 752,
+          "upper": 874,
+          "kind": "high_c_short_syzygy",
+          "c": 48,
+          "residual_lower": 704,
+          "residual_upper": 826,
+          "t": 9,
+          "p": 12,
+          "q": 40,
+          "required_k": 111
+        }
+      ]
+    },
+    {
+      "d": 57,
+      "lower": 106,
+      "upper": 923,
+      "M": 1711,
+      "m_lower": 788,
+      "covering_intervals": [
+        {
+          "lower": 106,
+          "upper": 412,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 104,
+          "residual_upper": 410,
+          "q": 28,
+          "required_k": 1243
+        },
+        {
+          "lower": 365,
+          "upper": 916,
+          "kind": "high_c_short_syzygy",
+          "c": 42,
+          "residual_lower": 323,
+          "residual_upper": 874,
+          "t": 16,
+          "p": 6,
+          "q": 27,
+          "required_k": 113
+        },
+        {
+          "lower": 834,
+          "upper": 923,
+          "kind": "high_c_short_syzygy",
+          "c": 49,
+          "residual_lower": 785,
+          "residual_upper": 874,
+          "t": 9,
+          "p": 13,
+          "q": 41,
+          "required_k": 113
+        }
+      ]
+    },
+    {
+      "d": 58,
+      "lower": 108,
+      "upper": 973,
+      "M": 1770,
+      "m_lower": 797,
+      "covering_intervals": [
+        {
+          "lower": 108,
+          "upper": 439,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 106,
+          "residual_upper": 437,
+          "q": 28,
+          "required_k": 1274
+        },
+        {
+          "lower": 436,
+          "upper": 967,
+          "kind": "high_c_short_syzygy",
+          "c": 44,
+          "residual_lower": 392,
+          "residual_upper": 923,
+          "t": 15,
+          "p": 7,
+          "q": 30,
+          "required_k": 115
+        },
+        {
+          "lower": 847,
+          "upper": 973,
+          "kind": "high_c_short_syzygy",
+          "c": 50,
+          "residual_lower": 797,
+          "residual_upper": 923,
+          "t": 9,
+          "p": 13,
+          "q": 42,
+          "required_k": 115
+        }
+      ]
+    },
+    {
+      "d": 59,
+      "lower": 110,
+      "upper": 1024,
+      "M": 1830,
+      "m_lower": 806,
+      "covering_intervals": [
+        {
+          "lower": 110,
+          "upper": 441,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 108,
+          "residual_upper": 439,
+          "q": 29,
+          "required_k": 1331
+        },
+        {
+          "lower": 377,
+          "upper": 1016,
+          "kind": "high_c_short_syzygy",
+          "c": 43,
+          "residual_lower": 334,
+          "residual_upper": 973,
+          "t": 17,
+          "p": 6,
+          "q": 27,
+          "required_k": 117
+        },
+        {
+          "lower": 860,
+          "upper": 1024,
+          "kind": "high_c_short_syzygy",
+          "c": 51,
+          "residual_lower": 809,
+          "residual_upper": 973,
+          "t": 9,
+          "p": 13,
+          "q": 43,
+          "required_k": 117
+        }
+      ]
+    },
+    {
+      "d": 60,
+      "lower": 112,
+      "upper": 1076,
+      "M": 1891,
+      "m_lower": 815,
+      "covering_intervals": [
+        {
+          "lower": 112,
+          "upper": 469,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 110,
+          "residual_upper": 467,
+          "q": 29,
+          "required_k": 1363
+        },
+        {
+          "lower": 450,
+          "upper": 1070,
+          "kind": "high_c_short_syzygy",
+          "c": 46,
+          "residual_lower": 404,
+          "residual_upper": 1024,
+          "t": 15,
+          "p": 7,
+          "q": 32,
+          "required_k": 119
+        },
+        {
+          "lower": 873,
+          "upper": 1076,
+          "kind": "high_c_short_syzygy",
+          "c": 52,
+          "residual_lower": 821,
+          "residual_upper": 1024,
+          "t": 9,
+          "p": 13,
+          "q": 44,
+          "required_k": 119
+        }
+      ]
+    },
+    {
+      "d": 61,
+      "lower": 114,
+      "upper": 1129,
+      "M": 1953,
+      "m_lower": 824,
+      "covering_intervals": [
+        {
+          "lower": 114,
+          "upper": 471,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 112,
+          "residual_upper": 469,
+          "q": 30,
+          "required_k": 1422
+        },
+        {
+          "lower": 457,
+          "upper": 1123,
+          "kind": "high_c_short_syzygy",
+          "c": 47,
+          "residual_lower": 410,
+          "residual_upper": 1076,
+          "t": 15,
+          "p": 7,
+          "q": 33,
+          "required_k": 121
+        },
+        {
+          "lower": 961,
+          "upper": 1129,
+          "kind": "high_c_short_syzygy",
+          "c": 53,
+          "residual_lower": 908,
+          "residual_upper": 1076,
+          "t": 9,
+          "p": 14,
+          "q": 45,
+          "required_k": 121
+        }
+      ]
+    },
+    {
+      "d": 62,
+      "lower": 116,
+      "upper": 1183,
+      "M": 2016,
+      "m_lower": 833,
+      "covering_intervals": [
+        {
+          "lower": 116,
+          "upper": 500,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 114,
+          "residual_upper": 498,
+          "q": 30,
+          "required_k": 1455
+        },
+        {
+          "lower": 464,
+          "upper": 1177,
+          "kind": "high_c_short_syzygy",
+          "c": 48,
+          "residual_lower": 416,
+          "residual_upper": 1129,
+          "t": 15,
+          "p": 7,
+          "q": 34,
+          "required_k": 123
+        },
+        {
+          "lower": 975,
+          "upper": 1183,
+          "kind": "high_c_short_syzygy",
+          "c": 54,
+          "residual_lower": 921,
+          "residual_upper": 1129,
+          "t": 9,
+          "p": 14,
+          "q": 46,
+          "required_k": 123
+        }
+      ]
+    },
+    {
+      "d": 63,
+      "lower": 118,
+      "upper": 1238,
+      "M": 2080,
+      "m_lower": 842,
+      "covering_intervals": [
+        {
+          "lower": 118,
+          "upper": 502,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 116,
+          "residual_upper": 500,
+          "q": 31,
+          "required_k": 1516
+        },
+        {
+          "lower": 471,
+          "upper": 1232,
+          "kind": "high_c_short_syzygy",
+          "c": 49,
+          "residual_lower": 422,
+          "residual_upper": 1183,
+          "t": 15,
+          "p": 7,
+          "q": 35,
+          "required_k": 125
+        },
+        {
+          "lower": 989,
+          "upper": 1238,
+          "kind": "high_c_short_syzygy",
+          "c": 55,
+          "residual_lower": 934,
+          "residual_upper": 1183,
+          "t": 9,
+          "p": 14,
+          "q": 47,
+          "required_k": 125
+        }
+      ]
+    },
+    {
+      "d": 64,
+      "lower": 120,
+      "upper": 1294,
+      "M": 2145,
+      "m_lower": 851,
+      "covering_intervals": [
+        {
+          "lower": 120,
+          "upper": 532,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 118,
+          "residual_upper": 530,
+          "q": 31,
+          "required_k": 1550
+        },
+        {
+          "lower": 478,
+          "upper": 1287,
+          "kind": "high_c_short_syzygy",
+          "c": 49,
+          "residual_lower": 429,
+          "residual_upper": 1238,
+          "t": 16,
+          "p": 7,
+          "q": 34,
+          "required_k": 127
+        },
+        {
+          "lower": 1003,
+          "upper": 1294,
+          "kind": "high_c_short_syzygy",
+          "c": 56,
+          "residual_lower": 947,
+          "residual_upper": 1238,
+          "t": 9,
+          "p": 14,
+          "q": 48,
+          "required_k": 127
+        }
+      ]
+    },
+    {
+      "d": 65,
+      "lower": 122,
+      "upper": 1351,
+      "M": 2211,
+      "m_lower": 860,
+      "covering_intervals": [
+        {
+          "lower": 122,
+          "upper": 534,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 120,
+          "residual_upper": 532,
+          "q": 32,
+          "required_k": 1613
+        },
+        {
+          "lower": 485,
+          "upper": 1344,
+          "kind": "high_c_short_syzygy",
+          "c": 50,
+          "residual_lower": 435,
+          "residual_upper": 1294,
+          "t": 16,
+          "p": 7,
+          "q": 35,
+          "required_k": 129
+        },
+        {
+          "lower": 1097,
+          "upper": 1351,
+          "kind": "high_c_short_syzygy",
+          "c": 57,
+          "residual_lower": 1040,
+          "residual_upper": 1294,
+          "t": 9,
+          "p": 15,
+          "q": 49,
+          "required_k": 129
+        }
+      ]
+    },
+    {
+      "d": 66,
+      "lower": 124,
+      "upper": 1409,
+      "M": 2278,
+      "m_lower": 869,
+      "covering_intervals": [
+        {
+          "lower": 124,
+          "upper": 565,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 122,
+          "residual_upper": 563,
+          "q": 32,
+          "required_k": 1648
+        },
+        {
+          "lower": 566,
+          "upper": 1403,
+          "kind": "high_c_short_syzygy",
+          "c": 52,
+          "residual_lower": 514,
+          "residual_upper": 1351,
+          "t": 15,
+          "p": 8,
+          "q": 38,
+          "required_k": 131
+        },
+        {
+          "lower": 1112,
+          "upper": 1409,
+          "kind": "high_c_short_syzygy",
+          "c": 58,
+          "residual_lower": 1054,
+          "residual_upper": 1351,
+          "t": 9,
+          "p": 15,
+          "q": 50,
+          "required_k": 131
+        }
+      ]
+    },
+    {
+      "d": 67,
+      "lower": 126,
+      "upper": 1468,
+      "M": 2346,
+      "m_lower": 878,
+      "covering_intervals": [
+        {
+          "lower": 126,
+          "upper": 567,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 124,
+          "residual_upper": 565,
+          "q": 33,
+          "required_k": 1713
+        },
+        {
+          "lower": 499,
+          "upper": 1460,
+          "kind": "high_c_short_syzygy",
+          "c": 51,
+          "residual_lower": 448,
+          "residual_upper": 1409,
+          "t": 17,
+          "p": 7,
+          "q": 35,
+          "required_k": 133
+        },
+        {
+          "lower": 1127,
+          "upper": 1468,
+          "kind": "high_c_short_syzygy",
+          "c": 59,
+          "residual_lower": 1068,
+          "residual_upper": 1409,
+          "t": 9,
+          "p": 15,
+          "q": 51,
+          "required_k": 133
+        }
+      ]
+    },
+    {
+      "d": 68,
+      "lower": 128,
+      "upper": 1528,
+      "M": 2415,
+      "m_lower": 887,
+      "covering_intervals": [
+        {
+          "lower": 128,
+          "upper": 599,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 126,
+          "residual_upper": 597,
+          "q": 33,
+          "required_k": 1749
+        },
+        {
+          "lower": 582,
+          "upper": 1522,
+          "kind": "high_c_short_syzygy",
+          "c": 54,
+          "residual_lower": 528,
+          "residual_upper": 1468,
+          "t": 15,
+          "p": 8,
+          "q": 40,
+          "required_k": 135
+        },
+        {
+          "lower": 1142,
+          "upper": 1528,
+          "kind": "high_c_short_syzygy",
+          "c": 60,
+          "residual_lower": 1082,
+          "residual_upper": 1468,
+          "t": 9,
+          "p": 15,
+          "q": 52,
+          "required_k": 135
+        }
+      ]
+    },
+    {
+      "d": 69,
+      "lower": 130,
+      "upper": 1589,
+      "M": 2485,
+      "m_lower": 896,
+      "covering_intervals": [
+        {
+          "lower": 130,
+          "upper": 601,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 128,
+          "residual_upper": 599,
+          "q": 34,
+          "required_k": 1816
+        },
+        {
+          "lower": 590,
+          "upper": 1583,
+          "kind": "high_c_short_syzygy",
+          "c": 55,
+          "residual_lower": 535,
+          "residual_upper": 1528,
+          "t": 15,
+          "p": 8,
+          "q": 41,
+          "required_k": 137
+        },
+        {
+          "lower": 1242,
+          "upper": 1589,
+          "kind": "high_c_short_syzygy",
+          "c": 61,
+          "residual_lower": 1181,
+          "residual_upper": 1528,
+          "t": 9,
+          "p": 16,
+          "q": 53,
+          "required_k": 137
+        }
+      ]
+    },
+    {
+      "d": 70,
+      "lower": 132,
+      "upper": 1651,
+      "M": 2556,
+      "m_lower": 905,
+      "covering_intervals": [
+        {
+          "lower": 132,
+          "upper": 634,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 130,
+          "residual_upper": 632,
+          "q": 34,
+          "required_k": 1853
+        },
+        {
+          "lower": 598,
+          "upper": 1645,
+          "kind": "high_c_short_syzygy",
+          "c": 56,
+          "residual_lower": 542,
+          "residual_upper": 1589,
+          "t": 15,
+          "p": 8,
+          "q": 42,
+          "required_k": 139
+        },
+        {
+          "lower": 1258,
+          "upper": 1651,
+          "kind": "high_c_short_syzygy",
+          "c": 62,
+          "residual_lower": 1196,
+          "residual_upper": 1589,
+          "t": 9,
+          "p": 16,
+          "q": 54,
+          "required_k": 139
+        }
+      ]
+    },
+    {
+      "d": 71,
+      "lower": 134,
+      "upper": 1714,
+      "M": 2628,
+      "m_lower": 914,
+      "covering_intervals": [
+        {
+          "lower": 134,
+          "upper": 636,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 132,
+          "residual_upper": 634,
+          "q": 35,
+          "required_k": 1922
+        },
+        {
+          "lower": 606,
+          "upper": 1707,
+          "kind": "high_c_short_syzygy",
+          "c": 56,
+          "residual_lower": 550,
+          "residual_upper": 1651,
+          "t": 16,
+          "p": 8,
+          "q": 41,
+          "required_k": 141
+        },
+        {
+          "lower": 1274,
+          "upper": 1714,
+          "kind": "high_c_short_syzygy",
+          "c": 63,
+          "residual_lower": 1211,
+          "residual_upper": 1651,
+          "t": 9,
+          "p": 16,
+          "q": 55,
+          "required_k": 141
+        }
+      ]
+    },
+    {
+      "d": 72,
+      "lower": 136,
+      "upper": 1778,
+      "M": 2701,
+      "m_lower": 923,
+      "covering_intervals": [
+        {
+          "lower": 136,
+          "upper": 670,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 134,
+          "residual_upper": 668,
+          "q": 35,
+          "required_k": 1960
+        },
+        {
+          "lower": 614,
+          "upper": 1771,
+          "kind": "high_c_short_syzygy",
+          "c": 57,
+          "residual_lower": 557,
+          "residual_upper": 1714,
+          "t": 16,
+          "p": 8,
+          "q": 42,
+          "required_k": 143
+        },
+        {
+          "lower": 1290,
+          "upper": 1778,
+          "kind": "high_c_short_syzygy",
+          "c": 64,
+          "residual_lower": 1226,
+          "residual_upper": 1714,
+          "t": 9,
+          "p": 16,
+          "q": 56,
+          "required_k": 143
+        }
+      ]
+    },
+    {
+      "d": 73,
+      "lower": 138,
+      "upper": 1843,
+      "M": 2775,
+      "m_lower": 932,
+      "covering_intervals": [
+        {
+          "lower": 138,
+          "upper": 672,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 136,
+          "residual_upper": 670,
+          "q": 36,
+          "required_k": 2031
+        },
+        {
+          "lower": 622,
+          "upper": 1835,
+          "kind": "high_c_short_syzygy",
+          "c": 57,
+          "residual_lower": 565,
+          "residual_upper": 1778,
+          "t": 17,
+          "p": 8,
+          "q": 41,
+          "required_k": 145
+        },
+        {
+          "lower": 1396,
+          "upper": 1843,
+          "kind": "high_c_short_syzygy",
+          "c": 65,
+          "residual_lower": 1331,
+          "residual_upper": 1778,
+          "t": 9,
+          "p": 17,
+          "q": 57,
+          "required_k": 145
+        }
+      ]
+    },
+    {
+      "d": 74,
+      "lower": 140,
+      "upper": 1910,
+      "M": 2850,
+      "m_lower": 940,
+      "covering_intervals": [
+        {
+          "lower": 140,
+          "upper": 707,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 138,
+          "residual_upper": 705,
+          "q": 36,
+          "required_k": 2070
+        },
+        {
+          "lower": 630,
+          "upper": 1901,
+          "kind": "high_c_short_syzygy",
+          "c": 58,
+          "residual_lower": 572,
+          "residual_upper": 1843,
+          "t": 17,
+          "p": 8,
+          "q": 42,
+          "required_k": 147
+        },
+        {
+          "lower": 1883,
+          "upper": 1910,
+          "kind": "high_c_short_syzygy",
+          "c": 67,
+          "residual_lower": 1816,
+          "residual_upper": 1843,
+          "t": 8,
+          "p": 22,
+          "q": 60,
+          "required_k": 147
+        }
+      ]
+    },
+    {
+      "d": 75,
+      "lower": 142,
+      "upper": 1977,
+      "M": 2926,
+      "m_lower": 949,
+      "covering_intervals": [
+        {
+          "lower": 142,
+          "upper": 709,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 140,
+          "residual_upper": 707,
+          "q": 37,
+          "required_k": 2143
+        },
+        {
+          "lower": 638,
+          "upper": 1969,
+          "kind": "high_c_short_syzygy",
+          "c": 59,
+          "residual_lower": 579,
+          "residual_upper": 1910,
+          "t": 17,
+          "p": 8,
+          "q": 43,
+          "required_k": 149
+        },
+        {
+          "lower": 1430,
+          "upper": 1977,
+          "kind": "high_c_short_syzygy",
+          "c": 67,
+          "residual_lower": 1363,
+          "residual_upper": 1910,
+          "t": 9,
+          "p": 17,
+          "q": 59,
+          "required_k": 149
+        }
+      ]
+    },
+    {
+      "d": 76,
+      "lower": 144,
+      "upper": 2046,
+      "M": 3003,
+      "m_lower": 957,
+      "covering_intervals": [
+        {
+          "lower": 144,
+          "upper": 745,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 142,
+          "residual_upper": 743,
+          "q": 37,
+          "required_k": 2183
+        },
+        {
+          "lower": 731,
+          "upper": 2039,
+          "kind": "high_c_short_syzygy",
+          "c": 62,
+          "residual_lower": 669,
+          "residual_upper": 1977,
+          "t": 15,
+          "p": 9,
+          "q": 48,
+          "required_k": 151
+        },
+        {
+          "lower": 2026,
+          "upper": 2046,
+          "kind": "high_c_short_syzygy",
+          "c": 69,
+          "residual_lower": 1957,
+          "residual_upper": 1977,
+          "t": 8,
+          "p": 23,
+          "q": 62,
+          "required_k": 151
+        }
+      ]
+    },
+    {
+      "d": 77,
+      "lower": 146,
+      "upper": 2116,
+      "M": 3081,
+      "m_lower": 965,
+      "covering_intervals": [
+        {
+          "lower": 146,
+          "upper": 747,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 144,
+          "residual_upper": 745,
+          "q": 38,
+          "required_k": 2258
+        },
+        {
+          "lower": 740,
+          "upper": 2109,
+          "kind": "high_c_short_syzygy",
+          "c": 63,
+          "residual_lower": 677,
+          "residual_upper": 2046,
+          "t": 15,
+          "p": 9,
+          "q": 49,
+          "required_k": 153
+        },
+        {
+          "lower": 2049,
+          "upper": 2116,
+          "kind": "high_c_short_syzygy",
+          "c": 70,
+          "residual_lower": 1979,
+          "residual_upper": 2046,
+          "t": 8,
+          "p": 23,
+          "q": 63,
+          "required_k": 153
+        }
+      ]
+    },
+    {
+      "d": 78,
+      "lower": 148,
+      "upper": 2188,
+      "M": 3160,
+      "m_lower": 972,
+      "covering_intervals": [
+        {
+          "lower": 148,
+          "upper": 784,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 146,
+          "residual_upper": 782,
+          "q": 38,
+          "required_k": 2299
+        },
+        {
+          "lower": 749,
+          "upper": 2179,
+          "kind": "high_c_short_syzygy",
+          "c": 63,
+          "residual_lower": 686,
+          "residual_upper": 2116,
+          "t": 16,
+          "p": 9,
+          "q": 48,
+          "required_k": 155
+        },
+        {
+          "lower": 2174,
+          "upper": 2188,
+          "kind": "high_c_short_syzygy",
+          "c": 72,
+          "residual_lower": 2102,
+          "residual_upper": 2116,
+          "t": 7,
+          "p": 24,
+          "q": 66,
+          "required_k": 155
+        }
+      ]
+    },
+    {
+      "d": 79,
+      "lower": 150,
+      "upper": 2260,
+      "M": 3240,
+      "m_lower": 980,
+      "covering_intervals": [
+        {
+          "lower": 150,
+          "upper": 786,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 148,
+          "residual_upper": 784,
+          "q": 39,
+          "required_k": 2376
+        },
+        {
+          "lower": 758,
+          "upper": 2252,
+          "kind": "high_c_short_syzygy",
+          "c": 64,
+          "residual_lower": 694,
+          "residual_upper": 2188,
+          "t": 16,
+          "p": 9,
+          "q": 49,
+          "required_k": 157
+        },
+        {
+          "lower": 2198,
+          "upper": 2260,
+          "kind": "high_c_short_syzygy",
+          "c": 72,
+          "residual_lower": 2126,
+          "residual_upper": 2188,
+          "t": 8,
+          "p": 24,
+          "q": 65,
+          "required_k": 157
+        }
+      ]
+    },
+    {
+      "d": 80,
+      "lower": 152,
+      "upper": 2334,
+      "M": 3321,
+      "m_lower": 987,
+      "covering_intervals": [
+        {
+          "lower": 152,
+          "upper": 824,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 150,
+          "residual_upper": 822,
+          "q": 39,
+          "required_k": 2418
+        },
+        {
+          "lower": 678,
+          "upper": 2324,
+          "kind": "high_c_short_syzygy",
+          "c": 64,
+          "residual_lower": 614,
+          "residual_upper": 2260,
+          "t": 17,
+          "p": 8,
+          "q": 48,
+          "required_k": 159
+        },
+        {
+          "lower": 2222,
+          "upper": 2333,
+          "kind": "high_c_short_syzygy",
+          "c": 73,
+          "residual_lower": 2149,
+          "residual_upper": 2260,
+          "t": 8,
+          "p": 24,
+          "q": 66,
+          "required_k": 159
+        },
+        {
+          "lower": 2327,
+          "upper": 2334,
+          "kind": "high_c_short_syzygy",
+          "c": 74,
+          "residual_lower": 2253,
+          "residual_upper": 2260,
+          "t": 7,
+          "p": 25,
+          "q": 68,
+          "required_k": 159
+        }
+      ]
+    },
+    {
+      "d": 81,
+      "lower": 154,
+      "upper": 2409,
+      "M": 3403,
+      "m_lower": 994,
+      "covering_intervals": [
+        {
+          "lower": 154,
+          "upper": 826,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 152,
+          "residual_upper": 824,
+          "q": 40,
+          "required_k": 2497
+        },
+        {
+          "lower": 776,
+          "upper": 2399,
+          "kind": "high_c_short_syzygy",
+          "c": 65,
+          "residual_lower": 711,
+          "residual_upper": 2334,
+          "t": 17,
+          "p": 9,
+          "q": 49,
+          "required_k": 161
+        },
+        {
+          "lower": 2352,
+          "upper": 2409,
+          "kind": "high_c_short_syzygy",
+          "c": 75,
+          "residual_lower": 2277,
+          "residual_upper": 2334,
+          "t": 7,
+          "p": 25,
+          "q": 69,
+          "required_k": 161
+        }
+      ]
+    },
+    {
+      "d": 82,
+      "lower": 156,
+      "upper": 2485,
+      "M": 3486,
+      "m_lower": 1001,
+      "covering_intervals": [
+        {
+          "lower": 156,
+          "upper": 865,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 154,
+          "residual_upper": 863,
+          "q": 40,
+          "required_k": 2540
+        },
+        {
+          "lower": 785,
+          "upper": 2475,
+          "kind": "high_c_short_syzygy",
+          "c": 66,
+          "residual_lower": 719,
+          "residual_upper": 2409,
+          "t": 17,
+          "p": 9,
+          "q": 50,
+          "required_k": 163
+        },
+        {
+          "lower": 2377,
+          "upper": 2484,
+          "kind": "high_c_short_syzygy",
+          "c": 75,
+          "residual_lower": 2302,
+          "residual_upper": 2409,
+          "t": 8,
+          "p": 25,
+          "q": 68,
+          "required_k": 163
+        },
+        {
+          "lower": 2485,
+          "upper": 2485,
+          "kind": "high_c_short_syzygy",
+          "c": 76,
+          "residual_lower": 2409,
+          "residual_upper": 2409,
+          "t": 7,
+          "p": 26,
+          "q": 70,
+          "required_k": 163
+        }
+      ]
+    },
+    {
+      "d": 83,
+      "lower": 158,
+      "upper": 2562,
+      "M": 3570,
+      "m_lower": 1008,
+      "covering_intervals": [
+        {
+          "lower": 158,
+          "upper": 867,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 156,
+          "residual_upper": 865,
+          "q": 41,
+          "required_k": 2621
+        },
+        {
+          "lower": 794,
+          "upper": 2552,
+          "kind": "high_c_short_syzygy",
+          "c": 67,
+          "residual_lower": 727,
+          "residual_upper": 2485,
+          "t": 17,
+          "p": 9,
+          "q": 51,
+          "required_k": 165
+        },
+        {
+          "lower": 2511,
+          "upper": 2562,
+          "kind": "high_c_short_syzygy",
+          "c": 77,
+          "residual_lower": 2434,
+          "residual_upper": 2485,
+          "t": 7,
+          "p": 26,
+          "q": 71,
+          "required_k": 165
+        }
+      ]
+    },
+    {
+      "d": 84,
+      "lower": 160,
+      "upper": 2640,
+      "M": 3655,
+      "m_lower": 1015,
+      "covering_intervals": [
+        {
+          "lower": 160,
+          "upper": 907,
+          "kind": "extended_sparse",
+          "c": 2,
+          "residual_lower": 158,
+          "residual_upper": 905,
+          "q": 41,
+          "required_k": 2665
+        },
+        {
+          "lower": 897,
+          "upper": 2632,
+          "kind": "high_c_short_syzygy",
+          "c": 70,
+          "residual_lower": 827,
+          "residual_upper": 2562,
+          "t": 15,
+          "p": 10,
+          "q": 56,
+          "required_k": 167
+        },
+        {
+          "lower": 2537,
+          "upper": 2640,
+          "kind": "high_c_short_syzygy",
+          "c": 78,
+          "residual_lower": 2459,
+          "residual_upper": 2562,
+          "t": 7,
+          "p": 26,
+          "q": 72,
+          "required_k": 167
+        }
+      ]
+    }
+  ]
+}
